@@ -1,4 +1,4 @@
-@extends('booking.layouts.app')
+@extends('layouts.app')
 
 @section('title', 'Room Booking')
 
@@ -10,7 +10,7 @@
       <div class="layout-container">
         
         
-            @include('booking.layouts.header')
+            @include('layouts.header')
 
             <!-- Content -->
 
