@@ -47,6 +47,8 @@
     <link rel="stylesheet" href="{{ ('assets/vendor/libs/datatables-responsive-bs5/responsive.bootstrap5.css') }}" />
     <link rel="stylesheet" href="{{ ('assets/vendor/libs/datatables-checkboxes-jquery/datatables.checkboxes.css') }}" />
 
+    
+
     <!-- Page CSS -->
     <link rel="stylesheet" href="{{ ('assets/vendor/css/pages/cards-advance.css') }}" />
     <!-- Helpers -->
@@ -57,6 +59,8 @@
     <script src="{{ ('assets/vendor/js/template-customizer.js') }}"></script>
     <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
     <script src="{{ ('assets/js/config.js') }}"></script>
+
+    @yield('pagecss')
   </head>
 
   
@@ -118,6 +122,10 @@
 <!--/ Layout wrapper -->
 
 <!-- Core JS -->
+
+
+
+
 <!-- build:js assets/vendor/js/core.js -->
 <script src="{{ ('assets/vendor/libs/jquery/jquery.js') }}"></script>
 <script src="{{ ('assets/vendor/libs/popper/popper.js') }}"></script>
@@ -132,15 +140,13 @@
 <script src="{{ ('assets/vendor/js/menu.js') }}"></script>
 <!-- endbuild -->
 
-<!-- Vendors JS -->
-<script src="{{ ('assets/vendor/libs/apex-charts/apexcharts.js') }}"></script>
-<script src="{{ ('assets/vendor/libs/swiper/swiper.js') }}"></script>
-<script src="{{ ('assets/vendor/libs/datatables-bs5/datatables-bootstrap5.js') }}"></script>
+
+
+@yield('pagejs')
 
 <!-- Main JS -->
 <script src="{{ ('assets/js/main.js') }}"></script>
 
-<!-- Page JS -->
-<script src="{{ ('assets/js/dashboards-analytics.js') }}"></script>
+
 </body>
 </html>
