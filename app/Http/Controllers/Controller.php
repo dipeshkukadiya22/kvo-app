@@ -8,5 +8,8 @@ use Illuminate\Routing\Controller as BaseController;
 
 class Controller extends BaseController
 {
-    use AuthorizesRequests, ValidatesRequests;
+    // Donation Controller 
+    public function donation1(){
+        return view ('Donation.donation1');
+    }
 }
