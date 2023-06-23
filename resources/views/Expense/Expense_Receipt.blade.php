@@ -39,7 +39,49 @@
             <!-- Content -->
 
             <div class="container-xxl flex-grow-1 container-p-y">
-              <h4 class="fw-bold py-3 mb-4">ખર્ચ વાઉચર</h4>
+              <div class="content-header row">
+                <div class="content-header-left col-md-9 col-12 mb-2">
+                    <div class="row breadcrumbs-top">
+                        <div class="col-12">
+                          <h4 class="fw-bold py-3">ખર્ચ વાઉચર</h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="content-header-right d-flex justify-content-end col-md-3 col-12">
+                    <div class="form-group breadcrumb-right py-3">
+                      <!-- Enable backdrop (default) Offcanvas -->
+                      <div class="mt-0">
+                        <button
+                          class="btn btn-primary"
+                          type="button"
+                          data-bs-toggle="offcanvas"
+                          data-bs-target="#offcanvasBackdrop"
+                          aria-controls="offcanvasBackdrop">
+                          <span class="ti-xs ti ti-plus me-1"></span>Add New User
+                        </button>
+                        <div
+                          class="offcanvas offcanvas-end"
+                          tabindex="-1"
+                          id="offcanvasBackdrop"
+                          aria-labelledby="offcanvasBackdropLabel">
+                          <div class="offcanvas-header border-bottom">
+                            <h5 id="offcanvasBackdropLabel" class="offcanvas-title">New User</h5>
+                            <button
+                              type="button"
+                              class="btn-close text-reset"
+                              data-bs-dismiss="offcanvas"
+                              aria-label="Close"></button>
+                          </div>
+                          <div class="offcanvas-body mx-0 flex-grow-0">
+                            <!-- Browser Default -->
+                            @include('layouts.adduser')
+                            <!-- /Browser Default -->
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                </div>
+              </div>
               <div class="row mb-4">
                 <!-- Browser Default -->
                 <div class="col-md mb-4 mb-md-0">
