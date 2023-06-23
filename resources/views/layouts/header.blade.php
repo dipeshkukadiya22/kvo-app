@@ -43,6 +43,8 @@
         </a>
       </div>
 
+      
+
       <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
         <ul class="navbar-nav flex-row align-items-center ms-auto">
           <!-- Language -->
@@ -1451,31 +1453,16 @@
               </ul>
             </li>
 
-            <!-- Misc -->
-            <li class="menu-item">
-              <a href="javascript:void(0)" class="menu-link menu-toggle">
-                <i class="menu-icon tf-icons ti ti-box-multiple"></i>
-                <div data-i18n="Misc">Misc</div>
-              </a>
-              <ul class="menu-sub">
-                <li class="menu-item">
-                  <a href="https://pixinvent.ticksy.com/" target="_blank" class="menu-link">
-                    <i class="menu-icon tf-icons ti ti-lifebuoy"></i>
-                    <div data-i18n="Support">Support</div>
-                  </a>
-                </li>
-                <li class="menu-item">
-                  <a
-                    href="https://demos.pixinvent.com/vuexy-html-admin-template/documentation/"
-                    target="_blank"
-                    class="menu-link">
-                    <i class="menu-icon tf-icons ti ti-file-description"></i>
-                    <div data-i18n="Documentation">Documentation</div>
-                  </a>
-                </li>
-              </ul>
-            </li>
+            
           </ul>
+
+          
+
         </div>
+       
+        
+       
       </aside>
       <!-- / Menu -->
+
+   
