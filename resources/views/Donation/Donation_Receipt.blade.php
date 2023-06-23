@@ -94,13 +94,13 @@
                             <hr class="mt-0" />
                           </div>
                           <div class="col-md-4">
-                              <label class="form-label" for="basic-default-name">નામ</label>
-                              <input
-                                type="text"
-                                class="form-control"
-                                id="basic-default-name"
-                                placeholder="John Doe"
-                                required />
+                            <label for="select2Basic" class="form-label">નામ</label>
+                            <select id="select2Basic" class="select2 form-select form-select-lg" data-allow-clear="true" required>
+                              <option value="AK">Alaska</option>
+                              <option value="HI">Hawaii</option>
+                              <option value="CA">California</option>
+                              <option value="NV">Nevada</option>
+                            </select>
                           </div>
                           <div class="col-md-4">
                             <label class="form-label" for="basic-default-dob">તારીખ</label>
@@ -198,6 +198,8 @@
     <!-- Main JS -->
     <script src="{{ asset ('assets/js/main.js') }}"></script>
 
+    <script src="{{ asset ('assets/js/forms-selects.js') }}"></script>
+    
     <!-- Page JS -->
     <script src="{{ asset ('assets/js/form-validation.js') }}"></script>
 
