@@ -57,7 +57,7 @@
                           data-bs-toggle="offcanvas"
                           data-bs-target="#offcanvasBackdrop"
                           aria-controls="offcanvasBackdrop">
-                          <span class="ti-xs ti ti-plus me-1"></span>Add New User
+                          <span class="ti-xs ti ti-plus me-1"></span>Add Member
                         </button>
                         <div
                           class="offcanvas offcanvas-end"
@@ -65,7 +65,7 @@
                           id="offcanvasBackdrop"
                           aria-labelledby="offcanvasBackdropLabel">
                           <div class="offcanvas-header border-bottom">
-                            <h5 id="offcanvasBackdropLabel" class="offcanvas-title">New User</h5>
+                            <h5 id="offcanvasBackdropLabel" class="offcanvas-title">Registration</h5>
                             <button
                               type="button"
                               class="btn-close text-reset"
@@ -96,7 +96,7 @@
                           <div class="col-md-4">
                             <label for="select2Basic" class="form-label">નામ</label>
                             <select id="select2Basic" class="select2 form-select form-select-lg" data-allow-clear="true" required>
-                              <option value="AK">Alaska</option>
+                              <option value="AK">Parshva Mehta - 9879472611</option>
                               <option value="HI">Hawaii</option>
                               <option value="CA">California</option>
                               <option value="NV">Nevada</option>
@@ -264,13 +264,14 @@
                             </div>
                           </div>
                           <div class="col-md-4">
-                            <label class="form-label" for="multicol-phone">શ્રી અન્ય ખાતે</label>
-                            <div class="input-group">
-                              <span class="input-group-text">₹</span>
-                              <input type="number" class="form-control" placeholder="Amount" aria-label="Amount (to the nearest dollar)">
-                              
-                            </div>
-                          </div>
+                            <label class="form-label" for="basic-default-name">શ્રી અન્ય ખાતે</label>
+                            <input
+                              type="text"
+                              class="form-control"
+                              id="basic-default-name"
+                              {{-- placeholder="John Doe" --}}
+                              required />
+                        	</div>
                           <div class="col-md-4">
                             <label class="form-label" for="multicol-phone">શ્રી અન્ય ખાતે</label>
                             <div class="input-group">
@@ -288,6 +289,15 @@
                               {{-- placeholder="John Doe" --}}
                               required />
                         	</div>
+                          {{-- <div class="col-md-4">
+                            <label class="form-label" for="multicol-phone">શ્રી અન્ય ખાતે</label>
+                            <div class="input-group">
+                              <span class="input-group-text">₹</span>
+                              <input type="number" class="form-control" placeholder="Amount" aria-label="Amount (to the nearest dollar)">
+                              
+                            </div>
+                          </div> --}}
+                          
                           <div class="col-md-4">
                             <label class="form-label" for="multicol-phone">ટોટલ</label>
                             <div class="input-group">

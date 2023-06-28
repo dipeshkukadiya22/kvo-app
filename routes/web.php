@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\donation;
 use App\Http\Controllers\Expense;
+use App\Http\Controllers\pdfcontroller;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,5 +28,7 @@ use App\Http\Controllers\Expense;
 Route::get('/', [BookingController::class, 'RoomBooking'])->name('RoomBooking');
 Route::get('Religious_Donation', [donation::class, 'Religious_Donation'])->name('Religious_Donation');
 Route::get('Community_Donation', [donation::class, 'Community_Donation'])->name('Community_Donation');
-Route::get('Donation_Receipt', [donation::class, 'Donation_Receipt'])->name('Donation_Receipt');
+Route::get('General_Donation', [donation::class, 'General_Donation'])->name('General_Donation');
 Route::get('Expense_Receipt', [Expense::class, 'Expense_Receipt'])->name('Expense_Receipt');
+Route::get('General_Donation_Report', [donation::class, 'General_Donation_Report'])->name('General_Donation_Report');
+Route::get('demopdf',[pdfcontroller::class,'demopdf'])->name('demopdf');

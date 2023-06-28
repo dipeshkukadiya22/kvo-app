@@ -8,6 +8,17 @@
         placeholder="John Doe"
         required />
     </div>
+
+    <div class="mb-3">
+      <label class="form-label" for="multicol-phone">Phone Number</label>
+      <input
+        type="number"
+        id="multicol-phone"
+        class="form-control phone-mask"
+        placeholder="658 799 8941"
+        aria-label="658 799 8941" />
+    </div>
+
     <div class="mb-3">
       <label class="form-label" for="basic-default-email">Email</label>
       <input
@@ -19,18 +30,9 @@
     </div>
 
     <div class="mb-3">
-      <label class="form-label" for="multicol-phone">Phone Number</label>
-      <input
-        type="number"
-        id="multicol-phone"
-        class="form-control phone-mask"
-        placeholder="658 799 8941"
-        aria-label="658 799 8941" />
-    </div>
-    <div class="mb-3">
       <label class="form-label" for="basic-default-country">City</label>
       <select class="form-select" id="basic-default-country" required>
-        <option value="">Select Country</option>
+        <option value="">Select City</option>
         <option value="usa">USA</option>
         <option value="uk">UK</option>
         <option value="france">France</option>

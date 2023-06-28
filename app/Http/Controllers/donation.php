@@ -15,7 +15,11 @@ class donation extends Controller
         return view ('Donation.Community_Donation');
     }
 
-    public function Donation_Receipt(){
-        return view ('Donation.Donation_Receipt');
+    public function General_Donation(){
+        return view ('Donation.General_Donation');
+    }
+
+    public function General_Donation_Report(){
+        return view ('Donation.General_Donation_Report');
     }
 }

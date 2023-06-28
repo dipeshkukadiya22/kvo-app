@@ -57,7 +57,7 @@
                           data-bs-toggle="offcanvas"
                           data-bs-target="#offcanvasBackdrop"
                           aria-controls="offcanvasBackdrop">
-                          <span class="ti-xs ti ti-plus me-1"></span>Add New User
+                          <span class="ti-xs ti ti-plus me-1"></span>Add Member
                         </button>
                         <div
                           class="offcanvas offcanvas-end"
@@ -65,7 +65,7 @@
                           id="offcanvasBackdrop"
                           aria-labelledby="offcanvasBackdropLabel">
                           <div class="offcanvas-header border-bottom">
-                            <h5 id="offcanvasBackdropLabel" class="offcanvas-title">New User</h5>
+                            <h5 id="offcanvasBackdropLabel" class="offcanvas-title">Registration</h5>
                             <button
                               type="button"
                               class="btn-close text-reset"
