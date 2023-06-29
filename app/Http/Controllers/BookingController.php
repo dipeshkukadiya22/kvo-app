@@ -10,4 +10,9 @@ class BookingController extends Controller
     public function RoomBooking(){
         return view ('Booking.room-booking');
     }
+
+    // RoomList
+    public function RoomList(){
+        return view ('Booking.room-list');
+    }
 }

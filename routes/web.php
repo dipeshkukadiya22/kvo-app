@@ -26,5 +26,8 @@ use App\Http\Controllers\MembersController;
 /* Room Booking Route */
 Route::get('/', [BookingController::class, 'RoomBooking'])->name('RoomBooking');
 
+/* Room list Route */
+Route::get('/room-list', [BookingController::class, 'RoomList'])->name('RoomList');
+
 /* View Members Route */
 Route::get('/view-members', [MembersController::class, 'ViewMembers'])->name('ViewMembers');
