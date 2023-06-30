@@ -1,13 +1,20 @@
 <html>
 	<head>
 		<style type="text/css">
+		
+		
 			/* table, th, td {
 				border: 1px solid black;
 				border-collapse: collapse;
 				} */
 
 				html{
-					margin: 30px;
+					margin: 10px 30px;
+					font-family: "Raleway", sans-serif;
+				}
+
+				.mt img{
+					margin: -5px;
 				}
 
 				table {
@@ -16,12 +23,17 @@
 				margin-left: auto;
   				margin-right: auto;
 				margin-bottom: 20px;
+				
+				
 				}
 
 				thead.hr{
 				border-bottom: 2px solid black;
 				border-collapse: collapse;
+				
+				
 				}
+			   
 
 				tr.hr{
 				border-top: 2px solid black;
@@ -29,15 +41,16 @@
 				}
 
 				th, td {
-				padding-top: 5px;
-				padding-bottom: 5px;
-				padding-left: 5px;
+				padding-top: 10px;
+				padding-bottom: 10px;
+				padding-left: 10px;
 				padding-right: 5px;
 				}
 
 				h1 {
 					margin-bottom: -20px;
 					margin-top: -15px;
+				
 				}
 
 				.addcenter{
@@ -46,20 +59,7 @@
 
 				b {
 					font-weight: bolder !important;
-				}
-
-				th.right-logo {
-					padding: inherit;
-				}
-				th.right-logo img {
-					width: 80px;
-					margin-right: -20px;
-				}
-				th.left-logo img {
-					width: 90px;
-				}
-				th.left-logo img {
-					margin: -20px !important;
+					font-size: 16px;
 				}
 				tr.hr td {
 					padding: 15px;
@@ -86,12 +86,7 @@
 			</colgroup> --}}
 			<thead class="hr">
 			  <tr>
-				<th class="left-logo" rowspan="2"><img src="C:/xampp/htdocs/shiv-satyam/public/assets/media/logos/left-logo.png"></th>
-				<th colspan="4"><h1>Shiv Satyam Weighbridge</h1></th>
-				<th class="right-logo" rowspan="2"><img src="C:/xampp/htdocs/shiv-satyam/public/assets/media/logos/right-logo.png"></th>
-			  </tr>
-			  <tr>
-				<td class="addcenter" colspan="4">Village: Dhaneti, Bhuj-Bhachau Highway, <br> Dist. Kutch, Pin Code: 370020, Tel. (+91) 98244 86644</td>
+				<th colspan="6" class="mt"><img src="C:\xampp\htdocs\kvo-app\public\assets\img\avatars\expen.png" style="height:100px;"></th>
 			  </tr>
 			</thead>
 			<tbody>
@@ -122,15 +117,10 @@
 			</tbody>
 		</table>
 
-		<table style="width: 640px">
+		<table style="width: 740px">
 			<thead class="hr">
 			  <tr>
-				<th class="left-logo" rowspan="2"><img src="C:/xampp/htdocs/shiv-satyam/public/assets/media/logos/left-logo.png"></th>
-				<th colspan="4"><h1>Shiv Satyam Weighbridge</h1></th>
-				<th class="right-logo" rowspan="2"><img src="C:/xampp/htdocs/shiv-satyam/public/assets/media/logos/right-logo.png"></th>
-			  </tr>
-			  <tr>
-				<td class="addcenter" colspan="4">Village: Dhaneti, Bhuj-Bhachau Highway, <br> Dist. Kutch, Pin Code: 370020, Tel. (+91) 98244 86644</td>
+				<th colspan="6" class="mt"><img src="C:\xampp\htdocs\kvo-app\public\assets\img\avatars\header.png" style="height:100px;"></th>
 			  </tr>
 			</thead>
 			<tbody>
@@ -161,15 +151,10 @@
 			</tbody>
 		</table>
 
-		<table style="width: 640px">
+		<table style="width: 740px">
 			<thead class="hr">
 			  <tr>
-				<th class="left-logo" rowspan="2"><img src="C:/xampp/htdocs/shiv-satyam/public/assets/media/logos/left-logo.png"></th>
-				<th colspan="4"><h1>Shiv Satyam Weighbridge</h1></th>
-				<th class="right-logo" rowspan="2"><img src="C:/xampp/htdocs/shiv-satyam/public/assets/media/logos/right-logo.png"></th>
-			  </tr>
-			  <tr>
-				<td class="addcenter" colspan="4">Village: Dhaneti, Bhuj-Bhachau Highway, <br> Dist. Kutch, Pin Code: 370020, Tel. (+91) 98244 86644</td>
+				<th colspan="6" class="mt"><img src="C:\xampp\htdocs\kvo-app\public\assets\img\avatars\header.png" style="height:100px;"></th>
 			  </tr>
 			</thead>
 			<tbody>
