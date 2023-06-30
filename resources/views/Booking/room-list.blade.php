@@ -83,7 +83,7 @@
                                 data-bs-target="#navs-pills-top-home"
                                 aria-controls="navs-pills-top-home"
                                 aria-selected="true">
-                                All Rooms (2)
+                                All Rooms (<span id="allRoomsCount">0</span>)
                               </button>
                             </li>
                             <li class="nav-item">
@@ -95,7 +95,7 @@
                                 data-bs-target="#navs-pills-top-profile"
                                 aria-controls="navs-pills-top-profile"
                                 aria-selected="false">
-                                Available (1)
+                                Available (<span id="availableRoomsCount">0</span>)
                               </button>
                             </li>
                             <li class="nav-item">
@@ -107,7 +107,7 @@
                                 data-bs-target="#navs-pills-top-messages"
                                 aria-controls="navs-pills-top-messages"
                                 aria-selected="false">
-                                Booked (1)
+                                Booked (<span id="bookedRoomsCount">0</span>)
                               </button>
                             </li>
                           </ul>
@@ -193,188 +193,136 @@
                     <div class="card">
                       <!-- Basic table -->
                       <section id="basic-datatable">
-                          <div class="row">
-                              <div class="col-12">
-                                  <div class="card">
-                                    
-                                      <div class="tab-content p-0">
-                                        <div class="tab-pane fade show active" id="navs-pills-top-home" role="tabpanel">
-                                            
-                                          <div class="card-datatable table-responsive pt-0">
-                                            <table id="DataTables_Table_0" class="datatables-basic table">
-                                              <thead>
-                                                  <tr>
-                                                      <th></th>
-                                                      <th></th>
-                                                      <th>Room Name</th>
-                                                      <th>Room Type</th>
-                                                      <th>Room Facility</th>
-                                                      <th>Status</th>
-                                                      <th>Action</th>
-                                                </tr>
-                                              </thead>
-                                              <tr>
-                                                  <td></td>
-                                                  <td></td>
-                                                  <td>Deluxe #B-0004</td>
-                                                  <td>Double Bed</td>
-                                                  <td>A.C. Room</td>
-                                                  <td><span class="badge bg-label-success">Available</span></td>
-                                                  <td>
-                                                    <div class="d-inline-block">
-                                                      <a href="javascript:;" class="btn btn-sm btn-icon item-edit" data-bs-toggle="offcanvas"
-                                                      data-bs-target="#offcanvasBackdropEditRoom" aria-controls="offcanvasBackdrop"><i class="text-primary ti ti-edit"></i></a>
-    
-                                                      <a href="javascript:;" id="confirm-text" class="text-danger delete-record"><i class="ti ti-trash "></i></a>
-                                                    </div>
-                                                </td>
-                                                  
-                                              </tr>
-                                              <tr>
-                                                <td></td>
-                                                <td></td>
-                                                <td>Deluxe #B-0005</td>
-                                                <td>Single Bed</td>
-                                                <td>Non A.C. Room</td>
-                                                <td>
-                                                    <div class="badge bg-label-danger mb-2">Booked</div>
-                                                    <div class="badge bg-label-primary booked-date "><i class="text-primary me-2 ti ti-calendar"></i> June 15, 2023 to June 20, 2023</div>
-                                                </td>
-                                                <td>
-                                                    <div class="d-inline-block">
-                                                      <a href="javascript:;" class="btn btn-sm btn-icon item-edit" data-bs-toggle="offcanvas"
-                                                      data-bs-target="#offcanvasBackdropEditRoom" aria-controls="offcanvasBackdrop"><i class="text-primary ti ti-edit"></i></a>
-                                                      <a href="javascript:;" id="confirm-text" class="text-danger delete-record"><i class="ti ti-trash"></i></a>
-                                                    </div>
-                                                </td>
-                                                
-                                            </tr>
-                                              
-                                            </table>
-                                          </div>
-                                          
-                                        </div>
-
-                                        <div class="tab-pane fade" id="navs-pills-top-profile" role="tabpanel">
-
-                                          <div class="card-datatable table-responsive pt-0">
-                                            <table id="DataTables_Table_0" class="datatables-basic table">
-                                              <thead>
-                                                  <tr>
-                                                      <th></th>
-                                                      <th></th>
-                                                      <th>Room Name</th>
-                                                      <th>Room Type</th>
-                                                      <th>Room Facility</th>
-                                                      <th>Status</th>
-                                                      <th>Action</th>
-                                                </tr>
-                                              </thead>
-                                              <tr>
-                                                  <td></td>
-                                                  <td></td>
-                                                  <td>Deluxe #B-0004</td>
-                                                  <td>Double Bed</td>
-                                                  <td>A.C. Room</td>
-                                                  <td><span class="badge bg-label-success">Available</span></td>
-                                                  <td>
-                                                    <div class="d-inline-block">
-                                                      <a href="javascript:;" class="btn btn-sm btn-icon item-edit" data-bs-toggle="offcanvas"
-                                                      data-bs-target="#offcanvasBackdropEditRoom" aria-controls="offcanvasBackdrop"><i class="text-primary ti ti-edit"></i></a>
-    
-                                                      <a href="javascript:;" id="confirm-text" class="text-danger delete-record"><i class="ti ti-trash "></i></a>
-                                                    </div>
-                                                </td>
-                                                  
-                                              </tr>
-                                              <tr>
-                                                <td></td>
-                                                <td></td>
-                                                <td>Deluxe #B-0005</td>
-                                                <td>Single Bed</td>
-                                                <td>Non A.C. Room</td>
-                                                <td>
-                                                    <div class="badge bg-label-danger mb-2">Booked</div>
-                                                    <div class="badge bg-label-primary booked-date "><i class="text-primary me-2 ti ti-calendar"></i> June 15, 2023 to June 20, 2023</div>
-                                                </td>
-                                                <td>
-                                                    <div class="d-inline-block">
-                                                      <a href="javascript:;" class="btn btn-sm btn-icon item-edit" data-bs-toggle="offcanvas"
-                                                      data-bs-target="#offcanvasBackdropEditRoom" aria-controls="offcanvasBackdrop"><i class="text-primary ti ti-edit"></i></a>
-                                                      <a href="javascript:;" id="confirm-text" class="text-danger delete-record"><i class="ti ti-trash"></i></a>
-                                                    </div>
-                                                </td>
-                                                
-                                            </tr>
-                                              
-                                            </table>
-                                          </div>
-                                          
-                                        </div>
-
-                                        <div class="tab-pane fade" id="navs-pills-top-messages" role="tabpanel">
-
-                                          <div class="card-datatable table-responsive pt-0">
-                                            <table id="DataTables_Table_0" class="datatables-basic table">
-                                              <thead>
-                                                  <tr>
-                                                      <th></th>
-                                                      <th></th>
-                                                      <th>Room Name</th>
-                                                      <th>Room Type</th>
-                                                      <th>Room Facility</th>
-                                                      <th>Status</th>
-                                                      <th>Action</th>
-                                                </tr>
-                                              </thead>
-                                              <tr>
-                                                  <td></td>
-                                                  <td></td>
-                                                  <td>Deluxe #B-0004</td>
-                                                  <td>Double Bed</td>
-                                                  <td>A.C. Room</td>
-                                                  <td><span class="badge bg-label-success">Available</span></td>
-                                                  <td>
-                                                    <div class="d-inline-block">
-                                                      <a href="javascript:;" class="btn btn-sm btn-icon item-edit" data-bs-toggle="offcanvas"
-                                                      data-bs-target="#offcanvasBackdropEditRoom" aria-controls="offcanvasBackdrop"><i class="text-primary ti ti-edit"></i></a>
-    
-                                                      <a href="javascript:;" id="confirm-text" class="text-danger delete-record"><i class="ti ti-trash "></i></a>
-                                                    </div>
-                                                </td>
-                                                  
-                                              </tr>
-                                              <tr>
-                                                <td></td>
-                                                <td></td>
-                                                <td>Deluxe #B-0005</td>
-                                                <td>Single Bed</td>
-                                                <td>Non A.C. Room</td>
-                                                <td>
-                                                    <div class="badge bg-label-danger mb-2">Booked</div>
-                                                    <div class="badge bg-label-primary booked-date "><i class="text-primary me-2 ti ti-calendar"></i> June 15, 2023 to June 20, 2023</div>
-                                                </td>
-                                                <td>
-                                                    <div class="d-inline-block">
-                                                      <a href="javascript:;" class="btn btn-sm btn-icon item-edit" data-bs-toggle="offcanvas"
-                                                      data-bs-target="#offcanvasBackdropEditRoom" aria-controls="offcanvasBackdrop"><i class="text-primary ti ti-edit"></i></a>
-                                                      <a href="javascript:;" id="confirm-text" class="text-danger delete-record"><i class="ti ti-trash"></i></a>
-                                                    </div>
-                                                </td>
-                                                
-                                            </tr>
-                                              
-                                            </table>
-                                          </div>
-                                          
-                                        </div>
-
-                                      </div>
-
+                        <div class="row">
+                          <div class="col-12">
+                            <div class="card">
+                              <div class="tab-content p-0">
+                                <div class="tab-pane fade show active" id="navs-pills-top-home" role="tabpanel">
+                                  <div class="card-datatable table-responsive pt-0">
+                                    <table id="DataTables_Table_0" class="datatables-basic table">
+                                      <thead>
+                                        <tr>
+                                          <th></th>
+                                          <th></th>
+                                          <th>Room Name</th>
+                                          <th>Room Type</th>
+                                          <th>Room Facility</th>
+                                          <th>Status</th>
+                                          <th>Action</th>
+                                        </tr>
+                                      </thead>
+                                      <tbody>
+                                        <tr>
+                                          <td></td>
+                                          <td></td>
+                                          <td>Deluxe #B-0004</td>
+                                          <td>Double Bed</td>
+                                          <td>A.C. Room</td>
+                                          <td><span class="badge bg-label-success">Available</span></td>
+                                          <td>
+                                            <div class="d-inline-block">
+                                              <a href="javascript:;" class="btn btn-sm btn-icon item-edit" data-bs-toggle="offcanvas" data-bs-target="#offcanvasBackdropEditRoom" aria-controls="offcanvasBackdrop"><i class="text-primary ti ti-edit"></i></a>
+                                              <a href="javascript:;" id="confirm-text" class="text-danger delete-record"><i class="ti ti-trash "></i></a>
+                                            </div>
+                                          </td>
+                                        </tr>
+                                        <tr>
+                                          <td></td>
+                                          <td></td>
+                                          <td>Deluxe #B-0005</td>
+                                          <td>Single Bed</td>
+                                          <td>Non A.C. Room</td>
+                                          <td>
+                                            <div class="badge bg-label-danger mb-2">Booked</div>
+                                            <div class="badge bg-label-primary booked-date "><i class="text-primary me-2 ti ti-calendar"></i> June 15, 2023 to June 20, 2023</div>
+                                          </td>
+                                          <td>
+                                            <div class="d-inline-block">
+                                              <a href="javascript:;" class="btn btn-sm btn-icon item-edit" data-bs-toggle="offcanvas" data-bs-target="#offcanvasBackdropEditRoom" aria-controls="offcanvasBackdrop"><i class="text-primary ti ti-edit"></i></a>
+                                              <a href="javascript:;" id="confirm-text" class="text-danger delete-record"><i class="ti ti-trash"></i></a>
+                                            </div>
+                                          </td>
+                                        </tr>
+                                      </tbody>
+                                    </table>
                                   </div>
-                                  
+                                </div>
+                        
+                                <div class="tab-pane fade" id="navs-pills-top-profile" role="tabpanel">
+                                  <div class="card-datatable table-responsive pt-0">
+                                    <table id="DataTables_Table_1" class="datatables-basic table">
+                                      <thead>
+                                        <tr>
+                                          <th></th>
+                                          <th></th>
+                                          <th>Room Name</th>
+                                          <th>Room Type</th>
+                                          <th>Room Facility</th>
+                                          <th>Status</th>
+                                          <th>Action</th>
+                                        </tr>
+                                      </thead>
+                                      <tbody>
+                                        <tr>
+                                          <td></td>
+                                          <td></td>
+                                          <td>Deluxe #B-0004</td>
+                                          <td>Double Bed</td>
+                                          <td>A.C. Room</td>
+                                          <td><span class="badge bg-label-success">Available</span></td>
+                                          <td>
+                                            <div class="d-inline-block">
+                                              <a href="javascript:;" class="btn btn-sm btn-icon item-edit" data-bs-toggle="offcanvas" data-bs-target="#offcanvasBackdropEditRoom" aria-controls="offcanvasBackdrop"><i class="text-primary ti ti-edit"></i></a>
+                                              <a href="javascript:;" id="confirm-text" class="text-danger delete-record"><i class="ti ti-trash "></i></a>
+                                            </div>
+                                          </td>
+                                        </tr>
+                                      </tbody>
+                                    </table>
+                                  </div>
+                                </div>
+                        
+                                <div class="tab-pane fade" id="navs-pills-top-messages" role="tabpanel">
+                                  <div class="card-datatable table-responsive pt-0">
+                                    <table id="DataTables_Table_2" class="datatables-basic table">
+                                      <thead>
+                                        <tr>
+                                          <th></th>
+                                          <th></th>
+                                          <th>Room Name</th>
+                                          <th>Room Type</th>
+                                          <th>Room Facility</th>
+                                          <th>Status</th>
+                                          <th>Action</th>
+                                        </tr>
+                                      </thead>
+                                      <tbody>
+                                        <tr>
+                                          <td></td>
+                                          <td></td>
+                                          <td>Deluxe #B-0005</td>
+                                          <td>Single Bed</td>
+                                          <td>Non A.C. Room</td>
+                                          <td>
+                                            <div class="badge bg-label-danger mb-2">Booked</div>
+                                            <div class="badge bg-label-primary booked-date "><i class="text-primary me-2 ti ti-calendar"></i> June 15, 2023 to June 20, 2023</div>
+                                          </td>
+                                          <td>
+                                            <div class="d-inline-block">
+                                              <a href="javascript:;" class="btn btn-sm btn-icon item-edit" data-bs-toggle="offcanvas" data-bs-target="#offcanvasBackdropEditRoom" aria-controls="offcanvasBackdrop"><i class="text-primary ti ti-edit"></i></a>
+                                              <a href="javascript:;" id="confirm-text" class="text-danger delete-record"><i class="ti ti-trash"></i></a>
+                                            </div>
+                                          </td>
+                                        </tr>
+                                        
+                                      </tbody>
+                                    </table>
+                                  </div>
+                                </div>
                               </div>
+                            </div>
                           </div>
+                        </div>
 
 
                           <!-- Enable backdrop (default) Offcanvas -->
@@ -644,7 +592,21 @@
 
     </script>
 
-    
+    <script>
+    // Function to update room counters
+    function updateRoomCounters() {
+      const allRoomsCount = document.getElementById('DataTables_Table_0').getElementsByTagName('tbody')[0].getElementsByTagName('tr').length;
+      const availableRoomsCount = document.getElementById('DataTables_Table_1').getElementsByTagName('tbody')[0].getElementsByTagName('tr').length;
+      const bookedRoomsCount = document.getElementById('DataTables_Table_2').getElementsByTagName('tbody')[0].getElementsByTagName('tr').length;
+
+      document.getElementById('allRoomsCount').textContent = allRoomsCount;
+      document.getElementById('availableRoomsCount').textContent = availableRoomsCount;
+      document.getElementById('bookedRoomsCount').textContent = bookedRoomsCount;
+    }
+
+    // Call the updateRoomCounters function on page load
+    window.addEventListener('load', updateRoomCounters);
+   </script>
 
 @endsection
 
