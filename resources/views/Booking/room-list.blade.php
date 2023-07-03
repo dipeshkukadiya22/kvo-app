@@ -21,6 +21,10 @@
 <link rel="stylesheet" href="{{ asset ('assets/vendor/libs/datatables-responsive-bs5/responsive.bootstrap5.css') }}" />
 <link rel="stylesheet" href="{{ asset ('assets/vendor/libs/datatables-checkboxes-jquery/datatables.checkboxes.css') }}" />
 
+<link rel="stylesheet" href="{{ ('assets/vendor/libs/flatpickr/flatpickr.css') }}" />
+<link rel="stylesheet" href="{{ ('assets/vendor/libs/pickr/pickr-themes.css') }}" />
+
+
 <!-- Row Group CSS -->
 <link rel="stylesheet" href="{{ asset ('assets/vendor/libs/datatables-rowgroup-bs5/rowgroup.bootstrap5.css') }}" />
 
@@ -80,8 +84,8 @@
                                 class="nav-link active"
                                 role="tab"
                                 data-bs-toggle="tab"
-                                data-bs-target="#navs-pills-top-home"
-                                aria-controls="navs-pills-top-home"
+                                data-bs-target="#navs-pills-top-allroom"
+                                aria-controls="navs-pills-top-allroom"
                                 aria-selected="true">
                                 All Rooms (<span id="allRoomsCount">0</span>)
                               </button>
@@ -92,8 +96,8 @@
                                 class="nav-link"
                                 role="tab"
                                 data-bs-toggle="tab"
-                                data-bs-target="#navs-pills-top-profile"
-                                aria-controls="navs-pills-top-profile"
+                                data-bs-target="#navs-pills-top-available"
+                                aria-controls="navs-pills-top-available"
                                 aria-selected="false">
                                 Available (<span id="availableRoomsCount">0</span>)
                               </button>
@@ -104,10 +108,22 @@
                                 class="nav-link"
                                 role="tab"
                                 data-bs-toggle="tab"
-                                data-bs-target="#navs-pills-top-messages"
-                                aria-controls="navs-pills-top-messages"
+                                data-bs-target="#navs-pills-top-booked"
+                                aria-controls="navs-pills-top-booked"
                                 aria-selected="false">
                                 Booked (<span id="bookedRoomsCount">0</span>)
+                              </button>
+                            </li>
+                            <li class="nav-item">
+                              <button
+                                type="button"
+                                class="nav-link"
+                                role="tab"
+                                data-bs-toggle="tab"
+                                data-bs-target="#navs-pills-top-canceled"
+                                aria-controls="navs-pills-top-canceled"
+                                aria-selected="false">
+                                Canceled (<span id="canceledRoomsCount">0</span>)
                               </button>
                             </li>
                           </ul>
@@ -197,7 +213,7 @@
                           <div class="col-12">
                             <div class="card">
                               <div class="tab-content p-0">
-                                <div class="tab-pane fade show active" id="navs-pills-top-home" role="tabpanel">
+                                <div class="tab-pane fade show active" id="navs-pills-top-allroom" role="tabpanel">
                                   <div class="card-datatable table-responsive pt-0">
                                     <table id="DataTables_Table_0" class="datatables-basic table">
                                       <thead>
@@ -218,7 +234,7 @@
                                           <td>Deluxe #B-0004</td>
                                           <td>Double Bed</td>
                                           <td>A.C. Room</td>
-                                          <td><span class="badge bg-label-success">Available</span></td>
+                                          <td><span class="badge bg-label-primary">Available</span></td>
                                           <td>
                                             <div class="d-inline-block">
                                               <a href="javascript:;" class="btn btn-sm btn-icon item-edit" data-bs-toggle="offcanvas" data-bs-target="#offcanvasBackdropEditRoom" aria-controls="offcanvasBackdrop"><i class="text-primary ti ti-edit"></i></a>
@@ -233,7 +249,7 @@
                                           <td>Single Bed</td>
                                           <td>Non A.C. Room</td>
                                           <td>
-                                            <div class="badge bg-label-danger mb-2">Booked</div>
+                                            <div class="badge bg-label-success mb-2">Booked</div>
                                             <div class="badge bg-label-primary booked-date "><i class="text-primary me-2 ti ti-calendar"></i> June 15, 2023 to June 20, 2023</div>
                                           </td>
                                           <td>
@@ -248,7 +264,7 @@
                                   </div>
                                 </div>
                         
-                                <div class="tab-pane fade" id="navs-pills-top-profile" role="tabpanel">
+                                <div class="tab-pane fade" id="navs-pills-top-available" role="tabpanel">
                                   <div class="card-datatable table-responsive pt-0">
                                     <table id="DataTables_Table_1" class="datatables-basic table">
                                       <thead>
@@ -269,7 +285,7 @@
                                           <td>Deluxe #B-0004</td>
                                           <td>Double Bed</td>
                                           <td>A.C. Room</td>
-                                          <td><span class="badge bg-label-success">Available</span></td>
+                                          <td><span class="badge bg-label-primary">Available</span></td>
                                           <td>
                                             <div class="d-inline-block">
                                               <a href="javascript:;" class="btn btn-sm btn-icon item-edit" data-bs-toggle="offcanvas" data-bs-target="#offcanvasBackdropEditRoom" aria-controls="offcanvasBackdrop"><i class="text-primary ti ti-edit"></i></a>
@@ -282,7 +298,7 @@
                                   </div>
                                 </div>
                         
-                                <div class="tab-pane fade" id="navs-pills-top-messages" role="tabpanel">
+                                <div class="tab-pane fade" id="navs-pills-top-booked" role="tabpanel">
                                   <div class="card-datatable table-responsive pt-0">
                                     <table id="DataTables_Table_2" class="datatables-basic table">
                                       <thead>
@@ -304,7 +320,7 @@
                                           <td>Single Bed</td>
                                           <td>Non A.C. Room</td>
                                           <td>
-                                            <div class="badge bg-label-danger mb-2">Booked</div>
+                                            <div class="badge bg-label-success mb-2">Booked</div>
                                             <div class="badge bg-label-primary booked-date "><i class="text-primary me-2 ti ti-calendar"></i> June 15, 2023 to June 20, 2023</div>
                                           </td>
                                           <td>
@@ -319,6 +335,46 @@
                                     </table>
                                   </div>
                                 </div>
+
+                                <div class="tab-pane fade" id="navs-pills-top-canceled" role="tabpanel">
+                                  <div class="card-datatable table-responsive pt-0">
+                                    <table id="DataTables_Table_3" class="datatables-basic table">
+                                      <thead>
+                                        <tr>
+                                          <th></th>
+                                          <th></th>
+                                          <th>Room Name</th>
+                                          <th>Room Type</th>
+                                          <th>Room Facility</th>
+                                          <th>Status</th>
+                                          <th>Action</th>
+                                        </tr>
+                                      </thead>
+                                      <tbody>
+                                        <tr>
+                                          <td></td>
+                                          <td></td>
+                                          <td>Deluxe #B-0005</td>
+                                          <td>Single Bed</td>
+                                          <td>Non A.C. Room</td>
+                                          <td>
+                                            <div class="badge bg-label-danger mb-2">Canceled</div>
+                                            <div class="badge bg-label-primary booked-date "><i class="text-primary me-2 ti ti-calendar"></i> June 15, 2023</div>
+                                          </td>
+                                          <td>
+                                            <div class="d-inline-block">
+                                              <a href="javascript:;" class="btn btn-sm btn-icon item-edit" data-bs-toggle="offcanvas" data-bs-target="#offcanvasBackdropEditRoom" aria-controls="offcanvasBackdrop"><i class="text-primary ti ti-edit"></i></a>
+                                              <a href="javascript:;" id="confirm-text" class="text-danger delete-record"><i class="ti ti-trash"></i></a>
+                                            </div>
+                                          </td>
+                                        </tr>
+                                        
+                                      </tbody>
+                                    </table>
+                                  </div>
+                                </div>
+
+
                               </div>
                             </div>
                           </div>
@@ -366,13 +422,23 @@
 
                                   <div class="mb-3">
                                     <label class="form-label" for="multicol-phone">Status</label>
-                                    <input
-                                      type="number"
-                                      id="multicol-phone"
-                                      class="form-control phone-mask"
-                                      placeholder="658 799 8941"
-                                      aria-label="658 799 8941" />
+                                    <select class="form-select" id="exampleFormControlSelect1" aria-label="Default select example">
+                                      <option selected>Select Status</option>
+                                      <option value="1">Booked</option>
+                                      <option value="2">Canceled</option>
+                                    </select>
                                   </div>
+
+                                  <!-- Range Picker-->
+                                  <div class="col-md-12 col-12 mb-4">
+                                    <label for="flatpickr-range" class="form-label">Date Update</label>
+                                    <input
+                                      type="text"
+                                      class="form-control"
+                                      placeholder="MM-DD-YYYY to MM-DD-YYYY"
+                                      id="flatpickr-range" />
+                                  </div>
+                                  <!-- /Range Picker-->
 
                                   <div class="row">
                                     <div class="col-12">
@@ -417,9 +483,11 @@
     <script src="{{ asset ('assets/vendor/libs/cleavejs/cleave.js') }}"></script>
     <script src="{{ asset ('assets/vendor/libs/cleavejs/cleave-phone.js') }}"></script>
     <script src="{{ asset('assets/vendor/libs/sweetalert2/sweetalert2.js') }}"></script>
+    <script src="{{ asset('assets/vendor/libs/flatpickr/flatpickr.js') }}"></script>
 
     <!-- Page JS -->
     <script src="{{ asset('assets/js/extended-ui-sweetalert2.js') }}"></script>
+    <script src="{{ asset('assets/js/forms-pickers.js') }}"></script>
 
     <!-- BEGIN: Page JS-->
    <script>
@@ -598,10 +666,12 @@
       const allRoomsCount = document.getElementById('DataTables_Table_0').getElementsByTagName('tbody')[0].getElementsByTagName('tr').length;
       const availableRoomsCount = document.getElementById('DataTables_Table_1').getElementsByTagName('tbody')[0].getElementsByTagName('tr').length;
       const bookedRoomsCount = document.getElementById('DataTables_Table_2').getElementsByTagName('tbody')[0].getElementsByTagName('tr').length;
+      const canceledRoomsCount = document.getElementById('DataTables_Table_3').getElementsByTagName('tbody')[0].getElementsByTagName('tr').length;
 
       document.getElementById('allRoomsCount').textContent = allRoomsCount;
       document.getElementById('availableRoomsCount').textContent = availableRoomsCount;
       document.getElementById('bookedRoomsCount').textContent = bookedRoomsCount;
+      document.getElementById('canceledRoomsCount').textContent = canceledRoomsCount;
     }
 
     // Call the updateRoomCounters function on page load

@@ -2,9 +2,11 @@
 
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\BookingController;
 
 use App\Http\Controllers\MembersController;
+use App\Http\Controllers\AuthController;
 
 
 use App\Http\Controllers\donation;
@@ -28,6 +30,12 @@ use App\Http\Controllers\pdfcontroller;
 });
 
 */
+
+/* Auth Login Route */
+Route::get('/dashboard', [DashboardController::class, 'Dashboard'])->name('Dashboard');
+
+/* Auth Login Route */
+Route::get('/login', [AuthController::class, 'LoginUser'])->name('LoginUser');
 
 /* Room Booking Route */
 Route::get('/', [BookingController::class, 'RoomBooking'])->name('RoomBooking');
