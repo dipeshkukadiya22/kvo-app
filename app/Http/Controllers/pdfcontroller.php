@@ -20,7 +20,7 @@ class pdfcontroller extends Controller
 
     public function pdf_Community_Donation()
     {   
-    $pdf = Pdf::loadView('pdf.pdf_Community_Donation')->setPaper('a5', 'landscape')->setOptions(['defaultFont' => 'NotoSansGujarati-Regular','enable_remote', TRUE]);
+    $pdf = Pdf::loadView('pdf.pdf_Community_Donation')->setPaper('a5', 'landscape')->setOptions(['defaultFont' => 'kap150']);
     return $pdf->stream();
     }
 
