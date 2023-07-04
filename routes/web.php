@@ -12,6 +12,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\donation;
 use App\Http\Controllers\Expense;
 use App\Http\Controllers\pdfcontroller;
+use App\Http\Controllers\medical;
 
 
 /*
@@ -56,3 +57,4 @@ Route::get('pdf_Religious_Donation',[pdfcontroller::class,'pdf_Religious_Donatio
 Route::get('pdf_Community_Donation',[pdfcontroller::class,'pdf_Community_Donation'])->name('pdf_Community_Donation');
 Route::get('pdf_General_Donation',[pdfcontroller::class,'pdf_General_Donation'])->name('pdf_General_Donation');
 Route::get('pdf_Expense_Receipt',[pdfcontroller::class,'pdf_Expense_Receipt'])->name('pdf_Expense_Receipt');
+Route::get('treatment',[medical::class,'treatment'])->name('treatment');
