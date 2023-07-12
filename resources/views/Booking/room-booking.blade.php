@@ -23,6 +23,12 @@
   .all-members > div:first-child button.btn.btn-label-danger.mt-4.waves-effect {
       display: none !important;
   }
+  .bs-stepper .step.active .bs-stepper-icon svg {
+    color: var(--bs-primary) !important;
+  }
+  .bs-stepper .step.crossed .step-trigger .bs-stepper-icon svg {
+    color: var(--bs-primary) !important;
+  }
 </style>
 
 @endsection
@@ -96,6 +102,7 @@
                                   placeholder="john.doe"
                                    />
                               </div>
+                              
   
                               <div class="mb-3">
                                 <label class="form-label" for="multicol-phone">Phone Number</label>
@@ -153,21 +160,8 @@
                       <div class="step" data-target="#account-details">
                         <button type="button" class="step-trigger">
                           <span class="bs-stepper-icon">
-                            <svg viewBox="0 0 54 54">
-                              <use xlink:href=" {{ asset('assets/svg/icons/form-wizard-account.svg#wizardAccount') }}"></use>
-                            </svg>
-                          </span>
-                          <span class="bs-stepper-label">Account Details</span>
-                        </button>
-                      </div>
-                      <div class="line">
-                        <i class="ti ti-chevron-right"></i>
-                      </div>
-                      <div class="step" data-target="#personal-info">
-                        <button type="button" class="step-trigger">
-                          <span class="bs-stepper-icon">
-                            <svg viewBox="0 0 58 54">
-                              <use xlink:href="{{ asset('assets/svg/icons/form-wizard-personal.svg#wizardPersonal') }}"></use>
+                            <svg viewBox="0 0 24 24">
+                              <use xlink:href=" {{ asset('assets/svg/icons/form-wizard-user-plus.svg#wizardUserPlus') }}"></use>
                             </svg>
                           </span>
                           <span class="bs-stepper-label">Personal Info</span>
@@ -176,14 +170,27 @@
                       <div class="line">
                         <i class="ti ti-chevron-right"></i>
                       </div>
+                      <div class="step" data-target="#personal-info">
+                        <button type="button" class="step-trigger">
+                          <span class="bs-stepper-icon">
+                            <svg viewBox="0 0 24 24">
+                              <use xlink:href="{{ asset('assets/svg/icons/form-wizard-booking.svg#wizardBooking') }}"></use>
+                            </svg>
+                          </span>
+                          <span class="bs-stepper-label">Booking Details</span>
+                        </button>
+                      </div>
+                      <div class="line">
+                        <i class="ti ti-chevron-right"></i>
+                      </div>
                       <div class="step" data-target="#address">
                         <button type="button" class="step-trigger">
                           <span class="bs-stepper-icon">
-                            <svg viewBox="0 0 54 54">
-                              <use xlink:href="{{ asset('assets/svg/icons/form-wizard-address.svg#wizardAddress') }}"></use>
+                            <svg viewBox="0 0 24 24">
+                              <use xlink:href="{{ asset('assets/svg/icons/form-wizard-members.svg#wizardMembers') }}"></use>
                             </svg>
                           </span>
-                          <span class="bs-stepper-label">Address</span>
+                          <span class="bs-stepper-label">Member Details</span>
                         </button>
                       </div>
                       
@@ -206,16 +213,10 @@
                         <!-- Account Details -->
                         <div id="account-details" class="content">
                           <div class="content-header mb-3">
-                            <h6 class="mb-0">Account Details</h6>
-                            <small>Enter Your Account Details.</small>
+                            <small>Enter Your Personal Details.</small>
                           </div>
                           <div class="row g-3">
-                           
-                              <div class="col-12">
-                                <h6 class="fw-semibold">1. Personal Info</h6>
-                                <hr class="mt-0">
-                              </div>
-                              
+                            
                               <!-- Basic -->
                               <div class="col-md-4">
                                 <label for="select2Basic" class="form-label">Name</label>
@@ -293,6 +294,16 @@
                                   placeholder="658 799 8941"
                                   aria-label="658 799 8941" />
                               </div>
+
+                              <div class="col-md-4">
+                              <label class="form-label" for="basic-default-name">Age</label>
+                              <input
+                                type="text"
+                                class="form-control"
+                                id="basic-default-name"
+                                placeholder="Age"
+                                 />
+                            </div>
     
                               <div class="col-4">
                                 <label class="form-label" for="collapsible-address">Address</label>
@@ -351,11 +362,11 @@
                                 
                               </div>
     
-                            <div class="col-12 d-flex justify-content-between">
-                              <button class="btn btn-label-secondary btn-prev" disabled>
+                            <div class="col-12 d-flex justify-content-end">
+                              {{-- <button class="btn btn-label-secondary btn-prev" disabled>
                                 <i class="ti ti-arrow-left me-sm-1"></i>
                                 <span class="align-middle d-sm-inline-block d-none">Previous</span>
-                              </button>
+                              </button> --}}
                               <button class="btn btn-primary btn-next">
                                 <span class="align-middle d-sm-inline-block d-none me-sm-1">Next</span>
                                 <i class="ti ti-arrow-right"></i>
@@ -366,15 +377,10 @@
                         <!-- Personal Info -->
                         <div id="personal-info" class="content">
                           <div class="content-header mb-3">
-                            <h6 class="mb-0">Personal Info</h6>
-                            <small>Enter Your Personal Info.</small>
+                            <small>Enter Your Booking Details.</small>
                           </div>
                           <div class="row g-3">
-                            <div class="col-12">
-                              <h6 class="mt-2 fw-semibold">2. Booking Details</h6>
-                              <hr class="mt-0">
-                            </div>
-  
+                            
                             <div class="col-md-4">
                               <label class="form-label" for="basic-default-name">No. of Person</label>
                               <input
@@ -385,15 +391,7 @@
                                  />
                             </div>
 
-                            <div class="col-md-4">
-                              <label class="form-label" for="basic-default-name">Age</label>
-                              <input
-                                type="text"
-                                class="form-control"
-                                id="basic-default-name"
-                                placeholder="Age"
-                                 />
-                            </div>
+                            
   
                             <!-- Datetime Picker-->
                             <div class="col-md-4">
@@ -468,24 +466,15 @@
                             </div>
   
                             <div class="col-md-4">
-                              <label class="form-label" for="basic-default-name">Deposit Rs</label>
-                              <input
-                                type="text"
-                                class="form-control"
-                                id="basic-default-name"
-                                placeholder="Deposit Rs"
-                                 />
+                              <label class="form-label" for="deposit-amount">Deposit Rs</label>
+                              <input type="text" class="form-control" id="deposit-amount" placeholder="Deposit Rs">
                             </div>
-
+                            
                             <div class="col-md-4">
-                              <label class="form-label" for="basic-default-name">Deposit Rs (rupees in words)</label>
-                              <input
-                                type="text"
-                                class="form-control"
-                                id="basic-default-name"
-                                placeholder="rupees in words"
-                                 />
+                              <label class="form-label" for="rupees-in-words">Deposit Rs (rupees in words)</label>
+                              <input type="text" class="form-control" id="rupees-in-words" placeholder="Rupees in words">
                             </div>
+                            
   
                             
                             <div class="col-12 d-flex justify-content-between">
@@ -503,8 +492,7 @@
                         <!-- All No of Person -->
                         <div id="address" class="content">
                           <div class="content-header mb-3">
-                            <h6 class="mb-0">Address</h6>
-                            <small>Enter Your Address.</small>
+                            <small>Enter Member Details.</small>
                           </div>
                           <div class="row g-3">
                             <!-- Form Repeater -->
@@ -574,35 +562,111 @@
                         
                         <!-- Review -->
                         <div id="review-submit" class="content">
-                          <p class="fw-semibold mb-2">Account</p>
-                          <ul class="list-unstyled">
-                            <li>Username</li>
-                            <li>exampl@email.com</li>
-                          </ul>
-                          <hr />
-                          <p class="fw-semibold mb-2">Personal Info</p>
-                          <ul class="list-unstyled">
-                            <li>First Name</li>
-                            <li>Last Name</li>
-                            <li>Country</li>
-                            <li>Language</li>
-                          </ul>
-                          <hr />
-                          <p class="fw-semibold mb-2">Address</p>
-                          <ul class="list-unstyled">
-                            <li>Address</li>
-                            <li>Landmark</li>
-                            <li>Pincode</li>
-                            <li>City</li>
-                          </ul>
-                          <hr />
-                          <p class="fw-semibold mb-2">Social Links</p>
-                          <ul class="list-unstyled">
-                            <li>https://twitter.com/abc</li>
-                            <li>https://facebook.com/abc</li>
-                            <li>https://plus.google.com/abc</li>
-                            <li>https://linkedin.com/abc</li>
-                          </ul>
+
+                          <!-- Invoice -->
+                          <div class="col-xl-12 col-md-12 col-12 mb-md-0 mb-4">
+                            <div class="invoice-preview-card">
+                              
+                              <div class="card-body">
+                                <div class="row p-sm-3 p-0 mb-3">
+                                 
+                                  <div class="col-xl-12 col-md-12 col-sm-5 col-12 mb-xl-0 mb-md-4 mb-sm-0 mb-4">
+                                    <h6 class="mb-4">Details:</h6>
+                                    <table>
+                                      <tbody>
+                                        <tr>
+                                          <td class="pe-4">Room Name:</td>
+                                          <td><strong>Room 2</strong></td>
+                                        </tr>
+                                        <tr>
+                                          <td class="pe-4">Room Facility</td>
+                                          <td>A.C. Room No</td>
+                                        </tr>
+                                        <tr>
+                                          <td class="pe-4">Check-In Date:</td>
+                                          <td>12-08-2023 11:00 am</td>
+                                        </tr>
+                                        <tr>
+                                          <td class="pe-4">Amount:</td>
+                                          <td>7500</td>
+                                        </tr>
+                                        <tr>
+                                          <td class="pe-4">SWIFT code:</td>
+                                          <td>BR91905</td>
+                                        </tr>
+                                      </tbody>
+                                    </table>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="table-responsive border-top">
+                                <table class="table mb-3">
+                                  <thead>
+                                    <tr>
+                                      <th>No.</th>
+                                      <th>Full Name</th>
+                                      <th>Age </th>
+                                      <th>Gender</th>
+                                      <th>Relations</th>
+                                      </tr>
+                                  </thead>
+                                  <tbody>
+                                    <tr>
+                                      <td>1</td>
+                                      <td class="text-nowrap">Dipesh K</td>
+                                      <td class="text-nowrap">27</td>
+                                      <td>Male</td>
+                                      <td>Self</td>
+                                     
+                                    </tr>
+                                    <tr>
+                                      <td>2</td>
+                                      <td class="text-nowrap">Junaid K</td>
+                                      <td class="text-nowrap">27</td>
+                                      <td>Male</td>
+                                      <td>Brother</td>
+                                     
+                                    </tr>
+                                    <tr>
+                                      <td>3</td>
+                                      <td class="text-nowrap">Karan M</td>
+                                      <td class="text-nowrap">20</td>
+                                      <td>Male</td>
+                                      <td>Brother</td>
+                                     
+                                    </tr>
+                                    <tr>
+                                      <td>4</td>
+                                      <td class="text-nowrap">Sahil</td>
+                                      <td class="text-nowrap">20</td>
+                                      <td>Male</td>
+                                      <td>Brother</td>
+                                     
+                                    </tr>
+                                    <tr>
+                                      <td colspan="3" class="align-top px-4 py-4">
+                                        
+                                      </td>
+                                      <td class="text-end pe-3 py-4">
+                                        <p class="mb-2 pt-3">Subtotal:</p>
+                                        <p class="mb-2">Tax:</p>
+                                        <p class="mb-0 pb-3">Total:</p>
+                                      </td>
+                                      <td class="ps-2 py-4">
+                                        <p class="fw-semibold mb-2 pt-3">$154.25</p>
+                                        <p class="fw-semibold mb-2">$50.00</p>
+                                        <p class="fw-semibold mb-0 pb-3">$204.25</p>
+                                      </td>
+                                    </tr>
+                                  </tbody>
+                                </table>
+                              </div>
+
+                              
+                            </div>
+                          </div>
+                          <!-- /Invoice -->
+
                           <div class="col-12 d-flex justify-content-between">
                             <button class="btn btn-label-secondary btn-prev">
                               <i class="ti ti-arrow-left me-sm-1"></i>
@@ -657,6 +721,78 @@
     <script src="{{ asset('assets/js/form-wizard-icons.js') }}"></script>
 
     <script src="{{ asset ('assets/js/forms-extras.js') }}"></script>
+
+    <script>
+      function convertToWords() {
+      var depositAmount = parseFloat(document.getElementById("deposit-amount").value);
+      var inWords = numberToWords(depositAmount);
+      document.getElementById("rupees-in-words").value = inWords;
+    }
+    
+    function numberToWords(number) {
+      var units = [
+        "Zero", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine",
+        "Ten", "Eleven", "Twelve", "Thirteen", "Fourteen", "Fifteen", "Sixteen", "Seventeen",
+        "Eighteen", "Nineteen"
+      ];
+    
+      var tens = [
+        "", "", "Twenty", "Thirty", "Forty", "Fifty", "Sixty", "Seventy", "Eighty", "Ninety"
+      ];
+    
+      var words = "";
+    
+      if (number === 0) {
+        return "Zero";
+      }
+    
+      if (number < 0) {
+        words += "Minus ";
+        number = Math.abs(number);
+      }
+    
+      if (Math.floor(number / 10000000) > 0) {
+        words += numberToWords(Math.floor(number / 10000000)) + " Crore ";
+        number %= 10000000;
+      }
+    
+      if (Math.floor(number / 100000) > 0) {
+        words += numberToWords(Math.floor(number / 100000)) + " Lakh ";
+        number %= 100000;
+      }
+    
+      if (Math.floor(number / 1000) > 0) {
+        words += numberToWords(Math.floor(number / 1000)) + " Thousand ";
+        number %= 1000;
+      }
+    
+      if (Math.floor(number / 100) > 0) {
+        words += numberToWords(Math.floor(number / 100)) + " Hundred ";
+        number %= 100;
+      }
+    
+      if (number > 0) {
+        if (words !== "") {
+          words += "and ";
+        }
+    
+        if (number < 20) {
+          words += units[number];
+        } else {
+          words += tens[Math.floor(number / 10)];
+          if (number % 10 > 0) {
+            words += "-" + units[number % 10];
+          }
+        }
+      }
+    
+      return words.trim();
+    }
+    
+    // Add event listener to deposit amount input field
+    document.getElementById("deposit-amount").addEventListener("input", convertToWords);
+    
+    </script>
 
 
 @endsection
