@@ -39,7 +39,9 @@ Route::get('/dashboard', [DashboardController::class, 'Dashboard'])->name('Dashb
 Route::get('/login', [AuthController::class, 'LoginUser'])->name('LoginUser');
 
 /* Room Booking Route */
-Route::get('/', [BookingController::class, 'RoomBooking'])->name('RoomBooking');
+Route::POST('room_booking', [BookingController::class, 'RoomBooking'])->name('room_booking');
+Route::get('room-booking', [BookingController::class, 'index']);
+Route::POST('add_member', [BookingController::class, 'add_member'])->name('add_member');
 
 
 /* Room list Route */
