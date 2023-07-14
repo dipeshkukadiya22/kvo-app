@@ -11,4 +11,6 @@ class add_members extends Model
     protected $table = 'add_members';
     protected $primaryKey = 'p_id';
     public $timestamps = false;
+
+    
 }

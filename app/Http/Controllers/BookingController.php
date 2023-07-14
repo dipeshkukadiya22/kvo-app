@@ -3,17 +3,27 @@
 namespace App\Http\Controllers;
 use App\Models\personal_details;
 use App\Models\room_details;
-
+use App\Models\add_members;
+use App\Models\member_details;
 use Illuminate\Http\Request;
 
 class BookingController extends Controller
 {
     public function index(){
-        return view ('Booking.room-booking');
+        $p_details=personal_details::with('member')->get();
+        $m_data=add_members::all();
+        $p_id=add_members::get()->last()->p_id;
+        return view ('Booking.room-booking',['p_details'=>$p_details,'m_data'=>$m_data,'p_id'=>$p_id]);
+       
     }
 
     public function RoomBooking(Request $req)
     {
+        $m_name =(personal_details::get()->last()->m_name);
+        $p_details=personal_details::with('member')->get();
+        dd($p_details);
+        $data = weight_entry::find($req->p_id);
+        $m_data = add_members::all();
         $details = new personal_details();
         $details->name = $req->name;
         $details-> email = $req->email;
@@ -25,7 +35,7 @@ class BookingController extends Controller
         $details-> city=$req->city;
         $details-> gender=$req->gender;
         $details->save(); 
-
+        //room_details
         $booking = new room_details();
         $booking->no_of_person=$req->no_of_person;
         $booking->check_in_date=$req->check_in_date;
@@ -38,26 +48,38 @@ class BookingController extends Controller
         $booking->deposite_rs=$req->deposite_rs;
         $booking->rs_word=$req->rs_word;
         $booking->save();
-
+        //member_details
         $m_details = new member_details();
         $m_details->full_name=$req->full_name;
         $m_details->age=$req->age;
         $m_details->gender=$req->gender;
         $m_details->relation=$req->relation;
         $m_details->save();
-        return view ('Booking.room-booking');
+        return view ('Booking.room-booking',['m_data'=>$m_data,'data'=>$data,'p_details'=>$p_details,'m_name'=>$m_name]);
 
     }
 
     public function add_member(Request $req){
+        $m_data=add_members::all();
+        $p_details=personal_details::with('member')->get();
         $member = new add_members();
-        $member->name = $req->name;
+        $member->m_name = strtoupper($req->m_name);
         $member->email = $req->email;
         $member->phone_no = $req->phone_no;
         $member->city = $req->city;
-        $member->address = $req->address;
+        $member->address = strtoupper($req->address);
         $member->save();
-        return view('room-booking');
+        return view('Booking.room-booking',['member'=>$member,'m_data'=>$m_data,'p_details'=>$p_details]);
+
+
+
+
+        // galat wait 
+
+
+
+
+        // aiya p_details return j nathi karav ti jo to khari mari maaa 
     }
     
 
