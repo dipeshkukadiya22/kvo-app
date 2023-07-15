@@ -186,20 +186,14 @@
                               <!-- Basic -->
                               <div class="col-md-4">
                                 <label for="select2Basic" class="form-label">Name</label>
-                                <!-- vari karo add me -->
-                                
-                              
-                                
                                 <select id="select2Basic" class="select2 form-select form-select-lg" data-allow-clear="true" name="name" required>
-                                @foreach ($m_data as $row)  
-                                <option value="{{$row->p_id}}" {{(!empty($member) && $member->m_name==$row->m_name)? "selected":"m_name"}}> {{($row->m_name)}}</option>
-                                <option value="{{$row->p_id}}" {{(!empty($member) && $member->m_name==$row->m_name)? "selected" : ''}}> {{($row->m_name)}}</option>
-
-                                @endforeach
-                                 
-                                 
-                                 
+                                  <option value="">None</option>
+                                  @foreach ($m_data as $row)  
+                                      <option value="{{$row->p_id}}" {{(!empty($member) && $member->m_name == $row->m_name) ? "selected" : ""}}>{{$row->m_name}}</option>
+                                  @endforeach
                                 </select>
+                              
+
                                 
                             
                               </div>
@@ -207,7 +201,7 @@
                               <div class="col-md-4">
                             
                                   <label class="form-label" for="basic-default-email">Email</label>
-                                  <input type="email" id="basic-default-email" name="email" class="form-control" placeholder="john.doe" value="{{ (!empty($member) && $member->email == $row->email) ? $member->email : '' }}" />
+                                  <input type="email" id="basic-default-email" name="email" class="form-control" placeholder="john.doe" value="{{ (!empty($member) )? $member->email : '' }}" />
 
                               </div>                                                                                                            
 
@@ -215,7 +209,7 @@
                               <div class="col-md-4">
                                 
                                 <label class="form-label" for="multicol-phone">Phone Number</label>
-                                <input type="number" id="multicol-phone" name="phone_no" class="form-control phone-mask" placeholder="658 799 8941" aria-label="658 799 8941" value="{{ (!empty($member) && $member->phone_no == $row->phone_no) ? $member->phone_no : 'phone_no' }}" />
+                                <input type="number" id="multicol-phone" name="phone_no" class="form-control phone-mask" placeholder="658 799 8941" aria-label="658 799 8941" value="{{ (!empty($member)) ? $member->phone_no : '' }}" />
                               </div>
 
                               <div class="col-md-4">
@@ -225,7 +219,7 @@
     
                               <div class="col-4">
                                 <label class="form-label" for="collapsible-address">Address</label>
-                                <textarea name="collapsible-address"  name="address"class="form-control" id="collapsible-address" rows="1" placeholder="1456, Mall Road" value="{{ (!empty($member) && $member->address == $row->address) ? $member->address : 'address' }}"></textarea>
+                                <textarea name="collapsible-address"  name="address" class="form-control" id="collapsible-address" rows="1" placeholder="1456, Mall Road" value="">{{ (!empty($member) ) ? $member->address : '' }}</textarea>
                               </div>
                                                         
                               <div class="col-md-4">
@@ -240,7 +234,7 @@
                               
                               <div class="col-md-4">
                                 <label for="defaultFormControlInput" class="form-label">City</label>
-                                <input type="text" class="form-control" name="city" id="defaultFormControlInput" placeholder="John Doe" aria-describedby="defaultFormControlHelp" value="{{ (!empty($member) && $member->city == $row->city) ? $member->city : '' }}" />
+                                <input type="text" class="form-control" name="city" id="defaultFormControlInput" placeholder="John Doe" aria-describedby="defaultFormControlHelp" value="{{ (!empty($member)) ? $member->city : '' }}" />
                               </div>
 
                               <div class="col-md-4">

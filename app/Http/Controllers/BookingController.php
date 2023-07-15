@@ -60,7 +60,7 @@ class BookingController extends Controller
     }
 
     public function add_member(Request $req){
-        $m_data=add_members::all();
+        
         $p_details=personal_details::with('member')->get();
         $member = new add_members();
         $member->m_name = strtoupper($req->m_name);
@@ -69,6 +69,7 @@ class BookingController extends Controller
         $member->city = $req->city;
         $member->address = strtoupper($req->address);
         $member->save();
+        $m_data=add_members::all();
         return view('Booking.room-booking',['member'=>$member,'m_data'=>$m_data,'p_details'=>$p_details]);
 
 
