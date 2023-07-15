@@ -39,7 +39,8 @@ Route::get('/dashboard', [DashboardController::class, 'Dashboard'])->name('Dashb
 Route::get('/login', [AuthController::class, 'LoginUser'])->name('LoginUser');
 
 /* Room Booking Route */
-Route::POST('room_booking', [BookingController::class, 'RoomBooking'])->name('room_booking');
+
+Route::POST('room-booking', [BookingController::class, 'RoomBooking'])->name('room_booking');
 Route::get('room-booking', [BookingController::class, 'index']);
 Route::POST('room-booking', [BookingController::class, 'add_member'])->name('room-booking');
 
@@ -51,6 +52,11 @@ Route::get('/room-list', [BookingController::class, 'RoomList'])->name('RoomList
 
 /* View Members Route */
 Route::get('/view-members', [MembersController::class, 'ViewMembers'])->name('ViewMembers');
+Route::POST('/edit_members', [MembersController::class, 'edit_members'])->name('edit_members');
+
+
+
+
 
 Route::get('Religious_Donation', [donation::class, 'Religious_Donation'])->name('Religious_Donation');
 Route::get('Community_Donation', [donation::class, 'Community_Donation'])->name('Community_Donation');

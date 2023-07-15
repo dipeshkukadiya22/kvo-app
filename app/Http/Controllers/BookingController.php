@@ -5,6 +5,7 @@ use App\Models\personal_details;
 use App\Models\room_details;
 use App\Models\add_members;
 use App\Models\member_details;
+use DB;
 use Illuminate\Http\Request;
 
 class BookingController extends Controller
@@ -21,7 +22,6 @@ class BookingController extends Controller
     {
         $m_name =(personal_details::get()->last()->m_name);
         $p_details=personal_details::with('member')->get();
-        dd($p_details);
         $data = weight_entry::find($req->p_id);
         $m_data = add_members::all();
         $details = new personal_details();
@@ -55,7 +55,9 @@ class BookingController extends Controller
         $m_details->gender=$req->gender;
         $m_details->relation=$req->relation;
         $m_details->save();
-        return view ('Booking.room-booking',['m_data'=>$m_data,'data'=>$data,'p_details'=>$p_details,'m_name'=>$m_name]);
+        //$member_data = member_details::all();
+        $m_data= DB::select("select * from member_details ORDER BY add_members.p_id DESC");
+        return view ('Booking.room-booking',['m_data'=>$m_data,'data'=>$data,'p_details'=>$p_details,'m_name'=>$m_name,'m_data'=>$m_data]);
 
     }
 
@@ -71,18 +73,9 @@ class BookingController extends Controller
         $member->save();
         $m_data=add_members::all();
         return view('Booking.room-booking',['member'=>$member,'m_data'=>$m_data,'p_details'=>$p_details]);
-
-
-
-
-        // galat wait 
-
-
-
-
-        // aiya p_details return j nathi karav ti jo to khari mari maaa 
     }
     
+   
 
     
 

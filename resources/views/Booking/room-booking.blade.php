@@ -174,7 +174,7 @@
                       </div>
                     </div>
                     <div class="bs-stepper-content">
-                      <form class="form-repeater"  method="POST" action="{{route('room-booking')}}">
+                      <form class="form-repeater"   method="POST" action="{{route('room-booking')}}">
                         @csrf
                         <!-- Account Details -->
                         <div id="account-details" class="content">
@@ -224,7 +224,7 @@
                                                         
                               <div class="col-md-4">
                                 <label class="form-label" for="basic-default-dob">DOB</label>
-                                <input type="text" class="form-control" name="dob" placeholder="YYYY-MM-DD" id="flatpickr-date" />
+                                <input type="text" class="form-control" name="dob" placeholder="DD-MM-YYYY" id="flatpickr-date" />
                               </div>
 
                               <div class="col-md-4">
@@ -462,38 +462,19 @@
                                       </tr>
                                   </thead>
                                   <tbody>
+                                   
                                     <tr>
-                                      <td>1</td>
-                                      <td class="text-nowrap">Dipesh K</td>
-                                      <td class="text-nowrap">27</td>
-                                      <td>Male</td>
-                                      <td>Self</td>
+                                      <td></td>
+                                      <td></td>
+                                      <td></td>
+                                      <td></td>
+                                      <td></td>
                                      
                                     </tr>
-                                    <tr>
-                                      <td>2</td>
-                                      <td class="text-nowrap">Junaid K</td>
-                                      <td class="text-nowrap">27</td>
-                                      <td>Male</td>
-                                      <td>Brother</td>
-                                     
-                                    </tr>
-                                    <tr>
-                                      <td>3</td>
-                                      <td class="text-nowrap">Karan M</td>
-                                      <td class="text-nowrap">20</td>
-                                      <td>Male</td>
-                                      <td>Brother</td>
-                                     
-                                    </tr>
-                                    <tr>
-                                      <td>4</td>
-                                      <td class="text-nowrap">Sahil</td>
-                                      <td class="text-nowrap">20</td>
-                                      <td>Male</td>
-                                      <td>Brother</td>
-                                     
-                                    </tr>
+                                  
+                                    
+                                    
+                                   
                                     <tr>
                                       <td colspan="3" class="align-top px-4 py-4">
                                         
