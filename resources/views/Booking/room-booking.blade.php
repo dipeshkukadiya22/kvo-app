@@ -1,3 +1,4 @@
+
 @extends('layouts.app')
 
 @section('title', 'Room Booking')
@@ -23,7 +24,8 @@
   .all-members > div:first-child button.btn.btn-label-danger.mt-4.waves-effect {
       display: none !important;
   }
-  .bs-stepper .step.active .bs-stepper-icon svg {
+  .bs-stepper .step.
+  ve .bs-stepper-icon svg {
     color: var(--bs-primary) !important;
   }
   .bs-stepper .step.crossed .step-trigger .bs-stepper-icon svg {
@@ -44,7 +46,7 @@
             @include('layouts.header')
 
             <!-- Content -->
-
+            
             <div class="container-xxl flex-grow-1 container-p-y">
               <div class="content-header row">
                 <div class="content-header-left col-md-9 col-12 mb-2">
@@ -59,84 +61,47 @@
                       
                       <!-- Enable backdrop (default) Offcanvas -->
                       <div class="mt-0">
-                        <button
-                          class="btn btn-primary"
-                          type="button"
-                          data-bs-toggle="offcanvas"
-                          data-bs-target="#offcanvasBackdrop"
-                          aria-controls="offcanvasBackdrop">
+                        <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasBackdrop" aria-controls="offcanvasBackdrop">
                           <span class="ti-xs ti ti-plus me-1"></span>Add Member
                         </button>
-                        <div
-                          class="offcanvas offcanvas-end"
-                          tabindex="-1"
-                          id="offcanvasBackdrop"
-                          aria-labelledby="offcanvasBackdropLabel">
+                        <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasBackdrop" aria-labelledby="offcanvasBackdropLabel">
                           <div class="offcanvas-header border-bottom">
                             <h5 id="offcanvasBackdropLabel" class="offcanvas-title">New Member</h5>
-                            <button
-                              type="button"
-                              class="btn-close text-reset"
-                              data-bs-dismiss="offcanvas"
-                              aria-label="Close"></button>
+                            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                           </div>
                           <div class="offcanvas-body mx-0 flex-grow-0">
 
                             <!-- Browser Default -->
-                            <form class="browser-default-validation">
+                            <form class="browser-default-validation" method="POST" action="{{route('room-booking')}}">
+                              @csrf
                               <div class="mb-3">
                                 <label class="form-label" for="basic-default-name">Name</label>
-                                <input
-                                  type="text"
-                                  class="form-control"
-                                  id="basic-default-name"
-                                  placeholder="John Doe"
-                                   />
+                                <input type="text" name="m_name" class="form-control" id="basic-default-name" placeholder="John Doe" />
                               </div>
                               <div class="mb-3">
                                 <label class="form-label" for="basic-default-email">Email</label>
-                                <input
-                                  type="email"
-                                  id="basic-default-email"
-                                  class="form-control"
-                                  placeholder="john.doe"
-                                   />
+                                <input type="email" name="email" id="basic-default-email" class="form-control" placeholder="john.doe"/>
                               </div>
                               
   
                               <div class="mb-3">
                                 <label class="form-label" for="multicol-phone">Phone Number</label>
-                                <input
-                                  type="number"
-                                  id="multicol-phone"
-                                  class="form-control phone-mask"
-                                  placeholder="658 799 8941"
-                                  aria-label="658 799 8941" />
+                                <input type="number" name="phone_no" id="multicol-phone" class="form-control phone-mask" placeholder="658 799 8941" aria-label="658 799 8941" maxlength="10"  />
                               </div>
                               <div class="mb-3">
                                 <label class="form-label" for="city">City</label>
-                                <input type="text" class="form-control" id="city" placeholder="Bhuj" />
+                                <input type="text" name="city" class="form-control" id="city" placeholder="Bhuj" />
                               </div>
     
                               <div class="mb-3">
                                 <label class="form-label" for="collapsible-address">Address</label>
-                                <textarea
-                                  name="collapsible-address"
-                                  class="form-control"
-                                  id="collapsible-address"
-                                  rows="2"
-                                  placeholder="1456, Mall Road"></textarea>
+                                <textarea name="address"  class="form-control" id="collapsible-address" rows="2" placeholder="1456, Mall Road"></textarea>
                               </div>
                               
                               <div class="row">
                                 <div class="col-12">
-                                  <button type="button" class="btn btn-primary mb-2 d-grid w-100">Submit</button>
-                                  <button
-                                    type="button"
-                                    class="btn btn-label-secondary d-grid w-100"
-                                    data-bs-dismiss="offcanvas">
-                                    Cancel
-                                  </button>
+                                  <button type="submit" class="btn btn-primary mb-2 d-grid w-100" >Submit</button>
+                                  <button type="button" class="btn btn-label-secondary d-grid w-100" data-bs-dismiss="offcanvas"> Cancel</button>
                                 </div>
                               </div>
                             </form>
@@ -209,7 +174,8 @@
                       </div>
                     </div>
                     <div class="bs-stepper-content">
-                      <form class="form-repeater" onSubmit="return false">
+                      <form class="form-repeater"   method="POST" action="{{route('room-booking')}}">
+                        @csrf
                         <!-- Account Details -->
                         <div id="account-details" class="content">
                           <div class="content-header mb-3">
@@ -220,143 +186,65 @@
                               <!-- Basic -->
                               <div class="col-md-4">
                                 <label for="select2Basic" class="form-label">Name</label>
-                                <select id="select2Basic" class="select2 form-select form-select-lg" data-allow-clear="true" required>
-                                  <option value="AK">Alaska</option>
-                                  <option value="HI">Hawaii</option>
-                                  <option value="CA">California</option>
-                                  <option value="NV">Nevada</option>
-                                  <option value="OR">Oregon</option>
-                                  <option value="WA">Washington</option>
-                                  <option value="AZ">Arizona</option>
-                                  <option value="CO">Colorado</option>
-                                  <option value="ID">Idaho</option>
-                                  <option value="MT">Montana</option>
-                                  <option value="NE">Nebraska</option>
-                                  <option value="NM">New Mexico</option>
-                                  <option value="ND">North Dakota</option>
-                                  <option value="UT">Utah</option>
-                                  <option value="WY">Wyoming</option>
-                                  <option value="AL">Alabama</option>
-                                  <option value="AR">Arkansas</option>
-                                  <option value="IL">Illinois</option>
-                                  <option value="IA">Iowa</option>
-                                  <option value="KS">Kansas</option>
-                                  <option value="KY">Kentucky</option>
-                                  <option value="LA">Louisiana</option>
-                                  <option value="MN">Minnesota</option>
-                                  <option value="MS">Mississippi</option>
-                                  <option value="MO">Missouri</option>
-                                  <option value="OK">Oklahoma</option>
-                                  <option value="SD">South Dakota</option>
-                                  <option value="TX">Texas</option>
-                                  <option value="TN">Tennessee</option>
-                                  <option value="WI">Wisconsin</option>
-                                  <option value="CT">Connecticut</option>
-                                  <option value="DE">Delaware</option>
-                                  <option value="FL">Florida</option>
-                                  <option value="GA">Georgia</option>
-                                  <option value="IN">Indiana</option>
-                                  <option value="ME">Maine</option>
-                                  <option value="MD">Maryland</option>
-                                  <option value="MA">Massachusetts</option>
-                                  <option value="MI">Michigan</option>
-                                  <option value="NH">New Hampshire</option>
-                                  <option value="NJ">New Jersey</option>
-                                  <option value="NY">New York</option>
-                                  <option value="NC">North Carolina</option>
-                                  <option value="OH">Ohio</option>
-                                  <option value="PA">Pennsylvania</option>
-                                  <option value="RI">Rhode Island</option>
-                                  <option value="SC">South Carolina</option>
-                                  <option value="VT">Vermont</option>
-                                  <option value="VA">Virginia</option>
-                                  <option value="WV">West Virginia</option>
+                                <select id="select2Basic" class="select2 form-select form-select-lg" data-allow-clear="true" name="name" required>
+                                  <option value="">None</option>
+                                  @foreach ($m_data as $row)  
+                                      <option value="{{$row->p_id}}" {{(!empty($member) && $member->m_name == $row->m_name) ? "selected" : ""}}>{{$row->m_name}}</option>
+                                  @endforeach
                                 </select>
-                              </div>
-    
-                              <div class="col-md-4">
-                                  <label class="form-label" for="basic-default-email">Email</label>
-                                  <input
-                                    type="email"
-                                    id="basic-default-email"
-                                    class="form-control"
-                                    placeholder="john.doe"
-                                     />
+                              
+
                                 
+                            
                               </div>
     
                               <div class="col-md-4">
+                            
+                                  <label class="form-label" for="basic-default-email">Email</label>
+                                  <input type="email" id="basic-default-email" name="email" class="form-control" placeholder="john.doe" value="{{ (!empty($member) )? $member->email : '' }}" />
+
+                              </div>                                                                                                            
+
+    
+                              <div class="col-md-4">
+                                
                                 <label class="form-label" for="multicol-phone">Phone Number</label>
-                                <input
-                                  type="number"
-                                  id="multicol-phone"
-                                  class="form-control phone-mask"
-                                  placeholder="658 799 8941"
-                                  aria-label="658 799 8941" />
+                                <input type="number" id="multicol-phone" name="phone_no" class="form-control phone-mask" placeholder="658 799 8941" aria-label="658 799 8941" value="{{ (!empty($member)) ? $member->phone_no : '' }}" />
                               </div>
 
                               <div class="col-md-4">
-                              <label class="form-label" for="basic-default-name">Age</label>
-                              <input
-                                type="text"
-                                class="form-control"
-                                id="basic-default-name"
-                                placeholder="Age"
-                                 />
-                            </div>
+                                <label class="form-label" for="basic-default-name">Age</label>
+                                <input type="text" class="form-control" name="age" id="basic-default-name" placeholder="Age" />
+                              </div>
     
                               <div class="col-4">
                                 <label class="form-label" for="collapsible-address">Address</label>
-                                <textarea
-                                  name="collapsible-address"
-                                  class="form-control"
-                                  id="collapsible-address"
-                                  rows="1"
-                                  placeholder="1456, Mall Road"></textarea>
+                                <textarea name="collapsible-address"  name="address" class="form-control" id="collapsible-address" rows="1" placeholder="1456, Mall Road" value="">{{ (!empty($member) ) ? $member->address : '' }}</textarea>
                               </div>
                                                         
                               <div class="col-md-4">
                                 <label class="form-label" for="basic-default-dob">DOB</label>
-                                <input type="text" class="form-control" placeholder="YYYY-MM-DD" id="flatpickr-date" />
+                                <input type="text" class="form-control" name="dob" placeholder="DD-MM-YYYY" id="flatpickr-date" />
                               </div>
 
                               <div class="col-md-4">
                                 <label for="defaultFormControlInput" class="form-label">Community</label>
-                                <input
-                                  type="text"
-                                  class="form-control"
-                                  id="defaultFormControlInput"
-                                  placeholder="John Doe"
-                                  aria-describedby="defaultFormControlHelp" />
+                                <input type="text" class="form-control" name="community" id="defaultFormControlInput" placeholder="John Doe" aria-describedby="defaultFormControlHelp" />
                               </div>
                               
                               <div class="col-md-4">
                                 <label for="defaultFormControlInput" class="form-label">City</label>
-                                <input
-                                  type="text"
-                                  class="form-control"
-                                  id="defaultFormControlInput"
-                                  placeholder="John Doe"
-                                  aria-describedby="defaultFormControlHelp" />
+                                <input type="text" class="form-control" name="city" id="defaultFormControlInput" placeholder="John Doe" aria-describedby="defaultFormControlHelp" value="{{ (!empty($member)) ? $member->city : '' }}" />
                               </div>
+
                               <div class="col-md-4">
                                 <label class="d-block form-label">Gender</label>
                                 <div class="form-check form-check-inline">
-                                  <input
-                                    class="form-check-input"
-                                    type="radio"
-                                    name="inlineRadioOptions"
-                                    id="inlineRadio1"
-                                    value="option1" />
+                                  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1" />
                                   <label class="form-check-label" for="inlineRadio1">Male</label>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                  <input
-                                    class="form-check-input"
-                                    type="radio"
-                                    name="inlineRadioOptions"
-                                    id="inlineRadio2"
-                                    value="option2" />
+                                  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2" />
                                   <label class="form-check-label" for="inlineRadio2">Female</label>
                                 </div>
                                 
@@ -383,31 +271,18 @@
                             
                             <div class="col-md-4">
                               <label class="form-label" for="basic-default-name">No. of Person</label>
-                              <input
-                                type="text"
-                                class="form-control"
-                                id="basic-default-name"
-                                placeholder="No of Person"
-                                 />
+                              <input type="text" class="form-control"  name="no_of_person" id="basic-default-name" placeholder="No of Person" />
                             </div>
-
-                            
-  
                             <!-- Datetime Picker-->
                             <div class="col-md-4">
                               <label for="flatpickr-datetime" class="form-label">Check-In Date</label>
-                              <input
-                                type="text"
-                                class="form-control"
-                                placeholder="DD-MM-YYYY HH:MM"
-                                id="flatpickr-datetime" />
+                              <input type="text" class="form-control" name="check_in_date" placeholder="DD-MM-YYYY HH:MM" id="flatpickr-datetime" />
                             </div>
                             <!-- /Datetime Picker-->
-  
                             
                             <div class="col-md-4">
                               <label class="form-label" for="basic-default-country">Room List</label>
-                              <select class="form-select" id="basic-default-country" required>
+                              <select class="form-select" name="room_list" id="basic-default-country" required>
                                 <option value="">Select Room</option>
                                 <option value="room-1">Room 1</option>
                                 <option value="room-2">Room 2</option>
@@ -417,24 +292,18 @@
 
                             <div class="col-md-4">
                               <label class="form-label" for="basic-default-country">Room Facility</label>
-                              <select class="form-select" id="basic-default-country" required>
+                              <select class="form-select" name="room_facility" id="basic-default-country" required>
                                 <option value="">Select Room</option>
                                 <option value="room-1">A.C. Room No.</option>
                                 <option value="room-2">Non. A.C. Room No.</option>
-                                
                               </select>
                             </div>
 
                             <div class="col-md-4">
                               <label class="form-label" for="basic-default-name">Amount</label>
                               <div class="input-group">
-                                
                                 <span class="input-group-text">₹</span>
-                                <input
-                                  type="number"
-                                  class="form-control"
-                                  placeholder="Amount"
-                                  aria-label="Amount (to the nearest indian)" />
+                                <input type="number" class="form-control"  name="amount" placeholder="Amount" aria-label="Amount (to the nearest indian)" />
                               </div>
                             </div>
   
@@ -442,37 +311,27 @@
   
                             <div class="col-md-4">
                               <label for="formFileMultiple" class="form-label">Identity Proof</label>
-                              <input class="form-control" type="file" id="formFileMultiple" multiple />
+                              <input class="form-control" type="file" name="id_proof" id="formFileMultiple" multiple />
                             </div>
   
                             <div class="col-md-4">
                               <label class="form-label" for="basic-default-name">Deposit No</label>
-                              <input
-                                type="text"
-                                class="form-control"
-                                id="basic-default-name"
-                                placeholder="Deposit No"
-                                 />
+                              <input type="text" class="form-control" name="deposit_no" id="basic-default-name" placeholder="Deposit No" />
                             </div>
 
                             <div class="col-md-4">
                               <label class="form-label" for="basic-default-name">Door Metri No: </label>
-                              <input
-                                type="text"
-                                class="form-control"
-                                id="basic-default-name"
-                                placeholder="Door Metri No"
-                                 />
+                              <input type="text" class="form-control" name="door_mt_no" id="basic-default-name" placeholder="Door Metri No" />
                             </div>
   
                             <div class="col-md-4">
                               <label class="form-label" for="deposit-amount">Deposit Rs</label>
-                              <input type="text" class="form-control" id="deposit-amount" placeholder="Deposit Rs">
+                              <input type="text" class="form-control" name="deposite_rs" id="deposit-amount" placeholder="Deposit Rs">
                             </div>
                             
                             <div class="col-md-4">
                               <label class="form-label" for="rupees-in-words">Deposit Rs (rupees in words)</label>
-                              <input type="text" class="form-control" id="rupees-in-words" placeholder="Rupees in words">
+                              <input type="text" class="form-control" name="rs_word" id="rupees-in-words" placeholder="Rupees in words">
                             </div>
                             
   
@@ -502,32 +361,24 @@
                                 <div class="row">
                                   <div class="mb-3 col-lg-6 col-xl-3 col-12 mb-0">
                                     <label class="form-label" for="form-repeater-1-1">Full Name</label>
-                                    <input type="text" id="form-repeater-1-1" class="form-control" placeholder="john doe" />
+                                    <input type="text" id="form-repeater-1-1"  name="full_name" class="form-control" placeholder="john doe" />
                                   </div>
                                   <div class="mb-3 col-lg-6 col-xl-3 col-12 mb-0">
                                     <label class="form-label" for="form-repeater-1-2">Age</label>
-                                    <input
-                                      type="text"
-                                      id="form-repeater-1-2"
-                                      class="form-control"
-                                      placeholder="your age" />
+                                    <input type="text" id="form-repeater-1-2" name="age" class="form-control" placeholder="your age" />
                                   </div>
                                   
                                   
                                   <div class="mb-3 col-lg-6 col-xl-2 col-12 mb-0">
                                     <label class="form-label" for="form-repeater-1-3">Gender</label>
-                                    <select id="form-repeater-1-3" class="form-select">
+                                    <select id="form-repeater-1-3" name="gender" class="form-select">
                                       <option value="Male">Male</option>
                                       <option value="Female">Female</option>
                                     </select>
                                   </div>
                                   <div class="mb-3 col-lg-6 col-xl-2 col-12 mb-0">
                                     <label class="form-label" for="form-repeater-1-4">Relations</label>
-                                    <input
-                                      type="text"
-                                      id="form-repeater-1-4"
-                                      class="form-control"
-                                      placeholder="Add Relation" />
+                                    <input type="text" id="form-repeater-1-4" name="relation" class="form-control" placeholder="Add Relation" />
                                   </div>
                                   <div class="mb-3 col-lg-12 col-xl-2 col-12 d-flex align-items-center mb-0">
                                     <button class="btn btn-label-danger mt-4" data-repeater-delete>
@@ -611,38 +462,19 @@
                                       </tr>
                                   </thead>
                                   <tbody>
+                                   
                                     <tr>
-                                      <td>1</td>
-                                      <td class="text-nowrap">Dipesh K</td>
-                                      <td class="text-nowrap">27</td>
-                                      <td>Male</td>
-                                      <td>Self</td>
+                                      <td></td>
+                                      <td></td>
+                                      <td></td>
+                                      <td></td>
+                                      <td></td>
                                      
                                     </tr>
-                                    <tr>
-                                      <td>2</td>
-                                      <td class="text-nowrap">Junaid K</td>
-                                      <td class="text-nowrap">27</td>
-                                      <td>Male</td>
-                                      <td>Brother</td>
-                                     
-                                    </tr>
-                                    <tr>
-                                      <td>3</td>
-                                      <td class="text-nowrap">Karan M</td>
-                                      <td class="text-nowrap">20</td>
-                                      <td>Male</td>
-                                      <td>Brother</td>
-                                     
-                                    </tr>
-                                    <tr>
-                                      <td>4</td>
-                                      <td class="text-nowrap">Sahil</td>
-                                      <td class="text-nowrap">20</td>
-                                      <td>Male</td>
-                                      <td>Brother</td>
-                                     
-                                    </tr>
+                                  
+                                    
+                                    
+                                   
                                     <tr>
                                       <td colspan="3" class="align-top px-4 py-4">
                                         
@@ -672,7 +504,7 @@
                               <i class="ti ti-arrow-left me-sm-1"></i>
                               <span class="align-middle d-sm-inline-block d-none">Previous</span>
                             </button>
-                            <button class="btn btn-success btn-submit">Submit</button>
+                            <button type="submit" class="btn btn-success btn-submit">Submit</button>
                           </div>
                         </div>
                       </form>
@@ -682,7 +514,7 @@
                 <!-- /Default Icons Wizard -->
                 
                 
-                          
+            
               </div>
               
             </div>
