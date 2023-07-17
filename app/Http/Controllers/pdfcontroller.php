@@ -14,25 +14,25 @@ class pdfcontroller extends Controller
         // $pdf->loadHTML('<h1>Hello BABA</h1>');
         // return $pdf->stream();
         
-    $pdf = Pdf::loadView('pdf.pdf_Religious_Donation')->setPaper('a5', 'potrait')->setOptions(['defaultFont' => 'NotoSansGujarati-Regular','enable_remote', TRUE]);
+    $pdf = Pdf::loadView('pdf.pdf_Religious_Donation')->setPaper('a5', 'potrait')->setOptions(['defaultFont' => 'KAP119']);
     return $pdf->stream();
     }
 
     public function pdf_Community_Donation()
     {   
-    $pdf = Pdf::loadView('pdf.pdf_Community_Donation')->setPaper('a5', 'landscape')->setOptions(['defaultFont' => 'kap150']);
+    $pdf = Pdf::loadView('pdf.pdf_Community_Donation')->setPaper('a5', 'landscape')->setOptions(['defaultFont' => 'KAP119']);
     return $pdf->stream();
     }
 
     public function pdf_General_Donation()
     {   
-    $pdf = Pdf::loadView('pdf.pdf_General_Donation')->setPaper('a5', 'landscape')->setOptions(['defaultFont' => 'NotoSansGujarati-Regular','enable_remote', TRUE]);
+    $pdf = Pdf::loadView('pdf.pdf_General_Donation')->setPaper('a5', 'landscape')->setOptions(['defaultFont' => 'KAP119']);
     return $pdf->stream();
     }
 
     public function pdf_Expense_Receipt()
     {   
-    $pdf = Pdf::loadView('pdf.pdf_Expense_Receipt')->setPaper('a5', 'landscape')->setOptions(['defaultFont' => 'NotoSansGujarati-Regular','enable_remote', TRUE]);
+    $pdf = Pdf::loadView('pdf.pdf_Expense_Receipt')->setPaper('a5', 'landscape')->setOptions(['defaultFont' => 'KAP119']);
     return $pdf->stream();
     }
 }

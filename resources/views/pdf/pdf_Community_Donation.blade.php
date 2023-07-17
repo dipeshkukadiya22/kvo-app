@@ -4,8 +4,8 @@
 		<style type="text/css">
 
 				@font-face {
-					font-family: kap150;
-					src: url('C:/xampp/htdocs/kvo-app/vendor/dompdf/dompdf/lib/fonts/kap150.ttf');
+					font-family: KAP119;
+					src: url('C:/xampp/htdocs/kvo-app/vendor/dompdf/dompdf/lib/fonts/KAP119.ttf');
 				}
 
 				@page  
@@ -14,8 +14,8 @@
 				} 
 
 				.gujfont{
-					font-family: "kap150" !important;
-					font-size: 18px !important;
+					font-family: "KAP119" !important;
+					font-size: 16px !important;
 				}
 
 				.table1{
@@ -55,7 +55,7 @@
 				}
 
 				table.table2.tg td:nth-child(3) {
-					text-align: right;
+					text-align: center;
 					vertical-align: middle !important;
 				}
 
@@ -117,37 +117,37 @@
 					</tr>
 					<tr>
 					<td class="tg-0pky gujfont">!</td>
-					<td class="tg-1pky">dfggggggggggff</td>
+					<td class="tg-1pky gujfont">X[9zL ZTGXL 8MSZXL JMZF D[l0S, R[SV5 ;[g8Z</td>
 					<td class="tg-0pky">65000</td>
 					</tr>
 					<tr>
 					<td class="tg-0pky gujfont">Z</td>
-					<td class="tg-0pky"></td>
+					<td class="tg-0pky gujfont">DCFHGG]\ DFD[Ú\</td>
 					<td class="tg-0pky"></td>
 					</tr>
 					<tr>
 					<td class="tg-0pky gujfont">#</td>
-					<td class="tg-0pky"></td>
+					<td class="tg-0pky gujfont">DFT]zL ,FB6LAF> ZFD_ T[HXL UF,F GJGLT EMHGXF/F</td>
 					<td class="tg-0pky"></td>
 					</tr>
 					<tr>
 					<td class="tg-0pky gujfont">$</td>
-					<td class="tg-0pky"></td>
+					<td class="tg-0pky gujfont">EMHGXF/F</td>
 					<td class="tg-0pky"></td>
 					</tr>
 					<tr>
 					<td class="tg-0pky gujfont">5</td>
-					<td class="tg-0pky"></td>
+					<td class="tg-0pky gujfont"> X{1—6S < ,JFHD < VF¬S®;LHG 0MG[XG </td>
 					<td class="tg-0pky"></td>
 					</tr>
 					<tr>
 					<td class="tg-0pky gujfont">^</td>
-					<td class="tg-0pky"></td>
+					<td class="tg-0pky gujfont">V[daI],g; 0MG[XG</td>
 					<td class="tg-0pky"></td>
 					</tr>
 					<tr>
 					<td class="tg-0pky gujfont">&</td>
-					<td class="tg-0pky"></td>
+					<td class="tg-0pky gujfont">>TZ</td>
 					<td class="tg-0pky"></td>
 					</tr>
 					<tr>
