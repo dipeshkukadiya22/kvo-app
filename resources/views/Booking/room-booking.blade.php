@@ -31,6 +31,44 @@
   .bs-stepper .step.crossed .step-trigger .bs-stepper-icon svg {
     color: var(--bs-primary) !important;
   }
+
+  /* drop down css */
+  /* Style for the dropdown */
+.btn-dropdown {
+  display: block;
+    width: 100%;
+    padding: 0.422rem 0.875rem;
+    font-size: 0.9375rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #6f6b7d;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #dbdade;
+    appearance: none;
+    border-radius: 0.375rem;
+    text-align: left;
+  
+}
+
+/* Style for the dropdown items (checkboxes) */
+.checkboxes {
+  display: none;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  padding: 5px;
+}
+
+.checkboxes label {
+  display: block;
+  padding: 0px;
+}
+
+/* Show the checkboxes when the dropdown is active */
+.dropdown-checkboxes.active .checkboxes {
+  display: block;
+}
+
 </style>
 
 @endsection
@@ -76,7 +114,7 @@
                               @csrf
                               <div class="mb-3">
                                 <label class="form-label" for="basic-default-name">Name</label>
-                                <input type="text" name="m_name" class="form-control" id="basic-default-name" placeholder="John Doe" />
+                                <input type="text" name="m_name" class="form-control" id="basic-default-name"  style="text-transform:uppercase"  placeholder="John Doe" />
                               </div>
                               <div class="mb-3">
                                 <label class="form-label" for="basic-default-email">Email</label>
@@ -187,9 +225,9 @@
                               <div class="col-md-4">
                                 <label for="select2Basic" class="form-label">Name</label>
                                 <select id="select2Basic" class="select2 form-select form-select-lg" data-allow-clear="true" name="name" required>
-                                  <option value="">None</option>
+                                  <option value="hidden">select name</option>
                                   @foreach ($m_data as $row)  
-                                      <option value="{{$row->p_id}}" {{(!empty($member) && $member->m_name == $row->m_name) ? "selected" : ""}}>{{$row->m_name}}</option>
+                                      <option value="{{$row->p_id}}" {{(!empty($member) && $member->m_name == $row->m_name) ? "selected" : ""}}>{{$row->m_name}}&nbsp;&nbsp;-&nbsp;&nbsp;{{$row->phone_no}}</option>
                                   @endforeach
                                 </select>
                               
@@ -222,10 +260,7 @@
                                 <textarea name="collapsible-address"  name="address" class="form-control" id="collapsible-address" rows="1" placeholder="1456, Mall Road" value="">{{ (!empty($member) ) ? $member->address : '' }}</textarea>
                               </div>
                                                         
-                              <div class="col-md-4">
-                                <label class="form-label" for="basic-default-dob">DOB</label>
-                                <input type="text" class="form-control" name="dob" placeholder="DD-MM-YYYY" id="flatpickr-date" />
-                              </div>
+                              
 
                               <div class="col-md-4">
                                 <label for="defaultFormControlInput" class="form-label">Community</label>
@@ -281,6 +316,25 @@
                             <!-- /Datetime Picker-->
                             
                             <div class="col-md-4">
+                                <label class="form-label" for="basic-default-country">Room Facility</label>
+                                <div class="dropdown-checkboxes">
+                                  <button class=" btn-dropdown">Select Room</button>
+                                  <div class="checkboxes">
+                                    <label>
+                                      <input type="checkbox" name="room_facility" value="room-1"> A.C. Room No.
+                                    </label>
+                                    <label>
+                                      <input type="checkbox" name="room_facility" value="room-2"> Non. A.C. Room No.
+                                    </label>
+                                    <label>
+                                      <input type="checkbox" name="room_facility" value="room-3"> Door Metri. Room No.
+                                    </label>
+                                  </div>
+                                </div>
+                              </div>
+
+
+                            <div class="col-md-4">
                               <label class="form-label" for="basic-default-country">Room List</label>
                               <select class="form-select" name="room_list" id="basic-default-country" required>
                                 <option value="">Select Room</option>
@@ -290,14 +344,7 @@
                               </select>
                             </div>
 
-                            <div class="col-md-4">
-                              <label class="form-label" for="basic-default-country">Room Facility</label>
-                              <select class="form-select" name="room_facility" id="basic-default-country" required>
-                                <option value="">Select Room</option>
-                                <option value="room-1">A.C. Room No.</option>
-                                <option value="room-2">Non. A.C. Room No.</option>
-                              </select>
-                            </div>
+                            
 
                             <div class="col-md-4">
                               <label class="form-label" for="basic-default-name">Amount</label>
@@ -319,10 +366,7 @@
                               <input type="text" class="form-control" name="deposit_no" id="basic-default-name" placeholder="Deposit No" />
                             </div>
 
-                            <div class="col-md-4">
-                              <label class="form-label" for="basic-default-name">Door Metri No: </label>
-                              <input type="text" class="form-control" name="door_mt_no" id="basic-default-name" placeholder="Door Metri No" />
-                            </div>
+                           
   
                             <div class="col-md-4">
                               <label class="form-label" for="deposit-amount">Deposit Rs</label>
@@ -370,11 +414,18 @@
                                   
                                   
                                   <div class="mb-3 col-lg-6 col-xl-2 col-12 mb-0">
-                                    <label class="form-label" for="form-repeater-1-3">Gender</label>
-                                    <select id="form-repeater-1-3" name="gender" class="form-select">
-                                      <option value="Male">Male</option>
-                                      <option value="Female">Female</option>
-                                    </select>
+                                  
+                                      <label class="d-block form-label">Gender</label>
+                                      <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1" />
+                                        <label class="form-check-label" for="inlineRadio1">Male</label>
+                                      </div>
+                                      <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2" />
+                                        <label class="form-check-label" for="inlineRadio2">Female</label>
+                                      </div>
+                                
+                                  
                                   </div>
                                   <div class="mb-3 col-lg-6 col-xl-2 col-12 mb-0">
                                     <label class="form-label" for="form-repeater-1-4">Relations</label>
@@ -625,6 +676,27 @@
     document.getElementById("deposit-amount").addEventListener("input", convertToWords);
     
     </script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+$(document).ready(function() {
+  $(".btn-dropdown").click(function() {
+    $(this).parent().toggleClass("active");
+  });
+
+  // Hide the dropdown when clicking outside of it
+  $(document).click(function(event) {
+    if (!$(event.target).closest(".dropdown-checkboxes").length) {
+      $(".dropdown-checkboxes").removeClass("active");
+    }
+  });
+});
+</script>
+$(document).ready(function () {   
+    $('body').on('change','#select', function() {
+         $('#show_selected').val(this.value);
+    });
+});
+
 
 
 @endsection
