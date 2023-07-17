@@ -204,7 +204,7 @@ table#DataTables_Table_0 tr:last-child td {
 
                                                 <div class="card-header flex-column flex-md-row">
                                                     <div class="head-label">
-                                                        <h5 class="card-title mb-0">Recent Booking</h5> 
+                                                        <h5 class="card-title mb-0">Upcoming Booking</h5> 
                                                     </div>
                                                 </div>
 
