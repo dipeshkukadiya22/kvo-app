@@ -167,8 +167,7 @@
                                 </select>
                         
                               </div>
-                              <input type="hidden" id="members" value="{{$m_data}}">
-                              <input type="hidden" id="email_user" value="{{!empty($member)  ? $member->m_name:''}}">
+                              
                              
                               <div class="col-md-4">
                                 <label class="form-label" for="basic-default-email">Email</label>
@@ -362,21 +361,20 @@
                                   
                                   </div>
                                   <div class="col-md-4">
-                              <label class="form-label" for="basic-default-country">Relation</label>
-                              <select class="form-select" name="relation" id="basic-default-country" required>
-                                <option value="SELF" selected>SELF</option>
-                                <option value="MOTHER">MOTHER</option>
-                                <option value="FATHER">FATHER</option>
-                                <option value="BROTHER">BROTHER</option>
-                                <option value="SISTER">SISTER</option>
-                                <option value="UNCLE">UNCLE</option>
-                                <option value="AUNTY">AUNTY</option>
-                                <option value="GRAND MOTHER">GRAND MOTHER</option>
-                                <option value="GRAND FATHER">GRAND FATHER</option>
-                                <option value="FRIEND">FRIEND</option>
-
-                              </select>
-                            </div>
+                                    <label class="form-label" for="basic-default-country">Relation</label>
+                                    <select class="form-select" name="relation" id="basic-default-country" required>
+                                      <option value="SELF" selected>SELF</option>
+                                      <option value="MOTHER">MOTHER</option>
+                                      <option value="FATHER">FATHER</option>
+                                      <option value="BROTHER">BROTHER</option>
+                                      <option value="SISTER">SISTER</option>
+                                      <option value="UNCLE">UNCLE</option>
+                                      <option value="AUNTY">AUNTY</option>
+                                      <option value="GRAND MOTHER">GRAND MOTHER</option>
+                                      <option value="GRAND FATHER">GRAND FATHER</option>
+                                      <option value="FRIEND">FRIEND</option>
+                                    </select>
+                                  </div>
                                   <div class="mb-3 col-lg-12 col-xl-2 col-12 d-flex align-items-center mb-0">
                                     <button class="btn btn-label-danger mt-4" data-repeater-delete>
                                       <i class="ti ti-x ti-xs me-1"></i>
