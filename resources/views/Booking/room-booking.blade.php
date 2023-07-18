@@ -34,40 +34,7 @@
 
   /* drop down css */
   /* Style for the dropdown */
-.btn-dropdown {
-  display: block;
-    width: 100%;
-    padding: 0.422rem 0.875rem;
-    font-size: 0.9375rem;
-    font-weight: 400;
-    line-height: 1.5;
-    color: #6f6b7d;
-    background-color: #fff;
-    background-clip: padding-box;
-    border: 1px solid #dbdade;
-    appearance: none;
-    border-radius: 0.375rem;
-    text-align: left;
-  
-}
 
-/* Style for the dropdown items (checkboxes) */
-.checkboxes {
-  display: none;
-  background-color: #fff;
-  border: 1px solid #ccc;
-  padding: 5px;
-}
-
-.checkboxes label {
-  display: block;
-  padding: 0px;
-}
-
-/* Show the checkboxes when the dropdown is active */
-.dropdown-checkboxes.active .checkboxes {
-  display: block;
-}
 
 </style>
 
@@ -110,39 +77,7 @@
                           <div class="offcanvas-body mx-0 flex-grow-0">
 
                             <!-- Browser Default -->
-                            <form class="browser-default-validation" method="POST" action="{{route('room-booking')}}">
-                              @csrf
-                              <div class="mb-3">
-                                <label class="form-label" for="basic-default-name">Name</label>
-                                <input type="text" name="m_name" class="form-control" id="basic-default-name"  style="text-transform:uppercase"  placeholder="John Doe" />
-                              </div>
-                              <div class="mb-3">
-                                <label class="form-label" for="basic-default-email">Email</label>
-                                <input type="email" name="email" id="basic-default-email" class="form-control" placeholder="john.doe"/>
-                              </div>
-                              
-  
-                              <div class="mb-3">
-                                <label class="form-label" for="multicol-phone">Phone Number</label>
-                                <input type="number" name="phone_no" id="multicol-phone" class="form-control phone-mask" placeholder="658 799 8941" aria-label="658 799 8941" maxlength="10"  />
-                              </div>
-                              <div class="mb-3">
-                                <label class="form-label" for="city">City</label>
-                                <input type="text" name="city" class="form-control" id="city" placeholder="Bhuj" />
-                              </div>
-    
-                              <div class="mb-3">
-                                <label class="form-label" for="collapsible-address">Address</label>
-                                <textarea name="address"  class="form-control" id="collapsible-address" rows="2" placeholder="1456, Mall Road"></textarea>
-                              </div>
-                              
-                              <div class="row">
-                                <div class="col-12">
-                                  <button type="submit" class="btn btn-primary mb-2 d-grid w-100" >Submit</button>
-                                  <button type="button" class="btn btn-label-secondary d-grid w-100" data-bs-dismiss="offcanvas"> Cancel</button>
-                                </div>
-                              </div>
-                            </form>
+                            @include('layouts.adduser')
                             <!-- /Browser Default -->
 
                             
@@ -155,7 +90,7 @@
             </div>
               
               <div class="row mb-4">
-                
+      
                 <!-- Default Icons Wizard -->
                 <div class="col-12 mb-4">
                   <div class="bs-stepper wizard-icons wizard-icons-example mt-2">
@@ -212,7 +147,7 @@
                       </div>
                     </div>
                     <div class="bs-stepper-content">
-                      <form class="form-repeater"   method="POST" action="{{route('room-booking')}}">
+                    <form action="{{route('RoomBooking')}}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <!-- Account Details -->
                         <div id="account-details" class="content">
@@ -224,18 +159,17 @@
                               <!-- Basic -->
                               <div class="col-md-4">
                                 <label for="select2Basic" class="form-label">Name</label>
-                                <select id="select2Basic" class="select2 form-select form-select-lg" data-allow-clear="true" name="name" required>
-                                  <option value="hidden">select name</option>
+                                <select id="select2Basic" class="select2 form-select form-select-lg" data-allow-clear="true" name="name" placeholder="select name" required>
+                                  <option value=""></option>
                                   @foreach ($m_data as $row)  
                                       <option value="{{$row->p_id}}" {{(!empty($member) && $member->m_name == $row->m_name) ? "selected" : ""}}>{{$row->m_name}}&nbsp;&nbsp;-&nbsp;&nbsp;{{$row->phone_no}}</option>
                                   @endforeach
                                 </select>
-                              
-
-                                
-                            
+                        
                               </div>
-    
+                              <input type="hidden" id="members" value="{{$m_data}}">
+                              <input type="hidden" id="email_user" value="{{!empty($member)  ? $member->m_name:''}}">
+                             
                               <div class="col-md-4">
                             
                                   <label class="form-label" for="basic-default-email">Email</label>
@@ -257,7 +191,7 @@
     
                               <div class="col-4">
                                 <label class="form-label" for="collapsible-address">Address</label>
-                                <textarea name="collapsible-address"  name="address" class="form-control" id="collapsible-address" rows="1" placeholder="1456, Mall Road" value="">{{ (!empty($member) ) ? $member->address : '' }}</textarea>
+                                <textarea name="collapsible_address"  class="form-control" id="collapsible_address" rows="1" placeholder="1456, Mall Road" value="">{{ (!empty($member) ) ? $member->address : '' }}</textarea>
                               </div>
                                                         
                               
@@ -275,11 +209,11 @@
                               <div class="col-md-4">
                                 <label class="d-block form-label">Gender</label>
                                 <div class="form-check form-check-inline">
-                                  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1" />
+                                  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="male" />
                                   <label class="form-check-label" for="inlineRadio1">Male</label>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2" />
+                                  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="female" />
                                   <label class="form-check-label" for="inlineRadio2">Female</label>
                                 </div>
                                 
@@ -350,7 +284,7 @@
                               <label class="form-label" for="basic-default-name">Amount</label>
                               <div class="input-group">
                                 <span class="input-group-text">₹</span>
-                                <input type="number" class="form-control"  name="amount" placeholder="Amount" aria-label="Amount (to the nearest indian)" />
+                                <input type="number" class="form-control"  name="amount" placeholder="Amount" aria-label="Amount (to the nearest indian)" value="800" />
                               </div>
                             </div>
   
@@ -363,7 +297,7 @@
   
                             <div class="col-md-4">
                               <label class="form-label" for="basic-default-name">Deposit No</label>
-                              <input type="text" class="form-control" name="deposit_no" id="basic-default-name" placeholder="Deposit No" />
+                              <input type="text" class="form-control" name="deposite_no" id="basic-default-name" placeholder="Deposit No" />
                             </div>
 
                            
@@ -409,7 +343,7 @@
                                   </div>
                                   <div class="mb-3 col-lg-6 col-xl-3 col-12 mb-0">
                                     <label class="form-label" for="form-repeater-1-2">Age</label>
-                                    <input type="text" id="form-repeater-1-2" name="age" class="form-control" placeholder="your age" />
+                                    <input type="text" id="form-repeater-1-2" name="m_age" class="form-control" placeholder="your age" />
                                   </div>
                                   
                                   
@@ -427,10 +361,22 @@
                                 
                                   
                                   </div>
-                                  <div class="mb-3 col-lg-6 col-xl-2 col-12 mb-0">
-                                    <label class="form-label" for="form-repeater-1-4">Relations</label>
-                                    <input type="text" id="form-repeater-1-4" name="relation" class="form-control" placeholder="Add Relation" />
-                                  </div>
+                                  <div class="col-md-4">
+                              <label class="form-label" for="basic-default-country">Relation</label>
+                              <select class="form-select" name="relation" id="basic-default-country" required>
+                                <option value="SELF" selected>SELF</option>
+                                <option value="MOTHER">MOTHER</option>
+                                <option value="FATHER">FATHER</option>
+                                <option value="BROTHER">BROTHER</option>
+                                <option value="SISTER">SISTER</option>
+                                <option value="UNCLE">UNCLE</option>
+                                <option value="AUNTY">AUNTY</option>
+                                <option value="GRAND MOTHER">GRAND MOTHER</option>
+                                <option value="GRAND FATHER">GRAND FATHER</option>
+                                <option value="FRIEND">FRIEND</option>
+
+                              </select>
+                            </div>
                                   <div class="mb-3 col-lg-12 col-xl-2 col-12 d-flex align-items-center mb-0">
                                     <button class="btn btn-label-danger mt-4" data-repeater-delete>
                                       <i class="ti ti-x ti-xs me-1"></i>
@@ -555,7 +501,7 @@
                               <i class="ti ti-arrow-left me-sm-1"></i>
                               <span class="align-middle d-sm-inline-block d-none">Previous</span>
                             </button>
-                            <button type="submit" class="btn btn-success btn-submit">Submit</button>
+                            <button class="btn btn-success btn-submit">Submit</button>
                           </div>
                         </div>
                       </form>
@@ -676,26 +622,26 @@
     document.getElementById("deposit-amount").addEventListener("input", convertToWords);
     
     </script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script>
-$(document).ready(function() {
-  $(".btn-dropdown").click(function() {
-    $(this).parent().toggleClass("active");
-  });
+   
 
-  // Hide the dropdown when clicking outside of it
-  $(document).click(function(event) {
-    if (!$(event.target).closest(".dropdown-checkboxes").length) {
-      $(".dropdown-checkboxes").removeClass("active");
-    }
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+  $("#select2Basic").change(function() {
+    var selectedValue = $(this).val();
+   
+    console.log( $('#members').val());
+    alert($('option:selected').text());
+  
   });
-});
 </script>
-$(document).ready(function () {   
-    $('body').on('change','#select', function() {
-         $('#show_selected').val(this.value);
-    });
-});
+
+
+
+
+
+
 
 
 

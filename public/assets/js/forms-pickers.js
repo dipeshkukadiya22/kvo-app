@@ -32,12 +32,17 @@
   }
 
   // Datetime
+  var currentDateTime = new Date();
   if (flatpickrDateTime) {
-    flatpickrDateTime.flatpickr({
+      flatpickrDateTime.flatpickr({
       enableTime: true,
-      dateFormat: 'Y-m-d H:i'
+      dateFormat: 'd-m-Y H:i',
+      defaultDate: currentDateTime
+     
+
     });
   }
+  
 
   // Multi Date Select
   if (flatpickrMulti) {

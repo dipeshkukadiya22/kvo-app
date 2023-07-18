@@ -9,5 +9,6 @@ class member_details extends Model
 {
     use HasFactory;
     protected $table = 'member_details';
+    protected $primaryKey = 'p_id';
     public $timestamps = false;
 }

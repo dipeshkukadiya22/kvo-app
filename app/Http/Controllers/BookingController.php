@@ -5,6 +5,7 @@ use App\Models\personal_details;
 use App\Models\room_details;
 use App\Models\add_members;
 use App\Models\member_details;
+use Carbon\Carbon;
 use DB;
 use Illuminate\Http\Request;
 
@@ -20,43 +21,55 @@ class BookingController extends Controller
 
     public function RoomBooking(Request $req)
     {
+        //dd($req->toArray());
         $m_name =(personal_details::get()->last()->m_name);
         $p_details=personal_details::with('member')->get();
-        $data = weight_entry::find($req->p_id);
+        $data = personal_details::find($req->p_id);
         $m_data = add_members::all();
         $details = new personal_details();
         $details->name = $req->name;
         $details-> email = $req->email;
         $details-> phone_no = $req->phone_no;
         $details-> age = $req->age;
-        $details-> address=$req->address;
-        $details-> dob=$req->dob;
+        $details-> address = $req->collapsible_address;
+        //dd($req->email);
         $details-> community=$req->community;
         $details-> city=$req->city;
-        $details-> gender=$req->gender;
+        $details-> gender=$req->inlineRadioOptions;
         $details->save(); 
         //room_details
         $booking = new room_details();
-        $booking->no_of_person=$req->no_of_person;
-        $booking->check_in_date=$req->check_in_date;
-        $booking->room_list=$req->room_list;
-        $booking->room_facility=$req->room_facility;
-        $booking->amount=$req->amount;
-        $booking->id_proof=$req->id_proof;
-        $booking->deposite_no=$req->deposite_no;
-        $booking->door_mt_no= $req->door_mt_no;
-        $booking->deposite_rs=$req->deposite_rs;
-        $booking->rs_word=$req->rs_word;
-        $booking->save();
+        $booking->no_of_person = $req->no_of_person;
+        $booking->check_in_date = Carbon::now();
+        if (is_numeric($req->room_list)) {
+            $booking->room_list = $req->room_list;
+        }else {
+            $roomNumbers = explode(',', $req->room_list);
+            foreach ($roomNumbers as $roomNumber) {
+            $booking = new room_details();
+            $booking->no_of_person = $req->no_of_person;
+            $booking->check_in_date = Carbon::now();
+            $booking->room_list = (int)$roomNumber; // Convert to integer
+            $booking->room_facility = $req->room_facility;
+            $booking->amount = $req->amount;
+            $booking->id_proof = $req->id_proof;
+            $booking->deposite_no = $req->deposite_no;
+            $booking->deposite_rs = $req->deposite_rs;
+            $booking->rs_word = $req->rs_word;
+            $booking->save();
+        }
+        }
         //member_details
         $m_details = new member_details();
-        $m_details->full_name=$req->full_name;
-        $m_details->age=$req->age;
-        $m_details->gender=$req->gender;
+        $m_details->full_name = $req->full_name;
+        
+        $m_details->age=$req->m_age;
+        $m_details->gender=$req->inlineRadioOptions;
         $m_details->relation=$req->relation;
+        //dd($req->m_age);
         $m_details->save();
         //$member_data = member_details::all();
-        $m_data= DB::select("select * from member_details ORDER BY add_members.p_id DESC");
+        //$m_data= DB::select("select * from member_details ORDER BY add_members.p_id DESC");
         return view ('Booking.room-booking',['m_data'=>$m_data,'data'=>$data,'p_details'=>$p_details,'m_name'=>$m_name,'m_data'=>$m_data]);
 
     }
