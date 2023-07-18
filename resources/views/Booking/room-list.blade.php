@@ -154,19 +154,15 @@
                               <div class="offcanvas-body mx-0 flex-grow-0">
     
                                 <!-- Browser Default -->
-                                <form class="browser-default-validation">
+                                <form class="browser-default-validation" method="POST" action="{{route('RoomList')}}">
+                                @csrf
                                   <div class="mb-3">
                                     <label class="form-label" for="basic-default-name">Room Name</label>
-                                    <input
-                                      type="text"
-                                      class="form-control"
-                                      id="basic-default-name"
-                                      placeholder="Deluxe"
-                                       />
+                                    <input type="text" class="form-control" name="room_name" id="basic-default-name" placeholder="Deluxe" />
                                   </div>
                                   <div class="mb-3">
                                     <label for="exampleFormControlSelect1" class="form-label">Room Type</label>
-                                    <select class="form-select" id="exampleFormControlSelect1" aria-label="Default select example">
+                                    <select class="form-select" name="room_type" id="exampleFormControlSelect1" aria-label="Default select example">
                                       <option selected>Select Room Type</option>
                                       <option value="1">Single Bed</option>
                                       <option value="2">Double Bed</option>
@@ -175,7 +171,7 @@
       
                                    <div class="mb-3">
                                     <label for="exampleFormControlSelect1" class="form-label">Room Facility</label>
-                                    <select class="form-select" id="exampleFormControlSelect2" aria-label="Default select example">
+                                    <select class="form-select" name="room_facility" id="exampleFormControlSelect2" aria-label="Default select example">
                                       <option selected>Select Room</option>
                                       <option value="1">A.C. Room</option>
                                       <option value="2">Non A.C Room</option>

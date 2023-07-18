@@ -137,9 +137,9 @@
                                 <input type="text" name="city" class="form-control" id="city" placeholder="Bhuj" />
                               </div>
     
-                              <div class="mb-3">
+                              <div class="col-4">
                                 <label class="form-label" for="collapsible-address">Address</label>
-                                <textarea name="address"  class="form-control" id="collapsible-address" rows="2" placeholder="1456, Mall Road"></textarea>
+                                <textarea name="collapsible_address"  class="form-control" id="collapsible_address" rows="1" placeholder="1456, Mall Road" value="">{{ (!empty($member) ) ? $member->collapsible_address : '' }}</textarea>
                               </div>
                               
                               <div class="row">
@@ -236,13 +236,14 @@
                                       <option value="{{$row->p_id}}" {{(!empty($member) && $member->m_name == $row->m_name) ? "selected" : ""}}>{{$row->m_name}}&nbsp;&nbsp;-&nbsp;&nbsp;{{$row->phone_no}}</option>
                                   @endforeach
                                 </select>
-                        
+                                <!-- joyu aiya bhul hati member to apne add karie tyare malse samji ? m_data ma hata ne badha data ha value j worng hati etle  have hu j query  ma code karu 6u  -->
+                                <input type="hidden" id="email_user" value="{{!empty($m_data)  ? $m_data:''}}">
                               </div>
     
                               <div class="col-md-4">
                             
                                   <label class="form-label" for="basic-default-email">Email</label>
-                                  <input type="email" id="basic-default-email" name="email" class="form-control" placeholder="john.doe" value="{{ (!empty($member) )? $member->email : '' }}" />
+                                  <input type="email" id="member_email" name="email" class="form-control" placeholder="john.doe" value="{{ (!empty($member) )? $member->email : '' }}" />
 
                               </div>                                                                                                            
 
@@ -250,7 +251,7 @@
                               <div class="col-md-4">
                                 
                                 <label class="form-label" for="multicol-phone">Phone Number</label>
-                                <input type="number" id="multicol-phone" name="phone_no" class="form-control phone-mask" placeholder="658 799 8941" aria-label="658 799 8941" value="{{ (!empty($member)) ? $member->phone_no : '' }}" />
+                                <input type="number" id="member-phone" name="phone_no" class="form-control phone-mask" placeholder="658 799 8941" aria-label="658 799 8941" value="{{ (!empty($member)) ? $member->phone_no : '' }}" />
                               </div>
 
                               <div class="col-md-4">
@@ -260,7 +261,7 @@
     
                               <div class="col-4">
                                 <label class="form-label" for="collapsible-address">Address</label>
-                                <textarea name="collapsible-address"  name="address" class="form-control" id="collapsible-address" rows="1" placeholder="1456, Mall Road" value="">{{ (!empty($member) ) ? $member->address : '' }}</textarea>
+                                <textarea name="m_address"  class="form-control" id="member-address" rows="1" placeholder="1456, Mall Road" value="">{{ (!empty($member) ) ? $member->address : '' }}</textarea>
                               </div>
                                                         
                               
@@ -294,17 +295,17 @@
                               
                               <div class="col-md-4">
                                 <label for="defaultFormControlInput" class="form-label">City</label>
-                                <input type="text" class="form-control" name="city" id="defaultFormControlInput" placeholder="John Doe" aria-describedby="defaultFormControlHelp" value="{{ (!empty($member)) ? $member->city : '' }}" />
+                                <input type="text" class="form-control" name="city" id="member_city" placeholder="John Doe" aria-describedby="defaultFormControlHelp" value="{{ (!empty($member)) ? $member->city : '' }}" />
                               </div>
 
                               <div class="col-md-4">
                                 <label class="d-block form-label">Gender</label>
                                 <div class="form-check form-check-inline">
-                                  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1" />
+                                  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="MALE" />
                                   <label class="form-check-label" for="inlineRadio1">Male</label>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2" />
+                                  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="FEMALE" />
                                   <label class="form-check-label" for="inlineRadio2">Female</label>
                                 </div>
                                 
@@ -315,10 +316,13 @@
                                 <i class="ti ti-arrow-left me-sm-1"></i>
                                 <span class="align-middle d-sm-inline-block d-none">Previous</span>
                               </button> --}}
-                              <button class="btn btn-primary btn-next">
+                              <div>
+                              <input type="button" class="btn btn-primary btn-next">
                                 <span class="align-middle d-sm-inline-block d-none me-sm-1">Next</span>
                                 <i class="ti ti-arrow-right"></i>
-                              </button>
+                              </div>
+                              
+                             
                             </div>
                           </div>
                         </div>
@@ -377,12 +381,7 @@
                             <!-- Custom Suggestions: List -->
                             <div class="col-md-4">
                               <label for="TagifyCustomListSuggestion" class="form-label">Room List</label>
-                              <input
-                                id="TagifyCustomListSuggestion"
-                                name="TagifyCustomListSuggestion"
-                                class="form-control"
-                                placeholder="Select Roomlist"
-                                />
+                              <input id="TagifyCustomListSuggestion" name="TagifyCustomListSuggestion" class="form-control" placeholder="Select Roomlist" />
                             </div>
 
                             <div class="col-md-4">
@@ -424,10 +423,11 @@
                                 <i class="ti ti-arrow-left me-sm-1"></i>
                                 <span class="align-middle d-sm-inline-block d-none">Previous</span>
                               </button>
-                              <button class="btn btn-primary btn-next">
+                              <div>
+                              <input type="button" class="btn btn-primary btn-next">
                                 <span class="align-middle d-sm-inline-block d-none me-sm-1">Next</span>
                                 <i class="ti ti-arrow-right"></i>
-                              </button>
+                              </div>
                             </div>
                           </div>
                         </div>
@@ -504,10 +504,11 @@
                                 <i class="ti ti-arrow-left me-sm-1"></i>
                                 <span class="align-middle d-sm-inline-block d-none">Previous</span>
                               </button>
-                              <button class="btn btn-primary btn-next">
+                              <div>
+                              <input type="button" class="btn btn-primary btn-next">
                                 <span class="align-middle d-sm-inline-block d-none me-sm-1">Next</span>
                                 <i class="ti ti-arrow-right"></i>
-                              </button>
+                              </div>
                             </div>
                           </div>
                         </div>
@@ -817,6 +818,26 @@ $(document).ready(function () {
 })();
 
 </script>
+
+<script>
+        $(document).ready(function () {
+            $("#select2Basic").click(function () {
+                var data = $.parseJSON($("#email_user").val());
+                 
+                $.each(data,function(key,value){
+                  console.log('id::'+$('#select2Basic').val());
+                  if($('#select2Basic').val()==value['p_id']){
+                   console.log(value['email']);
+                   $('#member_email').val(value['email']);
+                   $('#member-phone').val(value['phone_no']);
+                   $('#member-address').val(value['address']);
+                   $('#member_city').val(value['city']);
+                   }
+                });
+            
+            });
+        });
+    </script>
 
 
 

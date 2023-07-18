@@ -5,6 +5,7 @@ use App\Models\personal_details;
 use App\Models\room_details;
 use App\Models\add_members;
 use App\Models\member_details;
+use App\Models\add_room;
 use Carbon\Carbon;
 use DB;
 use Illuminate\Http\Request;
@@ -31,7 +32,7 @@ class BookingController extends Controller
         $details-> email = $req->email;
         $details-> phone_no = $req->phone_no;
         $details-> age = $req->age;
-        $details-> address = $req->collapsible_address;
+        $details-> address = $req->m_address;
         $details-> community=$req->community;
         $details-> city=$req->city;
         $details-> gender=$req->inlineRadioOptions;
@@ -40,7 +41,7 @@ class BookingController extends Controller
         $booking = new room_details();
         $booking->no_of_person = $req->no_of_person;
         $booking->check_in_date = Carbon::now();
-       // $booking->room_list = $req->room_list; // Assuming $req->room_list contains the string 'room-1'
+        $booking->room_list = $req->TagifyCustomListSuggestion;
         $booking->room_facility = $req->room_facility;
         $booking->amount = $req->amount;
         $booking->id_proof = $req->id_proof;
@@ -85,7 +86,14 @@ class BookingController extends Controller
     
 
     // RoomList
-    public function RoomList(){
-        return view ('Booking.room-list');
+    public function RoomList(Request $req){
+    
+        $list = new add_room();
+        $list->room_name = $req->input('room_name');
+        $list->room_type = $req->input('room_type');
+        $list->room_facility = $req->input('room_facility');
+        $list->save();
+    
+        return redirect('Booking.room-list');
     }
 }
