@@ -230,8 +230,8 @@
                               <!-- Basic -->
                               <div class="col-md-4">
                                 <label for="select2Basic" class="form-label">Name</label>
-                                <select id="select2Basic" class="select2 form-select form-select" data-allow-clear="true" name="name" required>
-                                  <option value="hidden">select name</option>
+                                <select id="select2Basic" class="select2 form-select form-select-lg" data-allow-clear="true" name="name" placeholder="select name" required>
+                                  <option value=""></option>
                                   @foreach ($m_data as $row)  
                                       <option value="{{$row->p_id}}" {{(!empty($member) && $member->m_name == $row->m_name) ? "selected" : ""}}>{{$row->m_name}}&nbsp;&nbsp;-&nbsp;&nbsp;{{$row->phone_no}}</option>
                                   @endforeach
