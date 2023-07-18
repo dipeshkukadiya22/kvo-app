@@ -158,7 +158,7 @@
                             
                               <!-- Basic -->
                               <div class="col-md-4">
-                                <label for="select2Basic" class="form-label">Name</label>
+                                <label for="select2Basic" class="form-label" >Name</label>
                                 <select id="select2Basic" class="select2 form-select form-select-lg" data-allow-clear="true" name="name" placeholder="select name" required>
                                   <option value=""></option>
                                   @foreach ($m_data as $row)  
@@ -171,11 +171,11 @@
                               <input type="hidden" id="email_user" value="{{!empty($member)  ? $member->m_name:''}}">
                              
                               <div class="col-md-4">
-                            
-                                  <label class="form-label" for="basic-default-email">Email</label>
-                                  <input type="email" id="basic-default-email" name="email" class="form-control" placeholder="john.doe" value="{{ (!empty($member) )? $member->email : '' }}" />
-
-                              </div>                                                                                                            
+                                <label class="form-label" for="basic-default-email">Email</label>
+                                <input type="email" id="basic-default-email" name="email" class="form-control" placeholder="john.doe" value="{{ (!empty($member) )? $member->email : '' }}" required />
+                                
+                            </div>
+                                                                                                           
 
     
                               <div class="col-md-4">
@@ -191,7 +191,7 @@
     
                               <div class="col-4">
                                 <label class="form-label" for="collapsible-address">Address</label>
-                                <textarea name="collapsible_address"  class="form-control" id="collapsible_address" rows="1" placeholder="1456, Mall Road" value="">{{ (!empty($member) ) ? $member->address : '' }}</textarea>
+                                <textarea name="collapsible_address"  class="form-control" id="collapsible_address" rows="1" placeholder="1456, Mall Road" value="">{{ (!empty($member) ) ? $member->collapsible_address : '' }}</textarea>
                               </div>
                                                         
                               
@@ -209,11 +209,11 @@
                               <div class="col-md-4">
                                 <label class="d-block form-label">Gender</label>
                                 <div class="form-check form-check-inline">
-                                  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="male" />
+                                  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="MALE" />
                                   <label class="form-check-label" for="inlineRadio1">Male</label>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="female" />
+                                  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="FEMALE" />
                                   <label class="form-check-label" for="inlineRadio2">Female</label>
                                 </div>
                                 
@@ -224,10 +224,10 @@
                                 <i class="ti ti-arrow-left me-sm-1"></i>
                                 <span class="align-middle d-sm-inline-block d-none">Previous</span>
                               </button> --}}
-                              <button class="btn btn-primary btn-next">
+                              <input type="button" class="btn btn-primary btn-next">
                                 <span class="align-middle d-sm-inline-block d-none me-sm-1">Next</span>
                                 <i class="ti ti-arrow-right"></i>
-                              </button>
+                             
                             </div>
                           </div>
                         </div>
@@ -253,7 +253,7 @@
                                 <label class="form-label" for="basic-default-country">Room Facility</label>
                                 <div class="dropdown-checkboxes">
                                   <button class=" btn-dropdown">Select Room</button>
-                                  <div class="checkboxes">
+                                  <div class="checkboxes" required>
                                     <label>
                                       <input type="checkbox" name="room_facility" value="room-1"> A.C. Room No.
                                     </label>
@@ -270,7 +270,7 @@
 
                             <div class="col-md-4">
                               <label class="form-label" for="basic-default-country">Room List</label>
-                              <select class="form-select" name="room_list" id="basic-default-country" required>
+                              <select class="form-select" name="room_list" id="basic-default-country" >
                                 <option value="">Select Room</option>
                                 <option value="room-1">Room 1</option>
                                 <option value="room-2">Room 2</option>
@@ -351,11 +351,11 @@
                                   
                                       <label class="d-block form-label">Gender</label>
                                       <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1" />
+                                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="MALE" />
                                         <label class="form-check-label" for="inlineRadio1">Male</label>
                                       </div>
                                       <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2" />
+                                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="FEMALE" />
                                         <label class="form-check-label" for="inlineRadio2">Female</label>
                                       </div>
                                 
@@ -501,7 +501,7 @@
                               <i class="ti ti-arrow-left me-sm-1"></i>
                               <span class="align-middle d-sm-inline-block d-none">Previous</span>
                             </button>
-                            <button class="btn btn-success btn-submit">Submit</button>
+                            <button type="submit" class="btn btn-success btn-submit">Submit</button>
                           </div>
                         </div>
                       </form>

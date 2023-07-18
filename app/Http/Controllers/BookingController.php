@@ -32,34 +32,24 @@ class BookingController extends Controller
         $details-> phone_no = $req->phone_no;
         $details-> age = $req->age;
         $details-> address = $req->collapsible_address;
-        //dd($req->email);
         $details-> community=$req->community;
         $details-> city=$req->city;
         $details-> gender=$req->inlineRadioOptions;
         $details->save(); 
-        //room_details
+    
         $booking = new room_details();
         $booking->no_of_person = $req->no_of_person;
         $booking->check_in_date = Carbon::now();
-        if (is_numeric($req->room_list)) {
-            $booking->room_list = $req->room_list;
-        }else {
-            $roomNumbers = explode(',', $req->room_list);
-            foreach ($roomNumbers as $roomNumber) {
-            $booking = new room_details();
-            $booking->no_of_person = $req->no_of_person;
-            $booking->check_in_date = Carbon::now();
-            $booking->room_list = (int)$roomNumber; // Convert to integer
-            $booking->room_facility = $req->room_facility;
-            $booking->amount = $req->amount;
-            $booking->id_proof = $req->id_proof;
-            $booking->deposite_no = $req->deposite_no;
-            $booking->deposite_rs = $req->deposite_rs;
-            $booking->rs_word = $req->rs_word;
-            $booking->save();
-        }
-        }
-        //member_details
+       // $booking->room_list = $req->room_list; // Assuming $req->room_list contains the string 'room-1'
+        $booking->room_facility = $req->room_facility;
+        $booking->amount = $req->amount;
+        $booking->id_proof = $req->id_proof;
+        $booking->deposite_no = $req->deposite_no;
+        $booking->deposite_rs = $req->deposite_rs;
+        $booking->rs_word = $req->rs_word;
+        $booking->save();
+
+    
         $m_details = new member_details();
         $m_details->full_name = $req->full_name;
         
