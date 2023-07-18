@@ -6,7 +6,7 @@
 @section('pagecss')
 
 <link rel="stylesheet" href="{{ asset ('assets/vendor/libs/bootstrap-select/bootstrap-select.css') }}" />
-<link rel="stylesheet" href="{{ asset ('assets/vendor/libs/select2/select2.css') }}" />
+
 <link rel="stylesheet" href="{{ asset ('assets/vendor/libs/flatpickr/flatpickr.css') }}" />
 <link rel="stylesheet" href="{{ asset ('assets/vendor/libs/typeahead-js/typeahead.css') }}" />
 <link rel="stylesheet" href="{{ asset ('assets/vendor/libs/tagify/tagify.css') }}" />
@@ -14,6 +14,8 @@
 <link rel="stylesheet" href="{{ asset ('assets/vendor/libs/bs-stepper/bs-stepper.css') }}" />
 
 <link rel="stylesheet" href="{{ asset ('assets/vendor/libs/dropzone/dropzone.css') }}" />
+
+<link rel="stylesheet" href="{{ asset ('assets/vendor/libs/select2/select2.css') }}" />
 
 <style>
   @media (min-width: 768px){
@@ -24,12 +26,16 @@
   .all-members > div:first-child button.btn.btn-label-danger.mt-4.waves-effect {
       display: none !important;
   }
-  .bs-stepper .step.
-  ve .bs-stepper-icon svg {
+  .bs-stepper .step.active .bs-stepper-icon svg {
     color: var(--bs-primary) !important;
   }
   .bs-stepper .step.crossed .step-trigger .bs-stepper-icon svg {
     color: var(--bs-primary) !important;
+  }
+
+  .form-control[readonly] {
+      background-color: #efefef;
+      opacity: 1;
   }
 
   /* drop down css */
@@ -224,7 +230,7 @@
                               <!-- Basic -->
                               <div class="col-md-4">
                                 <label for="select2Basic" class="form-label">Name</label>
-                                <select id="select2Basic" class="select2 form-select form-select-lg" data-allow-clear="true" name="name" required>
+                                <select id="select2Basic" class="select2 form-select form-select" data-allow-clear="true" name="name" required>
                                   <option value="hidden">select name</option>
                                   @foreach ($m_data as $row)  
                                       <option value="{{$row->p_id}}" {{(!empty($member) && $member->m_name == $row->m_name) ? "selected" : ""}}>{{$row->m_name}}&nbsp;&nbsp;-&nbsp;&nbsp;{{$row->phone_no}}</option>
@@ -261,11 +267,33 @@
                               </div>
                                                         
                               
-
+                              <!-- Basic -->
                               <div class="col-md-4">
-                                <label for="defaultFormControlInput" class="form-label">Community</label>
+                                <label for="select2Basic" class="form-label">Community</label>
+                                <select id="select2Basic" class="select2 form-select form-select-lg" data-allow-clear="true">
+                                  <option value="AK">Alaska</option>
+                                  <option value="HI">Hawaii</option>
+                                  <option value="CA">California</option>
+                                  <option value="NV">Nevada</option>
+                                  <option value="OR">Oregon</option>
+                                  <option value="WA">Washington</option>
+                                  <option value="AZ">Arizona</option>
+                                  <option value="CO">Colorado</option>
+                                  <option value="ID">Idaho</option>
+                                  <option value="MT">Montana</option>
+                                  <option value="NE">Nebraska</option>
+                                </select>
+                              </div>
+
+                              
+
+                              
+                              <div class="col-md-4">
+                                <label for="defaultFormControlInput" class="form-label">Sub Community</label>
                                 <input type="text" class="form-control" name="community" id="defaultFormControlInput" placeholder="John Doe" aria-describedby="defaultFormControlHelp" />
                               </div>
+
+                              
                               
                               <div class="col-md-4">
                                 <label for="defaultFormControlInput" class="form-label">City</label>
@@ -315,36 +343,50 @@
                             </div>
                             <!-- /Datetime Picker-->
                             
+                            
+
+                              <!-- Primary -->
                             <div class="col-md-4">
-                                <label class="form-label" for="basic-default-country">Room Facility</label>
-                                <div class="dropdown-checkboxes">
-                                  <button class=" btn-dropdown">Select Room</button>
-                                  <div class="checkboxes">
-                                    <label>
-                                      <input type="checkbox" name="room_facility" value="room-1"> A.C. Room No.
-                                    </label>
-                                    <label>
-                                      <input type="checkbox" name="room_facility" value="room-2"> Non. A.C. Room No.
-                                    </label>
-                                    <label>
-                                      <input type="checkbox" name="room_facility" value="room-3"> Door Metri. Room No.
-                                    </label>
-                                  </div>
-                                </div>
+                              <label for="select3Primary" class="form-label">Room Facility</label>
+                              <div class="select2-primary">
+                                <select id="select3Primary" name="room_list" class="select2 form-select" multiple>
+                                  <option value="">Select Room</option>
+                                    <option value="room-1" name="room_facility">Non. A.C. Room No.</option>
+                                    <option value="room-2" name="room_facility">Room 2</option>
+                                    <option value="room-3" name="room_facility">Door Metri. Room No.</option>
+                                </select>
                               </div>
-
-
-                            <div class="col-md-4">
-                              <label class="form-label" for="basic-default-country">Room List</label>
-                              <select class="form-select" name="room_list" id="basic-default-country" required>
-                                <option value="">Select Room</option>
-                                <option value="room-1">Room 1</option>
-                                <option value="room-2">Room 2</option>
-                                <option value="room-3">Room 3</option>
-                              </select>
                             </div>
 
+
+                            <!-- Primary -->
+                           <!-- <div class="col-md-4">
+                              <label for="select2Primary" class="form-label">Room List</label>
+                              <div class="select2-primary">
+                                <select id="select2Primary" name="room_list" class="select2 form-select" multiple>
+                                  <option value="">Select Room</option>
+                                    <option value="room-1">Room 1</option>
+                                    <option value="room-2">Room 2</option>
+                                    <option value="room-3">Room 3</option>
+                                    <option value="room-3">Room 4</option>
+                                    <option value="room-3">Room 5</option>
+                                    <option value="room-3">Room 6</option>
+                                    <option value="room-3">Room 7</option>
+                                    <option value="room-3">Room 8</option>
+                                </select>
+                              </div>
+                            </div> -->
                             
+                            <!-- Custom Suggestions: List -->
+                            <div class="col-md-4">
+                              <label for="TagifyCustomListSuggestion" class="form-label">Room List</label>
+                              <input
+                                id="TagifyCustomListSuggestion"
+                                name="TagifyCustomListSuggestion"
+                                class="form-control"
+                                placeholder="Select Roomlist"
+                                />
+                            </div>
 
                             <div class="col-md-4">
                               <label class="form-label" for="basic-default-name">Amount</label>
@@ -363,19 +405,19 @@
   
                             <div class="col-md-4">
                               <label class="form-label" for="basic-default-name">Deposit No</label>
-                              <input type="text" class="form-control" name="deposit_no" id="basic-default-name" placeholder="Deposit No" />
+                              <input type="text" class="form-control" name="deposit_no" id="basic-default-name" placeholder="Deposit No"  readonly/>
                             </div>
 
                            
   
                             <div class="col-md-4">
                               <label class="form-label" for="deposit-amount">Deposit Rs</label>
-                              <input type="text" class="form-control" name="deposite_rs" id="deposit-amount" placeholder="Deposit Rs">
+                              <input type="number" class="form-control" name="deposite_rs" id="deposit-amount" placeholder="Deposit Rs">
                             </div>
                             
                             <div class="col-md-4">
                               <label class="form-label" for="rupees-in-words">Deposit Rs (rupees in words)</label>
-                              <input type="text" class="form-control" name="rs_word" id="rupees-in-words" placeholder="Rupees in words">
+                              <input type="text" class="form-control" name="rs_word" id="rupees-in-words" placeholder="Rupees in words" readonly>
                             </div>
                             
   
@@ -523,9 +565,7 @@
                                      
                                     </tr>
                                   
-                                    
-                                    
-                                   
+                                                                       
                                     <tr>
                                       <td colspan="3" class="align-top px-4 py-4">
                                         
@@ -576,12 +616,7 @@
 
 @section('pagejs')
 
-    <script src="{{ asset('assets/vendor/libs/select2/select2.js') }}"></script>
-    <script src="{{ asset('assets/vendor/libs/bootstrap-select/bootstrap-select.js') }}"></script>
-    <script src="{{ asset('assets/vendor/libs/moment/moment.js') }}"></script>
-    <script src="{{ asset('assets/vendor/libs/flatpickr/flatpickr.js') }}"></script>
-    <script src="{{ asset('assets/vendor/libs/typeahead-js/typeahead.js') }}"></script>
-    <script src="{{ asset('assets/vendor/libs/tagify/tagify.js') }}"></script>
+    
     
     <script src="{{ asset('assets/vendor/libs/dropzone/dropzone.js') }}"></script>
 
@@ -592,7 +627,18 @@
     <script src="{{ asset('assets/vendor/libs/bs-stepper/bs-stepper.js') }}"></script>
     <script src="{{ asset ('assets/vendor/libs/jquery-repeater/jquery-repeater.js') }}"></script>
 
+    <script src="{{ asset('assets/vendor/libs/bloodhound/bloodhound.js') }}"></script>
 
+    <script src="{{ asset('assets/vendor/libs/select2/select2.js') }}"></script>
+    <script src="{{ asset('assets/vendor/libs/bootstrap-select/bootstrap-select.js') }}"></script>
+    <script src="{{ asset('assets/vendor/libs/moment/moment.js') }}"></script>
+    <script src="{{ asset('assets/vendor/libs/flatpickr/flatpickr.js') }}"></script>
+    <script src="{{ asset('assets/vendor/libs/typeahead-js/typeahead.js') }}"></script>
+    <script src="{{ asset('assets/vendor/libs/tagify/tagify.js') }}"></script>
+
+
+
+    
     <!-- Page JS -->
     
     <script src="{{ asset ('assets/js/forms-selects.js') }}"></script>
@@ -604,6 +650,7 @@
     <script src="{{ asset('assets/js/form-wizard-icons.js') }}"></script>
 
     <script src="{{ asset ('assets/js/forms-extras.js') }}"></script>
+
 
     <script>
       function convertToWords() {
@@ -690,12 +737,79 @@ $(document).ready(function() {
     }
   });
 });
-</script>
+
 $(document).ready(function () {   
     $('body').on('change','#select', function() {
          $('#show_selected').val(this.value);
     });
 });
+
+
+
+</script>
+
+
+<script>
+
+  /**
+ * Tagify
+ */
+
+'use strict';
+
+(function () {
+  // Basic
+  //------------------------------------------------------
+  const tagifyBasicEl = document.querySelector('#TagifyBasic');
+  const TagifyBasic = new Tagify(tagifyBasicEl);
+
+  // Read only
+  //------------------------------------------------------
+  const tagifyReadonlyEl = document.querySelector('#TagifyReadonly');
+  const TagifyReadonly = new Tagify(tagifyReadonlyEl);
+
+  // Custom list & inline suggestion
+  //------------------------------------------------------
+  const TagifyCustomInlineSuggestionEl = document.querySelector('#TagifyCustomInlineSuggestion');
+  const TagifyCustomListSuggestionEl = document.querySelector('#TagifyCustomListSuggestion');
+
+  const whitelist = [
+    'Room 1',
+    'Room 2',
+    'Room 3',
+    'Room 4',
+    'Room 5',
+    'Room 6',
+    'Room 7'
+  ];
+  // Inline
+  let TagifyCustomInlineSuggestion = new Tagify(TagifyCustomInlineSuggestionEl, {
+    whitelist: whitelist,
+    maxTags: 10,
+    dropdown: {
+      maxItems: 20,
+      classname: 'tags-inline',
+      enabled: 0,
+      closeOnSelect: false
+    }
+  });
+  // List
+  let TagifyCustomListSuggestion = new Tagify(TagifyCustomListSuggestionEl, {
+    whitelist: whitelist,
+    maxTags: 10,
+    dropdown: {
+      maxItems: 20,
+      classname: '',
+      enabled: 0,
+      closeOnSelect: false
+    }
+  });
+
+
+})();
+
+</script>
+
 
 
 
