@@ -218,7 +218,7 @@
                       </div>
                     </div>
                     <div class="bs-stepper-content">
-                      <form class="form-repeater"   method="POST" action="{{route('room-booking')}}">
+                     <form action="{{route('RoomBooking')}}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <!-- Account Details -->
                         <div id="account-details" class="content">
@@ -228,18 +228,15 @@
                           <div class="row g-3">
                             
                               <!-- Basic -->
-                              <div class="col-md-4">
-                                <label for="select2Basic" class="form-label">Name</label>
+                             <div class="col-md-4">
+                                <label for="select2Basic" class="form-label" >Name</label>
                                 <select id="select2Basic" class="select2 form-select form-select-lg" data-allow-clear="true" name="name" placeholder="select name" required>
                                   <option value=""></option>
                                   @foreach ($m_data as $row)  
                                       <option value="{{$row->p_id}}" {{(!empty($member) && $member->m_name == $row->m_name) ? "selected" : ""}}>{{$row->m_name}}&nbsp;&nbsp;-&nbsp;&nbsp;{{$row->phone_no}}</option>
                                   @endforeach
                                 </select>
-                              
-
-                                
-                            
+                        
                               </div>
     
                               <div class="col-md-4">
@@ -392,7 +389,7 @@
                               <label class="form-label" for="basic-default-name">Amount</label>
                               <div class="input-group">
                                 <span class="input-group-text">₹</span>
-                                <input type="number" class="form-control"  name="amount" placeholder="Amount" aria-label="Amount (to the nearest indian)" />
+                                <input type="number" class="form-control"  name="amount" placeholder="Amount" aria-label="Amount (to the nearest indian)" value="800" />
                               </div>
                             </div>
   
@@ -451,7 +448,7 @@
                                   </div>
                                   <div class="mb-3 col-lg-6 col-xl-3 col-12 mb-0">
                                     <label class="form-label" for="form-repeater-1-2">Age</label>
-                                    <input type="text" id="form-repeater-1-2" name="age" class="form-control" placeholder="your age" />
+                                    <input type="text" id="form-repeater-1-2" name="m_age" class="form-control" placeholder="your age" />
                                   </div>
                                   
                                   
@@ -459,19 +456,30 @@
                                   
                                       <label class="d-block form-label">Gender</label>
                                       <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1" />
+                                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="MALE" />
                                         <label class="form-check-label" for="inlineRadio1">Male</label>
                                       </div>
                                       <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2" />
+                                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="FEMALE" />
                                         <label class="form-check-label" for="inlineRadio2">Female</label>
                                       </div>
                                 
                                   
                                   </div>
-                                  <div class="mb-3 col-lg-6 col-xl-2 col-12 mb-0">
-                                    <label class="form-label" for="form-repeater-1-4">Relations</label>
-                                    <input type="text" id="form-repeater-1-4" name="relation" class="form-control" placeholder="Add Relation" />
+                                  <div class="col-md-4">
+                                    <label class="form-label" for="basic-default-country">Relation</label>
+                                    <select class="form-select" name="relation" id="basic-default-country" required>
+                                      <option value="SELF" selected>SELF</option>
+                                      <option value="MOTHER">MOTHER</option>
+                                      <option value="FATHER">FATHER</option>
+                                      <option value="BROTHER">BROTHER</option>
+                                      <option value="SISTER">SISTER</option>
+                                      <option value="UNCLE">UNCLE</option>
+                                      <option value="AUNTY">AUNTY</option>
+                                      <option value="GRAND MOTHER">GRAND MOTHER</option>
+                                      <option value="GRAND FATHER">GRAND FATHER</option>
+                                      <option value="FRIEND">FRIEND</option>
+                                    </select>
                                   </div>
                                   <div class="mb-3 col-lg-12 col-xl-2 col-12 d-flex align-items-center mb-0">
                                     <button class="btn btn-label-danger mt-4" data-repeater-delete>
