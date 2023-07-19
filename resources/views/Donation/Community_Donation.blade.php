@@ -87,7 +87,8 @@
                 <div class="col-md mb-4 mb-md-0">
                   <div class="card">
                     <div class="card-body">
-                      <form class="browser-default-validation">
+                      <form class="browser-default-validation" method="POST" action="{{route ('CommunityDonation')}}">
+                        @csrf
                         <div class="row g-3">
                           <div class="col-12">
                             <h6 class="fw-semibold">1. Personal Details</h6>
@@ -95,7 +96,7 @@
                           </div>
                           <div class="col-md-4">
                             <label for="select2Basic" class="form-label">નામ</label>
-                            <select id="select2Basic" class="select2 form-select form-select-lg" data-allow-clear="true" required>
+                            <select id="select2Basic" name="name" class="select2 form-select form-select-lg" data-allow-clear="true" required>
                               <option value="AK">Alaska</option>
                               <option value="HI">Hawaii</option>
                               <option value="CA">California</option>
@@ -107,37 +108,40 @@
                             <input
                               type="number"
                               id="multicol-phone"
+                              name="phone_no" 
                               class="form-control phone-mask"
                               placeholder="658 799 8941"
-                              aria-label="658 799 8941" />
+                              aria-label="658 799 8941" required/>
                           </div>
                           <div class="col-md-2">
                             <label class="form-label" for="basic-default-name">ગામ</label>
                             <input
                               type="text"
                               class="form-control"
+                              name="city"
                               id="basic-default-name"
                               placeholder="John Doe"
                               required />
                          
                           </div>
                           <div class="col-md-2">
-                            <label class="form-label" for="basic-default-dob">તારીખ</label>
+                            <label class="form-label"  for="basic-default-dob">તારીખ</label>
                             <input
                               type="text"
                               class="form-control flatpickr-validation"
+                              name="d_date"
                               id="basic-default-dob"
                               required />
                           </div>
-                          <div class="col-md-2">
-                            <label class="form-label" for="basic-default-name">પહોંચ નંબર</label>
+                          <!--<div class="col-md-2">
+                            <label class="form-label" name="p_number" for="basic-default-name">પહોંચ નંબર</label>
                             <input
                               type="text"
                               class="form-control"
                               id="basic-default-name"
                               placeholder="15"
-                              required readonly/>
-                          </div>
+                              required />
+                          </div>-->
                           <div class="col-12">
                             <h6 class="mt-2 fw-semibold">2. Donation Details</h6>
                             <hr class="mt-0" />
@@ -146,7 +150,7 @@
                             <label class="form-label" for="multicol-phone">શેઠશ્રી રતનશી ટોકરશી વોરા મેડિકલ ચેકઅપ સેન્ટર</label>
                             <div class="input-group">
                               <span class="input-group-text">₹</span>
-                              <input type="number" class="form-control" placeholder="Amount" aria-label="Amount (to the nearest dollar)">
+                              <input type="number" class="form-control" name="medical_checkup" placeholder="Amount" aria-label="Amount (to the nearest dollar)" required>
                               
                             </div>
                           </div>
@@ -154,7 +158,7 @@
                             <label class="form-label" for="multicol-phone">મહાજનનું મામેરું</label>
                             <div class="input-group">
                               <span class="input-group-text">₹</span>
-                              <input type="number" class="form-control" placeholder="Amount" aria-label="Amount (to the nearest dollar)">
+                              <input type="number" class="form-control" name="mahajan" placeholder="Amount" aria-label="Amount (to the nearest dollar)" required>
                               
                             </div>
                           </div>
@@ -162,7 +166,7 @@
                             <label class="form-label" for="multicol-phone">માતુશ્રી લાખણીબાઈ રામજી તેજશી ગાલા નવનીત ભોજનશાળા</label>
                             <div class="input-group">
                               <span class="input-group-text">₹</span>
-                              <input type="number" class="form-control" placeholder="Amount" aria-label="Amount (to the nearest dollar)">
+                              <input type="number" class="form-control" name="bhojanshala" placeholder="Amount" aria-label="Amount (to the nearest dollar)" required>
                               
                             </div>
                           </div>
@@ -170,7 +174,7 @@
                             <label class="form-label" for="multicol-phone">શૈક્ષણિક</label>
                             <div class="input-group">
                               <span class="input-group-text">₹</span>
-                              <input type="number" class="form-control" placeholder="Amount" aria-label="Amount (to the nearest dollar)">
+                              <input type="number" class="form-control" name="shaikshanik" placeholder="Amount" aria-label="Amount (to the nearest dollar)" required>
                               
                             </div>
                           </div>
@@ -178,7 +182,7 @@
                             <label class="form-label" for="multicol-phone">લવાજમ</label>
                             <div class="input-group">
                               <span class="input-group-text">₹</span>
-                              <input type="number" class="form-control" placeholder="Amount" aria-label="Amount (to the nearest dollar)">
+                              <input type="number" class="form-control" name="lavajam" placeholder="Amount" aria-label="Amount (to the nearest dollar)" required>
                               
                             </div>
                           </div>
@@ -186,7 +190,7 @@
                             <label class="form-label" for="multicol-phone">ઑક્સીજન ડોનેશન</label>
                             <div class="input-group">
                               <span class="input-group-text">₹</span>
-                              <input type="number" class="form-control" placeholder="Amount" aria-label="Amount (to the nearest dollar)">
+                              <input type="number" class="form-control" name="oxygen" placeholder="Amount" aria-label="Amount (to the nearest dollar)" required>
                               
                             </div>
                           </div>
@@ -194,7 +198,7 @@
                             <label class="form-label" for="multicol-phone">એમ્બ્યુલન્સ ડોનેશન</label>
                             <div class="input-group">
                               <span class="input-group-text">₹</span>
-                              <input type="number" class="form-control" placeholder="Amount" aria-label="Amount (to the nearest dollar)">
+                              <input type="number" class="form-control" name="ambulance" placeholder="Amount" aria-label="Amount (to the nearest dollar)" required>
                               
                             </div>
                           </div>
@@ -202,24 +206,25 @@
                             <label class="form-label" for="multicol-phone">ઈતર</label>
                             <div class="input-group">
                               <span class="input-group-text">₹</span>
-                              <input type="number" class="form-control" placeholder="Amount" aria-label="Amount (to the nearest dollar)">
+                              <input type="number" class="form-control" name="other" placeholder="Amount" aria-label="Amount (to the nearest dollar)" required>
                               
                             </div>
                           </div>
-                          <div class="col-md-4">
+                          <!--<div class="col-md-4">
                             <label class="form-label" for="multicol-phone">શ્રી અન્ય ખાતે</label>
                             <div class="input-group">
                               <span class="input-group-text">₹</span>
                               <input type="number" class="form-control" placeholder="Amount" aria-label="Amount (to the nearest dollar)">
                               
                             </div>
-                          </div>
+                          </div>-->
                           <div class="col-md-4">
                             <label class="form-label" for="basic-default-name">અન્ય વિગત</label>
                             <input
                               type="text"
                               class="form-control"
                               id="basic-default-name"
+                              name="remarks" 
                               {{-- placeholder="John Doe" --}}
                               required />
                         	</div>
@@ -227,8 +232,8 @@
                             <label class="form-label" for="multicol-phone">ટોટલ</label>
                             <div class="input-group">
                               <span class="input-group-text">₹</span>
-                              <input readonly type="text" id="Text1" class="form-control" placeholder="Amount" aria-label="Amount (to the nearest dollar)"
-                              onkeypress="return onlyNumbers(this.value);" onkeyup="NumToWord(this.value,'ankers');" maxlength="9">
+                              <input  type="text" id="Text1" class="form-control" name="total" placeholder="Amount" aria-label="Amount (to the nearest dollar)"
+                              onkeypress="return onlyNumbers(this.value);" onkeyup="NumToWord(this.value,'ankers');" maxlength="9" required>
                             </div>
                           </div>
                           {{-- <div id="divDisplayWords"> --}}
@@ -238,47 +243,52 @@
                               type="text"
                               class="form-control"
                               id="ankers"
+                              name="total_in_word" 
                               value=""
                               {{-- placeholder="John Doe" --}}
-                              required readonly/>
+                              required />
                         	</div>
                           <div class="col-md-4">
                             <label class="d-block form-label">નાણા મળેલ</label>
                             <div class="form-check form-check-inline mb-2">
                               <input
                                 type="radio"
-                                id="basic-default-radio-male"
-                                name="basic-default-radio"
+                                id="basic_default_radio-male"
+                                name="basic_default_radio"
                                 class="form-check-input"
+                                value="cheque"
                                 required />
-                              <label class="form-check-label" for="basic-default-radio">ચેક</label>
+                              <label class="form-check-label" for="basic_default_radio">ચેક</label>
                             </div>
                             <div class="form-check form-check-inline">
                               <input
                                 type="radio"
-                                id="basic-default-radio-female"
-                                name="basic-default-radio"
+                                id="basic_default_radio-female"
+                                name="basic_default_radio"
                                 class="form-check-input"
+                                value="Draft"
                                 required />
-                              <label class="form-check-label" for="basic-default-radio">ડ્રાફ્ટ</label>
+                              <label class="form-check-label" for="basic_default_radio">ડ્રાફ્ટ</label>
                             </div>
                             <div class="form-check form-check-inline">
                               <input
                                 type="radio"
-                                id="basic-default-radio-female"
-                                name="basic-default-radio"
+                                id="basic_default_radio-female"
+                                name="basic_default_radio"
                                 class="form-check-input"
+                                value="Cash"
                                 required />
-                              <label class="form-check-label" for="basic-default-radio">રોકડા</label>
+                              <label class="form-check-label" for="basic_default_radio">રોકડા</label>
                             </div>
                             <div class="form-check form-check-inline">
                               <input
                                 type="radio"
-                                id="basic-default-radio-female"
-                                name="basic-default-radio"
+                                id="basic_default_radio-female"
+                                name="basic_default_radio"
                                 class="form-check-input"
+                                value="UPI"
                                 required />
-                              <label class="form-check-label" for="basic-default-radio">UPI</label>
+                              <label class="form-check-label" for="basic_default_radio">UPI</label>
                             </div>
                           </div>
                           <div class="row mt-3">
