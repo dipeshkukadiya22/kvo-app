@@ -139,8 +139,9 @@
     
                               <div class="col-4">
                                 <label class="form-label" for="collapsible-address">Address</label>
-                                <textarea name="collapsible_address"  class="form-control" id="collapsible_address" rows="1" placeholder="1456, Mall Road" value="">{{ (!empty($member) ) ? $member->collapsible_address : '' }}</textarea>
+                                <textarea name="collapsible_address"  class="form-control" id="collapsible_address" rows="1" placeholder="1456, Mall Road" ></textarea>
                               </div>
+                             
                               
                               <div class="row">
                                 <div class="col-12">
@@ -218,7 +219,7 @@
                       </div>
                     </div>
                     <div class="bs-stepper-content">
-                     <form action="{{route('RoomBooking')}}" method="POST" enctype="multipart/form-data">
+                     <form action="{{route('RoomBooking')}}" method="POST">
                         @csrf
                         <!-- Account Details -->
                         <div id="account-details" class="content">
@@ -236,7 +237,7 @@
                                       <option value="{{$row->p_id}}" {{(!empty($member) && $member->m_name == $row->m_name) ? "selected" : ""}}>{{$row->m_name}}&nbsp;&nbsp;-&nbsp;&nbsp;{{$row->phone_no}}</option>
                                   @endforeach
                                 </select>
-                                <!-- joyu aiya bhul hati member to apne add karie tyare malse samji ? m_data ma hata ne badha data ha value j worng hati etle  have hu j query  ma code karu 6u  -->
+                                
                                 <input type="hidden" id="email_user" value="{{!empty($m_data)  ? $m_data:''}}">
                               </div>
     
@@ -261,7 +262,10 @@
     
                               <div class="col-4">
                                 <label class="form-label" for="collapsible-address">Address</label>
-                                <textarea name="m_address"  class="form-control" id="member-address" rows="1" placeholder="1456, Mall Road" value="">{{ (!empty($member) ) ? $member->address : '' }}</textarea>
+                               
+                                
+                                
+                                <textarea name="collapsibleaddress"  class="form-control" id="member-address" rows="1" placeholder="1456, Mall Road">{{ (!empty($member) ) ? $member->address : '' }}</textarea>
                               </div>
                                                         
                               
@@ -401,7 +405,7 @@
   
                             <div class="col-md-4">
                               <label class="form-label" for="basic-default-name">Deposit No</label>
-                              <input type="text" class="form-control" name="deposit_no" id="basic-default-name" placeholder="Deposit No"  readonly/>
+                              <input type="text" class="form-control" name="deposit_no" id="basic-default-name" placeholder="Deposit No" value="101" readonly/>
                             </div>
 
                            

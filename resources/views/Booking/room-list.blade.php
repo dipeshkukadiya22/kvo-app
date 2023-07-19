@@ -158,14 +158,16 @@
                                 @csrf
                                   <div class="mb-3">
                                     <label class="form-label" for="basic-default-name">Room Name</label>
-                                    <input type="text" class="form-control" name="room_name" id="basic-default-name" placeholder="Deluxe" />
+                                    <input type="text" class="form-control" name="room_name" id="basic-default-name" placeholder="Deluxe"/>
                                   </div>
                                   <div class="mb-3">
                                     <label for="exampleFormControlSelect1" class="form-label">Room Type</label>
                                     <select class="form-select" name="room_type" id="exampleFormControlSelect1" aria-label="Default select example">
                                       <option selected>Select Room Type</option>
-                                      <option value="1">Single Bed</option>
-                                      <option value="2">Double Bed</option>
+                                      
+                                      <option value="1">Double Bed</option>
+                                      <option value="2">3 Bed</option>
+                                      <option value="3">4 Bed</option>
                                     </select>
                                   </div>
       
@@ -173,14 +175,16 @@
                                     <label for="exampleFormControlSelect1" class="form-label">Room Facility</label>
                                     <select class="form-select" name="room_facility" id="exampleFormControlSelect2" aria-label="Default select example">
                                       <option selected>Select Room</option>
-                                      <option value="1">A.C. Room</option>
-                                      <option value="2">Non A.C Room</option>
+                                      <option value="1">A.C. ROOM</option>
+                                      <option value="2">NON A.C ROOM</option>
+                                      <option value="3">DOOR METRI A.C ROOM</option>
+                                      <option value="3">DOOR METRI NON A.C ROOM</option>
                                     </select>
                                   </div>
 
                                    <div class="row">
                                     <div class="col-12">
-                                      <button type="button" class="btn btn-primary mb-2 d-grid w-100">Submit</button>
+                                      <button type="submit" class="btn btn-primary mb-2 d-grid w-100">Submit</button>
                                       <button
                                         type="button"
                                         class="btn btn-label-secondary d-grid w-100"

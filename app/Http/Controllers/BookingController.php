@@ -32,7 +32,9 @@ class BookingController extends Controller
         $details-> email = $req->email;
         $details-> phone_no = $req->phone_no;
         $details-> age = $req->age;
-        $details-> address = $req->m_address;
+        $details-> address = $req->collapsibleaddress;
+        // blade ma 
+        //dd($req->collapsibleaddress);
         $details-> community=$req->community;
         $details-> city=$req->city;
         $details-> gender=$req->inlineRadioOptions;
@@ -42,7 +44,7 @@ class BookingController extends Controller
         $booking->no_of_person = $req->no_of_person;
         $booking->check_in_date = Carbon::now();
         $booking->room_list = $req->TagifyCustomListSuggestion;
-        $booking->room_facility = $req->room_facility;
+        $booking->room_facility = $req->room_list;
         $booking->amount = $req->amount;
         $booking->id_proof = $req->id_proof;
         $booking->deposite_no = $req->deposite_no;
@@ -73,7 +75,7 @@ class BookingController extends Controller
         $member->email = $req->email;
         $member->phone_no = $req->phone_no;
         $member->city = $req->city;
-        $member->address = strtoupper($req->address);
+        $member->address = strtoupper($req->collapsible_address);
         $member->save();
         $m_data=add_members::all();
         return view('Booking.room-booking',['member'=>$member,'m_data'=>$m_data,'p_details'=>$p_details]);
@@ -86,6 +88,10 @@ class BookingController extends Controller
     
 
     // RoomList
+    public function ADDROOM(){
+        return view('Booking.room-list');
+
+    }
     public function RoomList(Request $req){
     
         $list = new add_room();
@@ -94,6 +100,6 @@ class BookingController extends Controller
         $list->room_facility = $req->input('room_facility');
         $list->save();
     
-        return redirect('Booking.room-list');
+        return view('Booking.room-list');
     }
 }
