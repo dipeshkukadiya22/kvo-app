@@ -53,7 +53,7 @@
     
     <div class="row">
       <div class="col-12">
-        <button type="button" class="btn btn-primary mb-2 d-grid w-100">Submit</button>
+        <button type="submit" class="btn btn-primary mb-2 d-grid w-100">Submit</button>
         <button
           type="button"
           class="btn btn-label-secondary d-grid w-100"

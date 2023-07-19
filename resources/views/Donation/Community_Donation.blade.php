@@ -96,21 +96,23 @@
                           </div>
                           <div class="col-md-4">
                             <label for="select2Basic" class="form-label">નામ</label>
-                            <select id="select2Basic" name="name" class="select2 form-select form-select-lg" data-allow-clear="true" required>
-                              <option value="AK">Alaska</option>
-                              <option value="HI">Hawaii</option>
-                              <option value="CA">California</option>
-                              <option value="NV">Nevada</option>
+                            <select id="select2Basic" class="select2 form-select form-select-lg" data-allow-clear="true" name="name" placeholder="select name" required>
+                              <option value=""></option>
+                              @foreach ($m_data as $row)  
+                                  <option value="{{$row->m_name}}" {{(!empty($member) && $member->m_name == $row->m_name) ? "selected" : ""}}>{{$row->m_name}}&nbsp;&nbsp;-&nbsp;&nbsp;{{$row->phone_no}}</option>
+                              @endforeach
                             </select>
+                            <input type="hidden" id="email_user" value="{{!empty($m_data)  ? $m_data:''}}">
                           </div>
                           <div class="col-md-2">
                             <label class="form-label" for="multicol-phone">મોબાઈલ નંબર</label>
                             <input
                               type="number"
-                              id="multicol-phone"
+                              id="member-phone"
                               name="phone_no" 
                               class="form-control phone-mask"
                               placeholder="658 799 8941"
+                              value="{{ (!empty($member)) ? $member->phone_no : '' }}"
                               aria-label="658 799 8941" required/>
                           </div>
                           <div class="col-md-2">
@@ -119,8 +121,9 @@
                               type="text"
                               class="form-control"
                               name="city"
-                              id="basic-default-name"
+                              id="member_city"
                               placeholder="John Doe"
+                              value="{{ (!empty($member)) ? $member->city : '' }}"
                               required />
                          
                           </div>
@@ -483,6 +486,26 @@ function NumToWord(inputNumber, outputControl) {
   document.getElementById(outputControl).value = finalOutput;
 }
 </script>
+
+
+<!-- Make sure to include jQuery library before this script -->
+<script>
+  $(document).ready(function () {
+      $("#select2Basic").change(function () {
+          var data = JSON.parse($("#email_user").val());
+          var selectedId = $(this).val();
+          
+          $.each(data, function (key, value) {
+              if (value['m_name'] == selectedId) {
+                  $('#member-phone').val(value['phone_no']);
+                  $('#member_city').val(value['city']);
+                  return false; // Exit the loop once a match is found
+              }
+          });
+      });
+  });
+</script>
+
 
 <!-- end num to word -->
 
