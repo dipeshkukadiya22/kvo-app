@@ -15,6 +15,8 @@
 <link rel="stylesheet" href="{{ asset ('assets/vendor/libs/tagify/tagify.css') }}" />
 <link rel="stylesheet" href="{{ asset ('assets/vendor/libs/formvalidation/dist/css/formValidation.min.css') }}" />
 
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.all.min.js"></script>
+
 <!-- Page CSS -->
 <style>
 
@@ -87,12 +89,12 @@
                 <div class="col-md mb-4 mb-md-0">
                   <div class="card">
                     <div class="card-body">
-                      <form class="browser-default-validation" method="POST" action="{{route ('CommunityDonation')}}">
+                      <form id="donationForm"  class="browser-default-validation" method="POST" action="{{route ('CommunityDonation')}}">
                         @csrf
                         <div class="row g-3">
                           <div class="col-12">
                             <h6 class="fw-semibold">1. Personal Details</h6>
-                            <hr class="mt-0" />
+                            <hr class="mt-0 mb-0" />
                           </div>
                           <div class="col-md-4">
                             <label for="select2Basic" class="form-label">નામ</label>
@@ -123,7 +125,7 @@
                               name="city"
                               id="member_city"
                               placeholder="John Doe"
-                              value="{{ (!empty($member)) ? $member->city : '' }}"
+                              value="{{ (!empty($member)) ? $member->donation : '' }}"
                               required />
                          
                           </div>
@@ -136,18 +138,23 @@
                               id="basic-default-dob"
                               required />
                           </div>
-                          <!--<div class="col-md-2">
+
+                          {{-- <div class="col-md-2">
                             <label class="form-label" name="p_number" for="basic-default-name">પહોંચ નંબર</label>
                             <input
                               type="text"
                               class="form-control"
                               id="basic-default-name"
                               placeholder="15"
+                              value="{{ $donation_id }}" 
                               required />
-                          </div>-->
+                          </div> --}}
+
+                         
+
                           <div class="col-12">
-                            <h6 class="mt-2 fw-semibold">2. Donation Details</h6>
-                            <hr class="mt-0" />
+                            <h6 class="mt-4 fw-semibold">2. Donation Details</h6>
+                            <hr class="mt-0 mb-0" />
                           </div>
                           <div class="col-md-4">
                             <label class="form-label" for="multicol-phone">શેઠશ્રી રતનશી ટોકરશી વોરા મેડિકલ ચેકઅપ સેન્ટર</label>
@@ -327,6 +334,7 @@
     <script src="{{ asset ('assets/vendor/libs/formvalidation/dist/js/FormValidation.min.js') }}"></script>
     <script src="{{ asset ('assets/vendor/libs/formvalidation/dist/js/plugins/Bootstrap5.min.js') }}"></script>
     <script src="{{ asset ('assets/vendor/libs/formvalidation/dist/js/plugins/AutoFocus.min.js') }}"></script>
+    
 
     <!-- Main JS -->
     <script src="{{ asset ('assets/js/main.js') }}"></script>
@@ -486,7 +494,7 @@ function NumToWord(inputNumber, outputControl) {
   document.getElementById(outputControl).value = finalOutput;
 }
 </script>
-
+<!-- end num to word -->
 
 <!-- Make sure to include jQuery library before this script -->
 <script>
@@ -507,7 +515,36 @@ function NumToWord(inputNumber, outputControl) {
 </script>
 
 
-<!-- end num to word -->
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    // Find the form element by its ID
+    const form = document.getElementById("donationForm");
+
+    // Add a submit event listener to the form
+    form.addEventListener("submit", function(event) {
+      event.preventDefault(); // Prevent the default form submission
+
+      // Simulate form submission or perform AJAX request if needed
+      // For demonstration purposes, we are using a 1-second timeout
+      setTimeout(function() {
+        // Show the SweetAlert popup after the form is submitted
+        Swal.fire({
+          icon: "success",
+          title: "Form Submitted",
+          text: "Your data has been submitted successfully!",
+          confirmButtonText: "OK",
+        }).then((result) => {
+          // Optionally, you can redirect to another page after the user clicks "OK"
+          if (result.isConfirmed) {
+            // Replace "your-page-url" with the desired destination URL
+            window.location.href = window.location.href;
+          }
+        });
+      }, 1000); // Adjust the timeout value if needed
+    });
+  });
+</script>
+
 
 @endsection
 

@@ -20,11 +20,13 @@ class donation extends Controller
         $p_details=community_donation::with('member')->get();
         $m_data = add_members::all();
         $donation_id=add_members::get()->last()->donation_id;
+        
 
         return view ('Donation.Community_Donation',['m_name' => $m_name, 'p_details' => $p_details, 'donation_id' => $donation_id, 'm_data' => $m_data]);
     }
     
     public function Community_Donation(Request $req){
+
 
         $m_name =(community_donation::get()->last()->m_name);
         $p_details=community_donation::with('member')->get();
