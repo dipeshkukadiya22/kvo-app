@@ -405,7 +405,7 @@
   
                             <div class="col-md-4">
                               <label class="form-label" for="basic-default-name">Deposit No</label>
-                              <input type="text" class="form-control" name="deposit_no" id="basic-default-name" placeholder="Deposit No" value="101" readonly/>
+                              <input type="text" class="form-control" name="deposit_no" id="basic-default-name" placeholder="Deposit No" />
                             </div>
 
                            
