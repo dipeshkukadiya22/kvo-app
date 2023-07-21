@@ -219,7 +219,7 @@
                                       <thead>
                                         <tr>
                                           <th></th>
-                                          <th></th>
+                                          <th>Room No</th>
                                           <th>Room Name</th>
                                           <th>Room Type</th>
                                           <th>Room Facility</th>
@@ -228,26 +228,14 @@
                                         </tr>
                                       </thead>
                                       <tbody>
+                                      @foreach($list as $row)
                                         <tr>
-                                          <td></td>
-                                          <td></td>
-                                          <td>Deluxe #B-0004</td>
-                                          <td>Double Bed</td>
-                                          <td>A.C. Room</td>
-                                          <td><span class="badge bg-label-primary">Available</span></td>
-                                          <td>
-                                            <div class="d-inline-block">
-                                              <a href="javascript:;" class="btn btn-sm btn-icon item-edit" data-bs-toggle="offcanvas" data-bs-target="#offcanvasBackdropEditRoom" aria-controls="offcanvasBackdrop"><i class="text-primary ti ti-edit"></i></a>
-                                              <a href="javascript:;" id="confirm-text" class="text-danger delete-record"><i class="ti ti-trash "></i></a>
-                                            </div>
-                                          </td>
-                                        </tr>
-                                        <tr>
-                                          <td></td>
-                                          <td></td>
-                                          <td>Deluxe #B-0005</td>
-                                          <td>Single Bed</td>
-                                          <td>Non A.C. Room</td>
+                                        <td></td>
+                                        <td>{{$row->room_no}}</td>
+                                        <td>{{$row->room_name}}</td>
+                                        <td>{{$row->room_type}}</td>
+                                        <td>{{$row->room_facility}}</td>
+                                        
                                           <td>
                                             <div class="badge bg-label-success mb-2">Booked</div>
                                             <div class="badge bg-label-primary booked-date "><i class="text-primary me-2 ti ti-calendar"></i> June 15, 2023 to June 20, 2023</div>
@@ -259,6 +247,7 @@
                                             </div>
                                           </td>
                                         </tr>
+                                        @endforeach
                                       </tbody>
                                     </table>
                                   </div>

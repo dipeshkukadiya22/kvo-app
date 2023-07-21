@@ -130,7 +130,10 @@
   
                               <div class="mb-3">
                                 <label class="form-label" for="multicol-phone">Phone Number</label>
-                                <input type="number" name="phone_no" id="multicol-phone" class="form-control phone-mask" placeholder="658 799 8941" aria-label="658 799 8941" maxlength="10"  />
+                                <input type="number" name="phone_no" id="multicol-phone" class="form-control phone-mask" placeholder="658 799 8941" required />
+
+                              
+  
                               </div>
                               <div class="mb-3">
                                 <label class="form-label" for="city">City</label>
@@ -252,12 +255,12 @@
                               <div class="col-md-4">
                                 
                                 <label class="form-label" for="multicol-phone">Phone Number</label>
-                                <input type="number" id="member-phone" name="phone_no" class="form-control phone-mask" placeholder="658 799 8941" aria-label="658 799 8941" value="{{ (!empty($member)) ? $member->phone_no : '' }}" />
+                                <input type="number" id="member-phone" name="phone_no" class="form-control phone-mask" placeholder="658 799 8941" aria-label="658 799 8941" value="{{ (!empty($member)) ? $member->phone_no : '' }}"  maxlength="10" minlength="10" required/>
                               </div>
 
                               <div class="col-md-4">
                                 <label class="form-label" for="basic-default-name">Age</label>
-                                <input type="text" class="form-control" name="age" id="basic-default-name" placeholder="Age" />
+                                <input type="text" class="form-control" name="age" id="basic-default-age" placeholder="Age" />
                               </div>
     
                               <div class="col-4">
@@ -354,10 +357,10 @@
                             <div class="col-md-4">
                               <label for="select3Primary" class="form-label">Room Facility</label>
                               <div class="select2-primary">
-                                <select id="select3Primary" name="room_list" class="select2 form-select" multiple>
+                                <select id="select3Primary1" name="room_list" class="select2 form-select" multiple>
                                   <option value="">Select Room</option>
-                                    <option value="room-1" name="room_facility">Non. A.C. Room No.</option>
-                                    <option value="room-2" name="room_facility">Room 2</option>
+                                    <option value="room-1" name="room_facility"> A.C. Room No.</option>
+                                    <option value="room-2" name="room_facility">Non. A.C. Room N</option>
                                     <option value="room-3" name="room_facility">Door Metri. Room No.</option>
                                 </select>
                               </div>
@@ -428,7 +431,7 @@
                                 <span class="align-middle d-sm-inline-block d-none">Previous</span>
                               </button>
                               <div>
-                              <input type="button" class="btn btn-primary btn-next">
+                              <input type="button" onclick ="" class="btn btn-primary btn-next">
                                 <span class="align-middle d-sm-inline-block d-none me-sm-1">Next</span>
                                 <i class="ti ti-arrow-right"></i>
                               </div>
@@ -448,15 +451,15 @@
                                 <div class="row">
                                   <div class="mb-3 col-lg-6 col-xl-3 col-12 mb-0">
                                     <label class="form-label" for="form-repeater-1-1">Full Name</label>
-                                    <input type="text" id="form-repeater-1-1"  name="full_name" class="form-control" placeholder="john doe" />
+                                    <input type="text" id="full_name_form"  name="full_name" class="form-control" placeholder="john doe" value="{{ (!empty($member) )? $member->m_name : '' }}"/>
                                   </div>
                                   <div class="mb-3 col-lg-6 col-xl-3 col-12 mb-0">
                                     <label class="form-label" for="form-repeater-1-2">Age</label>
-                                    <input type="text" id="form-repeater-1-2" name="m_age" class="form-control" placeholder="your age" />
+                                    <input type="text" id="member_age" name="m_age" class="form-control" placeholder="your age" />
                                   </div>
                                   
                                   
-                                  <div class="mb-3 col-lg-6 col-xl-2 col-12 mb-0">
+                                  <div class="mb-3 col-lg-6 col-xl-2 col-12 mb-0 ">
                                   
                                       <label class="d-block form-label">Gender</label>
                                       <div class="form-check form-check-inline">
@@ -533,11 +536,11 @@
                                       <tbody>
                                         <tr>
                                           <td class="pe-4">Room Name:</td>
-                                          <td><strong>Room 2</strong></td>
+                                          <td ><strong> </strong></td>
                                         </tr>
                                         <tr>
                                           <td class="pe-4">Room Facility</td>
-                                          <td>A.C. Room No</td>
+                                          <td id="room_faci"></td>
                                         </tr>
                                         <tr>
                                           <td class="pe-4">Check-In Date:</td>
@@ -547,10 +550,7 @@
                                           <td class="pe-4">Amount:</td>
                                           <td>7500</td>
                                         </tr>
-                                        <tr>
-                                          <td class="pe-4">SWIFT code:</td>
-                                          <td>BR91905</td>
-                                        </tr>
+                                        
                                       </tbody>
                                     </table>
                                   </div>
@@ -836,12 +836,60 @@ $(document).ready(function () {
                    $('#member-phone').val(value['phone_no']);
                    $('#member-address').val(value['address']);
                    $('#member_city').val(value['city']);
+                   $('#full_name_form').val(value['m_name']);
                    }
                 });
             
             });
         });
     </script>
+   
+<script>
+  $(document).ready(function() {
+    let currentStep = 1;
+
+    $(".btn-next").on("click", function() {
+     
+     $('#member_age').val($('#basic-default-age').val());
+    
+    });
+  });
+</script>
+<script>
+  $(document).ready(function() {
+    let currentStep = 1;
+
+    $(".btn-next").on("click", function() {
+     
+     $('#room_faci').val($('#select3Primary1').val());
+    
+    });
+  });
+</script>
+
+
+
+<script>
+  $(document).ready(function() {
+    $("#multicol-phone").on("input", function() {
+      let value = $(this).val();
+      // Remove any non-numeric characters from the input
+      value = value.replace(/\D/g, "");
+      
+      // Enforce the maximum length
+      if (value.length > 10) {
+        value = value.slice(0, 10);
+      }
+      
+      // Enforce the minimum length
+      while (value.length < 10) {
+        value = "0" + value
+      }
+
+    });
+  });
+
+<script>
 
 
 

@@ -47,7 +47,7 @@ class BookingController extends Controller
         $booking->room_facility = $req->room_list;
         $booking->amount = $req->amount;
         $booking->id_proof = $req->id_proof;
-        $booking->deposite_no = $req->deposite_no;
+        $booking->deposite_no = $req->deposit_no;
         $booking->deposite_rs = $req->deposite_rs;
         $booking->rs_word = $req->rs_word;
         $booking->save();
@@ -89,17 +89,18 @@ class BookingController extends Controller
 
     // RoomList
     public function ADDROOM(){
-        return view('Booking.room-list');
+        $list =$data=DB::select("SELECT * , add_room.room_no as id from add_room");
+        return view('Booking.room-list',['list'=>$list]);
 
     }
     public function RoomList(Request $req){
-    
-        $list = new add_room();
-        $list->room_name = $req->input('room_name');
-        $list->room_type = $req->input('room_type');
-        $list->room_facility = $req->input('room_facility');
-        $list->save();
-    
-        return view('Booking.room-list');
+        $room = new add_room();
+        $room->room_name = $req->input('room_name');
+        $room->room_type = $req->input('room_type');
+        $room->room_facility = $req->input('room_facility');
+        $room->save();
+        $list = DB::select("SELECT * , add_room.room_no as id from add_room ");
+        dd($list->toArray());
+        return view('Booking.room-list', ['list' => $list]);
     }
 }

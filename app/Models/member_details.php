@@ -11,4 +11,9 @@ class member_details extends Model
     protected $table = 'member_details';
     protected $primaryKey = 'p_id';
     public $timestamps = false;
+
+    public function member()
+    {
+        return $this->belongsTo(add_members::class, 'p_id');
+    }
 }
