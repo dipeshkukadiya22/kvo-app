@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\community_donation;
+use App\Models\General_Donation;
+
 use Carbon\Carbon;
 
 use Illuminate\Http\Request;
@@ -51,7 +53,26 @@ class donation extends Controller
         return view ('Donation.Community_Donation');
     }
 
-    public function General_Donation(){
+    public function index1(){
+        return view ('Donation.General_Donation');
+    }
+
+    public function General_Donation(Request $req){
+
+        $General_Donation = new General_Donation();
+
+        //Personal Details
+        $General_Donation -> id  = $req -> id;
+        $General_Donation-> date = Carbon::now();
+        $General_Donation -> city = $req -> city;
+        $General_Donation -> name = $req -> name;
+        $General_Donation -> haste = $req -> haste;
+        $General_Donation -> phone_no = $req -> phone_no;
+        $General_Donation -> details = $req -> details;
+
+        $General_Donation -> save();
+
+                
         return view ('Donation.General_Donation');
     }
 

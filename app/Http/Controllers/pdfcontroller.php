@@ -35,4 +35,10 @@ class pdfcontroller extends Controller
     $pdf = Pdf::loadView('pdf.pdf_Expense_Receipt')->setPaper('a5', 'landscape')->setOptions(['defaultFont' => 'KAP119']);
     return $pdf->stream();
     }
+
+    public function pdf_Religious_Expense_Receipt()
+    {   
+    $pdf = Pdf::loadView('pdf.pdf_Religious_Expense_Receipt')->setPaper('a5', 'landscape')->setOptions(['defaultFont' => 'KAP119']);
+    return $pdf->stream();
+    }
 }

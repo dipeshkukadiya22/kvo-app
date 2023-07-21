@@ -87,7 +87,8 @@
                 <div class="col-md mb-4 mb-md-0">
                   <div class="card">
                     <div class="card-body">
-                      <form class="browser-default-validation">
+                      <form action="{{route('GeneralDonation')}}" method="POST" class="browser-default-validation">
+                        @csrf
                         <div class="row g-3">
                           <div class="col-12">
                             <h6 class="fw-semibold">1. Personal Details</h6>
@@ -95,7 +96,7 @@
                           </div>
                           <div class="col-md-4">
                             <label for="select2Basic" class="form-label">નામ</label>
-                            <select id="select2Basic" class="select2 form-select form-select-lg" data-allow-clear="true" required>
+                            <select id="select2Basic" name="name" class="select2 form-select form-select-lg" data-allow-clear="true" required>
                               <option value="AK">Alaska</option>
                               <option value="HI">Hawaii</option>
                               <option value="CA">California</option>
@@ -106,6 +107,7 @@
                             <label class="form-label" for="basic-default-dob">તારીખ</label>
                             <input
                               type="text"
+                              name="date"
                               class="form-control flatpickr-validation"
                               id="basic-default-dob"
                               required />
@@ -114,15 +116,17 @@
                             <label class="form-label" for="basic-default-name">પહોંચ નંબર</label>
                             <input
                               type="text"
+                              name="id"
                               class="form-control"
                               id="basic-default-name"
                               placeholder="15"
-                              required readonly/>
+                              required/>
                           </div>
                           <div class="col-md-4">
                             <label class="form-label" for="basic-default-name">હસ્તે</label>
                             <input
                               type="text"
+                              name="haste"
                               class="form-control"
                               id="basic-default-name"
                               placeholder="John Doe"
@@ -133,6 +137,7 @@
                             <label class="form-label" for="multicol-phone">મોબાઈલ નંબર</label>
                             <input
                               type="number"
+                              name="phone_no"
                               id="multicol-phone"
                               class="form-control phone-mask"
                               placeholder="658 799 8941"
@@ -142,6 +147,7 @@
                             <label class="form-label" for="basic-default-name">ગામ</label>
                             <input
                               type="text"
+                              name="city"
                               class="form-control"
                               id="basic-default-name"
                               placeholder="John Doe"
@@ -156,6 +162,7 @@
                             <label class="form-label" for="multicol-phone">મળેલ દાન</label>
                             <input
                               type="text"
+                              name="details"
                               class="form-control"
                               id="basic-default-name"
                               {{-- placeholder="John Doe" --}}
