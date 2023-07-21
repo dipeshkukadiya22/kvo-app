@@ -15,7 +15,7 @@
 <link rel="stylesheet" href="{{ asset ('assets/vendor/libs/tagify/tagify.css') }}" />
 <link rel="stylesheet" href="{{ asset ('assets/vendor/libs/formvalidation/dist/css/formValidation.min.css') }}" />
 
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.all.min.js"></script>
+{{-- <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.all.min.js"></script> --}}
 
 <!-- Page CSS -->
 <style>
@@ -89,7 +89,7 @@
                 <div class="col-md mb-4 mb-md-0">
                   <div class="card">
                     <div class="card-body">
-                      <form id="donationForm"  class="browser-default-validation" method="POST" action="{{route ('CommunityDonation')}}">
+                      <form  class="browser-default-validation" method="POST" action="{{route ('CommunityDonation')}}">
                         @csrf
                         <div class="row g-3">
                           <div class="col-12">
@@ -515,7 +515,7 @@ function NumToWord(inputNumber, outputControl) {
 </script>
 
 
-<script>
+{{-- <script>
   document.addEventListener("DOMContentLoaded", function() {
     // Find the form element by its ID
     const form = document.getElementById("donationForm");
@@ -543,7 +543,7 @@ function NumToWord(inputNumber, outputControl) {
       }, 1000); // Adjust the timeout value if needed
     });
   });
-</script>
+</script> --}}
 
 
 @endsection
