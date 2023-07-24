@@ -80,13 +80,7 @@
                           <ul class="nav nav-pills mb-3 me-2" role="tablist">
                             <li class="nav-item">
                               <button
-                                type="button"
-                                class="nav-link active"
-                                role="tab"
-                                data-bs-toggle="tab"
-                                data-bs-target="#navs-pills-top-allroom"
-                                aria-controls="navs-pills-top-allroom"
-                                aria-selected="true">
+                                type="button" class="nav-link active" role="tab" data-bs-toggle="tab" data-bs-target="#navs-pills-top-allroom" aria-controls="navs-pills-top-allroom" aria-selected="true">
                                 All Rooms (<span id="allRoomsCount">0</span>)
                               </button>
                             </li>
