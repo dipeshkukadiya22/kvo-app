@@ -19,7 +19,7 @@ class donation extends Controller
         $m_name =(community_donation::get()->last()->m_name);
         $p_details=community_donation::with('member')->get();
         $m_data = add_members::all();
-        $donation_id=add_members::get()->last()->donation_id;
+        $donation_id = community_donation::get()->last()->donation_id;
         
 
         return view ('Donation.Community_Donation',['m_name' => $m_name, 'p_details' => $p_details, 'donation_id' => $donation_id, 'm_data' => $m_data]);
@@ -32,6 +32,8 @@ class donation extends Controller
         $p_details=community_donation::with('member')->get();
         $m_data = add_members::all();
         $data = community_donation::find($req->donation_id);
+
+        $donation_id = community_donation::get()->last()->donation_id;
 
         $community_donation = new community_donation();
         
@@ -60,11 +62,24 @@ class donation extends Controller
 
         $community_donation -> save();
 
+        if($community_donation) { 
+
+            return redirect() -> route('Community_Donation') -> with ('message', 'Form submitted successfully!') -> with 
+            (['p_details'=>$p_details,'m_name'=>$m_name,'m_data'=>$m_data, 'data'=>$data, 'donation_id' => $donation_id ]);
+
+        }
+        else{
+
+            return redirect() -> route('Community_Donation') -> with ('message', 'your data not submit') -> with 
+            (['p_details'=>$p_details,'m_name'=>$m_name,'m_data'=>$m_data, 'data'=>$data, 'donation_id' => $donation_id ]);
+
+        }
+
 
         //$m_data= DB::select("select * from member_details ORDER BY add_members.p_id DESC");
-        return view ('Donation.Community_Donation',['p_details'=>$p_details,'m_name'=>$m_name,'m_data'=>$m_data, 'data'=>$data ]);
+        //return view ('Donation.Community_Donation',['p_details'=>$p_details,'m_name'=>$m_name,'m_data'=>$m_data, 'data'=>$data ]);
 
-
+        
 
         //return view ('Donation.Community_Donation');
     }
