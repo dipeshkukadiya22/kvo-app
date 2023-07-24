@@ -857,7 +857,7 @@ $(document).ready(function () {
 </script>
 <script>
   $(document).ready(function() {
-    let currentStep = 1;
+    let currentStep = 2;
 
     $(".btn-next").on("click", function() {
      
@@ -866,6 +866,8 @@ $(document).ready(function () {
     });
   });
 </script>
+
+
 
 
 

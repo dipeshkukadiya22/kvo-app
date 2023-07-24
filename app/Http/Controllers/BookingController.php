@@ -103,4 +103,8 @@ class BookingController extends Controller
         dd($list->toArray());
         return view('Booking.room-list', ['list' => $list]);
     }
+
+    public function room_booked(){
+        
+    }
 }
