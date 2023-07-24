@@ -58,7 +58,8 @@ Route::POST('/edit_members', [MembersController::class, 'edit_members'])->name('
 
 
 
-Route::get('Religious_Donation', [donation::class, 'Religious_Donation'])->name('Religious_Donation');
+Route::get('Religious_Donation', [donation::class, 'Religious_Donation_index'])->name('Religious_Donation');
+Route::POST('ReligiousDonation', [donation::class, 'Religious_Donation'])->name('ReligiousDonation');
 
 Route::get('Community_Donation', [donation::class, 'index'])->name('Community_Donation');
 Route::POST('CommunityDonation', [donation::class, 'Community_Donation'])->name('CommunityDonation');

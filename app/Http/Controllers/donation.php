@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\community_donation;
+use App\Models\religious_donation;
 use App\Models\add_members;
 use Carbon\Carbon;
 
@@ -10,10 +11,79 @@ use Illuminate\Http\Request;
 
 class donation extends Controller
 {
-    // Donation Controller 
-    public function Religious_Donation(){
-        return view ('Donation.Religious_Donation');
+    // Religious Donation
+    public function Religious_Donation_index(){
+
+        $m_name =(religious_donation::get()->last()->m_name);
+        $p_details=religious_donation::with('member')->get();
+        $m_data = add_members::all();
+        $religious_donation_id = religious_donation::get() -> last() ->religious_donation_id;
+        
+
+        return view ('Donation.Religious_Donation',['m_name' => $m_name, 'p_details' => $p_details, 'religious_donation_id' => $religious_donation_id, 'm_data' => $m_data]);
     }
+
+    public function Religious_Donation(Request $req){
+
+
+        $m_name =(religious_donation::get()->last()->m_name);
+        $p_details=religious_donation::with('member')->get();
+        $m_data = add_members::all();
+        $data = religious_donation::find($req -> religious_donation_id);
+
+        $religious_donation_id = religious_donation::get() -> last() -> religious_donation_id;
+
+        $religious_donation = new religious_donation();
+        
+        //Personal Details
+        $religious_donation -> name = $req -> name;
+        //dd($req);
+        $religious_donation -> haste = $req -> haste;
+        $religious_donation-> r_date = Carbon::now();
+        $religious_donation -> phone_no = $req -> phone_no;
+        $religious_donation -> city = $req -> city;
+        $religious_donation -> community = $req -> community;
+        
+        //Donation Details
+        $religious_donation -> sarv_sadharan = $req -> sarv_sadharan;
+        $religious_donation -> jiv_daya = $req -> jiv_daya;
+        $religious_donation -> shadhu_shdhvi = $req -> shadhu_shdhvi;
+        $religious_donation -> sadharmik = $req -> sadharmik;
+        $religious_donation -> chaturmas = $req -> chaturmas;
+        $religious_donation -> kayami_tithi = $req -> kayami_tithi;
+        $religious_donation -> devdravya = $req -> devdravya;
+        $religious_donation -> kesar_sukhad = $req -> kesar_sukhad;
+        $religious_donation -> dhoop_deep = $req -> dhoop_deep;
+        $religious_donation -> snatra_puja = $req -> snatra_puja;
+        $religious_donation -> agani_pooja = $req -> agani_pooja;
+        $religious_donation -> moti_pooja = $req -> moti_pooja;
+        $religious_donation -> drut_boli = $req -> drut_boli;
+        $religious_donation -> other_account_name = $req -> other_account_name;
+        $religious_donation -> other_account_amount = $req -> other_account_amount;
+        $religious_donation -> remarks = $req -> remarks;
+        $religious_donation -> total = $req -> total;
+        $religious_donation -> total_in_word = $req -> total_in_word;
+        $religious_donation -> payment_mode = $req -> basic_default_radio;
+
+        $religious_donation -> save();
+
+        if($religious_donation) { 
+
+            return redirect() -> route('Religious_Donation') -> with ('message', 'Form submitted successfully!') -> with 
+            (['p_details'=>$p_details,'m_name'=>$m_name,'m_data'=>$m_data, 'data'=>$data, 'religious_donation_id' => $religious_donation_id ]);
+
+        }
+        else{
+
+            return redirect() -> route('Religious_Donation') -> with ('message', 'your data not submit') -> with 
+            (['p_details'=>$p_details,'m_name'=>$m_name,'m_data'=>$m_data, 'data'=>$data, 'religious_donation_id' => $religious_donation_id ]);
+
+        }
+
+    }
+
+
+    // Community Donation
     public function index(){
 
         $m_name =(community_donation::get()->last()->m_name);
