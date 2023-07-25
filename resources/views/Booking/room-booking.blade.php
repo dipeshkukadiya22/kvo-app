@@ -342,7 +342,7 @@
                             
                             <div class="col-md-4">
                               <label class="form-label" for="basic-default-name">No. of Person</label>
-                              <input type="text" class="form-control"  name="no_of_person" id="basic-default-name" placeholder="No of Person" />
+                              <input type="text" class="form-control"  name="no_of_person" id="no_of_person_id" placeholder="No of Person" />
                             </div>
                             <!-- Datetime Picker-->
                             <div class="col-md-4">
@@ -430,7 +430,8 @@
                           </div>
                           <div class="row g-3">
                             <!-- Form Repeater -->
-                            <div class="col-12">
+                            
+                            <div id="step2FormsContainer "class="col-12">
                               <div class="all-members" data-repeater-list="group-a">
                               <div data-repeater-item>
                                 <div class="row">
@@ -455,8 +456,6 @@
                                         <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="FEMALE" />
                                         <label class="form-check-label" for="inlineRadio2">Female</label>
                                       </div>
-                                
-                                  
                                   </div>
                                   <div class="col-md-4">
                                     <label class="form-label" for="basic-default-country">Relation</label>
@@ -483,13 +482,14 @@
                                 <hr />
                               </div>
                             </div>
+                              </div>
                             <div class="mb-0">
                               <button class="btn btn-primary" data-repeater-create>
                                 <i class="ti ti-plus me-1"></i>
                                 <span class="align-middle">Add Members</span>
                               </button>
                             </div>
-                            </div>
+                            
                             <!-- /Form Repeater -->
                             <div class="col-12 d-flex justify-content-between">
                               <button class="btn btn-label-secondary btn-prev">
@@ -519,13 +519,14 @@
                                     <h6 class="mb-4">Details:</h6>
                                     <table>
                                       <tbody>
-                                        <tr>
-                                          <td class="pe-4">Room Name:</td>
-                                          <td id="room_lst"></td>
-                                        </tr>
+                                        
                                         <tr>
                                           <td class="pe-4">Room Facility</td>
                                           <td id="room_faci"></td>
+                                        </tr>
+                                        <tr>
+                                          <td class="pe-4">Room Name:</td>
+                                          <td id="room_lst"></td>
                                         </tr>
                                         <tr>
                                           <td class="pe-4">Check-In Date:</td>
@@ -851,7 +852,7 @@ $(document).ready(function () {
       const selectedDate = $('#flatpickr-datetime').val();
       const selectedamount = $('#r_amount').val();
       if (selectedValue && selectedValue.length > 0) {
-        $('#room_faci').text(selectedValue.join(', '));
+        $('#room_faci').text(selectedValue);
         currentStep++;
       } else {
        
@@ -898,6 +899,53 @@ $(document).ready(function () {
     });
   });
 </script>
+<script>
+  $(document).ready(function() {
+    let currentStep = 1;
+
+    $(".btn-next").on("click", function() {
+      if (currentStep === 1) {
+        const enteredNumbers = $('#no_of_person_id').val();
+        const numbersArray = enteredNumbers.split(',').map(number => number.trim());
+
+        if (numbersArray.length > 0) {
+          // Clear the container before adding new forms
+          $('#step2FormsContainer').empty();
+
+          // Generate and display forms based on the entered numbers
+          numbersArray.forEach((number, index) => {
+            const formHTML = `
+              <div class="step2-form row">
+                <div class="col-md-6 mb-3">
+                  <label class="form-label" for="full_name_${index}">Full Name</label>
+                  <input type="text" id="full_name_${index}" name="full_name_${index}" class="form-control" placeholder="john doe" value="" />
+                </div>
+                <div class="col-md-6 mb-3">
+                  <label class="form-label" for="member_age_${index}">Age</label>
+                  <input type="text" id="member_age_${index}" name="m_age_${index}" class="form-control" placeholder="your age" />
+                </div>
+                <!-- Add the rest of your form elements for each person -->
+              </div>
+            `;
+
+            // Append each form HTML to the container
+            $('#step2FormsContainer').append(formHTML);
+          });
+
+          // Move to the next step
+          currentStep++;
+        } else {
+          // Handle the case when no numbers are entered
+        }
+      }
+      // Add the code to handle other steps if necessary
+    });
+  });
+</script>
+
+
+
+
 
 
 
