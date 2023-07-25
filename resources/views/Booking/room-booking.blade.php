@@ -359,31 +359,16 @@
                               <div class="select2-primary">
                                 <select id="select3Primary1" name="room_list" class="select2 form-select" multiple>
                                   <option value="">Select Room</option>
-                                    <option value="room-1" name="room_facility"> A.C. Room No.</option>
-                                    <option value="room-2" name="room_facility">Non. A.C. Room N</option>
-                                    <option value="room-3" name="room_facility">Door Metri. Room No.</option>
+                                    <option value="A.C. Room No" name="room_facility"> A.C. Room.</option>
+                                    <option value="Non. A.C. Room No" name="room_facility">Non. A.C. Room</option>
+                                    <option value="Door Metri. Room No" name="room_facility">Door Metri. Room.</option>
                                 </select>
                               </div>
                             </div>
 
 
                             <!-- Primary -->
-                           <!-- <div class="col-md-4">
-                              <label for="select2Primary" class="form-label">Room List</label>
-                              <div class="select2-primary">
-                                <select id="select2Primary" name="room_list" class="select2 form-select" multiple>
-                                  <option value="">Select Room</option>
-                                    <option value="room-1">Room 1</option>
-                                    <option value="room-2">Room 2</option>
-                                    <option value="room-3">Room 3</option>
-                                    <option value="room-3">Room 4</option>
-                                    <option value="room-3">Room 5</option>
-                                    <option value="room-3">Room 6</option>
-                                    <option value="room-3">Room 7</option>
-                                    <option value="room-3">Room 8</option>
-                                </select>
-                              </div>
-                            </div> -->
+                         
                             
                             <!-- Custom Suggestions: List -->
                             <div class="col-md-4">
@@ -395,7 +380,7 @@
                               <label class="form-label" for="basic-default-name">Amount</label>
                               <div class="input-group">
                                 <span class="input-group-text">₹</span>
-                                <input type="number" class="form-control"  name="amount" placeholder="Amount" aria-label="Amount (to the nearest indian)" value="800" />
+                                <input type="number" class="form-control"  name="amount" placeholder="Amount" aria-label="Amount (to the nearest indian)" id="r_amount" value="800" />
                               </div>
                             </div>
   
@@ -475,7 +460,7 @@
                                   </div>
                                   <div class="col-md-4">
                                     <label class="form-label" for="basic-default-country">Relation</label>
-                                    <select class="form-select" name="relation" id="basic-default-country" required>
+                                    <select class="form-select" name="relation" id="member_relation" required>
                                       <option value="SELF" selected>SELF</option>
                                       <option value="MOTHER">MOTHER</option>
                                       <option value="FATHER">FATHER</option>
@@ -512,7 +497,7 @@
                                 <span class="align-middle d-sm-inline-block d-none">Previous</span>
                               </button>
                               <div>
-                              <input type="button" class="btn btn-primary btn-next">
+                                <input type="button"  class="btn btn-primary btn-next">
                                 <span class="align-middle d-sm-inline-block d-none me-sm-1">Next</span>
                                 <i class="ti ti-arrow-right"></i>
                               </div>
@@ -536,7 +521,7 @@
                                       <tbody>
                                         <tr>
                                           <td class="pe-4">Room Name:</td>
-                                          <td ><strong> </strong></td>
+                                          <td id="room_lst"></td>
                                         </tr>
                                         <tr>
                                           <td class="pe-4">Room Facility</td>
@@ -544,11 +529,11 @@
                                         </tr>
                                         <tr>
                                           <td class="pe-4">Check-In Date:</td>
-                                          <td>12-08-2023 11:00 am</td>
+                                          <td id="check_date"></td>
                                         </tr>
                                         <tr>
                                           <td class="pe-4">Amount:</td>
-                                          <td>7500</td>
+                                          <td id="room_amount"></td>
                                         </tr>
                                         
                                       </tbody>
@@ -571,15 +556,15 @@
                                    
                                     <tr>
                                       <td></td>
-                                      <td></td>
-                                      <td></td>
-                                      <td></td>
-                                      <td></td>
+                                      <td id="member_full_name"></td>
+                                      <td id="members_age"></td>
+                                      <td id="member_gen"></td>
+                                      <td id="member_rel"></td>
                                      
                                     </tr>
                                   
                                                                        
-                                    <tr>
+                                    <!-- <tr>
                                       <td colspan="3" class="align-top px-4 py-4">
                                         
                                       </td>
@@ -593,7 +578,7 @@
                                         <p class="fw-semibold mb-2">$50.00</p>
                                         <p class="fw-semibold mb-0 pb-3">$204.25</p>
                                       </td>
-                                    </tr>
+                                    </tr> -->
                                   </tbody>
                                 </table>
                               </div>
@@ -855,17 +840,69 @@ $(document).ready(function () {
     });
   });
 </script>
+
 <script>
   $(document).ready(function() {
-    let currentStep = 2;
+    let currentStep = 1;
 
     $(".btn-next").on("click", function() {
-     
-     $('#room_faci').val($('#select3Primary1').val());
-    
+      const selectedValue = $('#select3Primary1').val();
+      const selectedList = $('#TagifyCustomListSuggestion').val();
+      const selectedDate = $('#flatpickr-datetime').val();
+      const selectedamount = $('#r_amount').val();
+      if (selectedValue && selectedValue.length > 0) {
+        $('#room_faci').text(selectedValue.join(', '));
+        currentStep++;
+      } else {
+       
+      }
+      if (selectedList && selectedList.length > 0) {
+        $('#room_lst').text(selectedList);
+        currentStep++;
+        
+      } else {
+      
+      }
+      if (selectedDate && selectedDate.length > 0) {
+        $('#check_date').text(selectedDate);
+        currentStep++;
+      } else {
+        
+      }
+      if (selectedamount && selectedamount.length > 0) {
+        $('#room_amount').text(selectedamount);
+        currentStep++;
+      } else {
+       
+      }
     });
   });
 </script>
+
+
+
+<script>
+  $(document).ready(function() {
+    let currentStep = 1;
+
+    $(".btn-next").on("click", function() {
+      const fullName = $('#full_name_form').val();
+      const age = $('#member_age').val();
+      const gender = $('input[name="inlineRadioOptions"]:checked').val();
+      const relation = $('#member_relation').val();
+
+      $('#member_full_name').text(fullName);
+      $('#members_age').text(age);
+      $('#member_gen').text(gender);
+      $('#member_rel').text(relation);
+    });
+  });
+</script>
+
+
+
+
+
 
 
 
