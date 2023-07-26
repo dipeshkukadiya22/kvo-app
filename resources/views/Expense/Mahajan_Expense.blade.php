@@ -153,7 +153,7 @@
                             <input
                               type="text"
                               class="form-control"
-                              value="{{$depo_id}}"
+                              value="{{$depo_id + 1}}"
                               id="basic-default-name"
                               name="depo_id"
                               placeholder="15"

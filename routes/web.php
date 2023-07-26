@@ -64,13 +64,13 @@ Route::get('Religious_Donation', [donation::class, 'Religious_Donation'])->name(
 Route::get('Community_Donation', [donation::class, 'index'])->name('Community_Donation');
 Route::POST('CommunityDonation', [donation::class, 'Community_Donation'])->name('CommunityDonation');
 
-//Route::POST('General_Donation', [donation::class, 'add_member'])->name('General_Donation');
+Route::POST('General_Donation', [donation::class, 'add_member'])->name('General_Donation');
 Route::get('General_Donation', [donation::class, 'index1']);
 Route::POST('GeneralDonation', [donation::class, 'General_Donation'])->name('GeneralDonation');
 
-Route::post('Mahajan_Expense', [Expense::class, 'add_member'])->name('mahajan_expense');
-Route::get('Mahajan_Expense', [Expense::class, 'index'])->name('mahajan_expense_index');
-Route::post('MahajanExpense', [Expense::class, 'Mahajan_Expense'])->name('mahajan_expense');
+Route::post('Mahajan_Expense', [Expense::class, 'add_member'])->name('Mahajan_Expense');
+Route::get('Mahajan_Expense', [Expense::class, 'index'])->name('Mahajan_Expense');
+Route::post('MahajanExpense', [Expense::class, 'Mahajan_Expense'])->name('MahajanExpense');
 
 
 Route::get('Sangh_Expense', [Expense::class, 'Sangh_Expense'])->name('Sangh_Expense');

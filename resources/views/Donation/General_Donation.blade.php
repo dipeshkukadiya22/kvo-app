@@ -136,7 +136,7 @@
                             <select id="select2Basic" class="select2 form-select form-select-lg" data-allow-clear="true" name="name" placeholder="select name" required>
                               <option value=""></option>
                               @foreach ($m_data as $row)  
-                                  <option value="{{$row->depo_id}}" {{(!empty($member) && $member->m_name == $row->m_name) ? "selected" : ""}}>{{$row->m_name}}&nbsp;&nbsp;-&nbsp;&nbsp;{{$row->phone_no}}</option>
+                                  <option value="{{$row->m_name}}" {{(!empty($member) && $member->m_name == $row->m_name) ? "selected" : ""}}>{{$row->m_name}}&nbsp;&nbsp;-&nbsp;&nbsp;{{$row->phone_no}}</option>
                               @endforeach
                             </select>
                             <input type="hidden" id="email_user" value="{{!empty($m_data)  ? $m_data:''}}">
@@ -158,8 +158,8 @@
                               class="form-control"
                               id="basic-default-name"
                               placeholder="15"
-                              value="{{$depo_id}}"
-                              required />
+                              value="{{$depo_id + 1}}"
+                              required readonly/>
                           </div>
                           <div class="col-md-4">
                             <label class="form-label" for="basic-default-name">હસ્તે</label>

@@ -61,7 +61,7 @@ class donation extends Controller
         $p_details=GeneralDonation::with('member')->get();
         $m_data = add_members::all();
        // $depo_id=add_members::get()->last()->depo_id;
-        $depo_id = Generaldonation::get()->last()->depo_id;
+        $depo_id = GeneralDonation::get()->last()->depo_id;
         //dd($depo_id);
         
 
@@ -75,6 +75,7 @@ class donation extends Controller
         $data = GeneralDonation::find($req->depo_id);
         $m_data = add_members::all();
         $data = GeneralDonation::find($req->depo_id);
+        $depo_id = GeneralDonation::get()->last()->depo_id;
         $General_Donation = new GeneralDonation();
         //Personal Details
         $General_Donation -> depo_id  = $req -> depo_id;
@@ -84,14 +85,11 @@ class donation extends Controller
         $General_Donation -> haste = $req -> haste;
         $General_Donation -> phone_no = $req -> phone_no;
         $General_Donation -> details = $req -> details;
-        $depo_id = Generaldonation::get()->last()->depo_id;
-
+       
         $General_Donation -> save();
+        return redirect()->route('General_Donation');
 
-        //$m_data= DB::select("select * from member_details ORDER BY add_members.p_id DESC");
-        return view ('Donation.General_Donation',['p_details'=>$p_details,'m_name'=>$m_name,'m_data'=>$m_data, 'data'=>$data,'depo_id'=>$depo_id,'data'=>$data ]);
-
-        // return view ('Donation.General_Donation');
+       
     }
 
     public function General_Donation_Report(){
@@ -109,6 +107,7 @@ class donation extends Controller
         $member->address = strtoupper($req->collapsible_address);
         $member->save();
         $m_data=add_members::all();
-        return view('Donation.General_Donation',['member'=>$member,'m_data'=>$m_data,]);
+        $depo_id = GeneralDonation::get()->last()->depo_id;
+        return view('Donation.General_Donation',['member'=>$member,'m_data'=>$m_data,'depo_id' => $depo_id]);
     }
 }

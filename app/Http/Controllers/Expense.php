@@ -16,12 +16,12 @@ class Expense extends Controller
         $m_name =(Mahajan_Expense::get()->last()->m_name);
         $p_details=Mahajan_Expense::with('member')->get();
         $m_data = add_members::all();
-        $id=add_members::get()->last()->id;
+        //$id=add_members::get()->last()->id;
         $depo_id = Mahajan_Expense::get()->last()->depo_id;
         //dd($depo_id);
         
 
-        return view ('Expense.Mahajan_Expense',['m_name' => $m_name, 'p_details' => $p_details, 'id' => $id, 'm_data' => $m_data,'depo_id'=>$depo_id ]);
+        return view ('Expense.Mahajan_Expense',['m_name' => $m_name, 'p_details' => $p_details, 'm_data' => $m_data,'depo_id'=>$depo_id ]);
     }
 
 
@@ -32,6 +32,7 @@ class Expense extends Controller
         $p_details=Mahajan_Expense::with('member')->get();
         $m_data = add_members::all();
         $data = Mahajan_Expense::find($req->depo_id);
+        $depo_id = Mahajan_Expense::get()->last()->depo_id;
         $Mahajan_Expense = new Mahajan_Expense();
         //Personal Details
         $Mahajan_Expense -> depo_id  = $req -> depo_id;
@@ -41,11 +42,11 @@ class Expense extends Controller
         $Mahajan_Expense -> amount = $req -> amount;
         $Mahajan_Expense -> inword = $req -> inword;
         $Mahajan_Expense -> save();
-        $depo_id = (Mahajan_Expense::get()->last()->depo_id)+1;
+       
        
 
         //$m_data= DB::select("select * from member_details ORDER BY add_members.p_id DESC");
-        return view ('Expense.Mahajan_Expense',['p_details'=>$p_details,'m_name'=>$m_name,'m_data'=>$m_data, 'data'=>$data,'depo_id'=>$depo_id ]);
+        return redirect()->route('Mahajan_Expense');
 
         // return view ('Donation.Mahajan_Expense');
     }
@@ -65,6 +66,7 @@ class Expense extends Controller
         $member->address = strtoupper($req->address);
         $member->save();
         $m_data=add_members::all();
-        return view('Expense.Mahajan_Expense',['member'=>$member,'m_data'=>$m_data,'p_details'=>$p_details]);
+        $depo_id = Mahajan_Expense::get()->last()->depo_id;
+        return view('Expense.Mahajan_Expense',['member'=>$member,'m_data'=>$m_data,'p_details'=>$p_details,'depo_id' => $depo_id]);
     }
 }
