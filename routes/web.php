@@ -42,7 +42,8 @@ Route::get('/login', [AuthController::class, 'LoginUser'])->name('LoginUser');
 
 Route::POST('RoomBooking', [BookingController::class, 'RoomBooking'])->name('RoomBooking');
 Route::get('room-booking', [BookingController::class, 'index']);
-Route::POST('room-booking', [BookingController::class, 'add_member'])->name('room-booking');
+
+
 
 
 
@@ -63,10 +64,17 @@ Route::get('Religious_Donation', [donation::class, 'Religious_Donation'])->name(
 Route::get('Community_Donation', [donation::class, 'index'])->name('Community_Donation');
 Route::POST('CommunityDonation', [donation::class, 'Community_Donation'])->name('CommunityDonation');
 
-Route::get('General_Donation', [donation::class, 'index1'])->name('General_Donation');
+//Route::POST('General_Donation', [donation::class, 'add_member'])->name('General_Donation');
+Route::get('General_Donation', [donation::class, 'index1']);
 Route::POST('GeneralDonation', [donation::class, 'General_Donation'])->name('GeneralDonation');
 
-Route::get('Expense_Receipt', [Expense::class, 'Expense_Receipt'])->name('Expense_Receipt');
+Route::post('Mahajan_Expense', [Expense::class, 'add_member'])->name('mahajan_expense');
+Route::get('Mahajan_Expense', [Expense::class, 'index'])->name('mahajan_expense_index');
+Route::post('MahajanExpense', [Expense::class, 'Mahajan_Expense'])->name('mahajan_expense');
+
+
+Route::get('Sangh_Expense', [Expense::class, 'Sangh_Expense'])->name('Sangh_Expense');
+
 Route::get('General_Donation_Report', [donation::class, 'General_Donation_Report'])->name('General_Donation_Report');
 Route::get('pdf_Religious_Donation',[pdfcontroller::class,'pdf_Religious_Donation'])->name('pdf_Religious_Donation');
 Route::get('pdf_Community_Donation',[pdfcontroller::class,'pdf_Community_Donation'])->name('pdf_Community_Donation');
