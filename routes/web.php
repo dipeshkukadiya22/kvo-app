@@ -55,14 +55,15 @@ Route::get('/view-members', [MembersController::class, 'ViewMembers'])->name('Vi
 Route::POST('/edit_members', [MembersController::class, 'edit_members'])->name('edit_members');
 
 
-
-
-
 Route::get('Religious_Donation', [donation::class, 'index1'])->name('Religious_Donation');
 Route::POST('ReligiousDonation', [donation::class, 'Religious_Donation'])->name('ReligiousDonation');
 
+// Add Community_Donation
 Route::get('Community_Donation', [donation::class, 'index'])->name('Community_Donation');
 Route::POST('CommunityDonation', [donation::class, 'Community_Donation'])->name('CommunityDonation');
+
+// View Community_Donation
+Route::get('/View_Community_Donation',  [donation::class, 'View_Community_Donation']) -> name('View_Community_Donation');
 
 
 Route::get('General_Donation', [donation::class, 'General_Donation'])->name('General_Donation');

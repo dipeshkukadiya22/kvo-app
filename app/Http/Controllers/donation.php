@@ -153,6 +153,11 @@ class donation extends Controller
         //return view ('Donation.Community_Donation');
     }
 
+    // View Community_Donation
+    public function View_Community_Donation(){
+        return view('Donation.View_Community_Donation');
+    }
+
     public function General_Donation(){
         return view ('Donation.General_Donation');
     }
