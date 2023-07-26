@@ -342,7 +342,7 @@
                             
                             <div class="col-md-4">
                               <label class="form-label" for="basic-default-name">No. of Person</label>
-                              <input type="text" class="form-control"  name="no_of_person" id="no_of_person_id" placeholder="No of Person" />
+                              <input type="text" class="form-control"  name="no_of_person" id="no_of_person_id" placeholder="No of Person" min="1" max="10"/>
                             </div>
                             <!-- Datetime Picker-->
                             <div class="col-md-4">
@@ -428,12 +428,16 @@
                           <div class="content-header mb-3">
                             <small>Enter Member Details.</small>
                           </div>
+                          
                           <div class="row g-3">
                             <!-- Form Repeater -->
+                          
                             
                             <div id="step2FormsContainer "class="col-12">
+                              <form class="dynamic-form">
                               <div class="all-members" data-repeater-list="group-a">
                               <div data-repeater-item>
+                             
                                 <div class="row">
                                   <div class="mb-3 col-lg-6 col-xl-3 col-12 mb-0">
                                     <label class="form-label" for="form-repeater-1-1">Full Name</label>
@@ -479,10 +483,14 @@
                                     </button>
                                   </div>
                                 </div>
+                                 
                                 <hr />
                               </div>
-                            </div>
                               </div>
+                            </form>
+                            </div>
+                            <div id="dynamicFormsContainer">
+                            </div>
                             <div class="mb-0">
                               <button class="btn btn-primary" data-repeater-create>
                                 <i class="ti ti-plus me-1"></i>
@@ -880,9 +888,67 @@ $(document).ready(function () {
   });
 </script>
 
-
-
 <script>
+    $(document).ready(function() {
+        let numForms = 0; // Initialize to 0 initially
+
+        // Function to generate the form HTML
+        function generateForm() {
+            // The HTML structure for the form
+            const formHTML = `
+                <div class="row">
+                    <!-- Your form elements here -->
+                </div>
+            `;
+            return formHTML;
+        }
+
+        // Function to generate and insert the forms based on the input value
+        function generateForms(numForms) {
+            const formsContainer = $("#formsContainer");
+            formsContainer.empty(); // Clear any existing forms
+
+            for (let i = 0; i < numForms; i++) {
+                const formHTML = generateForm();
+                formsContainer.append(formHTML);
+            }
+        }
+
+        // Event delegation to handle the click event on the dynamically generated buttons
+        $(document).on("click", ".btn-next", function() {
+            // Do something when the "Next" button is clicked
+            // Access the form elements within the current step using the appropriate selectors
+
+            // Example: Get the value of the 'full_name_form' input within the current step
+            const fullName = $(this).closest(".row").find('input[name="full_name"]').val();
+            console.log("Full Name:", fullName);
+
+            // Example: Get the value of the 'member_age' input within the current step
+            const memberAge = $(this).closest(".row").find('input[name="m_age"]').val();
+            console.log("Member Age:", memberAge);
+
+            // Example: Get the value of the selected 'inlineRadioOptions' (gender) within the current step
+            const gender = $(this).closest(".row").find('input[name="inlineRadioOptions"]:checked').val();
+            console.log("Gender:", gender);
+
+            // Example: Get the value of the selected 'member_relation' (relation) within the current step
+            const relation = $(this).closest(".row").find('select[name="relation"]').val();
+            console.log("Relation:", relation);
+
+            // Move to the next step or perform any other logic you need
+            // currentStep++;
+            // ...
+        });
+
+        // Handle changes in the "no_of_person_id" input field to dynamically update the forms
+        $("#no_of_person_id").on("change", function() {
+            numForms = parseInt($(this).val());
+            generateForms(numForms);
+        });
+    });
+</script>
+
+<!-- <script>
   $(document).ready(function() {
     let currentStep = 1;
 
@@ -898,50 +964,41 @@ $(document).ready(function () {
       $('#member_rel').text(relation);
     });
   });
-</script>
+</script> -->
+
+
+
+
+
+
+
+
 <script>
   $(document).ready(function() {
-    let currentStep = 1;
-
-    $(".btn-next").on("click", function() {
-      if (currentStep === 1) {
-        const enteredNumbers = $('#no_of_person_id').val();
-        const numbersArray = enteredNumbers.split(',').map(number => number.trim());
-
-        if (numbersArray.length > 0) {
-          // Clear the container before adding new forms
-          $('#step2FormsContainer').empty();
-
-          // Generate and display forms based on the entered numbers
-          numbersArray.forEach((number, index) => {
-            const formHTML = `
-              <div class="step2-form row">
-                <div class="col-md-6 mb-3">
-                  <label class="form-label" for="full_name_${index}">Full Name</label>
-                  <input type="text" id="full_name_${index}" name="full_name_${index}" class="form-control" placeholder="john doe" value="" />
-                </div>
-                <div class="col-md-6 mb-3">
-                  <label class="form-label" for="member_age_${index}">Age</label>
-                  <input type="text" id="member_age_${index}" name="m_age_${index}" class="form-control" placeholder="your age" />
-                </div>
-                <!-- Add the rest of your form elements for each person -->
-              </div>
-            `;
-
-            // Append each form HTML to the container
-            $('#step2FormsContainer').append(formHTML);
-          });
-
-          // Move to the next step
-          currentStep++;
-        } else {
-          // Handle the case when no numbers are entered
-        }
+    $("#btn-next").click(function() {
+      let numForms = parseInt($("#no_of_person_id").val());
+      if (isNaN(numForms) || numForms <= 0) {
+        alert("Please enter a valid number greater than zero.");
+        return;
       }
-      // Add the code to handle other steps if necessary
+
+      // Clear previous forms if any
+      $("#dynamicFormsContainer").empty();
+
+      // Clone and show the form templates
+      for (let i = 0; i < numForms; i++) {
+        let formTemplate = $("#step2FormsContainer .dynamic-form").clone();
+        $("#dynamicFormsContainer").append(formTemplate);
+      }
+
+      // Display the forms container
+      $("#dynamicFormsContainer").show();
     });
   });
 </script>
+
+
+
 
 
 
