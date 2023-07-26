@@ -12,15 +12,17 @@ use Illuminate\Http\Request;
 class donation extends Controller
 {
     // Religious Donation
-    public function Religious_Donation_index(){
+    public function index1(){
 
         $m_name =(religious_donation::get()->last()->m_name);
         $p_details=religious_donation::with('member')->get();
         $m_data = add_members::all();
         $religious_donation_id = religious_donation::get() -> last() ->religious_donation_id;
         
-
+        
         return view ('Donation.Religious_Donation',['m_name' => $m_name, 'p_details' => $p_details, 'religious_donation_id' => $religious_donation_id, 'm_data' => $m_data]);
+
+        // return view ('Donation.Religious_Donation');
     }
 
     public function Religious_Donation(Request $req){
@@ -37,16 +39,15 @@ class donation extends Controller
         
         //Personal Details
         $religious_donation -> name = $req -> name;
-        //dd($req);
         $religious_donation -> haste = $req -> haste;
-        $religious_donation-> r_date = Carbon::now();
+        $religious_donation -> r_date = Carbon::now();
         $religious_donation -> phone_no = $req -> phone_no;
         $religious_donation -> city = $req -> city;
         $religious_donation -> community = $req -> community;
-        
         //Donation Details
         $religious_donation -> sarv_sadharan = $req -> sarv_sadharan;
         $religious_donation -> jiv_daya = $req -> jiv_daya;
+        //dd($req->jiv_daya);
         $religious_donation -> shadhu_shdhvi = $req -> shadhu_shdhvi;
         $religious_donation -> sadharmik = $req -> sadharmik;
         $religious_donation -> chaturmas = $req -> chaturmas;
@@ -64,9 +65,9 @@ class donation extends Controller
         $religious_donation -> total = $req -> total;
         $religious_donation -> total_in_word = $req -> total_in_word;
         $religious_donation -> payment_mode = $req -> basic_default_radio;
-
         $religious_donation -> save();
 
+        // return view ('Donation.Religious_Donation');
         if($religious_donation) { 
 
             return redirect() -> route('Religious_Donation') -> with ('message', 'Form submitted successfully!') -> with 
@@ -79,7 +80,6 @@ class donation extends Controller
             (['p_details'=>$p_details,'m_name'=>$m_name,'m_data'=>$m_data, 'data'=>$data, 'religious_donation_id' => $religious_donation_id ]);
 
         }
-
     }
 
 
@@ -91,7 +91,6 @@ class donation extends Controller
         $m_data = add_members::all();
         $donation_id = community_donation::get()->last()->donation_id;
         
-
         return view ('Donation.Community_Donation',['m_name' => $m_name, 'p_details' => $p_details, 'donation_id' => $donation_id, 'm_data' => $m_data]);
     }
     

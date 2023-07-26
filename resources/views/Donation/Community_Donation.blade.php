@@ -113,7 +113,7 @@
                               class="form-control"
                               id="basic-default-name"
                               name="donation_id"
-                              value="{{ $donation_id + 1 }}" 
+                              value="{{ $donation_id + 1 }}"  readonly
                                />
                           </div>
 
@@ -263,7 +263,7 @@
                                 <span class="input-group-text">₹</span>
                                 <input type="text" id="total" class="form-control" name="total" placeholder="Amount" aria-label="Amount (to the nearest dollar)" onkeypress="return onlyNumbers(event);" maxlength="9" required readonly>
                             </div>
-                        </div>
+                          </div>
                           {{-- <div id="divDisplayWords"> --}}
                           <div class="col-md-4">
                             <label class="form-label" for="basic-default-name">અંકે રૂપિયા</label>
@@ -274,7 +274,7 @@
                               name="total_in_word" 
                               value=""
                               {{-- placeholder="John Doe" --}}
-                              required />
+                              required readonly/>
                         	</div>
                           <div class="col-md-4">
                             <label class="d-block form-label">નાણા મળેલ</label>
@@ -361,6 +361,12 @@
     
     <!-- Page JS -->
     <script src="{{ asset ('assets/js/form-validation.js') }}"></script>
+
+    <!-- Vendors JS -->
+    <script src="{{ asset('assets/vendor/libs/toastr/toastr.js') }}"></script>
+
+    <!-- Page JS -->
+    <script src="{{ asset('assets/js/ui-toasts.js') }}"></script>
 
     <script>
         jQuery(document).ready(function($){
@@ -602,11 +608,7 @@ function NumToWord(inputNumber, outputControl) {
   });
 </script> --}}
 
-<!-- Vendors JS -->
-<script src="{{ asset('assets/vendor/libs/toastr/toastr.js') }}"></script>
 
-<!-- Page JS -->
-<script src="{{ asset('assets/js/ui-toasts.js') }}"></script>
 
 @if (Session::get('message'))
     <script>
