@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Barryvdh\DomPDF\Facade\Pdf;
+use DB;
 
 class pdfcontroller extends Controller
 {
@@ -32,7 +33,9 @@ class pdfcontroller extends Controller
 
     public function pdf_Expense_Receipt()
     {   
-    $pdf = Pdf::loadView('pdf.pdf_Expense_Receipt')->setPaper('a5', 'landscape')->setOptions(['defaultFont' => 'KAP119']);
+         $data=DB::select("SELECT * FROM Mahajan_Expense");
+    
+    $pdf = Pdf::loadView('pdf.pdf_Expense_Receipt',compact('data'))->setPaper('a5', 'landscape')->setOptions(['defaultFont' => 'KAP119']);
     return $pdf->stream();
     }
 
