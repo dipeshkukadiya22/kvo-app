@@ -82,3 +82,6 @@ Route::get('pdf_General_Donation',[pdfcontroller::class,'pdf_General_Donation'])
 Route::get('pdf_Expense_Receipt',[pdfcontroller::class,'pdf_Expense_Receipt'])->name('pdf_Expense_Receipt');
 Route::get('pdf_Religious_Expense_Receipt',[pdfcontroller::class,'pdf_Religious_Expense_Receipt'])->name('pdf_Religious_Expense_Receipt');
 Route::get('treatment',[medical::class,'treatment'])->name('treatment');
+Route::get('pdf_Checkout',[pdfcontroller::class,'pdf_Checkout'])->name('pdf_Checkout');
+Route::get('pdf_Advance_Deposit',[pdfcontroller::class,'pdf_Advance_Deposit'])->name('pdf_Advance_Deposit');
+Route::get('pdf_Checkin',[pdfcontroller::class,'pdf_Checkin'])->name('pdf_Checkin');
