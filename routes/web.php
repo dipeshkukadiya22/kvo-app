@@ -39,7 +39,12 @@ Route::get('/dashboard', [DashboardController::class, 'Dashboard'])->name('Dashb
 Route::get('/login', [AuthController::class, 'LoginUser'])->name('LoginUser');
 
 /* Room Booking Route */
-Route::get('/', [BookingController::class, 'RoomBooking'])->name('RoomBooking');
+
+Route::POST('RoomBooking', [BookingController::class, 'RoomBooking'])->name('RoomBooking');
+Route::get('room-booking', [BookingController::class, 'index']);
+Route::POST('room-booking', [BookingController::class, 'add_member'])->name('room-booking');
+
+
 
 
 /* Room list Route */
@@ -47,9 +52,20 @@ Route::get('/room-list', [BookingController::class, 'RoomList'])->name('RoomList
 
 /* View Members Route */
 Route::get('/view-members', [MembersController::class, 'ViewMembers'])->name('ViewMembers');
+Route::POST('/edit_members', [MembersController::class, 'edit_members'])->name('edit_members');
 
-Route::get('Religious_Donation', [donation::class, 'Religious_Donation'])->name('Religious_Donation');
-Route::get('Community_Donation', [donation::class, 'Community_Donation'])->name('Community_Donation');
+
+Route::get('Religious_Donation', [donation::class, 'index1'])->name('Religious_Donation');
+Route::POST('ReligiousDonation', [donation::class, 'Religious_Donation'])->name('ReligiousDonation');
+
+// Add Community_Donation
+Route::get('Community_Donation', [donation::class, 'index'])->name('Community_Donation');
+Route::POST('CommunityDonation', [donation::class, 'Community_Donation'])->name('CommunityDonation');
+
+// View Community_Donation
+Route::get('/View_Community_Donation',  [donation::class, 'View_Community_Donation']) -> name('View_Community_Donation');
+
+
 Route::get('General_Donation', [donation::class, 'General_Donation'])->name('General_Donation');
 Route::get('Expense_Receipt', [Expense::class, 'Expense_Receipt'])->name('Expense_Receipt');
 Route::get('General_Donation_Report', [donation::class, 'General_Donation_Report'])->name('General_Donation_Report');

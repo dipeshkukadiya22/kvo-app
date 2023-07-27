@@ -70,242 +70,105 @@
                   <div class="col-md mb-4 mb-md-0">
                     <div class="card">
                       <!-- Basic table -->
-                    <section id="basic-datatable">
-                        <div class="row">
-                            <div class="col-12">
-                                <div class="card">
-                                    <div class="card-datatable table-responsive pt-0">
-                                        <table id="DataTables_Table_0" class="datatables-basic table">
-                                          <thead>
-                                              <tr>
-                                                  <th></th>
-                                                  <th></th>
-                                                  <th>Full Name</th>
-                                                  <th>Email</th>
-                                                  <th>Phone Number</th>
-                                                  <th>City</th>
-                                                  <th>Address</th>
-                                                  <th>Action</th>
-                                              </tr>
-                                          </thead>
-                                          <tr>
+                      <section id="basic-datatable">
+                          <div class="row">
+                              <div class="col-12">
+                                  <div class="card">
+                                      <div class="card-datatable table-responsive pt-0">
+                                          <table id="DataTables_Table_0" class="datatables-basic table">
+                                            <thead>
+                                                <tr>
+                                                    <th></th>
+                                                    <th>No</th>
+                                                    <th>Full Name</th>
+                                                    <th>Email</th>
+                                                    <th>Phone Number</th>
+                                                    <th>City</th>
+                                                    <th>Address</th>
+                                                    <th>Action</th>
+                                                </tr>
+                                            </thead>
+                                           @foreach($data as $row)
+                                            <tr>
                                               <td></td>
-                                              <td>1</td>
-                                              <td>Dipesh K</td>
-                                              <td>dipesh@teque7.com</td>
-                                              <td>814124655</td>
-                                              <td>Bhuj</td>
-                                              <td>Jubilee Colony</td>
+                                              <td>{{$row->p_id}}</td>
+                                              <td>{{$row->m_name}}</td>
+                                              <td>{{$row->email}}</td>
+                                              <td>{{$row->phone_no}}</td>
+                                              <td>{{$row->city}}</td>
+                                              <td>{{$row->address}}</td>
+                                              
                                               <td>
-                                                  <div class="d-inline-block">
-                                                    <a href="javascript:;" class="btn btn-sm btn-icon item-edit" data-bs-toggle="offcanvas"
-                                                    data-bs-target="#offcanvasBackdrop" aria-controls="offcanvasBackdrop"><i class="text-primary ti ti-edit"></i></a>
-                                                    <a href="javascript:;" id="confirm-text" class="text-danger delete-record"><i class="ti ti-trash"></i></a>
-                                                  </div>
+                                                <div class="d-inline-block">
+                                                  <a href="" class="btn btn-sm btn-icon item-edit" data-bs-toggle="offcanvas"
+                                                  data-bs-target="#offcanvasBackdrop" aria-controls="offcanvasBackdrop"><i class="text-primary ti ti-edit"></i></a>
+                                                  <a href="javascript:;" id="confirm-text" class="text-danger delete-record"><i class="ti ti-trash"></i></a>
+                                                </div>
                                               </td>
-                                          </tr>
-                                          <tr>
-                                            <td></td>
-                                            <td>2</td>
-                                            <td>Jay</td>
-                                            <td>jay@teque7.com</td>
-                                            <td>814124655</td>
-                                            <td>Bhuj</td>
-                                            <td>Jubilee Colony</td>
-                                            <td>
-                                              <div class="d-inline-block">
-                                                <a href="javascript:;" class="btn btn-sm btn-icon item-edit" data-bs-toggle="offcanvas"
-                                                data-bs-target="#offcanvasBackdrop" aria-controls="offcanvasBackdrop"><i class="text-primary ti ti-edit"></i></a>
-                                                <a href="javascript:;" id="confirm-text" class="text-danger delete-record"><i class="ti ti-trash"></i></a>
-                                              </div>
-                                            </td>
-                                          </tr>
-                                          <tr>
-                                            <td></td>
-                                            <td>3</td>
-                                            <td>Karan </td>
-                                            <td>karan@teque7.com</td>
-                                            <td>814124655</td>
-                                            <td>Bhuj</td>
-                                            <td>Jubilee Colony</td>
-                                            <td>
-                                              <div class="d-inline-block">
-                                                <a href="javascript:;" class="btn btn-sm btn-icon item-edit" data-bs-toggle="offcanvas"
-                                                data-bs-target="#offcanvasBackdrop" aria-controls="offcanvasBackdrop"><i class="text-primary ti ti-edit"></i></a>
-                                                <a href="javascript:;" id="confirm-text" class="text-danger delete-record"><i class="ti ti-trash"></i></a>
-                                              </div>
-                                            </td>
-                                          </tr>
-                                          <tr>
-                                            <td></td>
-                                            <td>4</td>
-                                            <td>Sahal</td>
-                                            <td>sahal@teque7.com</td>
-                                            <td>814124655</td>
-                                            <td>Bhuj</td>
-                                            <td>Jubilee Colony</td>
-                                            <td>
-                                              <div class="d-inline-block">
-                                                <a href="javascript:;" class="btn btn-sm btn-icon item-edit" data-bs-toggle="offcanvas"
-                                                data-bs-target="#offcanvasBackdrop" aria-controls="offcanvasBackdrop"><i class="text-primary ti ti-edit"></i></a>
-                                                <a href="javascript:;" id="confirm-text" class="text-danger delete-record"><i class="ti ti-trash"></i></a>
-                                              </div>
-                                            </td>
-                                          </tr>
-                                          <tr>
-                                            <td></td>
-                                            <td>5</td>
-                                            <td>Junaid</td>
-                                            <td>junaid@teque7.com</td>
-                                            <td>814124655</td>
-                                            <td>Bhuj</td>
-                                            <td>Jubilee Colony</td>
-                                            <td>
-                                              <div class="d-inline-block">
-                                                <a href="javascript:;" class="btn btn-sm btn-icon item-edit" data-bs-toggle="offcanvas"
-                                                data-bs-target="#offcanvasBackdrop" aria-controls="offcanvasBackdrop"><i class="text-primary ti ti-edit"></i></a>
-                                                <a href="javascript:;" id="confirm-text" class="text-danger delete-record"><i class="ti ti-trash"></i></a>
-                                              </div>
-                                            </td>
-                                          </tr>
-                                          <tr>
-                                            <td></td>
-                                            <td>6</td>
-                                            <td>Junaid</td>
-                                            <td>junaid@teque7.com</td>
-                                            <td>814124655</td>
-                                            <td>Bhuj</td>
-                                            <td>Jubilee Colony</td>
-                                            <td>
-                                              <div class="d-inline-block">
-                                                <a href="javascript:;" class="btn btn-sm btn-icon item-edit" data-bs-toggle="offcanvas"
-                                                data-bs-target="#offcanvasBackdrop" aria-controls="offcanvasBackdrop"><i class="text-primary ti ti-edit"></i></a>
-                                                <a href="javascript:;" id="confirm-text" class="text-danger delete-record"><i class="ti ti-trash"></i></a>
-                                              </div>
-                                            </td>
-                                          </tr>
-                                          <tr>
-                                            <td></td>
-                                            <td>7</td>
-                                            <td>Junaid</td>
-                                            <td>junaid@teque7.com</td>
-                                            <td>814124655</td>
-                                            <td>Bhuj</td>
-                                            <td>Jubilee Colony</td>
-                                            <td>
-                                              <div class="d-inline-block">
-                                                <a href="javascript:;" class="btn btn-sm btn-icon item-edit" data-bs-toggle="offcanvas"
-                                                data-bs-target="#offcanvasBackdrop" aria-controls="offcanvasBackdrop"><i class="text-primary ti ti-edit"></i></a>
-                                                <a href="javascript:;" id="confirm-text" class="text-danger delete-record"><i class="ti ti-trash"></i></a>
-                                              </div>
-                                            </td>
-                                          </tr>
-                                          <tr>
-                                            <td></td>
-                                            <td>8</td>
-                                            <td>Junaid</td>
-                                            <td>junaid@teque7.com</td>
-                                            <td>814124655</td>
-                                            <td>Bhuj</td>
-                                            <td>Jubilee Colony</td>
-                                            <td>
-                                              <div class="d-inline-block">
-                                                <a href="javascript:;" class="btn btn-sm btn-icon item-edit" data-bs-toggle="offcanvas"
-                                                data-bs-target="#offcanvasBackdrop" aria-controls="offcanvasBackdrop"><i class="text-primary ti ti-edit"></i></a>
-                                                <a href="javascript:;" id="confirm-text" class="text-danger delete-record"><i class="ti ti-trash"></i></a>
-                                              </div>
-                                            </td>
-                                          </tr>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-
-                        <!-- Enable backdrop (default) Offcanvas -->
-                        <div class="mt-0">
-                          
-                          <div
-                            class="offcanvas offcanvas-end"
-                            tabindex="-1"
-                            id="offcanvasBackdrop"
-                            aria-labelledby="offcanvasBackdropLabel">
-                            <div class="offcanvas-header border-bottom">
-                              <h5 id="offcanvasBackdropLabel" class="offcanvas-title">New Member</h5>
-                              <button
-                                type="button"
-                                class="btn-close text-reset"
-                                data-bs-dismiss="offcanvas"
-                                aria-label="Close"></button>
-                            </div>
-                            <div class="offcanvas-body mx-0 flex-grow-0">
-
-                              <!-- Browser Default -->
-                              <form class="browser-default-validation">
-                                <div class="mb-3">
-                                  <label class="form-label" for="basic-default-name">Name</label>
-                                  <input
-                                    type="text"
-                                    class="form-control"
-                                    id="basic-default-name"
-                                    placeholder="John Doe"
-                                    />
-                                </div>
-                                <div class="mb-3">
-                                  <label class="form-label" for="basic-default-email">Email</label>
-                                  <input
-                                    type="email"
-                                    id="basic-default-email"
-                                    class="form-control"
-                                    placeholder="john.doe"
-                                    />
-                                </div>
-
-                                <div class="mb-3">
-                                  <label class="form-label" for="multicol-phone">Phone Number</label>
-                                  <input
-                                    type="number"
-                                    id="multicol-phone"
-                                    class="form-control phone-mask"
-                                    placeholder="658 799 8941"
-                                    aria-label="658 799 8941" />
-                                </div>
-                                <div class="mb-3">
-                                  <label class="form-label" for="city">City</label>
-                                  <input type="text" class="form-control" id="city" placeholder="Bhuj" />
-                                </div>
-      
-                                <div class="mb-3">
-                                  <label class="form-label" for="collapsible-address">Address</label>
-                                  <textarea
-                                    name="collapsible-address"
-                                    class="form-control"
-                                    id="collapsible-address"
-                                    rows="2"
-                                    placeholder="1456, Mall Road"></textarea>
-                                </div>
-                                
-                                <div class="row">
-                                  <div class="col-12">
-                                    <button type="button" class="btn btn-primary mb-2 d-grid w-100">Submit</button>
-                                    <button
-                                      type="button"
-                                      class="btn btn-label-secondary d-grid w-100"
-                                      data-bs-dismiss="offcanvas">
-                                      Cancel
-                                    </button>
+                                            </tr>
+                                          @endforeach
+                                          </table>
+                                      </div>
                                   </div>
-                                </div>
-                              </form>
-                              <!-- /Browser Default -->
+                              </div>
+                          </div>
 
-                              
+
+                          <!-- Enable backdrop (default) Offcanvas -->
+                          <div class="mt-0">
+                            
+                            <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasBackdrop" aria-labelledby="offcanvasBackdropLabel">
+                              <div class="offcanvas-header border-bottom">
+                                <h5 id="offcanvasBackdropLabel" class="offcanvas-title">New Member</h5>
+                                <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                              </div>
+                              <div class="offcanvas-body mx-0 flex-grow-0">
+
+                                <!-- Browser Default -->
+                                
+                                <form class="browser-default-validation" method="POST" action="">
+ 
+                                  @csrf
+                                  <div class="mb-3">
+                                    <label class="form-label" for="basic-default-name">Name</label>
+                                    <input type="text" class="form-control"  name="m_name" id="basic-default-name" placeholder="John Doe" value="{{ (!empty($member) )? $member->m_name : '' }}" />
+                                  </div>
+                                 
+                                
+                                  <div class="mb-3">
+                                    <label class="form-label" for="basic-default-email">Email</label>
+                                    <input type="email" id="basic-default-email" name="email" class="form-control" placeholder="john.doe" value="{{ (!empty($member) )? $member->email : '' }}"/>
+                                  </div>
+
+                                  <div class="mb-3">
+                                    <label class="form-label" for="multicol-phone">Phone Number</label>
+                                    <input type="number" id="multicol-phone" name="phone_no" class="form-control phone-mask" placeholder="658 799 8941" aria-label="658 799 8941" value="{{ (!empty($member) )? $member->phone_no : '' }}" />
+                                  </div>
+                                  <div class="mb-3">
+                                    <label class="form-label" for="city">City</label>
+                                    <input type="text" class="form-control" name="city" id="city" placeholder="Bhuj" {{ (!empty($member) )? $member->city : '' }} />
+                                  </div>
+        
+                                  <div class="mb-3">
+                                    <label class="form-label" for="collapsible-address">Address</label>
+                                    <textarea name="collapsible-address" name="address" class="form-control"  id="collapsible-address" rows="2" placeholder="1456, Mall Road">{{ (!empty($member) )? $member->address : '' }}</textarea>
+                                  </div>
+                                  
+                                  <div class="row">
+                                    <div class="col-12">
+                                      <button type="submit" class="btn btn-primary mb-2 d-grid w-100">Submit</button>
+                                      <button type="button" class="btn btn-label-secondary d-grid w-100" data-bs-dismiss="offcanvas"> Cancel </button>
+                                    </div>
+                                  </div>
+                                </form>
+                                <!-- /Browser Default -->
+
+                                
+                              </div>
                             </div>
                           </div>
-                        </div>
-                        
-                    </section>
+                          
+                      </section>
                      <!--/ Basic table -->
                   </div>
                 </div>
