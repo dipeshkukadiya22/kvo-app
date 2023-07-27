@@ -35,6 +35,7 @@
                         </div>
                     </div>
                 </div>
+                
                 <div class="content-header-right d-flex justify-content-end col-md-3 col-12">
                     <div class="form-group breadcrumb-right py-3">
                       <!-- Enable backdrop (default) Offcanvas -->
@@ -58,42 +59,47 @@
               </div>
               
               <div class="card mb-4">
-                <form class="card-body">  
+                <form class="card-body" id="add_treatment" method="post" action="{{route('add_treatment')}}">  
                   <div class="row g-3">
                   <div class="col-md-4">
+                  @csrf
                       <label class="form-label" for="multicol-phone">રશીદ નં </label>
-                      <input type="number" id="multicol-number" class="form-control phone-mask" placeholder="123.." aria-label="658 799 8941">
+                      <input type="number" id="sr_no" class="form-control phone-mask" value={{$rec_no+1}} readonly>
                     </div>
                     <div class="col-md-4">
                       <label class="form-label" for="multicol-username">દર્દીનું નામ </label>
-                      <input type="text" id="multicol-username" class="form-control" placeholder="Abc..">
+                      <select id="name" name="name" class="select2 form-select form-select-lg" data-allow-clear="true" >
+                        @foreach($member as $row)
+                          <option value="{{$row->p_id}}">{{$row->m_name}}</option>
+                        @endforeach
+                      </select>
                     </div>
                     <div class="col-md-4">
                       <label class="form-label" for="multicol-phone">દર્દીના મોબાઇલ નં </label>
-                      <input type="number" id="multicol-phone" class="form-control phone-mask" placeholder="658 799 8941" aria-label="658 799 8941">
+                      <input type="number" id="phone" class="form-control phone-mask" placeholder="658 799 8941" aria-label="658 799 8941" readonly>
                     </div>
                     <div class="col-md-4">
                       <label for="flatpickr-date" class="form-label">તારીખ </label>
-                      <input type="text" class="form-control" placeholder="DD-MM-YYYY" id="flatpickr-date" />
+                      <input type="date" class="form-control" placeholder="DD-MM-YYYY" id="date" name="date" />
                     </div>
                     <div class="col-md-4">
                       <label class="form-label" for="multicol-username">ડોક્ટરનું નામ </label>
-                      <input type="text" id="multicol-username" class="form-control" placeholder="Dr. Shah">
+                      <input type="text" id="doctor_name" name="doctor_name" class="form-control" placeholder="Dr. Shah" required>
                     </div>
                     <div class="col-md-4">
                       <label class="form-label" for="multicol-username">ગામનું નામ </label>
-                      <input type="text" id="multicol-username" class="form-control" placeholder="ex. bhuj">
+                      <input type="text" id="city" class="form-control" placeholder="ex. bhuj" readonly>
                     </div>
                     <div class="col-md-4">
                       <label class="form-label" for="collapsible-address">વિશેષ નોંધ </label>
-                      <textarea name="collapsible-remark" class="form-control" id="collapsible-remark" rows="1" placeholder="Hello,"></textarea>
+                      <textarea name="remark" class="form-control" id="remark" rows="1" placeholder="Hello,"></textarea>
                     </div>
                     <div class="col-md-4">
                       <label class="form-label" for="multicol-phone">રૂપિયા </label>
                       <div class="input-group">
                         <span class="input-group-text">₹</span>
-                        <input type="text" id="Text1" class="form-control" placeholder="Amount" aria-label="Amount (to the nearest dollar)"
-                          onkeypress="return onlyNumbers(this.value);" onkeyup="NumToWord(this.value,'ankers');" maxlength="9">
+                        <input type="text" id="amount" name="amount" class="form-control" placeholder="Amount" aria-label="Amount (to the nearest dollar)"
+                          onkeypress="return onlyNumbers(this.value);" onkeyup="NumToWord(this.value,'ankers');" maxlength="9" required>
                       </div>
                     </div>
                           {{-- <div id="divDisplayWords"> --}}
@@ -104,35 +110,24 @@
                     <div class="col-md-4">
                         <label class="d-block form-label">નાણા મળેલ</label>
                       <div class="form-check form-check-inline mb-2">
-                        <input type="radio" id="basic-default-radio-male" name="basic-default-radio" class="form-check-input" required />
+                        <input type="radio" id="cheque" name="basic-default-radio" class="form-check-input" />
                         <label class="form-check-label" for="basic-default-radio">ચેક </label>
                       </div>
                             <div class="form-check form-check-inline">
-                              <input
-                                type="radio"
-                                id="basic-default-radio-female"
-                                name="basic-default-radio"
-                                class="form-check-input"
-                                required />
+                              <input type="radio" id="draft" name="basic-default-radio" class="form-check-input"  />
                               <label class="form-check-label" for="basic-default-radio">ડ્રાફ્ટ </label>
                             </div>
                             <div class="form-check form-check-inline">
-                              <input
-                                type="radio"
-                                id="basic-default-radio-female"
-                                name="basic-default-radio"
-                                class="form-check-input"
-                                required />
+                              <input type="radio" id="cash" name="basic-default-radio" class="form-check-input" checked/>
                               <label class="form-check-label" for="basic-default-radio">રોકડા </label>
                             </div>
                             <div class="form-check form-check-inline">
-                              <input
-                                type="radio"
-                                id="basic-default-radio-female"
-                                name="basic-default-radio"
-                                class="form-check-input"
-                                required />
+                              <input type="radio" id="upi" name="basic-default-radio" class="form-check-input" />
                               <label class="form-check-label" for="basic-default-radio">UPI</label>
+                            </div>
+                            <div class="form-check form-check-inline" hidden>
+                              <input type="text" id="payment" name="payment" class="form-control" value="cash"/>
+                              <label class="form-check-label" for="basic-default-radio">payment</label>
                             </div>
                           </div>
                   </div>
@@ -162,6 +157,43 @@
 
 <script src="{{ asset('assets/js/forms-pickers.js') }}"></script>
 
+
+<script>
+  jQuery(document).ready(function($){
+    var currentDateTime = new Date();
+
+    $('#date').flatpickr({
+      enableTime: true,
+      dateFormat: "d-m-Y",
+      defaultDate: currentDateTime
+    });
+
+    $("#name").change(function(){
+      const id=document.getElementById("name").value;
+      $.ajax({
+        
+                url:"{{url('get')}}" +"/"+ id,
+                type:'GET',
+                  success:function(response){   
+                        $("#city").val(response['city']); 
+                        $("#phone").val(response['phone_no']); 
+                  }
+                });
+            });
+      $("#cash").change(function(){
+        document.getElementById("payment").value="cash";
+      });
+      $("#cheque").change(function(){
+        document.getElementById("payment").value="cheque";
+      });
+      $("#draft").change(function(){
+        document.getElementById("payment").value="draft";
+      });
+      $("#upi").change(function(){
+        document.getElementById("payment").value="upi";
+      });
+          });
+  </script>
 
 <!-- start num to word -->
 <script  type="text/javascript">
