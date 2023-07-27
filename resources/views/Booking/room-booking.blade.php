@@ -453,16 +453,16 @@
                                   <div class="mb-3 col-lg-6 col-xl-2 col-12 mb-0 ">
                                   
                                       <label class="d-block form-label">Gender</label>
-                                      <!-- ... your other HTML code ... -->
-<div class="form-check form-check-inline">
-    <input class="form-check-input" type="radio" name="gender_${i}" id="inlineRadio1_${i}" value="MALE" />
-    <label class="form-check-label" for="inlineRadio1_${i}">Male</label>
-</div>
-<div class="form-check form-check-inline">
-    <input class="form-check-input" type="radio" name="gender_${i}" id="inlineRadio2_${i}" value="FEMALE" />
-    <label class="form-check-label" for="inlineRadio2_${i}">Female</label>
-</div>
-<!-- ... your other HTML code ... -->
+                                    
+                                      <div class="form-check form-check-inline">
+                                          <input class="form-check-input" type="radio" name="gender_${i}" id="inlineRadio1_${i}" value="MALE" />
+                                          <label class="form-check-label" for="inlineRadio1_${i}">Male</label>
+                                      </div>
+                                      <div class="form-check form-check-inline">
+                                          <input class="form-check-input" type="radio" name="gender_${i}" id="inlineRadio2_${i}" value="FEMALE" />
+                                          <label class="form-check-label" for="inlineRadio2_${i}">Female</label>
+                                      </div>
+
 
                                   </div>
                                   <div class="col-md-4">
