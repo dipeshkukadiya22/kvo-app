@@ -22,7 +22,7 @@ class BookingController extends Controller
 
     public function RoomBooking(Request $req)
     {
-        //dd($req->toArray());
+        dd($req->toArray());
         $m_name =(personal_details::get()->last()->m_name);
         $p_details=personal_details::with('member')->get();
         $data = personal_details::find($req->p_id);
@@ -33,13 +33,19 @@ class BookingController extends Controller
         $details-> phone_no = $req->phone_no;
         $details-> age = $req->age;
         $details-> address = $req->collapsibleaddress;
-        // blade ma 
-        //dd($req->collapsibleaddress);
         $details-> community=$req->community;
         $details-> city=$req->city;
         $details-> gender=$req->inlineRadioOptions;
         $details->save(); 
-    
+        $total_member = $req->no_of_person +1;
+        for ($i =0; $i < $total_member; $i++){
+            $m_details = new member_details();
+            $m_details->full_name = $req->full_name[$i];
+            $m_details->age=$req->m_age[$i];
+            $m_details->gender=$req->inlineRadioOptions[$i];
+            $m_details->relation=$req->relation[$i];
+            $m_details->save();
+        }
         $booking = new room_details();
         $booking->no_of_person = $req->no_of_person;
         $booking->check_in_date = Carbon::now();
@@ -55,14 +61,11 @@ class BookingController extends Controller
     
         $m_details = new member_details();
         $m_details->full_name = $req->full_name;
-        
         $m_details->age=$req->m_age;
         $m_details->gender=$req->inlineRadioOptions;
         $m_details->relation=$req->relation;
-        //dd($req->m_age);
-        $m_details->save();
-        //$member_data = member_details::all();
-        //$m_data= DB::select("select * from member_details ORDER BY add_members.p_id DESC");
+        //$m_details->save();
+        
         return view ('Booking.room-booking',['m_data'=>$m_data,'data'=>$data,'p_details'=>$p_details,'m_name'=>$m_name,'m_data'=>$m_data]);
 
     }

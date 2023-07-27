@@ -416,7 +416,7 @@
                                 <span class="align-middle d-sm-inline-block d-none">Previous</span>
                               </button>
                               <div>
-                              <input type="button" onclick ="" class="btn btn-primary btn-next">
+                              <input type="button" id="repeat-next"  class="btn btn-primary btn-next" >
                                 <span class="align-middle d-sm-inline-block d-none me-sm-1">Next</span>
                                 <i class="ti ti-arrow-right"></i>
                               </div>
@@ -432,13 +432,14 @@
                           <div class="row g-3">
                             <!-- Form Repeater -->
                           
-                            
                             <div id="step2FormsContainer "class="col-12">
-                              <form class="dynamic-form">
+                              <div class="dynamic-form">
                               <div class="all-members" data-repeater-list="group-a">
                               <div data-repeater-item>
                              
-                                <div class="row">
+                             <div class="rep-form1">
+                          
+                                <div class="row formrepeater1">
                                   <div class="mb-3 col-lg-6 col-xl-3 col-12 mb-0">
                                     <label class="form-label" for="form-repeater-1-1">Full Name</label>
                                     <input type="text" id="full_name_form"  name="full_name" class="form-control" placeholder="john doe" value="{{ (!empty($member) )? $member->m_name : '' }}"/>
@@ -452,14 +453,17 @@
                                   <div class="mb-3 col-lg-6 col-xl-2 col-12 mb-0 ">
                                   
                                       <label class="d-block form-label">Gender</label>
-                                      <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="MALE" />
-                                        <label class="form-check-label" for="inlineRadio1">Male</label>
-                                      </div>
-                                      <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="FEMALE" />
-                                        <label class="form-check-label" for="inlineRadio2">Female</label>
-                                      </div>
+                                      <!-- ... your other HTML code ... -->
+<div class="form-check form-check-inline">
+    <input class="form-check-input" type="radio" name="gender_${i}" id="inlineRadio1_${i}" value="MALE" />
+    <label class="form-check-label" for="inlineRadio1_${i}">Male</label>
+</div>
+<div class="form-check form-check-inline">
+    <input class="form-check-input" type="radio" name="gender_${i}" id="inlineRadio2_${i}" value="FEMALE" />
+    <label class="form-check-label" for="inlineRadio2_${i}">Female</label>
+</div>
+<!-- ... your other HTML code ... -->
+
                                   </div>
                                   <div class="col-md-4">
                                     <label class="form-label" for="basic-default-country">Relation</label>
@@ -483,11 +487,13 @@
                                     </button>
                                   </div>
                                 </div>
-                                 
+                              </div>
+                              <div class="row rep-form">
+                              </div> 
                                 <hr />
                               </div>
                               </div>
-                            </form>
+                              </div>
                             </div>
                             <div id="dynamicFormsContainer">
                             </div>
@@ -603,6 +609,7 @@
                               <span class="align-middle d-sm-inline-block d-none">Previous</span>
                             </button>
                             <button type="submit" class="btn btn-success btn-submit">Submit</button>
+                            
                           </div>
                         </div>
                       </form>
@@ -888,67 +895,9 @@ $(document).ready(function () {
   });
 </script>
 
+
+
 <script>
-    $(document).ready(function() {
-        let numForms = 0; // Initialize to 0 initially
-
-        // Function to generate the form HTML
-        function generateForm() {
-            // The HTML structure for the form
-            const formHTML = `
-                <div class="row">
-                    <!-- Your form elements here -->
-                </div>
-            `;
-            return formHTML;
-        }
-
-        // Function to generate and insert the forms based on the input value
-        function generateForms(numForms) {
-            const formsContainer = $("#formsContainer");
-            formsContainer.empty(); // Clear any existing forms
-
-            for (let i = 0; i < numForms; i++) {
-                const formHTML = generateForm();
-                formsContainer.append(formHTML);
-            }
-        }
-
-        // Event delegation to handle the click event on the dynamically generated buttons
-        $(document).on("click", ".btn-next", function() {
-            // Do something when the "Next" button is clicked
-            // Access the form elements within the current step using the appropriate selectors
-
-            // Example: Get the value of the 'full_name_form' input within the current step
-            const fullName = $(this).closest(".row").find('input[name="full_name"]').val();
-            console.log("Full Name:", fullName);
-
-            // Example: Get the value of the 'member_age' input within the current step
-            const memberAge = $(this).closest(".row").find('input[name="m_age"]').val();
-            console.log("Member Age:", memberAge);
-
-            // Example: Get the value of the selected 'inlineRadioOptions' (gender) within the current step
-            const gender = $(this).closest(".row").find('input[name="inlineRadioOptions"]:checked').val();
-            console.log("Gender:", gender);
-
-            // Example: Get the value of the selected 'member_relation' (relation) within the current step
-            const relation = $(this).closest(".row").find('select[name="relation"]').val();
-            console.log("Relation:", relation);
-
-            // Move to the next step or perform any other logic you need
-            // currentStep++;
-            // ...
-        });
-
-        // Handle changes in the "no_of_person_id" input field to dynamically update the forms
-        $("#no_of_person_id").on("change", function() {
-            numForms = parseInt($(this).val());
-            generateForms(numForms);
-        });
-    });
-</script>
-
-<!-- <script>
   $(document).ready(function() {
     let currentStep = 1;
 
@@ -964,18 +913,12 @@ $(document).ready(function () {
       $('#member_rel').text(relation);
     });
   });
-</script> -->
-
-
-
-
-
-
-
+</script> 
 
 <script>
   $(document).ready(function() {
-    $("#btn-next").click(function() {
+    $("#repeat-next").click(function() {
+      console.log("click");
       let numForms = parseInt($("#no_of_person_id").val());
       if (isNaN(numForms) || numForms <= 0) {
         alert("Please enter a valid number greater than zero.");
@@ -983,16 +926,75 @@ $(document).ready(function () {
       }
 
       // Clear previous forms if any
-      $("#dynamicFormsContainer").empty();
+      $(".rep-form").empty();
 
       // Clone and show the form templates
+      //console.log('form:'.$('.reo-form').children());
       for (let i = 0; i < numForms; i++) {
-        let formTemplate = $("#step2FormsContainer .dynamic-form").clone();
-        $("#dynamicFormsContainer").append(formTemplate);
+        let formTemplate = $(".rep-form .formrepeater").clone();
+        $(".rep-form").append(
+        
+          '<div class="row formrepeater">'+
+                                 ' <div class="mb-3 col-lg-6 col-xl-3 col-12 mb-0">'+
+                                   ' <label class="form-label" for="form-repeater-1-1">Full Name</label>'+
+                                   ' <input type="text" id="full_name_form"  name="full_name" class="form-control" placeholder="john doe" value="{{ (!empty($member) )? $member->m_name : '' }}"/>'+
+                                 ' </div>'+
+                                 ' <div class="mb-3 col-lg-6 col-xl-3 col-12 mb-0">'+
+                                  '  <label class="form-label" for="form-repeater-1-2">Age</label>'+
+                                  '  <input type="text" id="member_age" name="m_age" class="form-control" placeholder="your age" />'+
+                                '  </div>'+
+                                  
+                                  
+                                '  <div class="mb-3 col-lg-6 col-xl-2 col-12 mb-0 ">'+
+                                  
+                                     ' <label class="d-block form-label">Gender</label>'+
+                                     ' <div class="form-check form-check-inline">'+
+                                       ' <input class="form-check-input" type="radio" name="gender_' + i + '" id="inlineRadio1_' + i + '" value="MALE" />'+
+                                       ' <label class="form-check-label" for="inlineRadio1_' + i + '">Male</label>'+
+                                     ' </div>'+
+                                     ' <div class="form-check form-check-inline">'+
+                                      '  <input class="form-check-input" type="radio" name="gender_' + i + '" id="inlineRadio2_' + i + '" value="FEMALE" />'+
+                                      '  <label class="form-check-label" for="inlineRadio2_' + i + '">Female</label>'+
+                                    '  </div>'+
+                                '  </div>'+
+                                 ' <div class="col-md-4">'+
+                                  '  <label class="form-label" for="basic-default-country">Relation</label>'+
+                                  '  <select class="form-select" name="relation[]" id="member_relation" required>'+
+                                   '   <option value="SELF" selected>SELF</option>'+
+                                    '  <option value="MOTHER">MOTHER</option>'+
+                                    '  <option value="FATHER">FATHER</option>'+
+                                    '  <option value="BROTHER">BROTHER</option>'+
+                                    '  <option value="SISTER">SISTER</option>'+
+                                    '  <option value="UNCLE">UNCLE</option>'+
+                                    '  <option value="AUNTY">AUNTY</option>'+
+                                    '  <option value="GRAND MOTHER">GRAND MOTHER</option>'+
+                                    '  <option value="GRAND FATHER">GRAND FATHER</option>'+
+                                    '  <option value="FRIEND">FRIEND</option>'+
+                                  '  </select>'+
+                                 ' </div>'+
+                                 ' <div class="mb-3 col-lg-12 col-xl-2 col-12 d-flex align-items-center mb-0">'+
+                                  '  <button class="btn btn-label-danger mt-4" data-repeater-delete>'+
+                                   '   <i class="ti ti-x ti-xs me-1"></i>'+
+                                   '   <span class="align-middle">Delete</span>'+
+                                  '  </button>'+
+                                  '</div>'+
+                               ' </div>'
+        );
       }
 
       // Display the forms container
-      $("#dynamicFormsContainer").show();
+      $(".rep-form").show();
+    });
+  });
+</script>
+<script>
+$(document).ready(function() {
+    $(".btn-submit").click(function() {
+      //console.log("click");
+      
+        alert("submited............");
+      
+      
     });
   });
 </script>
@@ -1010,30 +1012,6 @@ $(document).ready(function () {
 
 
 
-
-
-
-<script>
-  $(document).ready(function() {
-    $("#multicol-phone").on("input", function() {
-      let value = $(this).val();
-      // Remove any non-numeric characters from the input
-      value = value.replace(/\D/g, "");
-      
-      // Enforce the maximum length
-      if (value.length > 10) {
-        value = value.slice(0, 10);
-      }
-      
-      // Enforce the minimum length
-      while (value.length < 10) {
-        value = "0" + value
-      }
-
-    });
-  });
-
-<script>
 
 
 
