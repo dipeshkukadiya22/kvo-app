@@ -458,7 +458,7 @@
                                 <span class="align-middle d-sm-inline-block d-none me-sm-1">Next</span>
                                 <i class="ti ti-arrow-right"></i>
                               </div> --}}
-                              <button type="button" class="btn btn-primary btn-next">
+                              <button type="button"class="btn btn-primary btn-next"  id="repeat-next">
                                 <span class="align-middle d-sm-inline-block d-none me-sm-1">Next</span>
                                 <i class="ti ti-arrow-right"></i>
                               </button>
@@ -484,11 +484,11 @@
                                 <div class="row formrepeater1">
                                   <div class="mb-3 col-lg-6 col-xl-3 col-12 mb-0">
                                     <label class="form-label" for="form-repeater-1-1">Full Name</label>
-                                    <input type="text" id="full_name_form"  name="full_name" class="form-control" placeholder="john doe" value="{{ (!empty($member) )? $member->m_name : '' }}"/>
+                                    <input type="text" id="full_name_form"  name="full_name[]" class="form-control" placeholder="john doe" value="{{ (!empty($member) )? $member->m_name : '' }}"/>
                                   </div>
                                   <div class="mb-3 col-lg-6 col-xl-3 col-12 mb-0">
                                     <label class="form-label" for="form-repeater-1-2">Age</label>
-                                    <input type="text" id="member_age" name="m_age" class="form-control" placeholder="your age" />
+                                    <input type="text" id="member_age" name="m_age[]" class="form-control" placeholder="your age" />
                                   </div>
                                   
                                   
@@ -497,11 +497,11 @@
                                       <label class="d-block form-label">Gender</label>
                                     
                                       <div class="form-check form-check-inline">
-                                          <input class="form-check-input" type="radio" name="gender_${i}" id="inlineRadio1_${i}" value="MALE" />
+                                          <input class="form-check-input" type="radio" name="gender[]" id="inlineRadio1_${i}" value="MALE" />
                                           <label class="form-check-label" for="inlineRadio1_${i}">Male</label>
                                       </div>
                                       <div class="form-check form-check-inline">
-                                          <input class="form-check-input" type="radio" name="gender_${i}" id="inlineRadio2_${i}" value="FEMALE" />
+                                          <input class="form-check-input" type="radio" name="gender[]" id="inlineRadio2_${i}" value="FEMALE" />
                                           <label class="form-check-label" for="inlineRadio2_${i}">Female</label>
                                       </div>
 
@@ -509,7 +509,7 @@
                                   </div>
                                   <div class="col-md-4">
                                     <label class="form-label" for="basic-default-country">Relation</label>
-                                    <select class="form-select" name="relation" id="member_relation" required>
+                                    <select class="form-select" name="relation[]" id="member_relation" required>
                                       <option value="SELF" selected>SELF</option>
                                       <option value="MOTHER">MOTHER</option>
                                       <option value="FATHER">FATHER</option>
@@ -615,14 +615,16 @@
                                   </thead>
                                   <tbody>
                                    
-                                    <tr>
-                                      <td></td>
-                                      <td id="member_full_name"></td>
-                                      <td id="members_age"></td>
-                                      <td id="member_gen"></td>
-                                      <td id="member_rel"></td>
-                                     
-                                    </tr>
+                                 
+                                      <tr>
+                                        <td></td>
+                                        <td id="member_full_name"></td>
+                                        <td id="members_age"></td>
+                                        <td id="member_gen"></td>
+                                        <td id="member_rel"></td>
+                                      
+                                      </tr>
+                                    
                                   
                                                                        
                                     <!-- <tr>
@@ -1057,8 +1059,9 @@ $(document).ready(function () {
       $('#member_rel').text(relation);
     });
   });
-</script> 
+  </script>
 
+ 
 <script>
   $(document).ready(function() {
     $("#repeat-next").click(function() {
@@ -1081,11 +1084,11 @@ $(document).ready(function () {
           '<div class="row formrepeater">'+
                                  ' <div class="mb-3 col-lg-6 col-xl-3 col-12 mb-0">'+
                                    ' <label class="form-label" for="form-repeater-1-1">Full Name</label>'+
-                                   ' <input type="text" id="full_name_form"  name="full_name" class="form-control" placeholder="john doe" value="{{ (!empty($member) )? $member->m_name : '' }}"/>'+
+                                   ' <input type="text" id="full_name_form"  name="full_name[]" class="form-control" placeholder="john doe" value="{{ (!empty($member) )? $member->m_name : '' }}"/>'+
                                  ' </div>'+
                                  ' <div class="mb-3 col-lg-6 col-xl-3 col-12 mb-0">'+
                                   '  <label class="form-label" for="form-repeater-1-2">Age</label>'+
-                                  '  <input type="text" id="member_age" name="m_age" class="form-control" placeholder="your age" />'+
+                                  '  <input type="text" id="member_age" name="m_age[]" class="form-control" placeholder="your age" />'+
                                 '  </div>'+
                                   
                                   
@@ -1093,11 +1096,11 @@ $(document).ready(function () {
                                   
                                      ' <label class="d-block form-label">Gender</label>'+
                                      ' <div class="form-check form-check-inline">'+
-                                       ' <input class="form-check-input" type="radio" name="gender_' + i + '" id="inlineRadio1_' + i + '" value="MALE" />'+
+                                       ' <input class="form-check-input" type="radio" name="gender[]' + i + '" id="inlineRadio1_' + i + '" value="MALE" />'+
                                        ' <label class="form-check-label" for="inlineRadio1_' + i + '">Male</label>'+
                                      ' </div>'+
                                      ' <div class="form-check form-check-inline">'+
-                                      '  <input class="form-check-input" type="radio" name="gender_' + i + '" id="inlineRadio2_' + i + '" value="FEMALE" />'+
+                                      '  <input class="form-check-input" type="radio" name="gender[]' + i + '" id="inlineRadio2_' + i + '" value="FEMALE" />'+
                                       '  <label class="form-check-label" for="inlineRadio2_' + i + '">Female</label>'+
                                     '  </div>'+
                                 '  </div>'+
@@ -1131,6 +1134,7 @@ $(document).ready(function () {
     });
   });
 </script>
+
 <script>
 $(document).ready(function() {
     $(".btn-submit").click(function() {
