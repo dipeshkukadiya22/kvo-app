@@ -80,13 +80,7 @@
                           <ul class="nav nav-pills mb-3 me-2" role="tablist">
                             <li class="nav-item">
                               <button
-                                type="button"
-                                class="nav-link active"
-                                role="tab"
-                                data-bs-toggle="tab"
-                                data-bs-target="#navs-pills-top-allroom"
-                                aria-controls="navs-pills-top-allroom"
-                                aria-selected="true">
+                                type="button" class="nav-link active" role="tab" data-bs-toggle="tab" data-bs-target="#navs-pills-top-allroom" aria-controls="navs-pills-top-allroom" aria-selected="true">
                                 All Rooms (<span id="allRoomsCount">0</span>)
                               </button>
                             </li>
@@ -154,37 +148,37 @@
                               <div class="offcanvas-body mx-0 flex-grow-0">
     
                                 <!-- Browser Default -->
-                                <form class="browser-default-validation">
+                                <form class="browser-default-validation" method="POST" action="{{route('RoomList')}}">
+                                @csrf
                                   <div class="mb-3">
                                     <label class="form-label" for="basic-default-name">Room Name</label>
-                                    <input
-                                      type="text"
-                                      class="form-control"
-                                      id="basic-default-name"
-                                      placeholder="Deluxe"
-                                       />
+                                    <input type="text" class="form-control" name="room_name" id="basic-default-name" placeholder="Deluxe"/>
                                   </div>
                                   <div class="mb-3">
                                     <label for="exampleFormControlSelect1" class="form-label">Room Type</label>
-                                    <select class="form-select" id="exampleFormControlSelect1" aria-label="Default select example">
+                                    <select class="form-select" name="room_type" id="exampleFormControlSelect1" aria-label="Default select example">
                                       <option selected>Select Room Type</option>
-                                      <option value="1">Single Bed</option>
-                                      <option value="2">Double Bed</option>
+                                      
+                                      <option value="1">Double Bed</option>
+                                      <option value="2">3 Bed</option>
+                                      <option value="3">4 Bed</option>
                                     </select>
                                   </div>
       
                                    <div class="mb-3">
                                     <label for="exampleFormControlSelect1" class="form-label">Room Facility</label>
-                                    <select class="form-select" id="exampleFormControlSelect2" aria-label="Default select example">
+                                    <select class="form-select" name="room_facility" id="exampleFormControlSelect2" aria-label="Default select example">
                                       <option selected>Select Room</option>
-                                      <option value="1">A.C. Room</option>
-                                      <option value="2">Non A.C Room</option>
+                                      <option value="1">A.C. ROOM</option>
+                                      <option value="2">NON A.C ROOM</option>
+                                      <option value="3">DOOR METRI A.C ROOM</option>
+                                      <option value="3">DOOR METRI NON A.C ROOM</option>
                                     </select>
                                   </div>
 
                                    <div class="row">
                                     <div class="col-12">
-                                      <button type="button" class="btn btn-primary mb-2 d-grid w-100">Submit</button>
+                                      <button type="submit" class="btn btn-primary mb-2 d-grid w-100">Submit</button>
                                       <button
                                         type="button"
                                         class="btn btn-label-secondary d-grid w-100"
@@ -219,7 +213,7 @@
                                       <thead>
                                         <tr>
                                           <th></th>
-                                          <th></th>
+                                          <th>Room No</th>
                                           <th>Room Name</th>
                                           <th>Room Type</th>
                                           <th>Room Facility</th>
@@ -228,26 +222,14 @@
                                         </tr>
                                       </thead>
                                       <tbody>
+                                      @foreach($list as $row)
                                         <tr>
-                                          <td></td>
-                                          <td></td>
-                                          <td>Deluxe #B-0004</td>
-                                          <td>Double Bed</td>
-                                          <td>A.C. Room</td>
-                                          <td><span class="badge bg-label-primary">Available</span></td>
-                                          <td>
-                                            <div class="d-inline-block">
-                                              <a href="javascript:;" class="btn btn-sm btn-icon item-edit" data-bs-toggle="offcanvas" data-bs-target="#offcanvasBackdropEditRoom" aria-controls="offcanvasBackdrop"><i class="text-primary ti ti-edit"></i></a>
-                                              <a href="javascript:;" id="confirm-text" class="text-danger delete-record"><i class="ti ti-trash "></i></a>
-                                            </div>
-                                          </td>
-                                        </tr>
-                                        <tr>
-                                          <td></td>
-                                          <td></td>
-                                          <td>Deluxe #B-0005</td>
-                                          <td>Single Bed</td>
-                                          <td>Non A.C. Room</td>
+                                        <td></td>
+                                        <td>{{$row->room_no}}</td>
+                                        <td>{{$row->room_name}}</td>
+                                        <td>{{$row->room_type}}</td>
+                                        <td>{{$row->room_facility}}</td>
+                                        
                                           <td>
                                             <div class="badge bg-label-success mb-2">Booked</div>
                                             <div class="badge bg-label-primary booked-date "><i class="text-primary me-2 ti ti-calendar"></i> June 15, 2023 to June 20, 2023</div>
@@ -259,6 +241,7 @@
                                             </div>
                                           </td>
                                         </tr>
+                                        @endforeach
                                       </tbody>
                                     </table>
                                   </div>
