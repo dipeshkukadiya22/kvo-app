@@ -234,7 +234,7 @@
                               <!-- Basic -->
                              <div class="col-md-4">
                                 <label for="select2Basic" class="form-label" >Name</label>
-                                <select id="select2Basic" class="select2 form-select form-select-lg" data-allow-clear="true" name="name" placeholder="select name" required>
+                                <select id="select2Basic" class="select2 form-select" data-allow-clear="true" name="name" placeholder="select name" required>
                                   <option value=""></option>
                                   @foreach ($m_data as $row)  
                                       <option value="{{$row->p_id}}" {{(!empty($member) && $member->m_name == $row->m_name) ? "selected" : ""}}>{{$row->m_name}}&nbsp;&nbsp;-&nbsp;&nbsp;{{$row->phone_no}}</option>
@@ -323,11 +323,16 @@
                                 <i class="ti ti-arrow-left me-sm-1"></i>
                                 <span class="align-middle d-sm-inline-block d-none">Previous</span>
                               </button> --}}
-                              <div>
+                              {{-- <div>
                               <input type="button" class="btn btn-primary btn-next">
                                 <span class="align-middle d-sm-inline-block d-none me-sm-1">Next</span>
                                 <i class="ti ti-arrow-right"></i>
-                              </div>
+                              </div> --}}
+
+                              <button type="button" class="btn btn-primary btn-next">
+                                <span class="align-middle d-sm-inline-block d-none me-sm-1">Next</span>
+                                <i class="ti ti-arrow-right"></i>
+                              </button>
                               
                              
                             </div>
@@ -340,21 +345,13 @@
                           </div>
                           <div class="row g-3">
                             
-                            <div class="col-md-4">
-                              <label class="form-label" for="basic-default-name">No. of Person</label>
-                              <input type="text" class="form-control"  name="no_of_person" id="no_of_person_id" placeholder="No of Person" min="1" max="10"/>
-                            </div>
-                            <!-- Datetime Picker-->
-                            <div class="col-md-4">
-                              <label for="flatpickr-datetime" class="form-label">Check-In Date</label>
-                              <input type="text" class="form-control" name="check_in_date" placeholder="DD-MM-YYYY HH:MM" id="flatpickr-datetime" />
-                            </div>
+                           
                             <!-- /Datetime Picker-->
                             
                             
 
                               <!-- Primary -->
-                            <div class="col-md-4">
+                            {{-- <div class="col-md-4">
                               <label for="select3Primary" class="form-label">Room Facility</label>
                               <div class="select2-primary">
                                 <select id="select3Primary1" name="room_list" class="select2 form-select" multiple>
@@ -364,28 +361,69 @@
                                     <option value="Door Metri. Room No" name="room_facility">Door Metri. Room.</option>
                                 </select>
                               </div>
-                            </div>
+                            </div> --}}
 
 
                             <!-- Primary -->
-                         
+
                             
-                            <!-- Custom Suggestions: List -->
+                            <div class="row g-3 mb-3">
+
+                              <!-- Custom Suggestions: List -->
+                                <div class="col-md-2">
+                                  <label for="TagifyCustomListSuggestion" class="form-label">A.C. Room.</label>
+                                  <input id="TagifyCustomListSuggestion" name="TagifyCustomListSuggestion" class="form-control" placeholder="Select Roomlist" />
+                                </div>
+
+                                <div class="col-md-2">
+                                  <label class="form-label" for="basic-default-name">Amount</label>
+                                  <div class="input-group">
+                                    <span class="input-group-text">₹</span>
+                                    <input type="number" class="form-control"  name="amount" placeholder="Amount" aria-label="Amount (to the nearest indian)" id="r_amount" value="800" />
+                                  </div>
+                                </div>
+
+
+                                <div class="col-md-2">
+                                  <label for="TagifyCustomListSuggestion1" class="form-label">Non. A.C. Room</label>
+                                  <input id="TagifyCustomListSuggestion1" name="TagifyCustomListSuggestion1" class="form-control" placeholder="Select Roomlist" />
+                                </div>
+
+                                <div class="col-md-2">
+                                  <label class="form-label" for="basic-default-name">Amount</label>
+                                  <div class="input-group">
+                                    <span class="input-group-text">₹</span>
+                                    <input type="number" class="form-control"  name="amount" placeholder="Amount" aria-label="Amount (to the nearest indian)" id="r_amount" value="800" />
+                                  </div>
+                                </div>
+
+                                <div class="col-md-2">
+                                  <label for="TagifyCustomListSuggestion2" class="form-label">Door Metri. A.C. / Non. A.C. Room </label>
+                                  <input id="TagifyCustomListSuggestion2" name="TagifyCustomListSuggestion2" class="form-control" placeholder="Select Roomlist" />
+                                </div>
+
+                                <div class="col-md-2">
+                                  <label class="form-label" for="basic-default-name">Amount</label>
+                                  <div class="input-group">
+                                    <span class="input-group-text">₹</span>
+                                    <input type="number" class="form-control"  name="amount" placeholder="Amount" aria-label="Amount (to the nearest indian)" id="r_amount" value="800" />
+                                  </div>
+                                </div>
+  
+                            </div>
+                         
+                            <hr>
+                            
                             <div class="col-md-4">
-                              <label for="TagifyCustomListSuggestion" class="form-label">Room List</label>
-                              <input id="TagifyCustomListSuggestion" name="TagifyCustomListSuggestion" class="form-control" placeholder="Select Roomlist" />
+                              <label class="form-label" for="basic-default-name">No. of Person</label>
+                              <input type="text" class="form-control"  name="no_of_person" id="no_of_person_id" placeholder="No of Person" min="1" max="10"/>
+                            </div>
+                            <!-- Datetime Picker-->
+                            <div class="col-md-4">
+                              <label for="flatpickr-datetime" class="form-label">Check-In Date</label>
+                              <input type="text" class="form-control" name="check_in_date" placeholder="DD-MM-YYYY HH:MM" id="flatpickr-datetime" />
                             </div>
 
-                            <div class="col-md-4">
-                              <label class="form-label" for="basic-default-name">Amount</label>
-                              <div class="input-group">
-                                <span class="input-group-text">₹</span>
-                                <input type="number" class="form-control"  name="amount" placeholder="Amount" aria-label="Amount (to the nearest indian)" id="r_amount" value="800" />
-                              </div>
-                            </div>
-  
-                           
-  
                             <div class="col-md-4">
                               <label for="formFileMultiple" class="form-label">Identity Proof</label>
                               <input class="form-control" type="file" name="id_proof" id="formFileMultiple" multiple />
@@ -415,11 +453,15 @@
                                 <i class="ti ti-arrow-left me-sm-1"></i>
                                 <span class="align-middle d-sm-inline-block d-none">Previous</span>
                               </button>
-                              <div>
+                              {{-- <div>
                               <input type="button" id="repeat-next"  class="btn btn-primary btn-next" >
                                 <span class="align-middle d-sm-inline-block d-none me-sm-1">Next</span>
                                 <i class="ti ti-arrow-right"></i>
-                              </div>
+                              </div> --}}
+                              <button type="button" class="btn btn-primary btn-next">
+                                <span class="align-middle d-sm-inline-block d-none me-sm-1">Next</span>
+                                <i class="ti ti-arrow-right"></i>
+                              </button>
                             </div>
                           </div>
                         </div>
@@ -510,11 +552,15 @@
                                 <i class="ti ti-arrow-left me-sm-1"></i>
                                 <span class="align-middle d-sm-inline-block d-none">Previous</span>
                               </button>
-                              <div>
+                              {{-- <div>
                                 <input type="button"  class="btn btn-primary btn-next">
                                 <span class="align-middle d-sm-inline-block d-none me-sm-1">Next</span>
                                 <i class="ti ti-arrow-right"></i>
-                              </div>
+                              </div> --}}
+                              <button type="button" class="btn btn-primary btn-next">
+                                <span class="align-middle d-sm-inline-block d-none me-sm-1">Next</span>
+                                <i class="ti ti-arrow-right"></i>
+                              </button>
                             </div>
                           </div>
                         </div>
@@ -534,10 +580,10 @@
                                     <table>
                                       <tbody>
                                         
-                                        <tr>
+                                        {{-- <tr>
                                           <td class="pe-4">Room Facility</td>
                                           <td id="room_faci"></td>
-                                        </tr>
+                                        </tr> --}}
                                         <tr>
                                           <td class="pe-4">Room Name:</td>
                                           <td id="room_lst"></td>
@@ -788,13 +834,11 @@ $(document).ready(function () {
   const TagifyCustomListSuggestionEl = document.querySelector('#TagifyCustomListSuggestion');
 
   const whitelist = [
-    'Room 1',
-    'Room 2',
-    'Room 3',
-    'Room 4',
-    'Room 5',
-    'Room 6',
-    'Room 7'
+    '301 2BAC',
+    '302 2BAC',
+    '303 2BAC',
+    '304 2BAC'
+    
   ];
   // Inline
   let TagifyCustomInlineSuggestion = new Tagify(TagifyCustomInlineSuggestionEl, {
@@ -822,6 +866,106 @@ $(document).ready(function () {
 
 })();
 
+
+(function () {
+  // Basic
+  //------------------------------------------------------
+  const tagifyBasicEl = document.querySelector('#TagifyBasic');
+  const TagifyBasic = new Tagify(tagifyBasicEl);
+
+  // Read only
+  //------------------------------------------------------
+  const tagifyReadonlyEl = document.querySelector('#TagifyReadonly');
+  const TagifyReadonly = new Tagify(tagifyReadonlyEl);
+
+  // Custom list & inline suggestion
+  //------------------------------------------------------
+  const TagifyCustomInlineSuggestionEl = document.querySelector('#TagifyCustomInlineSuggestion1');
+  const TagifyCustomListSuggestionEl = document.querySelector('#TagifyCustomListSuggestion1');
+
+  const whitelist = [
+    '201 2BNAC',
+    '202 2BNAC',
+    '203 3BNAC',
+    '204 4BNAC'
+    
+  ];
+  // Inline
+  let TagifyCustomInlineSuggestion = new Tagify(TagifyCustomInlineSuggestionEl, {
+    whitelist: whitelist,
+    maxTags: 10,
+    dropdown: {
+      maxItems: 20,
+      classname: 'tags-inline',
+      enabled: 0,
+      closeOnSelect: false
+    }
+  });
+  // List
+  let TagifyCustomListSuggestion1 = new Tagify(TagifyCustomListSuggestionEl, {
+    whitelist: whitelist,
+    maxTags: 10,
+    dropdown: {
+      maxItems: 20,
+      classname: '',
+      enabled: 0,
+      closeOnSelect: false
+    }
+  });
+
+
+})();
+
+
+(function () {
+  // Basic
+  //------------------------------------------------------
+  const tagifyBasicEl = document.querySelector('#TagifyBasic');
+  const TagifyBasic = new Tagify(tagifyBasicEl);
+
+  // Read only
+  //------------------------------------------------------
+  const tagifyReadonlyEl = document.querySelector('#TagifyReadonly');
+  const TagifyReadonly = new Tagify(tagifyReadonlyEl);
+
+  // Custom list & inline suggestion
+  //------------------------------------------------------
+  const TagifyCustomInlineSuggestionEl = document.querySelector('#TagifyCustomInlineSuggestion2');
+  const TagifyCustomListSuggestionEl = document.querySelector('#TagifyCustomListSuggestion2');
+
+  const whitelist = [
+    '1 DMNAC',
+    '2 DMNAC',
+    '3 DMNAC',
+    '4 DMAC',
+    '5 DMAC',
+    '6 DMAC'
+  ];
+  // Inline
+  let TagifyCustomInlineSuggestion = new Tagify(TagifyCustomInlineSuggestionEl, {
+    whitelist: whitelist,
+    maxTags: 10,
+    dropdown: {
+      maxItems: 20,
+      classname: 'tags-inline',
+      enabled: 0,
+      closeOnSelect: false
+    }
+  });
+  // List
+  let TagifyCustomListSuggestion2 = new Tagify(TagifyCustomListSuggestionEl, {
+    whitelist: whitelist,
+    maxTags: 10,
+    dropdown: {
+      maxItems: 20,
+      classname: '',
+      enabled: 0,
+      closeOnSelect: false
+    }
+  });
+
+
+})();
 </script>
 
 <script>
