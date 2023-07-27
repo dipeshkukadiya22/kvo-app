@@ -48,10 +48,7 @@ Route::POST('room-booking', [BookingController::class, 'add_member'])->name('roo
 
 
 /* Room list Route */
-Route::get('room-list', [BookingController::class, 'ADDROOM'])->name('room-list');
-Route::POST('RoomList', [BookingController::class, 'RoomList'])->name('RoomList');
-
-//Route::POST('add_room', [BookingController::class, 'RoomList'])->name('RoomList');
+Route::get('/room-list', [BookingController::class, 'RoomList'])->name('RoomList');
 
 /* View Members Route */
 Route::get('/view-members', [MembersController::class, 'ViewMembers'])->name('ViewMembers');
