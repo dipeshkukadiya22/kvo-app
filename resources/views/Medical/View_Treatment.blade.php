@@ -97,8 +97,9 @@ button.swal2-cancel.btn.btn-label-danger {
                                                   <th>Action</th>
                                               </tr>
                                           </thead>
+                                          @foreach($member as $row)
                                           <tr>
-                                            @foreach($member as $row)
+                                              <input type="hidden" class="id" value="{{$row->sr_no}}">
                                               <td></td>
                                               <td>{{$row->sr_no}}</td>
                                               <td>{{$row->m_name}}</td>
@@ -112,10 +113,10 @@ button.swal2-cancel.btn.btn-label-danger {
                                                   <div class="d-inline-block">
                                                     <a href="" class="text-primary" ><i class="ti ti-eye"></i></a>
 
-                                                    <a href="{{route('edit_treatment',$row->sr_no)}}" data-typeId="{{$row->sr_no}}" id="edit" class="btn btn-sm btn-icon item-edit" data-bs-toggle="offcanvas"
+                                                    <a href="{{route('edit_treatment',$row->sr_no)}}" class="btn btn-sm btn-icon item-edit" data-bs-toggle="offcanvas"
                                                     data-bs-target="#offcanvasBackdrop" aria-controls="offcanvasBackdrop"><i class="text-primary ti ti-edit"></i></a>
 
-                                                    <a href="{{route('delete_treatment',$row->sr_no)}}" class="text-danger delete-record"><i class="ti ti-trash"></i></a>
+                                                    <button type="button" class="text-danger delete-record"><i class="ti ti-trash"></i></button>
                                                     
                                                   </div>
                                               </td>
@@ -308,28 +309,7 @@ button.swal2-cancel.btn.btn-label-danger {
     <script src="{{ asset('assets/js/extended-ui-sweetalert2.js') }}"></script>
 
     <!-- BEGIN: Page JS-->
-    <script>     
-      $("#edit").click(function(){
-          let editLinks1 = document.querySelectorAll('a#edit')
-          editLinks1.forEach(link1 => {
-                event.preventDefault();
-                const id = link1.getAttribute('data-typeId');
-             $.ajax({
-                url:"{{url('edit_treatment')}}" +"/"+ id,
-                type:'GET',
-                  success:function(response){  
-                        $("#sr_no").val(response['sr_no']); 
-                        $("#name").val(response['m_name']);
-                        $("#date").val(response['date']);
-                        $("#phone").val(response['phone']);
-                        $("#doctor_name").val(response['doctor_name']);
-                        $("#city").val(response['city']);
-                        $("#remark").val(response['remark']);
-                  }
-                });
-            });
-      });
-</script>
+    
    <script>
     
     var dt_basic_table = $('.datatables-basic');
@@ -679,10 +659,66 @@ button.swal2-cancel.btn.btn-label-danger {
   }
   </script>
   <!-- end num to word -->
-
+  
   <script>
+    // Get all elements with class "item-edit"
+    const editLinks = document.querySelectorAll(".item-edit");
+    // Loop through each delete link and attach a click event listener
+    editLinks.forEach(link => {
+        link.addEventListener("click", function() {
+            // Show a confirmation dialog using SweetAlert2
+            var id=$(this).closest("tr").find(".id").val();
+            alert(id);
+            $.ajax({
+                url:"{{url('get_member')}}" +"/"+ id,
+                type:'GET',
+                  success:function(response){  
+                        $("#sr_no").val(); 
+                        $("#name").val();
+                       /* $("#date").val(response['date']);
+                        $("#phone").val(response['phone']);
+                        $("#doctor_name").val(response['doctor_name']);
+                        $("#city").val(response['city']);
+                        $("#remark").val(response['remark']);*/
+                  }
+                });
+        });
+    });
+</script>
+<script>
+    $(".delete-record").click(function(e){
+            e.preventDefault();
+            var id=$(this).closest("tr").find(".id").val();
+            alert(id);
+                 Swal.fire({
+                    title: 'Are you sure?',
+                    text: "Once deleted, You will not be able to recover this!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085D6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    url:"{{url('delete_treatment')}}" +"/"+ id,
+                    type:'GET',
+                    success:function(response){
+                        Swal.fire(
+                            'Deleted!',
+                            'Your file has been deleted.',
+                            'success',
+                            );
+                            location.reload();
+                            }
+                        });
+                    }
+            });
+        });
+</script>
+<script>
     // Get all elements with class "delete-record"
-    const deleteLinks = document.querySelectorAll(".delete-record");
+    /*const deleteLinks = document.querySelectorAll(".delete-record");
 
     // Loop through each delete link and attach a click event listener
     deleteLinks.forEach(link => {
@@ -711,12 +747,7 @@ button.swal2-cancel.btn.btn-label-danger {
                 }
             });
         });
-    });
+    });*/
 </script>
-
-
-    
-
-@endsection
 
 @endsection

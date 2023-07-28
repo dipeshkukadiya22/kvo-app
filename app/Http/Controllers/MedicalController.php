@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-use DB;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\add_members;
 use App\Models\medical;
@@ -33,18 +33,23 @@ class MedicalController extends Controller
     }
     public function edit_treatment($id)
     {
-        dd("hi");
+
+    }
+    public function get_member($id)
+    {
         $member=DB::select("SELECT m.sr_no,m.date,m.doctor_name,m.amount,m.payment_mode,M.m_name,M.city,M.phone_no FROM medical As m join add_members As M where m.p_id=M.p_id and m.p_id='$id'");
-        dd($member);
         return $member;
     }
     public function get($id){
+    
         $data=add_members::find($id);
         return $data;
     }
-    public function delete($id)
+    public function delete_treatment($id)
     {
         $member=medical::find($id);
+        dd($member);
         $member::delete();
+        return back()->with("Delete Treatment");
     }
 }
