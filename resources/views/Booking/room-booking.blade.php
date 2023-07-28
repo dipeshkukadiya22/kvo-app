@@ -1050,7 +1050,19 @@ $(document).ready(function () {
       $('#members_age').text(age);
       $('#member_gen').text(gender);
       $('#member_rel').text(relation);
+
+
+
+
+      // loop
+      for (let i = 0; i < numForms; i++) {
+      $('#member_full_name'+i).text( = $('#full_name_form'+i).val();)
+      }
+
+
+
     });
+    
   });
   </script>
 
@@ -1077,11 +1089,11 @@ $(document).ready(function () {
           '<div class="row formrepeater">'+
                                  ' <div class="mb-3 col-lg-6 col-xl-3 col-12 mb-0">'+
                                    ' <label class="form-label" for="form-repeater-1-1">Full Name</label>'+
-                                   ' <input type="text" id="full_name_form"  name="full_name[]" class="form-control" placeholder="john doe" value="{{ (!empty($member) )? $member->m_name : '' }}"/>'+
+                                   ' <input type="text" id="full_name_form '+i+'"  name="full_name[]" class="form-control" placeholder="john doe" value="{{ (!empty($member) )? $member->m_name : '' }}"/>'+
                                  ' </div>'+
                                  ' <div class="mb-3 col-lg-6 col-xl-3 col-12 mb-0">'+
                                   '  <label class="form-label" for="form-repeater-1-2">Age</label>'+
-                                  '  <input type="text" id="member_age" name="m_age[]" class="form-control" placeholder="your age" />'+
+                                  '  <input type="text" id="member_age'+i+'" name="m_age[]" class="form-control" placeholder="your age" />'+
                                 '  </div>'+
                                   
                                   
@@ -1099,7 +1111,7 @@ $(document).ready(function () {
                                 '  </div>'+
                                  ' <div class="col-md-4">'+
                                   '  <label class="form-label" for="basic-default-country">Relation</label>'+
-                                  '  <select class="form-select" name="relation[]" id="member_relation" required>'+
+                                  '  <select class="form-select" name="relation[]" id="member_relation '+i+'" required>'+
                                    '   <option value="SELF" selected>SELF</option>'+
                                     '  <option value="MOTHER">MOTHER</option>'+
                                     '  <option value="FATHER">FATHER</option>'+
