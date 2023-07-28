@@ -48,8 +48,7 @@ class MedicalController extends Controller
     public function delete_treatment($id)
     {
         $member=medical::find($id);
-        dd($member);
-        $member::delete();
+        $member->delete();
         return back()->with("Delete Treatment");
     }
 }
