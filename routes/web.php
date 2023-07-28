@@ -77,3 +77,6 @@ Route::get('pdf_Expense_Receipt',[pdfcontroller::class,'pdf_Expense_Receipt'])->
 Route::get('treatment',[MedicalController::class,'show'])->name('show');
 Route::post('add_treatment',[MedicalController::class,'add'])->name('add_treatment');
 Route::get('/get/{id}',[MedicalController::class,'get'])->name('get');
+Route::get('view_treatment',[MedicalController::class,'view_treatment'])->name('view_treatment');
+Route::get('edit_treatment/{id}',[MedicalController::class,'edit'])->name('edit_treatment');
+Route::get('delete_treatment/{id}',[MedicalController::class,'delete'])->name('delete_treatment');
