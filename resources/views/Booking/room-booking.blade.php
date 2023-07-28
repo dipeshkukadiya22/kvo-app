@@ -379,7 +379,7 @@
                                   <label class="form-label" for="basic-default-name">Amount</label>
                                   <div class="input-group">
                                     <span class="input-group-text">₹</span>
-                                    <input type="number" class="form-control"  name="amount" placeholder="Amount" aria-label="Amount (to the nearest indian)" id="r_amount" value="800" />
+                                    <input type="number" class="form-control"  name="ac_amount" placeholder="Amount" aria-label="Amount (to the nearest indian)" id="ac-amount" value="800" />
                                   </div>
                                 </div>
 
@@ -393,7 +393,7 @@
                                   <label class="form-label" for="basic-default-name">Amount</label>
                                   <div class="input-group">
                                     <span class="input-group-text">₹</span>
-                                    <input type="number" class="form-control"  name="amount" placeholder="Amount" aria-label="Amount (to the nearest indian)" id="r_amount" value="800" />
+                                    <input type="number" class="form-control"  name="non_ac_amount" placeholder="Amount" aria-label="Amount (to the nearest indian)" id="non-ac-amount" value="800" />
                                   </div>
                                 </div>
 
@@ -406,7 +406,7 @@
                                   <label class="form-label" for="basic-default-name">Amount</label>
                                   <div class="input-group">
                                     <span class="input-group-text">₹</span>
-                                    <input type="number" class="form-control"  name="amount" placeholder="Amount" aria-label="Amount (to the nearest indian)" id="r_amount" value="800" />
+                                    <input type="number" class="form-control"  name="door_mt_amount" placeholder="Amount" aria-label="Amount (to the nearest indian)" id="door-mt-amount" value="800" />
                                   </div>
                                 </div>
   
@@ -1003,43 +1003,36 @@ $(document).ready(function () {
   });
 </script>
 
+
 <script>
   $(document).ready(function() {
     let currentStep = 1;
 
     $(".btn-next").on("click", function() {
-      const selectedValue = $('#select3Primary1').val();
-      const selectedList = $('#TagifyCustomListSuggestion').val();
+      const selectedList1 = $('#TagifyCustomListSuggestion').val();
+      const selectedList2 = $('#TagifyCustomListSuggestion1').val();
+      const selectedList3 = $('#TagifyCustomListSuggestion2').val();
       const selectedDate = $('#flatpickr-datetime').val();
-      const selectedamount = $('#r_amount').val();
-      if (selectedValue && selectedValue.length > 0) {
-        $('#room_faci').text(selectedValue);
-        currentStep++;
-      } else {
-       
-      }
-      if (selectedList && selectedList.length > 0) {
-        $('#room_lst').text(selectedList);
-        currentStep++;
-        
-      } else {
-      
-      }
+      const acAmount = parseFloat($('#ac-amount').val()) || 0; 
+      const nonAcAmount = parseFloat($('#non-ac-amount').val()) || 0;
+      const doorMtAmount = parseFloat($('#door-mt-amount').val()) || 0;
+
+      const totalAmount = acAmount + nonAcAmount + doorMtAmount;
+      const selectedRooms = 'A.C. Room: ' + selectedList1 + ', Non A.C. Room: ' + selectedList2 + ', Door Metri A.C. / Non A.C. Room: ' + selectedList3;
+
+      $('#room_lst').text(selectedRooms);
+
       if (selectedDate && selectedDate.length > 0) {
-        $('#check_date').text(selectedDate);
+        $('#check_date').text( selectedDate);
         currentStep++;
-      } else {
-        
       }
-      if (selectedamount && selectedamount.length > 0) {
-        $('#room_amount').text(selectedamount);
-        currentStep++;
-      } else {
-       
-      }
+      $('#room_amount').text('Total Amount: ' + totalAmount);
     });
   });
 </script>
+
+
+
 
 
 

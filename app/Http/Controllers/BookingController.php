@@ -22,7 +22,7 @@ class BookingController extends Controller
 
     public function RoomBooking(Request $req)
     {
-        dd($req->toArray());
+        //dd($req->toArray());
         $m_name =(personal_details::get()->last()->m_name);
         $p_details=personal_details::with('member')->get();
         $data = personal_details::find($req->p_id);
@@ -49,14 +49,29 @@ class BookingController extends Controller
         $booking = new room_details();
         $booking->no_of_person = $req->no_of_person;
         $booking->check_in_date = Carbon::now();
-        $booking->room_list = $req->TagifyCustomListSuggestion;
-        $booking->room_facility = $req->room_list;
-        $booking->amount = $req->amount;
+        $roomListArray = array(
+            'ac_room' => $req->TagifyCustomListSuggestion,
+            'non_ac_room' => $req->TagifyCustomListSuggestion1,
+            'door_metric_ac_non_ac_room' => $req->TagifyCustomListSuggestion2
+        );
+        $booking->room_list = json_encode($roomListArray);
+        //dd($roomListArray);
+        $booking->ac_amount = $req->ac_amount;
+        $booking->non_ac_amount = $req->non_ac_amount;
+        $booking->door_mt_amount = $req->door_mt_amount;
         $booking->id_proof = $req->id_proof;
         $booking->deposite_no = $req->deposit_no;
         $booking->deposite_rs = $req->deposite_rs;
         $booking->rs_word = $req->rs_word;
-        $booking->save();
+
+     try {
+    $booking->save();
+} catch (\Exception $e) {
+    // Log or display the error
+    error_log($e->getMessage());
+    // or
+    echo "Error: " . $e->getMessage();
+}
 
     
         $m_details = new member_details();
