@@ -116,7 +116,7 @@ button.swal2-cancel.btn.btn-label-danger {
                                                     <a href="{{route('edit_treatment',$row->sr_no)}}" class="btn btn-sm btn-icon item-edit" data-bs-toggle="offcanvas"
                                                     data-bs-target="#offcanvasBackdrop" aria-controls="offcanvasBackdrop"><i class="text-primary ti ti-edit"></i></a>
 
-                                                    <button type="button" class="text-danger delete-record"><i class="ti ti-trash"></i></button>
+                                                    <a class="text-danger delete-record"><i class="ti ti-trash"></i></a>
                                                     
                                                   </div>
                                               </td>
@@ -164,7 +164,7 @@ button.swal2-cancel.btn.btn-label-danger {
 
                                     <div class="col-md-12">
                                         <label class="form-label" for="multicol-phone">દર્દીના મોબાઇલ નં </label>
-                                        <input type="number" id="phone" class="form-control">
+                                        <input type="number" id="phone" class="form-control" readonly>
                                     </div>
 
                                     <div class="col-md-12">
@@ -181,7 +181,7 @@ button.swal2-cancel.btn.btn-label-danger {
 
                                     <div class="col-md-12">
                                         <label class="form-label" for="multicol-username">ગામનું નામ </label>
-                                        <input type="text" id="city" class="form-control" placeholder="ex. bhuj" readonly>
+                                        <input type="text" id="city" class="form-control" readonly>
                                     </div>
 
                                     <div class="col-md-12">
@@ -673,57 +673,28 @@ button.swal2-cancel.btn.btn-label-danger {
                 url:"{{url('get_member')}}" +"/"+ id,
                 type:'GET',
                   success:function(response){  
-                        $("#sr_no").val(); 
-                        $("#name").val();
-                       /* $("#date").val(response['date']);
-                        $("#phone").val(response['phone']);
-                        $("#doctor_name").val(response['doctor_name']);
-                        $("#city").val(response['city']);
-                        $("#remark").val(response['remark']);*/
+                      
+                        $("#name").val(response[0]['name']);
+                        $("#date").val(response[0]['date']);
+                        $("#phone").val(response[0]['phone']);
+                        $("#amount").val(response[0]['amount']);
+                        $("#doctor_name").val(response[0]['doctor_name']);
+                        $("#city").val(response[0]['city']);
+                        $("#remark").val(response[0]['remark']);
                   }
                 });
         });
     });
 </script>
-<script>
-    $(".delete-record").click(function(e){
-            e.preventDefault();
-            var id=$(this).closest("tr").find(".id").val();
-            alert(id);
-                 Swal.fire({
-                    title: 'Are you sure?',
-                    text: "Once deleted, You will not be able to recover this!",
-                    icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#3085D6',
-                    cancelButtonColor: '#d33',
-                    confirmButtonText: 'Yes, delete it!'
-            }).then((result) => {
-            if (result.isConfirmed) {
-                $.ajax({
-                    url:"{{url('delete_treatment')}}" +"/"+ id,
-                    type:'GET',
-                    success:function(response){
-                        Swal.fire(
-                            'Deleted!',
-                            'Your file has been deleted.',
-                            'success',
-                            );
-                            location.reload();
-                            }
-                        });
-                    }
-            });
-        });
-</script>
+
 <script>
     // Get all elements with class "delete-record"
-    /*const deleteLinks = document.querySelectorAll(".delete-record");
-
+    const deleteLinks = document.querySelectorAll(".delete-record");
     // Loop through each delete link and attach a click event listener
     deleteLinks.forEach(link => {
         link.addEventListener("click", function() {
             // Show a confirmation dialog using SweetAlert2
+            var id=$(this).closest("tr").find(".id").val();
             Swal.fire({
                 title: "Are you sure?",
                 text: "You won't be able to revert this!",
@@ -735,19 +706,22 @@ button.swal2-cancel.btn.btn-label-danger {
             }).then((result) => {
                 // If the user confirms the deletion, proceed with the deletion logic
                 if (result.isConfirmed) {
-                    // Write your deletion logic here
-                    // For example, you can remove the entire row from the table:
-                    const row = this.closest("tr");
-                    if (row) {
-                        row.remove();
-                    }
-
-                    // Show a success message using SweetAlert2
-                    Swal.fire("Deleted!", "The record has been deleted.", "success");
+                  $.ajax({
+                    url:"{{url('delete_treatment')}}" +"/"+ id,
+                    type:'GET',
+                    success:function(response){
+                        Swal.fire(
+                            'Deleted!',
+                            'Your Record has been deleted.',
+                            'success',
+                            );
+                            location.reload();
+                            }
+                        });
                 }
             });
         });
-    });*/
+    });
 </script>
 
 @endsection
