@@ -624,7 +624,8 @@
                                         <td id="member_rel"></td>
                                       
                                       </tr>
-                                    
+                                      <div class="row rep-table">
+                                      </div>
                                   
                                                                        
                                     <!-- <tr>
@@ -1046,19 +1047,34 @@ $(document).ready(function () {
       const gender = $('input[name="inlineRadioOptions"]:checked').val();
       const relation = $('#member_relation').val();
 
-      $('#member_full_name').text(fullName);
-      $('#members_age').text(age);
-      $('#member_gen').text(gender);
-      $('#member_rel').text(relation);
+      // $('#member_full_name').text(fullName);
+      // $('#members_age').text(age);
+      // $('#member_gen').text(gender);
+      // $('#member_rel').text(relation);
 
 
 
 
       // loop
+      
       for (let i = 0; i < numForms; i++) {
-      $('#member_full_name'+i).text( = $('#full_name_form'+i).val();)
-      }
+        $('#member_full_name'+i).text( = $('#full_name_form'+i).val();)
+        $('#members_age'+i).text = $('#member_age'+i).val();
+        $('#member_gen'+i).text= $('input[name="inlineRadioOptions"]:checked'+i).val();
+        $('#member_rel'+i).text= $('#member_relation'+i).val();
+        
 
+        $(".rep-table ").append(
+          '<tr>'+
+          '<td></td>'+
+          '<td id="member_full_name'+i+'"></td>'+
+          '<td id="members_age '+i+'"></td>'+
+          '<td id="member_gen '+i+'"></td>'+
+          '<td id="member_rel '+i+'"></td>'+
+          '</tr>'
+        );
+      }
+      $(".rep-table ").show();
 
 
     });
