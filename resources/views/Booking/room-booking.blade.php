@@ -453,11 +453,7 @@
                                 <i class="ti ti-arrow-left me-sm-1"></i>
                                 <span class="align-middle d-sm-inline-block d-none">Previous</span>
                               </button>
-                              {{-- <div>
-                              <input type="button" id="repeat-next"  class="btn btn-primary btn-next" >
-                                <span class="align-middle d-sm-inline-block d-none me-sm-1">Next</span>
-                                <i class="ti ti-arrow-right"></i>
-                              </div> --}}
+                            
                               <button type="button"class="btn btn-primary btn-next"  id="repeat-next">
                                 <span class="align-middle d-sm-inline-block d-none me-sm-1">Next</span>
                                 <i class="ti ti-arrow-right"></i>
@@ -497,13 +493,15 @@
                                       <label class="d-block form-label">Gender</label>
                                     
                                       <div class="form-check form-check-inline">
-                                          <input class="form-check-input" type="radio" name="gender[]" id="inlineRadio1_${i}" value="MALE" />
-                                          <label class="form-check-label" for="inlineRadio1_${i}">Male</label>
-                                      </div>
-                                      <div class="form-check form-check-inline">
-                                          <input class="form-check-input" type="radio" name="gender[]" id="inlineRadio2_${i}" value="FEMALE" />
-                                          <label class="form-check-label" for="inlineRadio2_${i}">Female</label>
-                                      </div>
+  <input class="form-check-input" type="radio" name="gender[]" id="inlineRadio1_${i}" value="MALE" />
+  <label class="form-check-label" for="inlineRadio1_${i}">Male</label>
+</div>
+<div class="form-check form-check-inline">
+  <input class="form-check-input" type="radio" name="gender[]" id="inlineRadio2_${i}" value="FEMALE" />
+  <label class="form-check-label" for="inlineRadio2_${i}">Female</label>
+</div>
+
+
 
 
                                   </div>
@@ -613,7 +611,7 @@
                                       <th>Relations</th>
                                       </tr>
                                   </thead>
-                                  <tbody>
+                                  <tbody class="rep-table">
                                    
                                  
                                       <tr>
@@ -624,25 +622,9 @@
                                         <td id="member_rel"></td>
                                       
                                       </tr>
-                                      <div class="row rep-table">
-                                      </div>
-                                  
+                                      
                                                                        
-                                    <!-- <tr>
-                                      <td colspan="3" class="align-top px-4 py-4">
-                                        
-                                      </td>
-                                      <td class="text-end pe-3 py-4">
-                                        <p class="mb-2 pt-3">Subtotal:</p>
-                                        <p class="mb-2">Tax:</p>
-                                        <p class="mb-0 pb-3">Total:</p>
-                                      </td>
-                                      <td class="ps-2 py-4">
-                                        <p class="fw-semibold mb-2 pt-3">$154.25</p>
-                                        <p class="fw-semibold mb-2">$50.00</p>
-                                        <p class="fw-semibold mb-0 pb-3">$204.25</p>
-                                      </td>
-                                    </tr> -->
+                                 
                                   </tbody>
                                 </table>
                               </div>
@@ -1040,39 +1022,52 @@ $(document).ready(function () {
 <script>
   $(document).ready(function() {
     let currentStep = 1;
-
+ 
     $(".btn-next").on("click", function() {
+      $(".rep-table ").empty();
       const fullName = $('#full_name_form').val();
       const age = $('#member_age').val();
       const gender = $('input[name="inlineRadioOptions"]:checked').val();
       const relation = $('#member_relation').val();
 
-      // $('#member_full_name').text(fullName);
-      // $('#members_age').text(age);
-      // $('#member_gen').text(gender);
-      // $('#member_rel').text(relation);
+       $('#member_full_name').text(fullName);
+       $('#members_age').text(age);
+       $('#member_gen').text(gender);
+       $('#member_rel').text(relation);
+ 
+       $(".rep-table ").append(
+       
+       '<tr>'+
+       '<td></td>'+
 
-
-
-
-      // loop
+       '<td id="member_full_name">'+ $('#full_name_form').val()+'</td>'+
+        '<td id="members_age">'+ $('#member_age').val()+'</td>'+
+        '<td id="member_gen">'+ $('input[name="inlineRadioOptions"]:checked').val()+'</td>'+
+        '<td id="member_rel">' +  $('#member_relation').val()+'</td>'+
+        '</tr>'
+      );
       
+       let numForms = parseInt($("#no_of_person_id").val());
+      if (isNaN(numForms) || numForms <= 0) {
+        alert("Please enter a valid number greater than zero.");
+        return false;
+      }
       for (let i = 0; i < numForms; i++) {
-        $('#member_full_name'+i).text( = $('#full_name_form'+i).val();)
-        $('#members_age'+i).text = $('#member_age'+i).val();
-        $('#member_gen'+i).text= $('input[name="inlineRadioOptions"]:checked'+i).val();
-        $('#member_rel'+i).text= $('#member_relation'+i).val();
-        
-
         $(".rep-table ").append(
-          '<tr>'+
-          '<td></td>'+
-          '<td id="member_full_name'+i+'"></td>'+
-          '<td id="members_age '+i+'"></td>'+
-          '<td id="member_gen '+i+'"></td>'+
-          '<td id="member_rel '+i+'"></td>'+
+       
+         '<tr>'+
+         '<td></td>'+
+ 
+         '<td id="member_full_name'+i+'">'+ $('#full_name_form'+i).val()+'</td>'+
+          '<td id="members_age'+i+'">'+ $('#member_age'+i).val()+'</td>'+
+          '<td id="member_gen'+i+'">'+ $('input[name="inlineRadioOptions"]:checked').val()+'</td>'+
+          '<td id="member_rel'+i+'">' +  $('#member_relation'+i).val()+'</td>'+
           '</tr>'
         );
+        $('#member_full_name'+i).text = $('#full_name_form'+i).val();
+        $('#members_age'+i).text = $('#member_age'+i).val();
+        $('#member_gen'+i).text= $('input[name="inlineRadioOptions"]:checked').val();
+        $('#member_rel'+i).text= $('#member_relation'+i).val();
       }
       $(".rep-table ").show();
 
@@ -1101,11 +1096,11 @@ $(document).ready(function () {
       for (let i = 0; i < numForms; i++) {
         let formTemplate = $(".rep-form .formrepeater").clone();
         $(".rep-form").append(
-        
+
           '<div class="row formrepeater">'+
                                  ' <div class="mb-3 col-lg-6 col-xl-3 col-12 mb-0">'+
                                    ' <label class="form-label" for="form-repeater-1-1">Full Name</label>'+
-                                   ' <input type="text" id="full_name_form '+i+'"  name="full_name[]" class="form-control" placeholder="john doe" value="{{ (!empty($member) )? $member->m_name : '' }}"/>'+
+                                   ' <input type="text" id="full_name_form'+i+'"  name="full_name[]" class="form-control" placeholder="john doe" value="{{ (!empty($member) )? $member->m_name : '' }}"/>'+
                                  ' </div>'+
                                  ' <div class="mb-3 col-lg-6 col-xl-3 col-12 mb-0">'+
                                   '  <label class="form-label" for="form-repeater-1-2">Age</label>'+
@@ -1117,17 +1112,17 @@ $(document).ready(function () {
                                   
                                      ' <label class="d-block form-label">Gender</label>'+
                                      ' <div class="form-check form-check-inline">'+
-                                       ' <input class="form-check-input" type="radio" name="gender[]' + i + '" id="inlineRadio1_' + i + '" value="MALE" />'+
-                                       ' <label class="form-check-label" for="inlineRadio1_' + i + '">Male</label>'+
+                                       ' <input class="form-check-input" type="radio" name="gender[]" id="inlineRadio1_' + i + '" value="MALE" />'+
+                                       ' <label class="form-check-label" for="inlineRadio1' + i + '">Male</label>'+
                                      ' </div>'+
                                      ' <div class="form-check form-check-inline">'+
                                       '  <input class="form-check-input" type="radio" name="gender[]' + i + '" id="inlineRadio2_' + i + '" value="FEMALE" />'+
-                                      '  <label class="form-check-label" for="inlineRadio2_' + i + '">Female</label>'+
+                                      '  <label class="form-check-label" for="inlineRadio2' + i + '">Female</label>'+
                                     '  </div>'+
                                 '  </div>'+
                                  ' <div class="col-md-4">'+
                                   '  <label class="form-label" for="basic-default-country">Relation</label>'+
-                                  '  <select class="form-select" name="relation[]" id="member_relation '+i+'" required>'+
+                                  '  <select class="form-select" name="relation[]" id="member_relation'+i+'" required>'+
                                    '   <option value="SELF" selected>SELF</option>'+
                                     '  <option value="MOTHER">MOTHER</option>'+
                                     '  <option value="FATHER">FATHER</option>'+
