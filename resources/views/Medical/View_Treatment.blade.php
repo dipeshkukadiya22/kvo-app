@@ -149,22 +149,27 @@ button.swal2-cancel.btn.btn-label-danger {
                             <div class="offcanvas-body mx-0 flex-grow-0">
 
                               <!-- Browser Default -->
-                              <form class="browser-default-validation" method="POST" action="">
+                              <form id="kvo_update_treatmet" class="browser-default-validation" method="POST" action="{{route('update_treatment')}}">
                                 <div class="row g-3">
 
+                                @csrf
                                     <div class="col-md-12">
                                         <label class="form-label" for="multicol-phone">રશીદ નં </label>
-                                        <input type="number" id="sr_no" class="form-control" readonly>
+                                        <input type="number" id="sr_no" name="sr_no" class="form-control" readonly/>
                                     </div>
 
                                     <div class="col-md-12">
                                         <label class="form-label" for="multicol-username">દર્દીનું નામ </label>
-                                        <input type="text" id="name" class="form-control">
+                                        <select id="name" name="name" class="select2 form-select form-select-lg" data-allow-clear="true" >
+                                          @foreach($member_data as $row)
+                                                <option value="{{$row->p_id}}">{{$row->m_name}}</option>
+                                          @endforeach
+                                        </select>   
                                     </div>
 
                                     <div class="col-md-12">
                                         <label class="form-label" for="multicol-phone">દર્દીના મોબાઇલ નં </label>
-                                        <input type="number" id="phone" class="form-control" readonly>
+                                        <input type="number" id="phone" name="phone" class="form-control" readonly/>
                                     </div>
 
                                     <div class="col-md-12">
@@ -213,16 +218,6 @@ button.swal2-cancel.btn.btn-label-danger {
                                     
 
                                     <div class="col-md-12">
-                                        <label class="form-label" for="basic-default-name">અન્ય વિગત</label>
-                                        <input
-                                        type="text"
-                                        class="form-control"
-                                        id="basic-default-name"
-                                        name="remarks" 
-                                        {{-- placeholder="John Doe" --}}
-                                        required />
-                                    </div>
-                                    <div class="col-md-12">
                                         <label class="d-block form-label">નાણા મળેલ</label>
                                         <div class="form-check form-check-inline mb-2">
                                         <input
@@ -260,6 +255,10 @@ button.swal2-cancel.btn.btn-label-danger {
                                             />
                                         <label class="form-check-label" for="basic_default_radio">UPI</label>
                                         </div>
+                                        <div class="form-check form-check-inline" >
+                                            <input type="text" id="payment" name="payment" class="form-control" />
+                                            <label class="form-check-label" for="basic-default-radio">payment</label>
+                            </div>
                                     </div>
                                     
                                     <div class="row">
@@ -668,25 +667,63 @@ button.swal2-cancel.btn.btn-label-danger {
         link.addEventListener("click", function() {
             // Show a confirmation dialog using SweetAlert2
             var id=$(this).closest("tr").find(".id").val();
-            alert(id);
+            
             $.ajax({
                 url:"{{url('get_member')}}" +"/"+ id,
                 type:'GET',
                   success:function(response){  
-                      
-                        $("#name").val(response[0]['name']);
+                    var name=response[0]['m_name'];
+                    var sr_no=response[0]['p_id'];
+                        $("#sr_no").val(response[0]['sr_no']);  
+                        if(name==="Bhoomi"){
+                        $("#name option[value=1]").attr('selected', 'selected');}
+                        if(name==="JAY SHAH"){
+                        $("#name option[value=134]").attr('selected', 'selected');}
                         $("#date").val(response[0]['date']);
-                        $("#phone").val(response[0]['phone']);
+                        $("#phone").val(response[0]['phone_no']);
                         $("#amount").val(response[0]['amount']);
                         $("#doctor_name").val(response[0]['doctor_name']);
                         $("#city").val(response[0]['city']);
+                        $("#ankers").val(response[0]['amount_in_words']);
                         $("#remark").val(response[0]['remark']);
+                        $("#payment").val(response[0]['payment_mode']);
+                        var payment=response[0]['payment_mode'];
+                        if(payment=="CASH"){$("#cash").attr('checked',true);}
+                        if(payment=="UPI"){$("#upi").attr('checked',true);}
+                        if(payment=="DRAFT"){$("#draft").attr('checked',true);}
+                        if(payment=="CHEQUE"){$("#cheque").attr('checked',true);}
                   }
                 });
         });
     });
 </script>
-
+<script>
+$("#name").change(function(){
+      const id=document.getElementById("name").value;
+      $.ajax({
+        
+                url:"{{url('get')}}" +"/"+ id,
+                type:'GET',
+                  success:function(response){   
+                        $("#city").val(response['city']); 
+                        $("#phone").val(response['phone_no']); 
+                  }
+                });
+            });
+      $("#cash").change(function(){
+        document.getElementById("payment").value="CASH";
+      });
+      $("#cheque").change(function(){
+        document.getElementById("payment").value="CHEQUE";
+      });
+      $("#draft").change(function(){
+        document.getElementById("payment").value="DRAFT";
+      });
+      $("#upi").change(function(){
+        document.getElementById("payment").value="UPI";
+      });
+      
+</script>
 <script>
     // Get all elements with class "delete-record"
     const deleteLinks = document.querySelectorAll(".delete-record");
@@ -721,6 +758,30 @@ button.swal2-cancel.btn.btn-label-danger {
                 }
             });
         });
+    });
+
+
+    $("#kvo_update_treatmet").submit(function(){
+        var doctor_name=document.getElementById("doctor_name").value;
+        var amount=document.getElementById("amount").value;
+        if(doctor_name ==='' && amount === '')
+        {
+            Swal.fire({
+                text: "Sorry, looks like there are some errors detected, please try again.",
+                icon: "error",
+            });
+            return false; // Prevent form submission
+        } else {
+            Swal.fire({
+                position: 'middle-center',
+                icon: 'success',
+                title: 'Medical Treatment data has been successfully updated!',
+                showConfirmButton: false,
+                timer: 1500
+                }).then(function() {
+                $("#kvo_update_treatment").submit();
+           });
+        }
     });
 </script>
 

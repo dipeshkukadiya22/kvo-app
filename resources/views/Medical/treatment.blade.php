@@ -88,7 +88,8 @@
                     </div>
                     <div class="col-md-4">
                       <label class="form-label" for="multicol-username">ગામનું નામ </label>
-                      <input type="text" id="city" class="form-control" placeholder="ex. bhuj" readonly>
+                      <input type="text" id="city" 
+class="form-control" placeholder="ex. bhuj" readonly>
                     </div>
                     <div class="col-md-4">
                       <label class="form-label" for="collapsible-address">વિશેષ નોંધ </label>
@@ -181,16 +182,16 @@
                 });
             });
       $("#cash").change(function(){
-        document.getElementById("payment").value="cash";
+        document.getElementById("payment").value="CASH";
       });
       $("#cheque").change(function(){
-        document.getElementById("payment").value="cheque";
+        document.getElementById("payment").value="CHEQUE";
       });
       $("#draft").change(function(){
-        document.getElementById("payment").value="draft";
+        document.getElementById("payment").value="DRAFT";
       });
       $("#upi").change(function(){
-        document.getElementById("payment").value="upi";
+        document.getElementById("payment").value="UPI";
       });
           });
   </script>
