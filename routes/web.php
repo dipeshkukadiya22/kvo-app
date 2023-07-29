@@ -61,7 +61,7 @@ Route::POST('ReligiousDonation', [donation::class, 'Religious_Donation'])->name(
 // Add Community_Donation
 Route::get('Community_Donation', [donation::class, 'index'])->name('Community_Donation');
 Route::POST('CommunityDonation', [donation::class, 'Community_Donation'])->name('CommunityDonation');
-
+Route::get('view_community_donation', [donation::class, 'view_donation'])->name('view_donation');
 // View Community_Donation
 Route::get('/View_Community_Donation',  [donation::class, 'View_Community_Donation']) -> name('View_Community_Donation');
 

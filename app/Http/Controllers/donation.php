@@ -24,7 +24,9 @@ class donation extends Controller
 
         // return view ('Donation.Religious_Donation');
     }
-
+    public function view_donation(){
+      
+    }
     public function Religious_Donation(Request $req){
 
 
@@ -155,7 +157,9 @@ class donation extends Controller
 
     // View Community_Donation
     public function View_Community_Donation(){
-        return view('Donation.View_Community_Donation');
+        $donation=community_donation::all();
+        return view('Donation.View_Community_Donation',['donation'=> $donation]);
+
     }
 
     public function General_Donation(){

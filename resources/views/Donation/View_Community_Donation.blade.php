@@ -96,15 +96,16 @@ button.swal2-cancel.btn.btn-label-danger {
                                                   <th>Action</th>
                                               </tr>
                                           </thead>
+                                          @foreach($donation as $row)
                                           <tr>
                                               <td></td>
-                                              <td>1</td>
-                                              <td>Dipesh K</td>
-                                              <td>25 Jul, 2023</td>
-                                              <td>814124655</td>
-                                              <td>Bhuj</td>
-                                              <td>12000</td>
-                                              <td>UPI</td>
+                                              <td>{{$row->donation_id}}</td>
+                                              <td>{{$row->name}}</td>
+                                              <td>{{$row->d_date}}</td>
+                                              <td>{{$row->phone_no}}</td>
+                                              <td>{{$row->city}}</td>
+                                              <td>{{$row->total}}</td>
+                                              <td>{{$row->payment_mode}}</td>
                                               <td>
                                                   <div class="d-inline-block">
                                                     <a href="javascript:;" class="text-primary"><i class="ti ti-eye"></i></a>
@@ -117,69 +118,7 @@ button.swal2-cancel.btn.btn-label-danger {
                                                   </div>
                                               </td>
                                           </tr>
-                                          <tr>
-                                            <td></td>
-                                            <td>2</td>
-                                            <td>Dipesh K</td>
-                                            <td>25 Jul, 2023</td>
-                                            <td>814124655</td>
-                                            <td>Bhuj</td>
-                                            <td>12000</td>
-                                            <td>UPI</td>
-                                            <td>
-                                                <div class="d-inline-block">
-                                                  <a href="javascript:;" class="text-primary"><i class="ti ti-eye"></i></a>
-
-                                                  <a href="javascript:;" class="btn btn-sm btn-icon item-edit" data-bs-toggle="offcanvas"
-                                                  data-bs-target="#offcanvasBackdrop" aria-controls="offcanvasBackdrop"><i class="text-primary ti ti-edit"></i></a>
-
-                                                  <a href="javascript:;" class="text-danger delete-record"><i class="ti ti-trash"></i></a>
-                                                  
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td></td>
-                                            <td>3</td>
-                                            <td>Dipesh K</td>
-                                            <td>25 Jul, 2023</td>
-                                            <td>814124655</td>
-                                            <td>Bhuj</td>
-                                            <td>12000</td>
-                                            <td>UPI</td>
-                                            <td>
-                                                <div class="d-inline-block">
-                                                  <a href="javascript:;" class="text-primary"><i class="ti ti-eye"></i></a>
-
-                                                  <a href="javascript:;" class="btn btn-sm btn-icon item-edit" data-bs-toggle="offcanvas"
-                                                  data-bs-target="#offcanvasBackdrop" aria-controls="offcanvasBackdrop"><i class="text-primary ti ti-edit"></i></a>
-
-                                                  <a href="javascript:;" class="text-danger delete-record"><i class="ti ti-trash"></i></a>
-                                                  
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td></td>
-                                            <td>4</td>
-                                            <td>Dipesh K</td>
-                                            <td>25 Jul, 2023</td>
-                                            <td>814124655</td>
-                                            <td>Bhuj</td>
-                                            <td>12000</td>
-                                            <td>UPI</td>
-                                            <td>
-                                                <div class="d-inline-block">
-                                                  <a href="javascript:;" class="text-primary"><i class="ti ti-eye"></i></a>
-
-                                                  <a href="javascript:;" class="btn btn-sm btn-icon item-edit" data-bs-toggle="offcanvas"
-                                                  data-bs-target="#offcanvasBackdrop" aria-controls="offcanvasBackdrop"><i class="text-primary ti ti-edit"></i></a>
-
-                                                  <a href="javascript:;" class="text-danger delete-record"><i class="ti ti-trash"></i></a>
-                                                  
-                                                </div>
-                                            </td>
-                                        </tr>
+                                         @endforeach
                                         </table>
                                     </div>
                                 </div>
