@@ -66,6 +66,7 @@ Route::get('view_community_donation', [donation::class, 'view_donation'])->name(
 Route::get('/View_Community_Donation',  [donation::class, 'view_comm_donation']) -> name('view_Comm_donation');
 Route::get('/get_community_donation/{id}',[donation::class,'get'])->name('get_community_donation');
 Route::get('/delete_community_donation/{id}',[donation::class,'delete'])->name('delete_community_donation');
+Route::post('/update_community_donation',[donation::class,'update_community_donation'])->name('update_community_donation');
 
 Route::get('General_Donation', [donation::class, 'General_Donation'])->name('General_Donation');
 Route::get('Expense_Receipt', [Expense::class, 'Expense_Receipt'])->name('Expense_Receipt');

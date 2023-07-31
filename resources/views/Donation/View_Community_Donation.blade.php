@@ -129,7 +129,7 @@ button.swal2-cancel.btn.btn-label-danger {
 
                         <!-- Enable backdrop (default) Offcanvas -->
                         <div class="mt-0">
-                          
+                        
                           <div
                             class="offcanvas offcanvas-end"
                             tabindex="-1"
@@ -146,9 +146,10 @@ button.swal2-cancel.btn.btn-label-danger {
                             <div class="offcanvas-body mx-0 flex-grow-0">
 
                               <!-- Browser Default -->
-                              <form class="browser-default-validation">
+                              <form class="browser-default-validation" method="POST" action="{{route('update_community_donation')}}">
                                 <div class="row g-3">
                                     <div class="col-md-12">
+                                    @csrf
                                         <label class="form-label" name="p_number" for="basic-default-name">પહોંચ નંબર</label>
                                         <input
                                             type="text"
@@ -268,9 +269,7 @@ button.swal2-cancel.btn.btn-label-danger {
                                             type="radio"
                                             id="cheque"
                                             name="basic_default_radio"
-                                            class="form-check-input"
-                                            value="cheque"
-                                            required />
+                                            class="form-check-input" />
                                         <label class="form-check-label" for="basic_default_radio">ચેક</label>
                                         </div>
                                         <div class="form-check form-check-inline">
@@ -279,8 +278,7 @@ button.swal2-cancel.btn.btn-label-danger {
                                             id="draft"
                                             name="basic_default_radio"
                                             class="form-check-input"
-                                            value="Draft"
-                                            required />
+                                            value="Draft"/>
                                         <label class="form-check-label" for="basic_default_radio">ડ્રાફ્ટ</label>
                                         </div>
                                         <div class="form-check form-check-inline">
@@ -289,8 +287,7 @@ button.swal2-cancel.btn.btn-label-danger {
                                             id="cash"
                                             name="basic_default_radio"
                                             class="form-check-input"
-                                            value="Cash"
-                                            required />
+                                            />
                                         <label class="form-check-label" for="basic_default_radio">રોકડા</label>
                                         </div>
                                         <div class="form-check form-check-inline">
@@ -299,8 +296,7 @@ button.swal2-cancel.btn.btn-label-danger {
                                             id="upi"
                                             name="basic_default_radio"
                                             class="form-check-input"
-                                            value="UPI"
-                                            required />
+                                            value="UPI" />
                                         <label class="form-check-label" for="basic_default_radio">UPI</label>
                                         </div>
                                         <div class="form-check form-check-inline">
@@ -311,7 +307,7 @@ button.swal2-cancel.btn.btn-label-danger {
                                     
                                     <div class="row">
                                         <div class="col-12">
-                                            <button type="button" class="btn btn-primary mb-2 d-grid w-100">Update</button>
+                                            <button type="submit" class="btn btn-primary mb-2 d-grid w-100">Update</button>
                                             <button
                                             type="button"
                                             class="btn btn-label-secondary d-grid w-100"
@@ -750,11 +746,13 @@ button.swal2-cancel.btn.btn-label-danger {
         link.addEventListener("click", function() {
             // Show a confirmation dialog using SweetAlert2
             var id=$(this).closest("tr").find(".id").val();
-            alert(id);
+            //console.info(id);
+            //alert(id);
             $.ajax({
                 url:"{{url('get_community_donation')}}" +"/"+ id,
                 type:'GET',
                   success:function(response){  
+                    console.info(response);
                       $("#donation_id").val(response['donation_id']);
                       $("#medical_checkup").val(response['medical_checkup']);
                       $("#bhojanshala").val(response['bhojanshala']);
@@ -766,8 +764,13 @@ button.swal2-cancel.btn.btn-label-danger {
                       $("#other").val(response['other']);
                       $("#remarks").val(response['remarks']);
                       $("#total").val(response['total']);
-                      $("#ankres").val(response['total_in_word']);
+                      $("#ankers").val(response['total_in_word']);
                       $("#payment").val(response['payment_mode']); 
+                      var payment=response['payment_mode'];
+                        if(payment=="CASH"){$("#cash").attr('checked',true);}
+                        if(payment=="UPI"){$("#upi").attr('checked',true);}
+                        if(payment=="DRAFT"){$("#draft").attr('checked',true);}
+                        if(payment=="CHEQUE"){$("#cheque").attr('checked',true);}
                   }
                 });
         });

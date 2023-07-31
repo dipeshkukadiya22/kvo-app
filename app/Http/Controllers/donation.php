@@ -163,7 +163,8 @@ class donation extends Controller
     }
     public function get($id){
         $data=community_donation::find($id);
-        dd($data);
+        //dd($data);
+        
         return $data;
     }
     public function delete($id)
@@ -171,6 +172,24 @@ class donation extends Controller
         $donation=community_donation::find($id);
         $donation->delete();
         //return back()->with("Delete Community Donation");
+    }
+    public function update_community_donation(Request $req)
+    {
+        $community_donation=community_donation::find($req->donation_id);
+        $community_donation -> medical_checkup = $req -> medical_checkup;
+        $community_donation -> mahajan = $req -> mahajan;
+        $community_donation -> bhojanshala = $req -> bhojanshala;
+        $community_donation -> shaikshanik = $req -> shaikshanik;
+        $community_donation -> lavajam = $req -> lavajam;
+        $community_donation -> oxygen = $req -> oxygen;
+        $community_donation -> ambulance = $req -> ambulance;
+        $community_donation -> other = $req -> other;
+        $community_donation -> remarks = $req -> remarks;
+        $community_donation -> total = $req -> total;
+        $community_donation -> total_in_word = $req -> total_in_word;
+        $community_donation -> payment_mode = $req -> basic_default_radio;
+        $community_donation->save();
+        return back()->with("Update Community Donation");
     }
     public function General_Donation(){
         return view ('Donation.General_Donation');
