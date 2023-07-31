@@ -81,43 +81,16 @@
                             <li class="nav-item">
                               <button
                                 type="button" class="nav-link active" role="tab" data-bs-toggle="tab" data-bs-target="#navs-pills-top-allroom" aria-controls="navs-pills-top-allroom" aria-selected="true">
-                                All Rooms (<span id="allRoomsCount">0</span>)
+                                All Rooms <span id="allRoomsCount">0</span>
                               </button>
                             </li>
                             <li class="nav-item">
-                              <button
-                                type="button"
-                                class="nav-link"
-                                role="tab"
-                                data-bs-toggle="tab"
-                                data-bs-target="#navs-pills-top-available"
-                                aria-controls="navs-pills-top-available"
-                                aria-selected="false">
-                                Available (<span id="availableRoomsCount">0</span>)
-                              </button>
+                              <button type="button" class="nav-link" role="tab" data-bs-toggle="tab" data-bs-target="#navs-pills-top-available"  aria-controls="navs-pills-top-available" aria-selected="false"> Available (<span id="availableRoomsCount">0</span>) </button>
                             </li>
                             <li class="nav-item">
-                              <button
-                                type="button"
-                                class="nav-link"
-                                role="tab"
-                                data-bs-toggle="tab"
-                                data-bs-target="#navs-pills-top-booked"
-                                aria-controls="navs-pills-top-booked"
-                                aria-selected="false">
-                                Booked (<span id="bookedRoomsCount">0</span>)
-                              </button>
+                              <button type="button" class="nav-link"  role="tab"  data-bs-toggle="tab"  data-bs-target="#navs-pills-top-booked"  aria-controls="navs-pills-top-booked"  aria-selected="false">  Booked (<span id="bookedRoomsCount">0</span>) </button>
                             </li>
-                            <li class="nav-item">
-                              <button
-                                type="button"
-                                class="nav-link"
-                                role="tab"
-                                data-bs-toggle="tab"
-                                data-bs-target="#navs-pills-top-canceled"
-                                aria-controls="navs-pills-top-canceled"
-                                aria-selected="false">
-                                Canceled (<span id="canceledRoomsCount">0</span>)
+                            <li class="nav-item"> <button  type="button" class="nav-link" role="tab" data-bs-toggle="tab"  data-bs-target="#navs-pills-top-canceled"  aria-controls="navs-pills-top-canceled" aria-selected="false"> Canceled (<span id="canceledRoomsCount">0</span>)
                               </button>
                             </li>
                           </ul>
@@ -262,12 +235,13 @@
                                         </tr>
                                       </thead>
                                       <tbody>
+                                        
                                         <tr>
                                           <td></td>
                                           <td></td>
-                                          <td>Deluxe #B-0004</td>
-                                          <td>Double Bed</td>
-                                          <td>A.C. Room</td>
+                                          <td></td>
+                                          <td></td>
+                                          <td></td>
                                           <td><span class="badge bg-label-primary">Available</span></td>
                                           <td>
                                             <div class="d-inline-block">
@@ -276,6 +250,7 @@
                                             </div>
                                           </td>
                                         </tr>
+                                       
                                       </tbody>
                                     </table>
                                   </div>
@@ -296,15 +271,17 @@
                                         </tr>
                                       </thead>
                                       <tbody>
+                                      @foreach($room_book as $book)
+                                     
                                         <tr>
                                           <td></td>
                                           <td></td>
-                                          <td>Deluxe #B-0005</td>
-                                          <td>Single Bed</td>
-                                          <td>Non A.C. Room</td>
+                                          <td>{{$book->room_list}}</td>
+                                          <td>{{substr($book->room_list, 11, 6)}}</td>
+                                          <td>{{substr($book->room_list, 30, 6)}}</td>
                                           <td>
                                             <div class="badge bg-label-success mb-2">Booked</div>
-                                            <div class="badge bg-label-primary booked-date "><i class="text-primary me-2 ti ti-calendar"></i> June 15, 2023 to June 20, 2023</div>
+                                            <div class="badge bg-label-primary booked-date "><i class="text-primary me-2 ti ti-calendar"></i></div>
                                           </td>
                                           <td>
                                             <div class="d-inline-block">
@@ -313,7 +290,7 @@
                                             </div>
                                           </td>
                                         </tr>
-                                        
+                                        @endforeach
                                       </tbody>
                                     </table>
                                   </div>

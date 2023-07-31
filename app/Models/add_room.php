@@ -11,4 +11,6 @@ class add_room extends Model
     protected $table = 'add_room';
     protected $primaryKey = 'room_no';
     public $timestamps = false;
+
+   
 }

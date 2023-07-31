@@ -63,15 +63,12 @@ class BookingController extends Controller
         $booking->deposite_no = $req->deposit_no;
         $booking->deposite_rs = $req->deposite_rs;
         $booking->rs_word = $req->rs_word;
+        $updateroom = add_room::where('room_name',$req->room_list)->get();
+        $updateroom->status=1;
+        $booking->save();
+      
+     
 
-     try {
-    $booking->save();
-} catch (\Exception $e) {
-    // Log or display the error
-    error_log($e->getMessage());
-    // or
-    echo "Error: " . $e->getMessage();
-}
 
     
         $m_details = new member_details();
@@ -96,19 +93,20 @@ class BookingController extends Controller
         $member->address = strtoupper($req->collapsible_address);
         $member->save();
         $m_data=add_members::all();
+       
+   
         return view('Booking.room-booking',['member'=>$member,'m_data'=>$m_data,'p_details'=>$p_details]);
     }
     
    
-
-    
-
-    
-
     // RoomList
+
     public function ADDROOM(){
         $list =$data=DB::select("SELECT * , add_room.room_no as id from add_room");
-        return view('Booking.room-list',['list'=>$list]);
+        $room_book = DB::select ("SELECT * , room_details.r_id as id from room_details ");
+//dd($room_book);
+       //$room_list = substr($room_book['room_list'], 0, 6);
+        return view('Booking.room-list',['list'=>$list,'room_book'=>$room_book,]);
 
     }
     public function RoomList(Request $req){
@@ -118,11 +116,10 @@ class BookingController extends Controller
         $room->room_facility = $req->input('room_facility');
         $room->save();
         $list = DB::select("SELECT * , add_room.room_no as id from add_room ");
-        dd($list->toArray());
-        return view('Booking.room-list', ['list' => $list]);
+        $room_book = DB::select("SELECT * , room_details.r_id as id from room_details");
+      //$room_list = substr($room_book['room_list'], 0, 6);
+        dd($room_list);
+        return view('Booking.room-list', ['list' => $list,'room_book'=>$room_book]);
     }
 
-    public function room_booked(){
-        
-    }
 }

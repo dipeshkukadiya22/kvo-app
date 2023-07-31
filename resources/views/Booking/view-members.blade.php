@@ -126,7 +126,7 @@
 
                                 <!-- Browser Default -->
                                 
-                                <form class="browser-default-validation" method="POST" action="">
+                                <form class="browser-default-validation" method="POST" action="{{route('edit_members')}}">
  
                                   @csrf
                                   <div class="mb-3">
