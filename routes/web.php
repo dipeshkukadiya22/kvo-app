@@ -64,6 +64,7 @@ Route::POST('CommunityDonation', [donation::class, 'Community_Donation'])->name(
 Route::get('view_community_donation', [donation::class, 'view_donation'])->name('view_donation');
 // View Community_Donation
 Route::get('/View_Community_Donation',  [donation::class, 'View_Community_Donation']) -> name('View_Community_Donation');
+Route::get('/get_community_donation/{id}',[MedicalController::class,'get_community_donation'])->name('get_community_donation');
 
 
 Route::get('General_Donation', [donation::class, 'General_Donation'])->name('General_Donation');

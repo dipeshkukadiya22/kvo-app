@@ -98,6 +98,7 @@ button.swal2-cancel.btn.btn-label-danger {
                                           </thead>
                                           @foreach($donation as $row)
                                           <tr>
+                                          <input type="hidden" class="id" value="{{$row->donation_id}}">
                                               <td></td>
                                               <td>{{$row->donation_id}}</td>
                                               <td>{{$row->name}}</td>
@@ -110,10 +111,10 @@ button.swal2-cancel.btn.btn-label-danger {
                                                   <div class="d-inline-block">
                                                     <a href="javascript:;" class="text-primary"><i class="ti ti-eye"></i></a>
 
-                                                    <a href="javascript:;" class="btn btn-sm btn-icon item-edit" data-bs-toggle="offcanvas"
+                                                    <a class="btn btn-sm btn-icon item-edit" data-bs-toggle="offcanvas"
                                                     data-bs-target="#offcanvasBackdrop" aria-controls="offcanvasBackdrop"><i class="text-primary ti ti-edit"></i></a>
 
-                                                    <a href="javascript:;" class="text-danger delete-record"><i class="ti ti-trash"></i></a>
+                                                    <a  class="text-danger delete-record"><i class="ti ti-trash"></i></a>
                                                     
                                                   </div>
                                               </td>
@@ -152,7 +153,7 @@ button.swal2-cancel.btn.btn-label-danger {
                                         <input
                                             type="text"
                                             class="form-control"
-                                            id="basic-default-name"
+                                            id="donation_id"
                                             name="donation_id"
                                             readonly
                                             />
@@ -162,7 +163,7 @@ button.swal2-cancel.btn.btn-label-danger {
                                         <label class="form-label" for="multicol-phone">શેઠશ્રી રતનશી ટોકરશી વોરા મેડિકલ ચેકઅપ સેન્ટર</label>
                                         <div class="input-group">
                                             <span class="input-group-text">₹</span>
-                                            <input type="number" class="form-control amount-input" name="medical_checkup" placeholder="Amount" aria-label="Amount (to the nearest dollar)" required>
+                                            <input type="number" class="form-control amount-input" name="medical_checkup" id="medical_checkup" placeholder="Amount" aria-label="Amount (to the nearest dollar)" required>
                                             
                                         </div>
                                     </div>
@@ -171,7 +172,7 @@ button.swal2-cancel.btn.btn-label-danger {
                                         <label class="form-label" for="multicol-phone">મહાજનનું મામેરું</label>
                                         <div class="input-group">
                                             <span class="input-group-text">₹</span>
-                                            <input type="number" class="form-control amount-input" name="mahajan" placeholder="Amount" aria-label="Amount (to the nearest dollar)" required>
+                                            <input type="number" class="form-control amount-input" name="mahajan" id="mahajan" placeholder="Amount" aria-label="Amount (to the nearest dollar)" required>
                                             
                                         </div>
                                     </div>
@@ -180,7 +181,7 @@ button.swal2-cancel.btn.btn-label-danger {
                                         <label class="form-label" for="multicol-phone">માતુશ્રી લાખણીબાઈ રામજી તેજશી ગાલા નવનીત ભોજનશાળા</label>
                                         <div class="input-group">
                                             <span class="input-group-text">₹</span>
-                                            <input type="number" class="form-control amount-input" name="bhojanshala" placeholder="Amount" aria-label="Amount (to the nearest dollar)" required>
+                                            <input type="number" class="form-control amount-input" name="bhojanshala" id="bhojanshala"placeholder="Amount" aria-label="Amount (to the nearest dollar)" required>
                                             
                                         </div>
                                     </div>
@@ -189,7 +190,7 @@ button.swal2-cancel.btn.btn-label-danger {
                                         <label class="form-label" for="multicol-phone">શૈક્ષણિક</label>
                                         <div class="input-group">
                                         <span class="input-group-text">₹</span>
-                                        <input type="number" class="form-control amount-input" name="shaikshanik" placeholder="Amount" aria-label="Amount (to the nearest dollar)" required>
+                                        <input type="number" class="form-control amount-input" name="shaikshanik" id="shaikshanik" placeholder="Amount" aria-label="Amount (to the nearest dollar)" required>
                                         
                                         </div>
                                     </div>
@@ -198,7 +199,7 @@ button.swal2-cancel.btn.btn-label-danger {
                                         <label class="form-label" for="multicol-phone">લવાજમ</label>
                                         <div class="input-group">
                                         <span class="input-group-text">₹</span>
-                                        <input type="number" class="form-control amount-input" name="lavajam" placeholder="Amount" aria-label="Amount (to the nearest dollar)" required>
+                                        <input type="number" class="form-control amount-input" name="lavajam" id="lavajam" placeholder="Amount" aria-label="Amount (to the nearest dollar)" required>
                                         
                                         </div>
                                     </div>
@@ -207,7 +208,7 @@ button.swal2-cancel.btn.btn-label-danger {
                                         <label class="form-label" for="multicol-phone">ઑક્સીજન ડોનેશન</label>
                                         <div class="input-group">
                                         <span class="input-group-text">₹</span>
-                                        <input type="number" class="form-control amount-input" name="oxygen" placeholder="Amount" aria-label="Amount (to the nearest dollar)" required>
+                                        <input type="number" class="form-control amount-input" name="oxygen" id="oxygen" placeholder="Amount" aria-label="Amount (to the nearest dollar)" required>
                                         
                                         </div>
                                     </div>
@@ -216,7 +217,7 @@ button.swal2-cancel.btn.btn-label-danger {
                                         <label class="form-label" for="multicol-phone">એમ્બ્યુલન્સ ડોનેશન</label>
                                         <div class="input-group">
                                         <span class="input-group-text">₹</span>
-                                        <input type="number" class="form-control amount-input" name="ambulance" placeholder="Amount" aria-label="Amount (to the nearest dollar)" required>
+                                        <input type="number" class="form-control amount-input" name="ambulance" id="ambulance" placeholder="Amount" aria-label="Amount (to the nearest dollar)" required>
                                         
                                         </div>
                                     </div>
@@ -225,7 +226,7 @@ button.swal2-cancel.btn.btn-label-danger {
                                         <label class="form-label" for="multicol-phone">ઈતર</label>
                                         <div class="input-group">
                                         <span class="input-group-text">₹</span>
-                                        <input type="number" class="form-control amount-input" name="other" placeholder="Amount" aria-label="Amount (to the nearest dollar)" required>
+                                        <input type="number" class="form-control amount-input" name="other" id="other" placeholder="Amount" aria-label="Amount (to the nearest dollar)" required>
                                         
                                         </div>
                                     </div>
@@ -235,7 +236,7 @@ button.swal2-cancel.btn.btn-label-danger {
                                         <input
                                         type="text"
                                         class="form-control"
-                                        id="basic-default-name"
+                                        id="remarks"
                                         name="remarks" 
                                         {{-- placeholder="John Doe" --}}
                                         required />
@@ -265,7 +266,7 @@ button.swal2-cancel.btn.btn-label-danger {
                                         <div class="form-check form-check-inline mb-2">
                                         <input
                                             type="radio"
-                                            id="basic_default_radio-male"
+                                            id="cheque"
                                             name="basic_default_radio"
                                             class="form-check-input"
                                             value="cheque"
@@ -275,7 +276,7 @@ button.swal2-cancel.btn.btn-label-danger {
                                         <div class="form-check form-check-inline">
                                         <input
                                             type="radio"
-                                            id="basic_default_radio-female"
+                                            id="draft"
                                             name="basic_default_radio"
                                             class="form-check-input"
                                             value="Draft"
@@ -285,7 +286,7 @@ button.swal2-cancel.btn.btn-label-danger {
                                         <div class="form-check form-check-inline">
                                         <input
                                             type="radio"
-                                            id="basic_default_radio-female"
+                                            id="cash"
                                             name="basic_default_radio"
                                             class="form-check-input"
                                             value="Cash"
@@ -295,12 +296,16 @@ button.swal2-cancel.btn.btn-label-danger {
                                         <div class="form-check form-check-inline">
                                         <input
                                             type="radio"
-                                            id="basic_default_radio-female"
+                                            id="upi"
                                             name="basic_default_radio"
                                             class="form-check-input"
                                             value="UPI"
                                             required />
                                         <label class="form-check-label" for="basic_default_radio">UPI</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input type="text" id="payment" name="payment" class="form-control" />
+                                            <label class="form-check-label" for="basic-default-radio">payment</label>
                                         </div>
                                     </div>
                                     
@@ -702,13 +707,13 @@ button.swal2-cancel.btn.btn-label-danger {
   <!-- end num to word -->
 
   <script>
-    // Get all elements with class "delete-record"
-    const deleteLinks = document.querySelectorAll(".delete-record");
-
+        // Get all elements with class "delete-record"
+        const deleteLinks = document.querySelectorAll(".delete-record");
     // Loop through each delete link and attach a click event listener
     deleteLinks.forEach(link => {
         link.addEventListener("click", function() {
             // Show a confirmation dialog using SweetAlert2
+            var id=$(this).closest("tr").find(".id").val();
             Swal.fire({
                 title: "Are you sure?",
                 text: "You won't be able to revert this!",
@@ -720,17 +725,52 @@ button.swal2-cancel.btn.btn-label-danger {
             }).then((result) => {
                 // If the user confirms the deletion, proceed with the deletion logic
                 if (result.isConfirmed) {
-                    // Write your deletion logic here
-                    // For example, you can remove the entire row from the table:
-                    const row = this.closest("tr");
-                    if (row) {
-                        row.remove();
-                    }
-
-                    // Show a success message using SweetAlert2
-                    Swal.fire("Deleted!", "The record has been deleted.", "success");
+                  $.ajax({
+                    url:"{{url('delete_community_donation')}}" +"/"+ id,
+                    type:'GET',
+                    success:function(response){
+                        Swal.fire(
+                            'Deleted!',
+                            'Your Record has been deleted.',
+                            'success',
+                            );
+                            location.reload();
+                            }
+                        });
                 }
             });
+        });
+    });
+</script>
+<script>
+ // Get all elements with class "item-edit"
+ const editLinks = document.querySelectorAll(".item-edit");
+    // Loop through each delete link and attach a click event listener
+    editLinks.forEach(link => {
+        link.addEventListener("click", function() {
+            // Show a confirmation dialog using SweetAlert2
+            var id=$(this).closest("tr").find(".id").val();
+            alert(id);
+            $.ajax({
+                url:"{{url('get_community_donation')}}" +"/"+ id,
+                type:'GET',
+                  success:function(response){  
+                      $("#donation_id").val(response['name']);
+                     /* $("#medical_checkup").val(response['medical_checkup']);
+                      $("#bhojanshala").val(response['bhojanshala']);
+                      $("#mahajan").val(response['mahajan']);
+                      $("#shaikshanik").val(response['shaikshanik']);
+                      $("#oxygen").val(response['oxygen']);
+                      $("#lavajam").val(response['lavajam']);
+                      $("#ambulance").val(response['ambulance']);
+                      $("#other").val(response['other']);
+                      $("#remarks").val(response['remarks']);
+                      $("#total").val(response['total']);
+                      $("#total_in_word").val(response['ambulance']);
+                      $("#payment").val(response['payment_mode']);*/
+                        
+                  }
+                });
         });
     });
 </script>

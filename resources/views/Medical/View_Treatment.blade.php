@@ -255,7 +255,7 @@ button.swal2-cancel.btn.btn-label-danger {
                                             />
                                         <label class="form-check-label" for="basic_default_radio">UPI</label>
                                         </div>
-                                        <div class="form-check form-check-inline" >
+                                        <div class="form-check form-check-inline" hidden>
                                             <input type="text" id="payment" name="payment" class="form-control" />
                                             <label class="form-check-label" for="basic-default-radio">payment</label>
                             </div>

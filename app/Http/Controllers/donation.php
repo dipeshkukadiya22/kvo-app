@@ -159,9 +159,18 @@ class donation extends Controller
     public function View_Community_Donation(){
         $donation=community_donation::all();
         return view('Donation.View_Community_Donation',['donation'=> $donation]);
-
     }
-
+    public function get_community_donation($id){
+        dd("hi");
+        $data=community_donation::find($id);
+        return $data;
+    }
+    public function delete_community_donation($id)
+    {
+        $donation=community_donation::find($id);
+        $donation->delete();
+        return back()->with("Delete Community Donation");
+    }
     public function General_Donation(){
         return view ('Donation.General_Donation');
     }
