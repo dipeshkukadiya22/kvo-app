@@ -15,12 +15,24 @@
 <link rel="stylesheet" href="{{ asset ('assets/vendor/libs/tagify/tagify.css') }}" />
 <link rel="stylesheet" href="{{ asset ('assets/vendor/libs/formvalidation/dist/css/formValidation.min.css') }}" />
 
+<link rel="stylesheet" href="{{ asset('assets/vendor/libs/toastr/toastr.css') }}" />
+<link rel="stylesheet" href="{{ asset('assets/vendor/libs/animate-css/animate.css') }}" />
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+{{-- <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.all.min.js"></script> --}}
+
 <!-- Page CSS -->
 <style>
 
 .form-label {
     font-weight: bold;
 }
+
+.form-control[readonly] {
+      background-color: #efefef;
+      opacity: 1;
+  }
 
 </style>
 
@@ -87,30 +99,43 @@
                 <div class="col-md mb-4 mb-md-0">
                   <div class="card">
                     <div class="card-body">
-                      <form class="browser-default-validation" method="POST" action="{{route ('CommunityDonation')}}">
+                      <form  class="browser-default-validation" method="POST" action="{{route ('CommunityDonation')}}">
                         @csrf
                         <div class="row g-3">
                           <div class="col-12">
                             <h6 class="fw-semibold">1. Personal Details</h6>
-                            <hr class="mt-0" />
+                            <hr class="mt-0 mb-0" />
                           </div>
+                          <div class="col-md-2">
+                            <label class="form-label" name="p_number" for="basic-default-name">પહોંચ નંબર</label>
+                            <input
+                              type="text"
+                              class="form-control"
+                              id="basic-default-name"
+                              name="donation_id"
+                              value="{{ $donation_id + 1 }}"  readonly
+                               />
+                          </div>
+
                           <div class="col-md-4">
                             <label for="select2Basic" class="form-label">નામ</label>
-                            <select id="select2Basic" name="name" class="select2 form-select form-select-lg" data-allow-clear="true" required>
-                              <option value="AK">Alaska</option>
-                              <option value="HI">Hawaii</option>
-                              <option value="CA">California</option>
-                              <option value="NV">Nevada</option>
+                            <select id="select2Basic" class="select2 form-select form-select-lg" data-allow-clear="true" name="name" placeholder="select name" required>
+                              <option value=""></option>
+                              @foreach ($m_data as $row)  
+                                  <option value="{{$row->m_name}}" {{(!empty($member) && $member->m_name == $row->m_name) ? "selected" : ""}}>{{$row->m_name}}&nbsp;&nbsp;-&nbsp;&nbsp;{{$row->phone_no}}</option>
+                              @endforeach
                             </select>
+                            <input type="hidden" id="email_user" value="{{!empty($m_data)  ? $m_data:''}}">
                           </div>
                           <div class="col-md-2">
                             <label class="form-label" for="multicol-phone">મોબાઈલ નંબર</label>
                             <input
                               type="number"
-                              id="multicol-phone"
+                              id="member-phone"
                               name="phone_no" 
                               class="form-control phone-mask"
                               placeholder="658 799 8941"
+                              value="{{ (!empty($member)) ? $member->phone_no : '' }}"
                               aria-label="658 799 8941" required/>
                           </div>
                           <div class="col-md-2">
@@ -119,8 +144,9 @@
                               type="text"
                               class="form-control"
                               name="city"
-                              id="basic-default-name"
+                              id="member_city"
                               placeholder="John Doe"
+                              value="{{ (!empty($member)) ? $member->donation : '' }}"
                               required />
                          
                           </div>
@@ -133,32 +159,26 @@
                               id="basic-default-dob"
                               required />
                           </div>
-                          <!--<div class="col-md-2">
-                            <label class="form-label" name="p_number" for="basic-default-name">પહોંચ નંબર</label>
-                            <input
-                              type="text"
-                              class="form-control"
-                              id="basic-default-name"
-                              placeholder="15"
-                              required />
-                          </div>-->
+
+                          
                           <div class="col-12">
-                            <h6 class="mt-2 fw-semibold">2. Donation Details</h6>
-                            <hr class="mt-0" />
+                            <h6 class="mt-4 fw-semibold">2. Donation Details</h6>
+                            <hr class="mt-0 mb-0" />
                           </div>
                           <div class="col-md-4">
                             <label class="form-label" for="multicol-phone">શેઠશ્રી રતનશી ટોકરશી વોરા મેડિકલ ચેકઅપ સેન્ટર</label>
                             <div class="input-group">
                               <span class="input-group-text">₹</span>
-                              <input type="number" class="form-control" name="medical_checkup" placeholder="Amount" aria-label="Amount (to the nearest dollar)" required>
+                              <input type="number" class="form-control amount-input" name="medical_checkup" placeholder="Amount" aria-label="Amount (to the nearest dollar)" required>
                               
                             </div>
                           </div>
+
                           <div class="col-md-4">
                             <label class="form-label" for="multicol-phone">મહાજનનું મામેરું</label>
                             <div class="input-group">
                               <span class="input-group-text">₹</span>
-                              <input type="number" class="form-control" name="mahajan" placeholder="Amount" aria-label="Amount (to the nearest dollar)" required>
+                              <input type="number" class="form-control amount-input" name="mahajan" placeholder="Amount" aria-label="Amount (to the nearest dollar)" required>
                               
                             </div>
                           </div>
@@ -166,7 +186,7 @@
                             <label class="form-label" for="multicol-phone">માતુશ્રી લાખણીબાઈ રામજી તેજશી ગાલા નવનીત ભોજનશાળા</label>
                             <div class="input-group">
                               <span class="input-group-text">₹</span>
-                              <input type="number" class="form-control" name="bhojanshala" placeholder="Amount" aria-label="Amount (to the nearest dollar)" required>
+                              <input type="number" class="form-control amount-input" name="bhojanshala" placeholder="Amount" aria-label="Amount (to the nearest dollar)" required>
                               
                             </div>
                           </div>
@@ -174,7 +194,7 @@
                             <label class="form-label" for="multicol-phone">શૈક્ષણિક</label>
                             <div class="input-group">
                               <span class="input-group-text">₹</span>
-                              <input type="number" class="form-control" name="shaikshanik" placeholder="Amount" aria-label="Amount (to the nearest dollar)" required>
+                              <input type="number" class="form-control amount-input" name="shaikshanik" placeholder="Amount" aria-label="Amount (to the nearest dollar)" required>
                               
                             </div>
                           </div>
@@ -182,7 +202,7 @@
                             <label class="form-label" for="multicol-phone">લવાજમ</label>
                             <div class="input-group">
                               <span class="input-group-text">₹</span>
-                              <input type="number" class="form-control" name="lavajam" placeholder="Amount" aria-label="Amount (to the nearest dollar)" required>
+                              <input type="number" class="form-control amount-input" name="lavajam" placeholder="Amount" aria-label="Amount (to the nearest dollar)" required>
                               
                             </div>
                           </div>
@@ -190,7 +210,7 @@
                             <label class="form-label" for="multicol-phone">ઑક્સીજન ડોનેશન</label>
                             <div class="input-group">
                               <span class="input-group-text">₹</span>
-                              <input type="number" class="form-control" name="oxygen" placeholder="Amount" aria-label="Amount (to the nearest dollar)" required>
+                              <input type="number" class="form-control amount-input" name="oxygen" placeholder="Amount" aria-label="Amount (to the nearest dollar)" required>
                               
                             </div>
                           </div>
@@ -198,7 +218,7 @@
                             <label class="form-label" for="multicol-phone">એમ્બ્યુલન્સ ડોનેશન</label>
                             <div class="input-group">
                               <span class="input-group-text">₹</span>
-                              <input type="number" class="form-control" name="ambulance" placeholder="Amount" aria-label="Amount (to the nearest dollar)" required>
+                              <input type="number" class="form-control amount-input" name="ambulance" placeholder="Amount" aria-label="Amount (to the nearest dollar)" required>
                               
                             </div>
                           </div>
@@ -206,7 +226,7 @@
                             <label class="form-label" for="multicol-phone">ઈતર</label>
                             <div class="input-group">
                               <span class="input-group-text">₹</span>
-                              <input type="number" class="form-control" name="other" placeholder="Amount" aria-label="Amount (to the nearest dollar)" required>
+                              <input type="number" class="form-control amount-input" name="other" placeholder="Amount" aria-label="Amount (to the nearest dollar)" required>
                               
                             </div>
                           </div>
@@ -228,12 +248,20 @@
                               {{-- placeholder="John Doe" --}}
                               required />
                         	</div>
-                          <div class="col-md-4">
+                          {{-- <div class="col-md-4">
                             <label class="form-label" for="multicol-phone">ટોટલ</label>
                             <div class="input-group">
                               <span class="input-group-text">₹</span>
                               <input  type="text" id="Text1" class="form-control" name="total" placeholder="Amount" aria-label="Amount (to the nearest dollar)"
                               onkeypress="return onlyNumbers(this.value);" onkeyup="NumToWord(this.value,'ankers');" maxlength="9" required>
+                            </div>
+                          </div> --}}
+
+                          <div class="col-md-4">
+                            <label class="form-label" for="multicol-phone">ટોટલ</label>
+                            <div class="input-group">
+                                <span class="input-group-text">₹</span>
+                                <input type="text" id="total" class="form-control" name="total" placeholder="Amount" aria-label="Amount (to the nearest dollar)" onkeypress="return onlyNumbers(event);" maxlength="9" required readonly>
                             </div>
                           </div>
                           {{-- <div id="divDisplayWords"> --}}
@@ -246,7 +274,7 @@
                               name="total_in_word" 
                               value=""
                               {{-- placeholder="John Doe" --}}
-                              required />
+                              required readonly/>
                         	</div>
                           <div class="col-md-4">
                             <label class="d-block form-label">નાણા મળેલ</label>
@@ -324,6 +352,7 @@
     <script src="{{ asset ('assets/vendor/libs/formvalidation/dist/js/FormValidation.min.js') }}"></script>
     <script src="{{ asset ('assets/vendor/libs/formvalidation/dist/js/plugins/Bootstrap5.min.js') }}"></script>
     <script src="{{ asset ('assets/vendor/libs/formvalidation/dist/js/plugins/AutoFocus.min.js') }}"></script>
+    
 
     <!-- Main JS -->
     <script src="{{ asset ('assets/js/main.js') }}"></script>
@@ -332,6 +361,12 @@
     
     <!-- Page JS -->
     <script src="{{ asset ('assets/js/form-validation.js') }}"></script>
+
+    <!-- Vendors JS -->
+    <script src="{{ asset('assets/vendor/libs/toastr/toastr.js') }}"></script>
+
+    <!-- Page JS -->
+    <script src="{{ asset('assets/js/ui-toasts.js') }}"></script>
 
     <script>
         jQuery(document).ready(function($){
@@ -342,6 +377,44 @@
     })
     });
     </script>
+
+    
+<script>
+  $(document).ready(function () {
+      // Select all input fields with class 'amount-input'
+      $('.amount-input').on('input', function () {
+          var total = 0;
+
+          // Loop through each input field and calculate the total
+          $('.amount-input').each(function () {
+              var amount = parseFloat($(this).val());
+              if (!isNaN(amount)) {
+                  total += amount;
+              }
+          });
+
+          // Update the 'ટોટલ' input field with the calculated total
+          $('#total').val(total);
+
+          // Convert the total to words and update the 'અંકે રૂપિયા' input field
+          NumToWord(total, 'ankers');
+      });
+  });
+
+  function onlyNumbers(evt) {
+      var e = event || evt; // For trans-browser compatibility
+      var charCode = e.which || e.keyCode;
+
+      if (charCode > 31 && (charCode < 48 || charCode > 57))
+          return false;
+      return true;
+  }
+
+  function NumToWord(inputNumber, outputControl) {
+      // Your NumToWord function implementation
+      // Make sure it works correctly separately
+  }
+</script>
 
     <!-- start num to word -->
 
@@ -483,8 +556,69 @@ function NumToWord(inputNumber, outputControl) {
   document.getElementById(outputControl).value = finalOutput;
 }
 </script>
-
 <!-- end num to word -->
+
+
+<!-- Make sure to include jQuery library before this script -->
+<script>
+  $(document).ready(function () {
+      $("#select2Basic").change(function () {
+          var data = JSON.parse($("#email_user").val());
+          var selectedId = $(this).val();
+          
+          $.each(data, function (key, value) {
+              if (value['m_name'] == selectedId) {
+                  $('#member-phone').val(value['phone_no']);
+                  $('#member_city').val(value['city']);
+                  return false; // Exit the loop once a match is found
+              }
+          });
+      });
+  });
+</script>
+
+
+{{-- <script>
+  document.addEventListener("DOMContentLoaded", function() {
+    // Find the form element by its ID
+    const form = document.getElementById("donationForm");
+
+    // Add a submit event listener to the form
+    form.addEventListener("submit", function(event) {
+      event.preventDefault(); // Prevent the default form submission
+
+      // Simulate form submission or perform AJAX request if needed
+      // For demonstration purposes, we are using a 1-second timeout
+      setTimeout(function() {
+        // Show the SweetAlert popup after the form is submitted
+        Swal.fire({
+          icon: "success",
+          title: "Form Submitted",
+          text: "Your data has been submitted successfully!",
+          confirmButtonText: "OK",
+        }).then((result) => {
+          // Optionally, you can redirect to another page after the user clicks "OK"
+          if (result.isConfirmed) {
+            // Replace "your-page-url" with the desired destination URL
+            window.location.href = window.location.href;
+          }
+        });
+      }, 1000); // Adjust the timeout value if needed
+    });
+  });
+</script> --}}
+
+
+
+@if (Session::get('message'))
+    <script>
+        toastr['success']("{{ Session::get('message') }}", 'Good Job!', {
+            closeButton: true,
+            tapToDismiss: false,
+        });
+    </script>
+@endif
+
 
 @endsection
 

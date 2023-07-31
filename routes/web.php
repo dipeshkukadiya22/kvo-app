@@ -12,7 +12,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\donation;
 use App\Http\Controllers\Expense;
 use App\Http\Controllers\pdfcontroller;
-use App\Http\Controllers\medical;
+use App\Http\Controllers\MedicalController;
 
 
 /*
@@ -56,13 +56,16 @@ Route::get('/view-members', [MembersController::class, 'ViewMembers'])->name('Vi
 Route::POST('/edit_members', [MembersController::class, 'edit_members'])->name('edit_members');
 
 
+Route::get('Religious_Donation', [donation::class, 'index1'])->name('Religious_Donation');
+Route::POST('ReligiousDonation', [donation::class, 'Religious_Donation'])->name('ReligiousDonation');
 
-
-
-Route::get('Religious_Donation', [donation::class, 'Religious_Donation'])->name('Religious_Donation');
-
+// Add Community_Donation
 Route::get('Community_Donation', [donation::class, 'index'])->name('Community_Donation');
 Route::POST('CommunityDonation', [donation::class, 'Community_Donation'])->name('CommunityDonation');
+Route::get('view_community_donation', [donation::class, 'view_donation'])->name('view_donation');
+// View Community_Donation
+Route::get('/View_Community_Donation',  [donation::class, 'View_Community_Donation']) -> name('View_Community_Donation');
+Route::get('/get_community_donation/{id}',[MedicalController::class,'get_community_donation'])->name('get_community_donation');
 
 Route::POST('General_Donation', [donation::class, 'add_member'])->name('General_Donation');
 Route::get('General_Donation', [donation::class, 'index1']);
@@ -80,8 +83,19 @@ Route::get('pdf_Religious_Donation',[pdfcontroller::class,'pdf_Religious_Donatio
 Route::get('pdf_Community_Donation',[pdfcontroller::class,'pdf_Community_Donation'])->name('pdf_Community_Donation');
 Route::get('pdf_General_Donation',[pdfcontroller::class,'pdf_General_Donation'])->name('pdf_General_Donation');
 Route::get('pdf_Expense_Receipt',[pdfcontroller::class,'pdf_Expense_Receipt'])->name('pdf_Expense_Receipt');
+
 Route::get('pdf_Religious_Expense_Receipt',[pdfcontroller::class,'pdf_Religious_Expense_Receipt'])->name('pdf_Religious_Expense_Receipt');
 Route::get('treatment',[medical::class,'treatment'])->name('treatment');
 Route::get('pdf_Checkout',[pdfcontroller::class,'pdf_Checkout'])->name('pdf_Checkout');
 Route::get('pdf_Advance_Deposit',[pdfcontroller::class,'pdf_Advance_Deposit'])->name('pdf_Advance_Deposit');
 Route::get('pdf_Checkin',[pdfcontroller::class,'pdf_Checkin'])->name('pdf_Checkin');
+
+Route::get('treatment',[MedicalController::class,'show'])->name('show');
+Route::post('add_treatment',[MedicalController::class,'add'])->name('add_treatment');
+Route::post('update_treatment',[MedicalController::class,'update'])->name('update_treatment');
+Route::get('/get/{id}',[MedicalController::class,'get'])->name('get');
+Route::get('/get_member/{id}',[MedicalController::class,'get_member'])->name('get_member');
+Route::get('view_treatment',[MedicalController::class,'view_treatment'])->name('view_treatment');
+Route::get('edit_treatment/{id}',[MedicalController::class,'edit_treatment'])->name('edit_treatment');
+Route::get('delete_treatment/{id}',[MedicalController::class,'delete_treatment'])->name('delete_treatment');
+
