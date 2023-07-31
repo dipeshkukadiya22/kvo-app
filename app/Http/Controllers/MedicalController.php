@@ -33,10 +33,6 @@ class MedicalController extends Controller
         $data->save();
         return back()->with("Add Treatment");
     }
-    public function edit_treatment($id)
-    {
-
-    }
     public function get_member($id)
     {
         $member=DB::select("SELECT m.sr_no,m.date,m.doctor_name,m.amount,m.payment_mode,m.amount_in_words,m.remark,M.m_name,M.city,M.phone_no,M.p_id FROM medical As m join add_members As M where m.p_id=M.p_id and m.sr_no='$id'");

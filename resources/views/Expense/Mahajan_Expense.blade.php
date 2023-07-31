@@ -43,7 +43,7 @@
                 <div class="content-header-left col-md-9 col-12 mb-2">
                     <div class="row breadcrumbs-top">
                         <div class="col-12">
-                          <h4 class="fw-bold py-3">ખર્ચ વાઉચર</h4>
+                          <h4 class="fw-bold py-3">મહાજન ખર્ચ વાઉચર</h4>
                         </div>
                     </div>
                 </div>
@@ -74,7 +74,42 @@
                           </div>
                           <div class="offcanvas-body mx-0 flex-grow-0">
                             <!-- Browser Default -->
-                            @include('layouts.adduser')
+                            <form class="browser-default-validation" method="POST" action="{{route('Mahajan_Expense')}}">
+                              @csrf
+                              <div class="mb-3">
+                                <label class="form-label" for="basic-default-name">Name</label>
+                                <input type="text" name="m_name" class="form-control" id="basic-default-name"  style="text-transform:uppercase"  placeholder="John Doe" />
+                              </div>
+                              <div class="mb-3">
+                                <label class="form-label" for="basic-default-email">Email</label>
+                                <input type="email" name="email" id="basic-default-email" class="form-control" placeholder="john.doe"/>
+                              </div>
+                              
+                            
+                              <div class="mb-3">
+                                <label class="form-label" for="multicol-phone">Phone Number</label>
+                                <input type="number" name="phone_no" id="multicol-phone" class="form-control phone-mask" placeholder="658 799 8941" required />
+                            
+                              
+                            
+                              </div>
+                              <div class="mb-3">
+                                <label class="form-label" for="city">City</label>
+                                <input type="text" name="city" class="form-control" id="city" placeholder="Bhuj" />
+                              </div>
+                            
+                              <div class="col-4">
+                                <label class="form-label" for="collapsible-address">Address</label>
+                                <textarea name="collapsible_address"  class="form-control" id="collapsible_address" rows="1" placeholder="1456, Mall Road" ></textarea>
+                              </div>
+                              
+                              <div class="row">
+                                <div class="col-12">
+                                  <button type="submit" class="btn btn-primary mb-2 d-grid w-100" >Submit</button>
+                                  <button type="button" class="btn btn-label-secondary d-grid w-100" data-bs-dismiss="offcanvas"> Cancel</button>
+                                </div>
+                              </div>
+                            </form>
                             <!-- /Browser Default -->
                           </div>
                         </div>
@@ -87,7 +122,8 @@
                 <div class="col-md mb-4 mb-md-0">
                   <div class="card">
                     <div class="card-body">
-                      <form class="browser-default-validation">
+                      <form action="{{route('MahajanExpense')}}" method="POST" class="browser-default-validation" >
+                        @csrf
                         <div class="row g-3">
                           <div class="col-12">
                             <h6 class="fw-semibold">1. Personal Details</h6>
@@ -95,12 +131,13 @@
                           </div>
                           <div class="col-md-4">
                             <label for="select2Basic" class="form-label">નામ</label>
-                            <select id="select2Basic" class="select2 form-select form-select-lg" data-allow-clear="true" required>
-                              <option value="AK">Alaska</option>
-                              <option value="HI">Hawaii</option>
-                              <option value="CA">California</option>
-                              <option value="NV">Nevada</option>
+                            <select id="select2Basic" class="select2 form-select form-select-lg" data-allow-clear="true" name="name" placeholder="select name" required>
+                              <option value=""></option>
+                              @foreach ($m_data as $row)  
+                                  <option value="{{$row->m_name}}" {{(!empty($member) && $member->m_name == $row->m_name) ? "selected" : ""}}>{{$row->m_name}}&nbsp;&nbsp;-&nbsp;&nbsp;{{$row->phone_no}}</option>
+                              @endforeach
                             </select>
+                            <input type="hidden" id="email_user" value="{{!empty($m_data)  ? $m_data:''}}">
                           </div>
                           <div class="col-md-4">
                             <label class="form-label" for="basic-default-dob">તારીખ</label>
@@ -108,6 +145,7 @@
                               type="text"
                               class="form-control flatpickr-validation"
                               id="basic-default-dob"
+                              name="date"
                               required />
                           </div>
                           <div class="col-md-4">
@@ -115,7 +153,9 @@
                             <input
                               type="text"
                               class="form-control"
+                              value="{{$depo_id + 1}}"
                               id="basic-default-name"
+                              name="depo_id"
                               placeholder="15"
                               required readonly/>
                           </div>
@@ -126,7 +166,7 @@
                           <div class="col-md-4">
                             <label class="form-label" for="collapsible-address">બાબત</label>
                             <textarea
-                              name="collapsible-address"
+                              name="collapsible_details"
                               class="form-control"
                               id="collapsible-address"
                               rows="1"></textarea>
@@ -135,7 +175,7 @@
                             <label class="form-label" for="multicol-phone">રૂપિયા</label>
                             <div class="input-group">
                               <span class="input-group-text">₹</span>
-                              <input type="text" id="Text1" class="form-control" placeholder="Amount" aria-label="Amount (to the nearest dollar)"
+                              <input type="text" id="Text1" name="amount" class="form-control" placeholder="Amount" aria-label="Amount (to the nearest dollar)"
                               onkeypress="return onlyNumbers(this.value);" onkeyup="NumToWord(this.value,'ankers');" maxlength="9">
                             </div>
                           </div>
@@ -144,6 +184,7 @@
                             <label class="form-label" for="basic-default-name">અંકે રૂપિયા</label>
                             <input
                               type="text"
+                              name="inword"
                               class="form-control"
                               id="ankers"
                               value=""
@@ -344,6 +385,24 @@
     </script>
 
     <!-- end num to word -->
+
+     <!-- Make sure to include jQuery library before this script -->
+<script>
+  $(document).ready(function () {
+      $("#select2Basic").change(function () {
+          var data = JSON.parse($("#email_user").val());
+          var selectedId = $(this).val();
+          
+          $.each(data, function (key, value) {
+              if (value['m_name'] == selectedId) {
+                  $('#member_phone').val(value['phone_no']);
+                  $('#member_city').val(value['city']);
+                  return false; // Exit the loop once a match is found
+              }
+          });
+      });
+  });
+</script>
 
 @endsection
 

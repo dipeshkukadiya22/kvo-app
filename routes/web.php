@@ -63,9 +63,9 @@ Route::get('Community_Donation', [donation::class, 'index'])->name('Community_Do
 Route::POST('CommunityDonation', [donation::class, 'Community_Donation'])->name('CommunityDonation');
 Route::get('view_community_donation', [donation::class, 'view_donation'])->name('view_donation');
 // View Community_Donation
-Route::get('/View_Community_Donation',  [donation::class, 'View_Community_Donation']) -> name('View_Community_Donation');
-Route::get('/get_community_donation/{id}',[MedicalController::class,'get_community_donation'])->name('get_community_donation');
-
+Route::get('/View_Community_Donation',  [donation::class, 'view_comm_donation']) -> name('view_Comm_donation');
+Route::get('/get_community_donation/{id}',[donation::class,'get'])->name('get_community_donation');
+Route::get('/delete_community_donation/{id}',[donation::class,'delete'])->name('delete_community_donation');
 
 Route::get('General_Donation', [donation::class, 'General_Donation'])->name('General_Donation');
 Route::get('Expense_Receipt', [Expense::class, 'Expense_Receipt'])->name('Expense_Receipt');

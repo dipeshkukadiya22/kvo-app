@@ -27,6 +27,8 @@ return array(
     'App\\Http\\Middleware\\TrustProxies' => $baseDir . '/app/Http/Middleware/TrustProxies.php',
     'App\\Http\\Middleware\\ValidateSignature' => $baseDir . '/app/Http/Middleware/ValidateSignature.php',
     'App\\Http\\Middleware\\VerifyCsrfToken' => $baseDir . '/app/Http/Middleware/VerifyCsrfToken.php',
+    'App\\Models\\GeneralDonation' => $baseDir . '/app/Models/GeneralDonation.php',
+    'App\\Models\\Mahajan_Expense' => $baseDir . '/app/Models/Mahajan_Expense.php',
     'App\\Models\\User' => $baseDir . '/app/Models/User.php',
     'App\\Models\\add_members' => $baseDir . '/app/Models/add_members.php',
     'App\\Models\\community_donation' => $baseDir . '/app/Models/community_donation.php',

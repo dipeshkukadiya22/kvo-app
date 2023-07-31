@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\community_donation;
-use App\Models\religious_donation;
+use Illuminate\Support\Facades\DB;
+use App\Models\GeneralDonation;
 use App\Models\add_members;
+use App\Models\religious_donation;
+
 use Carbon\Carbon;
 
 use Illuminate\Http\Request;
@@ -154,28 +157,42 @@ class donation extends Controller
 
         //return view ('Donation.Community_Donation');
     }
-
-    // View Community_Donation
-    public function View_Community_Donation(){
+    public function view_comm_donation(){
         $donation=community_donation::all();
         return view('Donation.View_Community_Donation',['donation'=> $donation]);
     }
-    public function get_community_donation($id){
-        dd("hi");
+    public function get($id){
         $data=community_donation::find($id);
+        dd($data);
         return $data;
     }
-    public function delete_community_donation($id)
+    public function delete($id)
     {
         $donation=community_donation::find($id);
         $donation->delete();
-        return back()->with("Delete Community Donation");
+        //return back()->with("Delete Community Donation");
     }
     public function General_Donation(){
         return view ('Donation.General_Donation');
+
     }
 
     public function General_Donation_Report(){
         return view ('Donation.General_Donation_Report');
+    }
+
+    public function add_member(Request $req){
+        
+        //$p_details=personal_details::with('member')->get();
+        $member = new add_members();
+        $member->m_name = strtoupper($req->m_name);
+        $member->email = $req->email;
+        $member->phone_no = $req->phone_no;
+        $member->city = $req->city;
+        $member->address = strtoupper($req->collapsible_address);
+        $member->save();
+        $m_data=add_members::all();
+        $depo_id = GeneralDonation::get()->last()->depo_id;
+        return view('Donation.General_Donation',['member'=>$member,'m_data'=>$m_data,'depo_id' => $depo_id]);
     }
 }

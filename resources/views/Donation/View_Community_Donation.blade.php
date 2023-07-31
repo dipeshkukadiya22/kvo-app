@@ -109,7 +109,7 @@ button.swal2-cancel.btn.btn-label-danger {
                                               <td>{{$row->payment_mode}}</td>
                                               <td>
                                                   <div class="d-inline-block">
-                                                    <a href="javascript:;" class="text-primary"><i class="ti ti-eye"></i></a>
+                                                    <a href="{{route('pdf_Community_Donation')}}" class="text-primary"><i class="ti ti-eye"></i></a>
 
                                                     <a class="btn btn-sm btn-icon item-edit" data-bs-toggle="offcanvas"
                                                     data-bs-target="#offcanvasBackdrop" aria-controls="offcanvasBackdrop"><i class="text-primary ti ti-edit"></i></a>
@@ -706,14 +706,14 @@ button.swal2-cancel.btn.btn-label-danger {
   </script>
   <!-- end num to word -->
 
-  <script>
-        // Get all elements with class "delete-record"
-        const deleteLinks = document.querySelectorAll(".delete-record");
+<script>
+ const deleteLinks = document.querySelectorAll(".delete-record");
     // Loop through each delete link and attach a click event listener
     deleteLinks.forEach(link => {
         link.addEventListener("click", function() {
             // Show a confirmation dialog using SweetAlert2
             var id=$(this).closest("tr").find(".id").val();
+            alert(id);
             Swal.fire({
                 title: "Are you sure?",
                 text: "You won't be able to revert this!",
@@ -741,8 +741,8 @@ button.swal2-cancel.btn.btn-label-danger {
             });
         });
     });
-</script>
-<script>
+
+
  // Get all elements with class "item-edit"
  const editLinks = document.querySelectorAll(".item-edit");
     // Loop through each delete link and attach a click event listener
@@ -755,8 +755,8 @@ button.swal2-cancel.btn.btn-label-danger {
                 url:"{{url('get_community_donation')}}" +"/"+ id,
                 type:'GET',
                   success:function(response){  
-                      $("#donation_id").val(response['name']);
-                     /* $("#medical_checkup").val(response['medical_checkup']);
+                      $("#donation_id").val(response['donation_id']);
+                      $("#medical_checkup").val(response['medical_checkup']);
                       $("#bhojanshala").val(response['bhojanshala']);
                       $("#mahajan").val(response['mahajan']);
                       $("#shaikshanik").val(response['shaikshanik']);
@@ -766,18 +766,13 @@ button.swal2-cancel.btn.btn-label-danger {
                       $("#other").val(response['other']);
                       $("#remarks").val(response['remarks']);
                       $("#total").val(response['total']);
-                      $("#total_in_word").val(response['ambulance']);
-                      $("#payment").val(response['payment_mode']);*/
-                        
+                      $("#ankres").val(response['total_in_word']);
+                      $("#payment").val(response['payment_mode']); 
                   }
                 });
         });
     });
 </script>
-
-
-    
-
 @endsection
 
 @endsection
