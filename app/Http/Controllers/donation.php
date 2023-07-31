@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\community_donation;
-
+use Illuminate\Support\Facades\DB;
 use App\Models\GeneralDonation;
 use App\Models\add_members;
 use App\Models\religious_donation;
@@ -157,59 +157,20 @@ class donation extends Controller
 
         //return view ('Donation.Community_Donation');
     }
-
-
-    public function index1(){
-
-        $m_name =(GeneralDonation::get()->last()->m_name);
-        $p_details=GeneralDonation::with('member')->get();
-        $m_data = add_members::all();
-       // $depo_id=add_members::get()->last()->depo_id;
-        $depo_id = GeneralDonation::get()->last()->depo_id;
-        //dd($depo_id);
-        
-
-        return view ('Donation.General_Donation',['m_name' => $m_name, 'p_details' => $p_details, 'm_data' => $m_data,'depo_id'=>$depo_id ]);
-    }
-
-    public function General_Donation(Request $req){
-
-        $m_name =(GeneralDonation::get()->last()->m_name);
-        $p_details=GeneralDonation::with('member')->get();
-        $data = GeneralDonation::find($req->depo_id);
-        $m_data = add_members::all();
-        $data = GeneralDonation::find($req->depo_id);
-        $depo_id = GeneralDonation::get()->last()->depo_id;
-        $General_Donation = new GeneralDonation();
-        //Personal Details
-        $General_Donation -> depo_id  = $req -> depo_id;
-        $General_Donation-> date = Carbon::now();
-        $General_Donation -> city = $req -> city;
-        $General_Donation -> name = $req -> name;
-        $General_Donation -> haste = $req -> haste;
-        $General_Donation -> phone_no = $req -> phone_no;
-        $General_Donation -> details = $req -> details;
-       
-        $General_Donation -> save();
-        return redirect()->route('General_Donation');
-
-       
-
-    // View Community_Donation
-    public function View_Community_Donation(){
+    public function view_comm_donation(){
         $donation=community_donation::all();
         return view('Donation.View_Community_Donation',['donation'=> $donation]);
     }
-    public function get_community_donation($id){
-        dd("hi");
+    public function get($id){
         $data=community_donation::find($id);
+        dd($data);
         return $data;
     }
-    public function delete_community_donation($id)
+    public function delete($id)
     {
         $donation=community_donation::find($id);
         $donation->delete();
-        return back()->with("Delete Community Donation");
+        //return back()->with("Delete Community Donation");
     }
     public function General_Donation(){
         return view ('Donation.General_Donation');

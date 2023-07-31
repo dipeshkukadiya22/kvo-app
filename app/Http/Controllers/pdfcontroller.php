@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Barryvdh\DomPDF\Facade\Pdf;
+
 use DB;
 
 class pdfcontroller extends Controller
@@ -15,7 +16,7 @@ class pdfcontroller extends Controller
         // $pdf->loadHTML('<h1>Hello BABA</h1>');
         // return $pdf->stream();
         
-    $pdf = Pdf::loadView('pdf.pdf_Religious_Donation')->setPaper('a5', 'potrait')->setOptions(['defaultFont' => 'KAP119']);
+    $pdf = Pdf::loadView('pdf.pdf_Religious_Donation')->setPaper('a5', 'potrait')->setOptions(['defaultFont' => 'NotoSansGujarati-Regular','enable_remote',True]);
     return $pdf->stream();
     }
 
