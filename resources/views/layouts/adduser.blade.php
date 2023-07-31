@@ -1,3 +1,4 @@
+
 <form class="browser-default-validation" method="POST" action="{{route('room-booking')}}">
   @csrf
   <div class="mb-3">
@@ -9,6 +10,25 @@
     <input type="email" name="email" id="basic-default-email" class="form-control" placeholder="john.doe"/>
   </div>
   
+
+
+  <div class="mb-3">
+    <label class="form-label" for="multicol-phone">Phone Number</label>
+    <input type="number" name="phone_no" id="multicol-phone" class="form-control phone-mask" placeholder="658 799 8941" required />
+
+  
+
+  </div>
+  <div class="mb-3">
+    <label class="form-label" for="city">City</label>
+    <input type="text" name="city" class="form-control" id="city" placeholder="Bhuj" />
+  </div>
+
+  <div class="col-4">
+    <label class="form-label" for="collapsible-address">Address</label>
+    <textarea name="collapsible_address"  class="form-control" id="collapsible_address" rows="1" placeholder="1456, Mall Road" ></textarea>
+  </div>
+ 
 
   <div class="mb-3">
     <label class="form-label" for="multicol-phone">Phone Number</label>
