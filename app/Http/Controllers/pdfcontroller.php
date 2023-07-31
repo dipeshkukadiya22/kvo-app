@@ -62,4 +62,10 @@ class pdfcontroller extends Controller
     $pdf = Pdf::loadView('pdf.pdf_Checkin')->setPaper('a4', 'potrait')->setOptions(['defaultFont' => 'KAP119']);
     return $pdf->stream();
     }
+
+    public function pdf_Medical_Treatment()
+    {   
+    $pdf = Pdf::loadView('pdf.pdf_Medical_Treatment')->setPaper('a5', 'landscape')->setOptions(['defaultFont' => 'KAP119']);
+    return $pdf->stream();
+    }
 }
