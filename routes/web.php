@@ -83,4 +83,10 @@ Route::get('/get/{id}',[MedicalController::class,'get'])->name('get');
 Route::get('/get_member/{id}',[MedicalController::class,'get_member'])->name('get_member');
 Route::get('view_treatment',[MedicalController::class,'view_treatment'])->name('view_treatment');
 Route::get('edit_treatment/{id}',[MedicalController::class,'edit_treatment'])->name('edit_treatment');
+
 Route::get('delete_treatment/{id}',[MedicalController::class,'delete_treatment'])->name('delete_treatment');
+
+Route::get('pdf_Medical_Treatment',[pdfcontroller::class,'pdf_Medical_Treatment'])->name('pdf_Medical_Treatment');
+
+Route::get('delete_treatment/{id}',[MedicalController::class,'delete_treatment'])->name('delete_treatment');
+
