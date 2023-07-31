@@ -563,6 +563,8 @@ class ComposerStaticInitd547a6cdc65bebda3b5bbce91a149a8c
         'App\\Http\\Middleware\\TrustProxies' => __DIR__ . '/../..' . '/app/Http/Middleware/TrustProxies.php',
         'App\\Http\\Middleware\\ValidateSignature' => __DIR__ . '/../..' . '/app/Http/Middleware/ValidateSignature.php',
         'App\\Http\\Middleware\\VerifyCsrfToken' => __DIR__ . '/../..' . '/app/Http/Middleware/VerifyCsrfToken.php',
+        'App\\Models\\GeneralDonation' => __DIR__ . '/../..' . '/app/Models/GeneralDonation.php',
+        'App\\Models\\Mahajan_Expense' => __DIR__ . '/../..' . '/app/Models/Mahajan_Expense.php',
         'App\\Models\\User' => __DIR__ . '/../..' . '/app/Models/User.php',
         'App\\Models\\add_members' => __DIR__ . '/../..' . '/app/Models/add_members.php',
         'App\\Models\\community_donation' => __DIR__ . '/../..' . '/app/Models/community_donation.php',
