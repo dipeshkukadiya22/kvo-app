@@ -20,10 +20,11 @@ class pdfcontroller extends Controller
     return $pdf->stream();
     }
 
-    public function pdf_Community_Donation()
+    public function pdf_Community_Donation($id)
     {   
-    $pdf = Pdf::loadView('pdf.pdf_Community_Donation')->setPaper('a5', 'landscape')->setOptions(['defaultFont' => 'KAP119']);
-    return $pdf->stream();
+        $community_donation=DB::select("SELECT * FROM `community_donation` join add_members WHERE add_members.p_id=community_donation.member_id and donation_id='$id'");
+        $pdf = Pdf::loadView('pdf.pdf_Community_Donation',['community_donation'=>$community_donation])->setPaper('a5', 'landscape')->setOptions(['defaultFont' => 'KAP119']);
+        return $pdf->stream();
     }
 
     public function pdf_General_Donation()
