@@ -69,6 +69,11 @@ Route::get('/delete_community_donation/{id}',[donation::class,'delete'])->name('
 Route::post('/update_community_donation',[donation::class,'update_community_donation'])->name('update_community_donation');
 
 Route::get('General_Donation', [donation::class, 'General_Donation'])->name('General_Donation');
+Route::post('add_general_donation',[donation::class, 'add_general_donation'])->name('add_general_donation');
+Route::get('View_General_Donation', [donation::class, 'view_general_donation'])->name('view_general_donation');
+Route::get('Delete_General_Donation/{id}', [donation::class, 'delete_general_donation'])->name('delete_general_donation');
+Route::get('/Get_General_Donation/{id}',[donation::class,'get_general_donation'])->name('get_general_donation');
+
 Route::get('Expense_Receipt', [Expense::class, 'Expense_Receipt'])->name('Expense_Receipt');
 Route::get('General_Donation_Report', [donation::class, 'General_Donation_Report'])->name('General_Donation_Report');
 Route::get('pdf_Religious_Donation',[pdfcontroller::class,'pdf_Religious_Donation'])->name('pdf_Religious_Donation');

@@ -171,7 +171,7 @@ class donation extends Controller
     {
         $donation=community_donation::find($id);
         $donation->delete();
-        //return back()->with("Delete Community Donation");
+    return back()->with("Delete Community Donation");
     }
     public function update_community_donation(Request $req)
     {
@@ -193,10 +193,38 @@ class donation extends Controller
     }
     public function General_Donation(){
         $member = DB::SELECT("select * from add_members");
-        return view ('Donation.General_Donation',['member'=>$member]);
-
+        $depo_id=GeneralDonation::get()->last()->depo_id;
+        return view ('Donation.General_Donation',['member'=>$member,'depo_id' => $depo_id]);
     }
-
+    public function add_general_donation(Request $req)
+    {
+        $donation=new GeneralDonation();
+        $donation->date=Date(('Y-m-d'),strtotime($req->date));
+        $donation->haste=$req->haste;
+        $donation->details=$req->details;
+        $donation->member_id=$req->name;
+        $donation->save();
+        return back()->with("Add General Donation");
+    }
+    public function view_general_donation()
+    {
+        $donation=DB::SELECT("SELECT * FROM `GeneralDonation` join add_members WHERE GeneralDonation.member_id=add_members.p_id");
+        $member = DB::SELECT("select * from add_members");
+        return view('Donation.View_General_Donation',['donation'=>$donation,'member' => $member]);
+    }
+    public function get_general_donation($id)
+    {
+        dd($id);
+        $donation=DB::SELECT("SELECT * FROM `GeneralDonation` join add_members WHERE GeneralDonation.member_id=add_members.p_id and depo_id='$id'");
+        return $donation;
+    }
+    public function delete_general_donation($id)
+    {
+        $donation=GeneralDonation::find($id);
+        dd($donation);
+        $donation->delete();
+        return back()->with("Delete General Donation");
+    }
     public function General_Donation_Report(){
         return view ('Donation.General_Donation_Report');
     }
