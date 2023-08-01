@@ -78,18 +78,18 @@ class BookingController extends Controller
         $member->email = $req->email;
         $member->phone_no = $req->phone_no;
         $member->city = $req->city;
-        $member->address = strtoupper($req->collapsible_address);
+        $member->address = stsrtoupper($req->collapsible_address);
         $member->save();
         $m_data=add_members::all();
         return view('Booking.room-booking',['member'=>$member,'m_data'=>$m_data,'p_details'=>$p_details]);
     }
     
+
+    
+    public function checkout(){
+        return view('Booking.checkout');
+    }
    
-
-    
-
-    
-
     // RoomList
     public function ADDROOM(){
         $list =$data=DB::select("SELECT * , add_room.room_no as id from add_room");
@@ -110,4 +110,6 @@ class BookingController extends Controller
     public function room_booked(){
         
     }
+
+    
 }
