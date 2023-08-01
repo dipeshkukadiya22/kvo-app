@@ -72,7 +72,8 @@ Route::get('General_Donation', [donation::class, 'General_Donation'])->name('Gen
 Route::get('Expense_Receipt', [Expense::class, 'Expense_Receipt'])->name('Expense_Receipt');
 Route::get('General_Donation_Report', [donation::class, 'General_Donation_Report'])->name('General_Donation_Report');
 Route::get('pdf_Religious_Donation',[pdfcontroller::class,'pdf_Religious_Donation'])->name('pdf_Religious_Donation');
-Route::get('pdf_Community_Donation',[pdfcontroller::class,'pdf_Community_Donation'])->name('pdf_Community_Donation');
+Route::get('/pdf_Community_Donation/{id}',[pdfcontroller::class,'pdf_Community_Donation'])->name('pdf_Community_Donation');
+Route::get('/pdf_Medical_Treatment/{id}',[pdfcontroller::class,'pdf_Medical_Treatment'])->name('pdf_Medical_Treatment');
 Route::get('pdf_General_Donation',[pdfcontroller::class,'pdf_General_Donation'])->name('pdf_General_Donation');
 Route::get('pdf_Expense_Receipt',[pdfcontroller::class,'pdf_Expense_Receipt'])->name('pdf_Expense_Receipt');
 
@@ -86,7 +87,7 @@ Route::get('edit_treatment/{id}',[MedicalController::class,'edit_treatment'])->n
 
 Route::get('delete_treatment/{id}',[MedicalController::class,'delete_treatment'])->name('delete_treatment');
 
-Route::get('pdf_Medical_Treatment',[pdfcontroller::class,'pdf_Medical_Treatment'])->name('pdf_Medical_Treatment');
+
 
 Route::get('delete_treatment/{id}',[MedicalController::class,'delete_treatment'])->name('delete_treatment');
 

@@ -111,7 +111,7 @@ button.swal2-cancel.btn.btn-label-danger {
                                               <td>{{$row->payment_mode}}</td>
                                               <td>
                                                   <div class="d-inline-block">
-                                                    <a href="" class="text-primary" ><i class="ti ti-eye"></i></a>
+                                                    <a href="{{route('pdf_Medical_Treatment',$row->sr_no)}}" class="text-primary" ><i class="ti ti-eye"></i></a>
 
                                                     <a href="{{route('edit_treatment',$row->sr_no)}}" class="btn btn-sm btn-icon item-edit" data-bs-toggle="offcanvas"
                                                     data-bs-target="#offcanvasBackdrop" aria-controls="offcanvasBackdrop"><i class="text-primary ti ti-edit"></i></a>

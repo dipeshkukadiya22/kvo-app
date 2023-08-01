@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Barryvdh\DomPDF\Facade\Pdf;
-
+use App\Models\community_donation;
 use DB;
 
 class pdfcontroller extends Controller
@@ -20,10 +20,11 @@ class pdfcontroller extends Controller
     return $pdf->stream();
     }
 
-    public function pdf_Community_Donation()
+    public function pdf_Community_Donation($id)
     {   
-    $pdf = Pdf::loadView('pdf.pdf_Community_Donation')->setPaper('a5', 'landscape')->setOptions(['defaultFont' => 'KAP119']);
-    return $pdf->stream();
+        $community_donation=DB::select("SELECT * FROM `community_donation` join add_members WHERE add_members.p_id=community_donation.member_id and donation_id='$id'");
+        $pdf = Pdf::loadView('pdf.pdf_Community_Donation',['community_donation'=>$community_donation])->setPaper('a5', 'landscape')->setOptions(['defaultFont' => 'KAP119']);
+        return $pdf->stream();
     }
 
     public function pdf_General_Donation()
@@ -64,9 +65,10 @@ class pdfcontroller extends Controller
     return $pdf->stream();
     }
 
-    public function pdf_Medical_Treatment()
+    public function pdf_Medical_Treatment($id)
     {   
-    $pdf = Pdf::loadView('pdf.pdf_Medical_Treatment')->setPaper('a5', 'landscape')->setOptions(['defaultFont' => 'KAP119']);
-    return $pdf->stream();
+        $medical=DB::select("SELECT * FROM medical join add_members where add_members.p_id=medical.p_id and sr_no='$id'");
+        $pdf = Pdf::loadView('pdf.pdf_Medical_Treatment',['medical' => $medical])->setPaper('a5', 'landscape')->setOptions(['defaultFont' => 'KAP119']);
+        return $pdf->stream();
     }
 }

@@ -284,7 +284,7 @@
                                 id="basic_default_radio-male"
                                 name="basic_default_radio"
                                 class="form-check-input"
-                                value="cheque"
+                                value="CHEQUE"
                                 required />
                               <label class="form-check-label" for="basic_default_radio">ચેક</label>
                             </div>
@@ -294,7 +294,7 @@
                                 id="basic_default_radio-female"
                                 name="basic_default_radio"
                                 class="form-check-input"
-                                value="Draft"
+                                value="DRAFT"
                                 required />
                               <label class="form-check-label" for="basic_default_radio">ડ્રાફ્ટ</label>
                             </div>
@@ -304,7 +304,7 @@
                                 id="basic_default_radio-female"
                                 name="basic_default_radio"
                                 class="form-check-input"
-                                value="Cash"
+                                value="CASH"
                                 required />
                               <label class="form-check-label" for="basic_default_radio">રોકડા</label>
                             </div>

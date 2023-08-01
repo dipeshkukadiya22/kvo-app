@@ -192,6 +192,7 @@ class donation extends Controller
         return back()->with("Update Community Donation");
     }
     public function General_Donation(){
+    
         return view ('Donation.General_Donation');
 
     }

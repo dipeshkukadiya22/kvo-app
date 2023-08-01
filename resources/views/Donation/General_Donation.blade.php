@@ -123,7 +123,7 @@
                 <div class="col-md mb-4 mb-md-0">
                   <div class="card">
                     <div class="card-body">
-                      <form action="{{route('GeneralDonation')}}" method="POST" class="browser-default-validation">
+                      <form action="{{route('General_Donation')}}" method="POST" class="browser-default-validation">
                        @csrf
                         <div class="row g-3">
                           <div class="col-12">
