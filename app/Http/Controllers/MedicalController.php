@@ -51,6 +51,7 @@ class MedicalController extends Controller
         return back()->with("Update Treatment");
     }
     public function get($id){
+        dd("$id");
         $data=add_members::find($id);
         return $data;
     }

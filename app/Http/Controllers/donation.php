@@ -192,8 +192,8 @@ class donation extends Controller
         return back()->with("Update Community Donation");
     }
     public function General_Donation(){
-    
-        return view ('Donation.General_Donation');
+        $member = DB::SELECT("select * from add_members");
+        return view ('Donation.General_Donation',['member'=>$member]);
 
     }
 
@@ -202,8 +202,6 @@ class donation extends Controller
     }
 
     public function add_member(Request $req){
-        
-        //$p_details=personal_details::with('member')->get();
         $member = new add_members();
         $member->m_name = strtoupper($req->m_name);
         $member->email = $req->email;

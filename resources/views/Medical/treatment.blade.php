@@ -67,8 +67,8 @@
                       <input type="number" id="sr_no" class="form-control phone-mask" value={{$rec_no+1}} readonly>
                     </div>
                     <div class="col-md-4">
-                      <label class="form-label" for="multicol-username">દર્દીનું નામ </label>
-                      <select id="name" name="name" class="select2 form-select form-select-lg" data-allow-clear="true" >
+                      <label for="select2Basic" class="form-label">દર્દીનું નામ </label>
+                      <select id="name" name="name" class="select2 form-select form-select-lg" data-allow-clear="true" required >
                         @foreach($member as $row)
                           <option value="{{$row->p_id}}">{{$row->m_name}}</option>
                         @endforeach

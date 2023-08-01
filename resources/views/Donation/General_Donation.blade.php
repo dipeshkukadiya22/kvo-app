@@ -74,43 +74,7 @@
                           </div>
                           <div class="offcanvas-body mx-0 flex-grow-0">
                             <!-- Browser Default -->
-                            <form class="browser-default-validation" method="POST" action="{{route('General_Donation')}}">
-                              @csrf
-                              <div class="mb-3">
-                                <label class="form-label" for="basic-default-name">Name</label>
-                                <input type="text" name="m_name" class="form-control" id="basic-default-name"  style="text-transform:uppercase"  placeholder="John Doe" />
-                              </div>
-                              <div class="mb-3">
-                                <label class="form-label" for="basic-default-email">Email</label>
-                                <input type="email" name="email" id="basic-default-email" class="form-control" placeholder="john.doe"/>
-                              </div>
-                              
-                            
-                              <div class="mb-3">
-                                <label class="form-label" for="multicol-phone">Phone Number</label>
-                                <input type="number" name="phone_no" id="multicol-phone" class="form-control phone-mask" placeholder="658 799 8941" required />
-                            
-                              
-                            
-                              </div>
-                              <div class="mb-3">
-                                <label class="form-label" for="city">City</label>
-                                <input type="text" name="city" class="form-control" id="city" placeholder="Bhuj" />
-                              </div>
-                            
-                              <div class="col-4">
-                                <label class="form-label" for="collapsible-address">Address</label>
-                                <textarea name="collapsible_address"  class="form-control" id="collapsible_address" rows="1" placeholder="1456, Mall Road" ></textarea>
-                              </div>
-                             
-                              
-                              <div class="row">
-                                <div class="col-12">
-                                  <button type="submit" class="btn btn-primary mb-2 d-grid w-100" >Submit</button>
-                                  <button type="button" class="btn btn-label-secondary d-grid w-100" data-bs-dismiss="offcanvas"> Cancel</button>
-                                </div>
-                              </div>
-                            </form>
+                            @include('layouts.adduser')
                             <!-- /Browser Default -->
                           </div>
                         </div>
@@ -123,29 +87,25 @@
                 <div class="col-md mb-4 mb-md-0">
                   <div class="card">
                     <div class="card-body">
-                      <form action="{{route('General_Donation')}}" method="POST" class="browser-default-validation">
-                       @csrf
+                      <form class="browser-default-validation" method="POST" action="">
                         <div class="row g-3">
                           <div class="col-12">
                             <h6 class="fw-semibold">1. Personal Details</h6>
                             <hr class="mt-0" />
                           </div>
+                          @csrf
                           <div class="col-md-4">
                             <label for="select2Basic" class="form-label">નામ</label>
-                          
-                            <select id="select2Basic" class="select2 form-select form-select-lg" data-allow-clear="true" name="name" placeholder="select name" required>
-                              <option value=""></option>
-                              @foreach ($m_data as $row)  
-                                  <option value="{{$row->m_name}}" {{(!empty($member) && $member->m_name == $row->m_name) ? "selected" : ""}}>{{$row->m_name}}&nbsp;&nbsp;-&nbsp;&nbsp;{{$row->phone_no}}</option>
-                              @endforeach
+                            <select id="name" class="select2 form-select form-select-lg" data-allow-clear="true" required>
+                                @foreach($member as $row)
+                                    <option value="{{$row->p_id}}">{{$row->m_name}}</option>
+                                @endforeach
                             </select>
-                            <input type="hidden" id="email_user" value="{{!empty($m_data)  ? $m_data:''}}">
                           </div>
                           <div class="col-md-4">
                             <label class="form-label" for="basic-default-dob">તારીખ</label>
                             <input
                               type="text"
-                              name="date"
                               class="form-control flatpickr-validation"
                               id="basic-default-dob"
                               required />
@@ -154,20 +114,19 @@
                             <label class="form-label" for="basic-default-name">પહોંચ નંબર</label>
                             <input
                               type="text"
-                              name="depo_id"
                               class="form-control"
-                              id="basic-default-name"
+                              id="depo_id"
+                              name="depo_id"
                               placeholder="15"
-                              value="{{$depo_id + 1}}"
                               required readonly/>
                           </div>
                           <div class="col-md-4">
                             <label class="form-label" for="basic-default-name">હસ્તે</label>
                             <input
                               type="text"
-                              name="haste"
                               class="form-control"
-                              id="basic-default-name"
+                              id="haste"
+                              name="haste"
                               placeholder="John Doe"
                               required />
                          
@@ -176,22 +135,20 @@
                             <label class="form-label" for="multicol-phone">મોબાઈલ નંબર</label>
                             <input
                               type="number"
-                              name="phone_no"
-                              id="member_phone"
+                              id="phone"
+                              name="phone"
                               class="form-control phone-mask"
                               placeholder="658 799 8941"
-                              aria-label="658 799 8941" 
-                              value="{{ (!empty($member)) ? $member->phone_no : '' }}"/>
+                              aria-label="658 799 8941" />
                           </div>
                           <div class="col-md-4">
                             <label class="form-label" for="basic-default-name">ગામ</label>
                             <input
                               type="text"
-                              name="city"
                               class="form-control"
-                              id="member_city"
+                              id="city"
+                              name="city"
                               placeholder="John Doe"
-                              value="{{(!empty($member)) ? $member->city : '' }}"
                               required />
                          
                           </div>
@@ -203,10 +160,9 @@
                             <label class="form-label" for="multicol-phone">મળેલ દાન</label>
                             <input
                               type="text"
-                              name="details"
                               class="form-control"
-                              id="basic-default-name"
-                              {{-- placeholder="John Doe" --}}
+                              id="amount"
+                              name="amount"
                               required />
                           </div>
                           <div class="row mt-3">
@@ -259,25 +215,22 @@
         defaultDate: currentDate
     })
     });
-    </script>
 
-    <!-- Make sure to include jQuery library before this script -->
-<script>
-  $(document).ready(function () {
-      $("#select2Basic").change(function () {
-          var data = JSON.parse($("#email_user").val());
-          var selectedId = $(this).val();
-          
-          $.each(data, function (key, value) {
-              if (value['m_name'] == selectedId) {
-                  $('#member_phone').val(value['phone_no']);
-                  $('#member_city').val(value['city']);
-                  return false; // Exit the loop once a match is found
-              }
-          });
-      });
-  });
-</script>
+    $("#name").change(function(){
+      const id=document.getElementById("name").value;
+      alert(id);
+      $.ajax({
+        
+                url:"{{url('get')}}" +"/"+ id,
+                type:'GET',
+                  success:function(response){   
+                    alert("success");
+                        $("#city").val(response['city']); 
+                        $("#phone").val(response['phone']); 
+                  }
+                });
+            });
+    </script>
 
 @endsection
 
