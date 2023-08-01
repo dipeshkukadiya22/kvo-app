@@ -370,10 +370,23 @@
                             <div class="row g-3 mb-3">
                             <input type="hidden" id="roomlist" value="{{!empty($r_list)  ? $r_list:''}}">
                               <!-- Custom Suggestions: List -->
-                                <div class="col-md-2">
-                                  <label for="TagifyCustomListSuggestion" class="form-label">A.C. Room.</label>
-                                  <input id="TagifyCustomListSuggestion" name="TagifyCustomListSuggestion" class="form-control" placeholder="Select Roomlist" />
-                                </div>
+                              <div class="col-md-2">
+                                <label for="select2Multiple1" class="form-label">Ac Room</label>
+                                
+                               
+                                <select id="select2Multiple1" name="select2Multiple1" class="select2 form-select" multiple>
+                               
+                                  @foreach ($r_list as $list)
+                                                @if ($list->room_facility == 'A.C.Room')
+                                                    <option value="{{$list->room_no}}"{{(!empty($member) && $member->room_name == $list->room_name) ? "selected" : ""}}>
+                                                        {{$list->room_name}}
+                                                    </option>
+                                                @endif
+                                           
+                                      
+                                  @endforeach
+                                </select>
+                              </div>
 
                                 <div class="col-md-2">
                                   <label class="form-label" for="basic-default-name">Amount</label>
@@ -384,10 +397,23 @@
                                 </div>
 
 
-                                <div class="col-md-2">
+                                <!-- <div class="col-md-2">
                                   <label for="TagifyCustomListSuggestion1" class="form-label">Non. A.C. Room</label>
                                   <input id="TagifyCustomListSuggestion1" name="TagifyCustomListSuggestion1" class="form-control" placeholder="Select Roomlist" />
-                                </div>
+                                </div> -->
+                                <div class="col-md-2">
+                                <label for="select2Multiple2" class="form-label">Non Ac Room</label>
+                                <select id="select2Multiple2" name="select2Multiple2" class="select2 form-select" multiple>
+                                 
+                                    <option value="AK">Alaska</option>
+                                    <option value="HI">Hawaii</option>
+                                    <option value="AK">Alaska</option>
+                                    <option value="HI">Hawaii</option>
+                                    <option value="AK">Alaska</option>
+                                    <option value="HI">Hawaii</option>
+                                 
+                                </select>
+                              </div>
 
                                 <div class="col-md-2">
                                   <label class="form-label" for="basic-default-name">Amount</label>
@@ -397,10 +423,23 @@
                                   </div>
                                 </div>
 
-                                <div class="col-md-2">
+                                <!-- <div class="col-md-2">
                                   <label for="TagifyCustomListSuggestion2" class="form-label">Door Metri. A.C. / Non. A.C. Room </label>
                                   <input id="TagifyCustomListSuggestion2" name="TagifyCustomListSuggestion2" class="form-control" placeholder="Select Roomlist" />
-                                </div>
+                                </div> -->
+                                <div class="col-md-2">
+                                <label for="select2Multiple3" class="form-label">Door Mt Room</label>
+                                <select id="select2Multiple3" name="select2Multiple3" class="select2 form-select" multiple>
+                                
+                                    <option value="AK">Alaska</option>
+                                    <option value="HI">Hawaii</option>
+                                    <option value="AK">Alaska</option>
+                                    <option value="HI">Hawaii</option>
+                                    <option value="AK">Alaska</option>
+                                    <option value="HI">Hawaii</option>
+                                 
+                                </select>
+                              </div>
 
                                 <div class="col-md-2">
                                   <label class="form-label" for="basic-default-name">Amount</label>
@@ -792,6 +831,11 @@ $(document).ready(function () {
 
 
 </script>
+<script>
+  $(document).ready(function() {
+    $('#select2Multiple1').select2();
+  });
+</script>
 
 
 <!-- <script>
@@ -1009,16 +1053,16 @@ $(document).ready(function () {
     let currentStep = 1;
 
     $(".btn-next").on("click", function() {
-      const selectedList1 = $('#TagifyCustomListSuggestion').val();
-      const selectedList2 = $('#TagifyCustomListSuggestion1').val();
-      const selectedList3 = $('#TagifyCustomListSuggestion2').val();
+      const selectedList1 = $('#select2Multiple1').val();
+      const selectedList2 = $('#select2Multiple2').val();
+      const selectedList3 = $('#select2Multiple3').val();
       const selectedDate = $('#flatpickr-datetime').val();
       const acAmount = parseFloat($('#ac-amount').val()) || 0; 
       const nonAcAmount = parseFloat($('#non-ac-amount').val()) || 0;
       const doorMtAmount = parseFloat($('#door-mt-amount').val()) || 0;
 
       const totalAmount = acAmount + nonAcAmount + doorMtAmount;
-      const selectedRooms = 'A.C. Room: ' + selectedList1 + ', Non A.C. Room: ' + selectedList2 + ', Door Metri A.C. / Non A.C. Room: ' + selectedList3;
+      const selectedRooms = 'A.C. Room:= ' + selectedList1 + ', Non A.C. Room:= ' + selectedList2 + ', Door Metri A.C. / Non A.C. Room:= ' + selectedList3;
 
       $('#room_lst').text(selectedRooms);
 

@@ -17,7 +17,8 @@ class BookingController extends Controller
         $m_data=add_members::all();
         $p_id=add_members::get()->last()->p_id;
         $r_list = add_room::all();
-        return view ('Booking.room-booking',['p_details'=>$p_details,'m_data'=>$m_data,'p_id'=>$p_id,'r_list'=>$r_list]);
+        $acroom = DB::select("SELECT * FROM add_room WHERE room_facility = 'A.C. Room'");
+        return view ('Booking.room-booking',['p_details'=>$p_details,'m_data'=>$m_data,'p_id'=>$p_id,'r_list'=>$r_list,'acroom'=>$acroom]);
        
     }
 
@@ -27,7 +28,9 @@ class BookingController extends Controller
         $m_name =(personal_details::get()->last()->m_name);
         $p_details=personal_details::with('member')->get();
         $data = personal_details::find($req->p_id);
-        $m_data = add_members::all(); $r_list = add_room::all();
+        $m_data = add_members::all();
+        $r_list = add_room::all();
+        $acroom = DB::select("SELECT * FROM add_room WHERE room_facility = 'A.C. Room'");
         $details = new personal_details();
         $details->name = $req->name;
         $details-> email = $req->email;
@@ -51,9 +54,9 @@ class BookingController extends Controller
         $booking->no_of_person = $req->no_of_person;
         $booking->check_in_date = Carbon::now();
         $roomListArray = array(
-            'ac_room' => $req->TagifyCustomListSuggestion,
-            'non_ac_room' => $req->TagifyCustomListSuggestion1,
-            'door_metric_ac_non_ac_room' => $req->TagifyCustomListSuggestion2
+            'ac_room' => $req->select2Multiple1,
+            'non_ac_room' => $req->select2Multiple2,
+            'door_metric_ac_non_ac_room' => $req->select2Multiple3
         );
         $booking->room_list = json_encode($roomListArray);
         //dd($roomListArray);
@@ -80,7 +83,7 @@ class BookingController extends Controller
         $m_details->relation=$req->relation;
         //$m_details->save();
         
-        return view ('Booking.room-booking',['m_data'=>$m_data,'data'=>$data,'p_details'=>$p_details,'m_name'=>$m_name,'m_data'=>$m_data,'r_list'=>$r_list]);
+        return view ('Booking.room-booking',['m_data'=>$m_data,'data'=>$data,'p_details'=>$p_details,'m_name'=>$m_name,'m_data'=>$m_data,'r_list'=>$r_list,'acroom'=>$acroom]);
 
     }
 
