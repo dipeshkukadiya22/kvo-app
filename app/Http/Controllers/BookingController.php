@@ -16,7 +16,8 @@ class BookingController extends Controller
         $p_details=personal_details::with('member')->get();
         $m_data=add_members::all();
         $p_id=add_members::get()->last()->p_id;
-        return view ('Booking.room-booking',['p_details'=>$p_details,'m_data'=>$m_data,'p_id'=>$p_id]);
+        $r_list = add_room::all();
+        return view ('Booking.room-booking',['p_details'=>$p_details,'m_data'=>$m_data,'p_id'=>$p_id,'r_list'=>$r_list]);
        
     }
 
@@ -26,7 +27,7 @@ class BookingController extends Controller
         $m_name =(personal_details::get()->last()->m_name);
         $p_details=personal_details::with('member')->get();
         $data = personal_details::find($req->p_id);
-        $m_data = add_members::all();
+        $m_data = add_members::all(); $r_list = add_room::all();
         $details = new personal_details();
         $details->name = $req->name;
         $details-> email = $req->email;
@@ -65,10 +66,10 @@ class BookingController extends Controller
         $booking->rs_word = $req->rs_word;
         $updateroom = add_room::where('room_no',$req->room_list)->get();
         $updateroom->status=1;
-        dd($roomListArray);
+       
         $booking->save();
-      
-     
+       
+      //dd($r_list->toArray());
 
 
     
@@ -79,7 +80,7 @@ class BookingController extends Controller
         $m_details->relation=$req->relation;
         //$m_details->save();
         
-        return view ('Booking.room-booking',['m_data'=>$m_data,'data'=>$data,'p_details'=>$p_details,'m_name'=>$m_name,'m_data'=>$m_data]);
+        return view ('Booking.room-booking',['m_data'=>$m_data,'data'=>$data,'p_details'=>$p_details,'m_name'=>$m_name,'m_data'=>$m_data,'r_list'=>$r_list]);
 
     }
 

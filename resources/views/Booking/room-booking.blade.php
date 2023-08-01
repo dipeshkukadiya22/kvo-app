@@ -368,7 +368,7 @@
 
                             
                             <div class="row g-3 mb-3">
-
+                            <input type="hidden" id="roomlist" value="{{!empty($r_list)  ? $r_list:''}}">
                               <!-- Custom Suggestions: List -->
                                 <div class="col-md-2">
                                   <label for="TagifyCustomListSuggestion" class="form-label">A.C. Room.</label>
@@ -493,13 +493,13 @@
                                       <label class="d-block form-label">Gender</label>
                                     
                                       <div class="form-check form-check-inline">
-  <input class="form-check-input" type="radio" name="gender[]" id="inlineRadio1_${i}" value="MALE" />
-  <label class="form-check-label" for="inlineRadio1_${i}">Male</label>
-</div>
-<div class="form-check form-check-inline">
-  <input class="form-check-input" type="radio" name="gender[]" id="inlineRadio2_${i}" value="FEMALE" />
-  <label class="form-check-label" for="inlineRadio2_${i}">Female</label>
-</div>
+                                          <input class="form-check-input" type="radio" name="gender[]" id="inlineRadio1_${i}" value="MALE" />
+                                          <label class="form-check-label" for="inlineRadio1_${i}">Male</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                          <input class="form-check-input" type="radio" name="gender[]" id="inlineRadio2_${i}" value="FEMALE" />
+                                          <label class="form-check-label" for="inlineRadio2_${i}">Female</label>
+                                        </div>
 
 
 
@@ -794,7 +794,7 @@ $(document).ready(function () {
 </script>
 
 
-<script>
+<!-- <script>
 
   /**
  * Tagify
@@ -951,7 +951,7 @@ $(document).ready(function () {
 
 
 })();
-</script>
+</script> -->
 
 <script>
         $(document).ready(function () {
@@ -973,6 +973,23 @@ $(document).ready(function () {
             });
         });
     </script>
+
+  <script>
+     $(document).ready(function () {
+            $("#TagifyCustomListSuggestion").click(function () {
+                var data = $.parseJSON($("#roomlist").val());
+                 
+                $.each(data,function(key,value){
+                  console.log('id::'+$('#TagifyCustomListSuggestion').val());
+                  if($('#TagifyCustomListSuggestion').val()==value['room_no']){
+                   $('#TagifyCustomListSuggestion').val(value['TagifyCustomListSuggestion']);
+                   
+                   }
+                });
+            
+            });
+        });
+  </script>
    
 <script>
   $(document).ready(function() {
