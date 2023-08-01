@@ -372,18 +372,13 @@
                               <!-- Custom Suggestions: List -->
                               <div class="col-md-2">
                                 <label for="select2Multiple1" class="form-label">Ac Room</label>
-                                
-                               
-                                <select id="select2Multiple1" name="select2Multiple1" class="select2 form-select" multiple>
-                               
+                                <select id="select2Multiple11" name="select2Multiple1[]" class="select2 form-select" multiple>
                                   @foreach ($r_list as $list)
-                                                @if ($list->room_facility == 'A.C.Room')
+                                                @if ($list->room_facility == 'A.C. Room')
                                                     <option value="{{$list->room_no}}"{{(!empty($member) && $member->room_name == $list->room_name) ? "selected" : ""}}>
-                                                        {{$list->room_name}}
+                                                    {{$list->room_no}} - {{$list->room_name}}
                                                     </option>
                                                 @endif
-                                           
-                                      
                                   @endforeach
                                 </select>
                               </div>
@@ -403,14 +398,15 @@
                                 </div> -->
                                 <div class="col-md-2">
                                 <label for="select2Multiple2" class="form-label">Non Ac Room</label>
-                                <select id="select2Multiple2" name="select2Multiple2" class="select2 form-select" multiple>
+                                <select id="select2Multiple22" name="select2Multiple2[]" class="select2 form-select" multiple>
                                  
-                                    <option value="AK">Alaska</option>
-                                    <option value="HI">Hawaii</option>
-                                    <option value="AK">Alaska</option>
-                                    <option value="HI">Hawaii</option>
-                                    <option value="AK">Alaska</option>
-                                    <option value="HI">Hawaii</option>
+                                @foreach ($r_list as $list)
+                                                @if ($list->room_facility == 'NON A.C ROOM')
+                                                    <option value="{{$list->room_no}}"{{(!empty($member) && $member->room_name == $list->room_name) ? "selected" : ""}}>
+                                                        {{$list->room_no}}-{{$list->room_name}}
+                                                    </option>
+                                                @endif
+                                  @endforeach
                                  
                                 </select>
                               </div>
@@ -429,14 +425,15 @@
                                 </div> -->
                                 <div class="col-md-2">
                                 <label for="select2Multiple3" class="form-label">Door Mt Room</label>
-                                <select id="select2Multiple3" name="select2Multiple3" class="select2 form-select" multiple>
+                                <select id="select2Multiple33" name="select2Multiple3[]" class="select2 form-select" multiple>
                                 
-                                    <option value="AK">Alaska</option>
-                                    <option value="HI">Hawaii</option>
-                                    <option value="AK">Alaska</option>
-                                    <option value="HI">Hawaii</option>
-                                    <option value="AK">Alaska</option>
-                                    <option value="HI">Hawaii</option>
+                                @foreach ($r_list as $list)
+                                @if ($list->room_facility == 'DOOR MATRY NON A.C ROOM' || $list->room_facility == 'DOOR MATRY  A.C ROOM')
+                                    <option value="{{$list->room_no}}"{{(!empty($member) && $member->room_name == $list->room_name) ? "selected" : ""}}>
+                                        {{$list->room_no}}-{{$list->room_name}}
+                                    </option>
+                                @endif
+                                  @endforeach
                                  
                                 </select>
                               </div>
@@ -617,10 +614,7 @@
                                     <table>
                                       <tbody>
                                         
-                                        {{-- <tr>
-                                          <td class="pe-4">Room Facility</td>
-                                          <td id="room_faci"></td>
-                                        </tr> --}}
+                                        
                                         <tr>
                                           <td class="pe-4">Room Name:</td>
                                           <td id="room_lst"></td>
@@ -1018,7 +1012,7 @@ $(document).ready(function () {
         });
     </script>
 
-  <script>
+  <!-- <script>
      $(document).ready(function () {
             $("#TagifyCustomListSuggestion").click(function () {
                 var data = $.parseJSON($("#roomlist").val());
@@ -1033,7 +1027,7 @@ $(document).ready(function () {
             
             });
         });
-  </script>
+  </script> -->
    
 <script>
   $(document).ready(function() {
@@ -1053,9 +1047,9 @@ $(document).ready(function () {
     let currentStep = 1;
 
     $(".btn-next").on("click", function() {
-      const selectedList1 = $('#select2Multiple1').val();
-      const selectedList2 = $('#select2Multiple2').val();
-      const selectedList3 = $('#select2Multiple3').val();
+      const selectedList1 = $('#select2Multiple11').val();
+      const selectedList2 = $('#select2Multiple22').val();
+      const selectedList3 = $('#select2Multiple33').val();
       const selectedDate = $('#flatpickr-datetime').val();
       const acAmount = parseFloat($('#ac-amount').val()) || 0; 
       const nonAcAmount = parseFloat($('#non-ac-amount').val()) || 0;

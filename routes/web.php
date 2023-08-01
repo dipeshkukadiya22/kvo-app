@@ -55,8 +55,10 @@ Route::POST('RoomList', [BookingController::class, 'RoomList'])->name('RoomList'
 
 
 /* View Members Route */
-Route::get('/view-members', [MembersController::class, 'ViewMembers'])->name('ViewMembers');
-Route::POST('/edit_members', [MembersController::class, 'edit_members'])->name('edit_members');
+Route::get('view-members', [MembersController::class, 'ViewMembers'])->name('ViewMembers');
+Route::get('edit_members/{id}', [MembersController::class, 'edit_members'])->name('edit_members');
+Route::get('delete_members/{id}', [MembersController::class, 'delete_members'])->name('delete_members');
+Route::POST('update_members', [MembersController::class, 'update_members'])->name('update_members');
 
 
 Route::get('Religious_Donation', [donation::class, 'index1'])->name('Religious_Donation');

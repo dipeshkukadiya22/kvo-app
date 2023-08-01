@@ -67,9 +67,9 @@ class BookingController extends Controller
         $booking->deposite_no = $req->deposit_no;
         $booking->deposite_rs = $req->deposite_rs;
         $booking->rs_word = $req->rs_word;
-        $updateroom = add_room::where('room_no',$req->room_list)->get();
+        $updateroom = add_room::whereIn('room_no',$req->room_list)->get();
         $updateroom->status=1;
-       
+       dd($req->room_list);
         $booking->save();
        
       //dd($r_list->toArray());
@@ -106,11 +106,9 @@ class BookingController extends Controller
    
     // RoomList
 
-    public function ADDROOM(){
+         public function ADDROOM(){
         $list =$data=DB::select("SELECT * , add_room.room_no as id from add_room");
         $room_book = DB::select ("SELECT * , room_details.r_id as id from room_details ");
-//dd($room_book);
-       //$room_list = substr($room_book['room_list'], 0, 6);
         return view('Booking.room-list',['list'=>$list,'room_book'=>$room_book,]);
 
     }

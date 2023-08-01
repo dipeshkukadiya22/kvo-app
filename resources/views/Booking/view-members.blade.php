@@ -100,7 +100,8 @@
                                               
                                               <td>
                                                 <div class="d-inline-block">
-                                                  <a href="" class="btn btn-sm btn-icon item-edit" data-bs-toggle="offcanvas"
+                                                <!-- <a href="{{route('edit_members', $row->p_id)}}" data-typeId="{{ $row->p_id }}" class="btn btn-sm btn-icon item-edit"><i class="text-primary ti ti-edit"></i></a> -->
+                                                <a href="{{route('edit_members', $row->p_id)}}"  data-typeId="{{$row->p_id}}"  class="btn btn-sm btn-icon item-edit" data-bs-toggle="offcanvas"
                                                   data-bs-target="#offcanvasBackdrop" aria-controls="offcanvasBackdrop"><i class="text-primary ti ti-edit"></i></a>
                                                   <a href="javascript:;" id="confirm-text" class="text-danger delete-record"><i class="ti ti-trash"></i></a>
                                                 </div>
@@ -115,44 +116,43 @@
 
 
                           <!-- Enable backdrop (default) Offcanvas -->
-                          <div class="mt-0">
+                          <div class="mt-0" id="editmembers">
                             
                             <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasBackdrop" aria-labelledby="offcanvasBackdropLabel">
                               <div class="offcanvas-header border-bottom">
-                                <h5 id="offcanvasBackdropLabel" class="offcanvas-title">New Member</h5>
+                                <h5 id="offcanvasBackdropLabel" class="offcanvas-title">Edit Member</h5>
                                 <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                               </div>
                               <div class="offcanvas-body mx-0 flex-grow-0">
 
                                 <!-- Browser Default -->
                                 
-                                <form class="browser-default-validation" method="POST" action="{{route('edit_members')}}">
- 
+                                <form class="browser-default-validation" method="POST" action="{{route('update_members')}}">
                                   @csrf
                                   <div class="mb-3">
                                     <label class="form-label" for="basic-default-name">Name</label>
-                                    <input type="text" class="form-control"  name="m_name" id="basic-default-name" placeholder="John Doe" value="{{ (!empty($member) )? $member->m_name : '' }}" />
+                                    <input type="text" class="form-control"  name="m_name1" id="m_name1" placeholder="John Doe" value="" />
                                   </div>
                                  
                                 
                                   <div class="mb-3">
                                     <label class="form-label" for="basic-default-email">Email</label>
-                                    <input type="email" id="basic-default-email" name="email" class="form-control" placeholder="john.doe" value="{{ (!empty($member) )? $member->email : '' }}"/>
+                                    <input type="email" id="email1" name="email1" class="form-control" placeholder="john.doe" />
                                   </div>
 
                                   <div class="mb-3">
                                     <label class="form-label" for="multicol-phone">Phone Number</label>
-                                    <input type="number" id="multicol-phone" name="phone_no" class="form-control phone-mask" placeholder="658 799 8941" aria-label="658 799 8941" value="{{ (!empty($member) )? $member->phone_no : '' }}" />
+                                    <input type="number" id="phone_no1" name="phone_no1" class="form-control phone-mask" placeholder="658 799 8941" aria-label="658 799 8941" value="" />
                                   </div>
                                   <div class="mb-3">
                                     <label class="form-label" for="city">City</label>
-                                    <input type="text" class="form-control" name="city" id="city" placeholder="Bhuj" {{ (!empty($member) )? $member->city : '' }} />
+                                    <input type="text" class="form-control" name="city1" id="city1" placeholder="Bhuj"  />
                                   </div>
         
-                                  <div class="mb-3">
+                                  <!-- <div class="mb-3">
                                     <label class="form-label" for="collapsible-address">Address</label>
-                                    <textarea name="collapsible-address" name="address" class="form-control"  id="collapsible-address" rows="2" placeholder="1456, Mall Road">{{ (!empty($member) )? $member->address : '' }}</textarea>
-                                  </div>
+                                    <textarea name="collapsible-address" name="address1" class="form-control"  id="address1" rows="2" placeholder="1456, Mall Road"></textarea>
+                                  </div> -->
                                   
                                   <div class="row">
                                     <div class="col-12">
@@ -365,6 +365,30 @@
 
     </script>
 
+<script>
+    $(document).ready(function() {
+        let editLinks1 = document.querySelectorAll('a.item-edit');
+        editLinks1.forEach(link1 => {
+            link1.addEventListener('click', function(event) {
+                event.preventDefault();
+                const id = link1.getAttribute('data-typeId');
+                $.ajax({
+                    url: "{{ url('edit_members') }}/" + id,
+                    type: 'GET',
+                    success: function(response) {
+                        console.log('Response:', response);
+                        $("#m_name1").val(response['m_name']);
+                        $("#email1").val(response['email']);
+                        $("#phone_no1").val(response['phone_no']);
+                        $("#city1").val(response['city']);
+                        $("#offcanvasBackdrop").modal('show'); 
+                    },
+                    
+                });
+            });
+        });
+    });
+</script>
 
     
 
