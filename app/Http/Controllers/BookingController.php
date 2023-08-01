@@ -63,8 +63,9 @@ class BookingController extends Controller
         $booking->deposite_no = $req->deposit_no;
         $booking->deposite_rs = $req->deposite_rs;
         $booking->rs_word = $req->rs_word;
-        $updateroom = add_room::where('room_name',$req->room_list)->get();
+        $updateroom = add_room::where('room_no',$req->room_list)->get();
         $updateroom->status=1;
+        dd($roomListArray);
         $booking->save();
       
      
