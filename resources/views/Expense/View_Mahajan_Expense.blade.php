@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'View all Medical Treatment')
+@section('title', 'View Mahajan Expense')
 
 @section('pagecss')
 
@@ -68,7 +68,7 @@ button.swal2-cancel.btn.btn-label-danger {
                   <div class="content-header-left col-md-9 col-12 mb-2">
                     {{-- <div class="row breadcrumbs-top">
                       <div class="col-12">
-                        <h4 class="fw-bold py-3">View all Medical Treatment</h4>
+                        <h4 class="fw-bold py-3">View Mahajan Expense</h4>
                       </div>
                     </div> --}}
                   </div>
@@ -86,37 +86,31 @@ button.swal2-cancel.btn.btn-label-danger {
                                           <thead>
                                               <tr>
                                                   <th></th>
-                                                  <th>પહોંચ નંબર</th>
+                                                  <th>વાઉચર નંબર</th>
                                                   <th>નામ</th>
                                                   <th>તારીખ</th>
-                                                  <th>મોબાઈલ નંબર</th>
-                                                  <th>ગામ</th>
-                                                  <th>ડૉક્ટરનું નામ</th>
-                                                  <th>ટોટલ</th>
-                                                  <td>નાણા મળેલ</td>
+                                                  <th>રુપિયા</th>
+                                                  <th>વિગત</th>
                                                   <th>Action</th>
                                               </tr>
                                           </thead>
-                                          @foreach($member as $row)
+                                          @foreach($expense as $row)
                                           <tr>
-                                              <input type="hidden" class="id" value="{{$row->sr_no}}">
+                                              <input type="hidden" class="id" value="{{$row->depo_id}}">
                                               <td></td>
-                                              <td>{{$row->sr_no}}</td>
+                                              <td>{{$row->depo_id}}</td>
                                               <td>{{$row->m_name}}</td>
                                               <td>{{Date("d-m-Y",strtotime($row->date))}}</td>
-                                              <td>{{$row->phone_no}}</td>
-                                              <td>{{$row->city}}</td>
-                                              <td>{{$row->doctor_name}}</td>
-                                              <td>{{"₹ ". $row->amount}}</td>
-                                              <td>{{$row->payment_mode}}</td>
+                                              <td>{{"₹ ".$row->amount}}</td>
+                                              <td>{{$row->details}}</td>
                                               <td>
                                                   <div class="d-inline-block">
-                                                    <a href="{{route('pdf_Medical_Treatment',$row->sr_no)}}" class="text-primary" ><i class="ti ti-eye"></i></a>
+                                                    <a href="{{route('pdf_Mahajan_Expense',$row->depo_id)}}" class="text-primary" ><i class="ti ti-eye"></i></a>
 
-                                                    <a href="{{route('edit_treatment',$row->sr_no)}}" class="btn btn-sm btn-icon item-edit" data-bs-toggle="offcanvas"
+                                                    <a class="btn btn-sm btn-icon item-edit" data-bs-toggle="offcanvas"
                                                     data-bs-target="#offcanvasBackdrop" aria-controls="offcanvasBackdrop"><i class="text-primary ti ti-edit"></i></a>
 
-                                                    <a class="text-danger delete-record"><i class="ti ti-trash"></i></a>
+                                                    <a  class="text-danger delete-record"><i class="ti ti-trash"></i></a>
                                                     
                                                   </div>
                                               </td>
@@ -139,7 +133,7 @@ button.swal2-cancel.btn.btn-label-danger {
                             id="offcanvasBackdrop"
                             aria-labelledby="offcanvasBackdropLabel">
                             <div class="offcanvas-header border-bottom">
-                              <h5 id="offcanvasBackdropLabel" class="offcanvas-title">Edit Treatment Details</h5>
+                              <h5 id="offcanvasBackdropLabel" class="offcanvas-title">Edit Mahajan Expense Details</h5>
                               <button
                                 type="button"
                                 class="btn-close text-reset"
@@ -149,27 +143,22 @@ button.swal2-cancel.btn.btn-label-danger {
                             <div class="offcanvas-body mx-0 flex-grow-0">
 
                               <!-- Browser Default -->
-                              <form id="kvo_update_treatmet" class="browser-default-validation" method="POST" action="{{route('update_treatment')}}">
+                              <form id="kvo_update_general_donation" class="browser-default-validation" method="POST" action="{{route('update_mahajan_expense')}}">
                                 <div class="row g-3">
 
                                 @csrf
                                     <div class="col-md-12">
-                                        <label class="form-label" for="multicol-phone">રશીદ નં </label>
-                                        <input type="number" id="sr_no" name="sr_no" class="form-control" readonly/>
+                                        <label class="form-label" for="multicol-phone">વાઉચર નં </label>
+                                        <input type="number" id="depo_id" name="depo_id" class="form-control" readonly/>
                                     </div>
 
                                     <div class="col-md-12">
-                                        <label class="form-label" for="multicol-username">દર્દીનું નામ </label>
-                                        <select id="name" name="name" class="select2 form-select form-select-lg" data-allow-clear="true" >
-                                          @foreach($member_data as $row)
-                                                <option value="{{$row->p_id}}">{{$row->m_name}}</option>
-                                          @endforeach
-                                        </select>   
-                                    </div>
-
-                                    <div class="col-md-12">
-                                        <label class="form-label" for="multicol-phone">દર્દીના મોબાઇલ નં </label>
-                                        <input type="number" id="phone" name="phone" class="form-control" readonly/>
+                                        <label class="form-label" for="multicol-username">નામ </label>
+                                        <select id="name" name="name" class="select2 form-select form-select-lg" data-allow-clear="false" >
+                                       @foreach ($member as $row)
+                                          <option value="{{$row->p_id}}">{{$row->m_name}}</option>
+                                       @endforeach
+                                        </select>    
                                     </div>
 
                                     <div class="col-md-12">
@@ -179,30 +168,14 @@ button.swal2-cancel.btn.btn-label-danger {
                                     </div>
 
                                     <div class="col-md-12">
-                                        <label class="form-label" for="multicol-username">ડોક્ટરનું નામ </label>
-                                        <input type="text" id="doctor_name" name="doctor_name" class="form-control" placeholder="Dr. Shah" required>  
-                                        </div>
-                                    
-
-                                    <div class="col-md-12">
-                                        <label class="form-label" for="multicol-username">ગામનું નામ </label>
-                                        <input type="text" id="city" class="form-control" readonly>
-                                    </div>
-
-                                    <div class="col-md-12">
-                                        <label class="form-label" for="collapsible-address">વિશેષ નોંધ </label>
-                                        <textarea name="remark" class="form-control" id="remark" rows="1" placeholder="Hello,"></textarea>
-                                      
-                                    </div>
-
-                                    <div class="col-md-12">
-                                        <label class="form-label" for="multicol-phone">રૂપિયા </label>
+                                        <label class="form-label" for="multicol-username">રુપિયા </label>
                                         <div class="input-group">
                                         <span class="input-group-text">₹</span>
-                                        <input type="text" id="amount" name="amount" class="form-control" placeholder="Amount" aria-label="Amount (to the nearest dollar)"
+                                        <input type="text" id="amount" name="amount" class="form-control amount-input" placeholder="Amount" aria-label="Amount (to the nearest dollar)"
                                         onkeypress="return onlyNumbers(this.value);" onkeyup="NumToWord(this.value,'ankers');" maxlength="9" required>
                                         </div>
                                     </div>
+
                                     {{-- <div id="divDisplayWords"> --}}
                                     <div class="col-md-12">
                                         <label class="form-label" for="basic-default-name">અંકે રૂપિયા</label>
@@ -215,50 +188,14 @@ button.swal2-cancel.btn.btn-label-danger {
                                         {{-- placeholder="John Doe" --}}
                                         required readonly/>
                                         </div>
-                                    
 
                                     <div class="col-md-12">
-                                        <label class="d-block form-label">નાણા મળેલ</label>
-                                        <div class="form-check form-check-inline mb-2">
-                                        <input
-                                            type="radio"
-                                            id="cheque"
-                                            name="basic_default_radio"
-                                            class="form-check-input"
-                                            />
-                                        <label class="form-check-label" for="basic_default_radio">ચેક</label>
-                                        </div>
-                                        <div class="form-check form-check-inline">
-                                        <input
-                                            type="radio"
-                                            id="draft"
-                                            name="basic_default_radio"
-                                            class="form-check-input"
-                                            />
-                                        <label class="form-check-label" for="basic_default_radio">ડ્રાફ્ટ</label>
-                                        </div>
-                                        <div class="form-check form-check-inline">
-                                        <input
-                                            type="radio"
-                                            id="cash"
-                                            name="basic_default_radio"
-                                            class="form-check-input"
-                                            checked/>
-                                        <label class="form-check-label" for="basic_default_radio">રોકડા</label>
-                                        </div>
-                                        <div class="form-check form-check-inline">
-                                        <input
-                                            type="radio"
-                                            id="upi"
-                                            name="basic_default_radio"
-                                            class="form-check-input"
-                                            />
-                                        <label class="form-check-label" for="basic_default_radio">UPI</label>
-                                        </div>
-                                        <div class="form-check form-check-inline" hidden>
-                                            <input type="text" id="payment" name="payment" class="form-control" />
-                                            <label class="form-check-label" for="basic-default-radio">payment</label>
-                            </div>
+                                        <label class="form-label" for="collapsible-address">વિગત</label>
+                                        <textarea name="details" class="form-control" id="details" rows="1" placeholder="Hello," required></textarea>
+                                      
+                                    </div>
+                                    <div class="col-md-12">
+             
                                     </div>
                                     
                                     <div class="row">
@@ -495,7 +432,7 @@ button.swal2-cancel.btn.btn-label-danger {
             });
   
             // Update the 'ટોટલ' input field with the calculated total
-            $('#total').val(total);
+            $('#amount').val(total);
   
             // Convert the total to words and update the 'અંકે રૂપિયા' input field
             NumToWord(total, 'ankers');
@@ -662,36 +599,20 @@ button.swal2-cancel.btn.btn-label-danger {
   <script>
     // Get all elements with class "item-edit"
     const editLinks = document.querySelectorAll(".item-edit");
-    // Loop through each delete link and attach a click event listener
+    // Loop through each edit link and attach a click event listener
     editLinks.forEach(link => {
         link.addEventListener("click", function() {
             // Show a confirmation dialog using SweetAlert2
             var id=$(this).closest("tr").find(".id").val();
-            
             $.ajax({
-                url:"{{url('get_member')}}" +"/"+ id,
+                url:"{{url('get_mahajan_expense')}}" +"/"+ id,
                 type:'GET',
                   success:function(response){  
-                    var name=response[0]['m_name'];
-                    var sr_no=response[0]['p_id'];
-                        $("#sr_no").val(response[0]['sr_no']);  
-                        if(name==="Bhoomi"){
-                        $("#name option[value=1]").attr('selected', 'selected');}
-                        if(name==="JAY SHAH"){
-                        $("#name option[value=134]").attr('selected', 'selected');}
-                        $("#date").val(response[0]['date']);
-                        $("#phone").val(response[0]['phone_no']);
-                        $("#amount").val(response[0]['amount']);
-                        $("#doctor_name").val(response[0]['doctor_name']);
-                        $("#city").val(response[0]['city']);
-                        $("#ankers").val(response[0]['amount_in_words']);
-                        $("#remark").val(response[0]['remark']);
-                        $("#payment").val(response[0]['payment_mode']);
-                        var payment=response[0]['payment_mode'];
-                        if(payment=="CASH"){$("#cash").attr('checked',true);}
-                        if(payment=="UPI"){$("#upi").attr('checked',true);}
-                        if(payment=="DRAFT"){$("#draft").attr('checked',true);}
-                        if(payment=="CHEQUE"){$("#cheque").attr('checked',true);}
+                    $("#depo_id").val(response[0]['depo_id']);
+                    $("#date").val(response[0]['date']);
+                    $("#amount").val(response[0]['amount']);
+                    $("#ankers").val(response[0]['inword']);
+                    $("#details").val(response[0]['details']);
                   }
                 });
         });
@@ -705,23 +626,11 @@ $("#name").change(function(){
                 url:"{{url('get')}}" +"/"+ id,
                 type:'GET',
                   success:function(response){   
-                        $("#city").val(response['city']); 
+                        $("#city").val("AAAAA"); 
                         $("#phone").val(response['phone_no']); 
                   }
                 });
             });
-      $("#cash").change(function(){
-        document.getElementById("payment").value="CASH";
-      });
-      $("#cheque").change(function(){
-        document.getElementById("payment").value="CHEQUE";
-      });
-      $("#draft").change(function(){
-        document.getElementById("payment").value="DRAFT";
-      });
-      $("#upi").change(function(){
-        document.getElementById("payment").value="UPI";
-      });
       
 </script>
 <script>
@@ -744,7 +653,7 @@ $("#name").change(function(){
                 // If the user confirms the deletion, proceed with the deletion logic
                 if (result.isConfirmed) {
                   $.ajax({
-                    url:"{{url('delete_treatment')}}" +"/"+ id,
+                    url:"{{url('delete_mahajan_expense')}}" +"/"+ id,
                     type:'GET',
                     success:function(response){
                         Swal.fire(
@@ -761,10 +670,11 @@ $("#name").change(function(){
     });
 
 
-    $("#kvo_update_treatmet").submit(function(){
-        var doctor_name=document.getElementById("doctor_name").value;
-        var amount=document.getElementById("amount").value;
-        if(doctor_name ==='' && amount === '')
+
+    $("#kvo_update_general_donation").submit(function(){
+        var haste=document.getElementById("haste").value;
+        var details=document.getElementById("details").value;
+        if(haste ==='' && details === '')
         {
             Swal.fire({
                 text: "Sorry, looks like there are some errors detected, please try again.",
@@ -775,11 +685,11 @@ $("#name").change(function(){
             Swal.fire({
                 position: 'middle-center',
                 icon: 'success',
-                title: 'Medical Treatment data has been successfully updated!',
+                title: 'General Donation has been successfully updated!',
                 showConfirmButton: false,
                 timer: 1500
                 }).then(function() {
-                $("#kvo_update_treatment").submit();
+                $("kvo_update_general_donation").submit();
            });
         }
     });

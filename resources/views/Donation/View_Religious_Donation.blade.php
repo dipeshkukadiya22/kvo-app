@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'View all Medical Treatment')
+@section('title', 'View all Religious Donation')
 
 @section('pagecss')
 
@@ -68,7 +68,7 @@ button.swal2-cancel.btn.btn-label-danger {
                   <div class="content-header-left col-md-9 col-12 mb-2">
                     {{-- <div class="row breadcrumbs-top">
                       <div class="col-12">
-                        <h4 class="fw-bold py-3">View all Medical Treatment</h4>
+                        <h4 class="fw-bold py-3">View all Religious Donation</h4>
                       </div>
                     </div> --}}
                   </div>
@@ -91,38 +91,35 @@ button.swal2-cancel.btn.btn-label-danger {
                                                   <th>તારીખ</th>
                                                   <th>મોબાઈલ નંબર</th>
                                                   <th>ગામ</th>
-                                                  <th>ડૉક્ટરનું નામ</th>
                                                   <th>ટોટલ</th>
                                                   <td>નાણા મળેલ</td>
                                                   <th>Action</th>
                                               </tr>
                                           </thead>
-                                          @foreach($member as $row)
+                                          @foreach($donation as $row)
                                           <tr>
-                                              <input type="hidden" class="id" value="{{$row->sr_no}}">
+                                          <input type="hidden" class="id" value="{{$row->donation_id}}">
                                               <td></td>
-                                              <td>{{$row->sr_no}}</td>
-                                              <td>{{$row->m_name}}</td>
-                                              <td>{{Date("d-m-Y",strtotime($row->date))}}</td>
+                                              <td>{{$row->donation_id}}</td>
+                                              <td>{{$row->name}}</td>
+                                              <td>{{$row->d_date}}</td>
                                               <td>{{$row->phone_no}}</td>
                                               <td>{{$row->city}}</td>
-                                              <td>{{$row->doctor_name}}</td>
-                                              <td>{{"₹ ". $row->amount}}</td>
+                                              <td>{{$row->total}}</td>
                                               <td>{{$row->payment_mode}}</td>
                                               <td>
                                                   <div class="d-inline-block">
-                                                    <a href="{{route('pdf_Medical_Treatment',$row->sr_no)}}" class="text-primary" ><i class="ti ti-eye"></i></a>
+                                                    <a href="{{route('pdf_Medical_Treatment',$row->donation_id)}}" class="text-primary"><i class="ti ti-eye"></i></a>
 
-                                                    <a href="{{route('edit_treatment',$row->sr_no)}}" class="btn btn-sm btn-icon item-edit" data-bs-toggle="offcanvas"
+                                                    <a class="btn btn-sm btn-icon item-edit" data-bs-toggle="offcanvas"
                                                     data-bs-target="#offcanvasBackdrop" aria-controls="offcanvasBackdrop"><i class="text-primary ti ti-edit"></i></a>
 
-                                                    <a class="text-danger delete-record"><i class="ti ti-trash"></i></a>
+                                                    <a  class="text-danger delete-record"><i class="ti ti-trash"></i></a>
                                                     
                                                   </div>
                                               </td>
                                           </tr>
-                                          @endforeach
-                                          
+                                         @endforeach
                                         </table>
                                     </div>
                                 </div>
@@ -132,14 +129,14 @@ button.swal2-cancel.btn.btn-label-danger {
 
                         <!-- Enable backdrop (default) Offcanvas -->
                         <div class="mt-0">
-                          
+                        
                           <div
                             class="offcanvas offcanvas-end"
                             tabindex="-1"
                             id="offcanvasBackdrop"
                             aria-labelledby="offcanvasBackdropLabel">
                             <div class="offcanvas-header border-bottom">
-                              <h5 id="offcanvasBackdropLabel" class="offcanvas-title">Edit Treatment Details</h5>
+                              <h5 id="offcanvasBackdropLabel" class="offcanvas-title">Edit Donation Details</h5>
                               <button
                                 type="button"
                                 class="btn-close text-reset"
@@ -149,58 +146,108 @@ button.swal2-cancel.btn.btn-label-danger {
                             <div class="offcanvas-body mx-0 flex-grow-0">
 
                               <!-- Browser Default -->
-                              <form id="kvo_update_treatmet" class="browser-default-validation" method="POST" action="{{route('update_treatment')}}">
+                              <form class="browser-default-validation" method="POST" action="{{route('update_community_donation')}}">
                                 <div class="row g-3">
-
-                                @csrf
                                     <div class="col-md-12">
-                                        <label class="form-label" for="multicol-phone">રશીદ નં </label>
-                                        <input type="number" id="sr_no" name="sr_no" class="form-control" readonly/>
+                                    @csrf
+                                        <label class="form-label" name="p_number" for="basic-default-name">પહોંચ નંબર</label>
+                                        <input
+                                            type="text"
+                                            class="form-control"
+                                            id="donation_id"
+                                            name="donation_id"
+                                            readonly
+                                            />
                                     </div>
 
                                     <div class="col-md-12">
-                                        <label class="form-label" for="multicol-username">દર્દીનું નામ </label>
-                                        <select id="name" name="name" class="select2 form-select form-select-lg" data-allow-clear="true" >
-                                          @foreach($member_data as $row)
-                                                <option value="{{$row->p_id}}">{{$row->m_name}}</option>
-                                          @endforeach
-                                        </select>   
-                                    </div>
-
-                                    <div class="col-md-12">
-                                        <label class="form-label" for="multicol-phone">દર્દીના મોબાઇલ નં </label>
-                                        <input type="number" id="phone" name="phone" class="form-control" readonly/>
-                                    </div>
-
-                                    <div class="col-md-12">
-                                        <label for="flatpickr-date" class="form-label">તારીખ </label>
-                                        <input type="date" class="form-control" placeholder="DD-MM-YYYY" id="date" name="date" />    
-                                        
-                                    </div>
-
-                                    <div class="col-md-12">
-                                        <label class="form-label" for="multicol-username">ડોક્ટરનું નામ </label>
-                                        <input type="text" id="doctor_name" name="doctor_name" class="form-control" placeholder="Dr. Shah" required>  
+                                        <label class="form-label" for="multicol-phone">શેઠશ્રી રતનશી ટોકરશી વોરા મેડિકલ ચેકઅપ સેન્ટર</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text">₹</span>
+                                            <input type="number" class="form-control amount-input" name="medical_checkup" id="medical_checkup" placeholder="Amount" aria-label="Amount (to the nearest dollar)" required>
+                                            
                                         </div>
-                                    
-
-                                    <div class="col-md-12">
-                                        <label class="form-label" for="multicol-username">ગામનું નામ </label>
-                                        <input type="text" id="city" class="form-control" readonly>
                                     </div>
 
                                     <div class="col-md-12">
-                                        <label class="form-label" for="collapsible-address">વિશેષ નોંધ </label>
-                                        <textarea name="remark" class="form-control" id="remark" rows="1" placeholder="Hello,"></textarea>
-                                      
+                                        <label class="form-label" for="multicol-phone">મહાજનનું મામેરું</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text">₹</span>
+                                            <input type="number" class="form-control amount-input" name="mahajan" id="mahajan" placeholder="Amount" aria-label="Amount (to the nearest dollar)" required>
+                                            
+                                        </div>
                                     </div>
 
                                     <div class="col-md-12">
-                                        <label class="form-label" for="multicol-phone">રૂપિયા </label>
+                                        <label class="form-label" for="multicol-phone">માતુશ્રી લાખણીબાઈ રામજી તેજશી ગાલા નવનીત ભોજનશાળા</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text">₹</span>
+                                            <input type="number" class="form-control amount-input" name="bhojanshala" id="bhojanshala"placeholder="Amount" aria-label="Amount (to the nearest dollar)" required>
+                                            
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-12">
+                                        <label class="form-label" for="multicol-phone">શૈક્ષણિક</label>
                                         <div class="input-group">
                                         <span class="input-group-text">₹</span>
-                                        <input type="text" id="amount" name="amount" class="form-control" placeholder="Amount" aria-label="Amount (to the nearest dollar)"
-                                        onkeypress="return onlyNumbers(this.value);" onkeyup="NumToWord(this.value,'ankers');" maxlength="9" required>
+                                        <input type="number" class="form-control amount-input" name="shaikshanik" id="shaikshanik" placeholder="Amount" aria-label="Amount (to the nearest dollar)" required>
+                                        
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-12">
+                                        <label class="form-label" for="multicol-phone">લવાજમ</label>
+                                        <div class="input-group">
+                                        <span class="input-group-text">₹</span>
+                                        <input type="number" class="form-control amount-input" name="lavajam" id="lavajam" placeholder="Amount" aria-label="Amount (to the nearest dollar)" required>
+                                        
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-12">
+                                        <label class="form-label" for="multicol-phone">ઑક્સીજન ડોનેશન</label>
+                                        <div class="input-group">
+                                        <span class="input-group-text">₹</span>
+                                        <input type="number" class="form-control amount-input" name="oxygen" id="oxygen" placeholder="Amount" aria-label="Amount (to the nearest dollar)" required>
+                                        
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-12">
+                                        <label class="form-label" for="multicol-phone">એમ્બ્યુલન્સ ડોનેશન</label>
+                                        <div class="input-group">
+                                        <span class="input-group-text">₹</span>
+                                        <input type="number" class="form-control amount-input" name="ambulance" id="ambulance" placeholder="Amount" aria-label="Amount (to the nearest dollar)" required>
+                                        
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-12">
+                                        <label class="form-label" for="multicol-phone">ઈતર</label>
+                                        <div class="input-group">
+                                        <span class="input-group-text">₹</span>
+                                        <input type="number" class="form-control amount-input" name="other" id="other" placeholder="Amount" aria-label="Amount (to the nearest dollar)" required>
+                                        
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-12">
+                                        <label class="form-label" for="basic-default-name">અન્ય વિગત</label>
+                                        <input
+                                        type="text"
+                                        class="form-control"
+                                        id="remarks"
+                                        name="remarks" 
+                                        {{-- placeholder="John Doe" --}}
+                                        required />
+                                    </div>
+        
+                                    <div class="col-md-12">
+                                        <label class="form-label" for="multicol-phone">ટોટલ</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text">₹</span>
+                                            <input type="text" id="total" class="form-control" name="total" placeholder="Amount" aria-label="Amount (to the nearest dollar)" onkeypress="return onlyNumbers(event);" maxlength="9" required readonly>
                                         </div>
                                     </div>
                                     {{-- <div id="divDisplayWords"> --}}
@@ -215,8 +262,6 @@ button.swal2-cancel.btn.btn-label-danger {
                                         {{-- placeholder="John Doe" --}}
                                         required readonly/>
                                         </div>
-                                    
-
                                     <div class="col-md-12">
                                         <label class="d-block form-label">નાણા મળેલ</label>
                                         <div class="form-check form-check-inline mb-2">
@@ -224,8 +269,7 @@ button.swal2-cancel.btn.btn-label-danger {
                                             type="radio"
                                             id="cheque"
                                             name="basic_default_radio"
-                                            class="form-check-input"
-                                            />
+                                            class="form-check-input" />
                                         <label class="form-check-label" for="basic_default_radio">ચેક</label>
                                         </div>
                                         <div class="form-check form-check-inline">
@@ -234,7 +278,7 @@ button.swal2-cancel.btn.btn-label-danger {
                                             id="draft"
                                             name="basic_default_radio"
                                             class="form-check-input"
-                                            />
+                                            value="Draft"/>
                                         <label class="form-check-label" for="basic_default_radio">ડ્રાફ્ટ</label>
                                         </div>
                                         <div class="form-check form-check-inline">
@@ -243,7 +287,7 @@ button.swal2-cancel.btn.btn-label-danger {
                                             id="cash"
                                             name="basic_default_radio"
                                             class="form-check-input"
-                                            checked/>
+                                            />
                                         <label class="form-check-label" for="basic_default_radio">રોકડા</label>
                                         </div>
                                         <div class="form-check form-check-inline">
@@ -252,13 +296,13 @@ button.swal2-cancel.btn.btn-label-danger {
                                             id="upi"
                                             name="basic_default_radio"
                                             class="form-check-input"
-                                            />
+                                            value="UPI" />
                                         <label class="form-check-label" for="basic_default_radio">UPI</label>
                                         </div>
-                                        <div class="form-check form-check-inline" hidden>
+                                        <div class="form-check form-check-inline">
                                             <input type="text" id="payment" name="payment" class="form-control" />
                                             <label class="form-check-label" for="basic-default-radio">payment</label>
-                            </div>
+                                        </div>
                                     </div>
                                     
                                     <div class="row">
@@ -308,7 +352,6 @@ button.swal2-cancel.btn.btn-label-danger {
     <script src="{{ asset('assets/js/extended-ui-sweetalert2.js') }}"></script>
 
     <!-- BEGIN: Page JS-->
-    
    <script>
     
     var dt_basic_table = $('.datatables-basic');
@@ -658,80 +701,15 @@ button.swal2-cancel.btn.btn-label-danger {
   }
   </script>
   <!-- end num to word -->
-  
-  <script>
-    // Get all elements with class "item-edit"
-    const editLinks = document.querySelectorAll(".item-edit");
-    // Loop through each delete link and attach a click event listener
-    editLinks.forEach(link => {
-        link.addEventListener("click", function() {
-            // Show a confirmation dialog using SweetAlert2
-            var id=$(this).closest("tr").find(".id").val();
-            
-            $.ajax({
-                url:"{{url('get_member')}}" +"/"+ id,
-                type:'GET',
-                  success:function(response){  
-                    var name=response[0]['m_name'];
-                    var sr_no=response[0]['p_id'];
-                        $("#sr_no").val(response[0]['sr_no']);  
-                        if(name==="Bhoomi"){
-                        $("#name option[value=1]").attr('selected', 'selected');}
-                        if(name==="JAY SHAH"){
-                        $("#name option[value=134]").attr('selected', 'selected');}
-                        $("#date").val(response[0]['date']);
-                        $("#phone").val(response[0]['phone_no']);
-                        $("#amount").val(response[0]['amount']);
-                        $("#doctor_name").val(response[0]['doctor_name']);
-                        $("#city").val(response[0]['city']);
-                        $("#ankers").val(response[0]['amount_in_words']);
-                        $("#remark").val(response[0]['remark']);
-                        $("#payment").val(response[0]['payment_mode']);
-                        var payment=response[0]['payment_mode'];
-                        if(payment=="CASH"){$("#cash").attr('checked',true);}
-                        if(payment=="UPI"){$("#upi").attr('checked',true);}
-                        if(payment=="DRAFT"){$("#draft").attr('checked',true);}
-                        if(payment=="CHEQUE"){$("#cheque").attr('checked',true);}
-                  }
-                });
-        });
-    });
-</script>
+
 <script>
-$("#name").change(function(){
-      const id=document.getElementById("name").value;
-      $.ajax({
-        
-                url:"{{url('get')}}" +"/"+ id,
-                type:'GET',
-                  success:function(response){   
-                        $("#city").val(response['city']); 
-                        $("#phone").val(response['phone_no']); 
-                  }
-                });
-            });
-      $("#cash").change(function(){
-        document.getElementById("payment").value="CASH";
-      });
-      $("#cheque").change(function(){
-        document.getElementById("payment").value="CHEQUE";
-      });
-      $("#draft").change(function(){
-        document.getElementById("payment").value="DRAFT";
-      });
-      $("#upi").change(function(){
-        document.getElementById("payment").value="UPI";
-      });
-      
-</script>
-<script>
-    // Get all elements with class "delete-record"
-    const deleteLinks = document.querySelectorAll(".delete-record");
+ const deleteLinks = document.querySelectorAll(".delete-record");
     // Loop through each delete link and attach a click event listener
     deleteLinks.forEach(link => {
         link.addEventListener("click", function() {
             // Show a confirmation dialog using SweetAlert2
             var id=$(this).closest("tr").find(".id").val();
+            alert(id);
             Swal.fire({
                 title: "Are you sure?",
                 text: "You won't be able to revert this!",
@@ -744,7 +722,7 @@ $("#name").change(function(){
                 // If the user confirms the deletion, proceed with the deletion logic
                 if (result.isConfirmed) {
                   $.ajax({
-                    url:"{{url('delete_treatment')}}" +"/"+ id,
+                    url:"{{url('delete_community_donation')}}" +"/"+ id,
                     type:'GET',
                     success:function(response){
                         Swal.fire(
@@ -761,28 +739,43 @@ $("#name").change(function(){
     });
 
 
-    $("#kvo_update_treatmet").submit(function(){
-        var doctor_name=document.getElementById("doctor_name").value;
-        var amount=document.getElementById("amount").value;
-        if(doctor_name ==='' && amount === '')
-        {
-            Swal.fire({
-                text: "Sorry, looks like there are some errors detected, please try again.",
-                icon: "error",
-            });
-            return false; // Prevent form submission
-        } else {
-            Swal.fire({
-                position: 'middle-center',
-                icon: 'success',
-                title: 'Medical Treatment data has been successfully updated!',
-                showConfirmButton: false,
-                timer: 1500
-                }).then(function() {
-                $("#kvo_update_treatment").submit();
-           });
-        }
+ // Get all elements with class "item-edit"
+ const editLinks = document.querySelectorAll(".item-edit");
+    // Loop through each delete link and attach a click event listener
+    editLinks.forEach(link => {
+        link.addEventListener("click", function() {
+            // Show a confirmation dialog using SweetAlert2
+            var id=$(this).closest("tr").find(".id").val();
+            //console.info(id);
+            //alert(id);
+            $.ajax({
+                url:"{{url('get_community_donation')}}" +"/"+ id,
+                type:'GET',
+                  success:function(response){  
+                    console.info(response);
+                      $("#donation_id").val(response['donation_id']);
+                      $("#medical_checkup").val(response['medical_checkup']);
+                      $("#bhojanshala").val(response['bhojanshala']);
+                      $("#mahajan").val(response['mahajan']);
+                      $("#shaikshanik").val(response['shaikshanik']);
+                      $("#oxygen").val(response['oxygen']);
+                      $("#lavajam").val(response['lavajam']);
+                      $("#ambulance").val(response['ambulance']);
+                      $("#other").val(response['other']);
+                      $("#remarks").val(response['remarks']);
+                      $("#total").val(response['total']);
+                      $("#ankers").val(response['total_in_word']);
+                      $("#payment").val(response['payment_mode']); 
+                      var payment=response['payment_mode'];
+                        if(payment=="CASH"){$("#cash").attr('checked',true);}
+                        if(payment=="UPI"){$("#upi").attr('checked',true);}
+                        if(payment=="DRAFT"){$("#draft").attr('checked',true);}
+                        if(payment=="CHEQUE"){$("#cheque").attr('checked',true);}
+                  }
+                });
+        });
     });
 </script>
+@endsection
 
 @endsection

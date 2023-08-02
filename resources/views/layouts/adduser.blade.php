@@ -39,10 +39,6 @@
     <input type="text" name="city" class="form-control" id="city" placeholder="Bhuj" />
   </div>
 
-  <div class="mb-3">
-    <label class="form-label" for="collapsible-address">Address</label>
-    <textarea name="collapsible_address"  class="form-control" id="collapsible_address" rows="2" placeholder="1456, Mall Road"></textarea>
-  </div>
   
   <div class="row">
     <div class="col-12">

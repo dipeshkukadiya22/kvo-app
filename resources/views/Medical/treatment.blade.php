@@ -88,8 +88,7 @@
                     </div>
                     <div class="col-md-4">
                       <label class="form-label" for="multicol-username">ગામનું નામ </label>
-                      <input type="text" id="city" 
-class="form-control" placeholder="ex. bhuj" readonly>
+                      <input type="text" id="city1" class="form-control" placeholder="ex. bhuj" readonly>
                     </div>
                     <div class="col-md-4">
                       <label class="form-label" for="collapsible-address">વિશેષ નોંધ </label>
@@ -176,7 +175,7 @@ class="form-control" placeholder="ex. bhuj" readonly>
                 url:"{{url('get')}}" +"/"+ id,
                 type:'GET',
                   success:function(response){   
-                        $("#city").val(response['city']); 
+                        $("#city1").val(response['city']); 
                         $("#phone").val(response['phone_no']); 
                   }
                 });

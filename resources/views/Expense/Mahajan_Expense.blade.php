@@ -74,7 +74,7 @@
                           </div>
                           <div class="offcanvas-body mx-0 flex-grow-0">
                             <!-- Browser Default -->
-                            <form class="browser-default-validation" method="POST" action="{{route('Mahajan_Expense')}}">
+                            <form class="browser-default-validation" method="POST" action="">
                               @csrf
                               <div class="mb-3">
                                 <label class="form-label" for="basic-default-name">Name</label>
@@ -122,7 +122,7 @@
                 <div class="col-md mb-4 mb-md-0">
                   <div class="card">
                     <div class="card-body">
-                      <form action="{{route('MahajanExpense')}}" method="POST" class="browser-default-validation" >
+                      <form id="kvo_add_mahajan_donation" class="browser-default-validation"  method="POST" action="{{route('add_mahajan_expense')}}"  >
                         @csrf
                         <div class="row g-3">
                           <div class="col-12">
@@ -134,7 +134,7 @@
                             <select id="select2Basic" class="select2 form-select form-select-lg" data-allow-clear="true" name="name" placeholder="select name" required>
                               <option value=""></option>
                               @foreach ($m_data as $row)  
-                                  <option value="{{$row->m_name}}" {{(!empty($member) && $member->m_name == $row->m_name) ? "selected" : ""}}>{{$row->m_name}}&nbsp;&nbsp;-&nbsp;&nbsp;{{$row->phone_no}}</option>
+                                  <option value="{{$row->p_id}}" {{(!empty($member) && $member->m_name == $row->m_name) ? "selected" : ""}}>{{$row->m_name}}&nbsp;&nbsp;-&nbsp;&nbsp;{{$row->phone_no}}</option>
                               @endforeach
                             </select>
                             <input type="hidden" id="email_user" value="{{!empty($m_data)  ? $m_data:''}}">
@@ -160,15 +160,15 @@
                               required readonly/>
                           </div>
                           <div class="col-12">
-                            <h6 class="mt-2 fw-semibold">2. Expence Details</h6>
+                            <h6 class="mt-2 fw-semibold">2. Expense Details</h6>
                             <hr class="mt-0" />
                           </div>
                           <div class="col-md-4">
                             <label class="form-label" for="collapsible-address">બાબત</label>
                             <textarea
-                              name="collapsible_details"
+                              name="details"
                               class="form-control"
-                              id="collapsible-address"
+                              id="details"
                               rows="1"></textarea>
                           </div>
                           <div class="col-md-4">
@@ -237,7 +237,7 @@
       jQuery(document).ready(function($){
       var currentDate = new Date();
       $('#basic-default-dob').flatpickr({
-      dateFormat: "d M, Y",
+      dateFormat: "d-m-Y",
       defaultDate: currentDate
     })
     });

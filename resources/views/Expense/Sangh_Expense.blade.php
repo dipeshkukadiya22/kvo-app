@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Donation Receipt')
+@section('title', 'Sangh Expense')
 
 @section('pagecss')
 
@@ -87,19 +87,19 @@
                 <div class="col-md mb-4 mb-md-0">
                   <div class="card">
                     <div class="card-body">
-                      <form class="browser-default-validation">
+                      <form id="kvo_add_sangh_expense" class="browser-default-validation" method="POST" action="{{route('add_sangh_expense')}}" >
                         <div class="row g-3">
                           <div class="col-12">
                             <h6 class="fw-semibold">1. Personal Details</h6>
                             <hr class="mt-0" />
                           </div>
+                          @csrf
                           <div class="col-md-4">
                             <label for="select2Basic" class="form-label">નામ</label>
-                            <select id="select2Basic" class="select2 form-select form-select-lg" data-allow-clear="true" required>
-                              <option value="AK">Alaska</option>
-                              <option value="HI">Hawaii</option>
-                              <option value="CA">California</option>
-                              <option value="NV">Nevada</option>
+                            <select id="name" name="name" class="select2 form-select form-select-lg" data-allow-clear="true" required>
+                                @foreach($member as $row)
+                                    <option value="{{$row->p_id}}">{{$row->m_name." - ".$row->phone_no }}</option>
+                                @endforeach
                             </select>
                           </div>
                           <div class="col-md-4">
@@ -107,7 +107,8 @@
                             <input
                               type="text"
                               class="form-control flatpickr-validation"
-                              id="basic-default-dob"
+                              id="date"
+                              name="date"
                               required />
                           </div>
                           <div class="col-md-4">
@@ -115,8 +116,9 @@
                             <input
                               type="text"
                               class="form-control"
-                              id="basic-default-name"
-                              placeholder="15"
+                              id="depo_id"
+                              name="depo_id"
+                              value="{{$depo_id + 1}}"
                               required readonly/>
                           </div>
                           <div class="col-12">
@@ -126,16 +128,16 @@
                           <div class="col-md-4">
                             <label class="form-label" for="collapsible-address">બાબત</label>
                             <textarea
-                              name="collapsible-address"
+                              name="details"
                               class="form-control"
-                              id="collapsible-address"
+                              id="details"
                               rows="1"></textarea>
                           </div>
                           <div class="col-md-4">
                             <label class="form-label" for="multicol-phone">રૂપિયા</label>
                             <div class="input-group">
                               <span class="input-group-text">₹</span>
-                              <input type="text" id="Text1" class="form-control" placeholder="Amount" aria-label="Amount (to the nearest dollar)"
+                              <input type="text" id="amount" name="amount" class="form-control" placeholder="Amount" aria-label="Amount (to the nearest dollar)"
                               onkeypress="return onlyNumbers(this.value);" onkeyup="NumToWord(this.value,'ankers');" maxlength="9">
                             </div>
                           </div>
@@ -146,6 +148,7 @@
                               type="text"
                               class="form-control"
                               id="ankers"
+                              name="ankers"
                               value=""
                               {{-- placeholder="John Doe" --}}
                               required readonly/>
@@ -195,8 +198,8 @@
     <script>
       jQuery(document).ready(function($){
       var currentDate = new Date();
-      $('#basic-default-dob').flatpickr({
-      dateFormat: "d M, Y",
+      $('#date').flatpickr({
+      dateFormat: "d-m-Y",
       defaultDate: currentDate
     })
     });

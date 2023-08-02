@@ -11,13 +11,9 @@ use DB;
 class pdfcontroller extends Controller
 {
     public function pdf_Religious_Donation()
-    {
-        // $pdf = App::make('dompdf.wrapper');
-        // $pdf->loadHTML('<h1>Hello BABA</h1>');
-        // return $pdf->stream();
-        
-    $pdf = Pdf::loadView('pdf.pdf_Religious_Donation')->setPaper('a5', 'potrait')->setOptions(['defaultFont' => 'NotoSansGujarati-Regular','enable_remote',True]);
-    return $pdf->stream();
+    {   
+        $pdf = Pdf::loadView('pdf.pdf_Religious_Donation')->setPaper('a5', 'potrait')->setOptions(['defaultFont' => 'NotoSansGujarati-Regular','enable_remote',True]);
+        return $pdf->stream();
     }
 
     public function pdf_Community_Donation($id)
@@ -27,24 +23,24 @@ class pdfcontroller extends Controller
         return $pdf->stream();
     }
 
-    public function pdf_General_Donation()
+    public function pdf_General_Donation($id)
     {   
-    $pdf = Pdf::loadView('pdf.pdf_General_Donation')->setPaper('a5', 'landscape')->setOptions(['defaultFont' => 'KAP119']);
-    return $pdf->stream();
+        $general_donatin=DB::select("SELECT * FROM `GeneralDonation` join add_members where GeneralDonation.member_id=add_members.p_id and depo_id='$id'");
+        $pdf = Pdf::loadView('pdf.pdf_General_Donation',['general_donation' => $general_donatin])->setPaper('a5', 'landscape')->setOptions(['defaultFont' => 'KAP119']);
+        return $pdf->stream();
     }
 
-    public function pdf_Expense_Receipt()
+    public function pdf_Mahajan_Expense($id)
     {   
-         $data=DB::select("SELECT * FROM Mahajan_Expense");
-    
-    $pdf = Pdf::loadView('pdf.pdf_Expense_Receipt',compact('data'))->setPaper('a5', 'landscape')->setOptions(['defaultFont' => 'KAP119']);
-    return $pdf->stream();
+        $mahajan_expense=DB::select("SELECT * FROM `Mahajan_Expense` join add_members WHERE Mahajan_Expense.member_id=add_members.p_id and depo_id='$id'");
+        $pdf = Pdf::loadView('pdf.pdf_Expense_Receipt',['mahajan_expense' => $mahajan_expense])->setPaper('a5', 'landscape')->setOptions(['defaultFont' => 'KAP119']);
+        return $pdf->stream();
     }
-
-    public function pdf_Religious_Expense_Receipt()
-    {   
-    $pdf = Pdf::loadView('pdf.pdf_Religious_Expense_Receipt')->setPaper('a5', 'landscape')->setOptions(['defaultFont' => 'KAP119']);
-    return $pdf->stream();
+    public function pdf_Sangh_Expense($id)
+    {      
+        $sangh_expense=DB::select("SELECT * FROM `Sangh_Expense` join add_members WHERE Sangh_Expense.member_id=add_members.p_id and depo_id='$id'");
+        $pdf = Pdf::loadView('pdf.pdf_Religious_Expense_Receipt',['sangh_expense' => $sangh_expense])->setPaper('a5', 'landscape')->setOptions(['defaultFont' => 'KAP119']);
+        return $pdf->stream();
     }
 
     public function pdf_Checkout()

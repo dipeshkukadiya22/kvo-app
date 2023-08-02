@@ -52,7 +52,6 @@ class MedicalController extends Controller
     }
     public function get($id){
         $data=add_members::find($id);
-        dd($data);
         return $data;
     }
     public function delete_treatment($id)

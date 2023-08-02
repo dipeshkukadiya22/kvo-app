@@ -214,14 +214,22 @@ class donation extends Controller
     }
     public function get_general_donation($id)
     {
-        dd($id);
         $donation=DB::SELECT("SELECT * FROM `GeneralDonation` join add_members WHERE GeneralDonation.member_id=add_members.p_id and depo_id='$id'");
         return $donation;
+    }
+    public function update_general_donation(Request $req)
+    {
+        $donation=GeneralDonation::find($req->depo_id);
+        $donation->date=Date(('Y-m-d'),strtotime($req->date));
+        $donation->haste=strtoupper($req->haste);
+        $donation->details=ucfirst($req->details);
+        $donation->member_id=$req->name;
+        $donation->save();
+        return back()->with("Update General Donation");
     }
     public function delete_general_donation($id)
     {
         $donation=GeneralDonation::find($id);
-        dd($donation);
         $donation->delete();
         return back()->with("Delete General Donation");
     }

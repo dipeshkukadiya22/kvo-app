@@ -112,10 +112,10 @@ button.swal2-cancel.btn.btn-label-danger {
                                                   <div class="d-inline-block">
                                                     <a href="{{route('pdf_General_Donation',$row->depo_id)}}" class="text-primary" ><i class="ti ti-eye"></i></a>
 
-                                                    <a  class="btn btn-sm btn-icon item-edit" data-bs-toggle="offcanvas"
+                                                    <a href="{{route('get_general_donation',$row->depo_id)}}" class="btn btn-sm btn-icon item-edit" data-bs-toggle="offcanvas"
                                                     data-bs-target="#offcanvasBackdrop" aria-controls="offcanvasBackdrop"><i class="text-primary ti ti-edit"></i></a>
 
-                                                    <a class="text-danger delete-record"><i class="ti ti-trash"></i></a>
+                                                    <a href="{{route('delete_general_donation',$row->depo_id)}}" class="text-danger delete-record"><i class="ti ti-trash"></i></a>
                                                     
                                                   </div>
                                               </td>
@@ -148,7 +148,7 @@ button.swal2-cancel.btn.btn-label-danger {
                             <div class="offcanvas-body mx-0 flex-grow-0">
 
                               <!-- Browser Default -->
-                              <form id="kvo_update_treatmet" class="browser-default-validation" method="POST" action="">
+                              <form id="kvo_update_general_donation" class="browser-default-validation" method="POST" action="{{route('update_general_donation')}}">
                                 <div class="row g-3">
 
                                 @csrf
@@ -185,12 +185,12 @@ button.swal2-cancel.btn.btn-label-danger {
 
                                     <div class="col-md-12">
                                         <label class="form-label" for="multicol-username">હસ્તે </label>
-                                        <input type="text" id="doctor_name" name="doctor_name" class="form-control" placeholder="Dr. Shah" required>  
+                                        <input type="text" id="haste" name="haste" class="form-control" placeholder="" required>  
                                         </div>
 
                                     <div class="col-md-12">
                                         <label class="form-label" for="collapsible-address">વિગત</label>
-                                        <textarea name="remark" class="form-control" id="remark" rows="1" placeholder="Hello,"></textarea>
+                                        <textarea name="details" class="form-control" id="details" rows="1" placeholder="Hello," required></textarea>
                                       
                                     </div>
                                     <div class="col-md-12">
@@ -603,19 +603,16 @@ button.swal2-cancel.btn.btn-label-danger {
         link.addEventListener("click", function() {
             // Show a confirmation dialog using SweetAlert2
             var id=$(this).closest("tr").find(".id").val();
-            alert(id);
-         
             $.ajax({
                 url:"{{url('get_general_donation')}}" +"/"+ id,
                 type:'GET',
                   success:function(response){  
-                    alert("hi");
-                    $("#depo_id").val(response['depo_id']);
-                    $("#phone").val(response['phone_no']);
-                    $("#date").val(response['date']);
-                    $("#city").val(response['city']);
-                    $("#haste").val(response['haste']);
-                    $("#details").val(response['details']);
+                    $("#depo_id").val(response[0]['depo_id']);
+                    $("#phone").val(response[0]['phone_no']);
+                    $("#date").val(response[0]['date']);
+                    $("#city").val(response[0]['city']);
+                    $("#haste").val(response[0]['haste']);
+                    $("#details").val(response[0]['details']);
                   }
                 });
         });
@@ -644,7 +641,6 @@ $("#name").change(function(){
         link.addEventListener("click", function() {
             // Show a confirmation dialog using SweetAlert2
             var id=$(this).closest("tr").find(".id").val();
-            alert(id);
             Swal.fire({
                 title: "Are you sure?",
                 text: "You won't be able to revert this!",
@@ -674,10 +670,10 @@ $("#name").change(function(){
     });
 
 
-    $("#kvo_update_treatmet").submit(function(){
-        var doctor_name=document.getElementById("doctor_name").value;
-        var amount=document.getElementById("amount").value;
-        if(doctor_name ==='' && amount === '')
+    $("#kvo_update_general_donation").submit(function(){
+        var haste=document.getElementById("haste").value;
+        var details=document.getElementById("details").value;
+        if(haste ==='' && details === '')
         {
             Swal.fire({
                 text: "Sorry, looks like there are some errors detected, please try again.",
@@ -688,11 +684,11 @@ $("#name").change(function(){
             Swal.fire({
                 position: 'middle-center',
                 icon: 'success',
-                title: 'Medical Treatment data has been successfully updated!',
+                title: 'General Donation has been successfully updated!',
                 showConfirmButton: false,
                 timer: 1500
                 }).then(function() {
-                $("#kvo_update_treatment").submit();
+                $("kvo_update_general_donation").submit();
            });
         }
     });
