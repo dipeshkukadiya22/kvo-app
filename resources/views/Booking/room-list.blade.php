@@ -225,8 +225,9 @@
                                     <table id="DataTables_Table_1" class="datatables-basic table">
                                       <thead>
                                         <tr>
+                                        <th></th>
                                           <th></th>
-                                          <th></th>
+                                          <th>Room No</th>
                                           <th>Room Name</th>
                                           <th>Room Type</th>
                                           <th>Room Facility</th>
@@ -235,13 +236,15 @@
                                         </tr>
                                       </thead>
                                       <tbody>
-                                        
+                                      @foreach($availablelist as $available)
+                                      @if( $available->status == 0)
                                         <tr>
                                           <td></td>
                                           <td></td>
-                                          <td></td>
-                                          <td></td>
-                                          <td></td>
+                                            <td>{{ $available->id }}</td>
+                                            <td>{{ $available->room_name }}</td>
+                                            <td>{{ $available->room_type }}</td>
+                                            <td>{{ $available->room_facility }}</td>
                                           <td><span class="badge bg-label-primary">Available</span></td>
                                           <td>
                                             <div class="d-inline-block">
@@ -250,7 +253,8 @@
                                             </div>
                                           </td>
                                         </tr>
-                                       
+                                        @endif
+                                    @endforeach
                                       </tbody>
                                     </table>
                                   </div>
@@ -263,6 +267,7 @@
                                         <tr>
                                           <th></th>
                                           <th></th>
+                                          <th>Room No</th>
                                           <th>Room Name</th>
                                           <th>Room Type</th>
                                           <th>Room Facility</th>
@@ -271,26 +276,31 @@
                                         </tr>
                                       </thead>
                                       <tbody>
-                                      @foreach($room_book as $book)
-                                     
+                                      @foreach($get_list as $book)
+                                      @if( $book->status == 1)
                                         <tr>
-                                          <td></td>
-                                          <td></td>
-                                          <td>{{$book->room_list}}</td>
-                                          <td>{{substr($book->room_list, 11, 6)}}</td>
-                                          <td>{{substr($book->room_list, 30, 6)}}</td>
-                                          <td>
-                                            <div class="badge bg-label-success mb-2">Booked</div>
-                                            <div class="badge bg-label-primary booked-date "><i class="text-primary me-2 ti ti-calendar"></i></div>
+                                            <td></td>
+                                            <td></td>
+                                            <td>{{ $book->id }}</td>
+                                            <td>{{ $book->room_name }}</td>
+                                            <td>{{ $book->room_type }}</td>
+                                            <td>{{ $book->room_facility }}</td>
+                                            <td>
+                                            <div class="badge bg-label-danger mb-2">Booked</div>
+                                            <div class="badge bg-label-primary booked-date "><i class="text-primary me-2 ti ti-calendar"></i> {{ $book->check_in_date}}</div>
                                           </td>
-                                          <td>
-                                            <div class="d-inline-block">
-                                              <a href="javascript:;" class="btn btn-sm btn-icon item-edit" data-bs-toggle="offcanvas" data-bs-target="#offcanvasBackdropEditRoom" aria-controls="offcanvasBackdrop"><i class="text-primary ti ti-edit"></i></a>
-                                              <a href="javascript:;" id="confirm-text" class="text-danger delete-record"><i class="ti ti-trash"></i></a>
-                                            </div>
-                                          </td>
+                                            
+                                            <td>
+                                                <div class="d-inline-block">
+                                                    <a href="javascript:;" class="btn btn-sm btn-icon item-edit" data-bs-toggle="offcanvas" data-bs-target="#offcanvasBackdropEditRoom" aria-controls="offcanvasBackdrop"><i class="text-primary ti ti-edit"></i></a>
+                                                    <a href="javascript:;" id="confirm-text" class="text-danger delete-record"><i class="ti ti-trash"></i></a>
+                                                </div>
+                                            </td>
                                         </tr>
-                                        @endforeach
+                                        @endif
+                                    @endforeach
+
+
                                       </tbody>
                                     </table>
                                   </div>

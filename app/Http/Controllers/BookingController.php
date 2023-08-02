@@ -59,7 +59,11 @@ class BookingController extends Controller
             'door_metric_ac_non_ac_room' => $req->select2Multiple3
         );
         $booking->room_list = json_encode($roomListArray);
-        //dd($roomListArray);
+    
+        $acroomlist=($roomListArray['ac_room']);
+        $nonacroomlist=($roomListArray['non_ac_room']);
+        $doormtnonacroomlist=($roomListArray['door_metric_ac_non_ac_room']);
+        
         $booking->ac_amount = $req->ac_amount;
         $booking->non_ac_amount = $req->non_ac_amount;
         $booking->door_mt_amount = $req->door_mt_amount;
@@ -67,10 +71,29 @@ class BookingController extends Controller
         $booking->deposite_no = $req->deposit_no;
         $booking->deposite_rs = $req->deposite_rs;
         $booking->rs_word = $req->rs_word;
-        $updateroom = add_room::whereIn('room_no',$req->room_list)->get();
-        $updateroom->status=1;
-       dd($req->room_list);
         $booking->save();
+        $updateroom = add_room::where('room_facility', 'A.C. Room')
+    ->orWhere('room_facility', 'NON A.C ROOM')
+    ->orWhere('room_facility', 'DOOR MATRY NON A.C ROOM')
+    ->when(!empty($acroomlist), function ($query) use ($acroomlist) {
+        $query->whereIn('room_no', $acroomlist);
+    })
+    ->when(!empty($nonacroomlist), function ($query) use ($nonacroomlist) {
+        $query->whereIn('room_no', $nonacroomlist);
+    })
+    ->when(!empty($doormtnonacroomlist), function ($query) use ($doormtnonacroomlist) {
+        $query->whereIn('room_no', $doormtnonacroomlist);
+    })
+    ->get();
+
+foreach ($updateroom as $room) {
+    $room->status = 1;
+    $room->save();
+}
+
+        
+       
+       
        
       //dd($r_list->toArray());
 
@@ -106,10 +129,12 @@ class BookingController extends Controller
    
     // RoomList
 
-         public function ADDROOM(){
+     public function get_room_list(){
         $list =$data=DB::select("SELECT * , add_room.room_no as id from add_room");
+        $get_list = DB::select("SELECT add_room.room_no AS id, add_room.*, room_details.* FROM add_room JOIN room_details ON add_room.room_no = room_details.r_id WHERE add_room.status = 1");
         $room_book = DB::select ("SELECT * , room_details.r_id as id from room_details ");
-        return view('Booking.room-list',['list'=>$list,'room_book'=>$room_book,]);
+        $availablelist = DB::select("SELECT *, add_room.room_no as id FROM add_room WHERE add_room.status = 0");
+        return view('Booking.room-list',['list'=>$list,'room_book'=>$room_book,'availablelist'=>$availablelist,'get_list' => $get_list]);
 
     }
     public function RoomList(Request $req){
@@ -118,11 +143,11 @@ class BookingController extends Controller
         $room->room_type = $req->input('room_type');
         $room->room_facility = $req->input('room_facility');
         $room->save();
-        $list = DB::select("SELECT * , add_room.room_no as id from add_room ");
-        $room_book = DB::select("SELECT * , room_details.r_id as id from room_details");
-      //$room_list = substr($room_book['room_list'], 0, 6);
-        dd($room_list);
-        return view('Booking.room-list', ['list' => $list,'room_book'=>$room_book]);
+       
+       
+        $availablelist = DB::select("SELECT *, add_room.room_no as id FROM add_room WHERE add_room.status = 0");
+        $room_book = DB::select("SELECT *, room_details.r_id as id, room_details.check_in_date FROM room_details");
+        return view('Booking.room-list', [ 'room_book' => $room_book,'availablelist'=>$availablelist]);
     }
-
+    
 }

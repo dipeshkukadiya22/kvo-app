@@ -140,10 +140,10 @@
                                 <input type="text" name="city" class="form-control" id="city" placeholder="Bhuj" />
                               </div>
     
-                              <div class="col-4">
+                              <!-- <div class="col-4">
                                 <label class="form-label" for="collapsible-address">Address</label>
                                 <textarea name="collapsible_address"  class="form-control" id="collapsible_address" rows="1" placeholder="1456, Mall Road" ></textarea>
-                              </div>
+                              </div> -->
                              
                               
                               <div class="row">
