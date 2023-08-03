@@ -368,7 +368,7 @@
 
                             
                             <div class="row g-3 mb-3">
-                            <input type="hidden" id="roomlist" value="{{!empty($r_list)  ? $r_list:''}}">
+                           
                               <!-- Custom Suggestions: List -->
                               <div class="col-md-2">
                                 <label for="select2Multiple1" class="form-label">Ac Room</label>

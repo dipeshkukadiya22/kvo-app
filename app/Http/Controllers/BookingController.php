@@ -16,7 +16,8 @@ class BookingController extends Controller
         $p_details=personal_details::with('member')->get();
         $m_data=add_members::all();
         $p_id=add_members::get()->last()->p_id;
-        $r_list = add_room::all();
+        
+        $r_list= DB::select("SELECT *, add_room.room_no as id FROM add_room WHERE add_room.status = 0");
         $acroom = DB::select("SELECT * FROM add_room WHERE room_facility = 'A.C. Room'");
         return view ('Booking.room-booking',['p_details'=>$p_details,'m_data'=>$m_data,'p_id'=>$p_id,'r_list'=>$r_list,'acroom'=>$acroom]);
        
@@ -32,6 +33,7 @@ class BookingController extends Controller
        
         $r_list = DB::select("SELECT add_room.room_no AS id, add_room.*, room_details.* FROM add_room JOIN room_details ON add_room.room_no = room_details.r_id WHERE add_room.status = 1");
         $acroom = DB::select("SELECT * FROM add_room WHERE room_facility = 'A.C. Room'");
+        $acroomlist= DB::select("SELECT *, add_room.room_no as id FROM add_room WHERE add_room.status = 0");
         $details = new personal_details();
         $details->name = $req->name;
         $details-> email = $req->email;
@@ -73,33 +75,15 @@ class BookingController extends Controller
         $booking->deposite_rs = $req->deposite_rs;
         $booking->rs_word = $req->rs_word;
         $booking->save();
-        $updateroom = add_room::where('room_facility', 'A.C. Room')
-    ->orWhere('room_facility', 'NON A.C ROOM')
-    ->orWhere('room_facility', 'DOOR MATRY NON A.C ROOM')
-    ->when(!empty($acroomlist), function ($query) use ($acroomlist) {
-        $query->whereIn('room_no', $acroomlist);
-    })
-    ->when(!empty($nonacroomlist), function ($query) use ($nonacroomlist) {
-        $query->whereIn('room_no', $nonacroomlist);
-    })
-    ->when(!empty($doormtnonacroomlist), function ($query) use ($doormtnonacroomlist) {
-        $query->whereIn('room_no', $doormtnonacroomlist);
-    })
-    ->get();
+        $updateroom = add_room::where('room_facility', 'A.C. Room')->orWhere('room_facility', 'NON A.C ROOM')->orWhere('room_facility', 'DOOR MATRY NON A.C ROOM')->when(!empty($acroomlist), function ($query) use ($acroomlist) {$query->whereIn('room_no', $acroomlist); }) ->when(!empty($nonacroomlist), function ($query) use ($nonacroomlist) {
+        $query->whereIn('room_no', $nonacroomlist); })->when(!empty($doormtnonacroomlist), function ($query) use ($doormtnonacroomlist) { $query->whereIn('room_no', $doormtnonacroomlist); })->get();
 
-foreach ($updateroom as $room) {
-    $room->status = 1;
-    $room->save();
-}
+    foreach ($updateroom as $room) {
+            $room->status = 1;
+            $room->save();
+        }
 
-        
-       
-       
-       
       //dd($r_list->toArray());
-
-
-    
         $m_details = new member_details();
         $m_details->full_name = $req->full_name;
         $m_details->age=$req->m_age;
@@ -119,7 +103,7 @@ foreach ($updateroom as $room) {
         $member->email = $req->email;
         $member->phone_no = $req->phone_no;
         $member->city = $req->city;
-        $member->address = strtoupper($req->collapsible_address);
+       
         $member->save();
         $m_data=add_members::all();
        
@@ -146,7 +130,7 @@ foreach ($updateroom as $room) {
         $room->save();
        
        
-       
+        $availablelist = DB::select("SELECT *, add_room.room_no as id FROM add_room WHERE add_room.status = 0");
         $room_book = DB::select("SELECT *, room_details.r_id as id, room_details.check_in_date FROM room_details");
         return view('Booking.room-list', [ 'room_book' => $room_book]);
     }
