@@ -57,6 +57,10 @@ Route::POST('/edit_members', [MembersController::class, 'edit_members'])->name('
 
 Route::get('Religious_Donation', [donation::class, 'index1'])->name('Religious_Donation');
 Route::POST('ReligiousDonation', [donation::class, 'Religious_Donation'])->name('ReligiousDonation');
+Route::get('View_Religious_Donation', [donation::class, 'View_Religious_Donation'])->name('View_Religious_Donation');
+Route::get('/delete_religious_donation/{id}', [donation::class, 'delete_religious_donation'])->name('delete_religious_donation');
+Route::get('/get_religious_donation/{id}',[donation::class,'get_religious_donation'])->name('get_religious_donation');
+Route::post('update_religious_donation',[donation::class,'update_religious_donation'])->name('update_religious_donation');
 
 // Add Community_Donation
 Route::get('Community_Donation', [donation::class, 'index'])->name('Community_Donation');
@@ -92,7 +96,7 @@ Route::post('update_mahajan_expense',[Expense::class,'update_mahajan_expense'])-
 
 
 Route::get('General_Donation_Report', [donation::class, 'General_Donation_Report'])->name('General_Donation_Report');
-Route::get('pdf_Religious_Donation',[pdfcontroller::class,'pdf_Religious_Donation'])->name('pdf_Religious_Donation');
+Route::get('/pdf_Religious_Donation/{id}',[pdfcontroller::class,'pdf_Religious_Donation'])->name('pdf_Religious_Donation');
 Route::get('/pdf_Community_Donation/{id}',[pdfcontroller::class,'pdf_Community_Donation'])->name('pdf_Community_Donation');
 Route::get('/pdf_Medical_Treatment/{id}',[pdfcontroller::class,'pdf_Medical_Treatment'])->name('pdf_Medical_Treatment');
 Route::get('/pdf_General_Donation/{id}',[pdfcontroller::class,'pdf_General_Donation'])->name('pdf_General_Donation');

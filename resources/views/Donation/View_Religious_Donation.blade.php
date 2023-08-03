@@ -89,27 +89,55 @@ button.swal2-cancel.btn.btn-label-danger {
                                                   <th>પહોંચ નંબર</th>
                                                   <th>નામ</th>
                                                   <th>તારીખ</th>
-                                                  <th>મોબાઈલ નંબર</th>
-                                                  <th>ગામ</th>
+                                                  <th>સંસ્થા</th>
+                                                  <th>શ્રી સર્વ સાધારણ ખાતે</th>
+                                                  <th>શ્રી સર્વ જીવદયા ખાતે</th>
+                                                  <th>શ્રી સાધુ સાધ્વી વૈયાવચ્છ ખાતે</th>
+                                                  <th>શ્રી સાધર્મિક ખરડા ખાતે</th>
+                                                  <th>શ્રી ચાતુર્માસ ખરડા ખાતે</th>
+                                                  <th>શ્રી કાયમી તિથી ફંડ ખાતે</th>
+                                                  <th>શ્રી દેવદ્રવ્ય ખાતે</th>
+                                                  <th>શ્રી કેસર સુખડ ખાતે</th>
+                                                  <th>શ્રી ધૂપ-દીપ ખાતે</th>
+                                                  <th>શ્રી સ્નાત્ર પૂજા ખાતે</th>
+                                                  <th>શ્રી આંગી પૂજા ખાતે</th>
+                                                  <th>શ્રી મોટી પૂજા ખાતે</th>
+                                                  <th>શ્રી ધ્રુતની બોલી ખાતે</th>
+                                                  <th>શ્રી  ખાતે</th>
                                                   <th>ટોટલ</th>
                                                   <td>નાણા મળેલ</td>
+                                                  <th>વિગત</th>
                                                   <th>Action</th>
                                               </tr>
                                           </thead>
                                           @foreach($donation as $row)
                                           <tr>
-                                          <input type="hidden" class="id" value="{{$row->donation_id}}">
+                                          <input type="hidden" class="id" value="{{$row->religious_donation_id}}">
                                               <td></td>
-                                              <td>{{$row->donation_id}}</td>
-                                              <td>{{$row->name}}</td>
-                                              <td>{{$row->d_date}}</td>
-                                              <td>{{$row->phone_no}}</td>
-                                              <td>{{$row->city}}</td>
+                                              <td>{{$row->religious_donation_id}}</td>
+                                              <td>{{$row->m_name}}</td>
+                                              <td>{{Date('d-m-Y',strtotime($row->r_date))}}</td>
+                                              <td>{{$row->community}}</td>
+                                              <td>{{$row->sarv_sadharan}}</td>
+                                              <td>{{$row->jiv_daya}}</td>
+                                              <td>{{$row->shadhu_shdhvi}}</td>
+                                              <td>{{$row->sadharmik}}</td>
+                                              <td>{{$row->chaturmas}}</td>
+                                              <td>{{$row->kayami_tithi}}</td>
+                                              <td>{{$row->devdravya}}</td>
+                                              <td>{{$row->kesar_sukhad}}</td>
+                                              <td>{{$row->dhoop_deep}}</td>
+                                              <td>{{$row->snatra_puja}}</td>
+                                              <td>{{$row->agani_pooja}}</td>
+                                              <td>{{$row->moti_pooja}}</td>
+                                              <td>{{$row->drut_boli}}</td>
+                                              <td>{{$row->other_account_amount}}</td>
                                               <td>{{$row->total}}</td>
                                               <td>{{$row->payment_mode}}</td>
+                                              <td>{{$row->remarks}}</td>
                                               <td>
                                                   <div class="d-inline-block">
-                                                    <a href="{{route('pdf_Medical_Treatment',$row->donation_id)}}" class="text-primary"><i class="ti ti-eye"></i></a>
+                                                    <a href="{{route('pdf_Religious_Donation',$row->religious_donation_id)}}" class="text-primary"><i class="ti ti-eye"></i></a>
 
                                                     <a class="btn btn-sm btn-icon item-edit" data-bs-toggle="offcanvas"
                                                     data-bs-target="#offcanvasBackdrop" aria-controls="offcanvasBackdrop"><i class="text-primary ti ti-edit"></i></a>
@@ -146,7 +174,7 @@ button.swal2-cancel.btn.btn-label-danger {
                             <div class="offcanvas-body mx-0 flex-grow-0">
 
                               <!-- Browser Default -->
-                              <form class="browser-default-validation" method="POST" action="{{route('update_community_donation')}}">
+                              <form class="browser-default-validation" method="POST" action="{{route('update_religious_donation')}}">
                                 <div class="row g-3">
                                     <div class="col-md-12">
                                     @csrf
@@ -518,7 +546,7 @@ button.swal2-cancel.btn.btn-label-danger {
       
       
     });
-    $('div.head-label').html('<h5 class="card-title mb-0">View all Community Donation</h5>');
+    $('div.head-label').html('<h5 class="card-title mb-0">View all Religious Donation</h5>');
 
     </script>
 
@@ -722,7 +750,7 @@ button.swal2-cancel.btn.btn-label-danger {
                 // If the user confirms the deletion, proceed with the deletion logic
                 if (result.isConfirmed) {
                   $.ajax({
-                    url:"{{url('delete_community_donation')}}" +"/"+ id,
+                    url:"{{url('delete_religious_donation')}}" +"/"+ id,
                     type:'GET',
                     success:function(response){
                         Swal.fire(
@@ -749,12 +777,12 @@ button.swal2-cancel.btn.btn-label-danger {
             //console.info(id);
             //alert(id);
             $.ajax({
-                url:"{{url('get_community_donation')}}" +"/"+ id,
+                url:"{{url('get_religious_donation')}}" +"/"+ id,
                 type:'GET',
                   success:function(response){  
                     console.info(response);
                       $("#donation_id").val(response['donation_id']);
-                      $("#medical_checkup").val(response['medical_checkup']);
+                     /* $("#medical_checkup").val(response['medical_checkup']);
                       $("#bhojanshala").val(response['bhojanshala']);
                       $("#mahajan").val(response['mahajan']);
                       $("#shaikshanik").val(response['shaikshanik']);
@@ -770,7 +798,7 @@ button.swal2-cancel.btn.btn-label-danger {
                         if(payment=="CASH"){$("#cash").attr('checked',true);}
                         if(payment=="UPI"){$("#upi").attr('checked',true);}
                         if(payment=="DRAFT"){$("#draft").attr('checked',true);}
-                        if(payment=="CHEQUE"){$("#cheque").attr('checked',true);}
+                        if(payment=="CHEQUE"){$("#cheque").attr('checked',true);}*/
                   }
                 });
         });

@@ -667,18 +667,20 @@ button.swal2-cancel.btn.btn-label-danger {
         link.addEventListener("click", function() {
             // Show a confirmation dialog using SweetAlert2
             var id=$(this).closest("tr").find(".id").val();
-            
+            var member_id=[],len=0,sr_no;
+            var temp=document.getElementById('name');
+             for(i=0;i<temp.options.length;i++)
+                  {
+                    member_id[i]=temp.options[i].value;
+                  }
             $.ajax({
                 url:"{{url('get_member')}}" +"/"+ id,
                 type:'GET',
-                  success:function(response){  
-                    var name=response[0]['m_name'];
-                    var sr_no=response[0]['p_id'];
-                        $("#sr_no").val(response[0]['sr_no']);  
-                        if(name==="Bhoomi"){
-                        $("#name option[value=1]").attr('selected', 'selected');}
-                        if(name==="JAY SHAH"){
-                        $("#name option[value=134]").attr('selected', 'selected');}
+                  success:function(response){ 
+                   
+                     sr_no=response[0]['p_id'];
+                    var payment=response[0]['payment_mode'];
+                        $("#sr_no").val(response[0]['sr_no']); 
                         $("#date").val(response[0]['date']);
                         $("#phone").val(response[0]['phone_no']);
                         $("#amount").val(response[0]['amount']);
@@ -687,14 +689,21 @@ button.swal2-cancel.btn.btn-label-danger {
                         $("#ankers").val(response[0]['amount_in_words']);
                         $("#remark").val(response[0]['remark']);
                         $("#payment").val(response[0]['payment_mode']);
-                        var payment=response[0]['payment_mode'];
                         if(payment=="CASH"){$("#cash").attr('checked',true);}
                         if(payment=="UPI"){$("#upi").attr('checked',true);}
                         if(payment=="DRAFT"){$("#draft").attr('checked',true);}
                         if(payment=="CHEQUE"){$("#cheque").attr('checked',true);}
-                  }
-                });
+                        member_id.forEach(myFunction)
+                        function myFunction(item, index, arr) {
+                            if((member_id[index])==sr_no)
+                            {
+                              $("#name option[value=" + sr_no + "]").attr('selected', 'selected'); 
+                            }
+                        }
+                      }   
+                });    
         });
+         
     });
 </script>
 <script>

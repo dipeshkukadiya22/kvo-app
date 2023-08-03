@@ -604,7 +604,6 @@ button.swal2-cancel.btn.btn-label-danger {
         link.addEventListener("click", function() {
             // Show a confirmation dialog using SweetAlert2
             var id=$(this).closest("tr").find(".id").val();
-            alert(id);
             $.ajax({
                 url:"{{url('get_sangh_expense')}}" +"/"+ id,
                 type:'GET',
@@ -642,7 +641,6 @@ $("#name").change(function(){
         link.addEventListener("click", function() {
             // Show a confirmation dialog using SweetAlert2
             var id=$(this).closest("tr").find(".id").val();
-            alert(id);
             Swal.fire({
                 title: "Are you sure?",
                 text: "You won't be able to revert this!",

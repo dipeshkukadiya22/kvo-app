@@ -86,7 +86,32 @@ class donation extends Controller
 
         }
     }
-
+    public function View_Religious_Donation()
+    {
+        $donation=DB::SELECT("SELECT * FROM `religious_donation` join add_members where religious_donation.member_id=add_members.p_id");
+        return view('Donation.View_Religious_Donation',['donation' => $donation]);
+    }
+    public function get_religious_donation($id)
+    {
+        $donation=DB::SELECT("SELECT * FROM `religious_donation` join add_members where religious_donation.member_id=add_members.p_id and religious_donation.member_id='$id'");
+        return $donation;
+    }
+    public function update_religious_donation(Request $req)
+    {
+        $donation=religious_donation::find($req->depo_id);
+        $donation->date=Date(('Y-m-d'),strtotime($req->date));
+        $donation->haste=strtoupper($req->haste);
+        $donation->details=ucfirst($req->details);
+        $donation->member_id=$req->name;
+        $donation->save();
+        return back()->with("Update Religious Donation");
+    }
+    public function delete_religious_donation($id)
+    {
+        $donation=religious_donation::find($id);
+        $donation->delete();
+        return back()->with("Delete Religious Donation");
+    }
 
     // Community Donation
     public function index(){
@@ -163,8 +188,6 @@ class donation extends Controller
     }
     public function get($id){
         $data=community_donation::find($id);
-        //dd($data);
-        
         return $data;
     }
     public function delete($id)
