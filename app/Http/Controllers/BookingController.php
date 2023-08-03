@@ -29,7 +29,8 @@ class BookingController extends Controller
         $p_details=personal_details::with('member')->get();
         $data = personal_details::find($req->p_id);
         $m_data = add_members::all();
-        $r_list = add_room::all();
+       
+        $r_list = DB::select("SELECT add_room.room_no AS id, add_room.*, room_details.* FROM add_room JOIN room_details ON add_room.room_no = room_details.r_id WHERE add_room.status = 1");
         $acroom = DB::select("SELECT * FROM add_room WHERE room_facility = 'A.C. Room'");
         $details = new personal_details();
         $details->name = $req->name;
@@ -145,9 +146,9 @@ foreach ($updateroom as $room) {
         $room->save();
        
        
-        $availablelist = DB::select("SELECT *, add_room.room_no as id FROM add_room WHERE add_room.status = 0");
+       
         $room_book = DB::select("SELECT *, room_details.r_id as id, room_details.check_in_date FROM room_details");
-        return view('Booking.room-list', [ 'room_book' => $room_book,'availablelist'=>$availablelist]);
+        return view('Booking.room-list', [ 'room_book' => $room_book]);
     }
     
 }
