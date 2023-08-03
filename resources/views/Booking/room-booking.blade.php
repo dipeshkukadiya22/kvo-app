@@ -120,7 +120,7 @@
                               @csrf
                               <div class="mb-3">
                                 <label class="form-label" for="basic-default-name">Name</label>
-                                <input type="text" name="m_name" class="form-control" id="basic-default-name"  style="text-transform:uppercase"  placeholder="John Doe" />
+                                <input type="text" name="m_name" class="form-control" style="text-transform:uppercase" id="basic-default-name"  style="text-transform:uppercase"  placeholder="John Doe" />
                               </div>
                               <div class="mb-3">
                                 <label class="form-label" for="basic-default-email">Email</label>
@@ -137,7 +137,7 @@
                               </div>
                               <div class="mb-3">
                                 <label class="form-label" for="city">City</label>
-                                <input type="text" name="city" class="form-control" id="city" placeholder="Bhuj" />
+                                <input type="text" name="city" class="form-control" id="city" style="text-transform:uppercase" placeholder="Bhuj" />
                               </div>
     
                               <!-- <div class="col-4">
@@ -268,7 +268,7 @@
                                
                                 
                                 
-                                <textarea name="collapsibleaddress"  class="form-control" id="member-address" rows="1" placeholder="1456, Mall Road">{{ (!empty($member) ) ? $member->address : '' }}</textarea>
+                                <textarea name="collapsibleaddress"  class="form-control" style="text-transform:uppercase" id="member-address" rows="1" placeholder="1456, Mall Road">{{ (!empty($member) ) ? $member->address : '' }}</textarea>
                               </div>
                                                         
                               
@@ -302,17 +302,17 @@
                               
                               <div class="col-md-4">
                                 <label for="defaultFormControlInput" class="form-label">City</label>
-                                <input type="text" class="form-control" name="city" id="member_city" placeholder="John Doe" aria-describedby="defaultFormControlHelp" value="{{ (!empty($member)) ? $member->city : '' }}" />
+                                <input type="text" class="form-control" name="city" id="member_city" style="text-transform:uppercase" placeholder="John Doe" aria-describedby="defaultFormControlHelp" value="{{ (!empty($member)) ? $member->city : '' }}" />
                               </div>
 
                               <div class="col-md-4">
                                 <label class="d-block form-label">Gender</label>
                                 <div class="form-check form-check-inline">
-                                  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="MALE" />
+                                  <input class="form-check-input" type="radio" name="inlineRadioOptions[]" id="inlineRadio1" value="MALE" />
                                   <label class="form-check-label" for="inlineRadio1">Male</label>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="FEMALE" />
+                                  <input class="form-check-input" type="radio" name="inlineRadioOptions[]" id="inlineRadio2" value="FEMALE" />
                                   <label class="form-check-label" for="inlineRadio2">Female</label>
                                 </div>
                                 
@@ -529,8 +529,9 @@
                                       <label class="d-block form-label">Gender</label>
                                     
                                       <div class="form-check form-check-inline">
-                                          <input class="form-check-input" type="radio" name="gender[]" id="inlineRadio1_${i}" value="MALE" />
-                                          <label class="form-check-label" for="inlineRadio1_${i}">Male</label>
+                                      <input class="form-check-input" type="radio" name="gender[]" id="inlineRadio1_' + i + '" value="MALE" />
+<label class="form-check-label" for="inlineRadio1_' + i + '">Male</label>
+
                                         </div>
                                         <div class="form-check form-check-inline">
                                           <input class="form-check-input" type="radio" name="gender[]" id="inlineRadio2_${i}" value="FEMALE" />
@@ -1079,58 +1080,55 @@ $(document).ready(function () {
     let currentStep = 1;
  
     $(".btn-next").on("click", function() {
-      $(".rep-table ").empty();
+      $(".rep-table").empty();
       const fullName = $('#full_name_form').val();
       const age = $('#member_age').val();
-      const gender = $('input[name="inlineRadioOptions"]:checked').val();
+      const selectedGender = $('input[name="gender[]"]').val();
       const relation = $('#member_relation').val();
 
-       $('#member_full_name').text(fullName);
-       $('#members_age').text(age);
-       $('#member_gen').text(gender);
-       $('#member_rel').text(relation);
- 
-       $(".rep-table ").append(
-       
-       '<tr>'+
-       '<td></td>'+
+      $('#member_full_name').text(fullName);
+      $('#members_age').text(age);
+      $('#member_gen').text(selectedGender);
+      $('#member_rel').text(relation);
 
-       '<td id="member_full_name">'+ $('#full_name_form').val()+'</td>'+
-        '<td id="members_age">'+ $('#member_age').val()+'</td>'+
-        '<td id="member_gen">'+ $('input[name="inlineRadioOptions"]:checked').val()+'</td>'+
-        '<td id="member_rel">' +  $('#member_relation').val()+'</td>'+
+      $(".rep-table").append(
+        '<tr>' +
+        '<td></td>' +
+        '<td id="member_full_name">' + $('#full_name_form').val() + '</td>' +
+        '<td id="members_age">' + $('#member_age').val() + '</td>' +
+        '<td id="member_gen">' + selectedGender + '</td>' +
+        '<td id="member_rel">' + $('#member_relation').val() + '</td>' +
         '</tr>'
       );
-      
-       let numForms = parseInt($("#no_of_person_id").val());
+
+      let numForms = parseInt($("#no_of_person_id").val());
       if (isNaN(numForms) || numForms <= 0) {
-        alert("Please enter a valid number greater than zero.");
+       
         return false;
       }
       for (let i = 0; i < numForms; i++) {
-        $(".rep-table ").append(
-       
-         '<tr>'+
-         '<td></td>'+
- 
-         '<td id="member_full_name'+i+'">'+ $('#full_name_form'+i).val()+'</td>'+
-          '<td id="members_age'+i+'">'+ $('#member_age'+i).val()+'</td>'+
-          '<td id="member_gen'+i+'">'+ $('input[name="inlineRadioOptions"]:checked').val()+'</td>'+
-          '<td id="member_rel'+i+'">' +  $('#member_relation'+i).val()+'</td>'+
+        $(".rep-table").append(
+          '<tr>' +
+          '<td></td>' +
+          '<td class="member_full_name' + i + '">' + $('#full_name_form' + i).val() + '</td>' +
+          '<td class="members_age' + i + '">' + $('#member_age' + i).val() + '</td>' +
+          '<td class="member_gen' + i + '">' + $('input[name="gender[]"]').val() + '</td>' +
+          '<td class="member_rel' + i + '">' + $('#member_relation' + i).val() + '</td>' +
           '</tr>'
         );
-        $('#member_full_name'+i).text = $('#full_name_form'+i).val();
-        $('#members_age'+i).text = $('#member_age'+i).val();
-        $('#member_gen'+i).text= $('input[name="inlineRadioOptions"]:checked').val();
-        $('#member_rel'+i).text= $('#member_relation'+i).val();
+
+        // Setting text for elements in the loop using jQuery
+        $('.member_full_name' + i).text($('#full_name_form' + i).val());
+        $('.members_age' + i).text($('#member_age' + i).val());
+        $('.member_gen' + i).text($('input[name="gender[]"]').val());
+        $('.member_rel' + i).text($('#member_relation' + i).val());
       }
-      $(".rep-table ").show();
 
-
+      $(".rep-table").show();
     });
-    
   });
-  </script>
+</script>
+
 
  
 <script>

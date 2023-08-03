@@ -84,26 +84,27 @@
                                                     <th>Email</th>
                                                     <th>Phone Number</th>
                                                     <th>City</th>
-                                                    <th>Address</th>
+                                                  
                                                     <th>Action</th>
                                                 </tr>
                                             </thead>
                                            @foreach($data as $row)
                                             <tr>
+                                            <input type="hidden" class="id" value="{{$row->p_id}}">
                                               <td></td>
                                               <td>{{$row->p_id}}</td>
                                               <td>{{$row->m_name}}</td>
                                               <td>{{$row->email}}</td>
                                               <td>{{$row->phone_no}}</td>
                                               <td>{{$row->city}}</td>
-                                              <td>{{$row->address}}</td>
+                                             
                                               
                                               <td>
                                                 <div class="d-inline-block">
                                                 <!-- <a href="{{route('edit_members', $row->p_id)}}" data-typeId="{{ $row->p_id }}" class="btn btn-sm btn-icon item-edit"><i class="text-primary ti ti-edit"></i></a> -->
                                                 <a href="{{route('edit_members', $row->p_id)}}"  data-typeId="{{$row->p_id}}"  class="btn btn-sm btn-icon item-edit" data-bs-toggle="offcanvas"
                                                   data-bs-target="#offcanvasBackdrop" aria-controls="offcanvasBackdrop"><i class="text-primary ti ti-edit"></i></a>
-                                                  <a href="javascript:;" id="confirm-text" class="text-danger delete-record"><i class="ti ti-trash"></i></a>
+                                                  <a href="{{route('delete_members', $row->p_id)}}" id="confirm-text" class="text-danger delete-record"><i class="ti ti-trash"></i></a>
                                                 </div>
                                               </td>
                                             </tr>
@@ -129,6 +130,11 @@
                                 
                                 <form class="browser-default-validation" method="POST" action="{{route('update_members')}}">
                                   @csrf
+                                  <div class="mb-3" hidden>
+                                    <label class="form-label" for="basic-default-name">Name</label>
+                                    <input type="text" class="form-control" style="text-transform:uppercase" name="p_id" id="p_id" placeholder="John Doe" value="" />
+                                  </div>
+
                                   <div class="mb-3">
                                     <label class="form-label" for="basic-default-name">Name</label>
                                     <input type="text" class="form-control"  name="m_name1" id="m_name1" placeholder="John Doe" value="" />
@@ -137,7 +143,7 @@
                                 
                                   <div class="mb-3">
                                     <label class="form-label" for="basic-default-email">Email</label>
-                                    <input type="email" id="email1" name="email1" class="form-control" placeholder="john.doe" />
+                                    <input type="email" id="email1" name="email1" class="form-control" placeholder="john.doe"  />
                                   </div>
 
                                   <div class="mb-3">
@@ -146,7 +152,7 @@
                                   </div>
                                   <div class="mb-3">
                                     <label class="form-label" for="city">City</label>
-                                    <input type="text" class="form-control" name="city1" id="city1" placeholder="Bhuj"  />
+                                    <input type="text" class="form-control" name="city1" style="text-transform:uppercase" id="city1" placeholder="Bhuj"  />
                                   </div>
         
                                   <!-- <div class="mb-3">
@@ -367,28 +373,30 @@
 
 <script>
     $(document).ready(function() {
-        let editLinks1 = document.querySelectorAll('a.item-edit');
-        editLinks1.forEach(link1 => {
-            link1.addEventListener('click', function(event) {
-                event.preventDefault();
-                const id = link1.getAttribute('data-typeId');
+      const editLinks = document.querySelectorAll(".item-edit");
+        editLinks.forEach(link => {
+            link.addEventListener('click', function() {
+            var id=$(this).closest("tr").find(".id").val();
+    
                 $.ajax({
                     url: "{{ url('edit_members') }}/" + id,
                     type: 'GET',
-                    success: function(response) {
-                        console.log('Response:', response);
+                    success:function(response){
+                        $("#p_id").val(response['p_id']);
                         $("#m_name1").val(response['m_name']);
                         $("#email1").val(response['email']);
                         $("#phone_no1").val(response['phone_no']);
                         $("#city1").val(response['city']);
-                        $("#offcanvasBackdrop").modal('show'); 
-                    },
-                    
-                });
+                        member_id.forEach(myFunction)
+                        
+                        
+                      }
+                    });
             });
         });
     });
 </script>
+
 
     
 

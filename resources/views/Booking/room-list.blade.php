@@ -281,7 +281,7 @@
                                         <tr>
                                             <td></td>
                                             <td></td>
-                                            <td>{{ $book->id }}</td>
+                                            <td>{{ $book->room_no }}</td>
                                             <td>{{ $book->room_name }}</td>
                                             <td>{{ $book->room_type }}</td>
                                             <td>{{ $book->room_facility }}</td>
@@ -343,8 +343,6 @@
                                     </table>
                                   </div>
                                 </div>
-
-
                               </div>
                             </div>
                           </div>
