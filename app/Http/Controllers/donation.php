@@ -93,7 +93,7 @@ class donation extends Controller
     }
     public function get_religious_donation($id)
     {
-        $donation=DB::SELECT("SELECT * FROM `religious_donation` join add_members where religious_donation.member_id=add_members.p_id and religious_donation.member_id='$id'");
+        $donation=DB::SELECT("SELECT * FROM `religious_donation` join add_members where religious_donation.member_id=add_members.p_id and religious_donation.religious_donation_id='$id'");
         return $donation;
     }
     public function update_religious_donation(Request $req)

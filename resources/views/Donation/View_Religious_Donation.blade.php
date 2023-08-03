@@ -189,77 +189,123 @@ button.swal2-cancel.btn.btn-label-danger {
                                     </div>
 
                                     <div class="col-md-12">
-                                        <label class="form-label" for="multicol-phone">શેઠશ્રી રતનશી ટોકરશી વોરા મેડિકલ ચેકઅપ સેન્ટર</label>
+                                        <label class="form-label" for="multicol-phone">શ્રી સર્વ સાધારણ ખાતે</label>
                                         <div class="input-group">
                                             <span class="input-group-text">₹</span>
-                                            <input type="number" class="form-control amount-input" name="medical_checkup" id="medical_checkup" placeholder="Amount" aria-label="Amount (to the nearest dollar)" required>
+                                            <input type="number" class="form-control amount-input" name="sarva_sadharan" id="sarva_sadharan" placeholder="Amount" aria-label="Amount (to the nearest dollar)" required>
                                             
                                         </div>
                                     </div>
 
                                     <div class="col-md-12">
-                                        <label class="form-label" for="multicol-phone">મહાજનનું મામેરું</label>
+                                        <label class="form-label" for="multicol-phone">શ્રી સર્વ જીવદયા ખાતે</label>
                                         <div class="input-group">
                                             <span class="input-group-text">₹</span>
-                                            <input type="number" class="form-control amount-input" name="mahajan" id="mahajan" placeholder="Amount" aria-label="Amount (to the nearest dollar)" required>
+                                            <input type="number" class="form-control amount-input" name="jiv_daya" id="jiv_daya" placeholder="Amount" aria-label="Amount (to the nearest dollar)" required>
                                             
                                         </div>
                                     </div>
 
                                     <div class="col-md-12">
-                                        <label class="form-label" for="multicol-phone">માતુશ્રી લાખણીબાઈ રામજી તેજશી ગાલા નવનીત ભોજનશાળા</label>
+                                        <label class="form-label" for="multicol-phone">શ્રી સાધુ સાધ્વી વૈયાવચ્છ ખાતે</label>
                                         <div class="input-group">
                                             <span class="input-group-text">₹</span>
-                                            <input type="number" class="form-control amount-input" name="bhojanshala" id="bhojanshala"placeholder="Amount" aria-label="Amount (to the nearest dollar)" required>
+                                            <input type="number" class="form-control amount-input" name="sadhu_sadhvi" id="sadhu_sadhvi"placeholder="Amount" aria-label="Amount (to the nearest dollar)" required>
                                             
                                         </div>
                                     </div>
 
                                     <div class="col-md-12">
-                                        <label class="form-label" for="multicol-phone">શૈક્ષણિક</label>
+                                        <label class="form-label" for="multicol-phone">શ્રી સાધર્મિક ખરડા ખાતે</label>
                                         <div class="input-group">
                                         <span class="input-group-text">₹</span>
-                                        <input type="number" class="form-control amount-input" name="shaikshanik" id="shaikshanik" placeholder="Amount" aria-label="Amount (to the nearest dollar)" required>
+                                        <input type="number" class="form-control amount-input" name="sadhrmik" id="sadhrmik" placeholder="Amount" aria-label="Amount (to the nearest dollar)" required>
                                         
                                         </div>
                                     </div>
 
                                     <div class="col-md-12">
-                                        <label class="form-label" for="multicol-phone">લવાજમ</label>
+                                        <label class="form-label" for="multicol-phone">શ્રી ચાતુર્માસ ખરડા ખાતે</label>
                                         <div class="input-group">
                                         <span class="input-group-text">₹</span>
-                                        <input type="number" class="form-control amount-input" name="lavajam" id="lavajam" placeholder="Amount" aria-label="Amount (to the nearest dollar)" required>
+                                        <input type="number" class="form-control amount-input" name="chaaturmash" id="chaaturmash" placeholder="Amount" aria-label="Amount (to the nearest dollar)" required>
                                         
                                         </div>
                                     </div>
 
                                     <div class="col-md-12">
-                                        <label class="form-label" for="multicol-phone">ઑક્સીજન ડોનેશન</label>
+                                        <label class="form-label" for="multicol-phone">શ્રી કાયમી તિથી ફંડ ખાતે</label>
                                         <div class="input-group">
                                         <span class="input-group-text">₹</span>
-                                        <input type="number" class="form-control amount-input" name="oxygen" id="oxygen" placeholder="Amount" aria-label="Amount (to the nearest dollar)" required>
+                                        <input type="number" class="form-control amount-input" name="kayami_tithi" id="kayami_tithi" placeholder="Amount" aria-label="Amount (to the nearest dollar)" required>
                                         
                                         </div>
                                     </div>
 
                                     <div class="col-md-12">
-                                        <label class="form-label" for="multicol-phone">એમ્બ્યુલન્સ ડોનેશન</label>
+                                        <label class="form-label" for="multicol-phone">શ્રી દેવદ્રવ્ય ખાતે</label>
                                         <div class="input-group">
                                         <span class="input-group-text">₹</span>
-                                        <input type="number" class="form-control amount-input" name="ambulance" id="ambulance" placeholder="Amount" aria-label="Amount (to the nearest dollar)" required>
+                                        <input type="number" class="form-control amount-input" name="dev_dravya" id="dev_dravya" placeholder="Amount" aria-label="Amount (to the nearest dollar)" required>
                                         
                                         </div>
                                     </div>
 
                                     <div class="col-md-12">
-                                        <label class="form-label" for="multicol-phone">ઈતર</label>
+                                        <label class="form-label" for="multicol-phone">શ્રી કેસર સુખડ ખાતે</label>
+                                        <div class="input-group">
+                                        <span class="input-group-text">₹</span>
+                                        <input type="number" class="form-control amount-input" name="kesar_sukhad" id="kesar_sukhad" placeholder="Amount" aria-label="Amount (to the nearest dollar)" required>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-12">
+                                        <label class="form-label" for="multicol-phone">શ્રી ધૂપ-દીપ ખાતે</label>
+                                        <div class="input-group">
+                                        <span class="input-group-text">₹</span>
+                                        <input type="number" class="form-control amount-input" name="dhoop_deep" id="dhoop_deep" placeholder="Amount" aria-label="Amount (to the nearest dollar)" required>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-12">
+                                        <label class="form-label" for="multicol-phone">શ્રી સ્નાત્ર પૂજા ખાતે</label>
+                                        <div class="input-group">
+                                        <span class="input-group-text">₹</span>
+                                        <input type="number" class="form-control amount-input" name="snatra_pooja" id="snatra_pooja" placeholder="Amount" aria-label="Amount (to the nearest dollar)" required>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-12">
+                                        <label class="form-label" for="multicol-phone">શ્રી આંગી પૂજા ખાતે</label>
+                                        <div class="input-group">
+                                        <span class="input-group-text">₹</span>
+                                        <input type="number" class="form-control amount-input" name="aangi_pooja" id="aangi_pooja" placeholder="Amount" aria-label="Amount (to the nearest dollar)" required>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-12">
+                                        <label class="form-label" for="multicol-phone">શ્રી મોટી પૂજા ખાતે</label>
+                                        <div class="input-group">
+                                        <span class="input-group-text">₹</span>
+                                        <input type="number" class="form-control amount-input" name="moti_pooja" id="moti_pooja" placeholder="Amount" aria-label="Amount (to the nearest dollar)" required>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-12">
+                                        <label class="form-label" for="multicol-phone">શ્રી ધ્રુતની બોલી ખાતે</label>
+                                        <div class="input-group">
+                                        <span class="input-group-text">₹</span>
+                                        <input type="number" class="form-control amount-input" name="dhrut_boli" id="dhrut_boli" placeholder="Amount" aria-label="Amount (to the nearest dollar)" required>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-12">
+                                        <label class="form-label" for="multicol-phone">શ્રી  ખાતે</label>
                                         <div class="input-group">
                                         <span class="input-group-text">₹</span>
                                         <input type="number" class="form-control amount-input" name="other" id="other" placeholder="Amount" aria-label="Amount (to the nearest dollar)" required>
-                                        
                                         </div>
                                     </div>
-
                                     <div class="col-md-12">
                                         <label class="form-label" for="basic-default-name">અન્ય વિગત</label>
                                         <input
@@ -737,7 +783,6 @@ button.swal2-cancel.btn.btn-label-danger {
         link.addEventListener("click", function() {
             // Show a confirmation dialog using SweetAlert2
             var id=$(this).closest("tr").find(".id").val();
-            alert(id);
             Swal.fire({
                 title: "Are you sure?",
                 text: "You won't be able to revert this!",
@@ -774,31 +819,36 @@ button.swal2-cancel.btn.btn-label-danger {
         link.addEventListener("click", function() {
             // Show a confirmation dialog using SweetAlert2
             var id=$(this).closest("tr").find(".id").val();
-            //console.info(id);
-            //alert(id);
             $.ajax({
                 url:"{{url('get_religious_donation')}}" +"/"+ id,
                 type:'GET',
                   success:function(response){  
-                    console.info(response);
-                      $("#donation_id").val(response['donation_id']);
-                     /* $("#medical_checkup").val(response['medical_checkup']);
-                      $("#bhojanshala").val(response['bhojanshala']);
-                      $("#mahajan").val(response['mahajan']);
-                      $("#shaikshanik").val(response['shaikshanik']);
-                      $("#oxygen").val(response['oxygen']);
-                      $("#lavajam").val(response['lavajam']);
-                      $("#ambulance").val(response['ambulance']);
-                      $("#other").val(response['other']);
-                      $("#remarks").val(response['remarks']);
-                      $("#total").val(response['total']);
-                      $("#ankers").val(response['total_in_word']);
-                      $("#payment").val(response['payment_mode']); 
-                      var payment=response['payment_mode'];
+                    //console.info(response);
+                   
+                      $("#donation_id").val(response[0]['religious_donation_id']);
+                     $("#sarva_sadharan").val(response[0]['sarv_sadharan']);
+                      $("#jiv_daya").val(response[0]['jiv_daya']);
+                      $("#sadhu_sadhvi").val(response[0]['shadhu_shdhvi']);
+                      $("#sadhrmik").val(response[0]['sadharmik']);
+                      $("#chaaturmash").val(response[0]['chaturmas']);
+                      $("#kayami_tithi").val(response[0]['kayami_tithi']);
+                      $("#dev_dravya").val(response[0]['devdravya']);
+                      $("#kesar_sukhad").val(response[0]['kesar_sukhad']);
+                      $("#dhoop_deep").val(response[0]['dhoop_deep']);
+                      $("#snatra_pooja").val(response[0]['snatra_puja']);
+                      $("#moti_pooja").val(response[0]['moti_pooja']);
+                      $("#aangi_pooja").val(response[0]['agani_pooja']);
+                      $("#dhrut_boli").val(response[0]['drut_boli']);
+                      $("#other").val(response[0]['other_account_amount']);
+                      $("#total").val(response[0]['total']);
+                      $("#ankers").val(response[0]['total_in_word']);
+                      $("#payment").val(response[0]['payment_mode']);
+                      $("#remarks").val(response[0]['remarks']);  
+                      var payment=response[0]['payment_mode'];
                         if(payment=="CASH"){$("#cash").attr('checked',true);}
                         if(payment=="UPI"){$("#upi").attr('checked',true);}
                         if(payment=="DRAFT"){$("#draft").attr('checked',true);}
-                        if(payment=="CHEQUE"){$("#cheque").attr('checked',true);}*/
+                        if(payment=="CHEQUE"){$("#cheque").attr('checked',true);}
                   }
                 });
         });
