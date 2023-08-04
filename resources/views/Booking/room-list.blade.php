@@ -125,27 +125,27 @@
                                 @csrf
                                   <div class="mb-3">
                                     <label class="form-label" for="basic-default-name">Room Name</label>
-                                    <input type="text" class="form-control" name="room_name" id="basic-default-name" placeholder="Deluxe"/>
+                                    <input type="text" class="form-control"  style="text-transform:uppercase" name="room_name" id="basic-default-name" placeholder="Deluxe"/>
                                   </div>
                                   <div class="mb-3">
                                     <label for="exampleFormControlSelect1" class="form-label">Room Type</label>
                                     <select class="form-select" name="room_type" id="exampleFormControlSelect1" aria-label="Default select example">
-                                      <option selected>Select Room Type</option>
-                                      
-                                      <option value="1">Double Bed</option>
-                                      <option value="2">3 Bed</option>
-                                      <option value="3">4 Bed</option>
+                                      <option value=""></option>
+                                      <option value=""></option>
+                                      <option value="Double Bed">Double Bed</option>
+                                      <option value="3 Bed">3 Bed</option>
+                                      <option value="4 Bed">4 Bed</option>
                                     </select>
                                   </div>
       
                                    <div class="mb-3">
                                     <label for="exampleFormControlSelect1" class="form-label">Room Facility</label>
                                     <select class="form-select" name="room_facility" id="exampleFormControlSelect2" aria-label="Default select example">
-                                      <option selected>Select Room</option>
-                                      <option value="1">A.C. ROOM</option>
-                                      <option value="2">NON A.C ROOM</option>
-                                      <option value="3">DOOR METRI A.C ROOM</option>
-                                      <option value="3">DOOR METRI NON A.C ROOM</option>
+                                      <option value="">Select Room</option>
+                                      <option value="A.C. ROOM">A.C. ROOM</option>
+                                      <option value="NON A.C ROOM">NON A.C ROOM</option>
+                                      <option value="DOOR METRI A.C ROOM">DOOR METRI A.C ROOM</option>
+                                      <option value="DOOR METRI NON A.C ROOM">DOOR METRI NON A.C ROOM</option>
                                     </select>
                                   </div>
 

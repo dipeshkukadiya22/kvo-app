@@ -19,7 +19,8 @@ class BookingController extends Controller
         
         $r_list= DB::select("SELECT *, add_room.room_no as id FROM add_room WHERE add_room.status = 0");
         $acroom = DB::select("SELECT * FROM add_room WHERE room_facility = 'A.C. Room'");
-        return view ('Booking.room-booking',['p_details'=>$p_details,'m_data'=>$m_data,'p_id'=>$p_id,'r_list'=>$r_list,'acroom'=>$acroom]);
+        $depositeno = room_details::get()->last()->deposite_no;
+        return view ('Booking.room-booking',['p_details'=>$p_details,'m_data'=>$m_data,'p_id'=>$p_id,'r_list'=>$r_list,'acroom'=>$acroom,'depositeno'=>$depositeno]);
        
     }
 
@@ -30,8 +31,9 @@ class BookingController extends Controller
         $p_details=personal_details::with('member')->get();
         $data = personal_details::find($req->p_id);
         $m_data = add_members::all();
+        $depositeno = room_details::get()->last()->deposite_no;
        
-        $r_list = DB::select("SELECT add_room.*, room_details.check_in_date, room_details.* FROM add_room LEFT JOIN room_details ON add_room.room_no = room_details.r_id WHERE add_room.status = 1");
+        $r_list = DB::select("SELECT *, add_room.room_no as id FROM add_room WHERE add_room.status = 0");
         $acroom = DB::select("SELECT * FROM add_room WHERE room_facility = 'A.C. Room'");
         $acroomlist= DB::select("SELECT *, add_room.room_no as id FROM add_room WHERE add_room.status = 0");
         $details = new personal_details();
@@ -53,6 +55,12 @@ class BookingController extends Controller
             $m_details->relation=$req->relation[$i];
             $m_details->save();
         }
+        $file = $req->file('id_proof');
+
+    if (!$file) {
+        return redirect()->back()->with('error', 'Please select a valid file.');
+    }
+        $path = $req->file('id_proof')->store('id_proof');
         $booking = new room_details();
         $booking->no_of_person = $req->no_of_person;
         $booking->check_in_date = Carbon::now();
@@ -70,7 +78,7 @@ class BookingController extends Controller
         $booking->ac_amount = $req->ac_amount;
         $booking->non_ac_amount = $req->non_ac_amount;
         $booking->door_mt_amount = $req->door_mt_amount;
-        $booking->id_proof = $req->id_proof;
+        $booking->id_proof = $path;
         $booking->deposite_no = $req->deposit_no;
         $booking->deposite_rs = $req->deposite_rs;
         $booking->rs_word = $req->rs_word;
@@ -86,20 +94,19 @@ class BookingController extends Controller
             $query->orWhereIn('room_no', $doormtnonacroomlist);
         })
         ->update(['status' => 1]);
-    // foreach ($updateroom as $room) {
-    //         $room->status = 1;
-    //         $room->save();
-    //     }
+     foreach ($updateroom as $room) {
+             $room->status = 1;
+           $room->save();
+       }
 
-      //dd($r_list->toArray());
+      
         $m_details = new member_details();
         $m_details->full_name = $req->full_name;
         $m_details->age=$req->m_age;
-        $m_details->gender=$req->inlineRadioOptions;
+        $m_details->gender = $req->input('gender' . $i);
         $m_details->relation=$req->relation;
-        //$m_details->save();
-        
-        return view ('Booking.room-booking',['m_data'=>$m_data,'data'=>$data,'p_details'=>$p_details,'m_name'=>$m_name,'m_data'=>$m_data,'r_list'=>$r_list,'acroom'=>$acroom]);
+        $r_list = DB::select("SELECT add_room.*, room_details.check_in_date, room_details.* FROM add_room LEFT JOIN room_details ON add_room.room_no = room_details.r_id WHERE add_room.status = 1");
+        return view ('Booking.room-list',['m_data'=>$m_data,'data'=>$data,'p_details'=>$p_details,'m_name'=>$m_name,'m_data'=>$m_data,'r_list'=>$r_list,'acroom'=>$acroom,'depositeno'=>$depositeno,'path'=>$path]);
 
     }
 
@@ -114,9 +121,9 @@ class BookingController extends Controller
        
         $member->save();
         $m_data=add_members::all();
-       
+        $r_list = DB::select("SELECT add_room.*, room_details.check_in_date, room_details.* FROM add_room LEFT JOIN room_details ON add_room.room_no = room_details.r_id WHERE add_room.status = 1");
    
-        return view('Booking.room-booking',['member'=>$member,'m_data'=>$m_data,'p_details'=>$p_details]);
+        return view('Booking.room-booking',['member'=>$member,'m_data'=>$m_data,'p_details'=>$p_details,'r_list'=>$r_list]);
     }
     
    
@@ -132,15 +139,15 @@ class BookingController extends Controller
     }
     public function RoomList(Request $req){
         $room = new add_room();
-        $room->room_name = $req->input('room_name');
+        $room->room_name = strtoupper($req->input('room_name'));
         $room->room_type = $req->input('room_type');
         $room->room_facility = $req->input('room_facility');
         $room->save();
-       
-       
+        $list =$data=DB::select("SELECT * , add_room.room_no as id from add_room");
         $availablelist = DB::select("SELECT *, add_room.room_no as id FROM add_room WHERE add_room.status = 0");
         $room_book = DB::select("SELECT *, room_details.r_id as id, room_details.check_in_date FROM room_details");
-        return view('Booking.room-list', [ 'room_book' => $room_book]);
+        return back();
     }
+
     
 }

@@ -42,8 +42,7 @@ class MembersController extends Controller
       
         $data=add_members::find($id);
         $data->delete();
-      
-        return redirect()->route('view-members');
+        return back();
 
     }
 }

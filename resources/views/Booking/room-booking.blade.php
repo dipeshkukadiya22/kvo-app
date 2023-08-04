@@ -260,7 +260,7 @@
 
                               <div class="col-md-4">
                                 <label class="form-label" for="basic-default-name">Age</label>
-                                <input type="text" class="form-control" name="age" id="basic-default-age" placeholder="Age" />
+                                <input type="number" class="form-control" name="age" id="basic-default-age" placeholder="Age" />
                               </div>
     
                               <div class="col-4">
@@ -268,7 +268,7 @@
                                
                                 
                                 
-                                <textarea name="collapsibleaddress"  class="form-control" style="text-transform:uppercase" id="member-address" rows="1" placeholder="1456, Mall Road">{{ (!empty($member) ) ? $member->address : '' }}</textarea>
+                                <textarea name="collapsibleaddress" style="text-transform:uppercase" class="form-control" style="text-transform:uppercase" id="member-address" rows="1" placeholder="1456, Mall Road">{{ (!empty($member) ) ? $member->address : '' }}</textarea>
                               </div>
                                                         
                               
@@ -308,11 +308,11 @@
                               <div class="col-md-4">
                                 <label class="d-block form-label">Gender</label>
                                 <div class="form-check form-check-inline">
-                                  <input class="form-check-input" type="radio" name="inlineRadioOptions[]" id="inlineRadio1" value="MALE" />
+                                  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="MALE" />
                                   <label class="form-check-label" for="inlineRadio1">Male</label>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                  <input class="form-check-input" type="radio" name="inlineRadioOptions[]" id="inlineRadio2" value="FEMALE" />
+                                  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="FEMALE" />
                                   <label class="form-check-label" for="inlineRadio2">Female</label>
                                 </div>
                                 
@@ -451,8 +451,8 @@
                             <hr>
                             
                             <div class="col-md-4">
-                              <label class="form-label" for="basic-default-name">No. of Person</label>
-                              <input type="text" class="form-control"  name="no_of_person" id="no_of_person_id" placeholder="No of Person" min="1" max="10"/>
+                              <label class="form-label" for="basic-default-name">No. of Other Person</label>
+                              <input type="number" class="form-control"  name="no_of_person" id="no_of_person_id" placeholder="No of Person" min="1" max="10"/>
                             </div>
                             <!-- Datetime Picker-->
                             <div class="col-md-4">
@@ -461,13 +461,13 @@
                             </div>
 
                             <div class="col-md-4">
-                              <label for="formFileMultiple" class="form-label">Identity Proof</label>
-                              <input class="form-control" type="file" name="id_proof" id="formFileMultiple" multiple />
+                                <label for="formFileMultiple" class="form-label">Identity Proof</label>
+                                <input class="form-control" type="file" name="id_proof" id="formFileMultiple" multiple />
                             </div>
   
                             <div class="col-md-4">
                               <label class="form-label" for="basic-default-name">Deposit No</label>
-                              <input type="text" class="form-control" name="deposit_no" id="basic-default-name" placeholder="Deposit No" />
+                              <input type="text" class="form-control" name="deposit_no" id="basic-default-name" placeholder="Deposit No" value="{{$depositeno + 1}}" readonly/>
                             </div>
 
                            
@@ -516,11 +516,11 @@
                                 <div class="row formrepeater1">
                                   <div class="mb-3 col-lg-6 col-xl-3 col-12 mb-0">
                                     <label class="form-label" for="form-repeater-1-1">Full Name</label>
-                                    <input type="text" id="full_name_form"  name="full_name[]" class="form-control" placeholder="john doe" value="{{ (!empty($member) )? $member->m_name : '' }}"/>
+                                    <input type="text" id="full_name_form" style="text-transform:uppercase"  name="full_name[]" class="form-control" placeholder="john doe" value="{{ (!empty($member) )? $member->m_name : '' }}"/>
                                   </div>
                                   <div class="mb-3 col-lg-6 col-xl-3 col-12 mb-0">
                                     <label class="form-label" for="form-repeater-1-2">Age</label>
-                                    <input type="text" id="member_age" name="m_age[]" class="form-control" placeholder="your age" />
+                                    <input type="number" id="member_age" name="m_age[]" class="form-control" placeholder="your age" />
                                   </div>
                                   
                                   
@@ -529,12 +529,12 @@
                                       <label class="d-block form-label">Gender</label>
                                     
                                       <div class="form-check form-check-inline">
-                                      <input class="form-check-input" type="radio" name="gender[]" id="inlineRadio1_' + i + '" value="MALE" />
-<label class="form-check-label" for="inlineRadio1_' + i + '">Male</label>
+                                      <input class="form-check-input" type="radio" name="gender[]" id="inlineRadio1" value="MALE" />
+                                      <label class="form-check-label" for="inlineRadio1_${i}">Male</label>
 
                                         </div>
                                         <div class="form-check form-check-inline">
-                                          <input class="form-check-input" type="radio" name="gender[]" id="inlineRadio2_${i}" value="FEMALE" />
+                                          <input class="form-check-input" type="radio" name="gender[]" id="inlineRadio2" value="FEMALE" />
                                           <label class="form-check-label" for="inlineRadio2_${i}">Female</label>
                                         </div>
 
@@ -1090,13 +1090,13 @@ $(document).ready(function () {
       $('#members_age').text(age);
       $('#member_gen').text(selectedGender);
       $('#member_rel').text(relation);
-
+// loop vadu kya append ?
       $(".rep-table").append(
         '<tr>' +
         '<td></td>' +
         '<td id="member_full_name">' + $('#full_name_form').val() + '</td>' +
         '<td id="members_age">' + $('#member_age').val() + '</td>' +
-        '<td id="member_gen">' + selectedGender + '</td>' +
+        '<td id="member_gen">' + $('input[name="gender[]"').val() + '</td>' +
         '<td id="member_rel">' + $('#member_relation').val() + '</td>' +
         '</tr>'
       );
@@ -1112,15 +1112,16 @@ $(document).ready(function () {
           '<td></td>' +
           '<td class="member_full_name' + i + '">' + $('#full_name_form' + i).val() + '</td>' +
           '<td class="members_age' + i + '">' + $('#member_age' + i).val() + '</td>' +
-          '<td class="member_gen' + i + '">' + $('input[name="gender[]"]').val() + '</td>' +
+          '<td class="member_gen' + i + '">' + $('input[name="gender[]'+i+'"]').val() + '</td>' +
           '<td class="member_rel' + i + '">' + $('#member_relation' + i).val() + '</td>' +
           '</tr>'
         );
+        
 
         // Setting text for elements in the loop using jQuery
         $('.member_full_name' + i).text($('#full_name_form' + i).val());
         $('.members_age' + i).text($('#member_age' + i).val());
-        $('.member_gen' + i).text($('input[name="gender[]"]').val());
+        $('.member_gen' + i).text($('input[name="gender'+i+'[]"]').val());
         $('.member_rel' + i).text($('#member_relation' + i).val());
       }
 
@@ -1153,11 +1154,11 @@ $(document).ready(function () {
           '<div class="row formrepeater">'+
                                  ' <div class="mb-3 col-lg-6 col-xl-3 col-12 mb-0">'+
                                    ' <label class="form-label" for="form-repeater-1-1">Full Name</label>'+
-                                   ' <input type="text" id="full_name_form'+i+'"  name="full_name[]" class="form-control" placeholder="john doe" value="{{ (!empty($member) )? $member->m_name : '' }}"/>'+
+                                   ' <input type="text" id="full_name_form'+i+'" style="text-transform:uppercase" name="full_name[]" class="form-control" placeholder="john doe" value="{{ (!empty($member) )? $member->m_name : '' }}"/>'+
                                  ' </div>'+
                                  ' <div class="mb-3 col-lg-6 col-xl-3 col-12 mb-0">'+
                                   '  <label class="form-label" for="form-repeater-1-2">Age</label>'+
-                                  '  <input type="text" id="member_age'+i+'" name="m_age[]" class="form-control" placeholder="your age" />'+
+                                  '  <input type="number" id="member_age'+i+'" name="m_age[]" class="form-control" placeholder="your age" />'+
                                 '  </div>'+
                                   
                                   
@@ -1165,12 +1166,12 @@ $(document).ready(function () {
                                   
                                      ' <label class="d-block form-label">Gender</label>'+
                                      ' <div class="form-check form-check-inline">'+
-                                       ' <input class="form-check-input" type="radio" name="gender[]" id="inlineRadio1_' + i + '" value="MALE" />'+
+                                       ' <input class="form-check-input" type="radio" name="gender'+i+'[]" id="inlineRadio1_' + i + '" value="MALE" />'+
                                        ' <label class="form-check-label" for="inlineRadio1' + i + '">Male</label>'+
                                      ' </div>'+
                                      ' <div class="form-check form-check-inline">'+
-                                      '  <input class="form-check-input" type="radio" name="gender[]' + i + '" id="inlineRadio2_' + i + '" value="FEMALE" />'+
-                                      '  <label class="form-check-label" for="inlineRadio2' + i + '">Female</label>'+
+                                      '  <input class="form-check-input" type="radio" name="gender'+i+'[]" id="inlineRadio2_' + i + '" value="FEMALE" />'+
+                                      '  <label class="form-check-label" for="inlineRadio2' + i + '" selected>Female</label>'+
                                     '  </div>'+
                                 '  </div>'+
                                  ' <div class="col-md-4">'+

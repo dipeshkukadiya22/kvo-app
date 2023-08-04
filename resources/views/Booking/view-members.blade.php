@@ -91,6 +91,7 @@
                                            @foreach($data as $row)
                                             <tr>
                                             <input type="hidden" class="id" value="{{$row->p_id}}">
+                                            
                                               <td></td>
                                               <td>{{$row->p_id}}</td>
                                               <td>{{$row->m_name}}</td>
@@ -101,10 +102,9 @@
                                               
                                               <td>
                                                 <div class="d-inline-block">
-                                                <!-- <a href="{{route('edit_members', $row->p_id)}}" data-typeId="{{ $row->p_id }}" class="btn btn-sm btn-icon item-edit"><i class="text-primary ti ti-edit"></i></a> -->
-                                                <a href="{{route('edit_members', $row->p_id)}}"  data-typeId="{{$row->p_id}}"  class="btn btn-sm btn-icon item-edit" data-bs-toggle="offcanvas"
-                                                  data-bs-target="#offcanvasBackdrop" aria-controls="offcanvasBackdrop"><i class="text-primary ti ti-edit"></i></a>
-                                                  <a href="{{route('delete_members', $row->p_id)}}" id="confirm-text" class="text-danger delete-record"><i class="ti ti-trash"></i></a>
+                                                <a class="btn btn-sm btn-icon item-edit" data-bs-toggle="offcanvas"
+                                                    data-bs-target="#offcanvasBackdrop" aria-controls="offcanvasBackdrop"><i class="text-primary ti ti-edit"></i></a>
+                                                <a  class="text-danger delete-record"><i class="ti ti-trash"></i></a>
                                                 </div>
                                               </td>
                                             </tr>
@@ -130,7 +130,7 @@
                                 
                                 <form class="browser-default-validation" method="POST" action="{{route('update_members')}}">
                                   @csrf
-                                  <div class="mb-3" hidden>
+                                  <div class="mb-3">
                                     <label class="form-label" for="basic-default-name">Name</label>
                                     <input type="text" class="form-control" style="text-transform:uppercase" name="p_id" id="p_id" placeholder="John Doe" value="" />
                                   </div>
@@ -372,29 +372,66 @@
     </script>
 
 <script>
-    $(document).ready(function() {
-      const editLinks = document.querySelectorAll(".item-edit");
-        editLinks.forEach(link => {
-            link.addEventListener('click', function() {
+  
+const editLinks = document.querySelectorAll(".item-edit");
+    // Loop through each delete link and attach a click event listener
+    editLinks.forEach(link => {
+        link.addEventListener("click", function() {
+            // Show a confirmation dialog using SweetAlert2
             var id=$(this).closest("tr").find(".id").val();
-    
-                $.ajax({
-                    url: "{{ url('edit_members') }}/" + id,
-                    type: 'GET',
-                    success:function(response){
-                        $("#p_id").val(response['p_id']);
+            var member_id=[];
+            var temp=document.getElementById('name');
+             for(i=0;i<temp.options.length;i++)
+                  {
+                    member_id[i]=temp.options[i].value;
+                  }
+            $.ajax({
+                url:"{{url('get_religious_donation')}}" +"/"+ id,
+                type:'GET',
+                  success:function(response){
+                         $("#p_id").val(response['p_id']);
                         $("#m_name1").val(response['m_name']);
                         $("#email1").val(response['email']);
                         $("#phone_no1").val(response['phone_no']);
                         $("#city1").val(response['city']);
-                        member_id.forEach(myFunction)
+                       
                         
                         
                       }
                     });
             });
         });
-    });
+ 
+</script>
+<script>
+    $(".servicedeletebtn").click(function(e){
+            e.preventDefault();
+            var id=$(this).closest("tr").find(".delete_id").val();
+                 Swal.fire({
+                    title: 'Are you sure?',
+                    text: "Once deleted, You will not be able to recover this!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085D6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    url:"{{url('delete_members')}}" +"/"+ id,
+                    type:'GET',
+                    success:function(response){
+                        Swal.fire(
+                            'Deleted!',
+                            'Your file has been deleted.',
+                            'success',
+                            );
+                            location.reload();
+                            }
+                        });
+                    }
+            });
+        });
 </script>
 
 
