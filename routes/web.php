@@ -66,7 +66,6 @@ Route::post('update_religious_donation',[donation::class,'update_religious_donat
 
 Route::get('Community_Donation', [donation::class, 'index'])->name('Community_Donation');
 Route::POST('CommunityDonation', [donation::class, 'Community_Donation'])->name('CommunityDonation');
-Route::get('view_community_donation', [donation::class, 'view_donation'])->name('view_donation');
 Route::get('/View_Community_Donation',  [donation::class, 'View_Community_Donation']) -> name('View_Community_Donation');
 Route::get('/get_community_donation/{id}',[donation::class,'get_community_donation'])->name('get_community_donation');
 Route::get('/delete_community_donation/{id}',[donation::class,'delete'])->name('delete_community_donation');
@@ -93,14 +92,6 @@ Route::get('/delete_mahajan_expense/{id}', [Expense::class, 'delete_mahajan_expe
 Route::get('/get_mahajan_expense/{id}',[Expense::class,'get_mahajan_expense'])->name('get_mahajan_expense');
 Route::post('update_mahajan_expense',[Expense::class,'update_mahajan_expense'])->name('update_mahajan_expense');
 
-Route::get('General_Donation_Report', [donation::class, 'General_Donation_Report'])->name('General_Donation_Report');
-Route::get('/pdf_Religious_Donation/{id}',[pdfcontroller::class,'pdf_Religious_Donation'])->name('pdf_Religious_Donation');
-Route::get('/pdf_Community_Donation/{id}',[pdfcontroller::class,'pdf_Community_Donation'])->name('pdf_Community_Donation');
-Route::get('/pdf_Medical_Treatment/{id}',[pdfcontroller::class,'pdf_Medical_Treatment'])->name('pdf_Medical_Treatment');
-Route::get('/pdf_General_Donation/{id}',[pdfcontroller::class,'pdf_General_Donation'])->name('pdf_General_Donation');
-Route::get('/pdf_Mahajan_Expense/{id}',[pdfcontroller::class,'pdf_Mahajan_Expense'])->name('pdf_Mahajan_Expense');
-Route::get('/pdf_Sangh_Expense/{id}',[pdfcontroller::class,'pdf_Sangh_Expense'])->name('pdf_Sangh_Expense');
-
 Route::get('treatment',[MedicalController::class,'show'])->name('show');
 Route::post('add_treatment',[MedicalController::class,'add'])->name('add_treatment');
 Route::post('update_treatment',[MedicalController::class,'update'])->name('update_treatment');
@@ -109,5 +100,12 @@ Route::get('/get_member/{id}',[MedicalController::class,'get_member'])->name('ge
 Route::get('view_treatment',[MedicalController::class,'view_treatment'])->name('view_treatment');
 Route::get('edit_treatment/{id}',[MedicalController::class,'edit_treatment'])->name('edit_treatment');
 Route::get('delete_treatment/{id}',[MedicalController::class,'delete_treatment'])->name('delete_treatment');
+
+Route::get('/pdf_Religious_Donation/{id}',[pdfcontroller::class,'pdf_Religious_Donation'])->name('pdf_Religious_Donation');
+Route::get('/pdf_Community_Donation/{id}',[pdfcontroller::class,'pdf_Community_Donation'])->name('pdf_Community_Donation');
+Route::get('/pdf_Medical_Treatment/{id}',[pdfcontroller::class,'pdf_Medical_Treatment'])->name('pdf_Medical_Treatment');
+Route::get('/pdf_General_Donation/{id}',[pdfcontroller::class,'pdf_General_Donation'])->name('pdf_General_Donation');
+Route::get('/pdf_Mahajan_Expense/{id}',[pdfcontroller::class,'pdf_Mahajan_Expense'])->name('pdf_Mahajan_Expense');
+Route::get('/pdf_Sangh_Expense/{id}',[pdfcontroller::class,'pdf_Sangh_Expense'])->name('pdf_Sangh_Expense');
 
 
