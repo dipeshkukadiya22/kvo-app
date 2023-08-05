@@ -85,7 +85,6 @@ button.swal2-cancel.btn.btn-label-danger {
                                         <table id="DataTables_Table_0" class="datatables-basic table">
                                           <thead>
                                               <tr>
-                                                  <th></th>
                                                   <th>પહોંચ નંબર</th>
                                                   <th>નામ</th>
                                                   <th>તારીખ</th>
@@ -100,7 +99,6 @@ button.swal2-cancel.btn.btn-label-danger {
                                           @foreach($member as $row)
                                           <tr>
                                               <input type="hidden" class="id" value="{{$row->sr_no}}">
-                                              <td></td>
                                               <td>{{$row->sr_no}}</td>
                                               <td>{{$row->m_name}}</td>
                                               <td>{{Date("d-m-Y",strtotime($row->date))}}</td>
@@ -214,9 +212,7 @@ button.swal2-cancel.btn.btn-label-danger {
                                         value=""
                                         {{-- placeholder="John Doe" --}}
                                         required readonly/>
-                                        </div>
-                                    
-
+                                    </div>
                                     <div class="col-md-12">
                                         <label class="d-block form-label">નાણા મળેલ</label>
                                         <div class="form-check form-check-inline mb-2">
@@ -258,10 +254,10 @@ button.swal2-cancel.btn.btn-label-danger {
                                         <div class="form-check form-check-inline" hidden>
                                             <input type="text" id="payment" name="payment" class="form-control" />
                                             <label class="form-check-label" for="basic-default-radio">payment</label>
-                            </div>
-                                    </div>
+                                        </div>
+                                        </div>
                                     
-                                    <div class="row">
+                                        <div class="row">
                                         <div class="col-12">
                                             <button type="submit" class="btn btn-primary mb-2 d-grid w-100">Update</button>
                                             <button
@@ -327,6 +323,7 @@ button.swal2-cancel.btn.btn-label-danger {
         
       dom: '<"card-header flex-column flex-md-row"<"head-label text-center"><"dt-action-buttons text-end pt-3 pt-md-0"B>><"row"<"col-sm-12 col-md-6"l><"col-sm-12 col-md-6 d-flex justify-content-center justify-content-md-end"f>>t<"row"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>',
       displayLength: 7,
+      order: [0,'desc'],
       lengthMenu: [7, 10, 25, 50, 75, 100],
       buttons: [
         {
@@ -339,7 +336,7 @@ button.swal2-cancel.btn.btn-label-danger {
               text: '<i class="ti ti-printer me-1" ></i>Print',
               className: 'dropdown-item',
               exportOptions: {
-                columns: [1 ,2, 3, 4, 5, 6],
+                columns: [0,1 ,2, 3, 4, 5, 6],
                 // prevent avatar to be display
                 format: {
                   body: function (inner, coldex, rowdex) {
@@ -375,8 +372,9 @@ button.swal2-cancel.btn.btn-label-danger {
               extend: 'csv',
               text: '<i class="ti ti-file-text me-1" ></i>Csv',
               className: 'dropdown-item',
+              title: 'Medical Treatment',
               exportOptions: {
-                columns: [3, 4, 5, 6, 7],
+                columns: [0,1 ,2, 3, 4, 5, 6],
                 // prevent avatar to be display
                 format: {
                   body: function (inner, coldex, rowdex) {
@@ -399,8 +397,9 @@ button.swal2-cancel.btn.btn-label-danger {
               extend: 'excel',
               text: '<i class="ti ti-file-spreadsheet me-1"></i>Excel',
               className: 'dropdown-item',
+              title: 'Medical Treatment',
               exportOptions: {
-                columns: [3, 4, 5, 6, 7],
+                columns: [0,1 ,2, 3, 4, 5, 6],
                 // prevent avatar to be display
                 format: {
                   body: function (inner, coldex, rowdex) {
@@ -423,8 +422,9 @@ button.swal2-cancel.btn.btn-label-danger {
               extend: 'pdf',
               text: '<i class="ti ti-file-description me-1"></i>Pdf',
               className: 'dropdown-item',
+              title: 'Medical Treatment',
               exportOptions: {
-                columns: [3, 4, 5, 6, 7],
+                columns: [0,1 ,2, 3, 4, 5, 6],
                 // prevent avatar to be display
                 format: {
                   body: function (inner, coldex, rowdex) {
@@ -447,8 +447,9 @@ button.swal2-cancel.btn.btn-label-danger {
               extend: 'copy',
               text: '<i class="ti ti-copy me-1" ></i>Copy',
               className: 'dropdown-item',
+              title: 'Medical Treatment',
               exportOptions: {
-                columns: [3, 4, 5, 6, 7],
+                columns: [0,1 ,2, 3, 4, 5, 6],
                 // prevent avatar to be display
                 format: {
                   body: function (inner, coldex, rowdex) {
@@ -475,7 +476,7 @@ button.swal2-cancel.btn.btn-label-danger {
       
       
     });
-    $('div.head-label').html('<h5 class="card-title mb-0">View all Community Donation</h5>');
+    $('div.head-label').html('<h5 class="card-title mb-0">View Medical Treatment</h5>');
 
     </script>
 
@@ -667,7 +668,7 @@ button.swal2-cancel.btn.btn-label-danger {
         link.addEventListener("click", function() {
             // Show a confirmation dialog using SweetAlert2
             var id=$(this).closest("tr").find(".id").val();
-            var member_id=[],len=0,sr_no;
+            var member_id=[];
             var temp=document.getElementById('name');
              for(i=0;i<temp.options.length;i++)
                   {
@@ -677,8 +678,7 @@ button.swal2-cancel.btn.btn-label-danger {
                 url:"{{url('get_member')}}" +"/"+ id,
                 type:'GET',
                   success:function(response){ 
-                   
-                     sr_no=response[0]['p_id'];
+                    var sr_no=response[0]['p_id'];
                     var payment=response[0]['payment_mode'];
                         $("#sr_no").val(response[0]['sr_no']); 
                         $("#date").val(response[0]['date']);

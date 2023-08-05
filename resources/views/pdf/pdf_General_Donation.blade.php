@@ -101,7 +101,7 @@
 				</tr>
 				<tr>
 					<td class="tg-0pky"><span class="gujfont">TFZLBo </span><span>{{$general_donation[0]->depo_id}}</span></td>
-					<td class="tg-0pky"><span class="gujfont">TFZLBo </span><span>{{$general_donation[0]->date}}</span></td>
+					<td class="tg-0pky"><span class="gujfont">TFZLBo </span><span>{{Date("d-m-Y",strtotime($general_donation[0]->date))}}</span></td>
 					<td class="tg-0pky"><span class="gujfont">UFDo </span><span>{{$general_donation[0]->city}}</span></td>
 				</tr>
 				<tr>

@@ -117,7 +117,7 @@
 					</tr>
 					<tr>
 					<td class="tg-1pky" height="100px">{{$sangh_expense[0]->details}}</td>
-					<td class="tg-1pky tac"><strong>{{$sangh_expense[0]->amount}}</strong></td>
+					<td class="tg-1pky tac"><strong>{{"Rs. ".$sangh_expense[0]->amount}}</strong></td>
 					</tr>
 					<tr>
 						<td class="tg-0pky" width="10%" colspan="2"><span class="gujfont">V\S[ ~—5IFo </span><span>{{$sangh_expense[0]->inword}}</span></td>

@@ -85,7 +85,6 @@ button.swal2-cancel.btn.btn-label-danger {
                                         <table id="DataTables_Table_0" class="datatables-basic table">
                                           <thead>
                                               <tr>
-                                                  <th></th>
                                                   <th>પહોંચ નંબર</th>
                                                   <th>નામ</th>
                                                   <th>તારીખ</th>
@@ -99,7 +98,6 @@ button.swal2-cancel.btn.btn-label-danger {
                                           @foreach($donation as $row)
                                           <tr>
                                               <input type="hidden" class="id" value="{{$row->depo_id}}">
-                                              <td></td>
                                               <td>{{$row->depo_id}}</td>
                                               <td>{{$row->m_name}}</td>
                                               <td>{{Date("d-m-Y",strtotime($row->date))}}</td>
@@ -112,10 +110,10 @@ button.swal2-cancel.btn.btn-label-danger {
                                                   <div class="d-inline-block">
                                                     <a href="{{route('pdf_General_Donation',$row->depo_id)}}" class="text-primary" ><i class="ti ti-eye"></i></a>
 
-                                                    <a href="{{route('get_general_donation',$row->depo_id)}}" class="btn btn-sm btn-icon item-edit" data-bs-toggle="offcanvas"
+                                                    <a  class="btn btn-sm btn-icon item-edit" data-bs-toggle="offcanvas"
                                                     data-bs-target="#offcanvasBackdrop" aria-controls="offcanvasBackdrop"><i class="text-primary ti ti-edit"></i></a>
 
-                                                    <a href="{{route('delete_general_donation',$row->depo_id)}}" class="text-danger delete-record"><i class="ti ti-trash"></i></a>
+                                                    <a  class="text-danger delete-record"><i class="ti ti-trash"></i></a>
                                                     
                                                   </div>
                                               </td>
@@ -168,7 +166,7 @@ button.swal2-cancel.btn.btn-label-danger {
                                     </div>
 
                                     <div class="col-md-12">
-                                        <label class="form-label" for="multicol-phone">દર્દીના મોબાઇલ નં </label>
+                                        <label class="form-label" for="multicol-phone">મોબાઇલ નં </label>
                                         <input type="number" id="phone" name="phone" class="form-control" readonly/>
                                     </div>
 
@@ -186,7 +184,7 @@ button.swal2-cancel.btn.btn-label-danger {
                                     <div class="col-md-12">
                                         <label class="form-label" for="multicol-username">હસ્તે </label>
                                         <input type="text" id="haste" name="haste" class="form-control" placeholder="" required>  
-                                        </div>
+                                    </div>
 
                                     <div class="col-md-12">
                                         <label class="form-label" for="collapsible-address">વિગત</label>
@@ -263,6 +261,7 @@ button.swal2-cancel.btn.btn-label-danger {
         
       dom: '<"card-header flex-column flex-md-row"<"head-label text-center"><"dt-action-buttons text-end pt-3 pt-md-0"B>><"row"<"col-sm-12 col-md-6"l><"col-sm-12 col-md-6 d-flex justify-content-center justify-content-md-end"f>>t<"row"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>',
       displayLength: 7,
+      order: [0,'desc'],
       lengthMenu: [7, 10, 25, 50, 75, 100],
       buttons: [
         {
@@ -274,8 +273,9 @@ button.swal2-cancel.btn.btn-label-danger {
               extend: 'print',
               text: '<i class="ti ti-printer me-1" ></i>Print',
               className: 'dropdown-item',
+              title: 'General Donation',
               exportOptions: {
-                columns: [1 ,2, 3, 4, 5, 6],
+                columns: [0,1 ,2, 3, 4, 5, 6],
                 // prevent avatar to be display
                 format: {
                   body: function (inner, coldex, rowdex) {
@@ -311,8 +311,9 @@ button.swal2-cancel.btn.btn-label-danger {
               extend: 'csv',
               text: '<i class="ti ti-file-text me-1" ></i>Csv',
               className: 'dropdown-item',
+              title: 'General Donation',
               exportOptions: {
-                columns: [3, 4, 5, 6, 7],
+                columns: [0,1 ,2, 3, 4, 5, 6],
                 // prevent avatar to be display
                 format: {
                   body: function (inner, coldex, rowdex) {
@@ -335,8 +336,9 @@ button.swal2-cancel.btn.btn-label-danger {
               extend: 'excel',
               text: '<i class="ti ti-file-spreadsheet me-1"></i>Excel',
               className: 'dropdown-item',
+              title: 'General Donation',
               exportOptions: {
-                columns: [3, 4, 5, 6, 7],
+                columns: [0,1 ,2, 3, 4, 5, 6],
                 // prevent avatar to be display
                 format: {
                   body: function (inner, coldex, rowdex) {
@@ -359,8 +361,9 @@ button.swal2-cancel.btn.btn-label-danger {
               extend: 'pdf',
               text: '<i class="ti ti-file-description me-1"></i>Pdf',
               className: 'dropdown-item',
+              title: 'General Donation',
               exportOptions: {
-                columns: [3, 4, 5, 6, 7],
+                columns: [0,1 ,2, 3, 4, 5, 6],
                 // prevent avatar to be display
                 format: {
                   body: function (inner, coldex, rowdex) {
@@ -384,7 +387,7 @@ button.swal2-cancel.btn.btn-label-danger {
               text: '<i class="ti ti-copy me-1" ></i>Copy',
               className: 'dropdown-item',
               exportOptions: {
-                columns: [3, 4, 5, 6, 7],
+                columns: [0,1 ,2, 3, 4, 5, 6],
                 // prevent avatar to be display
                 format: {
                   body: function (inner, coldex, rowdex) {
@@ -411,7 +414,7 @@ button.swal2-cancel.btn.btn-label-danger {
       
       
     });
-    $('div.head-label').html('<h5 class="card-title mb-0">View all Community Donation</h5>');
+    $('div.head-label').html('<h5 class="card-title mb-0">View all General Donation</h5>');
 
     </script>
 
@@ -603,36 +606,36 @@ button.swal2-cancel.btn.btn-label-danger {
         link.addEventListener("click", function() {
             // Show a confirmation dialog using SweetAlert2
             var id=$(this).closest("tr").find(".id").val();
+            var member_id=[];
+            var temp=document.getElementById('name');
+             for(i=0;i<temp.options.length;i++)
+                  {
+                    member_id[i]=temp.options[i].value;
+                  }
             $.ajax({
                 url:"{{url('get_general_donation')}}" +"/"+ id,
                 type:'GET',
                   success:function(response){  
+                    var sr_no=response[0]['p_id'];
                     $("#depo_id").val(response[0]['depo_id']);
                     $("#phone").val(response[0]['phone_no']);
                     $("#date").val(response[0]['date']);
                     $("#city").val(response[0]['city']);
                     $("#haste").val(response[0]['haste']);
                     $("#details").val(response[0]['details']);
+                    member_id.forEach(myFunction)
+                        function myFunction(item, index, arr) {
+                            if((member_id[index])==sr_no)
+                            {
+                              $("#name option[value=" + sr_no + "]").attr('selected', 'selected'); 
+                            }
+                        }
                   }
                 });
         });
     });
 </script>
-<script>
-$("#name").change(function(){
-      const id=document.getElementById("name").value;
-      $.ajax({
-        
-                url:"{{url('get')}}" +"/"+ id,
-                type:'GET',
-                  success:function(response){   
-                        $("#city").val("AAAAA"); 
-                        $("#phone").val(response['phone_no']); 
-                  }
-                });
-            });
-      
-</script>
+
 <script>
     // Get all elements with class "delete-record"
     const deleteLinks = document.querySelectorAll(".delete-record");

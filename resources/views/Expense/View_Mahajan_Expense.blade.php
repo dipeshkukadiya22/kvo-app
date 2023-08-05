@@ -85,10 +85,10 @@ button.swal2-cancel.btn.btn-label-danger {
                                         <table id="DataTables_Table_0" class="datatables-basic table">
                                           <thead>
                                               <tr>
-                                                  <th></th>
                                                   <th>વાઉચર નંબર</th>
                                                   <th>નામ</th>
                                                   <th>તારીખ</th>
+                                                  <th>ગામ</th>
                                                   <th>રુપિયા</th>
                                                   <th>વિગત</th>
                                                   <th>Action</th>
@@ -97,10 +97,10 @@ button.swal2-cancel.btn.btn-label-danger {
                                           @foreach($expense as $row)
                                           <tr>
                                               <input type="hidden" class="id" value="{{$row->depo_id}}">
-                                              <td></td>
                                               <td>{{$row->depo_id}}</td>
                                               <td>{{$row->m_name}}</td>
                                               <td>{{Date("d-m-Y",strtotime($row->date))}}</td>
+                                              <td>{{$row->city}}</td>
                                               <td>{{"₹ ".$row->amount}}</td>
                                               <td>{{$row->details}}</td>
                                               <td>
@@ -164,7 +164,11 @@ button.swal2-cancel.btn.btn-label-danger {
                                     <div class="col-md-12">
                                         <label for="flatpickr-date" class="form-label">તારીખ </label>
                                         <input type="date" class="form-control" placeholder="DD-MM-YYYY" id="date" name="date" />    
-                                        
+                                    </div>
+
+                                    <div class="col-md-12">
+                                        <label class="form-label" for="multicol-username">ગામનું નામ </label>
+                                        <input type="text" id="city" class="form-control" readonly>
                                     </div>
 
                                     <div class="col-md-12">
@@ -264,6 +268,7 @@ button.swal2-cancel.btn.btn-label-danger {
         
       dom: '<"card-header flex-column flex-md-row"<"head-label text-center"><"dt-action-buttons text-end pt-3 pt-md-0"B>><"row"<"col-sm-12 col-md-6"l><"col-sm-12 col-md-6 d-flex justify-content-center justify-content-md-end"f>>t<"row"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>',
       displayLength: 7,
+      order: [0,'desc'],
       lengthMenu: [7, 10, 25, 50, 75, 100],
       buttons: [
         {
@@ -275,8 +280,9 @@ button.swal2-cancel.btn.btn-label-danger {
               extend: 'print',
               text: '<i class="ti ti-printer me-1" ></i>Print',
               className: 'dropdown-item',
+              title: 'Mahajan Expense',
               exportOptions: {
-                columns: [1 ,2, 3, 4, 5, 6],
+                columns: [0,1 ,2, 3, 4, 5],
                 // prevent avatar to be display
                 format: {
                   body: function (inner, coldex, rowdex) {
@@ -312,8 +318,9 @@ button.swal2-cancel.btn.btn-label-danger {
               extend: 'csv',
               text: '<i class="ti ti-file-text me-1" ></i>Csv',
               className: 'dropdown-item',
+              title: 'Mahajan Expense',
               exportOptions: {
-                columns: [3, 4, 5, 6, 7],
+                columns: [0,1 ,2, 3, 4, 5],
                 // prevent avatar to be display
                 format: {
                   body: function (inner, coldex, rowdex) {
@@ -336,8 +343,9 @@ button.swal2-cancel.btn.btn-label-danger {
               extend: 'excel',
               text: '<i class="ti ti-file-spreadsheet me-1"></i>Excel',
               className: 'dropdown-item',
+              title: 'Mahajan Expense',
               exportOptions: {
-                columns: [3, 4, 5, 6, 7],
+                columns: [0,1 ,2, 3, 4, 5],
                 // prevent avatar to be display
                 format: {
                   body: function (inner, coldex, rowdex) {
@@ -360,8 +368,9 @@ button.swal2-cancel.btn.btn-label-danger {
               extend: 'pdf',
               text: '<i class="ti ti-file-description me-1"></i>Pdf',
               className: 'dropdown-item',
+              title: 'Mahajan Expense',
               exportOptions: {
-                columns: [3, 4, 5, 6, 7],
+                columns: [0,1 ,2, 3, 4, 5],
                 // prevent avatar to be display
                 format: {
                   body: function (inner, coldex, rowdex) {
@@ -384,8 +393,9 @@ button.swal2-cancel.btn.btn-label-danger {
               extend: 'copy',
               text: '<i class="ti ti-copy me-1" ></i>Copy',
               className: 'dropdown-item',
+              title: 'Mahajan Expense',
               exportOptions: {
-                columns: [3, 4, 5, 6, 7],
+                columns: [0,1 ,2, 3, 4, 5],
                 // prevent avatar to be display
                 format: {
                   body: function (inner, coldex, rowdex) {
@@ -604,35 +614,36 @@ button.swal2-cancel.btn.btn-label-danger {
         link.addEventListener("click", function() {
             // Show a confirmation dialog using SweetAlert2
             var id=$(this).closest("tr").find(".id").val();
+            var member_id=[];
+            var temp=document.getElementById('name');
+             for(i=0;i<temp.options.length;i++)
+                  {
+                    member_id[i]=temp.options[i].value;
+                  }
             $.ajax({
                 url:"{{url('get_mahajan_expense')}}" +"/"+ id,
                 type:'GET',
                   success:function(response){  
-                    $("#depo_id").val(response[0]['depo_id']);
-                    $("#date").val(response[0]['date']);
-                    $("#amount").val(response[0]['amount']);
-                    $("#ankers").val(response[0]['inword']);
-                    $("#details").val(response[0]['details']);
+                    var sr_no=response[0]['p_id'];
+                      $("#depo_id").val(response[0]['depo_id']);
+                      $("#date").val(response[0]['date']);
+                      $("#city").val(response[0]['city']);
+                      $("#amount").val(response[0]['amount']);
+                      $("#ankers").val(response[0]['inword']);
+                      $("#details").val(response[0]['details']);
+                      member_id.forEach(myFunction)
+                          function myFunction(item, index, arr) {
+                              if((member_id[index])==sr_no)
+                              {
+                                $("#name option[value=" + sr_no + "]").attr('selected', 'selected'); 
+                              }
+                          }
                   }
                 });
         });
     });
 </script>
-<script>
-$("#name").change(function(){
-      const id=document.getElementById("name").value;
-      $.ajax({
-        
-                url:"{{url('get')}}" +"/"+ id,
-                type:'GET',
-                  success:function(response){   
-                        $("#city").val("AAAAA"); 
-                        $("#phone").val(response['phone_no']); 
-                  }
-                });
-            });
-      
-</script>
+
 <script>
     // Get all elements with class "delete-record"
     const deleteLinks = document.querySelectorAll(".delete-record");

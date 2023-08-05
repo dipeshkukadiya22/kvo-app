@@ -180,7 +180,7 @@
 					<tr>
 					<td class="tg-0pky gujfont">!$</td>
 					<td class="tg-0pky gujfont">zL VgI BFT[</td>
-					<td class="tg-0pky">{{$religious_donation[0]->other_account_name}}</td>
+					<td class="tg-0pky">{{$religious_donation[0]->other_account_amount}}</td>
 					</tr>
 					<tr>
 					<td class="tg-0pky"></td>
@@ -189,7 +189,7 @@
 					</tr>
 					<tr>
 					<td class="tg-0pky"></td>
-					<td class="tg-0pky"></td>
+					<td class="tg-0pky">{{$religious_donation[0]->remarks}}</td>
 					<td class="tg-0pky"></td>
 					</tr>
 					<tr>

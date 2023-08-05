@@ -143,7 +143,7 @@
 					<tr>
 					<td class="tg-0pky gujfont">^</td>
 					<td class="tg-0pky gujfont">>TZ</td>
-					<td class="tg-0pky">{{"₹ ".$community_donation[0] -> other}}</td>
+					<td class="tg-0pky">{{$community_donation[0] -> other}}</td>
 					</tr>
 					<tr>
 					<td class="tg-0pky gujfont">&</td>
@@ -153,7 +153,7 @@
 					<tr>
 					<td class="tg-0pky"></td>
 					<td class="tg-0pky gujfont" style="text-align: right;">8M8,</td>
-					<td class="tg-0pky"><strong>{{$community_donation[0] -> total}}</strong></td>
+					<td class="tg-0pky"><strong>{{"Rs. ".$community_donation[0] -> total}}</strong></td>
 					</tr>
 			  </tbody>
 			</table>

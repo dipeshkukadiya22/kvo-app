@@ -88,8 +88,9 @@ class donation extends Controller
     }
     public function View_Religious_Donation()
     {
-        $donation=DB::SELECT("SELECT * FROM `religious_donation` join add_members where religious_donation.member_id=add_members.p_id");
-        return view('Donation.View_Religious_Donation',['donation' => $donation]);
+        $donation=DB::SELECT("SELECT * FROM `religious_donation` join add_members where religious_donation.member_id=add_members.p_id ORDER by religious_donation_id desc");
+        $member=add_members::get();
+        return view('Donation.View_Religious_Donation',['donation' => $donation,'member' =>$member]);
     }
     public function get_religious_donation($id)
     {
@@ -97,12 +98,30 @@ class donation extends Controller
         return $donation;
     }
     public function update_religious_donation(Request $req)
-    {
-        $donation=religious_donation::find($req->depo_id);
-        $donation->date=Date(('Y-m-d'),strtotime($req->date));
+    { 
+        $donation=religious_donation::find($req->religious_donation_id);
         $donation->haste=strtoupper($req->haste);
-        $donation->details=ucfirst($req->details);
+        $donation->remarks=ucfirst($req->remarks);
         $donation->member_id=$req->name;
+        $donation->community=$req->community;
+        $donation->sarv_sadharan=$req->sarva_sadharan;  
+        $donation->jiv_daya=$req->jiv_daya;
+        $donation->shadhu_shdhvi=$req->sadhu_sadhvi;  
+        $donation->sadharmik=$req->sadhrmik; 
+        $donation->chaturmas=$req->chaaturmash;  
+        $donation->kayami_tithi=$req->kayami_tithi;  
+        $donation->devdravya=$req->dev_dravya;  
+        $donation->kesar_sukhad=$req->kesar_sukhad;  
+        $donation->dhoop_deep=$req->dhoop_deep; 
+        $donation->snatra_puja=$req->snatra_pooja;  
+        $donation->moti_pooja=$req->moti_pooja;  
+        $donation->agani_pooja=$req->aangi_pooja;  
+        $donation->drut_boli=$req->dhrut_boli;  
+        $donation->other_account_amount=$req->other;  
+        $donation->total=$req->total;  
+        $donation->total_in_word=$req->total_in_word;  
+        $donation->payment_mode=$req->payment;  
+        $donation->remarks=$req->remarks;  
         $donation->save();
         return back()->with("Update Religious Donation");
     }
@@ -183,11 +202,14 @@ class donation extends Controller
         //return view ('Donation.Community_Donation');
     }
     public function view_comm_donation(){
-        $donation=community_donation::all();
-        return view('Donation.View_Community_Donation',['donation'=> $donation]);
+        $donation=DB::SELECT("SELECT * FROM `community_donation` join add_members where add_members.p_id=community_donation.member_id ORDER by donation_id desc");
+        $member=add_members::all();
+        return view('Donation.View_Community_Donation',['donation'=> $donation,'member' => $member]);
     }
-    public function get($id){
-        $data=community_donation::find($id);
+    public function get_community_donation($id){
+        
+        $data=DB::SELECT("SELECT * FROM `community_donation` join add_members where add_members.p_id=community_donation.member_id and donation_id='$id'");
+     
         return $data;
     }
     public function delete($id)
@@ -199,6 +221,7 @@ class donation extends Controller
     public function update_community_donation(Request $req)
     {
         $community_donation=community_donation::find($req->donation_id);
+        $community_donation -> d_date = $req -> date;
         $community_donation -> medical_checkup = $req -> medical_checkup;
         $community_donation -> mahajan = $req -> mahajan;
         $community_donation -> bhojanshala = $req -> bhojanshala;
@@ -207,10 +230,10 @@ class donation extends Controller
         $community_donation -> oxygen = $req -> oxygen;
         $community_donation -> ambulance = $req -> ambulance;
         $community_donation -> other = $req -> other;
-        $community_donation -> remarks = $req -> remarks;
+        $community_donation -> remarks =ucfirst( $req -> remarks);
         $community_donation -> total = $req -> total;
         $community_donation -> total_in_word = $req -> total_in_word;
-        $community_donation -> payment_mode = $req -> basic_default_radio;
+        $community_donation -> payment_mode = $req -> payment;
         $community_donation->save();
         return back()->with("Update Community Donation");
     }
@@ -231,7 +254,7 @@ class donation extends Controller
     }
     public function view_general_donation()
     {
-        $donation=DB::SELECT("SELECT * FROM `GeneralDonation` join add_members WHERE GeneralDonation.member_id=add_members.p_id");
+        $donation=DB::SELECT("SELECT * FROM `GeneralDonation` join add_members WHERE GeneralDonation.member_id=add_members.p_id order by depo_id desc");
         $member = DB::SELECT("select * from add_members");
         return view('Donation.View_General_Donation',['donation'=>$donation,'member' => $member]);
     }

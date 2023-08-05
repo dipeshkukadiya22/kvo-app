@@ -85,56 +85,26 @@ button.swal2-cancel.btn.btn-label-danger {
                                         <table id="DataTables_Table_0" class="datatables-basic table">
                                           <thead>
                                               <tr>
-                                                  <th></th>
                                                   <th>પહોંચ નંબર</th>
                                                   <th>નામ</th>
                                                   <th>તારીખ</th>
                                                   <th>સંસ્થા</th>
-                                                  <th>શ્રી સર્વ સાધારણ ખાતે</th>
-                                                  <th>શ્રી સર્વ જીવદયા ખાતે</th>
-                                                  <th>શ્રી સાધુ સાધ્વી વૈયાવચ્છ ખાતે</th>
-                                                  <th>શ્રી સાધર્મિક ખરડા ખાતે</th>
-                                                  <th>શ્રી ચાતુર્માસ ખરડા ખાતે</th>
-                                                  <th>શ્રી કાયમી તિથી ફંડ ખાતે</th>
-                                                  <th>શ્રી દેવદ્રવ્ય ખાતે</th>
-                                                  <th>શ્રી કેસર સુખડ ખાતે</th>
-                                                  <th>શ્રી ધૂપ-દીપ ખાતે</th>
-                                                  <th>શ્રી સ્નાત્ર પૂજા ખાતે</th>
-                                                  <th>શ્રી આંગી પૂજા ખાતે</th>
-                                                  <th>શ્રી મોટી પૂજા ખાતે</th>
-                                                  <th>શ્રી ધ્રુતની બોલી ખાતે</th>
-                                                  <th>શ્રી  ખાતે</th>
+                                                  <th>હસ્તે</th>
                                                   <th>ટોટલ</th>
                                                   <td>નાણા મળેલ</td>
-                                                  <th>વિગત</th>
                                                   <th>Action</th>
                                               </tr>
                                           </thead>
                                           @foreach($donation as $row)
                                           <tr>
                                           <input type="hidden" class="id" value="{{$row->religious_donation_id}}">
-                                              <td></td>
                                               <td>{{$row->religious_donation_id}}</td>
                                               <td>{{$row->m_name}}</td>
                                               <td>{{Date('d-m-Y',strtotime($row->r_date))}}</td>
                                               <td>{{$row->community}}</td>
-                                              <td>{{$row->sarv_sadharan}}</td>
-                                              <td>{{$row->jiv_daya}}</td>
-                                              <td>{{$row->shadhu_shdhvi}}</td>
-                                              <td>{{$row->sadharmik}}</td>
-                                              <td>{{$row->chaturmas}}</td>
-                                              <td>{{$row->kayami_tithi}}</td>
-                                              <td>{{$row->devdravya}}</td>
-                                              <td>{{$row->kesar_sukhad}}</td>
-                                              <td>{{$row->dhoop_deep}}</td>
-                                              <td>{{$row->snatra_puja}}</td>
-                                              <td>{{$row->agani_pooja}}</td>
-                                              <td>{{$row->moti_pooja}}</td>
-                                              <td>{{$row->drut_boli}}</td>
-                                              <td>{{$row->other_account_amount}}</td>
+                                              <td>{{$row->haste}}</td>
                                               <td>{{$row->total}}</td>
                                               <td>{{$row->payment_mode}}</td>
-                                              <td>{{$row->remarks}}</td>
                                               <td>
                                                   <div class="d-inline-block">
                                                     <a href="{{route('pdf_Religious_Donation',$row->religious_donation_id)}}" class="text-primary"><i class="ti ti-eye"></i></a>
@@ -182,18 +152,49 @@ button.swal2-cancel.btn.btn-label-danger {
                                         <input
                                             type="text"
                                             class="form-control"
-                                            id="donation_id"
-                                            name="donation_id"
+                                            id="religious_donation_id"
+                                            name="religious_donation_id"
                                             readonly
                                             />
                                     </div>
 
                                     <div class="col-md-12">
+                                        <label class="form-label" for="multicol-username">નામ </label>
+                                        <select id="name" name="name" class="select2 form-select form-select-lg" data-allow-clear="false" >
+                                       @foreach ($member as $row)
+                                          <option value="{{$row->p_id}}">{{$row->m_name}}</option>
+                                       @endforeach
+                                        </select>    
+                                    </div>
+
+                                    <div class="col-md-12">
+                                        <label for="flatpickr-date" class="form-label">તારીખ </label>
+                                        <input type="date" class="form-control" placeholder="DD-MM-YYYY" id="date" name="date" />    
+                                    </div>
+
+                                    <div class="col-md-12">
+                                        <label class="form-label" for="multicol-username">સંસ્થા</label>
+                                        <select id="community" name="community" class="select2 form-select form-select-lg" data-allow-clear="false" >
+                                          <option value="VIJAYNAGAR">વિજયનગર</option>
+                                          <option value="NAVNEETNAGAR">નવનીતનગર</option>
+                                        </select>    
+                                    </div>
+
+                                    <div class="col-md-12">
+                                        <label class="form-label" for="multicol-phone">હસ્તે</label>
+                                        <input
+                                            type="text"
+                                            class="form-control"
+                                            id="haste"
+                                            name="haste"
+                                            />
+                                    </div>
+                                    
+                                    <div class="col-md-12">
                                         <label class="form-label" for="multicol-phone">શ્રી સર્વ સાધારણ ખાતે</label>
                                         <div class="input-group">
                                             <span class="input-group-text">₹</span>
                                             <input type="number" class="form-control amount-input" name="sarva_sadharan" id="sarva_sadharan" placeholder="Amount" aria-label="Amount (to the nearest dollar)" required>
-                                            
                                         </div>
                                     </div>
 
@@ -373,7 +374,7 @@ button.swal2-cancel.btn.btn-label-danger {
                                             value="UPI" />
                                         <label class="form-check-label" for="basic_default_radio">UPI</label>
                                         </div>
-                                        <div class="form-check form-check-inline">
+                                        <div class="form-check form-check-inline" hidden>
                                             <input type="text" id="payment" name="payment" class="form-control" />
                                             <label class="form-check-label" for="basic-default-radio">payment</label>
                                         </div>
@@ -393,8 +394,6 @@ button.swal2-cancel.btn.btn-label-danger {
                                 </div>
                               </form>
                               <!-- /Browser Default -->
-
-                              
                             </div>
                           </div>
                         </div>
@@ -445,6 +444,7 @@ button.swal2-cancel.btn.btn-label-danger {
       dom: '<"card-header flex-column flex-md-row"<"head-label text-center"><"dt-action-buttons text-end pt-3 pt-md-0"B>><"row"<"col-sm-12 col-md-6"l><"col-sm-12 col-md-6 d-flex justify-content-center justify-content-md-end"f>>t<"row"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>',
       displayLength: 7,
       lengthMenu: [7, 10, 25, 50, 75, 100],
+      order: [0,'desc'],
       buttons: [
         {
           extend: 'collection',
@@ -455,8 +455,9 @@ button.swal2-cancel.btn.btn-label-danger {
               extend: 'print',
               text: '<i class="ti ti-printer me-1" ></i>Print',
               className: 'dropdown-item',
+              title: 'Religious Donation',
               exportOptions: {
-                columns: [1 ,2, 3, 4, 5, 6],
+                columns: [0,1 ,2, 3, 4, 5, 6,7],
                 // prevent avatar to be display
                 format: {
                   body: function (inner, coldex, rowdex) {
@@ -492,8 +493,9 @@ button.swal2-cancel.btn.btn-label-danger {
               extend: 'csv',
               text: '<i class="ti ti-file-text me-1" ></i>Csv',
               className: 'dropdown-item',
+              title: 'Religious Donation',
               exportOptions: {
-                columns: [3, 4, 5, 6, 7],
+                columns: [0,1 ,2, 3, 4, 5, 6,7],
                 // prevent avatar to be display
                 format: {
                   body: function (inner, coldex, rowdex) {
@@ -516,8 +518,9 @@ button.swal2-cancel.btn.btn-label-danger {
               extend: 'excel',
               text: '<i class="ti ti-file-spreadsheet me-1"></i>Excel',
               className: 'dropdown-item',
+              title: 'Religious Donation',
               exportOptions: {
-                columns: [3, 4, 5, 6, 7],
+                columns: [0,1 ,2, 3, 4, 5, 6,7],
                 // prevent avatar to be display
                 format: {
                   body: function (inner, coldex, rowdex) {
@@ -540,8 +543,9 @@ button.swal2-cancel.btn.btn-label-danger {
               extend: 'pdf',
               text: '<i class="ti ti-file-description me-1"></i>Pdf',
               className: 'dropdown-item',
+              title: 'Religious Donation',
               exportOptions: {
-                columns: [3, 4, 5, 6, 7],
+                columns: [0,1 ,2, 3, 4, 5, 6,7],
                 // prevent avatar to be display
                 format: {
                   body: function (inner, coldex, rowdex) {
@@ -564,8 +568,9 @@ button.swal2-cancel.btn.btn-label-danger {
               extend: 'copy',
               text: '<i class="ti ti-copy me-1" ></i>Copy',
               className: 'dropdown-item',
+              title: 'Religious Donation',
               exportOptions: {
-                columns: [3, 4, 5, 6, 7],
+                columns: [0,1 ,2, 3, 4, 5, 6,7],
                 // prevent avatar to be display
                 format: {
                   body: function (inner, coldex, rowdex) {
@@ -819,14 +824,25 @@ button.swal2-cancel.btn.btn-label-danger {
         link.addEventListener("click", function() {
             // Show a confirmation dialog using SweetAlert2
             var id=$(this).closest("tr").find(".id").val();
+            var member_id=[];
+            var temp=document.getElementById('name');
+             for(i=0;i<temp.options.length;i++)
+                  {
+                    member_id[i]=temp.options[i].value;
+                  }
             $.ajax({
                 url:"{{url('get_religious_donation')}}" +"/"+ id,
                 type:'GET',
                   success:function(response){  
                     //console.info(response);
-                   
-                      $("#donation_id").val(response[0]['religious_donation_id']);
-                     $("#sarva_sadharan").val(response[0]['sarv_sadharan']);
+                    var sr_no=response[0]['p_id'];
+                    var payment=response[0]['payment_mode'];
+                    var community=response[0]['community'];
+                    alert
+                      $("#religious_donation_id").val(response[0]['religious_donation_id']);
+                      $("#date").val(response[0]['r_date']);
+                      $("#haste").val(response[0]['haste']);
+                      $("#sarva_sadharan").val(response[0]['sarv_sadharan']);
                       $("#jiv_daya").val(response[0]['jiv_daya']);
                       $("#sadhu_sadhvi").val(response[0]['shadhu_shdhvi']);
                       $("#sadhrmik").val(response[0]['sadharmik']);
@@ -844,16 +860,38 @@ button.swal2-cancel.btn.btn-label-danger {
                       $("#ankers").val(response[0]['total_in_word']);
                       $("#payment").val(response[0]['payment_mode']);
                       $("#remarks").val(response[0]['remarks']);  
-                      var payment=response[0]['payment_mode'];
                         if(payment=="CASH"){$("#cash").attr('checked',true);}
                         if(payment=="UPI"){$("#upi").attr('checked',true);}
                         if(payment=="DRAFT"){$("#draft").attr('checked',true);}
                         if(payment=="CHEQUE"){$("#cheque").attr('checked',true);}
+                        if(community=="VIJAYNAGAR"){$("#community option[value='VIJAYNAGAR']").attr('selected', 'selected'); }
+                        if(community=="NAVNEETNAGAR"){$("#community option[value='NAVNEETNAGAR']").attr('selected', 'selected'); }
+                        member_id.forEach(myFunction)
+                        function myFunction(item, index, arr) {
+                            if((member_id[index])==sr_no)
+                            {
+                              $("#name option[value=" + sr_no + "]").attr('selected', 'selected'); 
+                            }
+                        }
                   }
                 });
         });
     });
 </script>
+<script>
+  $("#cash").change(function(){
+        document.getElementById("payment").value="CASH";
+      });
+      $("#cheque").change(function(){
+        document.getElementById("payment").value="CHEQUE";
+      });
+      $("#draft").change(function(){
+        document.getElementById("payment").value="DRAFT";
+      });
+      $("#upi").change(function(){
+        document.getElementById("payment").value="UPI";
+      });
+  </script>
 @endsection
 
 @endsection

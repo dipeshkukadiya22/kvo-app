@@ -62,13 +62,12 @@ Route::get('/delete_religious_donation/{id}', [donation::class, 'delete_religiou
 Route::get('/get_religious_donation/{id}',[donation::class,'get_religious_donation'])->name('get_religious_donation');
 Route::post('update_religious_donation',[donation::class,'update_religious_donation'])->name('update_religious_donation');
 
-// Add Community_Donation
+
 Route::get('Community_Donation', [donation::class, 'index'])->name('Community_Donation');
 Route::POST('CommunityDonation', [donation::class, 'Community_Donation'])->name('CommunityDonation');
 Route::get('view_community_donation', [donation::class, 'view_donation'])->name('view_donation');
-// View Community_Donation
 Route::get('/View_Community_Donation',  [donation::class, 'view_comm_donation']) -> name('view_Comm_donation');
-Route::get('/get_community_donation/{id}',[donation::class,'get'])->name('get_community_donation');
+Route::get('/get_community_donation/{id}',[donation::class,'get_community_donation'])->name('get_community_donation');
 Route::get('/delete_community_donation/{id}',[donation::class,'delete'])->name('delete_community_donation');
 Route::post('/update_community_donation',[donation::class,'update_community_donation'])->name('update_community_donation');
 

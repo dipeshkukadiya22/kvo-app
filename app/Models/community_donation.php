@@ -12,8 +12,8 @@ class community_donation extends Model
     protected $primaryKey = 'donation_id';
     public $timestamps = false;
 
-   /* public function member()
+    public function member()
     {
         return $this->belongsTo(add_members::class, 'donation_id');
-    }*/
+    }
 }

@@ -85,7 +85,6 @@ button.swal2-cancel.btn.btn-label-danger {
                                         <table id="DataTables_Table_0" class="datatables-basic table">
                                           <thead>
                                               <tr>
-                                                  <th></th>
                                                   <th>પહોંચ નંબર</th>
                                                   <th>નામ</th>
                                                   <th>તારીખ</th>
@@ -99,17 +98,16 @@ button.swal2-cancel.btn.btn-label-danger {
                                           @foreach($donation as $row)
                                           <tr>
                                           <input type="hidden" class="id" value="{{$row->donation_id}}">
-                                              <td></td>
                                               <td>{{$row->donation_id}}</td>
-                                              <td>{{$row->name}}</td>
-                                              <td>{{$row->d_date}}</td>
+                                              <td>{{$row->m_name}}</td>
+                                              <td>{{Date("d-m-Y",strtotime($row->d_date))}}</td>
                                               <td>{{$row->phone_no}}</td>
                                               <td>{{$row->city}}</td>
-                                              <td>{{$row->total}}</td>
+                                              <td>{{"₹ ".$row->total}}</td>
                                               <td>{{$row->payment_mode}}</td>
                                               <td>
                                                   <div class="d-inline-block">
-                                                    <a href="{{route('pdf_Medical_Treatment',$row->donation_id)}}" class="text-primary"><i class="ti ti-eye"></i></a>
+                                                    <a href="{{route('pdf_Community_Donation',$row->donation_id)}}" class="text-primary"><i class="ti ti-eye"></i></a>
 
                                                     <a class="btn btn-sm btn-icon item-edit" data-bs-toggle="offcanvas"
                                                     data-bs-target="#offcanvasBackdrop" aria-controls="offcanvasBackdrop"><i class="text-primary ti ti-edit"></i></a>
@@ -158,6 +156,20 @@ button.swal2-cancel.btn.btn-label-danger {
                                             name="donation_id"
                                             readonly
                                             />
+                                    </div>
+
+                                    <div class="col-md-12">
+                                        <label class="form-label" for="multicol-username">નામ </label>
+                                        <select id="name" name="name" class="select2 form-select form-select-lg" data-allow-clear="false" >
+                                       @foreach ($member as $row)
+                                          <option value="{{$row->p_id}}">{{$row->m_name}}</option>
+                                       @endforeach
+                                        </select>    
+                                    </div>
+
+                                    <div class="col-md-12">
+                                        <label for="flatpickr-date" class="form-label">તારીખ </label>
+                                        <input type="date" class="form-control" placeholder="DD-MM-YYYY" id="date" name="date" />    
                                     </div>
 
                                     <div class="col-md-12">
@@ -240,7 +252,7 @@ button.swal2-cancel.btn.btn-label-danger {
                                         id="remarks"
                                         name="remarks" 
                                         {{-- placeholder="John Doe" --}}
-                                        required />
+                                         />
                                     </div>
         
                                     <div class="col-md-12">
@@ -278,7 +290,7 @@ button.swal2-cancel.btn.btn-label-danger {
                                             id="draft"
                                             name="basic_default_radio"
                                             class="form-check-input"
-                                            value="Draft"/>
+                                            />
                                         <label class="form-check-label" for="basic_default_radio">ડ્રાફ્ટ</label>
                                         </div>
                                         <div class="form-check form-check-inline">
@@ -296,10 +308,10 @@ button.swal2-cancel.btn.btn-label-danger {
                                             id="upi"
                                             name="basic_default_radio"
                                             class="form-check-input"
-                                            value="UPI" />
+                                             />
                                         <label class="form-check-label" for="basic_default_radio">UPI</label>
                                         </div>
-                                        <div class="form-check form-check-inline">
+                                        <div class="form-check form-check-inline" hidden>
                                             <input type="text" id="payment" name="payment" class="form-control" />
                                             <label class="form-check-label" for="basic-default-radio">payment</label>
                                         </div>
@@ -370,6 +382,7 @@ button.swal2-cancel.btn.btn-label-danger {
         
       dom: '<"card-header flex-column flex-md-row"<"head-label text-center"><"dt-action-buttons text-end pt-3 pt-md-0"B>><"row"<"col-sm-12 col-md-6"l><"col-sm-12 col-md-6 d-flex justify-content-center justify-content-md-end"f>>t<"row"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>',
       displayLength: 7,
+      order: [0,'desc'],
       lengthMenu: [7, 10, 25, 50, 75, 100],
       buttons: [
         {
@@ -382,7 +395,7 @@ button.swal2-cancel.btn.btn-label-danger {
               text: '<i class="ti ti-printer me-1" ></i>Print',
               className: 'dropdown-item',
               exportOptions: {
-                columns: [1 ,2, 3, 4, 5, 6],
+                columns: [0,1 ,2, 3, 4, 5, 6],
                 // prevent avatar to be display
                 format: {
                   body: function (inner, coldex, rowdex) {
@@ -419,7 +432,7 @@ button.swal2-cancel.btn.btn-label-danger {
               text: '<i class="ti ti-file-text me-1" ></i>Csv',
               className: 'dropdown-item',
               exportOptions: {
-                columns: [3, 4, 5, 6, 7],
+                columns: [0,1 ,2, 3, 4, 5, 6],
                 // prevent avatar to be display
                 format: {
                   body: function (inner, coldex, rowdex) {
@@ -443,7 +456,7 @@ button.swal2-cancel.btn.btn-label-danger {
               text: '<i class="ti ti-file-spreadsheet me-1"></i>Excel',
               className: 'dropdown-item',
               exportOptions: {
-                columns: [3, 4, 5, 6, 7],
+                columns: [0,1,2,3, 4, 5, 6],
                 // prevent avatar to be display
                 format: {
                   body: function (inner, coldex, rowdex) {
@@ -467,7 +480,7 @@ button.swal2-cancel.btn.btn-label-danger {
               text: '<i class="ti ti-file-description me-1"></i>Pdf',
               className: 'dropdown-item',
               exportOptions: {
-                columns: [3, 4, 5, 6, 7],
+                columns: [0,1,2,3, 4, 5, 6],
                 // prevent avatar to be display
                 format: {
                   body: function (inner, coldex, rowdex) {
@@ -491,7 +504,7 @@ button.swal2-cancel.btn.btn-label-danger {
               text: '<i class="ti ti-copy me-1" ></i>Copy',
               className: 'dropdown-item',
               exportOptions: {
-                columns: [3, 4, 5, 6, 7],
+                columns: [0,1,2,3, 4, 5, 6],
                 // prevent avatar to be display
                 format: {
                   body: function (inner, coldex, rowdex) {
@@ -745,36 +758,61 @@ button.swal2-cancel.btn.btn-label-danger {
         link.addEventListener("click", function() {
             // Show a confirmation dialog using SweetAlert2
             var id=$(this).closest("tr").find(".id").val();
-            //console.info(id);
-            //alert(id);
+            var member_id=[];
+            var temp=document.getElementById('name');
+             for(i=0;i<temp.options.length;i++)
+                  {
+                    member_id[i]=temp.options[i].value;
+                  }
             $.ajax({
                 url:"{{url('get_community_donation')}}" +"/"+ id,
                 type:'GET',
                   success:function(response){  
-                    console.info(response);
-                      $("#donation_id").val(response['donation_id']);
-                      $("#medical_checkup").val(response['medical_checkup']);
-                      $("#bhojanshala").val(response['bhojanshala']);
-                      $("#mahajan").val(response['mahajan']);
-                      $("#shaikshanik").val(response['shaikshanik']);
-                      $("#oxygen").val(response['oxygen']);
-                      $("#lavajam").val(response['lavajam']);
-                      $("#ambulance").val(response['ambulance']);
-                      $("#other").val(response['other']);
-                      $("#remarks").val(response['remarks']);
-                      $("#total").val(response['total']);
-                      $("#ankers").val(response['total_in_word']);
-                      $("#payment").val(response['payment_mode']); 
-                      var payment=response['payment_mode'];
+                    var payment=response[0]['payment_mode'];
+                    var sr_no=response[0]['p_id'];
+                      $("#donation_id").val(response[0]['donation_id']);
+                      $("#date").val(response[0]['d_date']);
+                      $("#medical_checkup").val(response[0]['medical_checkup']);
+                      $("#bhojanshala").val(response[0]['bhojanshala']);
+                      $("#mahajan").val(response[0]['mahajan']);
+                      $("#shaikshanik").val(response[0]['shaikshanik']);
+                      $("#oxygen").val(response[0]['oxygen']);
+                      $("#lavajam").val(response[0]['lavajam']);
+                      $("#ambulance").val(response[0]['ambulance']);
+                      $("#other").val(response[0]['other']);
+                      $("#remarks").val(response[0]['remarks']);
+                      $("#total").val(response[0]['total']);
+                      $("#ankers").val(response[0]['total_in_word']);
+                      $("#payment").val(response[0]['payment_mode']); 
                         if(payment=="CASH"){$("#cash").attr('checked',true);}
                         if(payment=="UPI"){$("#upi").attr('checked',true);}
                         if(payment=="DRAFT"){$("#draft").attr('checked',true);}
                         if(payment=="CHEQUE"){$("#cheque").attr('checked',true);}
+                        member_id.forEach(myFunction)
+                        function myFunction(item, index, arr) {
+                            if((member_id[index])==sr_no)
+                            {
+                              $("#name option[value=" + sr_no + "]").attr('selected', 'selected'); 
+                            }
+                        }
                   }
                 });
         });
     });
+    $("#cash").change(function(){
+        document.getElementById("payment").value="CASH";
+      });
+      $("#cheque").change(function(){
+        document.getElementById("payment").value="CHEQUE";
+      });
+      $("#draft").change(function(){
+        document.getElementById("payment").value="DRAFT";
+      });
+      $("#upi").change(function(){
+        document.getElementById("payment").value="UPI";
+      });
 </script>
+
 @endsection
 
 @endsection
