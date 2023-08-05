@@ -4,11 +4,8 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\BookingController;
-
 use App\Http\Controllers\MembersController;
 use App\Http\Controllers\AuthController;
-
-
 use App\Http\Controllers\donation;
 use App\Http\Controllers\Expense;
 use App\Http\Controllers\pdfcontroller;
@@ -36,7 +33,11 @@ use App\Http\Controllers\MedicalController;
 Route::get('/dashboard', [DashboardController::class, 'Dashboard'])->name('Dashboard');
 
 /* Auth Login Route */
-Route::get('/login', [AuthController::class, 'LoginUser'])->name('LoginUser');
+//Route::get('/login', [AuthController::class, 'LoginUser'])->name('LoginUser');
+Route::get('login',[AuthController::class,'LoginUser'])->name('login');
+Route::post('login',[AuthController::class,'check_user'])->name('check_user');
+Route::get('login',[AuthController::class,'destroy'])->name('destroy');
+//Route::get('/',[authentication::class,'login']);
 
 /* Room Booking Route */
 
@@ -66,7 +67,7 @@ Route::post('update_religious_donation',[donation::class,'update_religious_donat
 Route::get('Community_Donation', [donation::class, 'index'])->name('Community_Donation');
 Route::POST('CommunityDonation', [donation::class, 'Community_Donation'])->name('CommunityDonation');
 Route::get('view_community_donation', [donation::class, 'view_donation'])->name('view_donation');
-Route::get('/View_Community_Donation',  [donation::class, 'view_comm_donation']) -> name('view_Comm_donation');
+Route::get('/View_Community_Donation',  [donation::class, 'View_Community_Donation']) -> name('View_Community_Donation');
 Route::get('/get_community_donation/{id}',[donation::class,'get_community_donation'])->name('get_community_donation');
 Route::get('/delete_community_donation/{id}',[donation::class,'delete'])->name('delete_community_donation');
 Route::post('/update_community_donation',[donation::class,'update_community_donation'])->name('update_community_donation');
@@ -91,8 +92,6 @@ Route::get('View_Mahajan_Expense', [Expense::class, 'view_mahajan_expense'])->na
 Route::get('/delete_mahajan_expense/{id}', [Expense::class, 'delete_mahajan_expense'])->name('delete_mahajan_expense');
 Route::get('/get_mahajan_expense/{id}',[Expense::class,'get_mahajan_expense'])->name('get_mahajan_expense');
 Route::post('update_mahajan_expense',[Expense::class,'update_mahajan_expense'])->name('update_mahajan_expense');
-
-
 
 Route::get('General_Donation_Report', [donation::class, 'General_Donation_Report'])->name('General_Donation_Report');
 Route::get('/pdf_Religious_Donation/{id}',[pdfcontroller::class,'pdf_Religious_Donation'])->name('pdf_Religious_Donation');

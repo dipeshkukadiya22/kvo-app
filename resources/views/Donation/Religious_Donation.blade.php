@@ -182,8 +182,8 @@
                           <div class="col-md-4">
                             <label class="form-label" for="basic-default-country">સંસ્થા</label>
                             <select class="form-select" name="community" id="basic-default-country" required>
-                              <option value="vijaynagar">વિજયનગર</option>
-                              <option value="navneetnagar">નવનીતનગર</option>
+                              <option value="VIJAYNAGAR">વિજયનગર</option>
+                              <option value="NAVNEETNAGAR">નવનીતનગર</option>
                             </select>
                           </div>
                           <div class="col-12">
