@@ -201,7 +201,7 @@ class donation extends Controller
 
         //return view ('Donation.Community_Donation');
     }
-    public function view_comm_donation(){
+    public function View_Community_Donation(){
         $donation=DB::SELECT("SELECT * FROM `community_donation` join add_members where add_members.p_id=community_donation.member_id ORDER by donation_id desc");
         $member=add_members::all();
         return view('Donation.View_Community_Donation',['donation'=> $donation,'member' => $member]);

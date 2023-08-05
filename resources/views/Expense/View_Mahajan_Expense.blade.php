@@ -110,7 +110,10 @@ button.swal2-cancel.btn.btn-label-danger {
                                                     <a class="btn btn-sm btn-icon item-edit" data-bs-toggle="offcanvas"
                                                     data-bs-target="#offcanvasBackdrop" aria-controls="offcanvasBackdrop"><i class="text-primary ti ti-edit"></i></a>
 
-                                                    <a  class="text-danger delete-record"><i class="ti ti-trash"></i></a>
+                                                    @php
+                                                    if(session('role')=="ADMIN"){ @endphp
+                                                        <a class="text-danger delete-record"><i class="ti ti-trash"></i></a>
+                                                    @php } @endphp
                                                     
                                                   </div>
                                               </td>
