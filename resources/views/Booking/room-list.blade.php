@@ -209,7 +209,7 @@
                                           <td>
                                             <div class="badge bg-label-success mb-2">Booked</div>
                                             <div class="input-group">
-                                            <input type="text" class="form-control" name="check_in_date" placeholder="DD-MM-YYYY HH:MM" id="flatpickr-datetime" />
+                                            <input type="text" class="form-control" name="check_in_date" placeholder="Select date" id="flatpickr-datetime" />
                                             </div>
                                           <td>
                                             <div class="d-inline-block">
@@ -290,9 +290,10 @@
                                             <td>{{ $book->room_type }}</td>
                                             <td>{{ $book->room_facility }}</td>
                                             <td>
-                                            <div class="badge bg-label-danger mb-2">Booked</div>
-                                            
-                                            <input type="text" class="form-control" name="check_in_date" placeholder="DD-MM-YYYY HH:MM" id="flatpickr-datetime" />
+                                            <div class="badge bg-label-success mb-2">Booked</div>
+                                            <div class="input-group">
+                                            <input type="text" class="form-control" name="check_in_date" placeholder="Select date" id="flatpickr-datetime" />
+                                            </div>
                                           </td>
                                             
                                             <!-- <td>
@@ -650,6 +651,31 @@
     // Call the updateRoomCounters function on page load
     window.addEventListener('load', updateRoomCounters);
    </script>
+
+<script>
+    flatpickr("#flatpickr-datetime", {
+        enableTime: true,
+        dateFormat: "d-m-Y",
+    });
+</script>
+<script>
+        var highlightDate = {};
+        highlightDate[ new Date('01/20/2022')] = new Date('01/20/2022');
+        highlightDate[ new Date('01/21/2022')] = new Date('01/21/2022');
+        highlightDate[ new Date('01/22/2022')] = new Date('01/22/2022');
+        highlightDate[ new Date('01/23/2022')] = new Date('01/23/2022');
+
+        $('#flatpickr-datetime').datepicker({
+            beforeShowDay: function( date ) {
+                var highlight = highlightDate[date];
+                if( highlight ) {
+                    return [true, "eventClass", 'Tooltip text'];
+                } else {
+                    return [true, '', ''];
+                }
+            }
+        });
+    </script>
 
 
 
