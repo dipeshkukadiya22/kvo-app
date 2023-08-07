@@ -292,7 +292,7 @@
                                             <td>
                                             <div class="badge bg-label-danger mb-2">Booked</div>
                                             
-                                            <div class="badge bg-label-primary booked-date "><i class="text-primary me-2 ti ti-calendar"></i> {{ $book->check_in_date}}</div>
+                                            <input type="text" class="form-control" name="check_in_date" placeholder="DD-MM-YYYY HH:MM" id="flatpickr-datetime" />
                                           </td>
                                             
                                             <!-- <td>
