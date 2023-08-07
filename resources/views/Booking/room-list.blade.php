@@ -30,6 +30,8 @@
 
 <link rel="stylesheet" href="{{ asset('assets/vendor/libs/animate-css/animate.css') }}" />
 <link rel="stylesheet" href="{{ asset('assets/vendor/libs/sweetalert2/sweetalert2.css') }}" />
+<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.css" />
+
     
 
 <!-- Page CSS -->
@@ -205,8 +207,7 @@
                                         
                                           <td>
                                             <div class="badge bg-label-success mb-2">Booked</div>
-                                            <div class="badge bg-label-primary booked-date "><i class="text-primary me-2 ti ti-calendar"></i> June 15, 2023 to June 20, 2023</div>
-                                          </td>
+                                            <input class="pull-right" type="text" name="daterange" value="01/15/2020 - 02/15/2010"> </td>
                                           <td>
                                             <div class="d-inline-block">
                                               <a href="javascript:;" class="btn btn-sm btn-icon item-edit" data-bs-toggle="offcanvas" data-bs-target="#offcanvasBackdropEditRoom" aria-controls="offcanvasBackdrop"><i class="text-primary ti ti-edit"></i></a>
@@ -231,8 +232,8 @@
                                           <th>Room Name</th>
                                           <th>Room Type</th>
                                           <th>Room Facility</th>
-                                          <th>Status</th>
-                                          <th>Action</th>
+                                          <th>Statusgttgg</th>
+                                          <!-- <th></th> -->
                                         </tr>
                                       </thead>
                                       <tbody>
@@ -246,12 +247,12 @@
                                             <td>{{ $available->room_type }}</td>
                                             <td>{{ $available->room_facility }}</td>
                                           <td><span class="badge bg-label-primary">Available</span></td>
-                                          <td>
+                                          <!-- <td>
                                             <div class="d-inline-block">
                                               <a href="javascript:;" class="btn btn-sm btn-icon item-edit" data-bs-toggle="offcanvas" data-bs-target="#offcanvasBackdropEditRoom" aria-controls="offcanvasBackdrop"><i class="text-primary ti ti-edit"></i></a>
                                               <a href="javascript:;" id="confirm-text" class="text-danger delete-record"><i class="ti ti-trash "></i></a>
                                             </div>
-                                          </td>
+                                          </td> -->
                                         </tr>
                                         @endif
                                     @endforeach
@@ -272,7 +273,7 @@
                                           <th>Room Type</th>
                                           <th>Room Facility</th>
                                           <th>Status</th>
-                                          <th>Action</th>
+                                          <!-- <th>Action</th> -->
                                         </tr>
                                       </thead>
                                       <tbody>
@@ -290,12 +291,12 @@
                                             <div class="badge bg-label-primary booked-date "><i class="text-primary me-2 ti ti-calendar"></i> {{ $book->check_in_date}}</div>
                                           </td>
                                             
-                                            <td>
+                                            <!-- <td>
                                                 <div class="d-inline-block">
                                                     <a href="javascript:;" class="btn btn-sm btn-icon item-edit" data-bs-toggle="offcanvas" data-bs-target="#offcanvasBackdropEditRoom" aria-controls="offcanvasBackdrop"><i class="text-primary ti ti-edit"></i></a>
                                                     <a href="javascript:;" id="confirm-text" class="text-danger delete-record"><i class="ti ti-trash"></i></a>
                                                 </div>
-                                            </td>
+                                            </td> -->
                                         </tr>
                                         @endif
                                     @endforeach
@@ -644,6 +645,16 @@
 
     // Call the updateRoomCounters function on page load
     window.addEventListener('load', updateRoomCounters);
+   </script>
+
+   <script>
+   $(function() {
+    $('input[name="daterange"]').daterangepicker();
+    $('input[name="daterange"]').change(function(){
+      $(this).val();
+      console.log($(this).val());
+    });
+});
    </script>
 
 @endsection
