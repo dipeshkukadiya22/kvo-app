@@ -134,6 +134,8 @@ class BookingController extends Controller
         $get_list = DB::select("SELECT add_room.*, room_details.check_in_date, room_details.* FROM add_room LEFT JOIN room_details ON add_room.room_no = room_details.r_id WHERE add_room.status = 1");
         $room_book = DB::select ("SELECT * , room_details.r_id as id from room_details ");
         $availablelist = DB::select("SELECT *, add_room.room_no as id FROM add_room WHERE add_room.status = 0");
+        $check_in_dates = array();
+      
         return view('Booking.room-list',['list'=>$list,'room_book'=>$room_book,'availablelist'=>$availablelist,'get_list' => $get_list]);
 
     }
