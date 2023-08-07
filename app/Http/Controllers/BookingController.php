@@ -55,12 +55,12 @@ class BookingController extends Controller
             $m_details->relation=$req->relation[$i];
             $m_details->save();
         }
-        $file = $req->file('id_proof');
+    //     $file = $req->file('id_proof');
 
-    if (!$file) {
-        return redirect()->back()->with('error', 'Please select a valid file.');
-    }
-        $path = $req->file('id_proof')->store('id_proof');
+    // if (!$file) {
+    //     echo  "Please select a valid file";
+    // }
+    //     $path = $req->file('id_proof')->store('id_proof');
         $booking = new room_details();
         $booking->no_of_person = $req->no_of_person;
         $booking->check_in_date = Carbon::now();
@@ -78,12 +78,12 @@ class BookingController extends Controller
         $booking->ac_amount = $req->ac_amount;
         $booking->non_ac_amount = $req->non_ac_amount;
         $booking->door_mt_amount = $req->door_mt_amount;
-        $booking->id_proof = $path;
+        $booking->id_proof =  $req->id_proof;
         $booking->deposite_no = $req->deposit_no;
         $booking->deposite_rs = $req->deposite_rs;
         $booking->rs_word = $req->rs_word;
         $booking->save();
-        $updateroom = add_room::whereIn('room_facility', ['A.C. Room', 'NON A.C ROOM', 'DOOR MATRY NON A.C ROOM'])
+        $roomsToUpdate = add_room::whereIn('room_facility', ['A.C. Room', 'NON A.C ROOM', 'DOOR MATRY NON A.C ROOM'])
         ->when(!empty($acroomlist), function ($query) use ($acroomlist) {
             $query->whereIn('room_no', $acroomlist);
         })
@@ -92,12 +92,14 @@ class BookingController extends Controller
         })
         ->when(!empty($doormtnonacroomlist), function ($query) use ($doormtnonacroomlist) {
             $query->orWhereIn('room_no', $doormtnonacroomlist);
-        });
-     foreach ($updateroom as $room) {
-             $room->status = 1;
-           $room->save();
-       }
-
+        })
+        ->get();
+    
+    // Update the status and save each room
+    foreach ($roomsToUpdate as $room) {
+        $room->status = 1;
+        $room->save();
+    }
       
         $m_details = new member_details();
         $m_details->full_name = $req->full_name;
@@ -105,7 +107,7 @@ class BookingController extends Controller
         $m_details->gender = $req->input('gender' . $i);
         $m_details->relation=$req->relation;
         $r_list = DB::select("SELECT add_room.*, room_details.check_in_date, room_details.* FROM add_room LEFT JOIN room_details ON add_room.room_no = room_details.r_id WHERE add_room.status = 1");
-        return view ('Booking.room-list',['m_data'=>$m_data,'data'=>$data,'p_details'=>$p_details,'m_name'=>$m_name,'m_data'=>$m_data,'r_list'=>$r_list,'acroom'=>$acroom,'depositeno'=>$depositeno,'path'=>$path]);
+        return view ('Booking.room-booking',['m_data'=>$m_data,'data'=>$data,'p_details'=>$p_details,'m_name'=>$m_name,'m_data'=>$m_data,'r_list'=>$r_list,'acroom'=>$acroom,'depositeno'=>$depositeno,]);
 
     }
 
@@ -113,6 +115,7 @@ class BookingController extends Controller
         
         $p_details=personal_details::with('member')->get();
         $member = new add_members();
+        $depositeno = room_details::get()->last()->deposite_no;
         $member->m_name = strtoupper($req->m_name);
         $member->email = $req->email;
         $member->phone_no = $req->phone_no;
@@ -122,7 +125,7 @@ class BookingController extends Controller
         $m_data=add_members::all();
         $r_list = DB::select("SELECT add_room.*, room_details.check_in_date, room_details.* FROM add_room LEFT JOIN room_details ON add_room.room_no = room_details.r_id WHERE add_room.status = 1");
    
-        return view('Booking.room-booking',['member'=>$member,'m_data'=>$m_data,'p_details'=>$p_details,'r_list'=>$r_list]);
+        return view('Booking.room-booking',['member'=>$member,'m_data'=>$m_data,'p_details'=>$p_details,'r_list'=>$r_list,'depositeno'=>$depositeno]);
     }
     
    

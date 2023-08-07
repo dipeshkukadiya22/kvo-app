@@ -663,7 +663,7 @@
      flatpickr("#flatpickr-datetime", {
       enableTime: true,
       dateFormat: "d-m-Y",
-      DefaultDate:$('#flatpickr-datetime').val();
+      DefaultDate:$('#flatpickr-datetime-booked').val();
       
     });
     
