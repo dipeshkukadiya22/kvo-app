@@ -292,7 +292,7 @@
                                             <td>
                                             <div class="badge bg-label-success mb-2">Booked</div>
                                             <div class="input-group">
-                                            <input type="text" class="form-control" name="check_in_date" placeholder="Select date" id="flatpickr-datetime" />
+                                            <input type="text" class="form-control" name="check_in_date" placeholder="Select date" id="flatpickr-datetime-booked" />
                                             </div>
                                           </td>
                                             
@@ -652,30 +652,24 @@
     window.addEventListener('load', updateRoomCounters);
    </script>
 
-<script>
-    flatpickr("#flatpickr-datetime", {
-        enableTime: true,
-        dateFormat: "d-m-Y",
-    });
-</script>
-<script>
-        var highlightDate = {};
-        highlightDate[ new Date('01/20/2022')] = new Date('01/20/2022');
-        highlightDate[ new Date('01/21/2022')] = new Date('01/21/2022');
-        highlightDate[ new Date('01/22/2022')] = new Date('01/22/2022');
-        highlightDate[ new Date('01/23/2022')] = new Date('01/23/2022');
 
-        $('#flatpickr-datetime').datepicker({
-            beforeShowDay: function( date ) {
-                var highlight = highlightDate[date];
-                if( highlight ) {
-                    return [true, "eventClass", 'Tooltip text'];
-                } else {
-                    return [true, '', ''];
-                }
-            }
-        });
-    </script>
+<script>
+  $(document).ready(function() {
+    let currentStep = 1;
+
+    $(".btn-next").on("click", function() {
+     
+     
+     flatpickr("#flatpickr-datetime", {
+      enableTime: true,
+      dateFormat: "d-m-Y",
+      DefaultDate:$('#flatpickr-datetime').val();
+      
+    });
+    
+    });
+  });
+</script>
 
 
 
