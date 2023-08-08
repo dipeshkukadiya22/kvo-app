@@ -215,12 +215,13 @@
                                                 @if ($row->status == 1)
                                                     <div>
                                                         <label for="flatpickr-multi" class="form-label text-danger">Booked</label>
-                                                        <i class="fa fa-calendar" 
-                            onclick="setDatepicker(this)">
-                        </i>
+                                                        <i class="fa fa-calendar text-danger " 
+                                                            onclick="setDatepicker(this)">
+                                                        </i>
                                                     </div>
                                                 @else
-                                                    {{$row->status == 0 ? 'Available' : ''}}
+                                                <span class="text-success">{{$row->status == 0 ? 'Available' : ''}}</span>
+                                                    
                                                 @endif
                                             </td>
                                             <td>
@@ -304,8 +305,8 @@
                                             <td>
                                             <!-- Multiple Dates Picker-->
                                             <div>
-                                              <label for="flatpickr-multi" class="form-label">Booked</label>
-                                              <input type="text" class="form-control" placeholder="YYYY-MM-DD" id="flatpickr-multi" />
+                                              <label for="flatpickr-multi" class="form-label">Booked </label>
+                                              <input type="" class="form-control" placeholder="YYYY-MM-DD" id="flatpickr-multi"  />
                                             </div>
                                            <!-- /Multiple Dates Picker-->
                                           </td>

@@ -253,8 +253,9 @@
                               <div class="col-md-4">
                                 
                                 <label class="form-label" for="multicol-phone">Phone Number</label>
-                                <input type="number" id="member-phone" name="phone_no" class="form-control phone-mask" placeholder="658 799 8941" aria-label="658 799 8941" value="{{ (!empty($member)) ? $member->phone_no : '' }}"  maxlength="10" minlength="10" required/>
+                                <input type="number" id="member-phone" name="phone_no" class="form-control phone-mask" placeholder="658 799 8941" aria-label="658 799 8941" value="{{ (!empty($member)) ? $member->phone_no : '' }}"  pattern="[1-9]{1}[0-9]{9}" maxlength="10" required/>
                               </div>
+                              
 
                               <div class="col-md-4">
                                 <label class="form-label" for="basic-default-name">Age</label>
@@ -274,8 +275,8 @@
                               <div class="col-md-4">
                                 <label for="select2Basic" class="form-label">Community</label>
                                 <select id="select2Basic" class="select2 form-select form-select-lg" data-allow-clear="true">
-                                  <option value="AK">Alaska</option>
-                                  <option value="HI">Hawaii</option>
+                                  <option value="Hindu" selected>Hindu</option>
+                                  <option value="Jain">Jain</option>
                                   <option value="CA">California</option>
                                   <option value="NV">Nevada</option>
                                   <option value="OR">Oregon</option>
@@ -364,19 +365,20 @@
 
                             <!-- Primary -->
 
-                            
+                            <div class="row">
                             <div class="col-md-2">
                                 <label for="select2Multiple1" class="form-label">Ac Room</label> 
+                              
                                 <select id="select2Multiple11" name="select2Multiple1[]" class="select2 form-select" multiple>
-                                      @foreach ($r_list as $list)
-                                        @if ($list->room_facility == 'A.C. Room')
-                                            <option value="{{ $list->room_no }}"{{ in_array($list->room_no, explode(',', $roomListArray['ac_room'])) ? " selected" : "" }}>
-                                                {{ $list->room_no }} - {{ $list->room_name }}
-                                            </option>
-                                        @endif
-                                    @endforeach
-                                </select>
-                              </div>
+                                  @foreach($a_list as $list)
+                                      @if ($list->room_facility == 'A.C. Room')
+                                          <option value="{{$list->room_no}}"{{(!empty($member) && $member->room_name == $list->room_name) ? "selected" : ""}}>
+                                              {{$list->room_no}}-{{$list->room_name}}
+                                          </option>
+                                      @endif
+                                  @endforeach
+                              </select>
+                            </div>
 
                                 <div class="col-md-2">
                                   <label class="form-label" for="basic-default-name">Amount</label>
@@ -395,7 +397,7 @@
                                 <label for="select2Multiple2" class="form-label">Non Ac Room</label>
                                 <select id="select2Multiple22" name="select2Multiple2[]" class="select2 form-select" multiple>
                                  
-                                @foreach ($r_list as $list)
+                                @foreach ($a_list as $list)
                                                 @if ($list->room_facility == 'NON A.C ROOM')
                                                     <option value="{{$list->room_no}}"{{(!empty($member) && $member->room_name == $list->room_name) ? "selected" : ""}}>
                                                         {{$list->room_no}}-{{$list->room_name}}
@@ -422,7 +424,7 @@
                                 <label for="select2Multiple3" class="form-label">Door Mt Room</label>
                                 <select id="select2Multiple33" name="select2Multiple3[]" class="select2 form-select" multiple>
                                 
-                                @foreach ($r_list as $list)
+                                @foreach ($a_list as $list)
                                 @if ($list->room_facility == 'DOOR MATRY NON A.C ROOM' || $list->room_facility == 'DOOR MATRY  A.C ROOM')
                                     <option value="{{$list->room_no}}"{{(!empty($member) && $member->room_name == $list->room_name) ? "selected" : ""}}>
                                         {{$list->room_no}}-{{$list->room_name}}
@@ -1211,7 +1213,21 @@ $(document).ready(function() {
     });
   });
 </script>
+<script>
+const contactInput = document.getElementById('phone_no');
 
+contactInput.addEventListener('input', function () {
+  const desiredLength = 10;
+  const inputValue = this.value.trim();
+  
+  if (inputValue.length !== desiredLength) {
+    this.setCustomValidity(`Contact number should be exactly ${desiredLength} digits.`);
+  } else {
+    this.setCustomValidity('');
+  }
+});
+
+</script>
 
 
 
