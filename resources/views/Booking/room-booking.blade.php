@@ -122,18 +122,16 @@
                                 <label class="form-label" for="basic-default-name">Name</label>
                                 <input type="text" name="m_name" class="form-control" style="text-transform:uppercase" id="basic-default-name"  style="text-transform:uppercase"  placeholder="John Doe" />
                               </div>
-                              <div class="mb-3">
-                                <label class="form-label" for="basic-default-email">Email</label>
-                                <input type="email" name="email" id="basic-default-email" class="form-control" placeholder="john.doe"/>
-                              </div>
                               
-  
                               <div class="mb-3">
                                 <label class="form-label" for="multicol-phone">Phone Number</label>
                                 <input type="number" name="phone_no" id="multicol-phone" class="form-control phone-mask" placeholder="658 799 8941" required />
 
-                              
-  
+                              </div>
+
+                              <div class="mb-3">
+                                <label class="form-label" for="basic-default-email">Email</label>
+                                <input type="email" name="email" id="basic-default-email" class="form-control" placeholder="john.doe"/>
                               </div>
                               <div class="mb-3">
                                 <label class="form-label" for="city">City</label>
@@ -466,7 +464,7 @@
                             </div>
   
                             <div class="col-md-4">
-                              <label class="form-label" for="basic-default-name">Deposit No</label>
+                              <label class="form-label" for="basic-default-name">Booking No</label>
                               <input type="text" class="form-control" name="deposit_no" id="basic-default-name" placeholder="Deposit No" value="{{$depositeno + 1}}" readonly/>
                             </div>
 

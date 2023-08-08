@@ -137,18 +137,18 @@ class BookingController extends Controller
         $room_book = DB::select ("SELECT * , room_details.r_id as id from room_details ");
         $availablelist = DB::select("SELECT *, add_room.room_no as id FROM add_room WHERE add_room.status = 0");
         $current_date = Carbon::now();
-       
-      // $room_ids= add_room::select('room_no')->where('check_in_date',$current_date)->get();
-       //dd($room_ids->room_no);
-     
+        $formatted_date = $current_date->format('Y-m-d');
 
-   
-       // $roomsToUpdate = room_details::whereIn('r_id',$room_ids)->get();
-        // 
-       
-       
-     
-      
+        $room_ids = room_details::where('check_in_date', $formatted_date)->pluck('r_id')->toArray();
+
+        // dd($room_ids);
+        //DB::enableQueryLog();
+
+        $roomsToUpdate = add_room::whereIn('room_no',$room_ids)->get();
+        //dd(DB::getQueryLog());
+
+        //dd($roomsToUpdate->toArray());
+
         return view('Booking.room-list',['list'=>$list,'room_book'=>$room_book,'availablelist'=>$availablelist,'get_list' => $get_list,'current_date'=> $current_date]);
 
     }

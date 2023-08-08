@@ -206,25 +206,31 @@
                                       <tbody>
                                       @foreach($list as $row)
                                         <tr>
-                                        <td></td>
-                                        <td>{{$row->room_no}}</td>
-                                        <td>{{$row->room_name}}</td>
-                                        <td>{{$row->room_type}}</td>
-                                        <td>{{$row->room_facility}}</td>
-                                        
-                                          <td>
-                                            <div class="badge bg-label-success mb-2">Booked</div>
-                                            <div class="input-group">
-                                            <input type="text" class="form-control  booked-day" name="check_in_date" placeholder="Select date" id="flatpickr-datetime" />
-                                            </div>
-                                          <td>
-                                            <div class="d-inline-block">
-                                              <a href="javascript:;" class="btn btn-sm btn-icon item-edit" data-bs-toggle="offcanvas" data-bs-target="#offcanvasBackdropEditRoom" aria-controls="offcanvasBackdrop"><i class="text-primary ti ti-edit"></i></a>
-                                              <a href="javascript:;" id="confirm-text" class="text-danger delete-record"><i class="ti ti-trash"></i></a>
-                                            </div>
-                                          </td>
+                                            <td></td>
+                                            <td>{{$row->room_no}}</td>
+                                            <td>{{$row->room_name}}</td>
+                                            <td>{{$row->room_type}}</td>
+                                            <td>{{$row->room_facility}}</td>
+                                            <td>
+                                                @if ($row->status == 1)
+                                                    <div>
+                                                        <label for="flatpickr-multi" class="form-label text-danger">Booked</label>
+                                                        <i class="fa fa-calendar" 
+                            onclick="setDatepicker(this)">
+                        </i>
+                                                    </div>
+                                                @else
+                                                    {{$row->status == 0 ? 'Available' : ''}}
+                                                @endif
+                                            </td>
+                                            <td>
+                                                <div class="d-inline-block">
+                                                    <a href="javascript:;" class="btn btn-sm btn-icon item-edit" data-bs-toggle="offcanvas" data-bs-target="#offcanvasBackdropEditRoom" aria-controls="offcanvasBackdrop"><i class="text-primary ti ti-edit"></i></a>
+                                                    <a href="javascript:;" id="confirm-text" class="text-danger delete-record"><i class="ti ti-trash"></i></a>
+                                                </div>
+                                            </td>
                                         </tr>
-                                        @endforeach
+                                    @endforeach
                                       </tbody>
                                     </table>
                                   </div>
@@ -298,7 +304,7 @@
                                             <td>
                                             <!-- Multiple Dates Picker-->
                                             <div>
-                                              <label for="flatpickr-multi" class="form-label">Multiple Dates Picker</label>
+                                              <label for="flatpickr-multi" class="form-label">Booked</label>
                                               <input type="text" class="form-control" placeholder="YYYY-MM-DD" id="flatpickr-multi" />
                                             </div>
                                            <!-- /Multiple Dates Picker-->
@@ -692,6 +698,30 @@
   }
 });
 </script>
+<script type="text/javascript">
+        function setDatepicker(_this) {
+  
+            /* Get the parent class name so we 
+                can show date picker */
+            let className = $(_this).parent()
+                .parent().parent().attr('class');
+  
+            // Remove space and add '.'
+            let removeSpace = className.replace(' ', '.');
+  
+            // jQuery class selector
+            $("." + removeSpace).datepicker({
+                format: "dd/mm/yyyy",
+  
+                // Positioning where the calendar is placed
+                orientation: "bottom auto",
+                // Calendar closes when cursor is 
+                // clicked outside the calendar
+                autoclose: true,
+                showOnFocus: "false"
+            });
+        }
+    </script>
 
 
 
