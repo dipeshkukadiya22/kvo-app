@@ -49,6 +49,12 @@
 .booked-date {
     display: table-caption;
 }
+.booked-day {
+    background-color: #f8f8f8;
+    border-radius: 50%;
+    color: #aaa;
+  }
+
 
 
 </style>
@@ -209,7 +215,7 @@
                                           <td>
                                             <div class="badge bg-label-success mb-2">Booked</div>
                                             <div class="input-group">
-                                            <input type="text" class="form-control" name="check_in_date" placeholder="Select date" id="flatpickr-datetime" />
+                                            <input type="text" class="form-control  booked-day" name="check_in_date" placeholder="Select date" id="flatpickr-datetime" />
                                             </div>
                                           <td>
                                             <div class="d-inline-block">
@@ -290,10 +296,12 @@
                                             <td>{{ $book->room_type }}</td>
                                             <td>{{ $book->room_facility }}</td>
                                             <td>
-                                            <div class="badge bg-label-success mb-2">Booked</div>
-                                            <div class="input-group">
-                                            <input type="text" class="form-control" name="check_in_date" placeholder="Select date" id="flatpickr-datetime-booked" />
+                                            <!-- Multiple Dates Picker-->
+                                            <div>
+                                              <label for="flatpickr-multi" class="form-label">Multiple Dates Picker</label>
+                                              <input type="text" class="form-control" placeholder="YYYY-MM-DD" id="flatpickr-multi" />
                                             </div>
+                                           <!-- /Multiple Dates Picker-->
                                           </td>
                                             
                                             <!-- <td>
@@ -633,6 +641,10 @@
     $('div.head-label').html('<h5 class="card-title mb-0">Details for all Rooms</h5> ');
 
     </script>
+    <!-- date picker -->
+    <script>
+    $("#bs-datepicker-multidate").datepicker({ multidate: true });
+    </script>
 
     <script>
     // Function to update room counters
@@ -654,21 +666,31 @@
 
 
 <script>
-  $(document).ready(function() {
-    let currentStep = 1;
+ $(document).ready(function() {
+  let currentStep = 1;
 
-    $(".btn-next").on("click", function() {
-     
-     
-     flatpickr("#flatpickr-datetime", {
-      enableTime: true,
-      dateFormat: "d-m-Y",
-      DefaultDate:$('#flatpickr-datetime-booked').val();
-      
-    });
-    
-    });
+  // Retrieve booked dates from the input field and format them as an array of Date objects
+  const bookedDates = $('#flatpickr-datetime-booked').val().split(',').map(dateStr => new Date(dateStr.trim()));
+
+  // Initialize the flatpickr instance
+  const flatpickrInstance = flatpickr("#flatpickr-datetime", {
+    enableTime: true,
+    dateFormat: "d-m-Y",
+    onDayCreate: function(dObj, dStr, fp, dayElem) {
+      // Check if the current day is booked and apply a custom class
+      if (bookedDates.some(bookedDate => isSameDay(dObj, bookedDate))) {
+        dayElem.classList.add('booked-day');
+      }
+    }
   });
+
+  // Function to check if two dates are the same day
+  function isSameDay(date1, date2) {
+    return date1.getDate() === date2.getDate() &&
+           date1.getMonth() === date2.getMonth() &&
+           date1.getFullYear() === date2.getFullYear();
+  }
+});
 </script>
 
 
