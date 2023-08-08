@@ -572,12 +572,12 @@
 
             <!-- Layouts -->
             <li class="menu-item">
-              <a href="javascript:void(0)" class="menu-link menu-toggle">
+              <a href="{{route('room-booking')}}" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons ti ti-layout-sidebar"></i>
-                <div data-i18n="Layouts">Layouts</div>
+                <div data-i18n="ROOM-BOOKING">ROOM-BOOKING </div>
               </a>
 
-              <ul class="menu-sub">
+              <!-- <ul class="menu-sub">
                 <li class="menu-item">
                   <a href="layouts-without-menu.html" class="menu-link">
                     <i class="menu-icon tf-icons ti ti-menu-2"></i>
@@ -608,16 +608,16 @@
                     <div data-i18n="Blank">Blank</div>
                   </a>
                 </li>
-              </ul>
+              </ul> -->
             </li>
 
             <!-- Apps -->
             <li class="menu-item">
               <a href="javascript:void(0)" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons ti ti-layout-grid-add"></i>
-                <div data-i18n="Apps">Apps</div>
+                <div data-i18n="DONATION">DONATION</div>
               </a>
-              <ul class="menu-sub">
+              <!-- <ul class="menu-sub">
                 <li class="menu-item">
                   <a href="app-email.html" class="menu-link">
                     <i class="menu-icon tf-icons ti ti-mail"></i>
@@ -713,9 +713,9 @@
                         </li>
                       </ul>
                     </li>
-                  </ul>
-                </li>
-                <li class="menu-item">
+                  </ul> -->
+                <!-- </li> -->
+                <!-- <li class="menu-item">
                   <a href="javascript:void(0);" class="menu-link menu-toggle">
                     <i class="menu-icon tf-icons ti ti-settings"></i>
                     <div data-i18n="Roles & Permissions">Roles & Permission</div>
@@ -733,7 +733,7 @@
                     </li>
                   </ul>
                 </li>
-              </ul>
+              </ul> -->
             </li>
 
             <!-- Pages -->
@@ -741,9 +741,9 @@
               <a href="javascript:void(0)" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons ti ti-file"></i>
 
-                <div data-i18n="Pages">Pages</div>
+                <div data-i18n="MEDICAL">MEDICAL</div>
               </a>
-              <ul class="menu-sub">
+              <!-- <ul class="menu-sub">
                 <li class="menu-item">
                   <a href="javascript:void(0);" class="menu-link menu-toggle">
                     <i class="menu-icon tf-icons ti ti-user-circle"></i>
@@ -1013,18 +1013,18 @@
                     <div data-i18n="Modal Examples">Modal Examples</div>
                   </a>
                 </li>
-              </ul>
+              </ul> -->
             </li>
 
             <!-- Components -->
             <li class="menu-item">
               <a href="javascript:void(0)" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons ti ti-toggle-left"></i>
-                <div data-i18n="Components">Components</div>
+                <div data-i18n="EXPENSE">EXPENSE</div>
               </a>
-              <ul class="menu-sub">
+              <!-- <ul class="menu-sub"> -->
                 <!-- Cards -->
-                <li class="menu-item">
+                <!-- <li class="menu-item">
                   <a href="javascript:void(0);" class="menu-link menu-toggle">
                     <i class="menu-icon tf-icons ti ti-id"></i>
                     <div data-i18n="Cards">Cards</div>
@@ -1056,9 +1056,9 @@
                       </a>
                     </li>
                   </ul>
-                </li>
+                </li> -->
                 <!-- User interface -->
-                <li class="menu-item">
+                <!-- <li class="menu-item">
                   <a href="javascript:void(0)" class="menu-link menu-toggle">
                     <i class="menu-icon tf-icons ti ti-color-swatch"></i>
                     <div data-i18n="User interface">User interface</div>
@@ -1160,9 +1160,9 @@
                       </a>
                     </li>
                   </ul>
-                </li>
+                </li> -->
                 <!-- Extended components -->
-                <li class="menu-item">
+                <!-- <li class="menu-item">
                   <a href="javascript:void(0)" class="menu-link menu-toggle">
                     <i class="menu-icon tf-icons ti ti-components"></i>
                     <div data-i18n="Extended UI">Extended UI</div>
@@ -1241,9 +1241,9 @@
                       </a>
                     </li>
                   </ul>
-                </li>
+                </li> -->
                 <!-- Icons -->
-                <li class="menu-item">
+                <!-- <li class="menu-item">
                   <a href="javascript:void(0)" class="menu-link menu-toggle">
                     <i class="menu-icon tf-icons ti ti-brand-tabler"></i>
                     <div data-i18n="Icons">Icons</div>
@@ -1262,15 +1262,15 @@
                   </ul>
                 </li>
               </ul>
-            </li>
+            </li> -->
 
             <!-- Forms -->
             <li class="menu-item">
               <a href="javascript:void(0)" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons ti ti-forms"></i>
-                <div data-i18n="Forms">Forms</div>
+                <div data-i18n="REPORTS">REPORTS</div>
               </a>
-              <ul class="menu-sub">
+              <!-- <ul class="menu-sub">
                 <li class="menu-item">
                   <a href="javascript:void(0);" class="menu-link menu-toggle">
                     <i class="menu-icon tf-icons ti ti-toggle-left"></i>
@@ -1376,18 +1376,18 @@
                     <div data-i18n="Form Validation">Form Validation</div>
                   </a>
                 </li>
-              </ul>
+              </ul> -->
             </li>
 
             <!-- Tables -->
-            <li class="menu-item">
+            <!-- <li class="menu-item">
               <a href="javascript:void(0)" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons ti ti-layout-grid"></i>
                 <div data-i18n="Tables">Tables</div>
               </a>
-              <ul class="menu-sub">
+              <ul class="menu-sub"> -->
                 <!-- Tables -->
-                <li class="menu-item">
+                <!-- <li class="menu-item">
                   <a href="tables-basic.html" class="menu-link">
                     <i class="menu-icon tf-icons ti ti-table"></i>
                     <div data-i18n="Tables">Tables</div>
@@ -1417,10 +1417,10 @@
                   </ul>
                 </li>
               </ul>
-            </li>
+            </li> -->
 
             <!-- Charts & Maps -->
-            <li class="menu-item">
+            <!-- <li class="menu-item">
               <a href="javascript:void(0)" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons ti ti-chart-bar"></i>
                 <div data-i18n="Charts & Maps">Charts & Maps</div>
@@ -1451,7 +1451,7 @@
                   </a>
                 </li>
               </ul>
-            </li>
+            </li> -->
 
             
           </ul>
