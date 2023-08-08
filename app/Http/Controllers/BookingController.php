@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers;
 use App\Models\personal_details;
 use App\Models\room_details;
@@ -20,6 +19,8 @@ class BookingController extends Controller
         $r_list= DB::select("SELECT *, add_room.room_no as id FROM add_room WHERE add_room.status = 0");
         $acroom = DB::select("SELECT * FROM add_room WHERE room_facility = 'A.C. Room'");
         $depositeno = room_details::get()->last()->deposite_no;
+
+        
         return view ('Booking.room-booking',['p_details'=>$p_details,'m_data'=>$m_data,'p_id'=>$p_id,'r_list'=>$r_list,'acroom'=>$acroom,'depositeno'=>$depositeno]);
        
     }
@@ -64,17 +65,20 @@ class BookingController extends Controller
         $booking = new room_details();
         $booking->no_of_person = $req->no_of_person;
         $booking->check_in_date = Carbon::now();
+       
         $roomListArray = array(
-            'ac_room' => $req->select2Multiple1,
-            'non_ac_room' => $req->select2Multiple2,
-            'door_metric_ac_non_ac_room' => $req->select2Multiple3
+            'ac_room' => implode(',', $req->select2Multiple1),
+            'non_ac_room' => implode(',', $req->select2Multiple2),
+            'door_metric_ac_non_ac_room' => implode(',', $req->select2Multiple3),
         );
         $booking->room_list = json_encode($roomListArray);
+        $acroomlist = ($roomListArray['ac_room']);
+        $nonacroomlist = ($roomListArray['non_ac_room']);
+        $doormtnonacroomlist = ($roomListArray['door_metric_ac_non_ac_room']);
     
-        $acroomlist=($roomListArray['ac_room']);
-        $nonacroomlist=($roomListArray['non_ac_room']);
-        $doormtnonacroomlist=($roomListArray['door_metric_ac_non_ac_room']);
         
+  
+    
         $booking->ac_amount = $req->ac_amount;
         $booking->non_ac_amount = $req->non_ac_amount;
         $booking->door_mt_amount = $req->door_mt_amount;
@@ -83,23 +87,24 @@ class BookingController extends Controller
         $booking->deposite_rs = $req->deposite_rs;
         $booking->rs_word = $req->rs_word;
         $booking->save();
+        
         $roomsToUpdate = add_room::whereIn('room_facility', ['A.C. Room', 'NON A.C ROOM', 'DOOR MATRY NON A.C ROOM'])
-        ->when(!empty($acroomlist), function ($query) use ($acroomlist) {
-            $query->whereIn('room_no', $acroomlist);
-        })
-        ->when(!empty($nonacroomlist), function ($query) use ($nonacroomlist) {
-            $query->orWhereIn('room_no', $nonacroomlist);
-        })
-        ->when(!empty($doormtnonacroomlist), function ($query) use ($doormtnonacroomlist) {
-            $query->orWhereIn('room_no', $doormtnonacroomlist);
-        })
-        ->get();
-    
-    // Update the status and save each room
-    foreach ($roomsToUpdate as $room) {
-        $room->status = 1;
-        $room->save();
-    }
+            ->when(!empty($roomListArray['ac_room']), function ($query) use ($roomListArray) {
+                $query->whereIn('room_no', explode(',', $roomListArray['ac_room']));
+            })
+            ->when(!empty($roomListArray['non_ac_room']), function ($query) use ($roomListArray) {
+                $query->orWhereIn('room_no', explode(',', $roomListArray['non_ac_room']));
+            })
+            ->when(!empty($roomListArray['door_metric_ac_non_ac_room']), function ($query) use ($roomListArray) {
+                $query->orWhereIn('room_no', explode(',', $roomListArray['door_metric_ac_non_ac_room']));
+            })
+            ->get();
+        
+        // Update the status and save each room
+        foreach ($roomsToUpdate as $room) {
+            $room->status = 1;
+            $room->save();
+        }
       
         $m_details = new member_details();
         $m_details->full_name = $req->full_name;
@@ -107,7 +112,7 @@ class BookingController extends Controller
         $m_details->gender = $req->input('gender' . $i);
         $m_details->relation=$req->relation;
         $r_list = DB::select("SELECT add_room.*, room_details.check_in_date, room_details.* FROM add_room LEFT JOIN room_details ON add_room.room_no = room_details.r_id WHERE add_room.status = 1");
-        return view ('Booking.room-booking',['m_data'=>$m_data,'data'=>$data,'p_details'=>$p_details,'m_name'=>$m_name,'m_data'=>$m_data,'r_list'=>$r_list,'acroom'=>$acroom,'depositeno'=>$depositeno,]);
+        return view ('Booking.room-booking',['m_data'=>$m_data,'data'=>$data,'p_details'=>$p_details,'m_name'=>$m_name,'m_data'=>$m_data,'r_list'=>$r_list,'acroom'=>$acroom,'depositeno'=>$depositeno,'roomListArray' => $roomListArray]);
 
     }
 
@@ -137,9 +142,12 @@ class BookingController extends Controller
         $room_book = DB::select ("SELECT * , room_details.r_id as id from room_details ");
         $availablelist = DB::select("SELECT *, add_room.room_no as id FROM add_room WHERE add_room.status = 0");
         $current_date = Carbon::now();
-        $room_ids= add_room::select('room_no')->where('check_in_date',$current_date)->get();
-        dd($room_ids->room_no);
-        $roomsToUpdate = room_details::whereIn('r_id',$room_ids)->get();
+      
+      
+       
+       
+     
+      
         return view('Booking.room-list',['list'=>$list,'room_book'=>$room_book,'availablelist'=>$availablelist,'get_list' => $get_list,'current_date'=> $current_date]);
 
     }

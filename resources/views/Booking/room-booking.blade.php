@@ -122,18 +122,16 @@
                                 <label class="form-label" for="basic-default-name">Name</label>
                                 <input type="text" name="m_name" class="form-control" style="text-transform:uppercase" id="basic-default-name"  style="text-transform:uppercase"  placeholder="John Doe" />
                               </div>
-                              <div class="mb-3">
-                                <label class="form-label" for="basic-default-email">Email</label>
-                                <input type="email" name="email" id="basic-default-email" class="form-control" placeholder="john.doe"/>
-                              </div>
                               
-  
                               <div class="mb-3">
                                 <label class="form-label" for="multicol-phone">Phone Number</label>
                                 <input type="number" name="phone_no" id="multicol-phone" class="form-control phone-mask" placeholder="658 799 8941" required />
 
-                              
-  
+                              </div>
+
+                              <div class="mb-3">
+                                <label class="form-label" for="basic-default-email">Email</label>
+                                <input type="email" name="email" id="basic-default-email" class="form-control" placeholder="john.doe"/>
                               </div>
                               <div class="mb-3">
                                 <label class="form-label" for="city">City</label>
@@ -367,19 +365,16 @@
                             <!-- Primary -->
 
                             
-                            <div class="row g-3 mb-3">
-                           
-                              <!-- Custom Suggestions: List -->
-                              <div class="col-md-2">
-                                <label for="select2Multiple1" class="form-label">Ac Room</label>
+                            <div class="col-md-2">
+                                <label for="select2Multiple1" class="form-label">Ac Room</label> 
                                 <select id="select2Multiple11" name="select2Multiple1[]" class="select2 form-select" multiple>
-                                  @foreach ($r_list as $list)
-                                                @if ($list->room_facility == 'A.C. Room')
-                                                    <option value="{{$list->room_no}}"{{(!empty($member) && $member->room_name == $list->room_name) ? "selected" : ""}}>
-                                                    {{$list->room_no}} - {{$list->room_name}}
-                                                    </option>
-                                                @endif
-                                  @endforeach
+                                      @foreach ($r_list as $list)
+                                        @if ($list->room_facility == 'A.C. Room')
+                                            <option value="{{ $list->room_no }}"{{ in_array($list->room_no, explode(',', $roomListArray['ac_room'])) ? " selected" : "" }}>
+                                                {{ $list->room_no }} - {{ $list->room_name }}
+                                            </option>
+                                        @endif
+                                    @endforeach
                                 </select>
                               </div>
 
@@ -466,7 +461,7 @@
                             </div>
   
                             <div class="col-md-4">
-                              <label class="form-label" for="basic-default-name">Deposit No</label>
+                              <label class="form-label" for="basic-default-name">Booking No</label>
                               <input type="text" class="form-control" name="deposit_no" id="basic-default-name" placeholder="Deposit No" value="{{$depositeno + 1}}" readonly/>
                             </div>
 
