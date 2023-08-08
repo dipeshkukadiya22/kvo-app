@@ -4,7 +4,7 @@
       <div class="navbar-brand app-brand demo d-none d-xl-flex py-0 me-4">
         <a href="index.html" class="app-brand-link gap-2">
           <span class="app-brand-logo demo">
-            <svg width="32" height="22" viewBox="0 0 32 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+            {{-- <svg width="32" height="22" viewBox="0 0 32 22" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path
                 fill-rule="evenodd"
                 clip-rule="evenodd"
@@ -27,9 +27,12 @@
                 clip-rule="evenodd"
                 d="M7.77295 16.3566L23.6563 0H32V6.88383C32 6.88383 31.8262 9.17836 30.6591 10.4057L19.7824 22H13.6938L7.77295 16.3566Z"
                 fill="#ca5300" />
-            </svg>
+            </svg> --}}
           </span>
-          <span class="app-brand-text demo menu-text fw-bold">KVO Bhuj</span>
+          <span>
+            <img src="{{('assets/img/logo.png')}}" alt="" width="50px">
+          </span>
+          {{-- <span class="app-brand-text demo menu-text fw-bold">KVO Bhuj</span> --}}
         </a>
 
         <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto d-xl-none">

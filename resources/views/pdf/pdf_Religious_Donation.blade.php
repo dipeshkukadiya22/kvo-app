@@ -107,8 +107,8 @@
 
 			<table class="table2 tg" style="width: 520px">
 				<tbody>
-					<tr style="font-weight: bold;">
-					<td class="tg-0pky tac gujfont gujfont" width="12%">G\AZ</td>
+					<tr>
+					<td class="tg-0pky tac gujfont" width="12%">G\AZ</td>
 					<td class="tg-0pky tac gujfont" width="68%">lJUT</td>
 					<td class="tg-0pky tac gujfont" width="20%">~P</td>
 					</tr>
