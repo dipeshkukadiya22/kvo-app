@@ -365,19 +365,16 @@
                             <!-- Primary -->
 
                             
-                            <div class="row g-3 mb-3">
-                           
-                              <!-- Custom Suggestions: List -->
-                              <div class="col-md-2">
-                                <label for="select2Multiple1" class="form-label">Ac Room</label>
+                            <div class="col-md-2">
+                                <label for="select2Multiple1" class="form-label">Ac Room</label> 
                                 <select id="select2Multiple11" name="select2Multiple1[]" class="select2 form-select" multiple>
-                                  @foreach ($r_list as $list)
-                                                @if ($list->room_facility == 'A.C. Room')
-                                                    <option value="{{$list->room_no}}"{{(!empty($member) && $member->room_name == $list->room_name) ? "selected" : ""}}>
-                                                    {{$list->room_no}} - {{$list->room_name}}
-                                                    </option>
-                                                @endif
-                                  @endforeach
+                                      @foreach ($r_list as $list)
+                                        @if ($list->room_facility == 'A.C. Room')
+                                            <option value="{{ $list->room_no }}"{{ in_array($list->room_no, explode(',', $roomListArray['ac_room'])) ? " selected" : "" }}>
+                                                {{ $list->room_no }} - {{ $list->room_name }}
+                                            </option>
+                                        @endif
+                                    @endforeach
                                 </select>
                               </div>
 
