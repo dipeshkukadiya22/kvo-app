@@ -701,3 +701,4 @@ button.swal2-cancel.btn.btn-label-danger {
 </script>
 
 @endsection
+@endsection
