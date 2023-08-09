@@ -68,9 +68,9 @@
                     </div>
                     <div class="col-md-4">
                       <label for="select2Basic" class="form-label">દર્દીનું નામ </label>
-                      <select id="select2Basic" name="name" class="select2 form-select form-select-lg" data-allow-clear="true" required >
+                      <select id="name" name="name" class="select2 form-select form-select-lg" data-allow-clear="true" >
                         @foreach($member as $row)
-                          <option value="{{$row->p_id}}">{{$row->m_name}}</option>
+                          <option value="{{$row->p_id}}">{{$row->m_name}} - {{$row->phone_no}}</option>
                         @endforeach
                       </select>
                     </div>
@@ -105,7 +105,7 @@
                           {{-- <div id="divDisplayWords"> --}}
                     <div class="col-md-4">
                       <label class="form-label" for="basic-default-name">શબ્દોમાં </label>
-                      <input type="text" class="form-control" id="ankers" value="" {{-- placeholder="Words" --}} required readonly/>
+                      <input type="text" class="form-control" id="ankers" name= "ankers" value="" {{-- placeholder="Words" --}} required readonly/>
                     </div>
                     <div class="col-md-4">
                         <label class="d-block form-label">નાણા મળેલ</label>

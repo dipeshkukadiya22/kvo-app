@@ -136,7 +136,7 @@
                             <label class="form-label" for="multicol-phone">મોબાઈલ નંબર</label>
                             <input
                               type="number"
-                              id="phone1"
+                              id="phone"
                               name="phone"
                               class="form-control phone-mask"
                               placeholder="658 799 8941"
@@ -219,13 +219,13 @@
 
     $("#name").change(function(){
       const id=document.getElementById("name").value;
-      alert(id);
       $.ajax({
         
                 url:"{{url('get')}}" +"/"+ id,
                 type:'GET',
                   success:function(response){   
-                      alert("success");
+                        $("#city1").val(response['city']); 
+                        $("#phone").val(response['phone_no']); 
                     
                   }
                 });

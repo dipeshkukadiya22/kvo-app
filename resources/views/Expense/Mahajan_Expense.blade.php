@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Donation Receipt')
+@section('title', 'Mahajan Expense')
 
 @section('pagecss')
 

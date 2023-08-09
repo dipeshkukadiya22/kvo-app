@@ -117,10 +117,9 @@
                             <select id="select2Basic" class="select2 form-select form-select-lg" data-allow-clear="true" name="name" placeholder="select name" required>
                               <option value=""></option>
                               @foreach ($m_data as $row)  
-                                  <option value="{{$row->m_name}}" {{(!empty($member) && $member->m_name == $row->m_name) ? "selected" : ""}}>{{$row->m_name}}&nbsp;&nbsp;-&nbsp;&nbsp;{{$row->phone_no}}</option>
+                              <option value="{{$row->p_id}}"> {{$row->m_name}} - {{$row->phone_no}} </option>
                               @endforeach
                             </select>
-                            <input type="hidden" id="email_user" value="{{!empty($m_data)  ? $m_data:''}}">
                           </div>
 
                            {{-- <div class="col-md-4">
@@ -302,7 +301,7 @@
                               name="other_account_name"
                               id="basic-default-name"
                               {{-- placeholder="John Doe" --}}
-                              required />
+                              />
                         	</div>
                           <div class="col-md-4">
                             <label class="form-label" for="multicol-phone">શ્રી અન્ય ખાતે</label>
@@ -320,7 +319,7 @@
                               name="remarks"
                               id="basic-default-name"
                               {{-- placeholder="John Doe" --}}
-                              required />
+                               />
                         	</div>
                           {{-- <div class="col-md-4">
                             <label class="form-label" for="multicol-phone">શ્રી અન્ય ખાતે</label>
@@ -358,7 +357,7 @@
                                 id="basic_default_radio-male"
                                 name="basic_default_radio"
                                 class="form-check-input"
-                                value="cheque"
+                                value="CHEQUE"
                                 required />
                               <label class="form-check-label" for="basic_default_radio">ચેક</label>
                             </div>
@@ -368,7 +367,7 @@
                                 id="basic_default_radio-female"
                                 name="basic_default_radio"
                                 class="form-check-input"
-                                value="Draft"
+                                value="DRAFT"
                                 required />
                               <label class="form-check-label" for="basic_default_radio">ડ્રાફ્ટ</label>
                             </div>
@@ -378,8 +377,8 @@
                                 id="basic_default_radio-female"
                                 name="basic_default_radio"
                                 class="form-check-input"
-                                value="Cash"
-                                required />
+                                value="CASH"
+                                required checked/>
                               <label class="form-check-label" for="basic_default_radio">રોકડા</label>
                             </div>
                             <div class="form-check form-check-inline">
@@ -628,21 +627,22 @@ function NumToWord(inputNumber, outputControl) {
 
 
 <!-- Make sure to include jQuery library before this script -->
-<script>
-  $(document).ready(function () {
-      $("#select2Basic").change(function () {
-          var data = JSON.parse($("#email_user").val());
-          var selectedId = $(this).val();
-          
-          $.each(data, function (key, value) {
-              if (value['m_name'] == selectedId) {
-                  $('#member-phone').val(value['phone_no']);
-                  $('#member_city').val(value['city']);
-                  return false; // Exit the loop once a match is found
-              }
-          });
-      });
-  });
+
+
+  <script>
+  $("#select2Basic").change(function(){
+      const id=document.getElementById("select2Basic").value;
+      $.ajax({
+  
+                url:"{{url('get')}}" +"/"+ id,
+                type:'GET',
+                  success:function(response){   
+                        $("#member_city").val(response['city']); 
+                        $("#member-phone").val(response['phone_no']); 
+                  }
+                });
+            });
+</script>
 </script>
 
 <script src="{{ asset('assets/vendor/libs/toastr/toastr.js') }}"></script>

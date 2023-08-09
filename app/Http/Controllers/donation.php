@@ -43,11 +43,10 @@ class donation extends Controller
         $religious_donation = new religious_donation();
         
         //Personal Details
-        $religious_donation -> name = $req -> name;
+
+        $religious_donation->member_id = $req->name;
         $religious_donation -> haste = $req -> haste;
         $religious_donation -> r_date = Carbon::now();
-        $religious_donation -> phone_no = $req -> phone_no;
-        $religious_donation -> city = $req -> city;
         $religious_donation -> community = $req -> community;
         //Donation Details
         $religious_donation -> sarv_sadharan = $req -> sarv_sadharan;
@@ -155,12 +154,9 @@ class donation extends Controller
 
         $community_donation = new community_donation();
         
-        //Personal Details
-        $community_donation -> name = $req -> name;
-        //dd($req);
-        $community_donation -> phone_no = $req -> phone_no;
-        $community_donation -> city = $req -> city;
-        
+     
+        $community_donation -> member_id = $req -> name;
+   
         $community_donation->d_date = Carbon::now();
         
         //Donation Details

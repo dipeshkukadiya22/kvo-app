@@ -122,10 +122,10 @@
                             <select id="select2Basic" class="select2 form-select form-select-lg" data-allow-clear="true" name="name" placeholder="select name" required>
                               <option value=""></option>
                               @foreach ($m_data as $row)  
-                                  <option value="{{$row->m_name}}" {{(!empty($member) && $member->m_name == $row->m_name) ? "selected" : ""}}>{{$row->m_name}}&nbsp;&nbsp;-&nbsp;&nbsp;{{$row->phone_no}}</option>
+                              <option value="{{$row->p_id}}"> {{$row->m_name}} - {{$row->phone_no}} </option>
                               @endforeach
                             </select>
-                            <input type="hidden" id="email_user" value="{{!empty($m_data)  ? $m_data:''}}">
+                  
                           </div>
                           <div class="col-md-2">
                             <label class="form-label" for="multicol-phone">મોબાઈલ નંબર</label>
@@ -305,7 +305,7 @@
                                 name="basic_default_radio"
                                 class="form-check-input"
                                 value="CASH"
-                                required />
+                                required checked/>
                               <label class="form-check-label" for="basic_default_radio">રોકડા</label>
                             </div>
                             <div class="form-check form-check-inline">
@@ -561,20 +561,18 @@ function NumToWord(inputNumber, outputControl) {
 
 <!-- Make sure to include jQuery library before this script -->
 <script>
-  $(document).ready(function () {
-      $("#select2Basic").change(function () {
-          var data = JSON.parse($("#email_user").val());
-          var selectedId = $(this).val();
-          
-          $.each(data, function (key, value) {
-              if (value['m_name'] == selectedId) {
-                  $('#member-phone').val(value['phone_no']);
-                  $('#member_city').val(value['city']);
-                  return false; // Exit the loop once a match is found
-              }
-          });
-      });
-  });
+  $("#select2Basic").change(function(){
+      const id=document.getElementById("select2Basic").value;
+      $.ajax({
+  
+                url:"{{url('get')}}" +"/"+ id,
+                type:'GET',
+                  success:function(response){   
+                        $("#member_city").val(response['city']); 
+                        $("#member-phone").val(response['phone_no']); 
+                  }
+                });
+            });
 </script>
 
 
