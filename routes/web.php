@@ -89,3 +89,8 @@ Route::get('pdf_Medical_Treatment',[pdfcontroller::class,'pdf_Medical_Treatment'
 
 Route::get('delete_treatment/{id}',[MedicalController::class,'delete_treatment'])->name('delete_treatment');
 
+Route::get('pdf_Checkin',[pdfcontroller::class,'pdf_Checkin'])->name('pdf_Checkin');
+
+Route::get('pdf_Checkout',[pdfcontroller::class,'pdf_Checkout'])->name('pdf_Checkout');
+
+Route::get('pdf_Advance_Deposit',[pdfcontroller::class,'pdf_Advance_Deposit'])->name('pdf_Advance_Deposit');
