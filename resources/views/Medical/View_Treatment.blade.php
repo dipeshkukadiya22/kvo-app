@@ -162,7 +162,7 @@ button.swal2-cancel.btn.btn-label-danger {
 
                                     <div class="col-md-12">
                                         <label class="form-label" for="multicol-username">દર્દીનું નામ </label>
-                                        <select id="name" name="name" class="select2 form-select form-select-lg" data-allow-clear="true" >
+                                          <select id="name" name="name" class="select2 form-select form-select-lg" data-allow-clear="true" >
                                           @foreach($member_data as $row)
                                                 <option value="{{$row->p_id}}">{{$row->m_name}}</option>
                                           @endforeach
