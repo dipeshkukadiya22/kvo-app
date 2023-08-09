@@ -24,14 +24,7 @@
     <input type="text" name="city" class="form-control" id="city" placeholder="Bhuj" />
   </div>
 
-  <div class="mb-3">
-    <label class="form-label" for="multicol-phone">Phone Number</label>
-    <input type="number" name="phone_no" id="multicol-phone" class="form-control phone-mask" placeholder="658 799 8941" aria-label="658 799 8941" maxlength="10"  />
-  </div>
-  <div class="mb-3">
-    <label class="form-label" for="city">City</label>
-    <input type="text" name="city" class="form-control" id="city" placeholder="Bhuj" />
-  </div>
+ 
 
   
   <div class="row">
