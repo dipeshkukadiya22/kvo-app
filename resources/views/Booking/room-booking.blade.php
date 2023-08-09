@@ -1174,7 +1174,7 @@ $(document).ready(function () {
                                  ' <div class="col-md-4">'+
                                   '  <label class="form-label" for="basic-default-country">Relation</label>'+
                                   '  <select class="form-select" name="relation[]" id="member_relation'+i+'" required>'+
-                                   '   <option value="SELF" selected>SELF</option>'+
+                                   '   <option value="" disabled selected>Select relation</option>'+
                                     '  <option value="MOTHER">MOTHER</option>'+
                                     '  <option value="FATHER">FATHER</option>'+
                                     '  <option value="BROTHER">BROTHER</option>'+
