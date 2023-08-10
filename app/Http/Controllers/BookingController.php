@@ -63,9 +63,13 @@ class BookingController extends Controller
     //     echo  "Please select a valid file";
     // }
     //     $path = $req->file('id_proof')->store('id_proof');
+    
         $booking = new room_details();
+   
+       
         $booking->no_of_person = $req->no_of_person;
         $booking->check_in_date = Carbon::now();
+       
        
       
         $acRoomList = implode(',', $req->input('select2Multiple1', []));
@@ -139,7 +143,7 @@ class BookingController extends Controller
 
     public function get_room_list(){
         $list =$data=DB::select("SELECT * , add_room.room_no as id from add_room");
-        $get_list = DB::select("SELECT add_room.*, room_details.check_in_date, room_details.* FROM add_room LEFT JOIN room_details ON add_room.room_no = room_details.r_id WHERE add_room.status = 1");
+        $get_list = DB::select("SELECT ar.*, rd.check_in_date, rd.* FROM add_room AS ar LEFT JOIN room_details AS rd ON ar.room_no = rd.r_id OR ar.room_detail_id = rd.r_id WHERE ar.status = 1");
         $room_book = DB::select ("SELECT * , room_details.r_id as id from room_details ");
         $availablelist = DB::select("SELECT *, add_room.room_no as id FROM add_room WHERE add_room.status = 0");
         $current_date = Carbon::now();
@@ -171,6 +175,11 @@ class BookingController extends Controller
         $availablelist = DB::select("SELECT *, add_room.room_no as id FROM add_room WHERE add_room.status = 0");
         $room_book = DB::select("SELECT *, room_details.r_id as id, room_details.check_in_date FROM room_details");
         return back();
+    }
+
+    public function checkout(){
+        $checkout= DB::select("SELECT add_members.p_id AS id, add_members.*, room_details.* FROM add_members JOIN room_details ON add_members.p_id = room_details.r_id");
+        return view('Booking.checkout',['checkout'=>$checkout]);
     }
 
     

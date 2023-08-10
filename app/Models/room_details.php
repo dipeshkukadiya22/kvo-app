@@ -13,6 +13,7 @@ class room_details extends Model
     public $timestamps = false;
     public function member()
     {
+        
         return $this->belongsTo(room_details::class, 'r_id');
     }
 }

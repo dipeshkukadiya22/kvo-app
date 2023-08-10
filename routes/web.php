@@ -44,7 +44,8 @@ Route::POST('RoomBooking', [BookingController::class, 'RoomBooking'])->name('Roo
 Route::get('room-booking', [BookingController::class, 'index']);
 Route::POST('room-booking', [BookingController::class, 'add_member'])->name('room-booking');
 
-
+// room checkout
+Route::get('checkout', [BookingController::class, 'checkout'])->name('checkout');
 
 
 /* Room list Route */

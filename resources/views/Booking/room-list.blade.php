@@ -54,6 +54,10 @@
     border-radius: 50%;
     color: #aaa;
   }
+  .eventClass a {
+            background-color: #dda919 !important;
+            color: #FFF !important;
+        }
 
 
 
@@ -212,18 +216,18 @@
                                             <td>{{$row->room_type}}</td>
                                             <td>{{$row->room_facility}}</td>
                                             <td>
-                                                @if ($row->status == 1)
-                                                    <div>
-                                                        <label for="flatpickr-multi" class="form-label text-danger">Booked</label>
-                                                        <i class="fa fa-calendar text-danger"  id="datepicker"
-                                                            onclick="setDatepicker(this)">
-                                                        </i>
-                                                    </div>
-                                                @else
-                                                <span class="text-success">{{$row->status == 0 ? 'Available' : ''}}</span>
-                                                    
-                                                @endif
-                                            </td>
+                                            @if ($row->status == 1)
+                                            <div>
+                                          <label for="flatpickr-multi" class="form-label text-danger">Booked</label>
+                                          <i class="fa fa-calendar text-danger" id="datepicker"></i>
+                                          </i>
+                                      </div>
+                                        @else
+                                            <span class="text-success">{{$row->status == 0 ? 'Available' : ''}}</span>
+                                        @endif
+
+
+                                          </td>
                                             <td>
                                                 <div class="d-inline-block">
                                                     <a href="javascript:;" class="btn btn-sm btn-icon item-edit" data-bs-toggle="offcanvas" data-bs-target="#offcanvasBackdropEditRoom" aria-controls="offcanvasBackdrop"><i class="text-primary ti ti-edit"></i></a>
@@ -306,7 +310,7 @@
                                             <!-- Multiple Dates Picker-->
                                             <div>
                                               <label for="flatpickr-multi" class="form-label">Booked </label>
-                                              <input type="" class="form-control" placeholder="YYYY-MM-DD" id="flatpickr-multi"  />
+                                              <input type="" class="form-control" placeholder="YYYY-MM-DD" id="flatpickr-multi" value="{{$book->check_in_date}}" />
                                             </div>
                                            <!-- /Multiple Dates Picker-->
                                           </td>
@@ -731,6 +735,23 @@
         alert(selected);
     });
 });
+</script>
+<script>
+    // Initialize Flatpickr
+    $("#datepicker").flatpickr();
+
+    // Retrieve the check-in date from the data attribute
+    var checkInDate = $("#datepicker").data("check-in-date");
+
+    // Highlight the entire month of the check-in date
+    var monthStart = new Date(checkInDate.getFullYear(), checkInDate.getMonth(), 1);
+    var monthEnd = new Date(checkInDate.getFullYear(), checkInDate.getMonth() + 1, 0);
+    var currentDate = monthStart;
+
+    while (currentDate <= monthEnd) {
+        $(".flatpickr-day[data-date='" + currentDate.toISOString().split('T')[0] + "']").addClass("highlighted");
+        currentDate.setDate(currentDate.getDate() + 1);
+    }
 </script>
 
 
