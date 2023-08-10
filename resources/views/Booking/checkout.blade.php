@@ -229,7 +229,7 @@ div.card-datatable [class*=col-md-] {
                                   </div>
 
                                   <div class="col mb-3">
-                                    <label for="nameExLarge" class="form-label">રસિત નંબર </label>
+                                    <label for="nameExLarge" class="form-label">રસિદ નંબર  </label>
                                     <input type="text" id="nameExLarge" class="form-control" placeholder="10" readonly/>
                                   </div>
 
@@ -567,6 +567,17 @@ div.card-datatable [class*=col-md-] {
 
                                       <tr>
                                         <td rowspan="4" colspan="5">
+                                          <div class="col-md-6 mb-3">
+                                            <label class="form-label" for="basic-default-name">અન્ય વિગત</label>
+                                            <input
+                                              type="text"
+                                              class="form-control"
+                                              name="remarks"
+                                              id="basic-default-name"
+                                              {{-- placeholder="John Doe" --}}
+                                              required />
+                                          </div>
+
                                           <div class="col-md-6 mb-3">
                                             <label class="form-label" for="basic-default-name">અંકે રૂપિયા</label>
                                             <input type="text" class="form-control" name="rs_word" id="rupees-in-words" placeholder="Rupees in words" readonly>
