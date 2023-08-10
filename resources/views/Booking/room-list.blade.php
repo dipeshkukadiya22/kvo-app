@@ -215,7 +215,7 @@
                                                 @if ($row->status == 1)
                                                     <div>
                                                         <label for="flatpickr-multi" class="form-label text-danger">Booked</label>
-                                                        <i class="fa fa-calendar text-danger " 
+                                                        <i class="fa fa-calendar text-danger"  id="datepicker"
                                                             onclick="setDatepicker(this)">
                                                         </i>
                                                     </div>
@@ -723,6 +723,15 @@
             });
         }
     </script>
+    <script>
+    $(function() {
+    $("#datepicker").datepicker();
+    $("#datepicker").on("change",function(){
+        var selected = $(this).val();
+        alert(selected);
+    });
+});
+</script>
 
 
 
