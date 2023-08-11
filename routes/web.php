@@ -100,6 +100,7 @@ Route::get('/get_member/{id}',[MedicalController::class,'get_member'])->name('ge
 Route::get('view_treatment',[MedicalController::class,'view_treatment'])->name('view_treatment');
 Route::get('edit_treatment/{id}',[MedicalController::class,'edit_treatment'])->name('edit_treatment');
 Route::get('delete_treatment/{id}',[MedicalController::class,'delete_treatment'])->name('delete_treatment');
+Route::get('checkdate',[MedicalController::class,'checkdate'])->name('checkdate');
 
 Route::get('/pdf_Religious_Donation/{id}',[pdfcontroller::class,'pdf_Religious_Donation'])->name('pdf_Religious_Donation');
 Route::get('/pdf_Community_Donation/{id}',[pdfcontroller::class,'pdf_Community_Donation'])->name('pdf_Community_Donation');

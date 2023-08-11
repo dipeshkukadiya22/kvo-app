@@ -61,4 +61,29 @@ class MedicalController extends Controller
         $member->delete();
         return back()->with("Delete Treatment");
     }
+    public function checkdate()
+    {
+        /* $global_user_id = 5;
+        $find_query = $db->prepare("SELECT date_available FROM user_dates WHERE user_id = :user_id");
+        $find_query->bindParam(':user_id', $global_user_id);
+        $find_query->execute();
+        $result_find = $find_query->fetchAll(PDO::FETCH_ASSOC);
+        $dates = []; // init the array
+        if(count($result_find) > 0) {
+        foreach($result_find as $row) $dates[]=$row['date_available'];
+        }
+        echo json_encode($dates)*/ 
+        /*$id=16;
+        $data=DB::select("SELECT DISTINCT date FROM `medical`");
+        $date=[];
+        if($data)
+        {
+            foreach($data as $row) 
+            {
+                $date[]=$row['date'];
+            }
+        }
+        echo json_encode($date);*/
+        return view('Medical.temp');
+    }
 }
