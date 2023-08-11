@@ -274,7 +274,7 @@
                               <!-- Basic -->
                               <div class="col-md-4">
                                 <label for="select2Basic" class="form-label">Community</label>
-                                <select id="select2Basic" class="select2 form-select form-select-lg" data-allow-clear="true">
+                                <select id="select2Basic" class="select2 form-select form-select-lg" data-allow-clear="true" name="community">
                                   <option value="Hindu" selected>Hindu</option>
                                   <option value="Jain">Jain</option>
                                   <option value="CA">California</option>
@@ -294,7 +294,7 @@
                               
                               <div class="col-md-4">
                                 <label for="defaultFormControlInput" class="form-label">Sub Community</label>
-                                <input type="text" class="form-control" name="community" id="defaultFormControlInput" placeholder="John Doe" aria-describedby="defaultFormControlHelp" />
+                                <input type="text" class="form-control" name="subcommunity" id="defaultFormControlInput" placeholder="John Doe" aria-describedby="defaultFormControlHelp" />
                               </div>
 
                               
@@ -307,8 +307,8 @@
                               <div class="col-md-4">
                                 <label class="d-block form-label">Gender</label>
                                 <div class="form-check form-check-inline">
-                                  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="MALE" />
-                                  <label class="form-check-label" for="inlineRadio1">Male</label>
+                                  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="MALE" checked/>
+                                  <label class="form-check-label" for="inlineRadio1" >Male</label>
                                 </div>
                                 <div class="form-check form-check-inline">
                                   <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="FEMALE" />
@@ -384,7 +384,7 @@
                                   <label class="form-label" for="basic-default-name">Amount</label>
                                   <div class="input-group">
                                     <span class="input-group-text">₹</span>
-                                    <input type="number" class="form-control"  name="ac_amount" placeholder="Amount" aria-label="Amount (to the nearest indian)" id="ac-amount" value="800" />
+                                    <input type="number" class="form-control"  name="ac_amount" placeholder="Amount" aria-label="Amount (to the nearest indian)" id="ac-amount" value="" />
                                   </div>
                                 </div>
 
@@ -412,7 +412,7 @@
                                   <label class="form-label" for="basic-default-name">Amount</label>
                                   <div class="input-group">
                                     <span class="input-group-text">₹</span>
-                                    <input type="number" class="form-control"  name="non_ac_amount" placeholder="Amount" aria-label="Amount (to the nearest indian)" id="non-ac-amount" value="800" />
+                                    <input type="number" class="form-control"  name="non_ac_amount" placeholder="Amount" aria-label="Amount (to the nearest indian)" id="non-ac-amount" value="" />
                                   </div>
                                 </div>
 
@@ -439,7 +439,7 @@
                                   <label class="form-label" for="basic-default-name">Amount</label>
                                   <div class="input-group">
                                     <span class="input-group-text">₹</span>
-                                    <input type="number" class="form-control"  name="door_mt_amount" placeholder="Amount" aria-label="Amount (to the nearest indian)" id="door-mt-amount" value="800" />
+                                    <input type="number" class="form-control"  name="door_mt_amount" placeholder="Amount" aria-label="Amount (to the nearest indian)" id="door-mt-amount" value="" />
                                   </div>
                                 </div>
   
@@ -464,7 +464,7 @@
   
                             <div class="col-md-4">
                               <label class="form-label" for="basic-default-name">Booking No</label>
-                              <input type="text" class="form-control" name="deposit_no" id="basic-default-name" placeholder="Deposit No" value="{{$depositeno + 1}}" readonly/>
+                              <input type="text" class="form-control" name="deposit_no" id="basic-default-name" placeholder="Deposit No" value="{{$p_id+1}}" readonly/>
                             </div>
 
                            
@@ -531,7 +531,7 @@
                                       <label class="d-block form-label">Gender</label>
                                     
                                       <div class="form-check form-check-inline">
-                                      <input class="form-check-input" type="radio" name="gender[]" id="inlineRadio1" value="MALE" />
+                                      <input class="form-check-input" type="radio" name="gender[]" id="inlineRadio1" value="MALE" checked />
                                       <label class="form-check-label" for="inlineRadio1_${i}">Male</label>
 
                                         </div>
@@ -1168,7 +1168,7 @@ $(document).ready(function () {
                                   
                                      ' <label class="d-block form-label">Gender</label>'+
                                      ' <div class="form-check form-check-inline">'+
-                                       ' <input class="form-check-input" type="radio" name="gender'+i+'[]" id="inlineRadio1_' + i + '" value="MALE" />'+
+                                       ' <input class="form-check-input" type="radio" name="gender'+i+'[]" id="inlineRadio1_' + i + '" value="MALE" checked/>'+
                                        ' <label class="form-check-label" for="inlineRadio1' + i + '">Male</label>'+
                                      ' </div>'+
                                      ' <div class="form-check form-check-inline">'+
