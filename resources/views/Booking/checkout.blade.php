@@ -124,15 +124,12 @@ div.card-datatable [class*=col-md-] {
                                           @foreach($checkout as $check)
                                           <tr>
                                               {{-- <td>1</td> --}}
-                                              <td>{{$check->m_name}}</td>
+                                              <td>{{$check->p_id}}</td>
                                               {{-- <td>Mandvi</td> --}}
+                                              <td>{{$check->room_no}}</td>
+                                              <td>{{$check->check_in_date}}</td>
                                               <td></td>
-                                              <td>25 Jul, 2023</td>
-                                              <td></td>
-                                              {{-- <td></td> --}}
-                                              {{-- <td>Delux A.C. Room</td> --}}
-                                              {{-- <td>1200</td> --}}
-                                              {{-- <td>100</td> --}}
+                                             
                                               <td>1300</td>
                                               <td>1</td>
                                               <td>500</td>

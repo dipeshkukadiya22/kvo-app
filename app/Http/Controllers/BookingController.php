@@ -38,16 +38,20 @@ class BookingController extends Controller
         $ar_list = DB::select("SELECT *, add_room.room_no as id FROM add_room WHERE add_room.status = 0");
         $acroom = DB::select("SELECT * FROM add_room WHERE room_facility = 'A.C. Room'");
         //$acroomlist= DB::select("SELECT *, add_room.room_no as id FROM add_room WHERE add_room.status = 0");
-        $details = new personal_details();
+        $details = new personal_details(); 
+        $pdetails = DB::select("SELECT * from room_details join add_room on add_room.room_detail_id=room_details.r_id join personal_details on personal_details.p_id=room_details.member_id join add_members on add_members.p_id = personal_details.member_id WHERE add_room.status = 1");
+       
         $details->name = $req->name;
-        $details-> email = $req->email;
-        $details-> phone_no = $req->phone_no;
-        $details-> age = $req->age;
-        $details-> address = $req->collapsibleaddress;
-        $details-> community=$req->community;
-        $details-> city=$req->city;
-        $details-> gender=$req->inlineRadioOptions;
-        $details->save(); 
+        // $details->email = $req->email;
+        // $details->phone_no = $req->phone_no;
+        $details->age = $req->age;
+        $details->address = $req->collapsibleaddress;
+        $details->community = $req->community;
+        // $details->city = $req->city;
+        $details->gender = $req->inlineRadioOptions;
+        
+        $details->save();
+        
         $total_member = $req->no_of_person +1;
         for ($i =0; $i < $total_member; $i++){
             $m_details = new member_details();
@@ -88,6 +92,7 @@ class BookingController extends Controller
         $booking->deposite_no = $req->deposit_no;
         $booking->deposite_rs = $req->deposite_rs;
         $booking->rs_word = $req->rs_word;
+        $booking->no_of_days = $req->no_of_days;
         $booking->save();
         
 //         $roomNumbersToUpdate = [];
@@ -115,7 +120,7 @@ class BookingController extends Controller
         $m_details->gender = $req->input('gender' . $i);
         $m_details->relation=$req->relation;
         $r_list = DB::select("SELECT add_room.*, room_details.check_in_date, room_details.* FROM add_room LEFT JOIN room_details ON add_room.room_no = room_details.r_id WHERE add_room.status = 1");
-        return view ('Booking.room-booking',['m_data'=>$m_data,'data'=>$data,'p_details'=>$p_details,'m_name'=>$m_name,'a_list'=>$ar_list,'r_list'=>$r_list,'acroom'=>$acroom,'depositeno'=>$depositeno]);
+        return view ('Booking.room-booking',['pdetails'=>$pdetails,'m_data'=>$m_data,'data'=>$data,'p_details'=>$p_details,'m_name'=>$m_name,'a_list'=>$ar_list,'r_list'=>$r_list,'acroom'=>$acroom,'depositeno'=>$depositeno]);
 
     }
 
@@ -143,7 +148,7 @@ class BookingController extends Controller
 
     public function get_room_list(){
         $list =$data=DB::select("SELECT * , add_room.room_no as id from add_room");
-        $get_list = DB::select("SELECT ar.*, rd.check_in_date, rd.* FROM add_room AS ar LEFT JOIN room_details AS rd ON ar.room_no = rd.r_id OR ar.room_detail_id = rd.r_id WHERE ar.status = 1");
+        $get_list = DB::select("SELECT * from room_details join add_room on add_room.room_detail_id=room_details.r_id join personal_details on personal_details.p_id=room_details.member_id WHERE add_room.status = 1");
         $room_book = DB::select ("SELECT * , room_details.r_id as id from room_details ");
         $availablelist = DB::select("SELECT *, add_room.room_no as id FROM add_room WHERE add_room.status = 0");
         $current_date = Carbon::now();
@@ -178,7 +183,7 @@ class BookingController extends Controller
     }
 
     public function checkout(){
-        $checkout= DB::select("SELECT add_members.p_id AS id, add_members.*, room_details.* FROM add_members JOIN room_details ON add_members.p_id = room_details.r_id");
+        $checkout= DB::select("SELECT * from room_details join add_room on add_room.room_detail_id=room_details.r_id join personal_details on personal_details.p_id=room_details.member_id WHERE add_room.status =1");
         return view('Booking.checkout',['checkout'=>$checkout]);
     }
 

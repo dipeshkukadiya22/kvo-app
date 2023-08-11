@@ -478,6 +478,11 @@
                               <label class="form-label" for="rupees-in-words">Deposit Rs (rupees in words)</label>
                               <input type="text" class="form-control" name="rs_word" id="rupees-in-words" placeholder="Rupees in words" readonly>
                             </div>
+
+                            <div class="col-md-4">
+                              <label class="form-label" for="deposit-amount">No of Days</label>
+                              <input type="number" class="form-control" name="no_of_days" id="no_of_days" placeholder="no_of_days">
+                            </div>
                             
   
                             
