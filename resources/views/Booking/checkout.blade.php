@@ -102,51 +102,35 @@ div.card-datatable [class*=col-md-] {
                                           <thead>
                                          
                                               <tr>
-                                                {{-- <th>બુકિંગ ID</th> --}}
                                                 <th>નામ</th>
-                                                {{-- <th>ગામ</th> --}}
                                                 <th>રૂમ નંબર </th>
-                                                {{-- <th>ડોરમેટરી નંબર</th> --}}
                                                 <th>આગમન તારીખ / સમય</th>
                                                 <th>ચેક આઉટ તારીખ / સમય</th>
-                                                {{-- <th>રૂમની વિગત </th> --}}
-                                                {{-- <th>ભાડું</th> --}}
-                                                {{-- <th>એક્સટ્રા ચાર્જ</th> --}}
-                                                <th>કુલ ભાડું</th>
-                                                <th>રોકાણ દિવસ</th>
-                                                <th>કુલ રકમ (₹)</th>
-                                                <th>ડિપોઝિટ બાદ </th>
-                                                <th>બાકી લેવાની / પરત કરવાની  રકમ</th>
+                                                <th>ભાડું</th>
+                                                <th>રોકાણ દિવસ</th>                       
+                                                <th>ડિપોઝિટ રકમ(₹) </th>
                                                 <th>Action</th>
                                               </tr>
-                                             
                                           </thead>
                                           @foreach($checkout as $check)
                                           <tr>
-                                              {{-- <td>1</td> --}}
-                                              <td>{{$check->p_id}}</td>
-                                              {{-- <td>Mandvi</td> --}}
-                                              <td>{{$check->room_no}}</td>
-                                              <td>{{$check->check_in_date}}</td>
-                                              <td></td>
-                                             
-                                              <td>1300</td>
-                                              <td>1</td>
-                                              <td>500</td>
-                                              <td>1300</td>
-                                              <td>600</td>
+                                             <input type="hidden" class="id" value="{{$check->r_id}}">
+                                              <td>{{$check->m_name}}</td>
+                                              <td>{{$check->room_list}}</td>
+                                              <td>{{date("d-m-Y",strtotime($check->check_in_date))}}</td>
+                                              <td>{{date("d-m-Y",strtotime($check->check_in_date . '+' .$check->no_of_days . 'days'))}}</td>
+                                              <td>{{$check->ac_amount + $check->non_ac_amount + $check->door_mt_amount}}</td>
+                                              <td>{{$check->no_of_days}}</td>
+                                              <td>{{$check->deposite_rs}}</td>
                                               <td>
                                                   <div class="d-inline-block">
                                                     <a href="javascript:;" class="text-primary"><img src="./assets/icon/orange-eye.png" width="20px"></a>
-
-                                                    {{-- <a href="javascript:;" class="btn btn-sm btn-icon item-edit" data-bs-toggle="offcanvas"
-                                                    data-bs-target="#offcanvasBackdrop" aria-controls="offcanvasBackdrop"><i class="text-primary ti ti-edit"></i></a> --}}
 
                                                     <a href="javascript:;" class="btn btn-sm btn-icon item-edit" data-bs-toggle="modal"
                                                     data-bs-target="#exLargeModal"><img src="./assets/icon/orange-edit.png" width="20px"></a>
 
 
-                                                    {{-- <a href="javascript:;" class="text-danger delete-record"><i class="ti ti-trash"></i></a> --}}
+                                                    <a href="javascript:;" class="text-danger delete-record"><img src="./assets/icon/orange-trash.png" width="20px"></a> 
                                                     
                                                   </div>
                                               </td>
@@ -159,57 +143,6 @@ div.card-datatable [class*=col-md-] {
                             </div>
                         </div>
 
-
-                        <!-- Enable backdrop (default) Offcanvas -->
-                        {{-- <div class="mt-0">
-                          
-                          <div
-                            class="offcanvas offcanvas-end"
-                            tabindex="-1"
-                            id="offcanvasBackdrop"
-                            aria-labelledby="offcanvasBackdropLabel">
-                            <div class="offcanvas-header border-bottom">
-                              <h5 id="offcanvasBackdropLabel" class="offcanvas-title">Edit Donation Details</h5>
-                              <button
-                                type="button"
-                                class="btn-close text-reset"
-                                data-bs-dismiss="offcanvas"
-                                aria-label="Close"></button>
-                            </div>
-                            <div class="offcanvas-body mx-0 flex-grow-0">
-
-                              <!-- Browser Default -->
-                              <form class="browser-default-validation">
-
-                                     <!-- Range Picker-->
-                                    <!-- Datetime Picker-->
-                                    <div class="col-md-12 mb-2">
-                                        <label for="flatpickr-datetime" class="form-label">Check-Out Date</label>
-                                        <input type="text" class="form-control" name="check_in_date" placeholder="DD-MM-YYYY HH:MM" id="flatpickr-datetime" />
-                                    </div>
-                                    <!-- /Range Picker-->
-                                    
-                                    <div class="row">
-                                        <div class="col-12">
-                                            <button type="button" class="btn btn-primary mb-2 d-grid w-100">Submit</button>
-                                            <button
-                                            type="submit"
-                                            class="btn btn-label-secondary d-grid w-100"
-                                            data-bs-dismiss="offcanvas">
-                                            Cancel
-                                            </button>
-                                        </div>
-                                    </div>
-                                
-                              </form>
-                              <!-- /Browser Default -->
-
-                              
-                            </div>
-                          </div>
-                        </div> --}}
-
-                        <!-- Extra Large Modal -->
                         <div class="modal fade" id="exLargeModal" tabindex="-1" aria-hidden="true">
                           <div class="modal-dialog modal-xl" role="document">
                             <div class="modal-content">
@@ -225,29 +158,20 @@ div.card-datatable [class*=col-md-] {
                                 <div class="row">
                                   <div class="col mb-3">
                                     <label for="nameExLarge" class="form-label">Booking ID</label>
-                                    <input type="text" id="nameExLarge" class="form-control" placeholder="125" readonly/>
+                                    <input type="text" id="bookingId" name="bookingId" class="form-control" placeholder="125" readonly/>
                                   </div>
 
                                   <div class="col mb-3">
                                     <label for="nameExLarge" class="form-label">રસિદ નંબર  </label>
-                                    <input type="text" id="nameExLarge" class="form-control" placeholder="10" readonly/>
-                                  </div>
-
-                                  <div class="col mb-3">
-                                    <label class="form-label"  for="basic-default-dob">તારીખ</label>
-                                    <input
-                                      type="text"
-                                      class="form-control flatpickr-validation"
-                                      name="r_date"
-                                      id="basic-default-dob1"
-                                      required />
-                                  </div>    
+                                    <input type="text" id="Rec_no" name="Rec_no" class="form-control" placeholder="10" readonly/>
+                                  </div>  
 
                                   <div class="col mb-3">
                                     <label for="select2Basic" class="form-label">નામ</label>
-                                    <select id="select2Basic" name="name" class="select2 form-select" data-allow-clear="true">
-                                      <option value="Bhoomi">Bhoomi</option>
-                                      <option value="Jay">Jay</option>
+                                    <select id="select2Basic" name="name" class="select2 form-select form-select-lg" data-allow-clear="false">
+                                    @foreach($member as $row)
+                                      <option value="{{$row->p_id}}">{{$row->m_name}}</option>
+                                    @endforeach
                                       
                                     </select>
                                   </div>
@@ -264,18 +188,18 @@ div.card-datatable [class*=col-md-] {
                                   <!-- Datetime Picker-->
                                   <div class="col mb-3">
                                     <label for="flatpickr-datetime" class="form-label">આગમન તારીખ / સમય</label>
-                                    <input type="text" class="form-control" name="check_in_date" placeholder="09-08-2023 17:36" readonly />
+                                    <input type="date" class="form-control" name="check_in_date" id="check_in_date" placeholder="09-08-2023 17:36" readonly />
                                   </div>
 
                                   <!-- Datetime Picker-->
                                   <div class="col mb-3">
                                     <label for="flatpickr-datetime" class="form-label">ચેક આઉટ તારીખ / સમય</label>
-                                    <input type="text" class="form-control" name="check_out_date" placeholder="DD-MM-YYYY HH:MM" id="flatpickr-datetime" />
+                                    <input type="date" class="form-control" name="check_out_date" id="check_out_date" placeholder="DD-MM-YYYY HH:MM"  />
                                   </div>
 
                                   <div class="col mb-3">
                                     <label class="form-label" for="deposit-amount">ડિપોઝિટ રકમ </label>
-                                    <input type="number" class="form-control" name="deposite_rs" id="deposit-amount" placeholder="Deposit Rs" readonly>
+                                    <input type="number" class="form-control" name="deposite" id="deposite" placeholder="Deposit Rs" readonly>
                                   </div>
                                   
 
@@ -588,7 +512,7 @@ div.card-datatable [class*=col-md-] {
                                             <div class="form-check form-check-inline mb-2">
                                               <input
                                                 type="radio"
-                                                id="basic_default_radio-male"
+                                                id="CHEQUE"
                                                 name="basic_default_radio"
                                                 class="form-check-input"
                                                 value="cheque"
@@ -598,31 +522,31 @@ div.card-datatable [class*=col-md-] {
                                             <div class="form-check form-check-inline">
                                               <input
                                                 type="radio"
-                                                id="basic_default_radio-female"
+                                                id="DRAFT"
                                                 name="basic_default_radio"
                                                 class="form-check-input"
                                                 value="Draft"
-                                                required />
+                                                 />
                                               <label class="form-check-label" for="basic_default_radio">ડ્રાફ્ટ</label>
                                             </div>
                                             <div class="form-check form-check-inline">
                                               <input
                                                 type="radio"
-                                                id="basic_default_radio-female"
+                                                id="CASH"
                                                 name="basic_default_radio"
                                                 class="form-check-input"
                                                 value="Cash"
-                                                required />
+                                                checked />
                                               <label class="form-check-label" for="basic_default_radio">રોકડા</label>
                                             </div>
                                             <div class="form-check form-check-inline">
                                               <input
                                                 type="radio"
-                                                id="basic_default_radio-female"
+                                                id="UPI"
                                                 name="basic_default_radio"
                                                 class="form-check-input"
                                                 value="UPI"
-                                                required />
+                                                 />
                                               <label class="form-check-label" for="basic_default_radio">UPI</label>
                                             </div>
                                           </div>
@@ -706,8 +630,8 @@ div.card-datatable [class*=col-md-] {
     <script>
       jQuery(document).ready(function($){
       var currentDate = new Date();
-      $('#basic-default-dob').flatpickr({
-      dateFormat: "d M, Y",
+      $('#check_out_date').flatpickr({
+      dateFormat: "d-m-Y",
       defaultDate: currentDate
     })
     });
@@ -973,7 +897,42 @@ document.getElementById("deposit-amount").addEventListener("input", convertToWor
     });
 </script> --}}
 
-
+<script>
+  
+const editLinks = document.querySelectorAll(".item-edit");
+    // Loop through each delete link and attach a click event listener
+    editLinks.forEach(link => {
+        link.addEventListener("click", function() {
+            // Show a confirmation dialog using SweetAlert2
+            var id=$(this).closest("tr").find(".id").val();
+           /* var member_id=[];
+            var temp=document.getElementById('select2Basic');
+             for(i=0;i<temp.options.length;i++)
+                  {
+                    member_id[i]=temp.options[i].value;
+                  }*/
+            $.ajax({
+                url:"{{url('get_booking_data')}}" +"/"+ id,
+                type:'GET',
+                  success:function(response){
+                      var sr_no=response[0]['m_id'];
+                      $("#bookingId").val(response[0]['r_id']);
+                      $("#city").val(response[0]['city']);
+                      $("#check_in_date").val(response[0]['check_in_date']);
+                      $("#deposite").val(response[0]['deposite_rs']);
+                    
+                     /* member_id.forEach(myFunction)
+                        function myFunction(item, index, arr) {
+                            if((member_id[index])==5)
+                            {
+                              $("#select2Basic option[value=" + sr_no + "]").attr('selected', 'selected'); 
+                            }
+                        }*/
+                      }
+                    });
+            });
+        });
+</script>
 
 @endsection
 

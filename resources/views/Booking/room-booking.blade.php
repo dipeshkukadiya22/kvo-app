@@ -307,11 +307,11 @@
                               <div class="col-md-4">
                                 <label class="d-block form-label">Gender</label>
                                 <div class="form-check form-check-inline">
-                                  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="MALE" checked/>
+                                  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="personalRadio1" value="MALE" checked/>
                                   <label class="form-check-label" for="inlineRadio1" >Male</label>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="FEMALE" />
+                                  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="personalRadio2" value="FEMALE" />
                                   <label class="form-check-label" for="inlineRadio2">Female</label>
                                 </div>
                                 
@@ -448,8 +448,8 @@
                             <hr>
                             
                             <div class="col-md-4">
-                              <label class="form-label" for="basic-default-name">No. of Other Person</label>
-                              <input type="number" class="form-control"  name="no_of_person" id="no_of_person_id" placeholder="No of Person" min="1" max="10"/>
+                              <label class="form-label" for="basic-default-name">No. of Person</label>
+                              <input type="number" class="form-control"  name="no_of_person" id="no_of_person_id" placeholder="No of Person" value="1"/>
                             </div>
                             <!-- Datetime Picker-->
                             <div class="col-md-4">
@@ -547,16 +547,20 @@
                                   <div class="col-md-4">
                                     <label class="form-label" for="basic-default-country">Relation</label>
                                     <select class="form-select" name="relation[]" id="member_relation" required>
-                                      <option value="SELF" selected>SELF</option>
-                                      <option value="MOTHER">MOTHER</option>
-                                      <option value="FATHER">FATHER</option>
-                                      <option value="BROTHER">BROTHER</option>
-                                      <option value="SISTER">SISTER</option>
-                                      <option value="UNCLE">UNCLE</option>
-                                      <option value="AUNTY">AUNTY</option>
-                                      <option value="GRAND MOTHER">GRAND MOTHER</option>
-                                      <option value="GRAND FATHER">GRAND FATHER</option>
-                                      <option value="FRIEND">FRIEND</option>
+                                      <option value="SELF" selected>SELF</option>                                      '  <option value="AUNTY">AUNTY</option>'+
+                                      <option value="BROTHER">BROTHER</option>'+
+                                       <option value="COUSIN">COUSIN</option>'+
+                                       <option value="DAUGHTER">DAUGHTER</option>'+
+                                       <option value="FATHER">FATHER</option>'+
+                                       <option value="FRIEND">FRIEND</option>'+
+                                       <option value="GRAND FATHER">GRAND FATHER</option>'+
+                                       <option value="GRAND MOTHER">GRAND MOTHER</option>'+
+                                       <option value="HUSBAND">HUSBAND</option>'+
+                                       <option value="MOTHER">MOTHER</option>'+
+                                       <option value="NEPHEW">NEPHEW</option>'+
+                                       <option value="SISTER">SISTER</option>'+
+                                       <option value="UNCLE">UNCLE</option>'+
+                                       <option value="WIFE">WIFE</option>'+
                                     </select>
                                   </div>
                                   <div class="mb-3 col-lg-12 col-xl-2 col-12 d-flex align-items-center mb-0">
@@ -822,6 +826,9 @@ $(document).ready(function() {
 $(document).ready(function () {   
     $('body').on('change','#select', function() {
          $('#show_selected').val(this.value);
+    });
+    $('#personalRadio2').change(function(){
+      $("#inlineRadio2").attr('checked',true);
     });
 });
 
@@ -1095,7 +1102,7 @@ $(document).ready(function () {
 // loop vadu kya append ?
       $(".rep-table").append(
         '<tr>' +
-        '<td></td>' +
+        '<td>'+ '1' +'</td>' +
         '<td id="member_full_name">' + $('#full_name_form').val() + '</td>' +
         '<td id="members_age">' + $('#member_age').val() + '</td>' +
         '<td id="member_gen">' + $('input[name="gender[]"').val() + '</td>' +
@@ -1108,10 +1115,11 @@ $(document).ready(function () {
        
         return false;
       }
-      for (let i = 0; i < numForms; i++) {
+      for (let i = 1; i < numForms; i++) {
+        let j=2;
         $(".rep-table").append(
           '<tr>' +
-          '<td></td>' +
+          '<td>'+ j +'</td>' +
           '<td class="member_full_name' + i + '">' + $('#full_name_form' + i).val() + '</td>' +
           '<td class="members_age' + i + '">' + $('#member_age' + i).val() + '</td>' +
           '<td class="member_gen' + i + '">' + $('input[name="gender[]'+i+'"]').val() + '</td>' +
@@ -1125,6 +1133,7 @@ $(document).ready(function () {
         $('.members_age' + i).text($('#member_age' + i).val());
         $('.member_gen' + i).text($('input[name="gender'+i+'[]"]').val());
         $('.member_rel' + i).text($('#member_relation' + i).val());
+        j++;
       }
 
       $(".rep-table").show();
@@ -1139,17 +1148,13 @@ $(document).ready(function () {
     $("#repeat-next").click(function() {
       console.log("click");
       let numForms = parseInt($("#no_of_person_id").val());
-      if (isNaN(numForms) || numForms <= 0) {
-        alert("Please enter a valid number greater than zero.");
-        return;
-      }
 
       // Clear previous forms if any
       $(".rep-form").empty();
 
       // Clone and show the form templates
       //console.log('form:'.$('.reo-form').children());
-      for (let i = 0; i < numForms; i++) {
+      for (let i = 1; i < numForms; i++) {
         let formTemplate = $(".rep-form .formrepeater").clone();
         $(".rep-form").append(
 
@@ -1176,19 +1181,25 @@ $(document).ready(function () {
                                       '  <label class="form-check-label" for="inlineRadio2' + i + '" selected>Female</label>'+
                                     '  </div>'+
                                 '  </div>'+
-                                 ' <div class="col-md-4">'+
-                                  '  <label class="form-label" for="basic-default-country">Relation</label>'+
-                                  '  <select class="form-select" name="relation[]" id="member_relation'+i+'" required>'+
-                                   '   <option value="" disabled selected>Select relation</option>'+
-                                    '  <option value="MOTHER">MOTHER</option>'+
-                                    '  <option value="FATHER">FATHER</option>'+
+                                ' <div class="col-md-4">'+
+                                    '  <label class="form-label" for="basic-default-country">Relation</label>'+
+                                    '  <select class="form-select" name="relation[]" id="member_relation'+i+'" required>'+
+                                    '   <option value="" disabled selected>Select relation</option>'+
+                                    '  <option value="AUNTY">AUNTY</option>'+
                                     '  <option value="BROTHER">BROTHER</option>'+
+                                    '  <option value="COUSIN">COUSIN</option>'+
+                                    '  <option value="DAUGHTER">DAUGHTER</option>'+
+                                    '  <option value="FATHER">FATHER</option>'+
+                                    '  <option value="FRIEND">FRIEND</option>'+
+                                    '  <option value="GRAND FATHER">GRAND FATHER</option>'+
+                                    '  <option value="GRAND MOTHER">GRAND MOTHER</option>'+
+                                    '  <option value="HUSBAND">HUSBAND</option>'+
+                                    '  <option value="MOTHER">MOTHER</option>'+
+                                    '  <option value="NEPHEW">NEPHEW</option>'+
                                     '  <option value="SISTER">SISTER</option>'+
                                     '  <option value="UNCLE">UNCLE</option>'+
-                                    '  <option value="AUNTY">AUNTY</option>'+
-                                    '  <option value="GRAND MOTHER">GRAND MOTHER</option>'+
-                                    '  <option value="GRAND FATHER">GRAND FATHER</option>'+
-                                    '  <option value="FRIEND">FRIEND</option>'+
+                                    '  <option value="WIFE">WIFE</option>'+
+                        
                                   '  </select>'+
                                  ' </div>'+
                                  ' <div class="mb-3 col-lg-12 col-xl-2 col-12 d-flex align-items-center mb-0">'+
@@ -1233,23 +1244,6 @@ contactInput.addEventListener('input', function () {
 });
 
 </script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 @endsection
 
 @endsection

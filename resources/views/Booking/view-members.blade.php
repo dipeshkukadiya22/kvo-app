@@ -380,7 +380,7 @@ const editLinks = document.querySelectorAll(".item-edit");
                 url:"{{url('edit_members')}}" +"/"+ id,
                 type:'GET',
                   success:function(response){
-                         $("#p_id").val(response['p_id']);
+                        $("#p_id").val(response['p_id']);
                         $("#m_name1").val(response['m_name']);
                         $("#email1").val(response['email']);
                         $("#phone_no1").val(response['phone_no']);
