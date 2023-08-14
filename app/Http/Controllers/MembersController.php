@@ -23,21 +23,13 @@ class MembersController extends Controller
     {
       
         $member = add_members::find($request->p_id);
-
         $member->m_name = strtoupper($request->m_name1);
         $member->email = $request->email1;
         $member->phone_no = $request->phone_no1;
-        $member->city = $request->city1;
+        $member->city = strtoupper($request->city1);
         $member->save();
-        return back();
+        return back()->with("Update Member Details");
     }
-    
-     
-    
-        
-    
-    
-
     public function delete_members($id){
       
         $data=add_members::find($id);

@@ -78,7 +78,6 @@
                                           <table id="DataTables_Table_0" class="datatables-basic table">
                                             <thead>
                                                 <tr>
-                                                    <th></th>
                                                     <th>No</th>
                                                     <th>Full Name</th>
                                                     <th>Email</th>
@@ -91,8 +90,6 @@
                                            @foreach($data as $row)
                                             <tr>
                                             <input type="hidden" class="id" value="{{$row->p_id}}">
-                                            
-                                              <td></td>
                                               <td>{{$row->p_id}}</td>
                                               <td>{{$row->m_name}}</td>
                                               <td>{{$row->email}}</td>
@@ -128,7 +125,7 @@
 
                                 <!-- Browser Default -->
                                 
-                                <form class="browser-default-validation" method="POST" action="{{route('update_members')}}">
+                                <form id="kvo_update_member" class="browser-default-validation" method="POST" action="{{route('update_members')}}">
                                   @csrf
                                   <div class="mb-3">
                                     <label class="form-label" for="basic-default-name">Name</label>
@@ -162,7 +159,7 @@
                                   
                                   <div class="row">
                                     <div class="col-12">
-                                      <button type="submit" class="btn btn-primary mb-2 d-grid w-100">Submit</button>
+                                      <button type="submit" id="update_submit" class="btn btn-primary mb-2 d-grid w-100">Submit</button>
                                       <button type="button" class="btn btn-label-secondary d-grid w-100" data-bs-dismiss="offcanvas"> Cancel </button>
                                     </div>
                                   </div>
@@ -379,63 +376,80 @@ const editLinks = document.querySelectorAll(".item-edit");
         link.addEventListener("click", function() {
             // Show a confirmation dialog using SweetAlert2
             var id=$(this).closest("tr").find(".id").val();
-            var member_id=[];
-            var temp=document.getElementById('name');
-             for(i=0;i<temp.options.length;i++)
-                  {
-                    member_id[i]=temp.options[i].value;
-                  }
             $.ajax({
-                url:"{{url('get_religious_donation')}}" +"/"+ id,
+                url:"{{url('edit_members')}}" +"/"+ id,
                 type:'GET',
                   success:function(response){
                          $("#p_id").val(response['p_id']);
                         $("#m_name1").val(response['m_name']);
                         $("#email1").val(response['email']);
                         $("#phone_no1").val(response['phone_no']);
-                        $("#city1").val(response['city']);
-                       
-                        
-                        
+                        $("#city1").val(response['city']);  
                       }
                     });
             });
         });
- 
 </script>
 <script>
-    $(".servicedeletebtn").click(function(e){
-            e.preventDefault();
-            var id=$(this).closest("tr").find(".delete_id").val();
-                 Swal.fire({
-                    title: 'Are you sure?',
-                    text: "Once deleted, You will not be able to recover this!",
-                    icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#3085D6',
-                    cancelButtonColor: '#d33',
-                    confirmButtonText: 'Yes, delete it!'
+    // Get all elements with class "delete-record"
+    const deleteLinks = document.querySelectorAll(".delete-record");
+    // Loop through each delete link and attach a click event listener
+    deleteLinks.forEach(link => {
+        link.addEventListener("click", function() {
+            // Show a confirmation dialog using SweetAlert2
+            var id=$(this).closest("tr").find(".id").val();
+            Swal.fire({
+                title: "Are you sure?",
+                text: "You won't be able to revert this!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Yes, delete it!",
             }).then((result) => {
-            if (result.isConfirmed) {
-                $.ajax({
+                // If the user confirms the deletion, proceed with the deletion logic
+                if (result.isConfirmed) {
+                  $.ajax({
                     url:"{{url('delete_members')}}" +"/"+ id,
                     type:'GET',
                     success:function(response){
                         Swal.fire(
                             'Deleted!',
-                            'Your file has been deleted.',
+                            'Your Record has been deleted.',
                             'success',
                             );
                             location.reload();
                             }
                         });
-                    }
+                }
             });
         });
+    });
+
+    $("#update_submit").click(function(){
+        var email=document.getElementById("email1").value;
+        var phone=document.getElementById("phone_no1").value;
+        var city=document.getElementById("city1").value;
+        if(email ==='' && phone === '' && city==='')
+        {
+            Swal.fire({
+                text: "Sorry, looks like there are some errors detected, please try again.",
+                icon: "error",
+            });
+            return false; // Prevent form submission
+        } else {
+            Swal.fire({
+                position: 'middle-center',
+                icon: 'success',
+                title: 'KVO Member Details has been successfully updated!',
+                showConfirmButton: false,
+                timer: 1500
+                }).then(function() {
+                $("kvo_update_member").submit();
+           });
+        }
+    });
 </script>
-
-
-    
 
 @endsection
 
