@@ -484,6 +484,15 @@
                               <input type="number" class="form-control" name="no_of_days" id="no_of_days" placeholder="no_of_days">
                             </div>
                             
+                            <div class="col-md-4">
+                              <label class="form-label" for="rupees-in-words">Occupation</label>
+                              <input type="text" class="form-control" name="occupation" id="occupation" placeholder="Occupation" require>
+                            </div>
+
+                            <div class="col-md-4">
+                              <label class="form-label" for="rupees-in-words">Reason</label>
+                              <input type="text" class="form-control" name="reason" id="reason" placeholder="Reason to stay" >
+                            </div>
   
                             
                             <div class="col-12 d-flex justify-content-between">
@@ -1053,9 +1062,16 @@ $(document).ready(function () {
 
 
 <script>
+ 
   $(document).ready(function() {
     let currentStep = 1;
+    var currentDateTime = new Date();
 
+    $('#flatpickr-datetime').flatpickr({
+      enableTime: true,
+      dateFormat: "d-m-Y H:i",
+      defaultDate: currentDateTime
+    });
     $(".btn-next").on("click", function() {
       const selectedList1 = $('#select2Multiple11').val();
       const selectedList2 = $('#select2Multiple22').val();

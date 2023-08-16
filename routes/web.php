@@ -45,7 +45,9 @@ Route::get('room-booking', [BookingController::class, 'index']);
 Route::POST('room-booking', [BookingController::class, 'add_member'])->name('room-booking');
 
 // room checkout
+Route::get('view_room_booking', [BookingController::class, 'view_room_booking'])->name('view_room_booking');
 Route::get('checkout', [BookingController::class, 'checkout'])->name('checkout');
+Route::POST('checkout1', [BookingController::class, 'add_checkout'])->name('add_checkout');
 Route::get('get_booking_data/{id}', [BookingController::class, 'get_booking_data'])->name('get_booking_data');
 
 /* Room list Route */
@@ -81,4 +83,5 @@ Route::get('pdf_Community_Donation',[pdfcontroller::class,'pdf_Community_Donatio
 Route::get('pdf_General_Donation',[pdfcontroller::class,'pdf_General_Donation'])->name('pdf_General_Donation');
 Route::get('pdf_Expense_Receipt',[pdfcontroller::class,'pdf_Expense_Receipt'])->name('pdf_Expense_Receipt');
 Route::get('pdf_CheckIn/{id}',[pdfcontroller::class,'pdf_CheckIn'])->name('pdf_CheckIn');
+Route::get('pdf_CheckOut/{id}',[pdfcontroller::class,'pdf_CheckOut'])->name('pdf_CheckOut');
 Route::get('treatment',[medical::class,'treatment'])->name('treatment');

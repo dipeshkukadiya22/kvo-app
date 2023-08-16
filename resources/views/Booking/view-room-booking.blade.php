@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Check-out')
+@section('title', 'View Room Booking')
 
 @section('pagecss')
 
@@ -91,7 +91,6 @@ div.card-datatable [class*=col-md-] {
                 </div>
                 <div class="row mb-4">
                   <div class="col-md mb-4 mb-md-0">
-                  <form id="kvo_add_checkout" class="browser-default-validation" method="POST" action="{{route('add_checkout')}}">
                     <div class="card">
                       <!-- Basic table -->
                     <section id="basic-datatable">
@@ -101,7 +100,7 @@ div.card-datatable [class*=col-md-] {
                                     <div class="card-datatable pt-0">
                                         <table id="DataTables_Table_0" class="datatables-basic table">
                                           <thead>
-                                         @csrf
+                                         
                                               <tr>
                                                 <th>નામ</th>
                                                 <th>રૂમ નંબર </th>
@@ -125,7 +124,7 @@ div.card-datatable [class*=col-md-] {
                                               <td>{{$row->deposite_rs}}</td>
                                               <td>
                                                   <div class="d-inline-block">
-                                                    <a href="{{route('pdf_CheckOut',1)}}" class="text-primary"><img src="./assets/icon/orange-eye.png" width="20px"></a>
+                                                    <a href="{{route('pdf_CheckIn',$row->r_id)}}" class="text-primary"><img src="./assets/icon/orange-eye.png" width="20px"></a>
 
                                                     <a href="javascript:;" class="btn btn-sm btn-icon item-edit" data-bs-toggle="modal"
                                                     data-bs-target="#exLargeModal"><img src="./assets/icon/orange-edit.png" width="20px"></a>
@@ -164,7 +163,7 @@ div.card-datatable [class*=col-md-] {
 
                                   <div class="col mb-3">
                                     <label for="nameExLarge" class="form-label">રસિદ નંબર  </label>
-                                    <input type="text" id="Rec_no" name="Rec_no" class="form-control" placeholder="10" value="{{$rec_no+1}}" readonly/>
+                                    <input type="text" id="Rec_no" name="Rec_no" class="form-control" placeholder="10" readonly/>
                                   </div>  
 
                                   <div class="col mb-3">
@@ -189,7 +188,7 @@ div.card-datatable [class*=col-md-] {
                                   <!-- Datetime Picker-->
                                   <div class="col mb-3">
                                     <label for="flatpickr-datetime" class="form-label">આગમન તારીખ / સમય</label>
-                                    <input type="date" class="form-control" name="check_in_date" id="check_in_date" placeholder="DD-MM-YYYY HH:MM" readonly/>
+                                    <input type="date" class="form-control" name="check_in_date" id="check_in_date" placeholder="09-08-2023 17:36" readonly />
                                   </div>
 
                                   <!-- Datetime Picker-->
@@ -198,12 +197,146 @@ div.card-datatable [class*=col-md-] {
                                     <input type="date" class="form-control" name="check_out_date" id="check_out_date" placeholder="DD-MM-YYYY HH:MM"  />
                                   </div>
 
-  
+                                  <div class="col mb-3">
+                                    <label class="form-label" for="deposit-amount">ડિપોઝિટ રકમ </label>
+                                    <input type="number" class="form-control" name="deposite" id="deposite" placeholder="Deposit Rs" readonly>
+                                  </div>
                                   
 
                                 </div>
 
-                               
+                                {{-- <div class="row g-3">
+                                  <!-- Multiple -->
+                                  <div class="col mb-3">
+                                    <label for="select2Multiple" class="form-label">A.C. Room.</label>
+                                    <select id="select2Multiple" class="select2 form-select" multiple>
+                                      <optgroup label="Alaskan/Hawaiian Time Zone">
+                                        <option value="AK">Alaska</option>
+                                        <option value="HI">Hawaii</option>
+                                      </optgroup>
+                                    </select>
+                                  </div>
+
+                                  <div class="col mb-3">
+                                    <label class="form-label" for="basic-default-name">કુલ ભાડું (A.C. Room.)</label>
+                                    <div class="input-group">
+                                      <span class="input-group-text">₹</span>
+                                      <input type="number" class="form-control"  name="amount" placeholder="Amount" aria-label="Amount (to the nearest indian)" id="r_amount" value="800" />
+                                    </div>
+                                  </div>
+
+                                  <div class="col mb-3">
+                                    <label for="select2Multiple" class="form-label">Non. A.C. Room</label>
+                                    <select id="select2Multiple2" class="select2 form-select" multiple>
+                                      <optgroup label="Alaskan/Hawaiian Time Zone">
+                                        <option value="AK">Alaska</option>
+                                        <option value="HI">Hawaii</option>
+                                      </optgroup>
+                                    </select>
+                                  </div>
+
+                                  <div class="col mb-3">
+                                    <label class="form-label" for="basic-default-name">કુલ ભાડું (Non. A.C.)</label>
+                                    <div class="input-group">
+                                      <span class="input-group-text">₹</span>
+                                      <input type="number" class="form-control"  name="amount" placeholder="Amount" aria-label="Amount (to the nearest indian)" id="r_amount" value="800" />
+                                    </div>
+                                  </div>
+
+                                  <div class="col mb-3">
+                                    <label for="select2Multiple" class="form-label">Door Metri. Room</label>
+                                    <select id="select2Multiple3" class="select2 form-select" multiple>
+                                      <optgroup label="Alaskan/Hawaiian Time Zone">
+                                        <option value="AK">Alaska</option>
+                                        <option value="HI">Hawaii</option>
+                                      </optgroup>
+                                    </select>
+                                  </div>
+
+                                  <div class="col mb-3">
+                                    <label class="form-label" for="basic-default-name">કુલ ભાડું (Door Metri)</label>
+                                    <div class="input-group">
+                                      <span class="input-group-text">₹</span>
+                                      <input type="number" class="form-control"  name="amount" placeholder="Amount" aria-label="Amount (to the nearest indian)" id="r_amount" value="800" />
+                                    </div>
+                                  </div>
+
+                                </div>
+
+                                <div class="row g-3">
+                                  <div class="col mb-3">
+                                    <label class="form-label" for="deposit-amount">એક્સટ્રા ચાર્જ</label>
+                                    <input type="number" class="form-control" name="extra_rs" id="extra-amount" placeholder="Extra Amount">
+                                  </div>
+
+                                  <div class="col mb-3">
+                                    <label class="form-label" for="deposit-amount">રોકાણ દિવસ</label>
+                                    <input type="number" class="form-control" name="extra_rs" id="extra-amount" placeholder="Extra Amount">
+                                  </div>
+
+                                  <div class="col mb-3">
+                                    <label class="form-label" for="deposit-amount">કુલ રકમ (₹)</label>
+                                    <input type="number" class="form-control" name="extra_rs" id="extra-amount" placeholder="Extra Amount">
+                                  </div>
+
+                                  <div class="col mb-3">
+                                    <label class="form-label" for="deposit-amount">ડિપોઝિટ બાદ </label>
+                                    <input type="number" class="form-control" name="extra_rs" id="extra-amount" placeholder="Extra Amount">
+                                  </div>
+
+                                  <div class="col mb-3">
+                                    <label class="form-label" for="deposit-amount">બાકી લેવાની / પરત કરવાની  રકમ</label>
+                                    <input type="number" class="form-control" name="extra_rs" id="extra-amount" placeholder="Extra Amount">
+                                  </div>
+
+                                </div>
+
+                                <div class="row g-3">
+                                  <div class="col-md-4">
+                                    <label class="d-block form-label">નાણા મળેલ</label>
+                                    <div class="form-check form-check-inline mb-2">
+                                      <input
+                                        type="radio"
+                                        id="basic_default_radio-male"
+                                        name="basic_default_radio"
+                                        class="form-check-input"
+                                        value="cheque"
+                                        required />
+                                      <label class="form-check-label" for="basic_default_radio">ચેક</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                      <input
+                                        type="radio"
+                                        id="basic_default_radio-female"
+                                        name="basic_default_radio"
+                                        class="form-check-input"
+                                        value="Draft"
+                                        required />
+                                      <label class="form-check-label" for="basic_default_radio">ડ્રાફ્ટ</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                      <input
+                                        type="radio"
+                                        id="basic_default_radio-female"
+                                        name="basic_default_radio"
+                                        class="form-check-input"
+                                        value="Cash"
+                                        required />
+                                      <label class="form-check-label" for="basic_default_radio">રોકડા</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                      <input
+                                        type="radio"
+                                        id="basic_default_radio-female"
+                                        name="basic_default_radio"
+                                        class="form-check-input"
+                                        value="UPI"
+                                        required />
+                                      <label class="form-check-label" for="basic_default_radio">UPI</label>
+                                    </div>
+                                  </div>
+                                </div> --}}
+
                                 <!-- Basic Bootstrap Table -->
                                 <div class="table-responsive text-nowrap">
                                   <table class="table">
@@ -224,22 +357,27 @@ div.card-datatable [class*=col-md-] {
                                           ડિલક્સ  રૂમ 
                                         </td>
                                         <td>
-                                          <input type="text" id="dlx_room" name="dlx_room" class="form-control" value=""  readonly/>
+                                          <div class="col">
+                                            <select id="select2Multiple2" class="select2 form-select" multiple>
+                                              <option value="AK">Alaska</option>
+                                              <option value="HI">Hawaii</option>
+                                            </select>
+                                          </div>
                                         </td>
                                         <td>
-                                          <input type="text" id="dlx_room_charge" name="dlx_room_charge" class="form-control"  readonly/>
+                                          <input type="text" class="form-control" value="1250" />
                                         </td>
                                         <td>
-                                          <input type="text" id="dlx_room_Excharge" name="dlx_room_Excharge" class="form-control" />
+                                          <input type="text" class="form-control" value="100" />
                                         </td>
                                         <td>
-                                          <input type="text" id="dlx_amount" name="dlx_amount" class="form-control"  readonly/>
+                                          <input type="text" class="form-control" value="1500" />
                                         </td>
                                         <td>
-                                          <input type="text" id="dlx_no_of_days" name="dlx_no_of_days" class="form-control"  readonly/>
+                                          <input type="text" class="form-control" value="2" readonly/>
                                         </td>
                                         <td>
-                                          <input type="text" id="dlx_room_total" name="dlx_room_total" class="form-control" readonly/>
+                                          <input type="text" class="form-control" value="1850" />
                                         </td>
                                       </tr>
 
@@ -248,22 +386,25 @@ div.card-datatable [class*=col-md-] {
                                           A.C. રૂમ
                                         </td>
                                         <td>
-                                          <input type="text" id="ac_room" name="ac_room" class="form-control" value=""  readonly/>
+                                          <select id="select2Multiple3" class="select2 form-select" multiple>
+                                            <option value="AK">Alaska</option>
+                                            <option value="HI">Hawaii</option>
+                                          </select>
                                         </td>
                                         <td>
-                                          <input type="text" id="ac_room_charge" name="ac_room_charge" class="form-control"  readonly/>
+                                          <input type="text" class="form-control" value="1250" />
                                         </td>
                                         <td>
-                                          <input type="text" id="ac_room_Excharge" name="ac_room_Excharge" class="form-control" />
+                                          <input type="text" class="form-control" value="100" />
                                         </td>
                                         <td>
-                                          <input type="text" id="ac_amount" name="ac_amount" class="form-control"  readonly/>
+                                          <input type="text" class="form-control" value="1500" />
                                         </td>
                                         <td>
-                                          <input type="text" id="ac_no_of_days" name="ac_no_of_days" class="form-control"  readonly/>
+                                          <input type="text" class="form-control" value="2" readonly/>
                                         </td>
                                         <td>
-                                          <input type="text" id="ac_room_total" name="ac_room_total" class="form-control" readonly/>
+                                          <input type="text" class="form-control" value="1850" />
                                         </td>
                                       </tr>
 
@@ -272,22 +413,25 @@ div.card-datatable [class*=col-md-] {
                                            Non. A.C. રૂમ
                                         </td>
                                         <td>
-                                          <input type="text" id="non_ac_room" name="non_ac_room" class="form-control" value=""  readonly/>
+                                          <select id="select2Multiple4" class="select2 form-select" multiple>
+                                            <option value="AK">Alaska</option>
+                                            <option value="HI">Hawaii</option>
+                                          </select>
                                         </td>
                                         <td>
-                                          <input type="text" id="non_ac_room_charge" name="non_ac_room_charge" class="form-control"  readonly/>
+                                          <input type="text" class="form-control" value="1250" />
                                         </td>
                                         <td>
-                                          <input type="text" id="non_ac_room_Excharge" name="non_ac_room_Excharge" class="form-control" />
+                                          <input type="text" class="form-control" value="100" />
                                         </td>
                                         <td>
-                                          <input type="text" id="non_ac_amount" name="non_ac_amount" class="form-control"  readonly/>
+                                          <input type="text" class="form-control" value="1500" />
                                         </td>
                                         <td>
-                                          <input type="text" id="non_ac_no_of_days" name="non_ac_no_of_days" class="form-control"  readonly/>
+                                          <input type="text" class="form-control" value="2" readonly/>
                                         </td>
                                         <td>
-                                          <input type="text" id="non_ac_room_total" name="non_ac_room_total" class="form-control" readonly/>
+                                          <input type="text" class="form-control" value="1850" />
                                         </td>
                                       </tr>
 
@@ -296,22 +440,25 @@ div.card-datatable [class*=col-md-] {
                                           A.C. ડોરમેટરી  
                                         </td>
                                         <td>
-                                          <input type="text" id="dmt_ac_room" name="dmt_ac_room" class="form-control" value=""  readonly/>
+                                          <select id="select2Multiple5" class="select2 form-select" multiple>
+                                            <option value="AK">Alaska</option>
+                                            <option value="HI">Hawaii</option>
+                                          </select>
                                         </td>
                                         <td>
-                                          <input type="text" id="dmt_ac_room_charge" name="dmt_ac_room_charge" class="form-control"  readonly/>
+                                          <input type="text" class="form-control" value="1250" />
                                         </td>
                                         <td>
-                                          <input type="text" id="dmt_ac_room_Excharge" name="dmt_ac_room_Excharge" class="form-control" />
+                                          <input type="text" class="form-control" value="100" />
                                         </td>
                                         <td>
-                                          <input type="text" id="dmt_ac_amount" name="dmt_ac_amount" class="form-control"  readonly/>
+                                          <input type="text" class="form-control" value="1500" />
                                         </td>
                                         <td>
-                                          <input type="text" id="dmt_ac_no_of_days" name="dmt_ac_no_of_days" class="form-control"  readonly/>
+                                          <input type="text" class="form-control" value="2" readonly/>
                                         </td>
                                         <td>
-                                          <input type="text" id="dmt_ac_room_total" name="dmt_ac_room_total" class="form-control" readonly/>
+                                          <input type="text" class="form-control" value="1850" />
                                         </td>
                                       </tr>
 
@@ -320,22 +467,25 @@ div.card-datatable [class*=col-md-] {
                                           Non. A.C. ડોરમેટરી  
                                         </td>
                                         <td>
-                                          <input type="text" id="non_dmt_ac_room" name="non_dmt_ac_room" class="form-control" value=""  readonly/>
+                                          <select id="select2Multiple6" class="select2 form-select" multiple>
+                                            <option value="AK">Alaska</option>
+                                            <option value="HI">Hawaii</option>
+                                          </select>
                                         </td>
                                         <td>
-                                          <input type="text" id="non_dmt_ac_room_charge" name="non_dmt_ac_room_charge" class="form-control"  readonly/>
+                                          <input type="text" class="form-control" value="1250" />
                                         </td>
                                         <td>
-                                          <input type="text" id="non_dmt_ac_room_Excharge" name="non_dmt_ac_room_Excharge" class="form-control" />
+                                          <input type="text" class="form-control" value="100" />
                                         </td>
                                         <td>
-                                          <input type="text" id="non_dmt_ac_amount" name="non_dmt_ac_amount" class="form-control"  readonly/>
+                                          <input type="text" class="form-control" value="1500" />
                                         </td>
                                         <td>
-                                          <input type="text" id="non_dmt_ac_no_of_days" name="non_dmt_ac_no_of_days" class="form-control"  readonly/>
+                                          <input type="text" class="form-control" value="2" readonly/>
                                         </td>
                                         <td>
-                                          <input type="text" id="non_dmt_ac_room_total" name="non_dmt_ac_room_total" class="form-control" readonly/>
+                                          <input type="text" class="form-control" value="1850" />
                                         </td>
                                       </tr>
 
@@ -346,8 +496,8 @@ div.card-datatable [class*=col-md-] {
                                             <input
                                               type="text"
                                               class="form-control"
-                                              name="remark"
-                                              id="remark"
+                                              name="remarks"
+                                              id="basic-default-name"
                                               {{-- placeholder="John Doe" --}}
                                               required />
                                           </div>
@@ -365,6 +515,7 @@ div.card-datatable [class*=col-md-] {
                                                 id="CHEQUE"
                                                 name="basic_default_radio"
                                                 class="form-check-input"
+                                                value="cheque"
                                                 required />
                                               <label class="form-check-label" for="basic_default_radio">ચેક</label>
                                             </div>
@@ -374,6 +525,7 @@ div.card-datatable [class*=col-md-] {
                                                 id="DRAFT"
                                                 name="basic_default_radio"
                                                 class="form-check-input"
+                                                value="Draft"
                                                  />
                                               <label class="form-check-label" for="basic_default_radio">ડ્રાફ્ટ</label>
                                             </div>
@@ -383,6 +535,7 @@ div.card-datatable [class*=col-md-] {
                                                 id="CASH"
                                                 name="basic_default_radio"
                                                 class="form-check-input"
+                                                value="Cash"
                                                 checked />
                                               <label class="form-check-label" for="basic_default_radio">રોકડા</label>
                                             </div>
@@ -392,30 +545,27 @@ div.card-datatable [class*=col-md-] {
                                                 id="UPI"
                                                 name="basic_default_radio"
                                                 class="form-check-input"
+                                                value="UPI"
                                                  />
                                               <label class="form-check-label" for="basic_default_radio">UPI</label>
                                             </div>
-                                            <div class="form-check form-check-inline">
-                                            <input type="text" id="payment" name="payment" class="form-control" />
-                                            <label class="form-check-label" for="basic-default-radio">payment</label>
-                                        </div>
                                           </div>
                                         </td>
                                         <td><strong>કુલ રકમ (₹)</strong></td>
-                                        <td> <input type="number" id="total" name="total" class="form-control" readonly/></td>
+                                        <td> <input type="text" class="form-control" value="1850" /></td>
                                       </tr>
 
                                       <tr>
                                         
                                         <td><strong>ડિપોઝિટ બાદ</strong></td>
-                                        <td> <input type="text" id="deposite" name="deposite" class="form-control"  readonly/></td>
+                                        <td> <input type="text" class="form-control" value="1850" readonly/></td>
                                       </tr>
 
                                       <tr>
                                         
                                         <td><strong>બાકી લેવાની /<br> પરત કરવાની રકમ</strong></td>
                                         <td>
-                                          <input type="text" class="form-control" name="net_amount" id="net_amount" >
+                                          <input type="number" class="form-control" name="deposite_rs" id="deposit-amount" >
                                         </td>
                                       </tr>
 
@@ -430,7 +580,7 @@ div.card-datatable [class*=col-md-] {
                                 <button type="button" class="btn btn-label-secondary" data-bs-dismiss="modal">
                                   Close
                                 </button>
-                                <button type="submit" class="btn btn-primary">Save changes</button>
+                                <button type="button" class="btn btn-primary">Save changes</button>
                               </div>
                             </div>
                           </div>
@@ -441,7 +591,6 @@ div.card-datatable [class*=col-md-] {
                     </section>
                      <!--/ Basic table -->
                   </div>
-                    </form>
                 </div>
             </div>
         </div>
@@ -482,28 +631,10 @@ div.card-datatable [class*=col-md-] {
       jQuery(document).ready(function($){
       var currentDate = new Date();
       $('#check_out_date').flatpickr({
-      dateFormat: "d-m-Y H:i",
-      enableTime: true,
+      dateFormat: "d-m-Y",
       defaultDate: currentDate
-      });
-
-      $('#check_in_date').flatpickr({
-      dateFormat: "Y-m-d H:i",
-      });
+    })
     });
-
-    $("#CASH").change(function(){
-        document.getElementById("payment").value="CASH";
-      });
-      $("#CHEQUE").change(function(){
-        document.getElementById("payment").value="CHEQUE";
-      });
-      $("#DRAFT").change(function(){
-        document.getElementById("payment").value="DRAFT";
-      });
-      $("#UPI").change(function(){
-        document.getElementById("payment").value="UPI";
-      });
     </script>
 
     <!-- BEGIN: Page JS-->
@@ -660,7 +791,7 @@ div.card-datatable [class*=col-md-] {
 
 <script>
   function convertToWords() {
-  var depositAmount = parseFloat(document.getElementById("net_amount").value);
+  var depositAmount = parseFloat(document.getElementById("deposit-amount").value);
   var inWords = numberToWords(depositAmount);
   document.getElementById("rupees-in-words").value = inWords;
 }
@@ -789,39 +920,6 @@ const editLinks = document.querySelectorAll(".item-edit");
                       $("#city").val(response[0]['city']);
                       $("#check_in_date").val(response[0]['check_in_date']);
                       $("#deposite").val(response[0]['deposite_rs']);
-                
-                      var room=response[0]['room_no'];
-                      if(room==301 || room==302 || room==401 || room==402)
-                      {
-                        $("#dlx_room").val(room);
-                        $("#dlx_room_charge").val(response[0]['ac_amount']);
-                        $("#dlx_no_of_days").val(response[0]['no_of_days']);
-                        $("#dlx_amount").val(response[0]['no_of_days'] * response[0]['ac_amount']);
-                        $("#dlx_room_total").val(response[0]['no_of_days'] * response[0]['ac_amount']);
-                      }
-                      if(room==303 || room==304 ||room==305 || room==306 )
-                      {
-                        $("#ac_room").val(room);
-                        $("#ac_room_charge").val(response[0]['ac_amount']);
-                        $("#ac_no_of_days").val(response[0]['no_of_days']);
-                        $("#ac_amount").val(response[0]['no_of_days'] * response[0]['ac_amount']);
-                        $("#ac_room_total").val(response[0]['no_of_days'] * response[0]['ac_amount']);
-                      }
-                      if(room==201 || room==202 ||room==203 || room==204 ||room==205 || room==206)
-                      {
-                        $("#non_ac_room").val(room);
-                        $("#non_ac_room_charge").val(response[0]['non_ac_amount']);
-                        $("#non_ac_no_of_days").val(response[0]['no_of_days']);
-                        $("#non_ac_amount").val(response[0]['no_of_days'] * response[0]['non_ac_amount']);
-                        $("#non_ac_room_total").val(response[0]['no_of_days'] * response[0]['non_ac_amount']);
-                      }
-                      
-                      if(room==1 || room==2 ||room==3 || room==4 ||room==5 || room==6 ||room==7 || room==8 ||room==9 || room==10)
-                      {
-                      }
-                  
-                
-                      //$("#total").val(dlx+ac+non_ac+dmt_ac+dmt_non_ac);
                     
                      /* member_id.forEach(myFunction)
                         function myFunction(item, index, arr) {
@@ -830,39 +928,12 @@ const editLinks = document.querySelectorAll(".item-edit");
                               $("#select2Basic option[value=" + sr_no + "]").attr('selected', 'selected'); 
                             }
                         }*/
-                        
                       }
                     });
             });
         });
 </script>
-<script>
-    $(document).ready(function() {
 
-     
-    });
-  $("#dlx_room_Excharge").change(function(){
-    var amt=parseInt(document.getElementById("dlx_amount").value); 
-    var excharge=parseInt(document.getElementById("dlx_room_Excharge").value); 
-    var deposite=parseInt(document.getElementById("deposite").value);
-    $("#dlx_room_total").val(amt+excharge);
-    var total=parseInt(document.getElementById("dlx_room_total").value);
-    $("#total").val(total);
-    $("#net_amount").val(total-deposite);
-  });
-
-  $("#ac_room_Excharge").change(function(){
-    var amt=parseInt(document.getElementById("ac_amount").value); 
-    var excharge=parseInt(document.getElementById("ac_room_Excharge").value); 
-    $("#ac_room_total").val(amt+excharge);
-  });
-
-  $("#non_ac_room_Excharge").change(function(){
-    var amt=parseInt(document.getElementById("non_ac_amount").value); 
-    var excharge=parseInt(document.getElementById("non_ac_room_Excharge").value); 
-    $("#non_ac_room_total").val(amt+excharge);
-  });
-  </script>
 @endsection
 
 @endsection

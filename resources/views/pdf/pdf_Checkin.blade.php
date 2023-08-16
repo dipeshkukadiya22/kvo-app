@@ -5,7 +5,7 @@
 
 				@font-face {
 					font-family: KAP119;
-					src: url('C:/xampp/htdocs/kvo-app/vendor/dompdf/dompdf/lib/fonts/KAP119.ttf');
+					src: url('C:/xampplatest/htdocs/kvo-app/vendor/dompdf/dompdf/lib/fonts/KAP119.ttf');
 				}
 
 				@page  
@@ -104,7 +104,7 @@
 				</tr>
 				<tr>
 					<td class="tg-0pky" colspan="3"><span class="gujfont">A]™SU G\ o </span><span>{{$room_booking[0]->r_id}}</span></td>
-					<td class="tg-0pky" colspan="3"><span class="gujfont">VFJJFGM ;DIo </span><span>{{$room_booking[0]->check_in_time}}</span></td>
+					<td class="tg-0pky" colspan="3"><span class="gujfont">VFJJFGM ;DIo </span><span>{{Date("d-m-Y H:i",strtotime($room_booking[0]->check_in_date))}}</span></td>
 				</tr>
 				<tr>
 					<td class="tg-0pky" colspan="4"><span class="gujfont">GFDo </span><span>{{$room_booking[0]->m_name." - " . $room_booking[0]->phone_no}}</span></td>
