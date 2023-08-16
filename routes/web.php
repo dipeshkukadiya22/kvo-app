@@ -80,4 +80,5 @@ Route::get('pdf_Religious_Donation',[pdfcontroller::class,'pdf_Religious_Donatio
 Route::get('pdf_Community_Donation',[pdfcontroller::class,'pdf_Community_Donation'])->name('pdf_Community_Donation');
 Route::get('pdf_General_Donation',[pdfcontroller::class,'pdf_General_Donation'])->name('pdf_General_Donation');
 Route::get('pdf_Expense_Receipt',[pdfcontroller::class,'pdf_Expense_Receipt'])->name('pdf_Expense_Receipt');
+Route::get('pdf_CheckIn/{id}',[pdfcontroller::class,'pdf_CheckIn'])->name('pdf_CheckIn');
 Route::get('treatment',[medical::class,'treatment'])->name('treatment');

@@ -112,19 +112,19 @@ div.card-datatable [class*=col-md-] {
                                                 <th>Action</th>
                                               </tr>
                                           </thead>
-                                          @foreach($checkout as $check)
+                                          @foreach($checkout as $row)
                                           <tr>
-                                             <input type="hidden" class="id" value="{{$check->r_id}}">
-                                              <td>{{$check->m_name}}</td>
-                                              <td>{{$check->room_list}}</td>
-                                              <td>{{date("d-m-Y",strtotime($check->check_in_date))}}</td>
-                                              <td>{{date("d-m-Y",strtotime($check->check_in_date . '+' .$check->no_of_days . 'days'))}}</td>
-                                              <td>{{$check->ac_amount + $check->non_ac_amount + $check->door_mt_amount}}</td>
-                                              <td>{{$check->no_of_days}}</td>
-                                              <td>{{$check->deposite_rs}}</td>
+                                             <input type="hidden" class="id" value="{{$row->r_id}}">
+                                              <td>{{$row->m_name}}</td>
+                                              <td>{{$row->room_list}}</td>
+                                              <td>{{date("d-m-Y",strtotime($row->check_in_date))}}</td>
+                                              <td>{{date("d-m-Y",strtotime($row->check_in_date . '+' .$row->no_of_days . 'days'))}}</td>
+                                              <td>{{$row->ac_amount + $row->non_ac_amount + $row->door_mt_amount}}</td>
+                                              <td>{{$row->no_of_days}}</td>
+                                              <td>{{$row->deposite_rs}}</td>
                                               <td>
                                                   <div class="d-inline-block">
-                                                    <a href="javascript:;" class="text-primary"><img src="./assets/icon/orange-eye.png" width="20px"></a>
+                                                    <a href="{{route('pdf_CheckIn',$row->r_id)}}" class="text-primary"><img src="./assets/icon/orange-eye.png" width="20px"></a>
 
                                                     <a href="javascript:;" class="btn btn-sm btn-icon item-edit" data-bs-toggle="modal"
                                                     data-bs-target="#exLargeModal"><img src="./assets/icon/orange-edit.png" width="20px"></a>
