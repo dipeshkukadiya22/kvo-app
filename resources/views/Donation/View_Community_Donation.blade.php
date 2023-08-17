@@ -114,7 +114,7 @@ button.swal2-cancel.btn.btn-label-danger {
 
                                                     @php
                                                     if(session('role')=="ADMIN"){ @endphp
-                                                        <a onclick="delete_community_donation({{$row->donation_id}})" class="text-danger delete-record"><img src="./assets/icon/orange-trash.png" width="20px"></a>
+                                                    <a onclick="delete_community_donation({{$row->donation_id}})" class="text-danger delete-record"><img src="./assets/icon/orange-trash.png" width="20px"></a>
                                                     @php } @endphp
                                                     
                                                   </div>

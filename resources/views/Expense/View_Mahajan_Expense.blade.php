@@ -105,14 +105,14 @@ button.swal2-cancel.btn.btn-label-danger {
                                               <td>{{$row->details}}</td>
                                               <td>
                                                   <div class="d-inline-block">
-                                                    <a href="{{route('pdf_Mahajan_Expense',$row->depo_id)}}" class="text-primary" ><i class="ti ti-eye"></i></a>
+                                                    <a href="{{route('pdf_Mahajan_Expense',$row->depo_id)}}" class="text-primary" ><img src="./assets/icon/orange-eye.png" width="20px"></a>
 
-                                                    <a class="btn btn-sm btn-icon item-edit" data-bs-toggle="offcanvas"
-                                                    data-bs-target="#offcanvasBackdrop" aria-controls="offcanvasBackdrop"><i class="text-primary ti ti-edit"></i></a>
+                                                    <a onclick="edit_mahajan_expense({{$row->depo_id}})" class="btn btn-sm btn-icon item-edit"
+                                                    ><img src="./assets/icon/orange-edit.png" width="20px"></a>
 
                                                     @php
                                                     if(session('role')=="ADMIN"){ @endphp
-                                                        <a class="text-danger delete-record"><i class="ti ti-trash"></i></a>
+                                                    <a onclick="delete_mahajan_expense({{$row->depo_id}})" class="text-danger delete-record"><img src="./assets/icon/orange-trash.png" width="20px"></a>
                                                     @php } @endphp
                                                     
                                                   </div>
@@ -610,13 +610,11 @@ button.swal2-cancel.btn.btn-label-danger {
   <!-- end num to word -->
   
   <script>
-    // Get all elements with class "item-edit"
-    const editLinks = document.querySelectorAll(".item-edit");
-    // Loop through each edit link and attach a click event listener
-    editLinks.forEach(link => {
-        link.addEventListener("click", function() {
-            // Show a confirmation dialog using SweetAlert2
-            var id=$(this).closest("tr").find(".id").val();
+  function edit_mahajan_expense(id)
+  {
+      const myOffcanvas = document.getElementById('offcanvasBackdrop');
+      let a=new bootstrap.Offcanvas(myOffcanvas);
+      a.show();
             var member_id=[];
             var temp=document.getElementById('name');
              for(i=0;i<temp.options.length;i++)
@@ -643,18 +641,12 @@ button.swal2-cancel.btn.btn-label-danger {
                           }
                   }
                 });
-        });
-    });
+  }             
 </script>
 
 <script>
-    // Get all elements with class "delete-record"
-    const deleteLinks = document.querySelectorAll(".delete-record");
-    // Loop through each delete link and attach a click event listener
-    deleteLinks.forEach(link => {
-        link.addEventListener("click", function() {
-            // Show a confirmation dialog using SweetAlert2
-            var id=$(this).closest("tr").find(".id").val();
+ function delete_mahajan_expense(id)
+  {
             Swal.fire({
                 title: "Are you sure?",
                 text: "You won't be able to revert this!",
@@ -680,8 +672,7 @@ button.swal2-cancel.btn.btn-label-danger {
                         });
                 }
             });
-        });
-    });
+  }
 
 
 

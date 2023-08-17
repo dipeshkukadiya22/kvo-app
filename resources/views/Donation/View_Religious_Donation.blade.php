@@ -107,14 +107,14 @@ button.swal2-cancel.btn.btn-label-danger {
                                               <td>{{$row->payment_mode}}</td>
                                               <td>
                                                   <div class="d-inline-block">
-                                                    <a href="{{route('pdf_Religious_Donation',$row->religious_donation_id)}}" class="text-primary"><i class="ti ti-eye"></i></a>
+                                                    <a href="{{route('pdf_Religious_Donation',$row->religious_donation_id)}}" class="text-primary"><img src="./assets/icon/orange-eye.png" width="20px"></a>
 
-                                                    <a class="btn btn-sm btn-icon item-edit" data-bs-toggle="offcanvas"
-                                                    data-bs-target="#offcanvasBackdrop" aria-controls="offcanvasBackdrop"><i class="text-primary ti ti-edit"></i></a>
+                                                    <a onclick="edit_religious_donation({{$row->religious_donation_id}})" class="btn btn-sm btn-icon item-edit"
+                                                    ><img src="./assets/icon/orange-edit.png" width="20px"></a>
 
                                                     @php
                                                     if(session('role')=="ADMIN"){ @endphp
-                                                        <a class="text-danger delete-record"><i class="ti ti-trash"></i></a>
+                                                    <a onclick="delete_religious_donation({{$row->religious_donation_id}})" class="text-danger delete-record"><img src="./assets/icon/orange-trash.png" width="20px"></a>
                                                     @php } @endphp
                                                     
                                                   </div>
@@ -785,12 +785,8 @@ button.swal2-cancel.btn.btn-label-danger {
   <!-- end num to word -->
 
 <script>
- const deleteLinks = document.querySelectorAll(".delete-record");
-    // Loop through each delete link and attach a click event listener
-    deleteLinks.forEach(link => {
-        link.addEventListener("click", function() {
-            // Show a confirmation dialog using SweetAlert2
-            var id=$(this).closest("tr").find(".id").val();
+function delete_community_donation(id)
+  {
             Swal.fire({
                 title: "Are you sure?",
                 text: "You won't be able to revert this!",
@@ -816,17 +812,13 @@ button.swal2-cancel.btn.btn-label-danger {
                         });
                 }
             });
-        });
-    });
+  }
 
-
- // Get all elements with class "item-edit"
- const editLinks = document.querySelectorAll(".item-edit");
-    // Loop through each delete link and attach a click event listener
-    editLinks.forEach(link => {
-        link.addEventListener("click", function() {
-            // Show a confirmation dialog using SweetAlert2
-            var id=$(this).closest("tr").find(".id").val();
+  function edit_religious_donation(id)
+  {
+      const myOffcanvas = document.getElementById('offcanvasBackdrop');
+      let a=new bootstrap.Offcanvas(myOffcanvas);
+      a.show();
             var member_id=[];
             var temp=document.getElementById('name');
              for(i=0;i<temp.options.length;i++)
@@ -878,8 +870,7 @@ button.swal2-cancel.btn.btn-label-danger {
                         }
                   }
                 });
-        });
-    });
+  }
 </script>
 <script>
   $("#cash").change(function(){
