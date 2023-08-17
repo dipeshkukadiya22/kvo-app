@@ -3,7 +3,7 @@
 	<head>
 		<style type="text/css">
 
-				@font-face {
+@font-face {
 					font-family: KAP119;
 					src: url('C:/xampplatest/htdocs/kvo-app/vendor/dompdf/dompdf/lib/fonts/KAP119.ttf');
 				}
@@ -83,7 +83,7 @@
 
                 .bigtitle{
                     font-size: 20px !important;
-                    font-weight: bolder !important;
+                    
                 }
 
 		</style>
@@ -128,7 +128,7 @@
 
 			<table class="table2 tg" style="width: 740px">
 				<tbody>
-					<tr style="font-weight: bold;">
+                <tr style="">
                     <td class="tg-0pky tac gujfont" width="8%">@D</td>
 					<td class="tg-0pky tac gujfont" width="52%">jI˜S®TG]\ 5]Ú\ GFD</td>
                     <td class="tg-0pky tac gujfont" width="10%">JI</td>
