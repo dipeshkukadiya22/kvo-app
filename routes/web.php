@@ -10,7 +10,7 @@ use App\Http\Controllers\donation;
 use App\Http\Controllers\Expense;
 use App\Http\Controllers\pdfcontroller;
 use App\Http\Controllers\MedicalController;
-
+use App\Http\Controllers\ReportController;
 
 /*
 |--------------------------------------------------------------------------
@@ -110,3 +110,7 @@ Route::get('/pdf_Mahajan_Expense/{id}',[pdfcontroller::class,'pdf_Mahajan_Expens
 Route::get('/pdf_Sangh_Expense/{id}',[pdfcontroller::class,'pdf_Sangh_Expense'])->name('pdf_Sangh_Expense');
 
 
+Route::get('religious_donation_report', [ReportController::class, 'religious_donation_report'])->name('religious_donation_report');
+Route::get('show_religious_donation_report', [ReportController::class, 'show_religious_donation_report'])->name('show_religious_donation_report');
+Route::get('religious_category_donation_report', [ReportController::class, 'religious_category_donation_report'])->name('religious_category_donation_report');
+Route::get('show_religious_category_donation_report', [ReportController::class, 'show_religious_category_donation_report'])->name('show_religious_category_donation_report');
