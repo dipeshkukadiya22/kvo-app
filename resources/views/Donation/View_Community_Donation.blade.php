@@ -107,14 +107,14 @@ button.swal2-cancel.btn.btn-label-danger {
                                               <td>{{$row->payment_mode}}</td>
                                               <td>
                                                   <div class="d-inline-block">
-                                                    <a href="{{route('pdf_Community_Donation',$row->donation_id)}}" class="text-primary"><i class="ti ti-eye"></i></a>
+                                                    <a href="{{route('pdf_Community_Donation',$row->donation_id)}}" class="text-primary"><img src="./assets/icon/orange-eye.png" width="20px"></a>
 
-                                                    <a class="btn btn-sm btn-icon item-edit" data-bs-toggle="offcanvas"
-                                                    data-bs-target="#offcanvasBackdrop" aria-controls="offcanvasBackdrop"><i class="text-primary ti ti-edit"></i></a>
+                                                    <a onclick="edit_community_donation({{$row->donation_id}})" class="btn btn-sm btn-icon item-edit"
+                                                    ><img src="./assets/icon/orange-edit.png" width="20px"></a>
 
                                                     @php
                                                     if(session('role')=="ADMIN"){ @endphp
-                                                        <a class="text-danger delete-record"><i class="ti ti-trash"></i></a>
+                                                        <a onclick="delete_community_donation({{$row->donation_id}})" class="text-danger delete-record"><img src="./assets/icon/orange-trash.png" width="20px"></a>
                                                     @php } @endphp
                                                     
                                                   </div>
@@ -719,89 +719,80 @@ button.swal2-cancel.btn.btn-label-danger {
   <!-- end num to word -->
 
 <script>
- const deleteLinks = document.querySelectorAll(".delete-record");
-    // Loop through each delete link and attach a click event listener
-    deleteLinks.forEach(link => {
-        link.addEventListener("click", function() {
-            // Show a confirmation dialog using SweetAlert2
-            var id=$(this).closest("tr").find(".id").val();
-            Swal.fire({
-                title: "Are you sure?",
-                text: "You won't be able to revert this!",
-                icon: "warning",
-                showCancelButton: true,
-                confirmButtonColor: "#3085d6",
-                cancelButtonColor: "#d33",
-                confirmButtonText: "Yes, delete it!",
-            }).then((result) => {
-                // If the user confirms the deletion, proceed with the deletion logic
-                if (result.isConfirmed) {
-                  $.ajax({
-                    url:"{{url('delete_community_donation')}}" +"/"+ id,
-                    type:'GET',
-                    success:function(response){
-                        Swal.fire(
-                            'Deleted!',
-                            'Your Record has been deleted.',
-                            'success',
-                            );
-                            location.reload();
-                            }
-                        });
-                }
-            });
-        });
-    });
-
-
- // Get all elements with class "item-edit"
- const editLinks = document.querySelectorAll(".item-edit");
-    // Loop through each delete link and attach a click event listener
-    editLinks.forEach(link => {
-        link.addEventListener("click", function() {
-            // Show a confirmation dialog using SweetAlert2
-            var id=$(this).closest("tr").find(".id").val();
-            var member_id=[];
-            var temp=document.getElementById('name');
-             for(i=0;i<temp.options.length;i++)
-                  {
-                    member_id[i]=temp.options[i].value;
-                  }
+  function delete_community_donation(id)
+  {
+      Swal.fire({
+          title: "Are you sure?",
+          text: "You won't be able to revert this!",
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonColor: "#3085d6",
+          cancelButtonColor: "#d33",
+          confirmButtonText: "Yes, delete it!",
+      }).then((result) => {
+          // If the user confirms the deletion, proceed with the deletion logic
+          if (result.isConfirmed) {
             $.ajax({
-                url:"{{url('get_community_donation')}}" +"/"+ id,
-                type:'GET',
-                  success:function(response){  
-                    var payment=response[0]['payment_mode'];
-                    var sr_no=response[0]['p_id'];
-                      $("#donation_id").val(response[0]['donation_id']);
-                      $("#date").val(response[0]['d_date']);
-                      $("#medical_checkup").val(response[0]['medical_checkup']);
-                      $("#bhojanshala").val(response[0]['bhojanshala']);
-                      $("#mahajan").val(response[0]['mahajan']);
-                      $("#shaikshanik").val(response[0]['shaikshanik']);
-                      $("#oxygen").val(response[0]['oxygen']);
-                      $("#lavajam").val(response[0]['lavajam']);
-                      $("#ambulance").val(response[0]['ambulance']);
-                      $("#other").val(response[0]['other']);
-                      $("#remarks").val(response[0]['remarks']);
-                      $("#total").val(response[0]['total']);
-                      $("#ankers").val(response[0]['total_in_word']);
-                      $("#payment").val(response[0]['payment_mode']); 
-                        if(payment=="CASH"){$("#cash").attr('checked',true);}
-                        if(payment=="UPI"){$("#upi").attr('checked',true);}
-                        if(payment=="DRAFT"){$("#draft").attr('checked',true);}
-                        if(payment=="CHEQUE"){$("#cheque").attr('checked',true);}
-                        member_id.forEach(myFunction)
-                        function myFunction(item, index, arr) {
-                            if((member_id[index])==sr_no)
-                            {
-                              $("#name option[value=" + sr_no + "]").attr('selected', 'selected'); 
-                            }
-                        }
+              url:"{{url('delete_community_donation')}}" +"/"+ id,
+              type:'GET',
+              success:function(response){
+                  Swal.fire(
+                      'Deleted!',
+                      'Your Record has been deleted.',
+                      'success',
+                      );
+                      location.reload();
+                      }
+                  });
+          }
+      });
+  }
+
+  function edit_community_donation(id)
+  {
+      const myOffcanvas = document.getElementById('offcanvasBackdrop');
+      let a=new bootstrap.Offcanvas(myOffcanvas);
+      a.show();
+      var member_id=[];
+      var temp=document.getElementById('name');
+        for(i=0;i<temp.options.length;i++)
+            {
+              member_id[i]=temp.options[i].value;
+            }
+      $.ajax({
+          url:"{{url('get_community_donation')}}" +"/"+ id,
+          type:'GET',
+            success:function(response){  
+              var payment=response[0]['payment_mode'];
+              var sr_no=response[0]['p_id'];
+                $("#donation_id").val(response[0]['donation_id']);
+                $("#date").val(response[0]['d_date']);
+                $("#medical_checkup").val(response[0]['medical_checkup']);
+                $("#bhojanshala").val(response[0]['bhojanshala']);
+                $("#mahajan").val(response[0]['mahajan']);
+                $("#shaikshanik").val(response[0]['shaikshanik']);
+                $("#oxygen").val(response[0]['oxygen']);
+                $("#lavajam").val(response[0]['lavajam']);
+                $("#ambulance").val(response[0]['ambulance']);
+                $("#other").val(response[0]['other']);
+                $("#remarks").val(response[0]['remarks']);
+                $("#total").val(response[0]['total']);
+                $("#ankers").val(response[0]['total_in_word']);
+                $("#payment").val(response[0]['payment_mode']); 
+                  if(payment=="CASH"){$("#cash").attr('checked',true);}
+                  if(payment=="UPI"){$("#upi").attr('checked',true);}
+                  if(payment=="DRAFT"){$("#draft").attr('checked',true);}
+                  if(payment=="CHEQUE"){$("#cheque").attr('checked',true);}
+                  member_id.forEach(myFunction)
+                  function myFunction(item, index, arr) {
+                      if((member_id[index])==sr_no)
+                      {
+                        $("#name option[value=" + sr_no + "]").attr('selected', 'selected'); 
+                      }
                   }
-                });
-        });
-    });
+            }
+          });
+  }
     $("#cash").change(function(){
         document.getElementById("payment").value="CASH";
       });

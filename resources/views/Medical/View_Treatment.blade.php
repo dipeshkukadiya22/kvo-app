@@ -109,14 +109,14 @@ button.swal2-cancel.btn.btn-label-danger {
                                               <td>{{$row->payment_mode}}</td>
                                               <td>
                                                   <div class="d-inline-block">
-                                                    <a href="{{route('pdf_Medical_Treatment',$row->sr_no)}}" class="text-primary" ><i class="ti ti-eye"></i></a>
+                                            
+                                                    <a href="{{route('pdf_Medical_Treatment',$row->sr_no)}}" class="text-primary" ><img src="./assets/icon/orange-eye.png" width="20px"></a>
 
-                                                    <a href="{{route('edit_treatment',$row->sr_no)}}" class="btn btn-sm btn-icon item-edit" data-bs-toggle="offcanvas"
-                                                    data-bs-target="#offcanvasBackdrop" aria-controls="offcanvasBackdrop"><i class="text-primary ti ti-edit"></i></a>
-
+                                                    <a onclick="edit_treatment({{$row->sr_no}})" class="btn btn-sm btn-icon item-edit"
+                                                    ><img src="./assets/icon/orange-edit.png" width="20px"></a>
                                                     @php
                                                     if(session('role')=="ADMIN"){ @endphp
-                                                        <a class="text-danger delete-record"><i class="ti ti-trash"></i></a>
+                                                        <a onclick="delete_treatment({{$row->sr_no}})" class="text-danger delete-record"><img src="./assets/icon/orange-trash.png" width="20px"></a>
                                                     @php } @endphp
                                                     
                                                     
@@ -664,52 +664,6 @@ button.swal2-cancel.btn.btn-label-danger {
   </script>
   <!-- end num to word -->
   
-  <script>
-    // Get all elements with class "item-edit"
-    const editLinks = document.querySelectorAll(".item-edit");
-    // Loop through each delete link and attach a click event listener
-    editLinks.forEach(link => {
-        link.addEventListener("click", function() {
-            // Show a confirmation dialog using SweetAlert2
-            var id=$(this).closest("tr").find(".id").val();
-            var member_id=[];
-            var temp=document.getElementById('name');
-             for(i=0;i<temp.options.length;i++)
-                  {
-                    member_id[i]=temp.options[i].value;
-                  }
-            $.ajax({
-                url:"{{url('get_member')}}" +"/"+ id,
-                type:'GET',
-                  success:function(response){ 
-                    var sr_no=response[0]['p_id'];
-                    var payment=response[0]['payment_mode'];
-                        $("#sr_no").val(response[0]['sr_no']); 
-                        $("#date").val(response[0]['date']);
-                        $("#phone").val(response[0]['phone_no']);
-                        $("#amount").val(response[0]['amount']);
-                        $("#doctor_name").val(response[0]['doctor_name']);
-                        $("#city").val(response[0]['city']);
-                        $("#ankers").val(response[0]['amount_in_words']);
-                        $("#remark").val(response[0]['remark']);
-                        $("#payment").val(response[0]['payment_mode']);
-                        if(payment=="CASH"){$("#cash").attr('checked',true);}
-                        if(payment=="UPI"){$("#upi").attr('checked',true);}
-                        if(payment=="DRAFT"){$("#draft").attr('checked',true);}
-                        if(payment=="CHEQUE"){$("#cheque").attr('checked',true);}
-                        member_id.forEach(myFunction)
-                        function myFunction(item, index, arr) {
-                            if((member_id[index])==sr_no)
-                            {
-                              $("#name option[value=" + sr_no + "]").attr('selected', 'selected'); 
-                            }
-                        }
-                      }   
-                });    
-        });
-         
-    });
-</script>
 <script>
 $("#name").change(function(){
       const id=document.getElementById("name").value;
@@ -738,40 +692,35 @@ $("#name").change(function(){
       
 </script>
 <script>
-    // Get all elements with class "delete-record"
-    const deleteLinks = document.querySelectorAll(".delete-record");
-    // Loop through each delete link and attach a click event listener
-    deleteLinks.forEach(link => {
-        link.addEventListener("click", function() {
-            // Show a confirmation dialog using SweetAlert2
-            var id=$(this).closest("tr").find(".id").val();
-            Swal.fire({
-                title: "Are you sure?",
-                text: "You won't be able to revert this!",
-                icon: "warning",
-                showCancelButton: true,
-                confirmButtonColor: "#3085d6",
-                cancelButtonColor: "#d33",
-                confirmButtonText: "Yes, delete it!",
-            }).then((result) => {
-                // If the user confirms the deletion, proceed with the deletion logic
-                if (result.isConfirmed) {
-                  $.ajax({
-                    url:"{{url('delete_treatment')}}" +"/"+ id,
-                    type:'GET',
-                    success:function(response){
-                        Swal.fire(
-                            'Deleted!',
-                            'Your Record has been deleted.',
-                            'success',
-                            );
-                            location.reload();
-                            }
-                        });
-                }
-            });
-        });
-    });
+  function delete_treatment(id)
+  {
+    alert(id);
+      Swal.fire({
+          title: "Are you sure?",
+          text: "You won't be able to revert this!",
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonColor: "#3085d6",
+          cancelButtonColor: "#d33",
+          confirmButtonText: "Yes, delete it!",
+      }).then((result) => {
+          // If the user confirms the deletion, proceed with the deletion logic
+          if (result.isConfirmed) {
+            $.ajax({
+              url:"{{url('delete_treatment')}}" +"/"+ id,
+              type:'GET',
+              success:function(response){
+                  Swal.fire(
+                      'Deleted!',
+                      'Your Record has been deleted.',
+                      'success',
+                      );
+                      location.reload();
+                      }
+                  });
+          }
+      });
+  }   
 
 
     $("#kvo_update_treatmet").submit(function(){
@@ -796,6 +745,48 @@ $("#name").change(function(){
            });
         }
     });
+
+
+    function edit_treatment(id)
+    {
+      const myOffcanvas = document.getElementById('offcanvasBackdrop');
+      let a=new bootstrap.Offcanvas(myOffcanvas);
+      a.show();
+      var member_id=[];
+      var temp=document.getElementById('name');
+        for(i=0;i<temp.options.length;i++)
+            {
+              member_id[i]=temp.options[i].value;
+            }
+        $.ajax({
+            url:"{{url('get_member')}}" +"/"+ id,
+            type:'GET',
+              success:function(response){ 
+                var sr_no=response[0]['p_id'];
+                var payment=response[0]['payment_mode'];
+                    $("#sr_no").val(response[0]['sr_no']); 
+                    $("#date").val(response[0]['date']);
+                    $("#phone").val(response[0]['phone_no']);
+                    $("#amount").val(response[0]['amount']);
+                    $("#doctor_name").val(response[0]['doctor_name']);
+                    $("#city").val(response[0]['city']);
+                    $("#ankers").val(response[0]['amount_in_words']);
+                    $("#remark").val(response[0]['remark']);
+                    $("#payment").val(response[0]['payment_mode']);
+                    if(payment=="CASH"){$("#cash").attr('checked',true);}
+                    if(payment=="UPI"){$("#upi").attr('checked',true);}
+                    if(payment=="DRAFT"){$("#draft").attr('checked',true);}
+                    if(payment=="CHEQUE"){$("#cheque").attr('checked',true);}
+                    member_id.forEach(myFunction)
+                    function myFunction(item, index, arr) {
+                        if((member_id[index])==sr_no)
+                        {
+                          $("#name option[value=" + sr_no + "]").attr('selected', 'selected'); 
+                        }
+                    }
+                  }   
+            });    
+    }
 </script>
 
 @endsection
