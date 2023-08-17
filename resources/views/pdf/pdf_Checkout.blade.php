@@ -5,7 +5,7 @@
 
 				@font-face {
 					font-family: KAP119;
-					src: url('C:/xampp/htdocs/kvo-app/vendor/dompdf/dompdf/lib/fonts/KAP119.ttf');
+					src: url('C:/xampplatest/htdocs/kvo-app/vendor/dompdf/dompdf/lib/fonts/KAP119.ttf');
 				}
 
 				@page  
@@ -138,7 +138,7 @@
 
 			<table class="table2 tg" style="width: 740px">
 				<tbody>
-					<tr style="font-weight: bold;">
+					<tr>
 					<td class="tg-0pky tac gujfont" width="20%">~DGL lJUT</td>
 					<td class="tg-0pky tac gujfont" width="10%">S], ÚD</td>
 					<td class="tg-0pky tac gujfont" width="10%">EF0]\</td>

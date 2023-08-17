@@ -218,9 +218,11 @@
                                             <td>
                                             @if ($row->status == 1)
                                             <div>
-                                          <label for="flatpickr-multi" class="form-label text-danger">Booked</label>
-                                          <i class="fa fa-calendar text-danger" id="datepicker"></i>
-                                          </i>
+                                            <label for="flatpickr-multi" id="cal" class="form-label text-danger">Booked</label>
+
+                                         
+                                       
+                                         
                                       </div>
                                         @else
                                             <span class="text-success">{{$row->status == 0 ? 'Available' : ''}}</span>
@@ -652,10 +654,7 @@
     $('div.head-label').html('<h5 class="card-title mb-0">Details for all Rooms</h5> ');
 
     </script>
-    <!-- date picker -->
-    <script>
-    $("#bs-datepicker-multidate").datepicker({ multidate: true });
-    </script>
+
 
     <script>
     // Function to update room counters
@@ -676,7 +675,7 @@
    </script>
 
 
-<script>
+<!-- <script>
  $(document).ready(function() {
   let currentStep = 1;
 
@@ -702,57 +701,32 @@
            date1.getFullYear() === date2.getFullYear();
   }
 });
-</script>
-<script type="text/javascript">
-        function setDatepicker(_this) {
-  
-            /* Get the parent class name so we 
-                can show date picker */
-            let className = $(_this).parent()
-                .parent().parent().attr('class');
-  
-            // Remove space and add '.'
-            let removeSpace = className.replace(' ', '.');
-  
-            // jQuery class selector
-            $("." + removeSpace).datepicker({
-                format: "dd/mm/yyyy",
-  
-                // Positioning where the calendar is placed
-                orientation: "bottom auto",
-                // Calendar closes when cursor is 
-                // clicked outside the calendar
-                autoclose: true,
-                showOnFocus: "false"
-            });
-        }
-    </script>
-    <script>
-    $(function() {
-    $("#datepicker").datepicker();
-    $("#datepicker").on("change",function(){
-        var selected = $(this).val();
-        alert(selected);
-    });
-});
-</script>
+</script> -->
 <script>
-    // Initialize Flatpickr
-    $("#datepicker").flatpickr();
+   jQuery(document).ready(function($){
+    var date1 = new Date('08/09/2023'); 
 
-    // Retrieve the check-in date from the data attribute
-    var checkInDate = $("#datepicker").data("check-in-date");
+var date2 = new Date('08/12/2023');
 
-    // Highlight the entire month of the check-in date
-    var monthStart = new Date(checkInDate.getFullYear(), checkInDate.getMonth(), 1);
-    var monthEnd = new Date(checkInDate.getFullYear(), checkInDate.getMonth() + 1, 0);
-    var currentDate = monthStart;
 
-    while (currentDate <= monthEnd) {
-        $(".flatpickr-day[data-date='" + currentDate.toISOString().split('T')[0] + "']").addClass("highlighted");
-        currentDate.setDate(currentDate.getDate() + 1);
-    }
+eventDates[date1] = date1;
+eventDates[date2] = date2;
+      $('#cal').datepicker({
+         beforeShowDay: function(date) {
+            var highlight = eventDates[date];
+            if (highlight) {
+               return [true, "event", 'Tooltip text'];
+            } else {
+               return [true, '', ''];
+            }
+         }
+      });
+   });
 </script>
+ 
+
+
+
 
 
 

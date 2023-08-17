@@ -119,23 +119,23 @@
                             <form class="browser-default-validation" method="POST" action="{{route('room-booking')}}">
                               @csrf
                               <div class="mb-3">
-                                <label class="form-label" for="basic-default-name">Name</label>
-                                <input type="text" name="m_name" class="form-control" style="text-transform:uppercase" id="basic-default-name"  style="text-transform:uppercase"  placeholder="John Doe" />
+                                <label class="form-label required" for="basic-default-name" >Name</label>
+                                <input type="text" name="m_name" class="form-control" style="text-transform:uppercase" id="basic-default-name"  style="text-transform:uppercase"  placeholder="Name" required />
                               </div>
                               
                               <div class="mb-3">
                                 <label class="form-label" for="multicol-phone">Phone Number</label>
-                                <input type="number" name="phone_no" id="multicol-phone" class="form-control phone-mask" placeholder="658 799 8941" required />
+                                <input type="number" name="phone_no" id="multicol-phone" class="form-control phone-mask" placeholder="658 799 8941" required>
 
                               </div>
 
                               <div class="mb-3">
                                 <label class="form-label" for="basic-default-email">Email</label>
-                                <input type="email" name="email" id="basic-default-email" class="form-control" placeholder="john.doe"/>
+                                <input type="email" name="email" id="basic-default-email" class="form-control" placeholder="Email" required/>
                               </div>
                               <div class="mb-3">
                                 <label class="form-label" for="city">City</label>
-                                <input type="text" name="city" class="form-control" id="city" style="text-transform:uppercase" placeholder="Bhuj" />
+                                <input type="text" name="city" class="form-control" id="city" style="text-transform:uppercase" placeholder="Bhuj" required/>
                               </div>
     
                               <!-- <div class="col-4">
@@ -220,7 +220,7 @@
                       </div>
                     </div>
                     <div class="bs-stepper-content">
-                     <form action="{{route('RoomBooking')}}" method="POST">
+                     <form action="{{route('RoomBooking')}}" method="POST" id="room_booking">
                         @csrf
                         <!-- Account Details -->
                         <div id="account-details" class="content">
@@ -231,7 +231,7 @@
                             
                               <!-- Basic -->
                              <div class="col-md-4">
-                                <label for="select2Basic" class="form-label" >Name</label>
+                                <label for="select2Basic" class="form-label" ><span class="required">Name</span></label>
                                 <select id="select2Basic" class="select2 form-select" data-allow-clear="true" name="name" placeholder="select name" required>
                                   <option value=""></option>
                                   @foreach ($m_data as $row)  
@@ -244,37 +244,38 @@
     
                               <div class="col-md-4">
                             
-                                  <label class="form-label" for="basic-default-email">Email</label>
-                                  <input type="email" id="member_email" name="email" class="form-control" placeholder="john.doe" value="{{ (!empty($member) )? $member->email : '' }}" />
+                                  <label class="form-label " for="basic-default-email" >
+                                    <span class="required">Email</span></label>
+                                  <input type="email" id="member_email" name="email" class="form-control" placeholder="john.doe" value="{{ (!empty($member) )? $member->email : '' }}" required/>
 
                               </div>                                                                                                            
 
     
                               <div class="col-md-4">
                                 
-                                <label class="form-label" for="multicol-phone">Phone Number</label>
+                                <label class="form-label" for="multicol-phone" required>Phone Number</label>
                                 <input type="number" id="member-phone" name="phone_no" class="form-control phone-mask" placeholder="658 799 8941" aria-label="658 799 8941" value="{{ (!empty($member)) ? $member->phone_no : '' }}"  pattern="[1-9]{1}[0-9]{9}" maxlength="10" required/>
                               </div>
                               
 
                               <div class="col-md-4">
-                                <label class="form-label" for="basic-default-name">Age</label>
-                                <input type="number" class="form-control" name="age" id="basic-default-age" placeholder="Age" />
+                                <label class="form-label" for="basic-default-name" required>Age</label>
+                                <input type="number" class="form-control" name="age" id="basic-default-age" placeholder="Age" required/>
                               </div>
     
                               <div class="col-4">
-                                <label class="form-label" for="collapsible-address">Address</label>
+                                <label class="form-label" for="collapsible-address" required>Address</label>
                                
                                 
                                 
-                                <textarea name="collapsibleaddress" style="text-transform:uppercase" class="form-control" style="text-transform:uppercase" id="member-address" rows="1" placeholder="1456, Mall Road">{{ (!empty($member) ) ? $member->address : '' }}</textarea>
+                                <textarea name="collapsibleaddress" style="text-transform:uppercase" class="form-control" style="text-transform:uppercase" id="member-address" rows="1" placeholder="1456, Mall Road" required>{{ (!empty($member) ) ? $member->address : '' }}</textarea>
                               </div>
                                                         
                               
                               <!-- Basic -->
                               <div class="col-md-4">
-                                <label for="select2Basic" class="form-label">Community</label>
-                                <select id="select2Basic" class="select2 form-select form-select-lg" data-allow-clear="true" name="community">
+                                <label for="select2Basic" class="form-label" required>Community</label>
+                                <select id="select2Basic" class="select2 form-select form-select-lg" data-allow-clear="true" name="community" required>
                                   <option value="Hindu" selected>Hindu</option>
                                   <option value="Jain">Jain</option>
                                   <option value="CA">California</option>
@@ -294,14 +295,14 @@
                               
                               <div class="col-md-4">
                                 <label for="defaultFormControlInput" class="form-label">Sub Community</label>
-                                <input type="text" class="form-control" name="subcommunity" id="defaultFormControlInput" placeholder="John Doe" aria-describedby="defaultFormControlHelp" />
+                                <input type="text" class="form-control" name="subcommunity" id="defaultFormControlInput" placeholder="John Doe" aria-describedby="defaultFormControlHelp" required/>
                               </div>
 
                               
                               
                               <div class="col-md-4">
                                 <label for="defaultFormControlInput" class="form-label">City</label>
-                                <input type="text" class="form-control" name="city" id="member_city" style="text-transform:uppercase" placeholder="John Doe" aria-describedby="defaultFormControlHelp" value="{{ (!empty($member)) ? $member->city : '' }}" />
+                                <input type="text" class="form-control" name="city" id="member_city" style="text-transform:uppercase" placeholder="John Doe" aria-describedby="defaultFormControlHelp" value="{{ (!empty($member)) ? $member->city : '' }}" required/>
                               </div>
 
                               <div class="col-md-4">
@@ -384,7 +385,7 @@
                                   <label class="form-label" for="basic-default-name">Amount</label>
                                   <div class="input-group">
                                     <span class="input-group-text">₹</span>
-                                    <input type="number" class="form-control"  name="ac_amount" placeholder="Amount" aria-label="Amount (to the nearest indian)" id="ac-amount" value="" />
+                                    <input type="number" class="form-control"  name="ac_amount" placeholder="Amount" aria-label="Amount (to the nearest indian)" id="ac-amount" />
                                   </div>
                                 </div>
 
@@ -412,7 +413,7 @@
                                   <label class="form-label" for="basic-default-name">Amount</label>
                                   <div class="input-group">
                                     <span class="input-group-text">₹</span>
-                                    <input type="number" class="form-control"  name="non_ac_amount" placeholder="Amount" aria-label="Amount (to the nearest indian)" id="non-ac-amount" value="" />
+                                    <input type="number" class="form-control"  name="non_ac_amount" placeholder="Amount" aria-label="Amount (to the nearest indian)" id="non-ac-amount" />
                                   </div>
                                 </div>
 
@@ -439,7 +440,7 @@
                                   <label class="form-label" for="basic-default-name">Amount</label>
                                   <div class="input-group">
                                     <span class="input-group-text">₹</span>
-                                    <input type="number" class="form-control"  name="door_mt_amount" placeholder="Amount" aria-label="Amount (to the nearest indian)" id="door-mt-amount" value="" />
+                                    <input type="number" class="form-control"  name="door_mt_amount" placeholder="Amount" aria-label="Amount (to the nearest indian)" id="door-mt-amount"  />
                                   </div>
                                 </div>
   
@@ -459,7 +460,7 @@
 
                             <div class="col-md-4">
                                 <label for="formFileMultiple" class="form-label">Identity Proof</label>
-                                <input class="form-control" type="file" name="id_proof" id="formFileMultiple" multiple />
+                                <input class="form-control" type="file" name="id_proof" id="formFileMultiple" multiple required />
                             </div>
   
                             <div class="col-md-4">
@@ -471,7 +472,7 @@
   
                             <div class="col-md-4">
                               <label class="form-label" for="deposit-amount">Deposit Rs</label>
-                              <input type="number" class="form-control" name="deposite_rs" id="deposit-amount" placeholder="Deposit Rs">
+                              <input type="number" class="form-control" name="deposite_rs" id="deposit-amount" placeholder="Deposit Rs" required>
                             </div>
                             
                             <div class="col-md-4">
@@ -481,17 +482,17 @@
 
                             <div class="col-md-4">
                               <label class="form-label" for="deposit-amount">No of Days</label>
-                              <input type="number" class="form-control" name="no_of_days" id="no_of_days" placeholder="no_of_days">
+                              <input type="number" class="form-control" name="no_of_days" id="no_of_days" placeholder="no_of_days" required>
                             </div>
                             
                             <div class="col-md-4">
                               <label class="form-label" for="rupees-in-words">Occupation</label>
-                              <input type="text" class="form-control" name="occupation" id="occupation" placeholder="Occupation" require>
+                              <input type="text" class="form-control" name="occupation" id="occupation" placeholder="Occupation" required>
                             </div>
 
                             <div class="col-md-4">
                               <label class="form-label" for="rupees-in-words">Reason</label>
-                              <input type="text" class="form-control" name="reason" id="reason" placeholder="Reason to stay" >
+                              <input type="text" class="form-control" name="reason" id="reason" placeholder="Reason to stay" required>
                             </div>
   
                             
@@ -540,12 +541,12 @@
                                       <label class="d-block form-label">Gender</label>
                                     
                                       <div class="form-check form-check-inline">
-                                      <input class="form-check-input" type="radio" name="gender[]" id="inlineRadio1" value="MALE" checked />
+                                      <input class="form-check-input" type="radio" name="gender" id="inlineRadio1" value="MALE" checked />
                                       <label class="form-check-label" for="inlineRadio1_${i}">Male</label>
 
                                         </div>
                                         <div class="form-check form-check-inline">
-                                          <input class="form-check-input" type="radio" name="gender[]" id="inlineRadio2" value="FEMALE" />
+                                          <input class="form-check-input" type="radio" name="gender" id="inlineRadio2" value="FEMALE" />
                                           <label class="form-check-label" for="inlineRadio2_${i}">Female</label>
                                         </div>
 
@@ -640,7 +641,7 @@
                                           <td id="check_date"></td>
                                         </tr>
                                         <tr>
-                                          <td class="pe-4">Amount:</td>
+                                          <td class="pe-4">Amount:-</td>
                                           <td id="room_amount"></td>
                                         </tr>
                                         
@@ -1064,36 +1065,41 @@ $(document).ready(function () {
 <script>
  
   $(document).ready(function() {
-    let currentStep = 1;
-    var currentDateTime = new Date();
+    // let currentStep = 1;
+    // var currentDateTime = new Date();
 
-    $('#flatpickr-datetime').flatpickr({
-      enableTime: true,
-      dateFormat: "d-m-Y H:i",
-      defaultDate: currentDateTime
-    });
+    // $('#flatpickr-datetime').flatpickr({
+    //   enableTime: true,
+    //   dateFormat: "d-m-Y H:i",
+    //   defaultDate: currentDateTime
+    // });
     $(".btn-next").on("click", function() {
       const selectedList1 = $('#select2Multiple11').val();
       const selectedList2 = $('#select2Multiple22').val();
       const selectedList3 = $('#select2Multiple33').val();
       const selectedDate = $('#flatpickr-datetime').val();
       const acAmount = parseFloat($('#ac-amount').val()) || 0; 
-      const nonAcAmount = parseFloat($('#non-ac-amount').val()) || 0;
-      const doorMtAmount = parseFloat($('#door-mt-amount').val()) || 0;
+    const nonAcAmount = parseFloat($('#non-ac-amount').val()) || 0;
+    const doorMtAmount = parseFloat($('#door-mt-amount').val()) || 0;
 
-      const totalAmount = acAmount + nonAcAmount + doorMtAmount;
+    const totalAmount = acAmount + nonAcAmount + doorMtAmount;
+
+    $('#room_amount').text( totalAmount);
       const selectedRooms = 'A.C. Room:= ' + selectedList1 + ', Non A.C. Room:= ' + selectedList2 + ', Door Metri A.C. / Non A.C. Room:= ' + selectedList3;
 
       $('#room_lst').text(selectedRooms);
 
       if (selectedDate && selectedDate.length > 0) {
         $('#check_date').text( selectedDate);
-        currentStep++;
+        // currentStep++;
       }
-      $('#room_amount').text('Total Amount: ' + totalAmount);
+     
     });
   });
 </script>
+
+
+
 
 
 
@@ -1108,20 +1114,20 @@ $(document).ready(function () {
       $(".rep-table").empty();
       const fullName = $('#full_name_form').val();
       const age = $('#member_age').val();
-      const selectedGender = $('input[name="gender[]"]').val();
+      const selectedGender = $('input[name="gender"]').val();
       const relation = $('#member_relation').val();
 
       $('#member_full_name').text(fullName);
       $('#members_age').text(age);
       $('#member_gen').text(selectedGender);
       $('#member_rel').text(relation);
-// loop vadu kya append ?
+
       $(".rep-table").append(
         '<tr>' +
         '<td>'+ '1' +'</td>' +
         '<td id="member_full_name">' + $('#full_name_form').val() + '</td>' +
         '<td id="members_age">' + $('#member_age').val() + '</td>' +
-        '<td id="member_gen">' + $('input[name="gender[]"').val() + '</td>' +
+        '<td id="member_gen">' + $('input[name="gender"').val() + '</td>' +
         '<td id="member_rel">' + $('#member_relation').val() + '</td>' +
         '</tr>'
       );
@@ -1138,7 +1144,7 @@ $(document).ready(function () {
           '<td>'+ j +'</td>' +
           '<td class="member_full_name' + i + '">' + $('#full_name_form' + i).val() + '</td>' +
           '<td class="members_age' + i + '">' + $('#member_age' + i).val() + '</td>' +
-          '<td class="member_gen' + i + '">' + $('input[name="gender[]'+i+'"]').val() + '</td>' +
+          '<td class="member_gen' + i + '">' + $('input[name="gender'+i+'"]').val() + '</td>' +
           '<td class="member_rel' + i + '">' + $('#member_relation' + i).val() + '</td>' +
           '</tr>'
         );
@@ -1235,15 +1241,44 @@ $(document).ready(function () {
 </script>
 
 <script>
-$(document).ready(function() {
-    $(".btn-submit").click(function() {
-      //console.log("click");
+ $("#room_booking").submit(function(){
       
-        alert("submited............");
-      
-      
-    });
+    
+    
+     
+      var address = document.getElementById('member-address').value;
+      var city = document.getElementById('member_city').value;
+    
+  
+      if (address  === '' && city === '' ) {
+  
+          Swal.fire({
+              text: "Sorry, looks like there are some errors detected, please try again.",
+              icon: "error",
+              buttonsStyling: false,
+              confirmButtonText: "Ok, got it!",
+              customClass: {
+                  confirmButton: "btn btn-primary"
+              }
+          });
+          return false; // Prevent form submission
+      } else {
+          Swal.fire({
+              text: "Form has been successfully submitted!",
+              icon: "success",
+              buttonsStyling: false,
+              confirmButtonText: "Ok, got it!",
+              customClass: {
+                  confirmButton: "btn btn-primary"
+              }
+          }).then(function(t) {
+              if (t.isConfirmed) {
+                  location.reload();
+              }
+          });
+      }
   });
+  </script>
 </script>
 <script>
 const contactInput = document.getElementById('phone_no');

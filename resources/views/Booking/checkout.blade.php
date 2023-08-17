@@ -791,6 +791,9 @@ const editLinks = document.querySelectorAll(".item-edit");
                       $("#deposite").val(response[0]['deposite_rs']);
                 
                       var room=response[0]['room_no'];
+                    
+
+                      
                       if(room==301 || room==302 || room==401 || room==402)
                       {
                         $("#dlx_room").val(room);
@@ -799,7 +802,7 @@ const editLinks = document.querySelectorAll(".item-edit");
                         $("#dlx_amount").val(response[0]['no_of_days'] * response[0]['ac_amount']);
                         $("#dlx_room_total").val(response[0]['no_of_days'] * response[0]['ac_amount']);
                       }
-                      if(room==303 || room==304 ||room==305 || room==306 )
+                      if(room==303 || room==304 ||room==305 || room==306 || room==403)
                       {
                         $("#ac_room").val(room);
                         $("#ac_room_charge").val(response[0]['ac_amount']);
@@ -807,7 +810,7 @@ const editLinks = document.querySelectorAll(".item-edit");
                         $("#ac_amount").val(response[0]['no_of_days'] * response[0]['ac_amount']);
                         $("#ac_room_total").val(response[0]['no_of_days'] * response[0]['ac_amount']);
                       }
-                      if(room==201 || room==202 ||room==203 || room==204 ||room==205 || room==206)
+                      if(room==201 || room==202 ||room==203 || room==204 ||room==205 || room==206 || room==404 || room==405 || room==406)
                       {
                         $("#non_ac_room").val(room);
                         $("#non_ac_room_charge").val(response[0]['non_ac_amount']);
@@ -818,7 +821,22 @@ const editLinks = document.querySelectorAll(".item-edit");
                       
                       if(room==1 || room==2 ||room==3 || room==4 ||room==5 || room==6 ||room==7 || room==8 ||room==9 || room==10)
                       {
+                        $("#non_dmt_ac_room").val(room);
+                        $("#non_dmt_ac_room_charge").val(response[0]['door_mt_amount']);
+                        $("#non_dmt_ac_no_of_days").val(response[0]['no_of_days']);
+                        $("#non_dmt_ac_amount").val(response[0]['no_of_days'] * response[0]['door_mt_amount']);
+                        $("#non_dmt_ac_room_total").val(response[0]['no_of_days'] * response[0]['door_mt_amount']);
                       }
+
+                      if(room==11 || room==12 ||room==13 || room==14 ||room==15 || room==16 ||room==17 || room==18 ||room==19 || room==20)
+                      {
+                        $("#dmt_ac_room").val(room);
+                        $("#dmt_ac_room_charge").val(response[0]['door_mt_amount']);
+                        $("#dmt_ac_no_of_days").val(response[0]['no_of_days']);
+                        $("#dmt_ac_amount").val(response[0]['no_of_days'] * response[0]['door_mt_amount']);
+                        $("#dmt_ac_room_total").val(response[0]['no_of_days'] * response[0]['door_mt_amount']);
+                      }
+               
                   
                 
                       //$("#total").val(dlx+ac+non_ac+dmt_ac+dmt_non_ac);
@@ -855,12 +873,36 @@ const editLinks = document.querySelectorAll(".item-edit");
     var amt=parseInt(document.getElementById("ac_amount").value); 
     var excharge=parseInt(document.getElementById("ac_room_Excharge").value); 
     $("#ac_room_total").val(amt+excharge);
+    var total=parseInt(document.getElementById("ac_room_total").value);
+    $("#total").val(total);
+    $("#net_amount").val(total-deposite);
   });
 
   $("#non_ac_room_Excharge").change(function(){
     var amt=parseInt(document.getElementById("non_ac_amount").value); 
     var excharge=parseInt(document.getElementById("non_ac_room_Excharge").value); 
     $("#non_ac_room_total").val(amt+excharge);
+    var total=parseInt(document.getElementById("non_ac_room_total").value);
+    $("#total").val(total);
+    $("#net_amount").val(total-deposite);
+  });
+
+  $("#non_dmt_ac_room_Excharge").change(function(){
+    var amt=parseInt(document.getElementById("door_mt_amount").value); 
+    var excharge=parseInt(document.getElementById("non_dmt_ac_room_Excharge").value); 
+    $("#non_dmt_ac_room_total").val(amt+excharge);
+    var total=parseInt(document.getElementById("non_dmt_ac_room_total").value);
+    $("#total").val(total);
+    $("#net_amount").val(total-deposite);
+  });
+
+  $("#dmt_ac_room_Excharge").change(function(){
+    var amt=parseInt(document.getElementById("door_mt_amount").value); 
+    var excharge=parseInt(document.getElementById("dmt_ac_room_Excharge").value); 
+    $("#dmt_ac_room_total").val(amt+excharge);
+    var total=parseInt(document.getElementById("dmt_ac_room_total").value);
+    $("#total").val(total);
+    $("#net_amount").val(total-deposite);
   });
   </script>
 @endsection

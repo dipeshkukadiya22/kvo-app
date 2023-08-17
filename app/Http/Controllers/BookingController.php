@@ -49,16 +49,8 @@ class BookingController extends Controller
         $details->id_proof=$req->id_proof;
         $details->occupation=$req->occupation;
         $details->reason=$req->reason;
-        $details->save();
-        
-        /*Insert Member deatil*/
-   
-    //     $file = $req->file('id_proof');
-
-    // if (!$file) {
-    //     echo  "Please select a valid file";
-    // }
-    //     $path = $req->file('id_proof')->store('id_proof');
+        //$details->save();
+    
 
         /*Insert Room Booking deatil*/
         $booking = new room_details();
@@ -67,12 +59,9 @@ class BookingController extends Controller
         $acRoomList = implode(',', $req->input('select2Multiple1', []));
         $nonAcRoomList = implode(',', $req->input('select2Multiple2', []));
         $doorMetricRoomList = implode(',', $req->input('select2Multiple3', []));
-        
+        //dd($acRoomList);
         $booking->room_list = "$acRoomList,$nonAcRoomList,$doorMetricRoomList";
-        // $acroomlist = ($roomListArray['ac_room']);
-        // $nonacroomlist = ($roomListArray['non_ac_room']);
-        // $doormtnonacroomlist = ($roomListArray['door_metric_ac_non_ac_room']);
-        //dd($booking->room_list);
+      
         $booking->ac_amount = $req->ac_amount;
         $booking->non_ac_amount = $req->non_ac_amount;
         $booking->door_mt_amount = $req->door_mt_amount;
@@ -80,40 +69,29 @@ class BookingController extends Controller
         $booking->rs_word = $req->rs_word;
         $booking->no_of_days = $req->no_of_days;
         $booking->member_id=$personal_details_id;
-        //dd($booking);
-        $booking->save();
         
-//         $roomNumbersToUpdate = [];
+        if(!empty($req->select2Multiple1)){
+        foreach($req->select2Multiple1 as $room)
+        {
+            $data=DB::UPDATE("UPDATE add_room SET STATUS='1',room_detail_id='$req->deposit_no' where room_no='$room'");
+        }}
+        if(!empty($req->select2Multiple2)){
+        foreach($req->select2Multiple2 as $room)
+        {
+            $data=DB::UPDATE("UPDATE add_room SET STATUS='1',room_detail_id='$req->deposit_no' where room_no='$room'");
+        }}
+        if(!empty($req->select2Multiple3)){
+        foreach($req->select2Multiple3 as $room)
+        {
+            $data=DB::UPDATE("UPDATE add_room SET STATUS='1',room_detail_id='$req->deposit_no' where room_no='$room'");
+        }}
 
-// $acRoomNumbers = explode(',', $roomListArray['ac_room']);
-// $nonAcRoomNumbers = explode(',', $roomListArray['non_ac_room']);
-// $doorMetricRoomNumbers = explode(',', $roomListArray['door_metric_ac_non_ac_room']);
-
-// $allRoomNumbers = array_merge($acRoomNumbers, $nonAcRoomNumbers, $doorMetricRoomNumbers);
-
-// // Filter out any duplicates and empty room numbers
-// $roomNumbersToUpdate = array_filter(array_unique($allRoomNumbers));
-
-// // Update room status
-// $roomsToUpdate = add_room::whereIn('room_no', $roomNumbersToUpdate)->get();
-
-// foreach ($roomsToUpdate as $room) {
-//     $room->status = 1;
-//     $room->save();
-// }
-      
-      /*temp hide
-        $m_details = new member_details();
-        $m_details->full_name =$req->full_name;
-        $m_details->age=$req->m_age;
-        $m_details->gender = $req->input('gender' . $i);
-        $m_details->relation=$req->relation;*/
         $total_member = $req->no_of_person;
         for ($i =0; $i < $total_member; $i++){
             $m_details = new member_details();
             $m_details->full_name = strtoupper($req->full_name[$i]);
             $m_details->age=$req->m_age[$i];
-            $m_details->gender=$req->inlineRadioOptions[$i];
+            $m_details->gender=$req->gender;
             $m_details->relation=$req->relation[$i];
             $m_details->personal_detail_id=$personal_details_id;
             $m_details->room_id=$req->deposit_no;
@@ -133,8 +111,8 @@ class BookingController extends Controller
         $member->email = $req->email;
         $member->phone_no = $req->phone_no;
         $member->city = $req->city;
-       
         $member->save();
+
         $m_data=add_members::all();
         $ar_list= DB::select("SELECT *, add_room.room_no as id FROM add_room WHERE add_room.status = 0");
         //dd($ar_list);
@@ -152,22 +130,17 @@ class BookingController extends Controller
         $room_book = DB::select ("SELECT * , room_details.r_id as id from room_details ");
         $availablelist = DB::select("SELECT *, add_room.room_no as id FROM add_room WHERE add_room.status = 0");
         $current_date = Carbon::now();
-        $formatted_date = $current_date->format('Y-m-d');
+        $formatted_date = $current_date->format('Y-m-d H:i'); 
         $room_ids = room_details::where('check_in_date', $formatted_date)->pluck('room_list')->toArray();
-
+        
         foreach ($room_ids as $r_list) {
             $roomNumbers = explode(',', $r_list);
-        DB::enableQueryLog();
-            //dd($r_list);
+            DB::enableQueryLog();
             add_room::whereIn('room_no', $roomNumbers)->update(['status' => 1]);
-        //dd(DB::getQueryLog());
-
+           
         }
-         //dd($r_list);
-        //DB::enableQueryLog();
+
         
-        //dd(DB::getQueryLog());
-        //dd($roomsToUpdate->toArray());
         return view('Booking.room-list',['list'=>$list,'room_book'=>$room_book,'availablelist'=>$availablelist,'get_list' => $get_list,'current_date'=> $current_date]);
     }
     public function RoomList(Request $req){
@@ -183,11 +156,13 @@ class BookingController extends Controller
     }
 
     public function checkout(){
-        $checkout= DB::select("SELECT * from room_details join add_room on add_room.room_detail_id=room_details.r_id join personal_details on personal_details.p_id=room_details.member_id join add_members on personal_details.member_id=add_members.p_id WHERE add_room.status =1");
+        $checkout= DB::select("SELECT * from room_details join add_room on add_room.room_detail_id=room_details.r_id join personal_details on personal_details.p_id=room_details.member_id join add_members on personal_details.member_id=add_members.p_id WHERE add_room.status = 1 GROUP by room_details.r_id");
+        
         $rec_no=checkout::get()->last()->rec_no;
         if(!$rec_no)
         {$rec_no=1;}
         $member=add_members::all();
+     
         return view('Booking.checkout',['checkout'=>$checkout,'member'=>$member,'rec_no'=>$rec_no]);
     }
     public function add_checkout(Request $req)
