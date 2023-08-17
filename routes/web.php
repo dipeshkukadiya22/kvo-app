@@ -13,6 +13,7 @@ use App\Http\Controllers\donation;
 use App\Http\Controllers\Expense;
 use App\Http\Controllers\pdfcontroller;
 use App\Http\Controllers\medical;
+use App\Http\Controllers\ReportsController;
 
 
 /*
@@ -79,3 +80,7 @@ Route::get('pdf_Community_Donation',[pdfcontroller::class,'pdf_Community_Donatio
 Route::get('pdf_General_Donation',[pdfcontroller::class,'pdf_General_Donation'])->name('pdf_General_Donation');
 Route::get('pdf_Expense_Receipt',[pdfcontroller::class,'pdf_Expense_Receipt'])->name('pdf_Expense_Receipt');
 Route::get('treatment',[medical::class,'treatment'])->name('treatment');
+
+
+//View Reports
+Route::get('religious_donation_report', [ReportsController::class, 'religious_donation_report'])->name('religious_donation_report');
