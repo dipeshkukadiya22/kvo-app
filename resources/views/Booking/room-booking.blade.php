@@ -1079,8 +1079,8 @@ $(document).ready(function () {
       const selectedList3 = $('#select2Multiple33').val();
       const selectedDate = $('#flatpickr-datetime').val();
       const acAmount = parseFloat($('#ac-amount').val()) || 0; 
-    const nonAcAmount = parseFloat($('#non-ac-amount').val()) || 0;
-    const doorMtAmount = parseFloat($('#door-mt-amount').val()) || 0;
+      const nonAcAmount = parseFloat($('#non-ac-amount').val()) || 0;
+      const doorMtAmount = parseFloat($('#door-mt-amount').val()) || 0;
 
     const totalAmount = acAmount + nonAcAmount + doorMtAmount;
 
