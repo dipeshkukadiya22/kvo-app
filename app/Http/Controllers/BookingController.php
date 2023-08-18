@@ -169,6 +169,7 @@ class BookingController extends Controller
     {
         $checkout= DB::select("SELECT * from room_details join add_room on add_room.room_detail_id=room_details.r_id join personal_details on personal_details.p_id=room_details.member_id join add_members on personal_details.member_id=add_members.p_id WHERE add_room.status =1");
         $member=add_members::all();
+        //dd($member);
         $data=new checkout();
         $data->room_booking_id=$req->bookingId;
         $data->member_id=$req->name;

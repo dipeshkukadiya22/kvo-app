@@ -172,6 +172,7 @@ div.card-datatable [class*=col-md-] {
                                     <select id="select2Basic" name="name" class="select2 form-select form-select-lg" data-allow-clear="false">
                                     @foreach($member as $row)
                                       <option value="{{$row->p_id}}">{{$row->m_name}}</option>
+                                     
                                     @endforeach
                                       
                                     </select>
@@ -220,6 +221,7 @@ div.card-datatable [class*=col-md-] {
                                     </thead>
                                     <tbody class="table-border-bottom-0">
                                       <tr>
+                                        <input type="hidden" value="{{!empty($m_data)  ? $m_data:''}}">
                                         <td>
                                           ડિલક્સ  રૂમ 
                                         </td>
@@ -230,7 +232,7 @@ div.card-datatable [class*=col-md-] {
                                           <input type="text" id="dlx_room_charge" name="dlx_room_charge" class="form-control"  readonly/>
                                         </td>
                                         <td>
-                                          <input type="text" id="dlx_room_Excharge" name="dlx_room_Excharge" class="form-control" />
+                                          <input type="text" id="dlx_room_Excharge" name="dlx_room_Excharge" class="form-control"/>
                                         </td>
                                         <td>
                                           <input type="text" id="dlx_amount" name="dlx_amount" class="form-control"  readonly/>
@@ -254,7 +256,7 @@ div.card-datatable [class*=col-md-] {
                                           <input type="text" id="ac_room_charge" name="ac_room_charge" class="form-control"  readonly/>
                                         </td>
                                         <td>
-                                          <input type="text" id="ac_room_Excharge" name="ac_room_Excharge" class="form-control" />
+                                          <input type="text" id="ac_room_Excharge" name="ac_room_Excharge" class="form-control"/>
                                         </td>
                                         <td>
                                           <input type="text" id="ac_amount" name="ac_amount" class="form-control"  readonly/>
@@ -326,7 +328,7 @@ div.card-datatable [class*=col-md-] {
                                           <input type="text" id="non_dmt_ac_room_charge" name="non_dmt_ac_room_charge" class="form-control"  readonly/>
                                         </td>
                                         <td>
-                                          <input type="text" id="non_dmt_ac_room_Excharge" name="non_dmt_ac_room_Excharge" class="form-control" />
+                                          <input type="text" id="non_dmt_ac_room_Excharge" name="non_dmt_ac_room_Excharge" class="form-control"/>
                                         </td>
                                         <td>
                                           <input type="text" id="non_dmt_ac_amount" name="non_dmt_ac_amount" class="form-control"  readonly/>
@@ -395,7 +397,7 @@ div.card-datatable [class*=col-md-] {
                                                  />
                                               <label class="form-check-label" for="basic_default_radio">UPI</label>
                                             </div>
-                                            <div class="form-check form-check-inline">
+                                            <div class="form-check form-check-inline" hidden>
                                             <input type="text" id="payment" name="payment" class="form-control" />
                                             <label class="form-check-label" for="basic-default-radio">payment</label>
                                         </div>
@@ -789,10 +791,13 @@ const editLinks = document.querySelectorAll(".item-edit");
                       $("#city").val(response[0]['city']);
                       $("#check_in_date").val(response[0]['check_in_date']);
                       $("#deposite").val(response[0]['deposite_rs']);
-                
-                      var room=response[0]['room_no'];
+                      var room=response[0]['room_list'];
                     
-
+                      var ArrNames =room .split(",");
+                      ArrNames.forEach(myFunction);
+                      function myFunction(room, index) {
+                         
+                        
                       
                       if(room==301 || room==302 || room==401 || room==402)
                       {
@@ -836,74 +841,169 @@ const editLinks = document.querySelectorAll(".item-edit");
                         $("#dmt_ac_amount").val(response[0]['no_of_days'] * response[0]['door_mt_amount']);
                         $("#dmt_ac_room_total").val(response[0]['no_of_days'] * response[0]['door_mt_amount']);
                       }
-               
-                  
-                
-                      //$("#total").val(dlx+ac+non_ac+dmt_ac+dmt_non_ac);
+                    }
+                    var a=document.getElementById("ac_room").value;
+                          if (a == "") {
+                              $("#ac_room_Excharge").prop('disabled', true);
+                          } else {
+                              $("#ac_room_Excharge").val ("0");
+                          }
+                        var l=document.getElementById("non_ac_room").value;
+                          if (l == "") {
+                              $("#non_ac_room_Excharge").prop('disabled', true);
+                          } else {
+                              $("#non_ac_room_Excharge").val ("0");
+                          }
+                          var m=document.getElementById("non_dmt_ac_room").value;
+                          if (m == "") {
+                              $("#non_dmt_ac_room_Excharge").prop('disabled', true);
+                          } else {
+                              $("#non_dmt_ac_room_Excharge").val ("0");
+                          }
+                          var p=document.getElementById("dmt_ac_room").value;
+                          if (p == "") {
+                              $("#dmt_ac_room_Excharge").prop('disabled', true);
+                          } else {
+                              $("#dmt_ac_room_Excharge").val ("0");
+                          }
+                          var k=document.getElementById("dlx_room").value;
+                          if (k == "") {
+                              $("#dlx_room_Excharge").prop('disabled', true);
+                          } else {
+                              $("#dlx_room_Excharge").val ("0");
+                          }
+                          
+                          
+                          
+                 
                     
-                     /* member_id.forEach(myFunction)
-                        function myFunction(item, index, arr) {
-                            if((member_id[index])==5)
-                            {
-                              $("#select2Basic option[value=" + sr_no + "]").attr('selected', 'selected'); 
-                            }
-                        }*/
+
+                      // $("#total").val(dlx+ac+non_ac+dmt_ac+dmt_non_ac);
+                      // member_id.forEach(myFunction)
+                      //   function myFunction(item, index, arr) {
+                      //       if((member_id[index])==5)
+                      //       {
+                      //         $("#select2Basic option[value=" + sr_no + "]").attr('selected', 'selected'); 
+                      //       }
+                      //   }
                         
-                      }
-                    });
+                      // }
+                  }
+                });
+              
             });
         });
 </script>
+<!-- <script>
+$(document).ready(function() {
+    const dlxtamount = parseInt($('#dlx_room_total').val()) || 0;
+    const acamount = parseInt($('#ac_room_total').val()) || 0;
+    const nonacamount = parseInt($('#non_ac_room_total').val()) || 0;
+    const nonacdmtamount = parseInt($('#non_dmt_ac_room_total').val()) || 0;
+    const acdmtamount = parseInt($('#dmt_ac_room_total').val()) || 0;
+
+    const totalAmount = dlxtamount + acamount + nonacamount + nonacdmtamount + acdmtamount;
+    alert(totalAmount);
+    $('#total').text(totalAmount);
+});
+</script> -->
+
+
 <script>
     $(document).ready(function() {
 
      
-    });
+   
   $("#dlx_room_Excharge").change(function(){
     var amt=parseInt(document.getElementById("dlx_amount").value); 
     var excharge=parseInt(document.getElementById("dlx_room_Excharge").value); 
     var deposite=parseInt(document.getElementById("deposite").value);
     $("#dlx_room_total").val(amt+excharge);
-    var total=parseInt(document.getElementById("dlx_room_total").value);
-    $("#total").val(total);
-    $("#net_amount").val(total-deposite);
+    // var total=parseInt(document.getElementById("dlx_room_total").value);
+    // $("#total").val(total);
+    
+    const dlxtamount = parseInt($('#dlx_room_total').val()) || 0;
+    const acamount = parseInt($('#ac_room_total').val()) || 0;
+    const nonacamount = parseInt($('#non_ac_room_total').val()) || 0;
+    const nonacdmtamount = parseInt($('#non_dmt_ac_room_total').val()) || 0;
+    const acdmtamount = parseInt($('#dmt_ac_room_total').val()) || 0;
+    const totalAmount = dlxtamount + acamount + nonacamount + nonacdmtamount + acdmtamount;
+    $('#total').val(totalAmount);
+    $("#net_amount").val(totalAmount-deposite);
   });
 
   $("#ac_room_Excharge").change(function(){
     var amt=parseInt(document.getElementById("ac_amount").value); 
     var excharge=parseInt(document.getElementById("ac_room_Excharge").value); 
+    var deposite=parseInt(document.getElementById("deposite").value);
     $("#ac_room_total").val(amt+excharge);
-    var total=parseInt(document.getElementById("ac_room_total").value);
-    $("#total").val(total);
-    $("#net_amount").val(total-deposite);
+    // var total=parseInt(document.getElementById("ac_room_total").value);
+    // $("#total").val(total);
+    // $("#net_amount").val(total-deposite);
+    const dlxtamount = parseInt($('#dlx_room_total').val()) || 0;
+    const acamount = parseInt($('#ac_room_total').val()) || 0;
+    const nonacamount = parseInt($('#non_ac_room_total').val()) || 0;
+    const nonacdmtamount = parseInt($('#non_dmt_ac_room_total').val()) || 0;
+    const acdmtamount = parseInt($('#dmt_ac_room_total').val()) || 0;
+    const totalAmount = dlxtamount + acamount + nonacamount + nonacdmtamount + acdmtamount;
+    $('#total').val(totalAmount);
+    $("#net_amount").val(totalAmount-deposite);
   });
 
   $("#non_ac_room_Excharge").change(function(){
     var amt=parseInt(document.getElementById("non_ac_amount").value); 
     var excharge=parseInt(document.getElementById("non_ac_room_Excharge").value); 
+    var deposite=parseInt(document.getElementById("deposite").value);
     $("#non_ac_room_total").val(amt+excharge);
-    var total=parseInt(document.getElementById("non_ac_room_total").value);
-    $("#total").val(total);
-    $("#net_amount").val(total-deposite);
+    // var total=parseInt(document.getElementById("non_ac_room_total").value);
+    // $("#total").val(total);
+    // $("#net_amount").val(total-deposite);
+    const dlxtamount = parseInt($('#dlx_room_total').val()) || 0;
+    const acamount = parseInt($('#ac_room_total').val()) || 0;
+    const nonacamount = parseInt($('#non_ac_room_total').val()) || 0;
+    const nonacdmtamount = parseInt($('#non_dmt_ac_room_total').val()) || 0;
+    const acdmtamount = parseInt($('#dmt_ac_room_total').val()) || 0;
+    const totalAmount = dlxtamount + acamount + nonacamount + nonacdmtamount + acdmtamount;
+    $('#total').val(totalAmount);
+    $("#net_amount").val(totalAmount-deposite);
   });
 
   $("#non_dmt_ac_room_Excharge").change(function(){
     var amt=parseInt(document.getElementById("door_mt_amount").value); 
     var excharge=parseInt(document.getElementById("non_dmt_ac_room_Excharge").value); 
+    var deposite=parseInt(document.getElementById("deposite").value);
     $("#non_dmt_ac_room_total").val(amt+excharge);
-    var total=parseInt(document.getElementById("non_dmt_ac_room_total").value);
-    $("#total").val(total);
-    $("#net_amount").val(total-deposite);
+    // var total=parseInt(document.getElementById("non_dmt_ac_room_total").value);
+    // $("#total").val(total);
+    // $("#net_amount").val(total-deposite);
+    const dlxtamount = parseInt($('#dlx_room_total').val()) || 0;
+    const acamount = parseInt($('#ac_room_total').val()) || 0;
+    const nonacamount = parseInt($('#non_ac_room_total').val()) || 0;
+    const nonacdmtamount = parseInt($('#non_dmt_ac_room_total').val()) || 0;
+    const acdmtamount = parseInt($('#dmt_ac_room_total').val()) || 0;
+    const totalAmount = dlxtamount + acamount + nonacamount + nonacdmtamount + acdmtamount;
+    $('#total').val(totalAmount);
+    $("#net_amount").val(totalAmount-deposite);
   });
 
   $("#dmt_ac_room_Excharge").change(function(){
     var amt=parseInt(document.getElementById("door_mt_amount").value); 
     var excharge=parseInt(document.getElementById("dmt_ac_room_Excharge").value); 
+    var deposite=parseInt(document.getElementById("deposite").value);
     $("#dmt_ac_room_total").val(amt+excharge);
-    var total=parseInt(document.getElementById("dmt_ac_room_total").value);
-    $("#total").val(total);
-    $("#net_amount").val(total-deposite);
+    // var total=parseInt(document.getElementById("dmt_ac_room_total").value);
+    // $("#total").val(total);
+    // $("#net_amount").val(total-deposite);
+    const dlxtamount = parseInt($('#dlx_room_total').val()) || 0;
+    const acamount = parseInt($('#ac_room_total').val()) || 0;
+    const nonacamount = parseInt($('#non_ac_room_total').val()) || 0;
+    const nonacdmtamount = parseInt($('#non_dmt_ac_room_total').val()) || 0;
+    const acdmtamount = parseInt($('#dmt_ac_room_total').val()) || 0;
+    const totalAmount = dlxtamount + acamount + nonacamount + nonacdmtamount + acdmtamount;
+    $('#total').val(totalAmount);
+    $("#net_amount").val(totalAmount-deposite);
   });
+});
   </script>
 @endsection
 
