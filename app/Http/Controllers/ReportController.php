@@ -92,4 +92,41 @@ class ReportController extends Controller
         $donation=DB::SELECT(" SELECT add_members.m_name,cd.d_date,cd." . $category ." as amount,cd.payment_mode from `community_donation` as cd join add_members on cd.member_id=add_members.p_id where d_date BETWEEN '$date1' and '$date2' and cd." . $category ." IS NOT NULL");
         return view('Reports.community_category_donation_report',['daterange'=>$daterange,'donation'=>$donation,'category'=>$category,'total'=>$total]);
     }
+    public function expense_report(){
+        $daterange=Date("01-m-Y")."-".Date("31-m-Y");
+        $trust="SANGH";
+        $date1=date('Y-m-d',strtotime(substr($daterange,0,10)));
+        $date2=date('Y-m-d',strtotime(substr($daterange,13)));
+        $expense=DB::SELECT("SELECT * FROM `Sangh_Expense` join add_members on add_members.p_id=Sangh_Expense.member_id where date BETWEEN '$date1' and '$date2'");
+        return view('Reports.expense_report',['expense'=>$expense,'daterange'=>$daterange,'trust' => $trust]);
+    }
+    public function show_expense_report(Request $req){
+        $daterange=$req->daterange;
+        $trust=$req->trust;
+        $date1=date('Y-m-d',strtotime(substr($daterange,0,10)));
+        $date2=date('Y-m-d',strtotime(substr($daterange,13)));
+        if($trust=="SANGH"){
+            $expense=DB::SELECT("SELECT * FROM `Sangh_Expense` join add_members on add_members.p_id=Sangh_Expense.member_id where date BETWEEN '$date1' and '$date2'");
+        }
+        else{
+            $expense=DB::SELECT("SELECT * FROM `Mahajan_Expense` join add_members on add_members.p_id=Mahajan_Expense.member_id where date BETWEEN '$date1' and '$date2'");
+        }
+       
+        return view('Reports.expense_report',['expense'=>$expense,'daterange'=>$daterange,'trust'=>$trust]);
+    }
+    public function medical_report(){
+        $daterange=Date("01-m-Y")."-".Date("31-m-Y");
+        $date1=date('Y-m-d',strtotime(substr($daterange,0,10)));
+        $date2=date('Y-m-d',strtotime(substr($daterange,13)));
+        $data=DB::SELECT("SELECT * FROM medical join add_members on add_members.p_id=medical.p_id where date BETWEEN '$date1' and '$date2'");
+        return view('Reports.medical_report',['data'=>$data,'daterange'=>$daterange]);
+    }
+    public function show_medical_report(Request $req){
+        $daterange=$req->daterange;
+        $date1=date('Y-m-d',strtotime(substr($daterange,0,10)));
+        $date2=date('Y-m-d',strtotime(substr($daterange,13)));
+        $data=DB::SELECT("SELECT * FROM medical join add_members on add_members.p_id=medical.p_id where date BETWEEN '$date1' and '$date2'");
+        return view('Reports.medical_report',['data'=>$data,'daterange'=>$daterange]);
+    }
+
 }

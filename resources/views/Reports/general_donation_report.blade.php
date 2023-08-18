@@ -152,9 +152,6 @@ div.card-datatable [class*=col-md-] {
                                             <div class="card-datatable pt-0">
                                                 <table id="DataTables_Table_0" class="datatables-basic table">
                                                 <thead>
-                                                <tr>
-                                                    <th colspan="4" style="text-align:center;">જનરલ ડોનેશન</th>
-                                                  </tr>
                                                     <tr>
                                                         <th>નામ</th>
                                                         <th>તારીખ</th>
@@ -361,7 +358,7 @@ div.card-datatable [class*=col-md-] {
     });
 
     
-   // $('div.head-label').html('<h5 class="card-title mb-0">Religious Donation Report</h5>');
+   $('div.head-label').html('<h5 class="card-title mb-0">જનરલ ડોનેશન રિપોર્ટ</h5>');
 
     </script>
 

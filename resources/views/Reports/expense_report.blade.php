@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Community Donation Report')
+@section('title', 'Expense Report')
 
 @section('pagecss')
 
@@ -96,7 +96,7 @@ div.card-datatable [class*=col-md-] {
                       <div class="content-header-left col-md-9 col-12 mb-2">
                         {{-- <div class="row breadcrumbs-top">
                           <div class="col-12">
-                            <h4 class="fw-bold py-3">Community Donation Report</h4>
+                            <h4 class="fw-bold py-3">Expense Report</h4>
                           </div>
                         </div> --}}
                       </div>
@@ -110,16 +110,23 @@ div.card-datatable [class*=col-md-] {
                             <div class="col-md mb-4 mb-md-0">
                                 <div class="card">
                                 <div class="card-body">
-                                    <form id="kvo_community_donation_trport" method="GET" class="browser-default-validation" action="{{route('show_community_donation_report')}}">
+                                    <form id="kvo_expense_report" method="GET" class="browser-default-validation" action="{{route('show_expense_report')}}">
                                         <div class="row g-3">
-                                            @csrf
-                    
+                                   
+                                            <div class="col-md-3 mb-3">
+                                                <label class="form-label" for="basic-default-country">સંસ્થા</label>
+                                                <select class="form-select" id="trust" name="trust" required>
+                                                <option value="SANGH" {{ ($trust == "SANGH") ? "selected" :""}}>સંઘ</option>
+                                                <option value="MAHAJAN" {{ ($trust == "MAHAJAN") ? "selected" :""}}>મહાજન</option>
+                                                </select>
+                                            </div>
                                            <!-- Range Picker-->
                                             <div class="col-md-3 col-12 mb-4">
                                                 <label for="flatpickr-range" class="form-label">Date</label>
                                                 <input
                                                 type="text"
                                                 name="daterange"
+                                                id="daterange"
                                                 class="form-control"
                                                 placeholder="YYYY-MM-DD to YYYY-MM-DD"
                                                 value="{{$daterange}}"
@@ -152,41 +159,27 @@ div.card-datatable [class*=col-md-] {
                                             <div class="card-datatable pt-0">
                                                 <table id="DataTables_Table_0" class="datatables-basic table">
                                                 <thead>
+                                                <tr>
+                                                    <th id="display_category" colspan="5" style="text-align:center;"></th>
+                                                  </tr>
                                                     <tr>
+                                                        <th>વાઉચર</th>
                                                         <th>નામ</th>
                                                         <th>તારીખ</th>
-                                                        <th>શેઠશ્રી રતનશી ટોકરશી વોરા મેડિકલ ચેકઅપ સેન્ટર</th>
-                                                        <th>મહાજનનું મામેરું</th>
-                                                        <th>માતુશ્રી લાખણીબાઈ રામજી તેજશી ગાલા નવનીત ભોજનશાળા</th>
-                                                        <th>શૈક્ષણિક</th>
-                                                        <th>લવાજમ</th>
-                                                        <th>ઑક્સીજન ડોનેશન</th>
-                                                        <th>એમ્બ્યુલન્સ ડોનેશન</th>
-                                                        <th>ઈતર</th>
-                                                        <th>ટોટલ</th>
+                                                        <th>રકમ</th>
+                                                        <th>વિગત</th>
                                                     </tr>
                                                 </thead>
+                                                @foreach($expense as $row)
                                                 <tr>
-                                                    <td></td>  <td></td>  <td></td>  <td></td>  <td></td>  <td></td>  <td></td>  <td></td>  <td></td>
-                                                      <td>Total Amount</td>
-                                                      <td>{{$total[0]->amount}}</td>
-                                                    </tr>
-                                                @foreach($donation as $row)
-                                                    <tr>
+                                                        <td>{{$row->depo_id}}</td>
                                                         <td>{{$row->m_name}}</td>
-                                                        <td>{{Date("d-m-Y",strtotime($row->d_date))}}</td>
-                                                        <td>{{$row->medical_checkup}}</td>
-                                                        <td>{{$row->mahajan}}</td>
-                                                        <td>{{$row->bhojanshala}}</td>
-                                                        <td>{{$row->shaikshanik}}</td>
-                                                        <td>{{$row->lavajam}}</td>
-                                                        <td>{{$row->oxygen}}</td>
-                                                        <td>{{$row->ambulance}}</td>
-                                                        <td>{{$row->other}}</td>
-                                                        <td>{{$row->total}}</td>
-                                                    </tr>
+                                                        <td>{{Date("d-m-Y",strtotime($row->date))}}</td>
+                                                        <td>{{$row->amount}}</td>
+                                                        <td>{{$row->details}}</td>     
+                                                </tr>
                                                 @endforeach
-                                                   
+                                          
                                                 </table>
                                             </div>
                                         </div>
@@ -238,14 +231,6 @@ div.card-datatable [class*=col-md-] {
     <!-- Page JS -->
     <script src="{{ asset ('assets/js/form-validation.js') }}"></script>
 
-    <script>
-      jQuery(document).ready(function($){
-      $('#basic-default-dob').flatpickr({
-      dateFormat: "d M, Y",
-    })
-    });
-    </script>
-
     <!-- BEGIN: Page JS-->
    <script>
     
@@ -268,7 +253,7 @@ div.card-datatable [class*=col-md-] {
               text: '<i class="ti ti-printer me-1" ></i>Print',
               className: 'dropdown-item',
               exportOptions: {
-                columns: [0,1 ,2, 3, 4, 5, 6, 7, 8, 9, 10],
+                columns: [0,1 ,2, 3,4],
                 // prevent avatar to be display
                 format: {
                   body: function (inner, coldex, rowdex) {
@@ -305,7 +290,7 @@ div.card-datatable [class*=col-md-] {
               text: '<i class="ti ti-file-text me-1" ></i>Csv',
               className: 'dropdown-item',
               exportOptions: {
-                columns: [0,1 ,2, 3, 4, 5, 6, 7, 8, 9, 10],
+                columns: [0,1 ,2, 3,4],
                 // prevent avatar to be display
                 format: {
                   body: function (inner, coldex, rowdex) {
@@ -329,7 +314,7 @@ div.card-datatable [class*=col-md-] {
               text: '<i class="ti ti-file-spreadsheet me-1"></i>Excel',
               className: 'dropdown-item',
               exportOptions: {
-                columns: [0,1 ,2, 3, 4, 5, 6, 7, 8, 9, 10],
+                columns: [0,1 ,2, 3,4],
                 // prevent avatar to be display
                 format: {
                   body: function (inner, coldex, rowdex) {
@@ -353,7 +338,7 @@ div.card-datatable [class*=col-md-] {
               text: '<i class="ti ti-file-description me-1"></i>Pdf',
               className: 'dropdown-item',
               exportOptions: {
-                columns: [1 ,2, 3, 4, 5, 6, 7, 8, 9, 10],
+                columns: [0,1 ,2, 3,4],
                 // prevent avatar to be display
                 format: {
                   body: function (inner, coldex, rowdex) {
@@ -385,10 +370,25 @@ div.card-datatable [class*=col-md-] {
     });
 
     
-    $('div.head-label').html('<h5 class="card-title mb-0">સામજિક દાન રિપોર્ટ</h5>');
+    $('div.head-label').html('<h5 class="card-title mb-0">ખર્ચ રિપોર્ટ</h5>');
 
     </script>
-
+<script>
+    jQuery(document).ready(function($){
+      let c=document.getElementById("trust").value;
+        switch(c) {
+            case "SANGH":
+              $('#display_category').html("સંઘ ખર્ચ");
+              break;
+              case "MAHAJAN":
+              $('#display_category').html("મહાજન ખર્ચ");
+              break;
+            
+            default:
+              // code block
+          }
+});
+    </script>
 
 <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>

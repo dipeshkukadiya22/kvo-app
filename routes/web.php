@@ -120,3 +120,7 @@ Route::get('community_donation_report', [ReportController::class, 'community_don
 Route::get('show_community_donation_report', [ReportController::class, 'show_community_donation_report'])->name('show_community_donation_report');
 Route::get('community_category_donation_report', [ReportController::class, 'community_category_donation_report'])->name('community_category_donation_report');
 Route::get('show_community_category_donation_report', [ReportController::class, 'show_community_category_donation_report'])->name('show_community_category_donation_report');
+Route::get('expense_report', [ReportController::class, 'expense_report'])->name('expense_report');
+Route::get('show_expense_report', [ReportController::class, 'show_expense_report'])->name('show_expense_report');
+Route::get('medical_report', [ReportController::class, 'medical_report'])->name('medical_report');
+Route::get('show_medical_report', [ReportController::class, 'show_medical_report'])->name('show_medical_report');

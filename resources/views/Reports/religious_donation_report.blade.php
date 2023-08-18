@@ -408,8 +408,8 @@ div.card-datatable [class*=col-md-] {
       
     });
 
-    
-    $('div.head-label').html('<h5 class="card-title mb-0">Religious Donation Report</h5>');
+   
+    $('div.head-label').html('<h5 class="card-title mb-0">ધાર્મિક દાન રિપોર્ટ</h5>');
 
     </script>
 

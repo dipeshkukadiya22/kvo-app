@@ -167,7 +167,7 @@ div.card-datatable [class*=col-md-] {
                                                 <table id="DataTables_Table_0" class="datatables-basic table">
                                                 <thead>
                                                   <tr>
-                                                    <th id="display_category" colspan="5" style="text-align:center;">{{$category}}</th>
+                                                    <th id="display_category" colspan="5" style="text-align:center;"></th>
                                                   </tr>
                                                     <tr>
                                                         <th>નામ</th>
@@ -449,7 +449,7 @@ div.card-datatable [class*=col-md-] {
               text: '<i class="ti ti-printer me-1" ></i>Print',
               className: 'dropdown-item',
               exportOptions: {
-                columns: [0,1 ,2, 3, 4],
+                columns: [0,1 ,2, 3],
                 // prevent avatar to be display
                 format: {
                   body: function (inner, coldex, rowdex) {
@@ -486,7 +486,7 @@ div.card-datatable [class*=col-md-] {
               text: '<i class="ti ti-file-text me-1" ></i>Csv',
               className: 'dropdown-item',
               exportOptions: {
-                columns: [0,1 ,2, 3, 4],
+                columns: [0,1 ,2, 3],
                 // prevent avatar to be display
                 format: {
                   body: function (inner, coldex, rowdex) {
@@ -510,7 +510,7 @@ div.card-datatable [class*=col-md-] {
               text: '<i class="ti ti-file-spreadsheet me-1"></i>Excel',
               className: 'dropdown-item',
               exportOptions: {
-                columns: [0,1 ,2, 3, 4],
+                columns: [0,1 ,2, 3],
                 // prevent avatar to be display
                 format: {
                   body: function (inner, coldex, rowdex) {
@@ -534,7 +534,7 @@ div.card-datatable [class*=col-md-] {
               text: '<i class="ti ti-file-description me-1"></i>Pdf',
               className: 'dropdown-item',
               exportOptions: {
-                columns: [0,1 ,2, 3, 4],
+                columns: [0,1 ,2, 3],
                 // prevent avatar to be display
                 format: {
                   body: function (inner, coldex, rowdex) {
@@ -566,7 +566,8 @@ div.card-datatable [class*=col-md-] {
     });
 
     
-   // $('div.head-label').html('<h5 class="card-title mb-0">Religious Donation Report</h5>');
+    $('div.head-label').html('<h5 class="card-title mb-0">સામજિક દાન રિપોર્ટ</h5>');
+
 
     </script>
 
