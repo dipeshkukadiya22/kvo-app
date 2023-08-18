@@ -156,6 +156,9 @@ div.card-datatable [class*=col-md-] {
                                   aria-label="Close"></button>
                               </div>
                               <div class="modal-body">
+                              <div class="d-inline-block">
+                                                    <a href="{{route('pdf_CheckOut',1)}}" class="text-primary"><img src="./assets/icon/orange-eye.png" width="20px"></a>
+                    </div>
                                 <div class="row">
                                   <div class="col mb-3">
                                     <label for="nameExLarge" class="form-label">Booking ID</label>
@@ -357,6 +360,8 @@ div.card-datatable [class*=col-md-] {
                                           <div class="col-md-6 mb-3">
                                             <label class="form-label" for="basic-default-name">અંકે રૂપિયા</label>
                                             <input type="text" class="form-control" name="rs_word" id="rupees-in-words" placeholder="Rupees in words" readonly>
+                                            
+
                                           </div>
 
                                           <div class="col-md-6">
@@ -417,7 +422,9 @@ div.card-datatable [class*=col-md-] {
                                         
                                         <td><strong>બાકી લેવાની /<br> પરત કરવાની રકમ</strong></td>
                                         <td>
-                                          <input type="text" class="form-control" name="net_amount" id="net_amount" >
+                                          <input type="text" class="form-control amount-input" name="net_amount" id="net_amount" aria-label="Amount (to the nearest dollar)"  onkeypress="return onlyNumbers(event);">
+                                          
+
                                         </td>
                                       </tr>
 
@@ -661,8 +668,37 @@ div.card-datatable [class*=col-md-] {
     </script>
 
 <script>
+  
+
+  $(document).ready(function () {
+      // Select all input fields with class 'amount-input'
+      $('.amount-input').on('input', function () {
+          var net_amount = 0;
+
+          // Convert the total to words and update the 'અંકે રૂપિયા' input field
+          NumToWord(net_amount, 'rupees-in-words');
+      });
+  });
+
+  function onlyNumbers(evt) {
+      var e = event || evt; // For trans-browser compatibility
+      var charCode = e.which || e.keyCode;
+
+      if (charCode > 31 && (charCode < 48 || charCode > 57))
+          return false;
+      return true;
+  }
+
+  function NumToWord(inputNumber, outputControl) {
+      // Your NumToWord function implementation
+      // Make sure it works correctly separately
+  }
+</script>
+
+<script>
   function convertToWords() {
   var depositAmount = parseFloat(document.getElementById("net_amount").value);
+ 
   var inWords = numberToWords(depositAmount);
   document.getElementById("rupees-in-words").value = inWords;
 }
@@ -728,7 +764,7 @@ function numberToWords(number) {
 }
 
 // Add event listener to deposit amount input field
-document.getElementById("deposit-amount").addEventListener("input", convertToWords);
+document.getElementById("net_amount").addEventListener("input", convertToWords);
 
 </script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -930,6 +966,7 @@ $(document).ready(function() {
     const totalAmount = dlxtamount + acamount + nonacamount + nonacdmtamount + acdmtamount;
     $('#total').val(totalAmount);
     $("#net_amount").val(totalAmount-deposite);
+   
   });
 
   $("#ac_room_Excharge").change(function(){
@@ -969,7 +1006,7 @@ $(document).ready(function() {
   });
 
   $("#non_dmt_ac_room_Excharge").change(function(){
-    var amt=parseInt(document.getElementById("door_mt_amount").value); 
+    var amt=parseInt(document.getElementById("non_dmt_ac_amount").value); 
     var excharge=parseInt(document.getElementById("non_dmt_ac_room_Excharge").value); 
     var deposite=parseInt(document.getElementById("deposite").value);
     $("#non_dmt_ac_room_total").val(amt+excharge);
@@ -984,6 +1021,7 @@ $(document).ready(function() {
     const totalAmount = dlxtamount + acamount + nonacamount + nonacdmtamount + acdmtamount;
     $('#total').val(totalAmount);
     $("#net_amount").val(totalAmount-deposite);
+  
   });
 
   $("#dmt_ac_room_Excharge").change(function(){
@@ -1005,6 +1043,9 @@ $(document).ready(function() {
   });
 });
   </script>
+
+
+
 @endsection
 
 @endsection

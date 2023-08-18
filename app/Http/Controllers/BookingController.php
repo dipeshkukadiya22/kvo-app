@@ -162,8 +162,19 @@ class BookingController extends Controller
         if(!$rec_no)
         {$rec_no=1;}
         $member=add_members::all();
+        $current_date = Carbon::now();
+        $formatted_date = $current_date->format('Y-m-d'); 
+        $room_ids = checkout::where('check_out_date', $formatted_date)->pluck('room_booking_id')->toArray();
+        
+        foreach ($room_ids as $r_list) {
+            $roomNumbers = explode(',', $r_list);
+            $queries = DB::getQueryLog();
+            add_room::whereIn('room_no', $roomNumbers)->update(['status' => 0 , 'room_detail_id' => 0]);
+
+           
+        }
      
-        return view('Booking.checkout',['checkout'=>$checkout,'member'=>$member,'rec_no'=>$rec_no]);
+        return view('Booking.checkout',['checkout'=>$checkout,'member'=>$member,'rec_no'=>$rec_no,'current_date'=> $current_date]);
     }
     public function add_checkout(Request $req)
     {
@@ -190,10 +201,21 @@ class BookingController extends Controller
         $data->payable_amount=$req->net_amount;
         $data->remark=$req->remark;
         $data->save();
-        if($data) { 
+      
 
+
+      
+        if($data) { 
+            $room=DB::SELECT("SELECT room_list FROM `room_details` where r_id='$req->bookingId'");
+            foreach ($room as $r) {
+            $r_list = $r->room_list; 
+            $roomNumbers = explode(',', $r_list);
+            add_room::whereIn('room_no', $roomNumbers)->update(['status' => 0 , 'room_detail_id' => 0]);
+        }
+          
             return redirect() -> route('checkout') -> with ('message', 'checkout submitted successfully!') -> with 
             (['checkout'=>$checkout,'member'=>$member]);
+
 
         }
         else{
