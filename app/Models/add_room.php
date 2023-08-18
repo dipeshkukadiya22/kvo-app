@@ -10,7 +10,5 @@ class add_room extends Model
     use HasFactory;
     protected $table = 'add_room';
     protected $primaryKey = 'room_no';
-    public $timestamps = false;
-
-   
+    public $timestamps = false;  
 }

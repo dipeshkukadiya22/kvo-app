@@ -1,4 +1,4 @@
-@extends('Auth.layouts.app')
+/@extends('Auth.layouts.app')
 
 @section('Login - KVO')
 
