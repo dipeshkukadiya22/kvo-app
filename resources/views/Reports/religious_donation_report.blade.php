@@ -112,12 +112,12 @@ div.card-datatable [class*=col-md-] {
                                 <div class="card-body">
                                     <form id="kvo_religious_donation_trport" method="GET" class="browser-default-validation" action="{{route('show_religious_donation_report')}}">
                                         <div class="row g-3">
-                                            @csvf
+                                            @csrf
                                             <div class="col-md-3 mb-3">
                                                 <label class="form-label" for="basic-default-country">સંસ્થા</label>
                                                 <select class="form-select" id="basic-default-country" name="trust" required>
-                                                <option value="VIJAYNAGAR">વિજયનગર</option>
-                                                <option value="NAVNEETNAGAR">નવનીતનગર</option>
+                                                <option value="VIJAYNAGAR" {{ ($trust == "VIJAYNAGAR") ? "selected" :""}}>વિજયનગર</option>
+                                                <option value="NAVNEETNAGAR" {{ ($trust == "NAVNEETNAGAR") ? "selected" :""}}>નવનીતનગર</option>
                                                 </select>
                                             </div>
                                             
@@ -182,6 +182,12 @@ div.card-datatable [class*=col-md-] {
                                                         <th>ટોટલ</th>
                                                     </tr>
                                                 </thead>
+                                                <tr>
+                                                    <td></td>  <td></td>  <td></td>  <td></td>  <td></td>  <td></td>  <td></td>  <td></td>  <td></td>
+                                                    <td></td>  <td></td>  <td></td>  <td></td>  <td></td>  <td></td>  <td></td>
+                                                      <td>Total Amount</td>
+                                                      <td>{{$total[0]->amount}}</td>
+                                                    </tr>
                                                 @foreach($donation as $row)
                                                     <tr>
                                                         <td>{{$row->m_name}}</td>
@@ -204,7 +210,7 @@ div.card-datatable [class*=col-md-] {
                                                         <td>{{$row->total}}</td>
                                                     </tr>
                                                 @endforeach
-                                                
+                                                   
                                                 </table>
                                             </div>
                                         </div>
@@ -222,119 +228,6 @@ div.card-datatable [class*=col-md-] {
 
 
 <!-- BEGIN: Page JS-->
-<script>
-
-	// Class definition
-	var KTDatatablesExample = function () {
-		// Shared variables
-		var table = '#DataTables_Table_0';
-		var datatable;
-		
-    // Private functions
-    var initDatatable = function () {
-       
-
-	   // Init datatable --- more info on datatables: https://datatables.net/manual/
-	   datatable = $('#ticket_data').DataTable({
-		   "info": true,
-		   'pageLength': 10,
-		   "ordering": false
-	   });
-	   //console.log(datatable);
-   }
-
-		// Hook export buttons
-		var exportButtons = () => {
-			
-			const documentTitle = 'Weighment Report';
-			var buttons = new $.fn.dataTable.Buttons(table, {
-				buttons: [
-					{
-						extend: 'copyHtml5',
-						title: documentTitle
-					},
-					{
-						extend: 'excelHtml5',
-						title: documentTitle
-					},
-					{
-						extend: 'csvHtml5',
-						title: documentTitle
-					},
-					{
-						extend: 'pdf',
-                    	title: documentTitle,
-						customize: function (doc) {
-                                // Here's where you can control the cell padding
-                                doc.styles.tableHeader.margin =
-                                  doc.styles.tableBodyOdd.margin =
-                                  doc.styles.tableBodyEven.margin = [3, 3, 3, 3];
-								  doc.pageMargins = [10, 10, 10,10];
-								  doc.defaultStyle.fontSize = 8;
-								  doc.styles.tableHeader.fontSize = 9;
-								  doc.styles.title.fontSize = 20;
-								  doc.content[1].margin = [ 25, 0, 25, 0 ] //left, top, right, bottom
-                            },
-
-						
-						orientation: 'landscape',
-						pageSize: 'a4',
-						exportOptions: {
-							columns: [0,1,2,3,4,5,6,7,8,9,10,11],
-						}
-					}
-				]
-			}).container().appendTo($('#ticket_data_buttons'));
-	
-			// Hook dropdown menu click event to datatable export buttons
-			const exportButtons = document.querySelectorAll('#ticket_data_export_menu [data-kt-export]');
-			exportButtons.forEach(exportButton => {
-				exportButton.addEventListener('click', e => {
-					e.preventDefault();
-	
-					// Get clicked export value
-					const exportValue = e.target.getAttribute('data-kt-export');
-					const target = document.querySelector('.dt-buttons .buttons-' + exportValue);
-	
-					// Trigger click event on hidden datatable export buttons
-					target.click();
-				});
-			});
-		}
-	
-		// Search Datatable --- official docs reference: https://datatables.net/reference/api/search()
-		var handleSearchDatatable = () => {
-			const filterSearch = document.querySelector('[data-kt-customer-table-filter]');
-			filterSearch.addEventListener('keyup', function (e) {
-				datatable.search(e.target.value).draw();
-			});
-		}
-		
-		// Public methods
-		return {
-			init: function () {
-				table = document.querySelector('#DataTables_Table_0');
-	
-				if ( !table ) {
-					return;
-				}
-	
-			initDatatable();
-            exportButtons();
-            handleSearchDatatable();
-			}
-		};
-	}();
-	
-	// On document ready
-	KTUtil.onDOMContentLoaded(function () {
-		KTDatatablesExample.init();
-	});
-	
-</script>    
-    $('div.head-label').html('<h5 class="card-title mb-0">Checkout</h5>');
-
-    </script>
 
 
 @section('pagejs')
@@ -516,7 +409,7 @@ div.card-datatable [class*=col-md-] {
     });
 
     
-   // $('div.head-label').html('<h5 class="card-title mb-0">Religious Donation Report</h5>');
+    $('div.head-label').html('<h5 class="card-title mb-0">Religious Donation Report</h5>');
 
     </script>
 

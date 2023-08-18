@@ -115,28 +115,28 @@ div.card-datatable [class*=col-md-] {
                                             <div class="col-md-3 mb-3">
                                                 <label class="form-label" for="basic-default-country">સંસ્થા</label>
                                                 <select class="form-select" id="basic-default-country" name="trust" required>
-                                                <option value="VIJAYNAGAR">વિજયનગર</option>
-                                                <option value="NAVNEETNAGAR">નવનીતનગર</option>
+                                                <option value="VIJAYNAGAR" {{ ($trust == "VIJAYNAGAR") ? "selected" :""}}>વિજયનગર</option>
+                                                <option value="NAVNEETNAGAR" {{ ($trust == "NAVNEETNAGAR") ? "selected" :""}}>નવનીતનગર</option>
                                                 </select>
                                             </div>
                                             
                                             <div class="col-md-3 mb-3">
                                                 <label class="form-label" for="basic-default-country">Donation Details</label>
-                                                <select class="form-select" id="basic-default-country" name="category" required>
-                                                <option value="sarv_sadharan">શ્રી સર્વ સાધારણ ખાતે</option>
-                                                <option value="jiv_daya">શ્રી જીવદયા ખાતે</option>
-                                                <option value="shadhu_shdhvi">શ્રી સાધુ સાધ્વી વૈયાવચ્છ ખાતે</option>
-                                                <option value="sadharmik">શ્રી સાધર્મિક ખરડા ખાતે</option>
-                                                <option value="chaturmas">શ્રી ચાતુર્માસ ખરડા ખાતે</option>
-                                                <option value="kayami_tithi">શ્રી કાયમી તિથી ફંડ ખાતે</option>
-                                                <option value="devdravya">શ્રી દેવદ્રવ્ય ખાતે</option>
-                                                <option value="kesar_sukhad">શ્રી કેસર સુખડ ખાતે</option>
-                                                <option value="dhoop_deep">શ્રી ધુપ-દીપ ખાતે</option>
-                                                <option value="snatra_puja">શ્રી સ્નાત્ર પૂજા ખાતે</option>
-                                                <option value="agani_pooja">શ્રી આંગી પૂજા ખાતે</option>
-                                                <option value="moti_pooja">શ્રી મોટી પૂજા ખાતે</option>
-                                                <option value="drut_boli">શ્રી ધૃતની બોલી ખાતે</option>
-                                                <option value="other_account_name">શ્રી અન્ય ખાતે</option>
+                                                <select class="form-select" id="category" name="category" required>
+                                                <option value="sarv_sadharan" {{ ($category == "sarv_sadharan") ? "selected" :""}}>શ્રી સર્વ સાધારણ ખાતે</option>
+                                                <option value="jiv_daya" {{ ($category == "jiv_daya") ? "selected" :""}}>શ્રી જીવદયા ખાતે</option>
+                                                <option value="shadhu_shdhvi" {{ ($category == "shadhu_shdhvi") ? "selected" :""}}>શ્રી સાધુ સાધ્વી વૈયાવચ્છ ખાતે</option>
+                                                <option value="sadharmik" {{ ($category == "sadharmik") ? "selected" :""}}>શ્રી સાધર્મિક ખરડા ખાતે</option>
+                                                <option value="chaturmas" {{ ($category == "chaturmas") ? "selected" :""}}>શ્રી ચાતુર્માસ ખરડા ખાતે</option>
+                                                <option value="kayami_tithi" {{ ($category == "kayami_tithi") ? "selected" :""}}>શ્રી કાયમી તિથી ફંડ ખાતે</option>
+                                                <option value="devdravya" {{ ($category == "devdravya") ? "selected" :""}}>શ્રી દેવદ્રવ્ય ખાતે</option>
+                                                <option value="kesar_sukhad" {{ ($category == "kesar_sukhad") ? "selected" :""}}>શ્રી કેસર સુખડ ખાતે</option>
+                                                <option value="dhoop_deep" {{ ($category == "dhoop_deep") ? "selected" :""}}>શ્રી ધુપ-દીપ ખાતે</option>
+                                                <option value="snatra_puja" {{ ($category == "snatra_puja") ? "selected" :""}}>શ્રી સ્નાત્ર પૂજા ખાતે</option>
+                                                <option value="agani_pooja" {{ ($category == "agani_pooja") ? "selected" :""}}>શ્રી આંગી પૂજા ખાતે</option>
+                                                <option value="moti_pooja" {{ ($category == "moti_pooja") ? "selected" :""}}>શ્રી મોટી પૂજા ખાતે</option>
+                                                <option value="drut_boli" {{ ($category == "drut_boli") ? "selected" :""}}>શ્રી ધૃતની બોલી ખાતે</option>
+                                                <option value="other_account_name" {{ ($category == "other_account_name") ? "selected" :""}}>શ્રી અન્ય ખાતે</option>
                                               
                                                 </select>
                                             </div>
@@ -147,6 +147,7 @@ div.card-datatable [class*=col-md-] {
                                                 <input
                                                 type="text"
                                                 name="daterange"
+                                                id="daterange"
                                                 class="form-control"
                                                 placeholder="YYYY-MM-DD to YYYY-MM-DD"
                                                 value="{{$daterange}}"
@@ -179,6 +180,9 @@ div.card-datatable [class*=col-md-] {
                                             <div class="card-datatable pt-0">
                                                 <table id="DataTables_Table_0" class="datatables-basic table">
                                                 <thead>
+                                                  <tr>
+                                                    <th id="display_category" colspan="5" style="text-align:center;">{{$category}}</th>
+                                                  </tr>
                                                     <tr>
                                                         <th>નામ</th>
                                                         <th>તારીખ</th>
@@ -196,6 +200,14 @@ div.card-datatable [class*=col-md-] {
                                                         <td>{{$row->payment_mode}}</td>
                                                 </tr>
                                                 @endforeach
+                                                <tr>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td>Total Amount:</td>
+                                                        <td>{{$total[0]->amount}}</td>
+                                                        <td></td>
+                                                </tr>
+                                          
                                                 </table>
                                             </div>
                                         </div>
@@ -222,18 +234,21 @@ div.card-datatable [class*=col-md-] {
       dom: '<"card-header flex-column flex-md-row"<"head-label text-center"><"dt-action-buttons text-end pt-3 pt-md-0"B>><"row"<"col-sm-12 col-md-6"l><"col-sm-12 col-md-6 d-flex justify-content-center justify-content-md-end"f>>t<"row"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>',
       displayLength: 7,
       lengthMenu: [7, 10, 25, 50, 75, 100],
+  
       buttons: [
         {
           extend: 'collection',
           className: 'btn btn-label-primary dropdown-toggle',
           text: '<i class="ti ti-file-export me-sm-1"></i> <span class="d-none d-sm-inline-block">Export</span>',
+          
           buttons: [
             {
               extend: 'print',
               text: '<i class="ti ti-printer me-1" ></i>Print',
               className: 'dropdown-item',
+            
               exportOptions: {
-                columns: [1 ,2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15],
+                columns: [1 ,2, 3, 4, 5],
                 // prevent avatar to be display
                 format: {
                   body: function (inner, coldex, rowdex) {
@@ -270,7 +285,7 @@ div.card-datatable [class*=col-md-] {
               text: '<i class="ti ti-file-text me-1" ></i>Csv',
               className: 'dropdown-item',
               exportOptions: {
-                columns: [1 ,2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15],
+                columns: [1 ,2, 3, 4, 5],
                 // prevent avatar to be display
                 format: {
                   body: function (inner, coldex, rowdex) {
@@ -293,8 +308,9 @@ div.card-datatable [class*=col-md-] {
               extend: 'excel',
               text: '<i class="ti ti-file-spreadsheet me-1"></i>Excel',
               className: 'dropdown-item',
+           
               exportOptions: {
-                columns: [1 ,2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14],
+                columns: [1 ,2, 3, 4, 5],
                 // prevent avatar to be display
                 format: {
                   body: function (inner, coldex, rowdex) {
@@ -318,7 +334,7 @@ div.card-datatable [class*=col-md-] {
               text: '<i class="ti ti-file-description me-1"></i>Pdf',
               className: 'dropdown-item',
               exportOptions: {
-                columns: [1 ,2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15],
+                columns: [1 ,2, 3, 4, 5],
                 // prevent avatar to be display
                 format: {
                   body: function (inner, coldex, rowdex) {
@@ -387,6 +403,68 @@ div.card-datatable [class*=col-md-] {
     <script src="{{ asset ('assets/js/form-validation.js') }}"></script>
 
  
+    <script>
+      jQuery(document).ready(function($){
+        $('#basic-default-dob').flatpickr({
+        dateFormat: "d M, Y",
+      });
+      let c=document.getElementById("category").value;
+        switch(c) {
+            case "sarv_sadharan":
+              $('#display_category').html("શ્રી સર્વ સાધારણ ખાતે");
+              break;
+              case "jiv_daya":
+              $('#display_category').html("શ્રી જીવદયા ખાતે");
+              break;
+              case "shadhu_shdhvi":
+              $('#display_category').html("શ્રી સાધુ સાધ્વી વૈયાવચ્છ ખાતે");
+              break;
+              case "sadharmik":
+              $('#display_category').html("શ્રી સાધર્મિક ખરડા ખાતે");
+              break;
+              case "chaturmas":
+              $('#display_category').html("શ્રી ચાતુર્માસ ખરડા ખાતે");
+              break;
+              case "kayami_tithi":
+              $('#display_category').html("શ્રી કાયમી તિથી ફંડ ખાતે");
+              break;
+              case "devdravya":
+              $('#display_category').html("શ્રી દેવદ્રવ્ય ખાતે");
+              break;
+              case "kesar_sukhad":
+              $('#display_category').html("શ્રી કેસર સુખડ ખાતે");
+              break;
+              case "dhoop_deep":
+              $('#display_category').html("શ્રી ધુપ-દીપ ખાતે");
+              break;
+              case "snatra_puja":
+              $('#display_category').html("શ્રી સ્નાત્ર પૂજા ખાતે");
+              break;
+              case "agani_pooja":
+              $('#display_category').html("શ્રી આંગી પૂજા ખાતે");
+              break;
+              case "moti_pooja":
+              $('#display_category').html("શ્રી મોટી પૂજા ખાતે");
+              break;
+              case "drut_boli":
+              $('#display_category').html("શ્રી ધૃતની બોલી ખાતે");
+              break;
+              case "other_account_name":
+              $('#display_category').html("શ્રી અન્ય ખાતે");
+              break;
+            default:
+              // code block
+          }
+     
+/*
+    <option value="dhoop_deep" {{ ($category == "dhoop_deep") ? "selected" :""}}>શ્રી ધુપ-દીપ ખાતે</option>
+    <option value="snatra_puja" {{ ($category == "snatra_puja") ? "selected" :""}}>શ્રી સ્નાત્ર પૂજા ખાતે</option>
+    <option value="agani_pooja" {{ ($category == "agani_pooja") ? "selected" :""}}>શ્રી આંગી પૂજા ખાતે</option>
+    <option value="moti_pooja" {{ ($category == "moti_pooja") ? "selected" :""}}>શ્રી મોટી પૂજા ખાતે</option>
+    <option value="drut_boli" {{ ($category == "drut_boli") ? "selected" :""}}>શ્રી ધૃતની બોલી ખાતે</option>
+    <option value="other_account_name" {{ ($category == "other_account_name") ? "selected" :""}}>શ્રી અન્ય ખાતે</option>*/
+});
+    </script>
 
     <!-- BEGIN: Page JS-->
    <script>
@@ -394,7 +472,7 @@ div.card-datatable [class*=col-md-] {
     var dt_basic_table = $('.datatables-basic');
     var dt_basic = dt_basic_table.DataTable({
 
-     
+      
         
       dom: '<"card-header flex-column flex-md-row"<"head-label text-center"><"dt-action-buttons text-end pt-3 pt-md-0"B>><"row"<"col-sm-12 col-md-6"l><"col-sm-12 col-md-6 d-flex justify-content-center justify-content-md-end"f>>t<"row"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>',
       displayLength: 7,
@@ -410,7 +488,7 @@ div.card-datatable [class*=col-md-] {
               text: '<i class="ti ti-printer me-1" ></i>Print',
               className: 'dropdown-item',
               exportOptions: {
-                columns: [1 ,2, 3, 4, 5],
+                columns: [0,1 ,2, 3, 4],
                 // prevent avatar to be display
                 format: {
                   body: function (inner, coldex, rowdex) {
@@ -447,7 +525,7 @@ div.card-datatable [class*=col-md-] {
               text: '<i class="ti ti-file-text me-1" ></i>Csv',
               className: 'dropdown-item',
               exportOptions: {
-                columns: [1 ,2, 3, 4, 5],
+                columns: [0,1 ,2, 3, 4],
                 // prevent avatar to be display
                 format: {
                   body: function (inner, coldex, rowdex) {
@@ -471,7 +549,7 @@ div.card-datatable [class*=col-md-] {
               text: '<i class="ti ti-file-spreadsheet me-1"></i>Excel',
               className: 'dropdown-item',
               exportOptions: {
-                columns: [1 ,2, 3, 4, 5],
+                columns: [0,1 ,2, 3, 4],
                 // prevent avatar to be display
                 format: {
                   body: function (inner, coldex, rowdex) {
@@ -495,7 +573,7 @@ div.card-datatable [class*=col-md-] {
               text: '<i class="ti ti-file-description me-1"></i>Pdf',
               className: 'dropdown-item',
               exportOptions: {
-                columns: [1 ,2, 3, 4, 5],
+                columns: [0,1 ,2, 3, 4],
                 // prevent avatar to be display
                 format: {
                   body: function (inner, coldex, rowdex) {
@@ -527,7 +605,7 @@ div.card-datatable [class*=col-md-] {
     });
 
     
-    $('div.head-label').html('<h5 class="card-title mb-0">Religious Donation Report</h5>');
+   // $('div.head-label').html('<h5 class="card-title mb-0">Religious Donation Report</h5>');
 
     </script>
 
