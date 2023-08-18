@@ -21,11 +21,17 @@
 <link rel="stylesheet" href="{{ asset ('assets/vendor/libs/datatables-responsive-bs5/responsive.bootstrap5.css') }}" />
 <link rel="stylesheet" href="{{ asset ('assets/vendor/libs/datatables-checkboxes-jquery/datatables.checkboxes.css') }}" />
 
+<link rel="stylesheet" href="{{ asset ('assets/vendor/libs/bs-stepper/bs-stepper.css') }}" />
+
 <!-- Row Group CSS -->
 <link rel="stylesheet" href="{{ asset ('assets/vendor/libs/datatables-rowgroup-bs5/rowgroup.bootstrap5.css') }}" />
 
 <link rel="stylesheet" href="{{ asset('assets/vendor/libs/animate-css/animate.css') }}" />
 <link rel="stylesheet" href="{{ asset('assets/vendor/libs/sweetalert2/sweetalert2.css') }}" />
+
+<link rel="stylesheet" href="{{ asset ('assets/vendor/libs/dropzone/dropzone.css') }}" />
+
+
 
     
 
@@ -63,6 +69,17 @@ div.card-datatable [class*=col-md-] {
       background-color: #efefef;
       opacity: 1;
   }
+
+  .bs-stepper.wizard-icons.wizard-icons-example.mt-2 {
+      box-shadow: unset !important;
+  }
+  .bs-stepper .step.active .bs-stepper-icon svg {
+    color: var(--bs-primary) !important;
+  }
+  .bs-stepper .step.crossed .step-trigger .bs-stepper-icon svg {
+    color: var(--bs-primary) !important;
+  }
+
 </style>
 
 @endsection
@@ -214,7 +231,6 @@ div.card-datatable [class*=col-md-] {
                           <div class="modal-dialog modal-xl" role="document">
                             <div class="modal-content">
                               <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel4">Detail Update</h5>
                                 <button
                                   type="button"
                                   class="btn-close"
@@ -223,441 +239,525 @@ div.card-datatable [class*=col-md-] {
                               </div>
                               <div class="modal-body">
                                 <div class="row">
-                                  <div class="col mb-3">
-                                    <label for="nameExLarge" class="form-label">Booking ID</label>
-                                    <input type="text" id="nameExLarge" class="form-control" placeholder="125" readonly/>
-                                  </div>
+                                 
+                                  <!-- Default Icons Wizard -->
+                                  <div class="col-12 mb-4">
 
-                                  <div class="col mb-3">
-                                    <label for="nameExLarge" class="form-label">રસિદ નંબર  </label>
-                                    <input type="text" id="nameExLarge" class="form-control" placeholder="10" readonly/>
-                                  </div>
-
-                                  <div class="col mb-3">
-                                    <label class="form-label"  for="basic-default-dob">તારીખ</label>
-                                    <input
-                                      type="text"
-                                      class="form-control flatpickr-validation"
-                                      name="r_date"
-                                      id="basic-default-dob1"
-                                      required />
-                                  </div>    
-
-                                  <div class="col mb-3">
-                                    <label for="select2Basic" class="form-label">નામ</label>
-                                    <select id="select2Basic" name="name" class="select2 form-select" data-allow-clear="true">
-                                      <option value="Bhoomi">Bhoomi</option>
-                                      <option value="Jay">Jay</option>
                                       
-                                    </select>
+
+                                    <div class="bs-stepper wizard-icons wizard-icons-example mt-2">
+                                      <div class="bs-stepper-header">
+                                        <div class="step" data-target="#account-details">
+                                          <button type="button" class="step-trigger">
+                                            <span class="bs-stepper-icon">
+                                              <svg viewBox="0 0 24 24">
+                                                <use xlink:href=" {{ asset('assets/svg/icons/form-wizard-user-plus.svg#wizardUserPlus') }}"></use>
+                                              </svg>
+                                            </span>
+                                            <span class="bs-stepper-label">Personal Info</span>
+                                          </button>
+                                        </div>
+                                        <div class="line">
+                                          <i class="ti ti-chevron-right"></i>
+                                        </div>
+                                        <div class="step" data-target="#personal-info">
+                                          <button type="button" class="step-trigger">
+                                            <span class="bs-stepper-icon">
+                                              <svg viewBox="0 0 24 24">
+                                                <use xlink:href="{{ asset('assets/svg/icons/form-wizard-booking.svg#wizardBooking') }}"></use>
+                                              </svg>
+                                            </span>
+                                            <span class="bs-stepper-label">Booking Details</span>
+                                          </button>
+                                        </div>
+                                        <div class="line">
+                                          <i class="ti ti-chevron-right"></i>
+                                        </div>
+                                        <div class="step" data-target="#address">
+                                          <button type="button" class="step-trigger">
+                                            <span class="bs-stepper-icon">
+                                              <svg viewBox="0 0 24 24">
+                                                <use xlink:href="{{ asset('assets/svg/icons/form-wizard-members.svg#wizardMembers') }}"></use>
+                                              </svg>
+                                            </span>
+                                            <span class="bs-stepper-label">Member Details</span>
+                                          </button>
+                                        </div>
+                                        
+                                        <div class="line">
+                                          <i class="ti ti-chevron-right"></i>
+                                        </div>
+                                        <div class="step" data-target="#review-submit">
+                                          <button type="button" class="step-trigger">
+                                            <span class="bs-stepper-icon">
+                                              <svg viewBox="0 0 54 54">
+                                                <use xlink:href="{{ asset('assets/svg/icons/form-wizard-submit.svg#wizardSubmit') }}"></use>
+                                              </svg>
+                                            </span>
+                                            <span class="bs-stepper-label">Review & Submit</span>
+                                          </button>
+                                        </div>
+                                      </div>
+                                      <div class="bs-stepper-content">
+                                      <form action="" method="POST">
+                                          <!-- Account Details -->
+                                          <div id="account-details" class="content">
+                                            <div class="content-header mb-3">
+                                              <small>Enter Your Personal Details.</small>
+                                            </div>
+                                            <div class="row g-3">
+                                              
+                                                <!-- Basic -->
+                                              <div class="col-md-4">
+                                                  <label for="select2Basic" class="form-label" >Name</label>
+                                                  <select id="select2Basic" class="select2 form-select" data-allow-clear="true" name="name" placeholder="select name" required>
+                                                    <option value="Bhoomi">Bhoomi</option>
+                                                    <option value="Jay">Jay</option>
+                                                  </select>
+                                                  
+                                                  <input type="hidden" id="email_user" value="{{!empty($m_data)  ? $m_data:''}}">
+                                                </div>
+                      
+                                                <div class="col-md-4">
+                                              
+                                                    <label class="form-label" for="basic-default-email">Email</label>
+                                                    <input type="email" id="member_email" name="email" class="form-control" placeholder="john.doe" />
+
+                                                </div>                                                                                                            
+
+                      
+                                                <div class="col-md-4">
+                                                  
+                                                  <label class="form-label" for="multicol-phone">Phone Number</label>
+                                                  <input type="number" id="member-phone" name="phone_no" class="form-control phone-mask" placeholder="658 799 8941" aria-label="658 799 8941" maxlength="10" minlength="10" required/>
+                                                </div>
+
+                                                <div class="col-md-4">
+                                                  <label class="form-label" for="basic-default-name">Age</label>
+                                                  <input type="text" class="form-control" name="age" id="basic-default-age" placeholder="Age" />
+                                                </div>
+                      
+                                                <div class="col-4">
+                                                  <label class="form-label" for="collapsible-address">Address</label>
+                                                
+                                                  
+                                                  
+                                                  <textarea name="collapsibleaddress"  class="form-control" id="member-address" rows="1" placeholder="1456, Mall Road"></textarea>
+                                                </div>
+                                                                          
+                                                
+                                                <!-- Basic -->
+                                                <div class="col-md-4">
+                                                  <label for="select2Basic" class="form-label">Community</label>
+                                                  <select id="select2Basic" class="select2 form-select form-select-lg" data-allow-clear="true">
+                                                    <option value="AK">Alaska</option>
+                                                    <option value="HI">Hawaii</option>
+                                                    <option value="CA">California</option>
+                                                    <option value="NV">Nevada</option>
+                                                    <option value="OR">Oregon</option>
+                                                    <option value="WA">Washington</option>
+                                                    <option value="AZ">Arizona</option>
+                                                    <option value="CO">Colorado</option>
+                                                    <option value="ID">Idaho</option>
+                                                    <option value="MT">Montana</option>
+                                                    <option value="NE">Nebraska</option>
+                                                  </select>
+                                                </div>
+
+                                                
+
+                                                
+                                                <div class="col-md-4">
+                                                  <label for="defaultFormControlInput" class="form-label">Sub Community</label>
+                                                  <input type="text" class="form-control" name="community" id="defaultFormControlInput" placeholder="John Doe" aria-describedby="defaultFormControlHelp" />
+                                                </div>
+
+                                                
+                                                
+                                                <div class="col-md-4">
+                                                  <label for="defaultFormControlInput" class="form-label">City</label>
+                                                  <input type="text" class="form-control" name="city" id="member_city" placeholder="John Doe" aria-describedby="defaultFormControlHelp" />
+                                                </div>
+
+                                                <div class="col-md-4">
+                                                  <label class="d-block form-label">Gender</label>
+                                                  <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="MALE" />
+                                                    <label class="form-check-label" for="inlineRadio1">Male</label>
+                                                  </div>
+                                                  <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="FEMALE" />
+                                                    <label class="form-check-label" for="inlineRadio2">Female</label>
+                                                  </div>
+                                                  
+                                                </div>
+                      
+                                              <div class="col-12 d-flex justify-content-end">
+                                                {{-- <button class="btn btn-label-secondary btn-prev" disabled>
+                                                  <i class="ti ti-arrow-left me-sm-1"></i>
+                                                  <span class="align-middle d-sm-inline-block d-none">Previous</span>
+                                                </button> --}}
+                                                {{-- <div>
+                                                <input type="button" class="btn btn-primary btn-next">
+                                                  <span class="align-middle d-sm-inline-block d-none me-sm-1">Next</span>
+                                                  <i class="ti ti-arrow-right"></i>
+                                                </div> --}}
+
+                                                <button type="button" class="btn btn-primary btn-next">
+                                                  <span class="align-middle d-sm-inline-block d-none me-sm-1">Next</span>
+                                                  <i class="ti ti-arrow-right"></i>
+                                                </button>
+                                                
+                                              
+                                              </div>
+                                            </div>
+                                          </div>
+                                          <!-- Personal Info -->
+                                          <div id="personal-info" class="content">
+                                            <div class="content-header mb-3">
+                                              <small>Enter Your Booking Details.</small>
+                                            </div>
+                                            <div class="row g-3">
+                                              
+                                            
+                                              <!-- /Datetime Picker-->
+                                              
+                                              
+
+                                                <!-- Primary -->
+                                              {{-- <div class="col-md-4">
+                                                <label for="select3Primary" class="form-label">Room Facility</label>
+                                                <div class="select2-primary">
+                                                  <select id="select3Primary1" name="room_list" class="select2 form-select" multiple>
+                                                    <option value="">Select Room</option>
+                                                      <option value="A.C. Room No" name="room_facility"> A.C. Room.</option>
+                                                      <option value="Non. A.C. Room No" name="room_facility">Non. A.C. Room</option>
+                                                      <option value="Door Metri. Room No" name="room_facility">Door Metri. Room.</option>
+                                                  </select>
+                                                </div>
+                                              </div> --}}
+
+
+                                              <!-- Primary -->
+
+                                              
+                                              <div class="row g-3 mt-0 mb-3">
+
+                                                <!-- Custom Suggestions: List -->
+                                                  <div class="col-md-2">
+                                                    <label for="TagifyCustomListSuggestion" class="form-label">A.C. Room.</label>
+                                                    <input id="TagifyCustomListSuggestion" name="TagifyCustomListSuggestion" class="form-control" placeholder="Select Roomlist" />
+                                                  </div>
+
+                                                  <div class="col-md-2">
+                                                    <label class="form-label" for="basic-default-name">Amount</label>
+                                                    <div class="input-group">
+                                                      <span class="input-group-text">₹</span>
+                                                      <input type="number" class="form-control"  name="amount" placeholder="Amount" aria-label="Amount (to the nearest indian)" id="r_amount" value="800" />
+                                                    </div>
+                                                  </div>
+
+
+                                                  <div class="col-md-2">
+                                                    <label for="TagifyCustomListSuggestion1" class="form-label">Non. A.C. Room</label>
+                                                    <input id="TagifyCustomListSuggestion1" name="TagifyCustomListSuggestion1" class="form-control" placeholder="Select Roomlist" />
+                                                  </div>
+
+                                                  <div class="col-md-2">
+                                                    <label class="form-label" for="basic-default-name">Amount</label>
+                                                    <div class="input-group">
+                                                      <span class="input-group-text">₹</span>
+                                                      <input type="number" class="form-control"  name="amount" placeholder="Amount" aria-label="Amount (to the nearest indian)" id="r_amount" value="800" />
+                                                    </div>
+                                                  </div>
+
+                                                  <div class="col-md-2">
+                                                    <label for="TagifyCustomListSuggestion2" class="form-label">Door Metri. Room </label>
+                                                    <input id="TagifyCustomListSuggestion2" name="TagifyCustomListSuggestion2" class="form-control" placeholder="Select Roomlist" />
+                                                  </div>
+
+                                                  <div class="col-md-2">
+                                                    <label class="form-label" for="basic-default-name">Amount</label>
+                                                    <div class="input-group">
+                                                      <span class="input-group-text">₹</span>
+                                                      <input type="number" class="form-control"  name="amount" placeholder="Amount" aria-label="Amount (to the nearest indian)" id="r_amount" value="800" />
+                                                    </div>
+                                                  </div>
+                    
+                                              </div>
+
+                                              
+                                          
+                                              <hr>
+                                              
+                                              <div class="col-md-4">
+                                                <label class="form-label" for="basic-default-name">No. of Person</label>
+                                                <input type="text" class="form-control"  name="no_of_person" id="no_of_person_id" placeholder="No of Person" min="1" max="10"/>
+                                              </div>
+                                              <!-- Datetime Picker-->
+                                              <div class="col-md-4">
+                                                <label for="flatpickr-datetime" class="form-label">Check-In Date</label>
+                                                <input type="text" class="form-control" name="check_in_date" placeholder="DD-MM-YYYY HH:MM" id="flatpickr-datetime" />
+                                              </div>
+
+                                              <div class="col-md-4">
+                                                <label class="form-label" for="basic-default-name">Deposit No</label>
+                                                <input type="text" class="form-control" name="deposit_no" id="basic-default-name" placeholder="Deposit No" />
+                                              </div>
+
+                                            
+                    
+                                              <div class="col-md-4">
+                                                <label class="form-label" for="deposit-amount">Deposit Rs</label>
+                                                <input type="number" class="form-control" name="deposite_rs" id="deposit-amount" placeholder="Deposit Rs">
+                                              </div>
+                                              
+                                              <div class="col-md-4">
+                                                <label class="form-label" for="rupees-in-words">Deposit Rs (rupees in words)</label>
+                                                <input type="text" class="form-control" name="rs_word" id="rupees-in-words" placeholder="Rupees in words" readonly>
+                                              </div>
+
+                                              <!-- Multi  -->
+                                              <div class="col-12">
+                                                <div action="/upload" class="dropzone needsclick" id="dropzone-multi">
+                                                  <div class="dz-message needsclick">
+                                                    Drop files here or click to upload
+                                                    <span class="note needsclick"
+                                                      >(This is just a demo dropzone. Selected files are <strong>not</strong> actually
+                                                      uploaded.)</span
+                                                    >
+                                                  </div>
+                                                  <div class="fallback">
+                                                    <input name="file" type="file" />
+                                                  </div>
+                                                </div>
+                                              </div>
+                                              <!-- Multi  -->
+
+                                              
+                                              <div class="col-12 d-flex justify-content-between">
+                                                <button class="btn btn-label-secondary btn-prev">
+                                                  <i class="ti ti-arrow-left me-sm-1"></i>
+                                                  <span class="align-middle d-sm-inline-block d-none">Previous</span>
+                                                </button>
+                                                {{-- <div>
+                                                <input type="button" id="repeat-next"  class="btn btn-primary btn-next" >
+                                                  <span class="align-middle d-sm-inline-block d-none me-sm-1">Next</span>
+                                                  <i class="ti ti-arrow-right"></i>
+                                                </div> --}}
+                                                <button type="button" class="btn btn-primary btn-next">
+                                                  <span class="align-middle d-sm-inline-block d-none me-sm-1">Next</span>
+                                                  <i class="ti ti-arrow-right"></i>
+                                                </button>
+                                              </div>
+                                            </div>
+                                          </div>
+                                          <!-- All No of Person -->
+                                          <div id="address" class="content">
+                                            <div class="content-header">
+                                              <small>Enter Member Details.</small>
+                                            </div>
+                                            
+                                            <div class="row g-3">
+                                              <!-- Form Repeater -->
+                                            
+                                              <div id="step2FormsContainer "class="col-12">
+                                                <div class="dynamic-form">
+                                                <div class="all-members" data-repeater-list="group-a">
+                                                <div data-repeater-item>
+                                              
+                                              <div class="rep-form1">
+                                            
+                                                  <div class="row formrepeater1">
+                                                    <div class="mb-3 col-lg-6 col-xl-3 col-12 mb-0">
+                                                      <label class="form-label" for="form-repeater-1-1">Full Name</label>
+                                                      <input type="text" id="full_name_form"  name="full_name" class="form-control" placeholder="john doe" />
+                                                    </div>
+                                                    <div class="mb-3 col-lg-6 col-xl-3 col-12 mb-0">
+                                                      <label class="form-label" for="form-repeater-1-2">Age</label>
+                                                      <input type="text" id="member_age" name="m_age" class="form-control" placeholder="your age" />
+                                                    </div>
+                                                    
+                                                    
+                                                    <div class="mb-3 col-lg-6 col-xl-2 col-12 mb-0 ">
+                                                    
+                                                        <label class="d-block form-label">Gender</label>
+                                                      
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="radio" name="gender_${i}" id="inlineRadio1_${i}" value="MALE" />
+                                                            <label class="form-check-label" for="inlineRadio1_${i}">Male</label>
+                                                        </div>
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input" type="radio" name="gender_${i}" id="inlineRadio2_${i}" value="FEMALE" />
+                                                            <label class="form-check-label" for="inlineRadio2_${i}">Female</label>
+                                                        </div>
+
+
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                      <label class="form-label" for="basic-default-country">Relation</label>
+                                                      <select class="form-select" name="relation" id="member_relation" required>
+                                                        <option value="SELF" selected>SELF</option>
+                                                        <option value="MOTHER">MOTHER</option>
+                                                        <option value="FATHER">FATHER</option>
+                                                        <option value="BROTHER">BROTHER</option>
+                                                        <option value="SISTER">SISTER</option>
+                                                        <option value="UNCLE">UNCLE</option>
+                                                        <option value="AUNTY">AUNTY</option>
+                                                        <option value="GRAND MOTHER">GRAND MOTHER</option>
+                                                        <option value="GRAND FATHER">GRAND FATHER</option>
+                                                        <option value="FRIEND">FRIEND</option>
+                                                      </select>
+                                                    </div>
+                                                    <div class="mb-3 col-lg-12 col-xl-2 col-12 d-flex align-items-center mb-0">
+                                                      <button class="btn btn-label-danger mt-4" data-repeater-delete>
+                                                        <i class="ti ti-x ti-xs me-1"></i>
+                                                        <span class="align-middle">Delete</span>
+                                                      </button>
+                                                    </div>
+                                                  </div>
+                                                </div>
+                                                <div class="row rep-form">
+                                                </div> 
+                                                  <hr />
+                                                </div>
+                                                </div>
+                                                </div>
+                                              </div>
+                                              <div id="dynamicFormsContainer">
+                                              </div>
+                                              <div class="mb-0">
+                                                <button class="btn btn-primary" data-repeater-create>
+                                                  <i class="ti ti-plus me-1"></i>
+                                                  <span class="align-middle">Add Members</span>
+                                                </button>
+                                              </div>
+                                              
+                                              <!-- /Form Repeater -->
+                                              <div class="col-12 d-flex justify-content-between">
+                                                <button class="btn btn-label-secondary btn-prev">
+                                                  <i class="ti ti-arrow-left me-sm-1"></i>
+                                                  <span class="align-middle d-sm-inline-block d-none">Previous</span>
+                                                </button>
+                                                {{-- <div>
+                                                  <input type="button"  class="btn btn-primary btn-next">
+                                                  <span class="align-middle d-sm-inline-block d-none me-sm-1">Next</span>
+                                                  <i class="ti ti-arrow-right"></i>
+                                                </div> --}}
+                                                <button type="button" class="btn btn-primary btn-next">
+                                                  <span class="align-middle d-sm-inline-block d-none me-sm-1">Next</span>
+                                                  <i class="ti ti-arrow-right"></i>
+                                                </button>
+                                              </div>
+                                            </div>
+                                          </div>
+                                          
+                                          <!-- Review -->
+                                          <div id="review-submit" class="content">
+
+                                            <!-- Invoice -->
+                                            <div class="col-xl-12 col-md-12 col-12 mb-md-0 mb-4">
+                                              <div class="invoice-preview-card">
+                                                
+                                                <div class="card-body">
+                                                  <div class="row p-sm-3 p-0 mb-3">
+                                                  
+                                                    <div class="col-xl-12 col-md-12 col-sm-5 col-12 mb-xl-0 mb-md-4 mb-sm-0 mb-4">
+                                                      <h6 class="mb-4">Details:</h6>
+                                                      <table>
+                                                        <tbody>
+                                                          
+                                                          {{-- <tr>
+                                                            <td class="pe-4">Room Facility</td>
+                                                            <td id="room_faci"></td>
+                                                          </tr> --}}
+                                                          <tr>
+                                                            <td class="pe-4">Room Name:</td>
+                                                            <td id="room_lst"></td>
+                                                          </tr>
+                                                          <tr>
+                                                            <td class="pe-4">Check-In Date:</td>
+                                                            <td id="check_date"></td>
+                                                          </tr>
+                                                          <tr>
+                                                            <td class="pe-4">Amount:</td>
+                                                            <td id="room_amount"></td>
+                                                          </tr>
+                                                          
+                                                        </tbody>
+                                                      </table>
+                                                    </div>
+                                                  </div>
+                                                </div>
+                                                <div class="table-responsive border-top">
+                                                  <table class="table mb-3">
+                                                    <thead>
+                                                      <tr>
+                                                        <th>No.</th>
+                                                        <th>Full Name</th>
+                                                        <th>Age </th>
+                                                        <th>Gender</th>
+                                                        <th>Relations</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    
+                                                      <tr>
+                                                        <td></td>
+                                                        <td id="member_full_name"></td>
+                                                        <td id="members_age"></td>
+                                                        <td id="member_gen"></td>
+                                                        <td id="member_rel"></td>
+                                                      
+                                                      </tr>
+                                                    
+                                                                                        
+                                                      <!-- <tr>
+                                                        <td colspan="3" class="align-top px-4 py-4">
+                                                          
+                                                        </td>
+                                                        <td class="text-end pe-3 py-4">
+                                                          <p class="mb-2 pt-3">Subtotal:</p>
+                                                          <p class="mb-2">Tax:</p>
+                                                          <p class="mb-0 pb-3">Total:</p>
+                                                        </td>
+                                                        <td class="ps-2 py-4">
+                                                          <p class="fw-semibold mb-2 pt-3">$154.25</p>
+                                                          <p class="fw-semibold mb-2">$50.00</p>
+                                                          <p class="fw-semibold mb-0 pb-3">$204.25</p>
+                                                        </td>
+                                                      </tr> -->
+                                                    </tbody>
+                                                  </table>
+                                                </div>
+
+                                                
+                                              </div>
+                                            </div>
+                                            <!-- /Invoice -->
+
+                                            <div class="col-12 d-flex justify-content-between">
+                                              <button class="btn btn-label-secondary btn-prev">
+                                                <i class="ti ti-arrow-left me-sm-1"></i>
+                                                <span class="align-middle d-sm-inline-block d-none">Previous</span>
+                                              </button>
+                                              <button type="submit" class="btn btn-success btn-submit">Submit</button>
+                                              
+                                            </div>
+                                          </div>
+                                        </form>
+                                      </div>
+                                    </div>
                                   </div>
+                                  <!-- /Default Icons Wizard -->
 
-
-                                  <div class="col mb-3">
-                                    <label class="form-label" for="city">ગામ </label>
-                                    <input type="text" name="city" class="form-control" id="city" placeholder="Bhuj" />
-                                  </div>
-
-                                </div>
-
-                                <div class="row g-3">
-                                  <!-- Datetime Picker-->
-                                  <div class="col mb-3">
-                                    <label for="flatpickr-datetime" class="form-label">આગમન તારીખ / સમય</label>
-                                    <input type="text" class="form-control" name="check_in_date" placeholder="09-08-2023 17:36" readonly />
-                                  </div>
-
-                                  <!-- Datetime Picker-->
-                                  <div class="col mb-3">
-                                    <label for="flatpickr-datetime" class="form-label">ચેક આઉટ તારીખ / સમય</label>
-                                    <input type="text" class="form-control" name="check_out_date" placeholder="DD-MM-YYYY HH:MM" id="flatpickr-datetime" />
-                                  </div>
-
-                                  <div class="col mb-3">
-                                    <label class="form-label" for="deposit-amount">ડિપોઝિટ રકમ </label>
-                                    <input type="number" class="form-control" name="deposite_rs" id="deposit-amount" placeholder="Deposit Rs" readonly>
-                                  </div>
                                   
-
                                 </div>
 
-                                {{-- <div class="row g-3">
-                                  <!-- Multiple -->
-                                  <div class="col mb-3">
-                                    <label for="select2Multiple" class="form-label">A.C. Room.</label>
-                                    <select id="select2Multiple" class="select2 form-select" multiple>
-                                      <optgroup label="Alaskan/Hawaiian Time Zone">
-                                        <option value="AK">Alaska</option>
-                                        <option value="HI">Hawaii</option>
-                                      </optgroup>
-                                    </select>
-                                  </div>
-
-                                  <div class="col mb-3">
-                                    <label class="form-label" for="basic-default-name">કુલ ભાડું (A.C. Room.)</label>
-                                    <div class="input-group">
-                                      <span class="input-group-text">₹</span>
-                                      <input type="number" class="form-control"  name="amount" placeholder="Amount" aria-label="Amount (to the nearest indian)" id="r_amount" value="800" />
-                                    </div>
-                                  </div>
-
-                                  <div class="col mb-3">
-                                    <label for="select2Multiple" class="form-label">Non. A.C. Room</label>
-                                    <select id="select2Multiple2" class="select2 form-select" multiple>
-                                      <optgroup label="Alaskan/Hawaiian Time Zone">
-                                        <option value="AK">Alaska</option>
-                                        <option value="HI">Hawaii</option>
-                                      </optgroup>
-                                    </select>
-                                  </div>
-
-                                  <div class="col mb-3">
-                                    <label class="form-label" for="basic-default-name">કુલ ભાડું (Non. A.C.)</label>
-                                    <div class="input-group">
-                                      <span class="input-group-text">₹</span>
-                                      <input type="number" class="form-control"  name="amount" placeholder="Amount" aria-label="Amount (to the nearest indian)" id="r_amount" value="800" />
-                                    </div>
-                                  </div>
-
-                                  <div class="col mb-3">
-                                    <label for="select2Multiple" class="form-label">Door Metri. Room</label>
-                                    <select id="select2Multiple3" class="select2 form-select" multiple>
-                                      <optgroup label="Alaskan/Hawaiian Time Zone">
-                                        <option value="AK">Alaska</option>
-                                        <option value="HI">Hawaii</option>
-                                      </optgroup>
-                                    </select>
-                                  </div>
-
-                                  <div class="col mb-3">
-                                    <label class="form-label" for="basic-default-name">કુલ ભાડું (Door Metri)</label>
-                                    <div class="input-group">
-                                      <span class="input-group-text">₹</span>
-                                      <input type="number" class="form-control"  name="amount" placeholder="Amount" aria-label="Amount (to the nearest indian)" id="r_amount" value="800" />
-                                    </div>
-                                  </div>
-
-                                </div>
-
-                                <div class="row g-3">
-                                  <div class="col mb-3">
-                                    <label class="form-label" for="deposit-amount">એક્સટ્રા ચાર્જ</label>
-                                    <input type="number" class="form-control" name="extra_rs" id="extra-amount" placeholder="Extra Amount">
-                                  </div>
-
-                                  <div class="col mb-3">
-                                    <label class="form-label" for="deposit-amount">રોકાણ દિવસ</label>
-                                    <input type="number" class="form-control" name="extra_rs" id="extra-amount" placeholder="Extra Amount">
-                                  </div>
-
-                                  <div class="col mb-3">
-                                    <label class="form-label" for="deposit-amount">કુલ રકમ (₹)</label>
-                                    <input type="number" class="form-control" name="extra_rs" id="extra-amount" placeholder="Extra Amount">
-                                  </div>
-
-                                  <div class="col mb-3">
-                                    <label class="form-label" for="deposit-amount">ડિપોઝિટ બાદ </label>
-                                    <input type="number" class="form-control" name="extra_rs" id="extra-amount" placeholder="Extra Amount">
-                                  </div>
-
-                                  <div class="col mb-3">
-                                    <label class="form-label" for="deposit-amount">બાકી લેવાની / પરત કરવાની  રકમ</label>
-                                    <input type="number" class="form-control" name="extra_rs" id="extra-amount" placeholder="Extra Amount">
-                                  </div>
-
-                                </div>
-
-                                <div class="row g-3">
-                                  <div class="col-md-4">
-                                    <label class="d-block form-label">નાણા મળેલ</label>
-                                    <div class="form-check form-check-inline mb-2">
-                                      <input
-                                        type="radio"
-                                        id="basic_default_radio-male"
-                                        name="basic_default_radio"
-                                        class="form-check-input"
-                                        value="cheque"
-                                        required />
-                                      <label class="form-check-label" for="basic_default_radio">ચેક</label>
-                                    </div>
-                                    <div class="form-check form-check-inline">
-                                      <input
-                                        type="radio"
-                                        id="basic_default_radio-female"
-                                        name="basic_default_radio"
-                                        class="form-check-input"
-                                        value="Draft"
-                                        required />
-                                      <label class="form-check-label" for="basic_default_radio">ડ્રાફ્ટ</label>
-                                    </div>
-                                    <div class="form-check form-check-inline">
-                                      <input
-                                        type="radio"
-                                        id="basic_default_radio-female"
-                                        name="basic_default_radio"
-                                        class="form-check-input"
-                                        value="Cash"
-                                        required />
-                                      <label class="form-check-label" for="basic_default_radio">રોકડા</label>
-                                    </div>
-                                    <div class="form-check form-check-inline">
-                                      <input
-                                        type="radio"
-                                        id="basic_default_radio-female"
-                                        name="basic_default_radio"
-                                        class="form-check-input"
-                                        value="UPI"
-                                        required />
-                                      <label class="form-check-label" for="basic_default_radio">UPI</label>
-                                    </div>
-                                  </div>
-                                </div> --}}
-
-                                <!-- Basic Bootstrap Table -->
-                                <div class="table-responsive text-nowrap">
-                                  <table class="table">
-                                    <thead>
-                                      <tr>
-                                        <th>રૂમની વિગત</th>
-                                        <th>Selected Room</th>
-                                        <th>ભાડું</th>
-                                        <th>એક્સટ્રા ચાર્જ</th>
-                                        <th>કુલ ભાડું</th>
-                                        <th>રોકાણ દિવસ</th>
-                                        <th>કુલ રકમ (₹)</th>
-                                      </tr>
-                                    </thead>
-                                    <tbody class="table-border-bottom-0">
-                                      <tr>
-                                        <td>
-                                          ડિલક્સ  રૂમ 
-                                        </td>
-                                        <td>
-                                          <div class="col">
-                                            <select id="select2Multiple2" class="select2 form-select" multiple>
-                                              <option value="AK">Alaska</option>
-                                              <option value="HI">Hawaii</option>
-                                            </select>
-                                          </div>
-                                        </td>
-                                        <td>
-                                          <input type="text" class="form-control" value="1250" />
-                                        </td>
-                                        <td>
-                                          <input type="text" class="form-control" value="100" />
-                                        </td>
-                                        <td>
-                                          <input type="text" class="form-control" value="1500" />
-                                        </td>
-                                        <td>
-                                          <input type="text" class="form-control" value="2" readonly/>
-                                        </td>
-                                        <td>
-                                          <input type="text" class="form-control" value="1850" />
-                                        </td>
-                                      </tr>
-
-                                      <tr>
-                                        <td>
-                                          A.C. રૂમ
-                                        </td>
-                                        <td>
-                                          <select id="select2Multiple3" class="select2 form-select" multiple>
-                                            <option value="AK">Alaska</option>
-                                            <option value="HI">Hawaii</option>
-                                          </select>
-                                        </td>
-                                        <td>
-                                          <input type="text" class="form-control" value="1250" />
-                                        </td>
-                                        <td>
-                                          <input type="text" class="form-control" value="100" />
-                                        </td>
-                                        <td>
-                                          <input type="text" class="form-control" value="1500" />
-                                        </td>
-                                        <td>
-                                          <input type="text" class="form-control" value="2" readonly/>
-                                        </td>
-                                        <td>
-                                          <input type="text" class="form-control" value="1850" />
-                                        </td>
-                                      </tr>
-
-                                      <tr>
-                                        <td>
-                                           Non. A.C. રૂમ
-                                        </td>
-                                        <td>
-                                          <select id="select2Multiple4" class="select2 form-select" multiple>
-                                            <option value="AK">Alaska</option>
-                                            <option value="HI">Hawaii</option>
-                                          </select>
-                                        </td>
-                                        <td>
-                                          <input type="text" class="form-control" value="1250" />
-                                        </td>
-                                        <td>
-                                          <input type="text" class="form-control" value="100" />
-                                        </td>
-                                        <td>
-                                          <input type="text" class="form-control" value="1500" />
-                                        </td>
-                                        <td>
-                                          <input type="text" class="form-control" value="2" readonly/>
-                                        </td>
-                                        <td>
-                                          <input type="text" class="form-control" value="1850" />
-                                        </td>
-                                      </tr>
-
-                                      <tr>
-                                        <td>
-                                          A.C. ડોરમેટરી  
-                                        </td>
-                                        <td>
-                                          <select id="select2Multiple5" class="select2 form-select" multiple>
-                                            <option value="AK">Alaska</option>
-                                            <option value="HI">Hawaii</option>
-                                          </select>
-                                        </td>
-                                        <td>
-                                          <input type="text" class="form-control" value="1250" />
-                                        </td>
-                                        <td>
-                                          <input type="text" class="form-control" value="100" />
-                                        </td>
-                                        <td>
-                                          <input type="text" class="form-control" value="1500" />
-                                        </td>
-                                        <td>
-                                          <input type="text" class="form-control" value="2" readonly/>
-                                        </td>
-                                        <td>
-                                          <input type="text" class="form-control" value="1850" />
-                                        </td>
-                                      </tr>
-
-                                      <tr>
-                                        <td>
-                                          Non. A.C. ડોરમેટરી  
-                                        </td>
-                                        <td>
-                                          <select id="select2Multiple6" class="select2 form-select" multiple>
-                                            <option value="AK">Alaska</option>
-                                            <option value="HI">Hawaii</option>
-                                          </select>
-                                        </td>
-                                        <td>
-                                          <input type="text" class="form-control" value="1250" />
-                                        </td>
-                                        <td>
-                                          <input type="text" class="form-control" value="100" />
-                                        </td>
-                                        <td>
-                                          <input type="text" class="form-control" value="1500" />
-                                        </td>
-                                        <td>
-                                          <input type="text" class="form-control" value="2" readonly/>
-                                        </td>
-                                        <td>
-                                          <input type="text" class="form-control" value="1850" />
-                                        </td>
-                                      </tr>
-
-                                      <tr>
-                                        <td rowspan="4" colspan="5">
-                                          <div class="col-md-6 mb-3">
-                                            <label class="form-label" for="basic-default-name">અન્ય વિગત</label>
-                                            <input
-                                              type="text"
-                                              class="form-control"
-                                              name="remarks"
-                                              id="basic-default-name"
-                                              {{-- placeholder="John Doe" --}}
-                                              required />
-                                          </div>
-
-                                          <div class="col-md-6 mb-3">
-                                            <label class="form-label" for="basic-default-name">અંકે રૂપિયા</label>
-                                            <input type="text" class="form-control" name="rs_word" id="rupees-in-words" placeholder="Rupees in words" readonly>
-                                          </div>
-
-                                          <div class="col-md-6">
-                                            <label class="d-block form-label">નાણા મળેલ</label>
-                                            <div class="form-check form-check-inline mb-2">
-                                              <input
-                                                type="radio"
-                                                id="basic_default_radio-male"
-                                                name="basic_default_radio"
-                                                class="form-check-input"
-                                                value="cheque"
-                                                required />
-                                              <label class="form-check-label" for="basic_default_radio">ચેક</label>
-                                            </div>
-                                            <div class="form-check form-check-inline">
-                                              <input
-                                                type="radio"
-                                                id="basic_default_radio-female"
-                                                name="basic_default_radio"
-                                                class="form-check-input"
-                                                value="Draft"
-                                                required />
-                                              <label class="form-check-label" for="basic_default_radio">ડ્રાફ્ટ</label>
-                                            </div>
-                                            <div class="form-check form-check-inline">
-                                              <input
-                                                type="radio"
-                                                id="basic_default_radio-female"
-                                                name="basic_default_radio"
-                                                class="form-check-input"
-                                                value="Cash"
-                                                required />
-                                              <label class="form-check-label" for="basic_default_radio">રોકડા</label>
-                                            </div>
-                                            <div class="form-check form-check-inline">
-                                              <input
-                                                type="radio"
-                                                id="basic_default_radio-female"
-                                                name="basic_default_radio"
-                                                class="form-check-input"
-                                                value="UPI"
-                                                required />
-                                              <label class="form-check-label" for="basic_default_radio">UPI</label>
-                                            </div>
-                                          </div>
-                                        </td>
-                                        <td><strong>કુલ રકમ (₹)</strong></td>
-                                        <td> <input type="text" class="form-control" value="1850" /></td>
-                                      </tr>
-
-                                      <tr>
-                                        
-                                        <td><strong>ડિપોઝિટ બાદ</strong></td>
-                                        <td> <input type="text" class="form-control" value="1850" readonly/></td>
-                                      </tr>
-
-                                      <tr>
-                                        
-                                        <td><strong>બાકી લેવાની /<br> પરત કરવાની રકમ</strong></td>
-                                        <td>
-                                          <input type="number" class="form-control" name="deposite_rs" id="deposit-amount" >
-                                        </td>
-                                      </tr>
-
-                                    </tbody>
-                                  </table>
-
-                                <!--/ Basic Bootstrap Table -->
-                          
+                                
 
                               </div>
-                              <div class="modal-footer">
-                                <button type="button" class="btn btn-label-secondary" data-bs-dismiss="modal">
-                                  Close
-                                </button>
-                                <button type="button" class="btn btn-primary">Save changes</button>
-                              </div>
+                           
                             </div>
                           </div>
                         </div>
@@ -666,6 +766,9 @@ div.card-datatable [class*=col-md-] {
                         
                     </section>
                      <!--/ Basic table -->
+
+
+
                   </div>
                 </div>
             </div>
@@ -699,9 +802,20 @@ div.card-datatable [class*=col-md-] {
 
     <script src="{{ asset('assets/js/forms-pickers.js') }}"></script>
     
-   
+
     <!-- Page JS -->
     <script src="{{ asset ('assets/js/form-validation.js') }}"></script>
+
+    <script src="{{ asset('assets/vendor/libs/bs-stepper/bs-stepper.js') }}"></script>
+
+    
+    <script src="{{ asset('assets/js/form-wizard-icons.js') }}"></script>
+
+        <script src="{{ asset('assets/vendor/libs/dropzone/dropzone.js') }}"></script>
+
+        <script src="{{ asset('assets/js/forms-file-upload.js') }}"></script>
+
+     
 
     <script>
       jQuery(document).ready(function($){
@@ -712,6 +826,7 @@ div.card-datatable [class*=col-md-] {
     })
     });
     </script>
+
 
     <!-- BEGIN: Page JS-->
    <script>
