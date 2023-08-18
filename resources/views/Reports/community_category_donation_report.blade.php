@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Religious Donation Report')
+@section('title', 'Community Donation Report')
 
 @section('pagecss')
 
@@ -96,7 +96,7 @@ div.card-datatable [class*=col-md-] {
                       <div class="content-header-left col-md-9 col-12 mb-2">
                         {{-- <div class="row breadcrumbs-top">
                           <div class="col-12">
-                            <h4 class="fw-bold py-3">Relogious Donation Report</h4>
+                            <h4 class="fw-bold py-3">Community Donation Report</h4>
                           </div>
                         </div> --}}
                       </div>
@@ -110,34 +110,20 @@ div.card-datatable [class*=col-md-] {
                             <div class="col-md mb-4 mb-md-0">
                                 <div class="card">
                                 <div class="card-body">
-                                    <form id="kvo_religious_category_donation_report" method="GET" class="browser-default-validation" action="{{route('show_religious_category_donation_report')}}">
+                                    <form id="kvo_religious_category_donation_report" method="GET" class="browser-default-validation" action="{{route('show_community_category_donation_report')}}">
                                         <div class="row g-3">
-                                            <div class="col-md-3 mb-3">
-                                                <label class="form-label" for="basic-default-country">સંસ્થા</label>
-                                                <select class="form-select" id="basic-default-country" name="trust" required>
-                                                <option value="VIJAYNAGAR" {{ ($trust == "VIJAYNAGAR") ? "selected" :""}}>વિજયનગર</option>
-                                                <option value="NAVNEETNAGAR" {{ ($trust == "NAVNEETNAGAR") ? "selected" :""}}>નવનીતનગર</option>
-                                                </select>
-                                            </div>
-                                            
+  
                                             <div class="col-md-3 mb-3">
                                                 <label class="form-label" for="basic-default-country">Donation Details</label>
                                                 <select class="form-select" id="category" name="category" required>
-                                                <option value="sarv_sadharan" {{ ($category == "sarv_sadharan") ? "selected" :""}}>શ્રી સર્વ સાધારણ ખાતે</option>
-                                                <option value="jiv_daya" {{ ($category == "jiv_daya") ? "selected" :""}}>શ્રી જીવદયા ખાતે</option>
-                                                <option value="shadhu_shdhvi" {{ ($category == "shadhu_shdhvi") ? "selected" :""}}>શ્રી સાધુ સાધ્વી વૈયાવચ્છ ખાતે</option>
-                                                <option value="sadharmik" {{ ($category == "sadharmik") ? "selected" :""}}>શ્રી સાધર્મિક ખરડા ખાતે</option>
-                                                <option value="chaturmas" {{ ($category == "chaturmas") ? "selected" :""}}>શ્રી ચાતુર્માસ ખરડા ખાતે</option>
-                                                <option value="kayami_tithi" {{ ($category == "kayami_tithi") ? "selected" :""}}>શ્રી કાયમી તિથી ફંડ ખાતે</option>
-                                                <option value="devdravya" {{ ($category == "devdravya") ? "selected" :""}}>શ્રી દેવદ્રવ્ય ખાતે</option>
-                                                <option value="kesar_sukhad" {{ ($category == "kesar_sukhad") ? "selected" :""}}>શ્રી કેસર સુખડ ખાતે</option>
-                                                <option value="dhoop_deep" {{ ($category == "dhoop_deep") ? "selected" :""}}>શ્રી ધુપ-દીપ ખાતે</option>
-                                                <option value="snatra_puja" {{ ($category == "snatra_puja") ? "selected" :""}}>શ્રી સ્નાત્ર પૂજા ખાતે</option>
-                                                <option value="agani_pooja" {{ ($category == "agani_pooja") ? "selected" :""}}>શ્રી આંગી પૂજા ખાતે</option>
-                                                <option value="moti_pooja" {{ ($category == "moti_pooja") ? "selected" :""}}>શ્રી મોટી પૂજા ખાતે</option>
-                                                <option value="drut_boli" {{ ($category == "drut_boli") ? "selected" :""}}>શ્રી ધૃતની બોલી ખાતે</option>
-                                                <option value="other_account_name" {{ ($category == "other_account_name") ? "selected" :""}}>શ્રી અન્ય ખાતે</option>
-                                              
+                                                <option value="medical_checkup" {{ ($category == "medical_checkup") ? "selected" :""}}>શેઠશ્રી રતનશી ટોકરશી વોરા મેડિકલ ચેકઅપ સેન્ટર</option>
+                                                <option value="mahajan" {{ ($category == "mahajan") ? "selected" :""}}>મહાજનનું મામેરું</option>
+                                                <option value="bhojanshala" {{ ($category == "bhojanshala") ? "selected" :""}}>માતુશ્રી લાખણીબાઈ રામજી તેજશી ગાલા નવનીત ભોજનશાળા</option>
+                                                <option value="shaikshanik" {{ ($category == "shaikshanik") ? "selected" :""}}>શૈક્ષણિક</option>
+                                                <option value="lavajam" {{ ($category == "lavajam") ? "selected" :""}}>લવાજમ</option>
+                                                <option value="oxygen" {{ ($category == "oxygen") ? "selected" :""}}>ઑક્સીજન ડોનેશન</option>
+                                                <option value="ambulance" {{ ($category == "ambulance") ? "selected" :""}}>એમ્બ્યુલન્સ ડોનેશન</option>
+                                                <option value="other" {{ ($category == "other") ? "selected" :""}}>ઈતર</option>
                                                 </select>
                                             </div>
                                             
@@ -186,7 +172,6 @@ div.card-datatable [class*=col-md-] {
                                                     <tr>
                                                         <th>નામ</th>
                                                         <th>તારીખ</th>
-                                                        <th>હસ્તે</th>
                                                         <th>રકમ</th>
                                                         <th>નાણા મળેલ</th>
                                                     </tr>
@@ -194,18 +179,16 @@ div.card-datatable [class*=col-md-] {
                                                 @foreach($donation as $row)
                                                 <tr>
                                                         <td>{{$row->m_name}}</td>
-                                                        <td>{{Date("d-m-Y",strtotime($row->r_date))}}</td>
-                                                        <td>{{$row->haste}}</td>
+                                                        <td>{{Date("d-m-Y",strtotime($row->d_date))}}</td>
                                                         <td>{{$row->amount}}</td>
                                                         <td>{{$row->payment_mode}}</td>
                                                 </tr>
                                                 @endforeach
                                                 <tr>
-                                                        <td></td>
-                                                        <td></td>
+                                                        <td></td> <td></td>
                                                         <td>Total Amount:</td>
                                                         <td>{{$total[0]->amount}}</td>
-                                                        <td></td>
+                                                       
                                                 </tr>
                                           
                                                 </table>
@@ -248,7 +231,7 @@ div.card-datatable [class*=col-md-] {
               className: 'dropdown-item',
             
               exportOptions: {
-                columns: [1 ,2, 3, 4, 5],
+                columns: [0,1 ,2, 3],
                 // prevent avatar to be display
                 format: {
                   body: function (inner, coldex, rowdex) {
@@ -285,7 +268,7 @@ div.card-datatable [class*=col-md-] {
               text: '<i class="ti ti-file-text me-1" ></i>Csv',
               className: 'dropdown-item',
               exportOptions: {
-                columns: [1 ,2, 3, 4, 5],
+                columns: [0,1 ,2, 3],
                 // prevent avatar to be display
                 format: {
                   body: function (inner, coldex, rowdex) {
@@ -310,7 +293,7 @@ div.card-datatable [class*=col-md-] {
               className: 'dropdown-item',
            
               exportOptions: {
-                columns: [1 ,2, 3, 4, 5],
+                columns: [0,1 ,2, 3],
                 // prevent avatar to be display
                 format: {
                   body: function (inner, coldex, rowdex) {
@@ -334,7 +317,7 @@ div.card-datatable [class*=col-md-] {
               text: '<i class="ti ti-file-description me-1"></i>Pdf',
               className: 'dropdown-item',
               exportOptions: {
-                columns: [1 ,2, 3, 4, 5],
+                columns: [0,1 ,2, 3],
                 // prevent avatar to be display
                 format: {
                   body: function (inner, coldex, rowdex) {
@@ -366,8 +349,10 @@ div.card-datatable [class*=col-md-] {
     });
 
     
+    $('div.head-label').html('<h5 class="card-title mb-0">Community Donation Report</h5>');
 
     </script>
+
 
 
 @section('pagejs')
@@ -410,59 +395,35 @@ div.card-datatable [class*=col-md-] {
       });
       let c=document.getElementById("category").value;
         switch(c) {
-            case "sarv_sadharan":
-              $('#display_category').html("શ્રી સર્વ સાધારણ ખાતે");
+            case "medical_checkup":
+              $('#display_category').html("શેઠશ્રી રતનશી ટોકરશી વોરા મેડિકલ ચેકઅપ સેન્ટર");
               break;
-              case "jiv_daya":
-              $('#display_category').html("શ્રી જીવદયા ખાતે");
+              case "mahajan":
+              $('#display_category').html("મહાજનનું મામેરું");
               break;
-              case "shadhu_shdhvi":
-              $('#display_category').html("શ્રી સાધુ સાધ્વી વૈયાવચ્છ ખાતે");
+              case "bhojanshala":
+              $('#display_category').html("માતુશ્રી લાખણીબાઈ રામજી તેજશી ગાલા નવનીત ભોજનશાળા");
               break;
-              case "sadharmik":
-              $('#display_category').html("શ્રી સાધર્મિક ખરડા ખાતે");
+              case "shaikshanik":
+              $('#display_category').html("શૈક્ષણિક");
               break;
-              case "chaturmas":
-              $('#display_category').html("શ્રી ચાતુર્માસ ખરડા ખાતે");
+              case "lavajam":
+              $('#display_category').html("લવાજમ");
               break;
-              case "kayami_tithi":
-              $('#display_category').html("શ્રી કાયમી તિથી ફંડ ખાતે");
+              case "oxygen":
+              $('#display_category').html("ઑક્સીજન ડોનેશન");
               break;
-              case "devdravya":
-              $('#display_category').html("શ્રી દેવદ્રવ્ય ખાતે");
+              case "ambulance":
+              $('#display_category').html("એમ્બ્યુલન્સ ડોનેશન");
               break;
-              case "kesar_sukhad":
-              $('#display_category').html("શ્રી કેસર સુખડ ખાતે");
+              case "other":
+              $('#display_category').html("ઈતર");
               break;
-              case "dhoop_deep":
-              $('#display_category').html("શ્રી ધુપ-દીપ ખાતે");
-              break;
-              case "snatra_puja":
-              $('#display_category').html("શ્રી સ્નાત્ર પૂજા ખાતે");
-              break;
-              case "agani_pooja":
-              $('#display_category').html("શ્રી આંગી પૂજા ખાતે");
-              break;
-              case "moti_pooja":
-              $('#display_category').html("શ્રી મોટી પૂજા ખાતે");
-              break;
-              case "drut_boli":
-              $('#display_category').html("શ્રી ધૃતની બોલી ખાતે");
-              break;
-              case "other_account_name":
-              $('#display_category').html("શ્રી અન્ય ખાતે");
-              break;
+            
             default:
               // code block
           }
-     
-/*
-    <option value="dhoop_deep" {{ ($category == "dhoop_deep") ? "selected" :""}}>શ્રી ધુપ-દીપ ખાતે</option>
-    <option value="snatra_puja" {{ ($category == "snatra_puja") ? "selected" :""}}>શ્રી સ્નાત્ર પૂજા ખાતે</option>
-    <option value="agani_pooja" {{ ($category == "agani_pooja") ? "selected" :""}}>શ્રી આંગી પૂજા ખાતે</option>
-    <option value="moti_pooja" {{ ($category == "moti_pooja") ? "selected" :""}}>શ્રી મોટી પૂજા ખાતે</option>
-    <option value="drut_boli" {{ ($category == "drut_boli") ? "selected" :""}}>શ્રી ધૃતની બોલી ખાતે</option>
-    <option value="other_account_name" {{ ($category == "other_account_name") ? "selected" :""}}>શ્રી અન્ય ખાતે</option>*/
+
 });
     </script>
 

@@ -114,3 +114,9 @@ Route::get('religious_donation_report', [ReportController::class, 'religious_don
 Route::get('show_religious_donation_report', [ReportController::class, 'show_religious_donation_report'])->name('show_religious_donation_report');
 Route::get('religious_category_donation_report', [ReportController::class, 'religious_category_donation_report'])->name('religious_category_donation_report');
 Route::get('show_religious_category_donation_report', [ReportController::class, 'show_religious_category_donation_report'])->name('show_religious_category_donation_report');
+Route::get('general_donation_report', [ReportController::class, 'general_donation_report'])->name('general_donation_report');
+Route::get('show_general_donation_report', [ReportController::class, 'show_general_donation_report'])->name('show_general_donation_report');
+Route::get('community_donation_report', [ReportController::class, 'community_donation_report'])->name('community_donation_report');
+Route::get('show_community_donation_report', [ReportController::class, 'show_community_donation_report'])->name('show_community_donation_report');
+Route::get('community_category_donation_report', [ReportController::class, 'community_category_donation_report'])->name('community_category_donation_report');
+Route::get('show_community_category_donation_report', [ReportController::class, 'show_community_category_donation_report'])->name('show_community_category_donation_report');
