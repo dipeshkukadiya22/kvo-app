@@ -117,20 +117,21 @@
 				</tr>
 				<tr>
 					<td class="tg-0pky" colspan="2"><span class="gujfont">Z;LN G\o </span><span>{{$checkout[0]->rec_no}}</span></td>
+					
 					<td class="tg-0pky" colspan="2"><span class="gujfont">A}™SU G\o </span><span>{{$checkout[0]->room_booking_id}}</span></td>
                     <td class="tg-0pky" colspan="2"><span class="gujfont">TFZLBo </span><span>{{(new DateTime($checkout[0]->check_out_date))->format('d-m-Y')}}</span></td>
 				</tr>
 				<tr>
-					<td class="tg-0pky" colspan="4"><span class="gujfont">GFDo </span><span>{{$checkout[0]->member_id}}</span></td>
-					<td class="tg-0pky" colspan="2"><span class="gujfont">UFDo </span><span></span></td>
+					<td class="tg-0pky" colspan="4"><span class="gujfont">GFDo </span><span>{{$checkout[0]->m_name}}</span></td>
+					<td class="tg-0pky" colspan="2"><span class="gujfont">UFDo </span><span>{{$checkout[0]->city}}</span></td>
 				</tr>
                 <tr>
-					<td class="tg-0pky"><span class="gujfont">5]bT õDZGF o </span><span></span></td>
-					<td class="tg-0pky" colspan="4" width="50%"><span class="gujfont">~D G\ o </span><span></span></td>
+					<td class="tg-0pky"><span class="gujfont">5]bT õDZGF o </span><span>{{$checkout[0]->age}}</span></td>
+					<td class="tg-0pky" colspan="4" width="50%"><span class="gujfont">~D G\ o </span><span>{{$checkout[0]->room_list}}</span></td>
                     <td class="tg-0pky"><span class="gujfont">0MZD[8ZL G\ o </span><span></span></td>
 				</tr>
                 <tr>
-					<td class="tg-0pky" colspan="3"><span class="gujfont">VFUDG TFZLB ;DI o </span><span></span></td>
+					<td class="tg-0pky" colspan="3"><span class="gujfont">VFUDG TFZLB ;DI o </span><span>{{(new DateTime($checkout[0]->check_in_date))->format('d-m-Y')}}</span></td>
                     <td class="tg-0pky" colspan="3"><span class="gujfont">R[S VFp8 TFZLB ;DI o </span><span>{{(new DateTime($checkout[0]->check_out_date))->format('d-m-Y')}}</span></td>
 					
 				</tr>
@@ -139,6 +140,8 @@
 
 			<table class="table2 tg" style="width: 740px">
 				<tbody>
+					@foreach($checkout as $room)
+
 					<tr>
 					<td class="tg-0pky tac gujfont" width="20%">~DGL lJUT</td>
 					<td class="tg-0pky tac gujfont" width="10%">S], ÚD</td>
@@ -148,72 +151,88 @@
 					<td class="tg-0pky tac gujfont" width="18%">ZMSF6 lNJ;</td>
 					<td class="tg-0pky tac gujfont" width="12%">S], ZSD</td>
 					</tr>
+					
+					
+				
+					@if($drc != 0)
 					<tr>
-					<td class="tg-0pky gujfont">l0,S®; ~D</td>
-					<td class="tg-0pky tc">2</td>
-					<td class="tg-0pky tc">900</td>
-					<td class="tg-0pky tc">100</td>
-                    <td class="tg-0pky tc">1000</td>
-					<td class="tg-0pky tc">2</td>
-                    <td class="tg-0pky tc">2000</td>
+						<td class="tg-0pky gujfont">l0,S®; ~D</td>
+						<td class="tg-0pky tc">{{$drc}}</td>
+						<td class="tg-0pky tc">{{$checkout[0]->ac_amount}}</td>
+						<td class="tg-0pky tc">{{$checkout[0]->ac_amount+$checkout[0]->deluxe_room_extra}}</td>
+						<td class="tg-0pky tc">{{$checkout[0]->no_of_days}}</td>
+						<td class="tg-0pky tc">{{$checkout[0]->deluxe_room_extra}}</td>
+						<td class="tg-0pky tc">{{$checkout[0]->deluxe_room_total}}</td>
 					</tr>
+					@endif
+						
+					@if($nonac != 0)
+					<tr>
+						<td class="tg-0pky gujfont">V[P;LP ~D</td>
+						<td class="tg-0pky tc">{{$nonac}}</td>
+						<td class="tg-0pky tc">{{$checkout[0]->ac_amount}}</td>
+						<td class="tg-0pky tc">{{$checkout[0]->ac_amount+$checkout[0]->ac_room_extra}}</td>
+						<td class="tg-0pky tc">{{$checkout[0]->no_of_days}}</td>
+						<td class="tg-0pky tc">{{$checkout[0]->ac_room_extra}}</td>
+						<td class="tg-0pky tc">{{$checkout[0]->ac_room_total}}</td>
+					</tr>
+					@endif
+					@if($ac != 0)
                     <tr>
-					<td class="tg-0pky gujfont">V[P;LP ~D</td>
-					<td class="tg-0pky tc">2</td>
-					<td class="tg-0pky tc">900</td>
-					<td class="tg-0pky tc">100</td>
-                    <td class="tg-0pky tc">1000</td>
-					<td class="tg-0pky tc">2</td>
-                    <td class="tg-0pky tc">2000</td>
-					</tr>
+						<td class="tg-0pky gujfont">GMG V[P;LP ~D</td>
+						<td class="tg-0pky tc">{{$ac}}</td>
+						<td class="tg-0pky tc">{{$checkout[0]->non_ac_amount}}</td>
+						<td class="tg-0pky tc">{{$checkout[0]->non_ac_amount+$checkout[0]->non_ac_room_extra}}</td>
+						<td class="tg-0pky tc">{{$checkout[0]->no_of_days}}</td>
+						<td class="tg-0pky tc">{{$checkout[0]->non_ac_room_extra}}</td>
+						<td class="tg-0pky tc">{{$checkout[0]->non_ac_room_total}}</td>
+						</tr>
+					@endif
+					@if($dmac !=0)
                     <tr>
-					<td class="tg-0pky gujfont">GMG V[P;LP ~D</td>
-					<td class="tg-0pky tc">2</td>
-					<td class="tg-0pky tc">900</td>
-					<td class="tg-0pky tc">100</td>
-                    <td class="tg-0pky tc">1000</td>
-					<td class="tg-0pky tc">2</td>
-                    <td class="tg-0pky tc">2000</td>
+						<td class="tg-0pky gujfont">V[P;LP 0MZD[8ZL</td>
+						<td class="tg-0pky tc">{{$dmac}}</td>
+						<td class="tg-0pky tc">{{$checkout[0]->door_mt_amount}}</td>
+						<td class="tg-0pky tc">{{$checkout[0]->door_mt_amount+$checkout[0]->ac_dmt_extra}}</td>
+						<td class="tg-0pky tc">{{$checkout[0]->no_of_days}}</td>
+						<td class="tg-0pky tc">{{$checkout[0]->ac_dmt_extra}}</td>
+						<td class="tg-0pky tc">{{$checkout[0]->ac_dmt_total}}</td>
 					</tr>
-                    <tr>
-					<td class="tg-0pky gujfont">V[P;LP 0MZD[8ZL</td>
-					<td class="tg-0pky tc">2</td>
-					<td class="tg-0pky tc">900</td>
-					<td class="tg-0pky tc">100</td>
-                    <td class="tg-0pky tc">1000</td>
-					<td class="tg-0pky tc">2</td>
-                    <td class="tg-0pky tc">2000</td>
-					</tr>
+					@endif
+					@if($dmnonac != 0)
                     <tr>
 					<td class="tg-0pky gujfont">GMG V[P;LP 0MZD[8ZL</td>
-					<td class="tg-0pky tc">2</td>
-					<td class="tg-0pky tc">900</td>
-					<td class="tg-0pky tc">100</td>
-                    <td class="tg-0pky tc">1000</td>
-					<td class="tg-0pky tc">2</td>
-                    <td class="tg-0pky tc">2000</td>
+						<td class="tg-0pky tc">{{$dmnonac}}</td>
+						<td class="tg-0pky tc">{{$checkout[0]->door_mt_amount}}</td>
+						<td class="tg-0pky tc">{{$checkout[0]->door_mt_amount+$checkout[0]->non_ac_dmt_extra}}</td>
+						<td class="tg-0pky tc">{{$checkout[0]->no_of_days}}</td>
+						<td class="tg-0pky tc">{{$checkout[0]->non_ac_dmt_extra}}</td>
+						<td class="tg-0pky tc">{{$checkout[0]->non_ac_dmt_total}}</td>
 					</tr>
+					@endif
+    			@endforeach
 			  </tbody>
 			</table>
 			<table class="table3 tg" style="width: 740px">
 			  <tbody>
 				<tr>
-				  <td class="tg-0pky" colspan="4"><span class="gujfont">V\S[o </span><span></span></td>
+				  <td class="tg-0pky" colspan="4"><span class="gujfont">V\S[o </span><span>{{$checkout[0]->amount_in_words}}</span></td>
                   <td class="tg-0pky gujfont" width="18%">S], ZSD</td>
-				  <td class="tg-0pky tc" width="12%">2500</td>
+				  <td class="tg-0pky tc" width="12%">{{$checkout[0]->total}}</td>
 				</tr>
 				<tr>
-				  <td class="tg-0pky" colspan="4"><span class="gujfont">ZMS0 í S[X í 0L0L </span><span></span></td>
+				  <td class="tg-0pky" colspan="4"><span class="gujfont">ZMS0 í S[X í 0L0L </span><span>{{$checkout[0]->payment_mode}}</span></td>
                   <td class="tg-0pky gujfont" width="18%">l05Mlh8 AFN</td>
-				  <td class="tg-0pky tc">1000</td>
+				  <td class="tg-0pky tc">{{$checkout[0]->deposite_rs}}</td>
 				</tr>
 				<tr>
 				  <td class="tg-0pky gujfont" colspan="2">GF6F\ VF5GFZGL ;CLo</td>
                   <td class="tg-0pky gujfont" colspan="2">GF6F\ VF5GFZGL ;CLo</td>
                   <td class="tg-0pky gujfont" height="50px">AFSL ,[JFGL í 5ZT SZJFGL ZSD</td>
-				  <td class="tg-0pky tc">1500</td>
+				  <td class="tg-0pky tc">{{$checkout[0]->payable_amount}}</td>
 				</tr>
 			  </tbody>
+
 			</table>
 	</body>
 </html>

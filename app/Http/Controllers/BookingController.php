@@ -49,7 +49,8 @@ class BookingController extends Controller
         $details->id_proof=$req->id_proof;
         $details->occupation=$req->occupation;
         $details->reason=$req->reason;
-        //$details->save();
+     
+        $details->save();
     
 
         /*Insert Room Booking deatil*/
@@ -69,7 +70,7 @@ class BookingController extends Controller
         $booking->rs_word = $req->rs_word;
         $booking->no_of_days = $req->no_of_days;
         $booking->member_id=$personal_details_id;
-        
+        $booking->save();
         if(!empty($req->select2Multiple1)){
         foreach($req->select2Multiple1 as $room)
         {
@@ -228,8 +229,13 @@ class BookingController extends Controller
         $data=DB::SELECT("SELECT *,add_members.p_id as m_id from room_details join add_room on add_room.room_detail_id=room_details.r_id join personal_details on personal_details.p_id=room_details.member_id join add_members on personal_details.member_id=add_members.p_id WHERE r_id='$id'");
         return $data;
     }
+    public function get_data($id)
+    {
+        $data=DB::SELECT("SELECT *,add_members.p_id as m_id from room_details join add_room on add_room.room_detail_id=room_details.r_id join personal_details on personal_details.p_id=room_details.member_id join add_members on personal_details.member_id=add_members.p_id WHERE r_id='$id' limit 1");
+        return $data;   
+    }
     public function view_room_booking(){
-        $checkout= DB::select("SELECT * from room_details join add_room on add_room.room_detail_id=room_details.r_id join personal_details on personal_details.p_id=room_details.member_id join add_members on personal_details.member_id=add_members.p_id WHERE add_room.status =1");
+        $checkout= DB::select("SELECT * FROM room_details JOIN ( SELECT add_room.room_detail_id, MAX(add_room.room_no) AS room_no, MAX(add_room.status) AS room_status FROM add_room WHERE add_room.status = 1 GROUP BY add_room.room_detail_id ) AS filtered_rooms ON room_details.r_id = filtered_rooms.room_detail_id JOIN personal_details ON personal_details.p_id = room_details.member_id JOIN add_members ON personal_details.member_id = add_members.p_id");
         $member=add_members::all();
         return view('Booking.view-room-booking',['checkout'=>$checkout,'member'=>$member]);
     }

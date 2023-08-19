@@ -46,6 +46,7 @@ Route::POST('room-booking', [BookingController::class, 'add_member'])->name('roo
 
 // room checkout
 Route::get('view_room_booking', [BookingController::class, 'view_room_booking'])->name('view_room_booking');
+Route::get('get_data/{id}', [BookingController::class, 'get_data'])->name('get_data');
 Route::get('checkout', [BookingController::class, 'checkout'])->name('checkout');
 Route::POST('checkout1', [BookingController::class, 'add_checkout'])->name('add_checkout');
 Route::get('get_booking_data/{id}', [BookingController::class, 'get_booking_data'])->name('get_booking_data');
