@@ -278,15 +278,7 @@
                                 <select id="select2Basic" class="select2 form-select form-select-lg" data-allow-clear="true" name="community" required>
                                   <option value="Hindu" selected>Hindu</option>
                                   <option value="Jain">Jain</option>
-                                  <option value="CA">California</option>
-                                  <option value="NV">Nevada</option>
-                                  <option value="OR">Oregon</option>
-                                  <option value="WA">Washington</option>
-                                  <option value="AZ">Arizona</option>
-                                  <option value="CO">Colorado</option>
-                                  <option value="ID">Idaho</option>
-                                  <option value="MT">Montana</option>
-                                  <option value="NE">Nebraska</option>
+
                                 </select>
                               </div>
 
