@@ -785,7 +785,7 @@ button.swal2-cancel.btn.btn-label-danger {
   <!-- end num to word -->
 
 <script>
-function delete_community_donation(id)
+function delete_religious_donation(id)
   {
             Swal.fire({
                 title: "Are you sure?",

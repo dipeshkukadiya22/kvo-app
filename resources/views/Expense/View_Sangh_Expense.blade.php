@@ -198,7 +198,7 @@ button.swal2-cancel.btn.btn-label-danger {
 
                                     <div class="col-md-12">
                                         <label class="form-label" for="collapsible-address">વિગત</label>
-                                        <textarea name="details" class="form-control" id="details" rows="1" placeholder="Hello,"></textarea>
+                                        <textarea name="details" class="form-control" id="details" rows="1" style="text-transform:capitalize" placeholder="Hello,"></textarea>
                                       
                                     </div>
                                     <div class="col-md-12">

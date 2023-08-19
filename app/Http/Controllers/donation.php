@@ -45,7 +45,7 @@ class donation extends Controller
         //Personal Details
 
         $religious_donation->member_id = $req->name;
-        $religious_donation -> haste = $req -> haste;
+        $religious_donation -> haste = strtoupper($req -> haste);
         $religious_donation -> r_date = Carbon::now();
         $religious_donation -> community = $req -> community;
         //Donation Details
@@ -63,9 +63,9 @@ class donation extends Controller
         $religious_donation -> agani_pooja = $req -> agani_pooja;
         $religious_donation -> moti_pooja = $req -> moti_pooja;
         $religious_donation -> drut_boli = $req -> drut_boli;
-        $religious_donation -> other_account_name = $req -> other_account_name;
+        $religious_donation -> other_account_name = ucfirst($req -> other_account_name);
         $religious_donation -> other_account_amount = $req -> other_account_amount;
-        $religious_donation -> remarks = $req -> remarks;
+        $religious_donation -> remarks =ucfirst($req -> remarks);
         $religious_donation -> total = $req -> total;
         $religious_donation -> total_in_word = $req -> total_in_word;
         $religious_donation -> payment_mode = $req -> basic_default_radio;
@@ -242,8 +242,8 @@ class donation extends Controller
     {
         $donation=new GeneralDonation();
         $donation->date=Date(('Y-m-d'),strtotime($req->date));
-        $donation->haste=$req->haste;
-        $donation->details=$req->details;
+        $donation->haste=strtoupper($req->haste);
+        $donation->details=strtoupper($req->details);
         $donation->member_id=$req->name;
         $donation->save();
         return back()->with("Add General Donation");

@@ -181,12 +181,12 @@ button.swal2-cancel.btn.btn-label-danger {
 
                                     <div class="col-md-12">
                                         <label class="form-label" for="multicol-username">ગામનું નામ </label>
-                                        <input type="text" id="city" class="form-control" readonly>
+                                        <input type="text" id="city"  style="text-transform:uppercase" class="form-control" readonly>
                                     </div>
 
                                     <div class="col-md-12">
                                         <label class="form-label" for="multicol-username">હસ્તે </label>
-                                        <input type="text" id="haste" name="haste" class="form-control" placeholder="" required>  
+                                        <input type="text" id="haste" name="haste" class="form-control"  style="text-transform:uppercase" placeholder="" required>  
                                     </div>
 
                                     <div class="col-md-12">

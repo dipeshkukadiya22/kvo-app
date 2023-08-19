@@ -136,7 +136,10 @@
                               class="form-control phone-mask"
                               placeholder="658 799 8941"
                               value="{{ (!empty($member)) ? $member->phone_no : '' }}"
-                              aria-label="658 799 8941" required/>
+                              aria-label="658 799 8941"
+                              required
+                              oninput="javascript: if (this.value.length > 10) this.value = this.value.slice(0, 10);"/>
+
                           </div>
                           <div class="col-md-2">
                             <label class="form-label" for="basic-default-name">ગામ</label>

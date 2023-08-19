@@ -139,6 +139,7 @@
                               class="form-control"
                               id="basic-default-name"
                               name="haste"
+                              style="text-transform:uppercase"
                               placeholder="John Doe"
                               required />
                          
@@ -162,7 +163,9 @@
                               class="form-control phone-mask"
                               placeholder="658 799 8941"
                               value="{{ (!empty($member)) ? $member->phone_no : '' }}"
-                              aria-label="658 799 8941" required/>
+                              aria-label="658 799 8941" 
+                              required
+                              oninput="javascript: if (this.value.length > 10) this.value = this.value.slice(0, 10);"/>
                           </div>
 
                           <div class="col-md-4">
@@ -173,6 +176,7 @@
                               name="city"
                               id="member_city"
                               placeholder="John Doe"
+                              style="text-transform:uppercase"
                               value="{{ (!empty($member)) ? $member->donation : '' }}"
                               required />
                          
@@ -300,6 +304,7 @@
                               class="form-control"
                               name="other_account_name"
                               id="basic-default-name"
+                              style="text-transform:capitalize"
                               {{-- placeholder="John Doe" --}}
                               />
                         	</div>
@@ -317,6 +322,7 @@
                               type="text"
                               class="form-control"
                               name="remarks"
+                              style="text-transform:capitalize"
                               id="basic-default-name"
                               {{-- placeholder="John Doe" --}}
                                />

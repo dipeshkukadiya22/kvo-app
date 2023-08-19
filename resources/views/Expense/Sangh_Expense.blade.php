@@ -97,6 +97,7 @@
                           <div class="col-md-4">
                             <label for="select2Basic" class="form-label">નામ</label>
                             <select id="name" name="name" class="select2 form-select form-select-lg" data-allow-clear="true" required>
+                            <option value=""></option>
                                 @foreach($member as $row)
                                     <option value="{{$row->p_id}}">{{$row->m_name." - ".$row->phone_no }}</option>
                                 @endforeach
@@ -131,6 +132,7 @@
                               name="details"
                               class="form-control"
                               id="details"
+                              style="text-transform:capitalize"
                               rows="1"></textarea>
                           </div>
                           <div class="col-md-4">

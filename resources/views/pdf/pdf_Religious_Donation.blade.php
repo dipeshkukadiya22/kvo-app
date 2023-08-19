@@ -5,7 +5,7 @@
 
 				@font-face {
 					font-family: KAP119;
-					src: url('C:/xampp/htdocs/kvo-app/vendor/dompdf/dompdf/lib/fonts/KAP119.ttf');
+					src: url('C:/xampp latest/htdocs/kvo-app/vendor/dompdf/dompdf/lib/fonts/KAP119.ttf');
 				}
 
 				@page  
@@ -228,7 +228,7 @@
 				  <td class="tg-0pky sign" rowspan="3"><span class="gujfont">;CL </span></td>
 				</tr>
 				<tr>
-				  <td class="tg-0pky gujfont" colspan="2"><span class="gujfont">D/[,o </span></span>{{$religious_donation[0]->payment_mode}}</span></td>
+				<td class="tg-0pky " colspan="2"><span class="gujfont">D/[,o </span><span>{{$religious_donation[0]->payment_mode}}</span></td>
 				</tr>
 				<tr>
 				  <td class="tg-0pky gujfont" colspan="2">VF5GFZ GL ;CLo</td>

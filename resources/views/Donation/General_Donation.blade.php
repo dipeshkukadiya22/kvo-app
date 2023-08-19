@@ -97,6 +97,7 @@
                           <div class="col-md-4">
                             <label for="select2Basic" class="form-label">નામ</label>
                             <select id="name" name="name" class="select2 form-select form-select-lg" data-allow-clear="true" required>
+                           
                                 @foreach($member as $row)
                                     <option value="{{$row->p_id}}">{{$row->m_name}}</option>
                                 @endforeach
@@ -128,6 +129,7 @@
                               class="form-control"
                               id="haste"
                               name="haste"
+                              style="text-transform:uppercase"
                               placeholder="John Doe"
                               required />
                          
@@ -140,8 +142,13 @@
                               name="phone"
                               class="form-control phone-mask"
                               placeholder="658 799 8941"
-                              aria-label="658 799 8941" />
+                              aria-label="658 799 8941"
+                              minlength="10"
+                              maxlength="10"
+                              required
+                              oninput="javascript: if (this.value.length > 10) this.value = this.value.slice(0, 10);"/>
                           </div>
+                       
                           <div class="col-md-4">
                             <label class="form-label" for="basic-default-name">ગામ</label>
                             <input
@@ -164,6 +171,7 @@
                               class="form-control"
                               id="details"
                               name="details"
+                              style="text-transform:uppercase"
                               required />
                           </div>
                           <div class="row mt-3">

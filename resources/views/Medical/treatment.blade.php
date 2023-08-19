@@ -68,7 +68,8 @@
                     </div>
                     <div class="col-md-4">
                       <label for="select2Basic" class="form-label">દર્દીનું નામ </label>
-                      <select id="name" name="name" class="select2 form-select form-select-lg" data-allow-clear="true" >
+                      <select id="name" name="name" class="select2 form-select " data-allow-clear="true" >
+                      <option value=""></option>
                         @foreach($member as $row)
                           <option value="{{$row->p_id}}">{{$row->m_name}} - {{$row->phone_no}}</option>
                         @endforeach

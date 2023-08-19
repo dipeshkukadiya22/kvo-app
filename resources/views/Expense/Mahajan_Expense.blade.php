@@ -134,6 +134,7 @@
                               name="details"
                               class="form-control"
                               id="details"
+                              style="text-transform:capitalize"
                               rows="1"></textarea>
                           </div>
                           <div class="col-md-4">

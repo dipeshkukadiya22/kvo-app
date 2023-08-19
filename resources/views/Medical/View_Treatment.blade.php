@@ -694,7 +694,7 @@ $("#name").change(function(){
 <script>
   function delete_treatment(id)
   {
-    alert(id);
+    //alert(id);
       Swal.fire({
           title: "Are you sure?",
           text: "You won't be able to revert this!",
