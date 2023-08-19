@@ -400,7 +400,7 @@ div.card-datatable [class*=col-md-] {
                                               
                                               <div class="col-md-4">
                                                 <label class="form-label" for="basic-default-name">No. of Person</label>
-                                                <input type="text" class="form-control"  name="no_of_person" id="no_of_person_id" placeholder="No of Person" min="1" max="10"/>
+                                                <input type="text" class="form-control"  name="no_of_person_id" id="no_of_person_id" placeholder="No of Person" min="1" max="10"/>
                                               </div>
                                               <!-- Datetime Picker-->
                                               <div class="col-md-4">
@@ -409,8 +409,8 @@ div.card-datatable [class*=col-md-] {
                                               </div>
 
                                               <div class="col-md-4">
-                                                <label class="form-label" for="basic-default-name">Deposit No</label>
-                                                <input type="text" class="form-control" name="deposit_no" id="basic-default-name" placeholder="Deposit No" />
+                                                <label class="form-label" for="basic-default-name">Booking No</label>
+                                                <input type="text" class="form-control" name="deposit_no" id="deposit_no" placeholder="Deposit No"  readonly/>
                                               </div>
 
                                             
@@ -423,6 +423,20 @@ div.card-datatable [class*=col-md-] {
                                               <div class="col-md-4">
                                                 <label class="form-label" for="rupees-in-words">Deposit Rs (rupees in words)</label>
                                                 <input type="text" class="form-control" name="rs_word" id="rupees-in-words" placeholder="Rupees in words" readonly>
+                                              </div>
+                                              <div class="col-md-4">
+                                                <label class="form-label" for="basic-default-name">No. of days</label>
+                                                <input type="text" class="form-control"  name="no_of_days" id="no_of_days" placeholder="No of Person" min="1" max="10"/>
+                                              </div>
+
+                                              <div class="col-md-4">
+                                                <label class="form-label" for="rupees-in-words">Occupation</label>
+                                                <input type="text" class="form-control" name="occupation" id="occupation" placeholder="Occupation" required>
+                                              </div>
+
+                                              <div class="col-md-4">
+                                                <label class="form-label" for="rupees-in-words">Reason</label>
+                                                <input type="text" class="form-control" name="reason" id="reason" placeholder="Reason to stay" required>
                                               </div>
 
                                               <!-- Multi  -->
@@ -745,8 +759,14 @@ function edit(id)
                   $("#address").val(response[0]['address']);
                   $("#subcommunity").val(response[0]['subcommunity']);
                   $("#city").val(response[0]['city']);
+              
                   if(gender=="MALE"){$("#MALE").attr('checked',true);}
                   if(gender=="FEMALE"){$("#FEMALE").attr('checked',true);}
+                  $("#occupation").val(response[0]['occupation']);
+                  $("#reason").val(response[0]['reason']);
+                  
+                  $("#badeposit_no").val(response[0]['deposit_no']);
+
                 }
             });
 
