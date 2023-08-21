@@ -216,7 +216,7 @@ div.card-datatable [class*=col-md-] {
                                         </div>
                                       </div>
                                       <div class="bs-stepper-content">
-                                      <form action="" method="POST">
+                                      <form id=kvo_update_room_booking method="POST" action="{{route('update_room_booking')}}">
                                           <!-- Account Details -->
                                           <div id="account-details" class="content">
                                             <div class="content-header mb-3">
@@ -227,7 +227,7 @@ div.card-datatable [class*=col-md-] {
                                                 <!-- Basic -->
                                               <div class="col-md-4">
                                                   <label for="select2Basic" class="form-label" >Name</label>
-                                                  <select id="name" class="select2 form-select" data-allow-clear="true" name="name" placeholder="select name" required>
+                                                  <select id="select2Basic" class="select2 form-select" data-allow-clear="true" name="name" placeholder="select name" required>
                                                       @foreach ($member as $row)
                                                           <option value="{{$row->p_id}}">{{$row->m_name}}</option>
                                                       @endforeach
@@ -237,7 +237,7 @@ div.card-datatable [class*=col-md-] {
                                                 <div class="col-md-4">
                                               
                                                     <label class="form-label" for="basic-default-email">Email</label>
-                                                    <input type="email" id="email" name="email" class="form-control" placeholder="john.doe" />
+                                                    <input type="email" id="member_email" name="member_email" class="form-control" placeholder="john.doe" />
 
                                                 </div>                                                                                                            
 
@@ -245,7 +245,7 @@ div.card-datatable [class*=col-md-] {
                                                 <div class="col-md-4">
                                                   
                                                   <label class="form-label" for="multicol-phone">Phone Number</label>
-                                                  <input type="number" id="phone" name="phone_no" class="form-control phone-mask" placeholder="658 799 8941" aria-label="658 799 8941" maxlength="10" minlength="10" required/>
+                                                  <input type="number" id="member_phone" name="member_phone" class="form-control phone-mask" placeholder="658 799 8941" aria-label="658 799 8941" maxlength="10" minlength="10" required/>
                                                 </div>
 
                                                 <div class="col-md-4">
@@ -258,7 +258,7 @@ div.card-datatable [class*=col-md-] {
                                                 
                                                   
                                                   
-                                                  <textarea name="address"  class="form-control" id="address" rows="1" placeholder="1456, Mall Road"></textarea>
+                                                  <textarea name="member_address"  class="form-control" id="member_address" rows="1" placeholder="1456, Mall Road"></textarea>
                                                 </div>
                                                                           
                                                 
@@ -284,7 +284,7 @@ div.card-datatable [class*=col-md-] {
                                                 
                                                 <div class="col-md-4">
                                                   <label for="defaultFormControlInput" class="form-label">City</label>
-                                                  <input type="text" class="form-control" name="city" id="city" placeholder="John Doe" aria-describedby="defaultFormControlHelp" />
+                                                  <input type="text" class="form-control" name="member_city" id="member_city" placeholder="John Doe" aria-describedby="defaultFormControlHelp" />
                                                 </div>
 
                                                 <div class="col-md-4">
@@ -352,43 +352,70 @@ div.card-datatable [class*=col-md-] {
                                               <div class="row g-3 mt-0 mb-3">
 
                                                 <!-- Custom Suggestions: List -->
-                                                  <div class="col-md-2">
-                                                    <label for="TagifyCustomListSuggestion" class="form-label">A.C. Room.</label>
-                                                    <input id="TagifyCustomListSuggestion" name="TagifyCustomListSuggestion" class="form-control" placeholder="Select Roomlist" />
-                                                  </div>
+                                                <div class="col-md-2">
+                                                    <label for="select2Multiple1" class="form-label">Ac Room</label> 
+                                                    <select id="select2Multiple11" name="select2Multiple1[]" class="select2 form-select" multiple>
+                                                    @foreach($a_list as $list)
+                                                        @if ($list->room_facility == 'A.C. Room')
+                                                            <option value="{{$list->room_no}}">
+                                                                {{$list->room_no}}-{{$list->room_name}}
+                                                            </option>
+                                                        @endif
+                                                    @endforeach
+                            
+                                                  </select>
+                                                </div>
 
                                                   <div class="col-md-2">
                                                     <label class="form-label" for="basic-default-name">Amount</label>
                                                     <div class="input-group">
                                                       <span class="input-group-text">₹</span>
-                                                      <input type="number" class="form-control"  name="amount" placeholder="Amount" aria-label="Amount (to the nearest indian)" id="r_amount" value="800" />
+                                                      <input type="number" class="form-control"  name="ac_amount" placeholder="Amount" aria-label="Amount (to the nearest indian)" id="ac_amount" value="" />
                                                     </div>
                                                   </div>
 
 
                                                   <div class="col-md-2">
-                                                    <label for="TagifyCustomListSuggestion1" class="form-label">Non. A.C. Room</label>
-                                                    <input id="TagifyCustomListSuggestion1" name="TagifyCustomListSuggestion1" class="form-control" placeholder="Select Roomlist" />
-                                                  </div>
+                                                      <label for="select2Multiple2" class="form-label">Non Ac Room</label>
+                                                      <select id="select2Multiple22" name="select2Multiple2[]" class="select2 form-select" multiple>
+                                                      @foreach ($a_list as $list)
+                                                                      @if ($list->room_facility == 'NON A.C ROOM')
+                                                                          <option value="{{$list->room_no}}">
+                                                                              {{$list->room_no}}-{{$list->room_name}}
+                                                                          </option>
+                                                                      @endif
+                                                        @endforeach
+                                                      </select>
+                                                    </div>
 
                                                   <div class="col-md-2">
                                                     <label class="form-label" for="basic-default-name">Amount</label>
                                                     <div class="input-group">
                                                       <span class="input-group-text">₹</span>
-                                                      <input type="number" class="form-control"  name="amount" placeholder="Amount" aria-label="Amount (to the nearest indian)" id="r_amount" value="800" />
+                                                      <input type="number" class="form-control"  name="non_ac_amount" placeholder="Amount" aria-label="Amount (to the nearest indian)" id="non_ac_amount" value="" />
                                                     </div>
                                                   </div>
 
                                                   <div class="col-md-2">
-                                                    <label for="TagifyCustomListSuggestion2" class="form-label">Door Metri. Room </label>
-                                                    <input id="TagifyCustomListSuggestion2" name="TagifyCustomListSuggestion2" class="form-control" placeholder="Select Roomlist" />
-                                                  </div>
+                                                      <label for="select2Multiple3" class="form-label">Door Mt Room</label>
+                                                      <select id="select2Multiple33" name="select2Multiple3[]" class="select2 form-select" multiple>
+                                                      
+                                                      @foreach ($a_list as $list)
+                                                      @if ($list->room_facility == 'DOOR MATRY NON A.C ROOM' || $list->room_facility == 'DOOR MATRY  A.C ROOM')
+                                                          <option value="{{$list->room_no}}">
+                                                              {{$list->room_no}}-{{$list->room_name}}
+                                                          </option>
+                                                      @endif
+                                                        @endforeach
+                                                      
+                                                      </select>
+                                                    </div>
 
                                                   <div class="col-md-2">
                                                     <label class="form-label" for="basic-default-name">Amount</label>
                                                     <div class="input-group">
                                                       <span class="input-group-text">₹</span>
-                                                      <input type="number" class="form-control"  name="amount" placeholder="Amount" aria-label="Amount (to the nearest indian)" id="r_amount" value="800" />
+                                                      <input type="number" class="form-control"  name="dmt_amount" placeholder="Amount" aria-label="Amount (to the nearest indian)" id="dmt_amount" value="" />
                                                     </div>
                                                   </div>
                     
@@ -410,7 +437,7 @@ div.card-datatable [class*=col-md-] {
 
                                               <div class="col-md-4">
                                                 <label class="form-label" for="basic-default-name">Booking No</label>
-                                                <input type="text" class="form-control" name="deposit_no" id="deposit_no" placeholder="Deposit No"  readonly/>
+                                                <input type="text" class="form-control" name="booking_id" id="booking_id" placeholder="Deposit No"  readonly/>
                                               </div>
 
                                             
@@ -462,12 +489,8 @@ div.card-datatable [class*=col-md-] {
                                                   <i class="ti ti-arrow-left me-sm-1"></i>
                                                   <span class="align-middle d-sm-inline-block d-none">Previous</span>
                                                 </button>
-                                                {{-- <div>
-                                                <input type="button" id="repeat-next"  class="btn btn-primary btn-next" >
-                                                  <span class="align-middle d-sm-inline-block d-none me-sm-1">Next</span>
-                                                  <i class="ti ti-arrow-right"></i>
-                                                </div> --}}
-                                                <button type="button" class="btn btn-primary btn-next">
+                                            
+                                                <button type="button" class="btn btn-primary btn-next" id="repeat-next">
                                                   <span class="align-middle d-sm-inline-block d-none me-sm-1">Next</span>
                                                   <i class="ti ti-arrow-right"></i>
                                                 </button>
@@ -475,7 +498,7 @@ div.card-datatable [class*=col-md-] {
                                             </div>
                                           </div>
                                           <!-- All No of Person -->
-                                          <div id="memberaddress" class="content">
+                                          <div id="address" class="content">
                                             <div class="content-header">
                                               <small>Enter Member Details.</small>
                                             </div>
@@ -493,11 +516,11 @@ div.card-datatable [class*=col-md-] {
                                                   <div class="row formrepeater1">
                                                     <div class="mb-3 col-lg-6 col-xl-3 col-12 mb-0">
                                                       <label class="form-label" for="form-repeater-1-1">Full Name</label>
-                                                      <input type="text" id="full_name_form"  name="full_name" class="form-control" placeholder="john doe" />
+                                                      <input type="text" id="full_name_form"  name="full_name[]" class="form-control" placeholder="john doe" />
                                                     </div>
                                                     <div class="mb-3 col-lg-6 col-xl-3 col-12 mb-0">
                                                       <label class="form-label" for="form-repeater-1-2">Age</label>
-                                                      <input type="text" id="m_age" name="m_age" class="form-control" placeholder="your age" />
+                                                      <input type="text" id="member_age" name="m_age[]" class="form-control" placeholder="your age" />
                                                     </div>
                                                     
                                                     
@@ -506,11 +529,11 @@ div.card-datatable [class*=col-md-] {
                                                         <label class="d-block form-label">Gender</label>
                                                       
                                                         <div class="form-check form-check-inline">
-                                                            <input class="form-check-input" type="radio" name="gender_${i}" id="inlineRadio1_${i}" value="MALE" />
+                                                            <input class="form-check-input" type="radio" name="gender" id="inlineRadio1_${i}" value="MALE" checked />
                                                             <label class="form-check-label" for="inlineRadio1_${i}">Male</label>
                                                         </div>
                                                         <div class="form-check form-check-inline">
-                                                            <input class="form-check-input" type="radio" name="gender_${i}" id="inlineRadio2_${i}" value="FEMALE" />
+                                                            <input class="form-check-input" type="radio" name="gender" id="inlineRadio2_${i}" value="FEMALE" />
                                                             <label class="form-check-label" for="inlineRadio2_${i}">Female</label>
                                                         </div>
 
@@ -519,16 +542,21 @@ div.card-datatable [class*=col-md-] {
                                                     <div class="col-md-4">
                                                       <label class="form-label" for="basic-default-country">Relation</label>
                                                       <select class="form-select" name="relation" id="member_relation" required>
-                                                        <option value="SELF" selected>SELF</option>
-                                                        <option value="MOTHER">MOTHER</option>
-                                                        <option value="FATHER">FATHER</option>
-                                                        <option value="BROTHER">BROTHER</option>
-                                                        <option value="SISTER">SISTER</option>
-                                                        <option value="UNCLE">UNCLE</option>
-                                                        <option value="AUNTY">AUNTY</option>
-                                                        <option value="GRAND MOTHER">GRAND MOTHER</option>
-                                                        <option value="GRAND FATHER">GRAND FATHER</option>
-                                                        <option value="FRIEND">FRIEND</option>
+                                                          <option value="SELF" selected>SELF</option>
+                                                          <option value="AUNTY">AUNTY</option>
+                                                          <option value="BROTHER">BROTHER</option>
+                                                          <option value="COUSIN">COUSIN</option>
+                                                          <option value="DAUGHTER">DAUGHTER</option>
+                                                          <option value="FATHER">FATHER</option>
+                                                          <option value="FRIEND">FRIEND</option>
+                                                          <option value="GRAND FATHER">GRAND FATHER</option>
+                                                          <option value="GRAND MOTHER">GRAND MOTHER</option>
+                                                          <option value="HUSBAND">HUSBAND</option>
+                                                          <option value="MOTHER">MOTHER</option>
+                                                          <option value="NEPHEW">NEPHEW</option>
+                                                          <option value="SISTER">SISTER</option>
+                                                          <option value="UNCLE">UNCLE</option>
+                                                          <option value="WIFE">WIFE</option>
                                                       </select>
                                                     </div>
                                                     <div class="mb-3 col-lg-12 col-xl-2 col-12 d-flex align-items-center mb-0">
@@ -634,21 +662,7 @@ div.card-datatable [class*=col-md-] {
                                                       </tr>
                                                     
                                                                                         
-                                                      <!-- <tr>
-                                                        <td colspan="3" class="align-top px-4 py-4">
-                                                          
-                                                        </td>
-                                                        <td class="text-end pe-3 py-4">
-                                                          <p class="mb-2 pt-3">Subtotal:</p>
-                                                          <p class="mb-2">Tax:</p>
-                                                          <p class="mb-0 pb-3">Total:</p>
-                                                        </td>
-                                                        <td class="ps-2 py-4">
-                                                          <p class="fw-semibold mb-2 pt-3">$154.25</p>
-                                                          <p class="fw-semibold mb-2">$50.00</p>
-                                                          <p class="fw-semibold mb-0 pb-3">$204.25</p>
-                                                        </td>
-                                                      </tr> -->
+                                                    
                                                     </tbody>
                                                   </table>
                                                 </div>
@@ -663,7 +677,7 @@ div.card-datatable [class*=col-md-] {
                                                 <i class="ti ti-arrow-left me-sm-1"></i>
                                                 <span class="align-middle d-sm-inline-block d-none">Previous</span>
                                               </button>
-                                              <button type="submit" class="btn btn-success btn-submit">Submit</button>
+                                              <button type="submit" onclick="call()" class="btn btn-success btn-submit">Submit</button>
                                               
                                             </div>
                                           </div>
@@ -695,7 +709,12 @@ div.card-datatable [class*=col-md-] {
 
 @section('pagejs')
 
-
+<script>
+  function call()
+  {
+    alert("hi");
+  }
+</script>
    
 
     <!-- Vendors JS -->
@@ -743,39 +762,242 @@ div.card-datatable [class*=col-md-] {
     })
     });
     </script>
+      <script>
+        $(document).ready(function () {
+            $("#select2Basic").click(function () {
+                var data = $.parseJSON($("#email_user").val());
+                 
+                $.each(data,function(key,value){
+                  console.log('id::'+$('#select2Basic').val());
+                  if($('#select2Basic').val()==value['p_id']){
+                   console.log(value['email']);
+                   $('#member_email').val(value['email']);
+                   $('#member_phone').val(value['phone_no']);
+                   $('#member_address').val(value['address']);
+                   $('#member_city').val(value['city']);
+                   $('#full_name_form').val(value['m_name']);
+                   }
+                });
+            
+            });
+        });
+    </script>
+
     <script>
 function edit(id)
 {
           const myOffcanvas = document.getElementById('exLargeModal');
           let a=new bootstrap.Modal(myOffcanvas);
-          alert(id);
+          var temp=document.getElementById('select2Basic');
+          var member_id=[];
+             for(i=0;i<temp.options.length;i++)
+                  {
+                    member_id[i]=temp.options[i].value;
+                  }
           a.show();
           $.ajax({
               url:"{{url('get_data')}}" +"/"+ id,
               type:'GET',
                 success:function(response){
                   var gender=response[0]['gender'];
+                  var sr_no=response[0]['m_id'];
                   $("#age").val(response[0]['age']);
-                  $("#address").val(response[0]['address']);
+                  $("#member_address").val(response[0]['address']);
                   $("#subcommunity").val(response[0]['subcommunity']);
-                  $("#city").val(response[0]['city']);
-              
+                  $("#member_city").val(response[0]['city']);
+                  $('#member_email').val(response[0]['email']);
+                  $('#member_phone').val(response[0]['phone_no']);
                   if(gender=="MALE"){$("#MALE").attr('checked',true);}
                   if(gender=="FEMALE"){$("#FEMALE").attr('checked',true);}
+                  $("#no_of_person_id").val(response[0]['no_of_person']);
+                  $("#booking_id").val(response[0]['r_id']);
+                  $("#deposit-amount").val(response[0]['deposite_rs']);
+                  $("#rupees-in-words").val(response[0]['rs_word']);
+                  $("#no_of_days").val(response[0]['no_of_days']);
                   $("#occupation").val(response[0]['occupation']);
                   $("#reason").val(response[0]['reason']);
-                  
-                  $("#badeposit_no").val(response[0]['deposit_no']);
+                  $("#ac_amount").val(response[0]['ac_amount']);
+                  $("#non_ac_amount").val(response[0]['non_ac_amount']);
+                  $("#dmt_amount").val(response[0]['door_mt_amount']);
+                  /*301,201,2,5*/
+                  var room=response[0]['room_list'];
+                  var ArrNames =room .split(",");
+                
+                      ArrNames.forEach(myFunction1);
+                      function myFunction1(room, index) {
+                        if(room==301 || room==302 || room==401 || room==402 )
+                        {
+                          $("#select2Multiple11 option[value=" + room + "]").attr('selected', 'selected');
+                        }
+                        if(room==303 || room==304 ||room==305 || room==306 || room==403)
+                        {
+                          $("#select2Multiple11 option[value=" + room + "]").attr('selected', 'selected');
+                        }
+                        if(room==203 || room==204 ||room==205 || room==206 || room==404 || room==405 || room==406)
+                        {
+                          $("#select2Multiple22 option[value=" + room + "]").attr('selected', 'selected');
+                        }
+                        if(room==201)
+                        {
+                          $("#select2Multiple22 option[value=" + room + "]").attr('selected', 'selected');
+                        }
+                        if(room==202)
+                        {
+                          $("#select2Multiple22 option[value=" + room + "]").attr('selected', 'selected');
+                        }
+                        if(room==1 || room==2 ||room==3 || room==4 ||room==5 || room==6 ||room==7 || room==8 ||room==9 || room==10 || room==11 || room==12 ||room==13 || room==14 ||room==15 || room==16 ||room==17 || room==18 ||room==19 || room==20)
+                        {
+                          $("#select2Multiple33 option[value=" + room + "]").attr('selected', 'selected');
+                        }
+                      }
+                     
+                      
+                  member_id.forEach(myFunction)
+                    function myFunction(item, index, arr) {
+                        if((member_id[index])==sr_no)
+                        {
+                          $("#select2Basic option[value=" + sr_no + "]").attr('selected', 'selected');
+                        }
+                    }
 
                 }
             });
 
             }
-    
-     
-      
-   
+  
       </script>
+<script>
+  $(document).ready(function() {
+    let currentStep = 1;
+ 
+    $(".btn-next").on("click", function() {
+      $(".rep-table").empty();
+      const fullName = $('#full_name_form').val();
+      const age = $('#member_age').val();
+      const selectedGender = $('input[name="gender"]').val();
+      const relation = $('#member_relation').val();
+
+      $('#member_full_name').text(fullName);
+      $('#members_age').text(age);
+      $('#member_gen').text(selectedGender);
+      $('#member_rel').text(relation);
+
+      $(".rep-table").append(
+        '<tr>' +
+        '<td>'+ '1' +'</td>' +
+        '<td id="member_full_name">' + $('#full_name_form').val() + '</td>' +
+        '<td id="members_age">' + $('#member_age').val() + '</td>' +
+        '<td id="member_gen">' + $('input[name="gender"').val() + '</td>' +
+        '<td id="member_rel">' + $('#member_relation').val() + '</td>' +
+        '</tr>'
+      );
+
+      let numForms = parseInt($("#no_of_person_id").val());
+      if (isNaN(numForms) || numForms <= 0) {
+       
+        return false;
+      }
+      for (let i = 1; i < numForms; i++) {
+        let j=2;
+        $(".rep-table").append(
+          '<tr>' +
+          '<td>'+ j +'</td>' +
+          '<td class="member_full_name' + i + '">' + $('#full_name_form' + i).val() + '</td>' +
+          '<td class="members_age' + i + '">' + $('#member_age' + i).val() + '</td>' +
+          '<td class="member_gen' + i + '">' + $('input[name="gender'+i+'"]').val() + '</td>' +
+          '<td class="member_rel' + i + '">' + $('#member_relation' + i).val() + '</td>' +
+          '</tr>'
+        );
+        
+
+        // Setting text for elements in the loop using jQuery
+        $('.member_full_name' + i).text($('#full_name_form' + i).val());
+        $('.members_age' + i).text($('#member_age' + i).val());
+        $('.member_gen' + i).text($('input[name="gender'+i+'[]"]').val());
+        $('.member_rel' + i).text($('#member_relation' + i).val());
+        j++;
+      }
+
+      $(".rep-table").show();
+    });
+  });
+</script>
+
+      <script>
+  $(document).ready(function() {
+
+    $("#repeat-next").click(function() {
+      console.log("click");
+      let numForms = parseInt($("#no_of_person_id").val());
+      // Clear previous forms if any
+      $(".rep-form").empty();
+
+      // Clone and show the form templates
+      //console.log('form:'.$('.reo-form').children());
+      for (let i = 1; i < numForms; i++) {
+        let formTemplate = $(".rep-form1 .formrepeater1").clone();
+        $(".rep-form").append(
+
+          '<div class="row formrepeater">'+
+                                 ' <div class="mb-3 col-lg-6 col-xl-3 col-12 mb-0">'+
+                                   ' <label class="form-label" for="form-repeater-1-1">Full Name</label>'+
+                                   ' <input type="text" id="full_name_form'+i+'" style="text-transform:uppercase" name="full_name[]" class="form-control" placeholder="john doe" value=""/>'+
+                                 ' </div>'+
+                                 ' <div class="mb-3 col-lg-6 col-xl-3 col-12 mb-0">'+
+                                  '  <label class="form-label" for="form-repeater-1-2">Age</label>'+
+                                  '  <input type="number" id="member_age'+i+'" name="m_age[]" class="form-control" placeholder="your age" />'+
+                                '  </div>'+
+                                  
+                                  
+                                '  <div class="mb-3 col-lg-6 col-xl-2 col-12 mb-0 ">'+
+                                  
+                                     ' <label class="d-block form-label">Gender</label>'+
+                                     ' <div class="form-check form-check-inline">'+
+                                       ' <input class="form-check-input" type="radio" name="gender'+i+'[]" id="inlineRadio1_' + i + '" value="MALE" checked/>'+
+                                       ' <label class="form-check-label" for="inlineRadio1' + i + '">Male</label>'+
+                                     ' </div>'+
+                                     ' <div class="form-check form-check-inline">'+
+                                      '  <input class="form-check-input" type="radio" name="gender'+i+'[]" id="inlineRadio2_' + i + '" value="FEMALE" />'+
+                                      '  <label class="form-check-label" for="inlineRadio2' + i + '" selected>Female</label>'+
+                                    '  </div>'+
+                                '  </div>'+
+                                ' <div class="col-md-4">'+
+                                    '  <label class="form-label" for="basic-default-country">Relation</label>'+
+                                    '  <select class="form-select" name="relation[]" id="member_relation'+i+'" required>'+
+                                    '   <option value="" disabled selected>Select relation</option>'+
+                                    '  <option value="AUNTY">AUNTY</option>'+
+                                    '  <option value="BROTHER">BROTHER</option>'+
+                                    '  <option value="COUSIN">COUSIN</option>'+
+                                    '  <option value="DAUGHTER">DAUGHTER</option>'+
+                                    '  <option value="FATHER">FATHER</option>'+
+                                    '  <option value="FRIEND">FRIEND</option>'+
+                                    '  <option value="GRAND FATHER">GRAND FATHER</option>'+
+                                    '  <option value="GRAND MOTHER">GRAND MOTHER</option>'+
+                                    '  <option value="HUSBAND">HUSBAND</option>'+
+                                    '  <option value="MOTHER">MOTHER</option>'+
+                                    '  <option value="NEPHEW">NEPHEW</option>'+
+                                    '  <option value="SISTER">SISTER</option>'+
+                                    '  <option value="UNCLE">UNCLE</option>'+
+                                    '  <option value="WIFE">WIFE</option>'+
+                        
+                                  '  </select>'+
+                                 ' </div>'+
+                                 ' <div class="mb-3 col-lg-12 col-xl-2 col-12 d-flex align-items-center mb-0">'+
+                                  '  <button class="btn btn-label-danger mt-4" data-repeater-delete>'+
+                                   '   <i class="ti ti-x ti-xs me-1"></i>'+
+                                   '   <span class="align-middle">Delete</span>'+
+                                  '  </button>'+
+                                  '</div>'+
+                               ' </div>'
+        );
+      }
+
+      // Display the forms container
+      $(".rep-form").show();
+    });
+  });
+</script>
+
     <!-- BEGIN: Page JS-->
    <script>
     

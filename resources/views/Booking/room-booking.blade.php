@@ -457,7 +457,7 @@
   
                             <div class="col-md-4">
                               <label class="form-label" for="basic-default-name">Booking No</label>
-                              <input type="text" class="form-control" name="deposit_no" id="basic-default-name" placeholder="Deposit No" value="{{$p_id+1}}" readonly/>
+                              <input type="text" class="form-control" name="deposit_no" id="deposit_no" placeholder="Deposit No" value="{{$p_id+1}}" readonly/>
                             </div>
 
                            
@@ -549,20 +549,21 @@
                                   <div class="col-md-4">
                                     <label class="form-label" for="basic-default-country">Relation</label>
                                     <select class="form-select" name="relation[]" id="member_relation" required>
-                                      <option value="SELF" selected>SELF</option>                                      '  <option value="AUNTY">AUNTY</option>'+
-                                      <option value="BROTHER">BROTHER</option>'+
-                                       <option value="COUSIN">COUSIN</option>'+
-                                       <option value="DAUGHTER">DAUGHTER</option>'+
-                                       <option value="FATHER">FATHER</option>'+
-                                       <option value="FRIEND">FRIEND</option>'+
-                                       <option value="GRAND FATHER">GRAND FATHER</option>'+
-                                       <option value="GRAND MOTHER">GRAND MOTHER</option>'+
-                                       <option value="HUSBAND">HUSBAND</option>'+
-                                       <option value="MOTHER">MOTHER</option>'+
-                                       <option value="NEPHEW">NEPHEW</option>'+
-                                       <option value="SISTER">SISTER</option>'+
-                                       <option value="UNCLE">UNCLE</option>'+
-                                       <option value="WIFE">WIFE</option>'+
+                                      <option value="SELF" selected>SELF</option>
+                                      <option value="AUNTY">AUNTY</option>
+                                      <option value="BROTHER">BROTHER</option>
+                                      <option value="COUSIN">COUSIN</option>
+                                      <option value="DAUGHTER">DAUGHTER</option>
+                                      <option value="FATHER">FATHER</option>
+                                      <option value="FRIEND">FRIEND</option>
+                                      <option value="GRAND FATHER">GRAND FATHER</option>
+                                      <option value="GRAND MOTHER">GRAND MOTHER</option>
+                                      <option value="HUSBAND">HUSBAND</option>
+                                      <option value="MOTHER">MOTHER</option>
+                                      <option value="NEPHEW">NEPHEW</option>
+                                      <option value="SISTER">SISTER</option>
+                                      <option value="UNCLE">UNCLE</option>
+                                      <option value="WIFE">WIFE</option>
                                     </select>
                                   </div>
                                   <div class="mb-3 col-lg-12 col-xl-2 col-12 d-flex align-items-center mb-0">
