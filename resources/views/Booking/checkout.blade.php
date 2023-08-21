@@ -105,6 +105,7 @@ div.card-datatable [class*=col-md-] {
                                               <tr>
                                                 <th>નામ</th>
                                                 <th>રૂમ નંબર </th>
+                                                <th>STATUS </th>
                                                 <th>આગમન તારીખ / સમય</th>
                                                 <th>ચેક આઉટ તારીખ / સમય</th>
                                                 <th>ભાડું</th>
@@ -118,6 +119,7 @@ div.card-datatable [class*=col-md-] {
                                              <input type="hidden" class="id" value="{{$row->r_id}}">
                                               <td>{{$row->m_name}}</td>
                                               <td>{{$row->room_list}}</td>
+                                                @if($row->status =="B")<td>BOOKED</td>@else<td>CHECKOUT</td>@endif
                                               <td>{{date("d-m-Y",strtotime($row->check_in_date))}}</td>
                                               <td>{{date("d-m-Y",strtotime($row->check_in_date . '+' .$row->no_of_days . 'days'))}}</td>
                                               <td>{{$row->ac_amount + $row->non_ac_amount + $row->door_mt_amount}}</td>
@@ -125,11 +127,9 @@ div.card-datatable [class*=col-md-] {
                                               <td>{{$row->deposite_rs}}</td>
                                               <td>
                                                   <div class="d-inline-block">
-                                                    <a href="{{route('pdf_CheckOut',1)}}" class="text-primary"><img src="./assets/icon/orange-eye.png" width="20px"></a>
+                                                    <a href=@if($row->status=='C')"{{route('pdf_CheckOut',1)}}";@else "#"; @endif class="text-primary"><img src="./assets/icon/orange-eye.png" width="20px"></a>
 
-                                                    <a href="javascript:;" class="btn btn-sm btn-icon item-edit" data-bs-toggle="modal"
-                                                    data-bs-target="#exLargeModal"><img src="./assets/icon/orange-edit.png" width="20px"></a>
-
+                                                    <a onclick="edit_checkout({{$row->r_id}})" class="btn btn-sm btn-icon item-edit"><img src="./assets/icon/orange-edit.png" width="20px"></a>
 
                                                     <a href="javascript:;" class="text-danger delete-record"><img src="./assets/icon/orange-trash.png" width="20px"></a> 
                                                     
@@ -156,9 +156,7 @@ div.card-datatable [class*=col-md-] {
                                   aria-label="Close"></button>
                               </div>
                               <div class="modal-body">
-                              <div class="d-inline-block">
-                                                    <a href="{{route('pdf_CheckOut',1)}}" class="text-primary"><img src="./assets/icon/orange-eye.png" width="20px"></a>
-                    </div>
+                           
                                 <div class="row">
                                   <div class="col mb-3">
                                     <label for="nameExLarge" class="form-label">Booking ID</label>
@@ -486,7 +484,109 @@ div.card-datatable [class*=col-md-] {
    
     <!-- Page JS -->
     <script src="{{ asset ('assets/js/form-validation.js') }}"></script>
+    <script>
+      function edit_checkout(id)
+      {
+        const model=document.getElementById('exLargeModal');
+        let a=new bootstrap.Modal(model);
+        a.show();
+        $.ajax({
+                url:"{{url('get_booking_data')}}" +"/"+ id,
+                type:'GET',
+                  success:function(response){
+                      var sr_no=response[0]['m_id'];
+             
+                      $("#bookingId").val(response[0]['r_id']);
+                      $("#city").val(response[0]['city']);
+                      $("#check_in_date").val(response[0]['check_in_date']);
+                      $("#deposite").val(response[0]['deposite_rs']);
+                      var room=response[0]['room_list'];
+                    
+                      var ArrNames =room .split(",");
+                      ArrNames.forEach(myFunction);
+                      function myFunction(room, index) {
+                         
+                        
+                      
+                      if(room==301 || room==302 || room==401 || room==402)
+                      {
+                        $("#dlx_room").val(room);
+                        $("#dlx_room_charge").val(response[0]['ac_amount']);
+                        $("#dlx_no_of_days").val(response[0]['no_of_days']);
+                        $("#dlx_amount").val(response[0]['no_of_days'] * response[0]['ac_amount']);
+                        $("#dlx_room_total").val(response[0]['no_of_days'] * response[0]['ac_amount']);
+                      }
+                      if(room==303 || room==304 ||room==305 || room==306 || room==403)
+                      {
+                        $("#ac_room").val(room);
+                        $("#ac_room_charge").val(response[0]['ac_amount']);
+                        $("#ac_no_of_days").val(response[0]['no_of_days']);
+                        $("#ac_amount").val(response[0]['no_of_days'] * response[0]['ac_amount']);
+                        $("#ac_room_total").val(response[0]['no_of_days'] * response[0]['ac_amount']);
+                      }
+                      if(room==201 || room==202 ||room==203 || room==204 ||room==205 || room==206 || room==404 || room==405 || room==406)
+                      {
+                        $("#non_ac_room").val(room);
+                        $("#non_ac_room_charge").val(response[0]['non_ac_amount']);
+                        $("#non_ac_no_of_days").val(response[0]['no_of_days']);
+                        $("#non_ac_amount").val(response[0]['no_of_days'] * response[0]['non_ac_amount']);
+                        $("#non_ac_room_total").val(response[0]['no_of_days'] * response[0]['non_ac_amount']);
+                      }
+                      
+                      if(room==1 || room==2 ||room==3 || room==4 ||room==5 || room==6 ||room==7 || room==8 ||room==9 || room==10)
+                      {
+                        $("#non_dmt_ac_room").val(room);
+                        $("#non_dmt_ac_room_charge").val(response[0]['door_mt_amount']);
+                        $("#non_dmt_ac_no_of_days").val(response[0]['no_of_days']);
+                        $("#non_dmt_ac_amount").val(response[0]['no_of_days'] * response[0]['door_mt_amount']);
+                        $("#non_dmt_ac_room_total").val(response[0]['no_of_days'] * response[0]['door_mt_amount']);
+                      }
 
+                      if(room==11 || room==12 ||room==13 || room==14 ||room==15 || room==16 ||room==17 || room==18 ||room==19 || room==20)
+                      {
+                        $("#dmt_ac_room").val(room);
+                        $("#dmt_ac_room_charge").val(response[0]['door_mt_amount']);
+                        $("#dmt_ac_no_of_days").val(response[0]['no_of_days']);
+                        $("#dmt_ac_amount").val(response[0]['no_of_days'] * response[0]['door_mt_amount']);
+                        $("#dmt_ac_room_total").val(response[0]['no_of_days'] * response[0]['door_mt_amount']);
+                      }
+                    }
+                    var a=document.getElementById("ac_room").value;
+                          if (a == "") {
+                              $("#ac_room_Excharge").prop('disabled', true);
+                          } else {
+                              $("#ac_room_Excharge").val ("0");
+                          }
+                        var l=document.getElementById("non_ac_room").value;
+                          if (l == "") {
+                              $("#non_ac_room_Excharge").prop('disabled', true);
+                          } else {
+                              $("#non_ac_room_Excharge").val ("0");
+                          }
+                          var m=document.getElementById("non_dmt_ac_room").value;
+                          if (m == "") {
+                              $("#non_dmt_ac_room_Excharge").prop('disabled', true);
+                          } else {
+                              $("#non_dmt_ac_room_Excharge").val ("0");
+                          }
+                          var p=document.getElementById("dmt_ac_room").value;
+                          if (p == "") {
+                              $("#dmt_ac_room_Excharge").prop('disabled', true);
+                          } else {
+                              $("#dmt_ac_room_Excharge").val ("0");
+                          }
+                          var k=document.getElementById("dlx_room").value;
+                          if (k == "") {
+                              $("#dlx_room_Excharge").prop('disabled', true);
+                          } else {
+                              $("#dlx_room_Excharge").val ("0");
+                          }
+                          
+            
+                  }
+                });
+      }
+    </script>
     <script>
       jQuery(document).ready(function($){
       var currentDate = new Date();
