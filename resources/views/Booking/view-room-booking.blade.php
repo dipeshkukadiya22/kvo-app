@@ -128,7 +128,7 @@ div.card-datatable [class*=col-md-] {
                                                   <div class="d-inline-block">
                                                     <a href="{{route('pdf_CheckIn',$row->r_id)}}" class="text-primary"><img src="./assets/icon/orange-eye.png" width="20px"></a>
 
-                                                    <a onclick="edit(184)" class="btn btn-sm btn-icon item-edit" ><img src="./assets/icon/orange-edit.png" width="20px"></a>
+                                                    <a onclick="edit(184)" class="btn btn-sm btn-icon item-edit"><img src="./assets/icon/orange-edit.png" width="20px"></a>
 
 
                                                     <a href="javascript:;" class="text-danger delete-record"><img src="./assets/icon/orange-trash.png" width="20px"></a> 
@@ -216,7 +216,8 @@ div.card-datatable [class*=col-md-] {
                                         </div>
                                       </div>
                                       <div class="bs-stepper-content">
-                                      <form id=kvo_update_room_booking method="POST" action="{{route('update_room_booking')}}">
+                                      <form id="kvo_update_room_booking" method="POST" action="{{ route('update_room_booking') }}">
+                                        @csrf
                                           <!-- Account Details -->
                                           <div id="account-details" class="content">
                                             <div class="content-header mb-3">
@@ -679,7 +680,7 @@ div.card-datatable [class*=col-md-] {
                                                 <i class="ti ti-arrow-left me-sm-1"></i>
                                                 <span class="align-middle d-sm-inline-block d-none">Previous</span>
                                               </button>
-                                              <button type="submit" onclick="call()" class="btn btn-success btn-submit">Submit</button>
+                                              <button type="submit"  class="btn btn-success btn-submit">Submit</button>
                                               
                                             </div>
                                           </div>
@@ -712,10 +713,26 @@ div.card-datatable [class*=col-md-] {
 @section('pagejs')
 
 <script>
-  function call()
-  {
-    alert("hi");
-  }
+  
+    $(".btn-submit").click(function(){
+   
+       
+            Swal.fire({
+                position: 'middle-center',
+                icon: 'success',
+                title: 'Room Booking data has been successfully updated!',
+                showConfirmButton: false,
+                timer: 1500
+                }).then(function() {
+                $("#kvo_update_room_booking").submit();
+           });
+       
+    });
+
+
+   
+   
+  
 </script>
    
 

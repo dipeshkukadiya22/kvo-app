@@ -277,10 +277,40 @@ class BookingController extends Controller
         $ar_list= DB::select("SELECT *, add_room.room_no as id FROM add_room");
         return view('Booking.view-room-booking',['checkout'=>$checkout,'member'=>$member,'a_list'=>$ar_list]);
     }
-    public function update_room_booking(Request $req)
+    public function update_room_booking(Request $req) 
     {
-        dd("hi");
+      $booking=room_details::find($req->booking_id);
+   
+      $booking->no_of_person = $req->no_of_person_id;
+      $booking->check_in_date = date("Y-m-d H:i",strtotime($req->check_in_date));
+      $acRoomList = implode(',', $req->input('select2Multiple1', []));
+      $nonAcRoomList = implode(',', $req->input('select2Multiple2', []));
+      $doorMetricRoomList = implode(',', $req->input('select2Multiple3', []));
+      $booking->room_list = "$acRoomList,$nonAcRoomList,$doorMetricRoomList";
+      $booking->ac_amount = $req->ac_amount;
+      $booking->non_ac_amount = $req->non_ac_amount;
+      $booking->door_mt_amount = $req->door_mt_amount;
+      $booking->deposite_rs = $req->deposite_rs;
+      $booking->rs_word = $req->rs_word;
+      $booking->no_of_days = $req->no_of_days;
+      $booking->member_id=$personal_details_id;
+      $booking->save();
+
+      $details=personal_details::find($req->member_id);
+      $personal_details_id=(personal_details::get()->last()->p_id)+1;
+      $details->age = $req->age;
+      $details->address = $req->collapsibleaddress;
+      $details->community = $req->community;
+      $details->subcommunity = strtoupper($req->subcommunity);
+      $details->gender = $req->inlineRadioOptions;
+      $details->member_id=$req->name;
+      $details->id_proof=$req->id_proof;
+      $details->occupation=$req->occupation;
+      $details->reason=$req->reason;
+   
+    return back();
     }
+
     public function cancel_room_booking($id)
     {
     
