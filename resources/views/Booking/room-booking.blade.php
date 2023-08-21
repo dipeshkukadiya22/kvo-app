@@ -1091,14 +1091,6 @@ $(document).ready(function () {
   });
 </script>
 
-
-
-
-
-
-
-
-
 <script>
   $(document).ready(function() {
     let currentStep = 1;

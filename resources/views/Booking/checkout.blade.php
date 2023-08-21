@@ -909,21 +909,7 @@ const editLinks = document.querySelectorAll(".item-edit");
                               $("#dlx_room_Excharge").val ("0");
                           }
                           
-                          
-                          
-                 
                     
-
-                      // $("#total").val(dlx+ac+non_ac+dmt_ac+dmt_non_ac);
-                      // member_id.forEach(myFunction)
-                      //   function myFunction(item, index, arr) {
-                      //       if((member_id[index])==5)
-                      //       {
-                      //         $("#select2Basic option[value=" + sr_no + "]").attr('selected', 'selected'); 
-                      //       }
-                      //   }
-                        
-                      // }
                   }
                 });
               

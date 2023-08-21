@@ -290,7 +290,7 @@ div.card-datatable [class*=col-md-] {
                                                 <div class="col-md-4">
                                                   <label class="d-block form-label">Gender</label>
                                                   <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="MALE" value="MALE" />
+                                                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="MALE" value="MALE" checked/>
                                                     <label class="form-check-label" for="inlineRadio1">Male</label>
                                                   </div>
                                                   <div class="form-check form-check-inline">
@@ -514,13 +514,15 @@ div.card-datatable [class*=col-md-] {
                                               <div class="rep-form1">
                                             
                                                   <div class="row formrepeater1">
+                                                    
                                                     <div class="mb-3 col-lg-6 col-xl-3 col-12 mb-0">
                                                       <label class="form-label" for="form-repeater-1-1">Full Name</label>
-                                                      <input type="text" id="full_name_form"  name="full_name[]" class="form-control" placeholder="john doe" />
+                                                      <input type="text" id="full_name_form" name="full_name[]" class="form-control" placeholder="john doe" value=""/>
+
                                                     </div>
                                                     <div class="mb-3 col-lg-6 col-xl-3 col-12 mb-0">
                                                       <label class="form-label" for="form-repeater-1-2">Age</label>
-                                                      <input type="text" id="member_age" name="m_age[]" class="form-control" placeholder="your age" />
+                                                      <input type="number" id="member_age" name="m_age[]" class="form-control" placeholder="your age" />
                                                     </div>
                                                     
                                                     
@@ -529,11 +531,11 @@ div.card-datatable [class*=col-md-] {
                                                         <label class="d-block form-label">Gender</label>
                                                       
                                                         <div class="form-check form-check-inline">
-                                                            <input class="form-check-input" type="radio" name="gender" id="inlineRadio1_${i}" value="MALE" checked />
+                                                            <input class="form-check-input" type="radio" name="gender" id="inlineRadio1" value="MALE" checked />
                                                             <label class="form-check-label" for="inlineRadio1_${i}">Male</label>
                                                         </div>
                                                         <div class="form-check form-check-inline">
-                                                            <input class="form-check-input" type="radio" name="gender" id="inlineRadio2_${i}" value="FEMALE" />
+                                                            <input class="form-check-input" type="radio" name="gender" id="inlineRadio2" value="FEMALE" />
                                                             <label class="form-check-label" for="inlineRadio2_${i}">Female</label>
                                                         </div>
 
@@ -650,8 +652,8 @@ div.card-datatable [class*=col-md-] {
                                                         <th>Relations</th>
                                                         </tr>
                                                     </thead>
-                                                    <tbody>
-                                                    
+                                                 
+                                                    <tbody class="rep-table">
                                                       <tr>
                                                         <td></td>
                                                         <td id="member_full_name"></td>
@@ -752,6 +754,17 @@ div.card-datatable [class*=col-md-] {
     <script src="{{ asset('assets/vendor/libs/dropzone/dropzone.js') }}"></script>
 
     <script src="{{ asset('assets/js/forms-file-upload.js') }}"></script>
+    <script>
+  $(document).ready(function() {
+    let currentStep = 1;
+
+    $(".btn-next").on("click", function() {
+      $('#member_age').val($('#age').val());
+      $('#full_name_form').val($("#select2Basic option:selected").text());
+    });
+  });
+
+</script>
 
     <script>
       jQuery(document).ready(function($){
@@ -866,17 +879,70 @@ function edit(id)
             }
   
       </script>
+      
+
+<script>
+ 
+  $(document).ready(function() {
+    // let currentStep = 1;
+    // var currentDateTime = new Date();
+
+    // $('#flatpickr-datetime').flatpickr({
+    //   enableTime: true,
+    //   dateFormat: "d-m-Y H:i",
+    //   defaultDate: currentDateTime
+    // });
+    $(".btn-next").on("click", function() {
+      const selectedList1 = $('#select2Multiple11').val();
+      const selectedList2 = $('#select2Multiple22').val();
+      const selectedList3 = $('#select2Multiple33').val();
+      const selectedDate = $('#flatpickr-datetime').val();
+      const acAmount = parseFloat($('#ac_amount').val()) || 0; 
+      const nonAcAmount = parseFloat($('#non_ac_amount').val()) || 0;
+      const doorMtAmount = parseFloat($('#dmt_amount').val()) || 0;
+
+    const totalAmount = acAmount + nonAcAmount + doorMtAmount;
+
+    $('#room_amount').text( totalAmount);
+      const selectedRooms = 'A.C. Room:= ' + selectedList1 + ', Non A.C. Room:= ' + selectedList2 + ', Door Metri A.C. / Non A.C. Room:= ' + selectedList3;
+
+      $('#room_lst').text(selectedRooms);
+
+      if (selectedDate && selectedDate.length > 0) {
+        $('#check_date').text( selectedDate);
+        // currentStep++;
+      }
+     
+    });
+  });
+</script>
+<script>
+$(document).ready(function () {   
+    $('body').on('change','#select', function() {
+         $('#show_selected').val(this.value);
+    });
+    $('#FEMALE').change(function(){
+      $("#inlineRadio2").attr('checked',true);
+    });
+});
+
+
+
+</script>
+
 <script>
   $(document).ready(function() {
     let currentStep = 1;
  
     $(".btn-next").on("click", function() {
+      
       $(".rep-table").empty();
+      
       const fullName = $('#full_name_form').val();
       const age = $('#member_age').val();
       const selectedGender = $('input[name="gender"]').val();
       const relation = $('#member_relation').val();
-
+      
       $('#member_full_name').text(fullName);
       $('#members_age').text(age);
       $('#member_gen').text(selectedGender);
@@ -923,7 +989,7 @@ function edit(id)
   });
 </script>
 
-      <script>
+  <script>
   $(document).ready(function() {
 
     $("#repeat-next").click(function() {
@@ -935,13 +1001,14 @@ function edit(id)
       // Clone and show the form templates
       //console.log('form:'.$('.reo-form').children());
       for (let i = 1; i < numForms; i++) {
-        let formTemplate = $(".rep-form1 .formrepeater1").clone();
+        let formTemplate = $(".rep-form1 .formrepeater").clone();
         $(".rep-form").append(
 
           '<div class="row formrepeater">'+
                                  ' <div class="mb-3 col-lg-6 col-xl-3 col-12 mb-0">'+
                                    ' <label class="form-label" for="form-repeater-1-1">Full Name</label>'+
-                                   ' <input type="text" id="full_name_form'+i+'" style="text-transform:uppercase" name="full_name[]" class="form-control" placeholder="john doe" value=""/>'+
+                                   ' <input type="text" id="full_name_form'+i+'" style="text-transform:uppercase" name="full_name[]" class="form-control" placeholder="john doe">'+
+                                    
                                  ' </div>'+
                                  ' <div class="mb-3 col-lg-6 col-xl-3 col-12 mb-0">'+
                                   '  <label class="form-label" for="form-repeater-1-2">Age</label>'+
