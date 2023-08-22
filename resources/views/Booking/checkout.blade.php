@@ -127,11 +127,11 @@ div.card-datatable [class*=col-md-] {
                                               <td>{{$row->deposite_rs}}</td>
                                               <td>
                                                   <div class="d-inline-block">
-                                                    <a href=@if($row->status=='C')"{{route('pdf_CheckOut',1)}}";@else "#"; @endif class="text-primary"><img src="./assets/icon/orange-eye.png" width="20px"></a>
+                                                    <a href=@if($row->status=='O')"{{route('pdf_CheckOut',1)}}";@else "#"; @endif class="text-primary"><img src="./assets/icon/orange-eye.png" width="20px"></a>
 
-                                                    <a onclick="edit_checkout({{$row->r_id}})" class="btn btn-sm btn-icon item-edit"><img src="./assets/icon/orange-edit.png" width="20px"></a>
+                                                    <a @if($row->status=='B') onclick="edit_checkout({{$row->r_id}})";@else "#"; @endif class="btn btn-sm btn-icon item-edit"><img src="./assets/icon/orange-edit.png" width="20px"></a>
 
-                                                    <a href="javascript:;" class="text-danger delete-record"><img src="./assets/icon/orange-trash.png" width="20px"></a> 
+                                                   
                                                     
                                                   </div>
                                               </td>
@@ -352,7 +352,7 @@ div.card-datatable [class*=col-md-] {
                                               name="remark"
                                               id="remark"
                                               {{-- placeholder="John Doe" --}}
-                                              required />
+                                              />
                                           </div>
 
                                           <div class="col-md-6 mb-3">

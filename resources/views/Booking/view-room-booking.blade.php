@@ -104,7 +104,9 @@ div.card-datatable [class*=col-md-] {
                                           <thead>
                                          
                                               <tr>
+                                                <th>બુકિંગ નં.</th>
                                                 <th>નામ</th>
+                                                <th>Status</th>
                                                 <th>રૂમ નંબર </th>
                                                 <th>આગમન તારીખ / સમય</th>
                                                 <th>ચેક આઉટ તારીખ / સમય</th>
@@ -117,7 +119,9 @@ div.card-datatable [class*=col-md-] {
                                           @foreach($checkout as $row)
                                           <tr>
                                              <input type="hidden" class="id" value="{{$row->r_id}}">
+                                             <td>{{$row->r_id}}</td>
                                               <td>{{$row->m_name}}</td>
+                                              @if($row->status=="A")<td>ADVANCE</td>@else<td>BOOKED</td> @endif
                                               <td>{{$row->room_list}}</td>
                                               <td>{{date("d-m-Y",strtotime($row->check_in_date))}}</td>
                                               <td>{{date("d-m-Y",strtotime($row->check_in_date . '+' .$row->no_of_days . 'days'))}}</td>
@@ -126,9 +130,9 @@ div.card-datatable [class*=col-md-] {
                                               <td>{{$row->deposite_rs}}</td>
                                               <td>
                                                   <div class="d-inline-block">
-                                                    <a href="{{route('pdf_CheckIn',$row->r_id)}}" class="text-primary"><img src="./assets/icon/orange-eye.png" width="20px"></a>
+                                                    <a href=@if($row->status=='B')"{{route('pdf_CheckIn',$row->r_id)}}";@else "#"; @endif class="text-primary"><img src="./assets/icon/orange-eye.png" width="20px"></a>
 
-                                                    <a onclick="edit(184)" class="btn btn-sm btn-icon item-edit"><img src="./assets/icon/orange-edit.png" width="20px"></a>
+                                                    <a onclick="edit({{$row->r_id}})" class="btn btn-sm btn-icon item-edit"><img src="./assets/icon/orange-edit.png" width="20px"></a>
 
 
                                                     <a href="javascript:;" class="text-danger delete-record"><img src="./assets/icon/orange-trash.png" width="20px"></a> 
@@ -228,11 +232,12 @@ div.card-datatable [class*=col-md-] {
                                                 <!-- Basic -->
                                               <div class="col-md-4">
                                                   <label for="select2Basic" class="form-label" >Name</label>
-                                                  <select id="select2Basic" class="select2 form-select" data-allow-clear="true" name="name" placeholder="select name" required>
+                                                  <input type="text" id="select2Basic" name="name" class="form-control" placeholder="" readonly/>
+                                                 <!-- <select id="select2Basic" class="select2 form-select" data-allow-clear="true" name="name" placeholder="select name" readonly>
                                                       @foreach ($member as $row)
                                                           <option value="{{$row->p_id}}">{{$row->m_name}}</option>
                                                       @endforeach
-                                                  </select>
+                                                  </select>-->
                                                 </div>
                       
                                                 <div class="col-md-4">
@@ -266,8 +271,8 @@ div.card-datatable [class*=col-md-] {
                                                 <!-- Basic -->
                                                 <div class="col-md-4">
                                                   <label for="select2Basic" class="form-label">Community</label>
-                                                  <select id="select2Basic" class="select2 form-select form-select-lg" data-allow-clear="true">
-                                                    <option value="Hindu" selected>Hindu</option>
+                                                  <select id="select2Basic1" class="select2 form-select form-select-lg" name="community" data-allow-clear="true">
+                                                    <option value="Hindu">Hindu</option>
                                                     <option value="Jain">Jain</option>
                                                       
                                                   </select>
@@ -312,7 +317,7 @@ div.card-datatable [class*=col-md-] {
                                                   <i class="ti ti-arrow-right"></i>
                                                 </div> --}}
 
-                                                <button type="button" class="btn btn-primary btn-next">
+                                                <button type="button" class="btn btn-primary btn-next" >
                                                   <span class="align-middle d-sm-inline-block d-none me-sm-1">Next</span>
                                                   <i class="ti ti-arrow-right"></i>
                                                 </button>
@@ -440,6 +445,10 @@ div.card-datatable [class*=col-md-] {
                                                 <label class="form-label" for="basic-default-name">Booking No</label>
                                                 <input type="text" class="form-control" name="booking_id" id="booking_id" placeholder="Deposit No"  readonly/>
                                               </div>
+                                              <div class="col-md-4" hidden>
+                                                <label class="form-label" for="basic-default-name">Personal Details Id</label>
+                                                <input type="text" class="form-control" name="person_id" id="person_id" placeholder="Deposit No"  readonly/>
+                                              </div>
 
                                             
                     
@@ -467,9 +476,12 @@ div.card-datatable [class*=col-md-] {
                                                 <input type="text" class="form-control" name="reason" id="reason" placeholder="Reason to stay" required>
                                               </div>
 
-                                              <!-- Multi  -->
+                                              <!-- Multi  <div class="col-md-4">
+                                                <label for="formFileMultiple" class="form-label">Identity Proof</label>
+                                                <input class="form-control" type="file" name="id_proof" id="formFileMultiple" multiple required />
+                                            -->
                                               <div class="col-12">
-                                                <div action="/upload" class="dropzone needsclick" id="dropzone-multi">
+                                                <div action="/upload" class="dropzone needsclick" id="dropzone-multi" >
                                                   <div class="dz-message needsclick">
                                                     Drop files here or click to upload
                                                     <span class="note needsclick"
@@ -478,7 +490,7 @@ div.card-datatable [class*=col-md-] {
                                                     >
                                                   </div>
                                                   <div class="fallback">
-                                                    <input name="file" type="file" />
+                                                  <input class="form-control" type="file" name="id_proof" id="formFileMultiple" multiple required />
                                                   </div>
                                                 </div>
                                               </div>
@@ -500,6 +512,10 @@ div.card-datatable [class*=col-md-] {
                                           </div>
                                           <!-- All No of Person -->
                                           <div id="address" class="content">
+                                                <button type="button" class="btn btn-primary" id="member_data">
+                                                  <span class="align-middle d-sm-inline-block d-none me-sm-1">show data</span>
+                                                  <i class="ti ti-arrow-right"></i>
+                                                </button>
                                             <div class="content-header">
                                               <small>Enter Member Details.</small>
                                             </div>
@@ -512,13 +528,15 @@ div.card-datatable [class*=col-md-] {
                                                 <div class="all-members" data-repeater-list="group-a">
                                                 <div data-repeater-item>
                                               
-                                              <div class="rep-form1">
-                                            
-                                                  <div class="row formrepeater1">
-                                                    
-                                                    <div class="mb-3 col-lg-6 col-xl-3 col-12 mb-0">
+                                                <div class="rep-form1">
+                                                    <div class="row formrepeater1">
+                                                      <div class="mb-3 col-lg-6 col-xl-3 col-12 mb-0">
+                                                      <label class="form-label" for="form-repeater-1-1">member_id</label>
+                                                      <input type="text" id="m_id" name="m_id[]" class="form-control" placeholder="john doe" value="" readonly/>
+                                                    </div>
+                                                      <div class="mb-3 col-lg-6 col-xl-3 col-12 mb-0">
                                                       <label class="form-label" for="form-repeater-1-1">Full Name</label>
-                                                      <input type="text" id="full_name_form" name="full_name[]" class="form-control" placeholder="john doe" value=""/>
+                                                      <input type="text" id="full_name_form" name="full_name[]" class="form-control" placeholder="john doe" value="" readonly/>
 
                                                     </div>
                                                     <div class="mb-3 col-lg-6 col-xl-3 col-12 mb-0">
@@ -544,8 +562,8 @@ div.card-datatable [class*=col-md-] {
                                                     </div>
                                                     <div class="col-md-4">
                                                       <label class="form-label" for="basic-default-country">Relation</label>
-                                                      <select class="form-select" name="relation" id="member_relation" required>
-                                                          <option value="SELF" selected>SELF</option>
+                                                      <select class="form-select" name="relation[]" id="member_relation" required>
+                                                          <option value="SELF" >SELF</option>
                                                           <option value="AUNTY">AUNTY</option>
                                                           <option value="BROTHER">BROTHER</option>
                                                           <option value="COUSIN">COUSIN</option>
@@ -712,28 +730,6 @@ div.card-datatable [class*=col-md-] {
 
 @section('pagejs')
 
-<script>
-  
-    $(".btn-submit").click(function(){
-   
-       
-            Swal.fire({
-                position: 'middle-center',
-                icon: 'success',
-                title: 'Room Booking data has been successfully updated!',
-                showConfirmButton: false,
-                timer: 1500
-                }).then(function() {
-                $("#kvo_update_room_booking").submit();
-           });
-       
-    });
-
-
-   
-   
-  
-</script>
    
 
     <!-- Vendors JS -->
@@ -777,7 +773,6 @@ div.card-datatable [class*=col-md-] {
 
     $(".btn-next").on("click", function() {
       $('#member_age').val($('#age').val());
-      $('#full_name_form').val($("#select2Basic option:selected").text());
     });
   });
 
@@ -792,45 +787,20 @@ div.card-datatable [class*=col-md-] {
     })
     });
     </script>
-      <script>
-        $(document).ready(function () {
-            $("#select2Basic").click(function () {
-                var data = $.parseJSON($("#email_user").val());
-                 
-                $.each(data,function(key,value){
-                  console.log('id::'+$('#select2Basic').val());
-                  if($('#select2Basic').val()==value['p_id']){
-                   console.log(value['email']);
-                   $('#member_email').val(value['email']);
-                   $('#member_phone').val(value['phone_no']);
-                   $('#member_address').val(value['address']);
-                   $('#member_city').val(value['city']);
-                   $('#full_name_form').val(value['m_name']);
-                   }
-                });
-            
-            });
-        });
-    </script>
-
     <script>
 function edit(id)
 {
           const myOffcanvas = document.getElementById('exLargeModal');
           let a=new bootstrap.Modal(myOffcanvas);
-          var temp=document.getElementById('select2Basic');
-          var member_id=[];
-             for(i=0;i<temp.options.length;i++)
-                  {
-                    member_id[i]=temp.options[i].value;
-                  }
           a.show();
           $.ajax({
               url:"{{url('get_data')}}" +"/"+ id,
               type:'GET',
                 success:function(response){
                   var gender=response[0]['gender'];
-                  var sr_no=response[0]['m_id'];
+                  var community=response[0]['community'];
+                  $("#select2Basic").val(response[0]['m_name']);
+                  $("#full_name_form").val(response[0]['m_name']);
                   $("#age").val(response[0]['age']);
                   $("#member_address").val(response[0]['address']);
                   $("#subcommunity").val(response[0]['subcommunity']);
@@ -841,6 +811,7 @@ function edit(id)
                   if(gender=="FEMALE"){$("#FEMALE").attr('checked',true);}
                   $("#no_of_person_id").val(response[0]['no_of_person']);
                   $("#booking_id").val(response[0]['r_id']);
+                  $("#person_id").val(response[0]['person_id']);
                   $("#deposit-amount").val(response[0]['deposite_rs']);
                   $("#rupees-in-words").val(response[0]['rs_word']);
                   $("#no_of_days").val(response[0]['no_of_days']);
@@ -849,7 +820,6 @@ function edit(id)
                   $("#ac_amount").val(response[0]['ac_amount']);
                   $("#non_ac_amount").val(response[0]['non_ac_amount']);
                   $("#dmt_amount").val(response[0]['door_mt_amount']);
-                  /*301,201,2,5*/
                   var room=response[0]['room_list'];
                   var ArrNames =room .split(",");
                 
@@ -879,15 +849,14 @@ function edit(id)
                         {
                           $("#select2Multiple33 option[value=" + room + "]").attr('selected', 'selected');
                         }
-                      }
-                     
-                      
-                  member_id.forEach(myFunction)
+                      }   
+                    member_id.forEach(myFunction)
                     function myFunction(item, index, arr) {
-                        if((member_id[index])==sr_no)
+                        if((member_id[index])==community)
                         {
-                          $("#select2Basic option[value=" + sr_no + "]").attr('selected', 'selected');
+                          $("#select2Basic1 option[value=" + community + "]").attr('selected', 'selected');
                         }
+
                     }
 
                 }
@@ -952,9 +921,8 @@ $(document).ready(function () {
     let currentStep = 1;
  
     $(".btn-next").on("click", function() {
-      
       $(".rep-table").empty();
-      
+    
       const fullName = $('#full_name_form').val();
       const age = $('#member_age').val();
       const selectedGender = $('input[name="gender"]').val();
@@ -964,7 +932,7 @@ $(document).ready(function () {
       $('#members_age').text(age);
       $('#member_gen').text(selectedGender);
       $('#member_rel').text(relation);
-
+      
       $(".rep-table").append(
         '<tr>' +
         '<td>'+ '1' +'</td>' +
@@ -1010,11 +978,12 @@ $(document).ready(function () {
   $(document).ready(function() {
 
     $("#repeat-next").click(function() {
-      console.log("click");
+    
+
       let numForms = parseInt($("#no_of_person_id").val());
       // Clear previous forms if any
       $(".rep-form").empty();
-
+     
       // Clone and show the form templates
       //console.log('form:'.$('.reo-form').children());
       for (let i = 1; i < numForms; i++) {
@@ -1022,9 +991,14 @@ $(document).ready(function () {
         $(".rep-form").append(
 
           '<div class="row formrepeater">'+
+                                  '<div class="mb-3 col-lg-6 col-xl-3 col-12 mb-0" >'+
+                                      '<label class="form-label" for="form-repeater-1-1">member_id</label>'+
+                                      '<input type="text" id="m_id'+i+'" name="m_id[]" class="fom_age[]rm-control" placeholder="john doe" value="" readonly/>'+
+                                    '</div>'+
+
                                  ' <div class="mb-3 col-lg-6 col-xl-3 col-12 mb-0">'+
                                    ' <label class="form-label" for="form-repeater-1-1">Full Name</label>'+
-                                   ' <input type="text" id="full_name_form'+i+'" style="text-transform:uppercase" name="full_name[]" class="form-control" placeholder="john doe">'+
+                                   ' <input type="text" id="full_name_form'+i+'" style="text-transform:uppercase" name="full_name[]" class="form-control" placeholder="john doe" value="">'+
                                     
                                  ' </div>'+
                                  ' <div class="mb-3 col-lg-6 col-xl-3 col-12 mb-0">'+
@@ -1074,6 +1048,32 @@ $(document).ready(function () {
                                   '</div>'+
                                ' </div>'
         );
+
+        var id=document.getElementById("person_id").value;
+        var relation=[];
+        var temp=document.getElementById('member_relation');
+             for(i=0;i<temp.options.length;i++)
+                  {
+                    relation[i]=temp.options[i].value;
+                  }
+        $.ajax({
+            url:"{{url('get_memberdata')}}" +"/"+ id,
+            type:'GET',
+              success:function(response){
+                var len=response.length;
+               for(i=0;i<=len;i++)
+                {     
+                $('#m_id' + i).val(response[i]['p_id']);
+                $('#full_name_form' + i).val(response[i]['full_name']);
+                $('#member_age' + i).val(response[i]['age']);
+                var gender=response[i]['gender'];
+                var rel=response[i]['relation'];
+                $("#member_relation"+ i +" option[value=" + rel + "]").attr('selected', 'selected');
+                if(gender=="MALE"){$("#inlineRadio1_1").attr('checked',true);}
+                if(gender=="FEMALE"){$("#inlineRadio2_1").attr('checked',true);}
+                }
+              }
+            });
       }
 
       // Display the forms container

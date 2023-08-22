@@ -233,7 +233,10 @@
                                             <td>
                                                 <div class="d-inline-block">
                                                     <a href="javascript:;" class="btn btn-sm btn-icon item-edit" data-bs-toggle="offcanvas" data-bs-target="#offcanvasBackdropEditRoom" aria-controls="offcanvasBackdrop"><i class="text-primary ti ti-edit"></i></a>
-                                                    <a href="javascript:;" id="confirm-text" class="text-danger delete-record"><i class="ti ti-trash"></i></a>
+                                                    <a href="{{route('cancel_room', $row->room_no)}}" class="text-danger delete-record" >
+                                                        <i class="ti ti-trash"></i>
+                                                    </a>
+
                                                 </div>
                                             </td>
                                         </tr>
@@ -419,7 +422,6 @@
                                     <label class="form-label" for="multicol-phone">Status</label>
                                     <select class="form-select" id="exampleFormControlSelect1" aria-label="Default select example">
                                       <option selected>Select Status</option>
-                                      <option value="1">Booked</option>
                                       <option value="2">Canceled</option>
                                     </select>
                                   </div>

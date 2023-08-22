@@ -43,11 +43,14 @@ Route::get('/login', [AuthController::class, 'LoginUser'])->name('LoginUser');
 Route::POST('RoomBooking', [BookingController::class, 'RoomBooking'])->name('RoomBooking');
 Route::get('room-booking', [BookingController::class, 'index']);
 Route::POST('room-booking', [BookingController::class, 'add_member'])->name('room-booking');
+Route::get('cancel_room/{id}',[BookingController::class, 'cancel_room'])->name('cancel_room');
+
 
 // room checkout
 Route::get('view_room_booking', [BookingController::class, 'view_room_booking'])->name('view_room_booking');
 Route::post('update_room_booking', [BookingController::class, 'update_room_booking'])->name('update_room_booking');
 Route::get('get_data/{id}', [BookingController::class, 'get_data'])->name('get_data');
+Route::get('get_memberdata/{id}', [BookingController::class, 'get_memberdata'])->name('get_memberdata');
 Route::get('checkout', [BookingController::class, 'checkout'])->name('checkout');
 Route::POST('checkout1', [BookingController::class, 'add_checkout'])->name('add_checkout');
 Route::get('get_booking_data/{id}', [BookingController::class, 'get_booking_data'])->name('get_booking_data');
