@@ -130,7 +130,7 @@ div.card-datatable [class*=col-md-] {
                                               <td>{{$row->deposite_rs}}</td>
                                               <td>
                                                   <div class="d-inline-block">
-                                                    <a href=@if($row->status=='B')"{{route('pdf_CheckIn',$row->r_id)}}";@else "#"; @endif class="text-primary"><img src="./assets/icon/orange-eye.png" width="20px"></a>
+                                                    <a href=@if($row->status=='BOOKED')"{{route('pdf_CheckIn',$row->r_id)}}" @endif class="text-primary"><img src="./assets/icon/orange-eye.png" width="20px"></a>
 
                                                     <a onclick="edit({{$row->r_id}})" class="btn btn-sm btn-icon item-edit"><img src="./assets/icon/orange-edit.png" width="20px"></a>
 
@@ -529,8 +529,8 @@ div.card-datatable [class*=col-md-] {
                                                 <div data-repeater-item>
                                               
                                                 <div class="rep-form1">
-                                                    <div class="row formrepeater1">
-                                                      <div class="mb-3 col-lg-6 col-xl-3 col-12 mb-0">
+                                                    <div class="row formrepeater1" >
+                                                      <div class="mb-3 col-lg-6 col-xl-3 col-12 mb-0" hidden  >
                                                       <label class="form-label" for="form-repeater-1-1">member_id</label>
                                                       <input type="text" id="m_id" name="m_id[]" class="form-control" placeholder="john doe" value="" readonly/>
                                                     </div>
@@ -991,7 +991,7 @@ $(document).ready(function () {
         $(".rep-form").append(
 
           '<div class="row formrepeater">'+
-                                  '<div class="mb-3 col-lg-6 col-xl-3 col-12 mb-0" >'+
+                                  '<div class="mb-3 col-lg-6 col-xl-3 col-12 mb-0" hidden>'+
                                       '<label class="form-label" for="form-repeater-1-1">member_id</label>'+
                                       '<input type="text" id="m_id'+i+'" name="m_id[]" class="fom_age[]rm-control" placeholder="john doe" value="" readonly/>'+
                                     '</div>'+
@@ -1069,8 +1069,8 @@ $(document).ready(function () {
                 var gender=response[i]['gender'];
                 var rel=response[i]['relation'];
                 $("#member_relation"+ i +" option[value=" + rel + "]").attr('selected', 'selected');
-                if(gender=="MALE"){$("#inlineRadio1_1").attr('checked',true);}
-                if(gender=="FEMALE"){$("#inlineRadio2_1").attr('checked',true);}
+                if(gender=="MALE"){$("#inlineRadio1_"+i).attr('checked',true);}
+                if(gender=="FEMALE"){$("#inlineRadio2_"+i).attr('checked',true);}
                 }
               }
             });
