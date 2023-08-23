@@ -554,11 +554,11 @@ div.card-datatable [class*=col-md-] {
                                                       
                                                         <div class="form-check form-check-inline">
                                                             <input class="form-check-input" type="radio" name="gender" id="inlineRadio1" value="MALE" checked />
-                                                            <label class="form-check-label" for="inlineRadio1_${i}">Male</label>
+                                                            <label class="form-check-label" for="inlineRadio1">Male</label>
                                                         </div>
                                                         <div class="form-check form-check-inline">
                                                             <input class="form-check-input" type="radio" name="gender" id="inlineRadio2" value="FEMALE" />
-                                                            <label class="form-check-label" for="inlineRadio2_${i}">Female</label>
+                                                            <label class="form-check-label" for="inlineRadio2">Female</label>
                                                         </div>
                                                         <div class="mb-3 col-lg-6 col-xl-3 col-12 mb-0" >
                                                         <label class="form-label" for="form-repeater-1-2">gender</label>

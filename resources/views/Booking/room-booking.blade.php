@@ -1140,13 +1140,13 @@ $(document).ready(function () {
         let j=2;
         
         $(".rep-table").append(
-      '<tr>' +
-      '<td>'+ j +'</td>' +
-      '<td class="member_full_name' + i + '">' + $('#full_name_form' + i).val() + '</td>' +
-      '<td class="members_age' + i + '">' + $('#member_age' + i).val() + '</td>' +
-      '<td class="member_gen'+ i +'">' + $('input[name="gender'+i+'[]"]:checked').val() + '</td>' +
-      '<td class="member_rel' + i + '">' + $('#member_relation' + i).val() + '</td>' +
-      '</tr>'
+          '<tr>' +
+          '<td>'+ j +'</td>' +
+          '<td class="member_full_name' + i + '">' + $('#full_name_form' + i).val() + '</td>' +
+          '<td class="members_age' + i + '">' + $('#member_age' + i).val() + '</td>' +
+          '<td class="member_gen'+ i +'">' + $('input[name="gender'+i+'[]"]:checked').val() + '</td>' +
+          '<td class="member_rel' + i + '">' + $('#member_relation' + i).val() + '</td>' +
+          '</tr>'
     );
 
         
