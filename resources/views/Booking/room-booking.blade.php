@@ -126,7 +126,7 @@
                               
                               <div class="mb-3">
                                 <label class="form-label" for="multicol-phone">Phone Number</label>
-                                <input type="number" name="phone_no" id="multicol-phone" class="form-control phone-mask" placeholder="658 799 8941" required>
+                                <input type="number" name="phone_no" id="multicol-phone" class="form-control phone-mask" placeholder="658 799 8941"  maxlength="10" required oninput="javascript: if (this.value.length > 10) this.value = this.value.slice(0, 10);"/>
 
                               </div>
 
@@ -248,7 +248,9 @@
                               <div class="col-md-4">
                                 
                                 <label class="form-label" for="multicol-phone"><span class="required">Phone Number</span></label>
-                                <input type="number" id="member-phone" name="phone_no" class="form-control phone-mask" placeholder="658 799 8941" aria-label="658 799 8941" value="{{ (!empty($member)) ? $member->phone_no : '' }}"  pattern="[1-9]{1}[0-9]{9}" maxlength="10" required>
+                                <input type="number" id="member-phone" name="phone_no" class="form-control phone-mask" placeholder="658 799 8941" aria-label="658 799 8941" value="{{ (!empty($member)) ? $member->phone_no : '' }}"    maxlength="10"
+                              required
+                              oninput="javascript: if (this.value.length > 10) this.value = this.value.slice(0, 10);"/>
                               </div>
                               
 
