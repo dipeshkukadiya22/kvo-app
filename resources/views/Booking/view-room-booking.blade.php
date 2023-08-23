@@ -272,8 +272,13 @@ div.card-datatable [class*=col-md-] {
                                                 <div class="col-md-4">
                                                   <label for="select2Basic" class="form-label">Community</label>
                                                   <select id="select2Basic1" class="select2 form-select form-select-lg" name="community" data-allow-clear="true">
-                                                    <option value="Hindu">Hindu</option>
-                                                    <option value="Jain">Jain</option>
+                                                  <option value="Hindu" selected>Hindu</option>
+                                                  <option value="Jain">Jain</option>
+                                                  <option value="Isalam">Isalam</option>
+                                                  <option value="Sikh">Sikh</option>
+                                                  <option value="Budda">Budda</option>
+                                                  <option value="Other Religions">Other Religions</option>
+
                                                       
                                                   </select>
                                                 </div>
@@ -557,9 +562,12 @@ div.card-datatable [class*=col-md-] {
                                                             <input class="form-check-input" type="radio" name="gender" id="inlineRadio2" value="FEMALE" />
                                                             <label class="form-check-label" for="inlineRadio2_${i}">Female</label>
                                                         </div>
-
-
+                                                        <div class="mb-3 col-lg-6 col-xl-3 col-12 mb-0" >
+                                                        <label class="form-label" for="form-repeater-1-2">gender</label>
+                                                        <input type="text" id="gender_data" name="gender_data" class="form-control" placeholder="your age" value="MALE"/>
+                                                      </div>
                                                     </div>
+
                                                     <div class="col-md-4">
                                                       <label class="form-label" for="basic-default-country">Relation</label>
                                                       <select class="form-select" name="relation[]" id="member_relation" required>
@@ -909,8 +917,14 @@ $(document).ready(function () {
     });
     $('#FEMALE').change(function(){
       $("#inlineRadio2").attr('checked',true);
+      $("#gender_data").val("FEMALE");
+    });
+    $('#MALE').change(function(){
+      $("#inlineRadio1").attr('checked',true);
+      $("#gender_data").val("MALE");
     });
 });
+
 
 
 
@@ -938,7 +952,7 @@ $(document).ready(function () {
         '<td>'+ '1' +'</td>' +
         '<td id="member_full_name">' + $('#full_name_form').val() + '</td>' +
         '<td id="members_age">' + $('#member_age').val() + '</td>' +
-        '<td id="member_gen">' + $('input[name="gender"').val() + '</td>' +
+        '<td id="member_gen">' +  $('#gender_data').val() + '</td>' +
         '<td id="member_rel">' + $('#member_relation').val() + '</td>' +
         '</tr>'
       );
@@ -955,7 +969,7 @@ $(document).ready(function () {
           '<td>'+ j +'</td>' +
           '<td class="member_full_name' + i + '">' + $('#full_name_form' + i).val() + '</td>' +
           '<td class="members_age' + i + '">' + $('#member_age' + i).val() + '</td>' +
-          '<td class="member_gen' + i + '">' + $('input[name="gender'+i+'"]').val() + '</td>' +
+          '<td class="member_gen' + i + '">' + $('input[name="gender'+i+'[]"]:checked').val() + '</td>' +
           '<td class="member_rel' + i + '">' + $('#member_relation' + i).val() + '</td>' +
           '</tr>'
         );
@@ -964,7 +978,7 @@ $(document).ready(function () {
         // Setting text for elements in the loop using jQuery
         $('.member_full_name' + i).text($('#full_name_form' + i).val());
         $('.members_age' + i).text($('#member_age' + i).val());
-        $('.member_gen' + i).text($('input[name="gender'+i+'[]"]').val());
+        $('.member_gen' + i).text($('#gender'+i).val());
         $('.member_rel' + i).text($('#member_relation' + i).val());
         j++;
       }
