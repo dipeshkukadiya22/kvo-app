@@ -315,7 +315,7 @@
                                             <!-- Multiple Dates Picker-->
                                             <div>
                                               <label for="flatpickr-multi" class="form-label">Booked </label>
-                                              <input type="" class="form-control" placeholder="YYYY-MM-DD" id="flatpickr-multi" value="{{$book->check_in_date}}" />
+                                              <input type="date" class="form-control" placeholder="YYYY-MM-DD" id="flatpickr-multi" value="{{$book->check_in_date}}" />
                                             </div>
                                            <!-- /Multiple Dates Picker-->
                                           </td>
@@ -705,10 +705,10 @@
 });
 </script> -->
 <script>
-   jQuery(document).ready(function($){
+ /*  jQuery(document).ready(function($){
     var date1 = new Date('08/09/2023'); 
 
-var date2 = new Date('08/12/2023');
+    var date2 = new Date('08/12/2023');
 
 
 eventDates[date1] = date1;
@@ -723,7 +723,37 @@ eventDates[date2] = date2;
             }
          }
       });
-   });
+   });*/
+   
+
+  jQuery(document).ready(function($){
+
+    const flatpickrInstance = flatpickr("#cal", {
+    enableTime: true,
+    dateFormat: "d-m-Y",
+    onDayCreate: function(dObj, dStr, fp, dayElem) {
+      // Check if the current day is booked and apply a custom class
+      if (bookedDates.some(bookedDate => isSameDay(dObj, bookedDate))) {
+        dayElem.classList.add('booked-day');
+      }
+    }
+  });
+
+  var eventDates = {};
+  eventDates[ new Date( '08/09/2023' )] = new Date( '08/09/2023' );
+  eventDates[ new Date( '08/12/2023' )] = new Date( '08/12/2023' );
+
+  $('#cal').datepicker({
+        beforeShowDay: function( date ) {
+            var highlight = eventDates[date];
+            if( highlight ) {
+                 return [true, "event", 'Tooltip text'];
+            } else {
+                 return [true, '', ''];
+            }
+        }
+    });
+  });
 </script>
  
 

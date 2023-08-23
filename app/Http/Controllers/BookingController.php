@@ -294,8 +294,8 @@ class BookingController extends Controller
         $details->community = $req->community;
         $details->subcommunity = strtoupper($req->subcommunity);
         $details->gender = $req->inlineRadioOptions;
-        dd($req->id_proof);
-        $details->id_proof=$req->id_proof;
+       
+        //$details->id_proof=$req->id_proof;
         $details->occupation=$req->occupation;
         $details->reason=$req->reason;
         $details->save();
@@ -338,12 +338,13 @@ class BookingController extends Controller
 
     public function cancel_room($id) {
         $room = add_room::find($id);
-    
         if (!$room) {
             return redirect() -> route('room-list') ;
         }
         $room->status = 0;
         $room->room_detail_id = 0;
         $room->save();
+        return back();
     }
+    
 }
