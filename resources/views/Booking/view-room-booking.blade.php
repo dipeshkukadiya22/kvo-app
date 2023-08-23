@@ -106,7 +106,7 @@ div.card-datatable [class*=col-md-] {
                                               <tr>
                                                 <th>બુકિંગ નં.</th>
                                                 <th>નામ</th>
-                                       
+                                                <th>Status</th>
                                                 <th>રૂમ નંબર </th>
                                                 <th>આગમન તારીખ / સમય</th>
                                                 <th>ચેક આઉટ તારીખ / સમય</th>
@@ -121,7 +121,7 @@ div.card-datatable [class*=col-md-] {
                                              <input type="hidden" class="id" value="{{$row->r_id}}">
                                              <td>{{$row->r_id}}</td>
                                               <td>{{$row->m_name}}</td>
-                                         
+                                              <td>{{$row->status}}</td>
                                               <td>{{$row->room_list}}</td>
                                               <td>{{date("d-m-Y",strtotime($row->check_in_date))}}</td>
                                               <td>{{date("d-m-Y",strtotime($row->check_in_date . '+' .$row->no_of_days . 'days'))}}</td>
