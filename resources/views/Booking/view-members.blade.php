@@ -99,9 +99,11 @@
                                               
                                               <td>
                                                 <div class="d-inline-block">
-                                                <a onclick="edit({{$row->p_id}})"  class="btn btn-sm btn-icon item-edit" aria-controls="offcanvasBackdrop"><i class="text-primary ti ti-edit"></i></a>
+                                                <a onclick="edit({{$row->p_id}})"  class="btn btn-sm btn-icon item-edit" aria-controls="offcanvasBackdrop"><img src="./assets/icon/orange-edit.png" width="20px"></a>
                                                 
-                                                <a  class="text-danger delete-record"><i class="ti ti-trash"></i></a>
+                                               
+                                                <a onclick="delete_member({{$row->p_id}})" class="text-danger delete-record"><img src="./assets/icon/orange-trash.png" width="20px"></a>
+                                                  
                                                 </div>
                                               </td>
                                             </tr>
@@ -371,36 +373,27 @@
 <script>
  function edit(id)
 {  
-  alert(id);
-      const myOffcanvas = document.getElementById('offcanvasBackdrop');
+     const myOffcanvas = document.getElementById('offcanvasBackdrop');
       let a=new bootstrap.Offcanvas(myOffcanvas);
       a.show();
-    
-                var id=$(this).closest("tr").find(".id").val();
                 $.ajax({
-                    url:"{{url('edit_members')}}" +"/"+ id,
+                    url:"{{url('/edit_members')}}" +"/"+ id,
                     type:'GET',
                       success:function(response){
-                        alert(response[0]['p_id']);
-                           /* $("#p_id").val(response['p_id']);
-                            $("#m_name1").val(response['m_name']);
-                            $("#email1").val(response['email']);
-                            $("#phone_no1").val(response['phone_no']);
-                            $("#city1").val(response['city']);  */
+                            $("#p_id").val(response[0]['p_id']);
+                            $("#m_name1").val(response[0]['m_name']);
+                            $("#email1").val(response[0]['email']);
+                            $("#phone_no1").val(response[0]['phone_no']);
+                            $("#city1").val(response[0]['city']);  
                           }
                         });
              
       }
 </script>
 <script>
-    // Get all elements with class "delete-record"
-    const deleteLinks = document.querySelectorAll(".delete-record");
-    // Loop through each delete link and attach a click event listener
-    deleteLinks.forEach(link => {
-        link.addEventListener("click", function() {
-            // Show a confirmation dialog using SweetAlert2
-            var id=$(this).closest("tr").find(".id").val();
-            Swal.fire({
+function delete_member(id)
+{    
+           Swal.fire({
                 title: "Are you sure?",
                 text: "You won't be able to revert this!",
                 icon: "warning",
@@ -425,9 +418,7 @@
                         });
                 }
             });
-        });
-    });
-
+          }
     $("#update_submit").click(function(){
         var email=document.getElementById("email1").value;
         var phone=document.getElementById("phone_no1").value;
