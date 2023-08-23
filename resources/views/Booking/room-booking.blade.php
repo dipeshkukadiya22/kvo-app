@@ -220,7 +220,7 @@
                       </div>
                     </div>
                     <div class="bs-stepper-content">
-                     <form action="{{route('RoomBooking')}}" method="POST" id="room_booking">
+                     <form class="browser-default-validation" action="{{route('RoomBooking')}}" method="POST" id="room_booking">
                         @csrf
                         <!-- Account Details -->
                         <div id="account-details" class="content">
@@ -231,7 +231,7 @@
                             
                               <!-- Basic -->
                              <div class="col-md-4">
-                                <label for="select2Basic" class="form-label" ><span class="required">Name</span></label>
+                                <label for="select2Basic" class="form-label"><span class="required">Name</span></label>
                                 <select id="select2Basic" class="select2 form-select" data-allow-clear="true" name="name" placeholder="select name" required>
                                   <option value=""></option>
                                   @foreach ($m_data as $row)  
@@ -241,20 +241,19 @@
                                 
                                 <input type="hidden" id="email_user" value="{{!empty($m_data)  ? $m_data:''}}">
                               </div>
+                              
+
     
                               <div class="col-md-4">
-                            
-                                  <label class="form-label " for="basic-default-email" >
-                                    <span class="required">Email</span></label>
-                                  <input type="email" id="member_email" name="email" class="form-control" placeholder="john.doe" value="{{ (!empty($member) )? $member->email : '' }}" required/>
-
-                              </div>                                                                                                            
-
+                            <label class="form-label" for="basic-default-email">Email</label>
+                            <input type="email" id="member_email" name="email" class="form-control" placeholder="john.doe" value="{{ (!empty($member)) ? $member->email : '' }}" required>
+                            <div class="error-message" id="email-error-message"></div>
+                          </div>
     
                               <div class="col-md-4">
                                 
                                 <label class="form-label" for="multicol-phone" required>Phone Number</label>
-                                <input type="number" id="member-phone" name="phone_no" class="form-control phone-mask" placeholder="658 799 8941" aria-label="658 799 8941" value="{{ (!empty($member)) ? $member->phone_no : '' }}"  pattern="[1-9]{1}[0-9]{9}" maxlength="10" required/>
+                                <input type="number" id="member-phone" name="phone_no" class="form-control phone-mask" placeholder="658 799 8941" aria-label="658 799 8941" value="{{ (!empty($member)) ? $member->phone_no : '' }}"  pattern="[1-9]{1}[0-9]{9}" maxlength="10" required>
                               </div>
                               
 
@@ -326,7 +325,7 @@
                                 <i class="ti ti-arrow-right"></i>
                               </div> --}}
 
-                              <button type="button" class="btn btn-primary btn-next">
+                              <button type="button" class="btn btn-primary btn-next" id="btn-step1">
                                 <span class="align-middle d-sm-inline-block d-none me-sm-1">Next</span>
                                 <i class="ti ti-arrow-right"></i>
                               </button>
@@ -1294,8 +1293,75 @@ contactInput.addEventListener('input', function () {
     this.setCustomValidity('');
   }
 });
-
 </script>
+<!-- <script>
+document.addEventListener('DOMContentLoaded', function() {
+  // Get reference to the "Next" button
+  const nextButton = document.getElementById('btn-step1');
+
+  // Add click event listener to the "Next" button
+  nextButton.addEventListener('click', function() {
+    // Get the email field
+    const emailField = document.getElementById('member_email');
+
+    // Check if the email field is empty
+    if (emailField.value.trim() === '') {
+      const errorMsg = "Email field is required.";
+      
+    }
+  });
+});
+</script> -->
+<script>
+$(document).ready(function() {
+  $(".btn-next").click(function() {
+
+  const nextButton = document.getElementById("btn-step1"); // Get the "Next" button
+
+
+    const emailErrorMessage = document.getElementById('email-error-message'); 
+    const emailField = document.getElementById('member_email'); // Get the email input field
+   // Get the error message container
+
+    if (emailField.value.trim() === '') {
+      emailField.classList.add('required-input'); // Apply red border style
+      emailErrorMessage.textContent = 'Please fill in this field.'; // Display error message
+      emailField.focus(); // Focus on the empty field
+      event.preventDefault(); // Prevent form submission
+    }
+    
+  });
+});
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 @endsection
 
 @endsection
