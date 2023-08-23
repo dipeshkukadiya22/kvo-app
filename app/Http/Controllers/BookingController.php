@@ -255,6 +255,20 @@ class BookingController extends Controller
         $data=DB::SELECT("SELECT *,add_members.p_id as m_id,room_details.member_id as person_id from room_details join personal_details on personal_details.p_id=room_details.member_id join add_members on personal_details.member_id=add_members.p_id WHERE r_id='$id'");
         return $data;   
     }
+    public function get_roomdata($id)
+    {
+        $data=DB::SELECT("SELECT * FROM `add_room` WHERE room_no='$id'");
+        return $data;   
+    }
+    public function update_roomdata(Request $req) 
+    {
+        $room=add_room::find($req->room_no);
+        $room->room_name=$req->room_name;
+        $room->room_type=$req->room_type;
+        $room->room_facility=$req->room_facility;
+        $room->save();
+        return back();
+    }
     public function get_memberdata($id)
     {
         $data=DB::SELECT("SELECT * FROM `member_details` WHERE personal_detail_id='$id'");

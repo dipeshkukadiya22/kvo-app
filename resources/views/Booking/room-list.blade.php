@@ -219,10 +219,6 @@
                                             @if ($row->status == 1)
                                             <div>
                                             <label for="flatpickr-multi" id="cal" class="form-label text-danger">Booked</label>
-
-                                         
-                                       
-                                         
                                       </div>
                                         @else
                                             <span class="text-success">{{$row->status == 0 ? 'Available' : ''}}</span>
@@ -232,7 +228,8 @@
                                           </td>
                                             <td>
                                                 <div class="d-inline-block">
-                                                    <a href="javascript:;" class="btn btn-sm btn-icon item-edit" data-bs-toggle="offcanvas" data-bs-target="#offcanvasBackdropEditRoom" aria-controls="offcanvasBackdrop"><i class="text-primary ti ti-edit"></i></a>
+                                                    <a onclick="edit({{$row->room_no}})" class="btn btn-sm btn-icon item-edit"><img src="./assets/icon/orange-edit.png" width="20px"></a>
+                                                   
                                                     <a href="{{route('cancel_room', $row->room_no)}}" class="text-danger delete-record" >
                                                         <i class="ti ti-trash"></i>
                                                     </a>
@@ -398,48 +395,51 @@
                               <div class="offcanvas-body mx-0 flex-grow-0">
 
                                 <!-- Browser Default -->
-                                <form class="browser-default-validation">
+                                <form id="kvo_edit_roomdata" method="POST" action="{{route('update_roomdata')}}">
+                                <div class="mb-3">
+                                    <label class="form-label" for="basic-default-name">Room No</label>
+                                    @csrf
+                                    <input
+                                      type="text"
+                                      class="form-control"
+                                      id="room_no"
+                                      name="room_no"
+                                      readonly
+                                      />
+                                  </div>
                                   <div class="mb-3">
                                     <label class="form-label" for="basic-default-name">Room Name</label>
                                     <input
                                       type="text"
                                       class="form-control"
-                                      id="basic-default-name"
-                                      placeholder="John Doe"
+                                      id="room_name"
+                                      name="room_name"
+                                      />
+                                  </div>
+                                  <div class="mb-3">
+                                    <label class="form-label" for="basic-default-name">Room Type</label>
+                                    <input
+                                      type="text"
+                                      class="form-control"
+                                      id="room_type"
+                                      name="room_type"
                                       />
                                   </div>
                                   <div class="mb-3">
                                     <label class="form-label" for="basic-default-email">Room Facility</label>
                                     <input
-                                      type="email"
-                                      id="basic-default-email"
+                                      type="text"
+                                      id="room_facility"
+                                      name="room_facility"
                                       class="form-control"
-                                      placeholder="john.doe"
+                                
                                       />
                                   </div>
-
-                                  <div class="mb-3">
-                                    <label class="form-label" for="multicol-phone">Status</label>
-                                    <select class="form-select" id="exampleFormControlSelect1" aria-label="Default select example">
-                                      <option selected>Select Status</option>
-                                      <option value="2">Canceled</option>
-                                    </select>
-                                  </div>
-
-                                  <!-- Range Picker-->
-                                  <div class="col-md-12 col-12 mb-4">
-                                    <label for="flatpickr-range" class="form-label">Date Update</label>
-                                    <input
-                                      type="text"
-                                      class="form-control"
-                                      placeholder="MM-DD-YYYY to MM-DD-YYYY"
-                                      id="flatpickr-range" />
-                                  </div>
-                                  <!-- /Range Picker-->
+                                
 
                                   <div class="row">
                                     <div class="col-12">
-                                      <button type="button" class="btn btn-primary mb-2 d-grid w-100">Submit</button>
+                                      <button type="submit" class="btn btn-primary mb-2 d-grid w-100">Submit</button>
                                       <button
                                         type="button"
                                         class="btn btn-label-secondary d-grid w-100"
@@ -755,7 +755,25 @@ eventDates[date2] = date2;
     });
   });
 </script>
- 
+ <script>
+  function edit(id)
+  {
+    const myOffcanvas = document.getElementById('offcanvasBackdropEditRoom');
+          let a=new bootstrap.Offcanvas(myOffcanvas);
+          a.show();
+          $("#room_name").val("61234");
+          $.ajax({
+              url:"{{url('get_roomdata')}}" +"/"+ id,
+              type:'GET',
+                success:function(response){
+                  $("#room_name").val(response[0]['room_name']);
+                  $("#room_facility").val(response[0]['room_facility']);
+                  $("#room_no").val(response[0]['room_no']);
+                  $("#room_type").val(response[0]['room_type']);
+                }
+              });
+  }
+  </script>
 
 
 
