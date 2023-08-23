@@ -25,7 +25,7 @@ class BookingController extends Controller
 
     public function RoomBooking(Request $req)
     {
-        dd($req->toArray());
+       
         $m_name =(personal_details::get()->last()->m_name);
         $p_details=personal_details::with('member')->get();
         $data = personal_details::find($req->p_id);
@@ -59,13 +59,14 @@ class BookingController extends Controller
         $booking->no_of_person = $req->no_of_person;
         $booking->check_in_date = date("Y-m-d H:i",strtotime($req->check_in_date));
     
-        $acRoomList = implode(',', array_filter($req->input('select2Multiple1', [])));
-        $nonAcRoomList = implode(',', array_filter($req->input('select2Multiple2', [])));
-        $doorMetricRoomList = implode(',', array_filter($req->input('select2Multiple3', [])));
+        $acRoomList = array_filter($req->input('select2Multiple1', []));
+        $nonAcRoomList = array_filter($req->input('select2Multiple2', []));
+        $doorMetricRoomList = array_filter($req->input('select2Multiple3', []));
         
+        $combinedList = array_merge($acRoomList, $nonAcRoomList, $doorMetricRoomList);
+        $filteredCombinedList = array_filter($combinedList);
         
-        //dd($acRoomList);
-        $booking->room_list = "$acRoomList,$nonAcRoomList,$doorMetricRoomList";
+        $booking->room_list = implode(',', $filteredCombinedList);
         $booking->ac_amount = $req->ac_amount;
         $booking->non_ac_amount = $req->non_ac_amount;
         $booking->door_mt_amount = $req->door_mt_amount;
@@ -74,13 +75,13 @@ class BookingController extends Controller
         $booking->no_of_days = $req->no_of_days;
         $booking->member_id=$personal_details_id;
         if(date("Y-m-d",strtotime($req->check_in_date)) == date("Y-m-d")) {
-            $booking->status="B";
+            $booking->status="BOOKED";
             $booking->booking_type="REGULAR";}
         else{
             
             $booking->advance_date= date("Y-m-d H:i",strtotime($req->check_in_date));
-            $booking->status="A";
-            $booking->booking_type="A";}
+            $booking->status="ADVANCE";
+            $booking->booking_type="ADVANCE";}
         
     
         $booking->save();
@@ -129,10 +130,10 @@ class BookingController extends Controller
 
         $m_data=add_members::all();
         $ar_list= DB::select("SELECT *, add_room.room_no as id FROM add_room WHERE add_room.status = 0");
-        //dd($ar_list);
+
         $r_list = DB::select("SELECT add_room.*, room_details.check_in_date, room_details.* FROM add_room LEFT JOIN room_details ON add_room.room_no = room_details.r_id WHERE add_room.status = 1");
    
-        return view('Booking.room-booking',['a_list'=>$ar_list,'member'=>$member,'m_data'=>$m_data,'p_details'=>$p_details,'r_list'=>$r_list,'depositeno'=>$depositeno]);
+        return back();
     }
     
    
@@ -257,7 +258,7 @@ class BookingController extends Controller
         return response()->json($data);   
     }
     public function view_room_booking(){
-        $checkout= DB::select("SELECT * FROM room_details join personal_details on personal_details.p_id=room_details.member_id join add_members on add_members.p_id=personal_details.member_id where room_details.status='B' or room_details.status='A'");
+        $checkout= DB::select("SELECT * FROM room_details join personal_details on personal_details.p_id=room_details.member_id join add_members on add_members.p_id=personal_details.member_id where room_details.status='BOOKED' or room_details.status='ADVANCE'");
         $member = add_members::all();
         $ar_list= DB::select("SELECT *, add_room.room_no as id FROM add_room");
         return view('Booking.view-room-booking',['checkout'=>$checkout,'member'=>$member,'a_list'=>$ar_list]);
@@ -268,11 +269,14 @@ class BookingController extends Controller
         $booking->no_of_person = $req->no_of_person_id;
         $booking->check_in_date = date("Y-m-d H:i",strtotime($req->check_in_date));
         
-        $acRoomList = implode(',', $req->input('select2Multiple1', []));
-        $nonAcRoomList = implode(',', $req->input('select2Multiple2', []));
-        $doorMetricRoomList = implode(',', $req->input('select2Multiple3', []));
-
-        $booking->room_list = "$acRoomList,$nonAcRoomList,$doorMetricRoomList";
+        $acRoomList = array_filter($req->input('select2Multiple1', []));
+        $nonAcRoomList = array_filter($req->input('select2Multiple2', []));
+        $doorMetricRoomList = array_filter($req->input('select2Multiple3', []));
+        
+        $combinedList = array_merge($acRoomList, $nonAcRoomList, $doorMetricRoomList);
+        $filteredCombinedList = array_filter($combinedList);
+        
+        $booking->room_list = implode(',', $filteredCombinedList);
         $booking->ac_amount = $req->ac_amount;
         $booking->non_ac_amount = $req->non_ac_amount;
         $booking->door_mt_amount = $req->dmt_amount;

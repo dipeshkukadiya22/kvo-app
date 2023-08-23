@@ -121,7 +121,7 @@ div.card-datatable [class*=col-md-] {
                                              <input type="hidden" class="id" value="{{$row->r_id}}">
                                              <td>{{$row->r_id}}</td>
                                               <td>{{$row->m_name}}</td>
-                                              @if($row->status=="A")<td>ADVANCE</td>@else<td>BOOKED</td> @endif
+                                              <td></td>
                                               <td>{{$row->room_list}}</td>
                                               <td>{{date("d-m-Y",strtotime($row->check_in_date))}}</td>
                                               <td>{{date("d-m-Y",strtotime($row->check_in_date . '+' .$row->no_of_days . 'days'))}}</td>
