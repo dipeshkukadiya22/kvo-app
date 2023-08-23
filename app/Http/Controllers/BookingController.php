@@ -68,11 +68,11 @@ class BookingController extends Controller
         $member->m_name = strtoupper($req->m_name);
         $member->email = $req->email;
         $member->phone_no = $req->phone_no;
-        $member->city = $req->city;
-        $member->address = strtoupper($req->address);
+        $member->city = strtoupper($req->city);
+       
         $member->save();
         $m_data=add_members::all();
-        return view('Booking.room-booking',['member'=>$member,'m_data'=>$m_data,'p_details'=>$p_details]);
+        return back();
     }
     
    

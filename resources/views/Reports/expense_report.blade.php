@@ -55,6 +55,7 @@ button.swal2-cancel.btn.btn-label-danger {
 /* Increase the width of th and td elements in the DataTable */
 .datatables-basic th, .datatables-basic td {
     min-width: 85px;
+   
 }
 
 div.card-datatable [class*=col-md-] {
@@ -163,11 +164,11 @@ div.card-datatable [class*=col-md-] {
                                                     <th id="display_category" colspan="5" style="text-align:center;"></th>
                                                   </tr>
                                                     <tr>
-                                                        <th>વાઉચર</th>
-                                                        <th>નામ</th>
-                                                        <th>તારીખ</th>
-                                                        <th>રકમ</th>
-                                                        <th>વિગત</th>
+                                                        <th>Voucher</th>
+                                                        <th>Name</th>
+                                                        <th>Date</th>
+                                                        <th>Amount</th>
+                                                        <th>Details</th>
                                                     </tr>
                                                 </thead>
                                                 @foreach($expense as $row)
@@ -241,6 +242,7 @@ div.card-datatable [class*=col-md-] {
         
       dom: '<"card-header flex-column flex-md-row"<"head-label text-center"><"dt-action-buttons text-end pt-3 pt-md-0"B>><"row"<"col-sm-12 col-md-6"l><"col-sm-12 col-md-6 d-flex justify-content-center justify-content-md-end"f>>t<"row"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>',
       displayLength: 7,
+      order : [0,'desc'],
       lengthMenu: [7, 10, 25, 50, 75, 100],
       buttons: [
         {

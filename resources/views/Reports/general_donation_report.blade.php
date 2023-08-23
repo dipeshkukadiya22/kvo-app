@@ -153,14 +153,16 @@ div.card-datatable [class*=col-md-] {
                                                 <table id="DataTables_Table_0" class="datatables-basic table">
                                                 <thead>
                                                     <tr>
-                                                        <th>નામ</th>
-                                                        <th>તારીખ</th>
-                                                        <th>હસ્તે</th>
-                                                        <th>વિગત</th>
+                                                        <th>Re No</th>
+                                                        <th>Name</th>
+                                                        <th>Date</th>
+                                                        <th>Haste</th>
+                                                        <th>Details</th>
                                                     </tr>
                                                 </thead>
                                                 @foreach($donation as $row)
                                                 <tr>
+                                                        <td>{{$row->depo_id}}</td>
                                                         <td>{{$row->m_name}}</td>
                                                         <td>{{Date("d-m-Y",strtotime($row->date))}}</td>
                                                         <td>{{$row->haste}}</td>
@@ -229,6 +231,7 @@ div.card-datatable [class*=col-md-] {
         
       dom: '<"card-header flex-column flex-md-row"<"head-label text-center"><"dt-action-buttons text-end pt-3 pt-md-0"B>><"row"<"col-sm-12 col-md-6"l><"col-sm-12 col-md-6 d-flex justify-content-center justify-content-md-end"f>>t<"row"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>',
       displayLength: 7,
+      order : [0,'desc'],
       lengthMenu: [7, 10, 25, 50, 75, 100],
       buttons: [
         {
@@ -241,7 +244,7 @@ div.card-datatable [class*=col-md-] {
               text: '<i class="ti ti-printer me-1" ></i>Print',
               className: 'dropdown-item',
               exportOptions: {
-                columns: [0,1 ,2, 3],
+                columns: [0,1 ,2, 3,4],
                 // prevent avatar to be display
                 format: {
                   body: function (inner, coldex, rowdex) {
@@ -278,7 +281,7 @@ div.card-datatable [class*=col-md-] {
               text: '<i class="ti ti-file-text me-1" ></i>Csv',
               className: 'dropdown-item',
               exportOptions: {
-                columns: [0,1 ,2, 3],
+                columns: [0,1 ,2, 3,4],
                 // prevent avatar to be display
                 format: {
                   body: function (inner, coldex, rowdex) {
@@ -302,7 +305,7 @@ div.card-datatable [class*=col-md-] {
               text: '<i class="ti ti-file-spreadsheet me-1"></i>Excel',
               className: 'dropdown-item',
               exportOptions: {
-                columns: [0,1 ,2, 3],
+                columns: [0,1 ,2, 3,4],
                 // prevent avatar to be display
                 format: {
                   body: function (inner, coldex, rowdex) {
@@ -326,7 +329,7 @@ div.card-datatable [class*=col-md-] {
               text: '<i class="ti ti-file-description me-1"></i>Pdf',
               className: 'dropdown-item',
               exportOptions: {
-                columns: [0,1 ,2, 3],
+                columns: [0,1 ,2, 3,4],
                 // prevent avatar to be display
                 format: {
                   body: function (inner, coldex, rowdex) {

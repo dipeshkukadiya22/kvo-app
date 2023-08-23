@@ -6,6 +6,7 @@
 
   <!-- Vendors CSS -->
   <link rel="stylesheet" href="{{ asset ('assets/vendor/libs/flatpickr/flatpickr.css') }}" />
+  <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.0/themes/base/jquery-ui.css">
 
   <!-- Page CSS --> 
   <style>
@@ -77,11 +78,11 @@
                     </div>
                     <div class="col-md-4">
                       <label class="form-label" for="multicol-phone">દર્દીના મોબાઇલ નં </label>
-                      <input type="number" id="phone" class="form-control phone-mask" placeholder="658 799 8941" aria-label="658 799 8941" readonly>
+                      <input type="number" id="phone" class="form-control phone-mask" placeholder="658 799 8941" aria-label="658 799 8941" readonly >
                     </div>
                     <div class="col-md-4">
                       <label for="flatpickr-date" class="form-label">તારીખ </label>
-                      <input type="date" class="form-control" placeholder="DD-MM-YYYY" id="date" name="date" />
+                      <input type="date" class="form-control flatpickr-validation" id="date" name="date" value="@php echo date('Y-m-d');@endphp" />
                     </div>
                     <div class="col-md-4">
                       <label class="form-label" for="multicol-username">ડોક્ટરનું નામ </label>
@@ -93,7 +94,7 @@
                     </div>
                     <div class="col-md-4">
                       <label class="form-label" for="collapsible-address">વિશેષ નોંધ </label>
-                      <textarea name="remark" class="form-control" id="remark" rows="1" placeholder="Hello,"></textarea>
+                      <textarea name="remark" class="form-control" id="remark" rows="1" style="text-transform:capitalize" placeholder="Hello,"></textarea>
                     </div>
                     <div class="col-md-4">
                       <label class="form-label" for="multicol-phone">રૂપિયા </label>
@@ -152,23 +153,15 @@
 <script src="{{ asset('assets/vendor/libs/bootstrap-daterangepicker/bootstrap-daterangepicker.js') }}"></script>
 <script src="{{ asset('assets/vendor/libs/jquery-timepicker/jquery-timepicker.js') }}"></script>
 <script src="{{ asset('assets/vendor/libs/pickr/pickr.js') }}"></script>
-
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
 
 <!-- Page JS -->
 
 <script src="{{ asset('assets/js/forms-pickers.js') }}"></script>
 
 
-<script>
-  jQuery(document).ready(function($){
-    var currentDateTime = new Date();
-
-    $('#date').flatpickr({
-      enableTime: true,
-      dateFormat: "d-m-Y",
-      defaultDate: currentDateTime
-    });
-
+    <script>
     $("#name").change(function(){
       const id=document.getElementById("name").value;
       $.ajax({
@@ -193,8 +186,9 @@
       $("#upi").change(function(){
         document.getElementById("payment").value="UPI";
       });
-          });
+        
   </script>
+
 
 <!-- start num to word -->
 <script  type="text/javascript">
@@ -315,6 +309,23 @@ function NumToWord(inputNumber, outputControl) {
 }
 </script>
 <!-- end num to word -->
+
+<script>
+  $(document).ready(function () {
+      $("#select2Basic").change(function () {
+          var data = JSON.parse($("#email_user").val());
+          var selectedId = $(this).val();
+          
+          $.each(data, function (key, value) {
+              if (value['m_name'] == selectedId) {
+                  $('#member-phone').val(value['phone_no']);
+                  $('#member_city').val(value['city']);
+                  return false; // Exit the loop once a match is found
+              }
+          });
+      });
+  });
+</script>
 
 
 @endsection

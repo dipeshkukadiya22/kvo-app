@@ -153,17 +153,17 @@ div.card-datatable [class*=col-md-] {
                                                 <table id="DataTables_Table_0" class="datatables-basic table">
                                                 <thead>
                                                     <tr>
-                                                        <th>નામ</th>
-                                                        <th>તારીખ</th>
-                                                        <th>શેઠશ્રી રતનશી ટોકરશી વોરા મેડિકલ ચેકઅપ સેન્ટર</th>
-                                                        <th>મહાજનનું મામેરું</th>
-                                                        <th>માતુશ્રી લાખણીબાઈ રામજી તેજશી ગાલા નવનીત ભોજનશાળા</th>
-                                                        <th>શૈક્ષણિક</th>
-                                                        <th>લવાજમ</th>
-                                                        <th>ઑક્સીજન ડોનેશન</th>
-                                                        <th>એમ્બ્યુલન્સ ડોનેશન</th>
-                                                        <th>ઈતર</th>
-                                                        <th>ટોટલ</th>
+                                                        <th>Name</th>
+                                                        <th>Date</th>
+                                                        <th> Medical Checkup center</th>
+                                                        <th>Mahajan Mameru</th>
+                                                        <th>Navnit Bhojanshala</th>
+                                                        <th>Educational</th>
+                                                        <th>Lavajam</th>
+                                                        <th>Oxygen Donation</th>
+                                                        <th>Ambulance Donation</th>
+                                                        <th>Other</th>
+                                                        <th>Total</th>
                                                     </tr>
                                                 </thead>
                                                 <tr>
@@ -256,6 +256,7 @@ div.card-datatable [class*=col-md-] {
         
       dom: '<"card-header flex-column flex-md-row"<"head-label text-center"><"dt-action-buttons text-end pt-3 pt-md-0"B>><"row"<"col-sm-12 col-md-6"l><"col-sm-12 col-md-6 d-flex justify-content-center justify-content-md-end"f>>t<"row"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>',
       displayLength: 7,
+      order : [0,'desc'],
       lengthMenu: [7, 10, 25, 50, 75, 100],
       buttons: [
         {

@@ -162,24 +162,24 @@ div.card-datatable [class*=col-md-] {
                                                 <table id="DataTables_Table_0" class="datatables-basic table">
                                                 <thead>
                                                     <tr>
-                                                        <th>નામ</th>
-                                                        <th>તારીખ</th>
-                                                        <th>હસ્તે</th>
-                                                        <th>શ્રી સર્વ સાધારણ ખાતે</th>
-                                                        <th>શ્રી જીવદયા ખાતે</th>
-                                                        <th>શ્રી સાધુ સાધ્વી વૈયાવચ્છ ખાતે</th>
-                                                        <th>શ્રી સાધર્મિક ખરડા ખાતે</th>
-                                                        <th>શ્રી ચાતુર્માસ ખરડા ખાતે</th>
-                                                        <th>શ્રી કાયમી તિથી ફંડ ખાતે</th>
-                                                        <th>શ્રી દેવદ્રવ્ય ખાતે</th>
-                                                        <th>શ્રી કેસર સુખડ ખાતે</th>
-                                                        <th>શ્રી ધુપ-દીપ ખાતે</th>
-                                                        <th>શ્રી સ્નાત્ર પૂજા ખાતે</th>
-                                                        <th>શ્રી આંગી પૂજા ખાતે</th>
-                                                        <th>શ્રી મોટી પૂજા ખાતે</th>
-                                                        <th>શ્રી ધૃતની બોલી ખાતે</th>
-                                                        <th>શ્રી અન્ય ખાતે</th>
-                                                        <th>ટોટલ</th>
+                                                        <th>Name</th>
+                                                        <th>Date</th>
+                                                        <th>Haste</th>
+                                                        <th>Sarv sadharan </th>
+                                                        <th>Jivdaya </th>
+                                                        <th>Sadhu Sadhvi</th>
+                                                        <th>Sadharmik Kharda </th>
+                                                        <th>Chaaturmash</th>
+                                                        <th>Kayami Tithi</th>
+                                                        <th>Devdravya</th>
+                                                        <th>Kesar Sukhad </th>
+                                                        <th>Dhup-Dip</th>
+                                                        <th>Snatra Pooja</th>
+                                                        <th>Angi Aangi-Pooja</th>
+                                                        <th>Moti Pooja</th>
+                                                        <th>Dhrut Boli</th>
+                                                        <th>Other</th>
+                                                        <th>Total</th>
                                                     </tr>
                                                 </thead>
                                                 <tr>
@@ -280,6 +280,7 @@ div.card-datatable [class*=col-md-] {
         
       dom: '<"card-header flex-column flex-md-row"<"head-label text-center"><"dt-action-buttons text-end pt-3 pt-md-0"B>><"row"<"col-sm-12 col-md-6"l><"col-sm-12 col-md-6 d-flex justify-content-center justify-content-md-end"f>>t<"row"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>',
       displayLength: 7,
+      order : [0,'desc'],
       lengthMenu: [7, 10, 25, 50, 75, 100],
       buttons: [
         {

@@ -23,7 +23,7 @@ class MedicalController extends Controller
     public function add(Request $req)
     {
         $data=new medical();
-        $data->p_id=$req->name;
+        $data->p_id=strtoupper($req->name);
         $data->date=Date("Y-m-d",strtotime($req->date));
         $data->doctor_name=strtoupper($req->doctor_name);
         $data->amount=$req->amount;

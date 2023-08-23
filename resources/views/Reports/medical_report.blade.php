@@ -153,12 +153,12 @@ div.card-datatable [class*=col-md-] {
                                                 <table id="DataTables_Table_0" class="datatables-basic table">
                                                 <thead>
                                                     <tr>
-                                                        <th>રશીદ નં</th>
-                                                        <th>દર્દીનું નામ</th>
-                                                        <th>તારીખ</th>
-                                                        <th>ડોક્ટરનું નામ </th>
-                                                        <th>રકમ</th>
-                                                        <th>વિગત</th>
+                                                        <th>Receipt No</th>
+                                                        <th>Patient</th>
+                                                        <th>Date</th>
+                                                        <th>Doctor Name</th>
+                                                        <th>Amount</th>
+                                                        <th>Details</th>
                                                     </tr>
                                                 </thead>
                                                 @foreach($data as $row)
@@ -233,6 +233,7 @@ div.card-datatable [class*=col-md-] {
         
       dom: '<"card-header flex-column flex-md-row"<"head-label text-center"><"dt-action-buttons text-end pt-3 pt-md-0"B>><"row"<"col-sm-12 col-md-6"l><"col-sm-12 col-md-6 d-flex justify-content-center justify-content-md-end"f>>t<"row"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>',
       displayLength: 7,
+      order : [0,'desc'],
       lengthMenu: [7, 10, 25, 50, 75, 100],
       buttons: [
         {

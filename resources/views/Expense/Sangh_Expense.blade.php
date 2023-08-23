@@ -111,6 +111,7 @@
                               id="date"
                               name="date"
                               required />
+                              
                           </div>
                           <div class="col-md-4">
                             <label class="form-label" for="basic-default-name">વાઉચર નંબર</label>
@@ -206,6 +207,8 @@
     })
     });
     </script>
+
+   
 
     <!-- start num to word -->
 

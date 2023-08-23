@@ -229,7 +229,7 @@
                             <label class="form-label" for="multicol-phone">ઈતર</label>
                             <div class="input-group">
                               <span class="input-group-text">₹</span>
-                              <input type="number" class="form-control amount-input" name="other" placeholder="Amount" aria-label="Amount (to the nearest dollar)" required>
+                              <input type="number" class="form-control amount-input" name="other"  placeholder="Amount" aria-label="Amount (to the nearest dollar)" required>
                               
                             </div>
                           </div>
@@ -248,6 +248,7 @@
                               class="form-control"
                               id="basic-default-name"
                               name="remarks" 
+                              style="text-transform:capitalize"
                               {{-- placeholder="John Doe" --}}
                               required />
                         	</div>

@@ -115,7 +115,7 @@ class Expense extends Controller
         $member = new add_members();
         $member->m_name = strtoupper($req->m_name);
         $member->email = $req->email;
-        $member->phone_no = $req->phone_no;
+        $member->phone_no =strtoupper($req->phone_no);
         $member->city = $req->city;
         $member->address = strtoupper($req->address);
         $member->save();

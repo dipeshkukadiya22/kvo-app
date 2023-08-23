@@ -14,14 +14,16 @@
 
   <div class="mb-3">
     <label class="form-label" for="multicol-phone">Phone Number</label>
-    <input type="number" name="phone_no" id="multicol-phone" class="form-control phone-mask" placeholder="658 799 8941" required />
+    <input type="number" name="phone_no" id="multicol-phone" class="form-control phone-mask" placeholder="658 799 8941"  maxlength="10"
+                              required
+                              oninput="javascript: if (this.value.length > 10) this.value = this.value.slice(0, 10);"/>
 
   
 
   </div>
   <div class="mb-3">
     <label class="form-label" for="city">City</label>
-    <input type="text" name="city" class="form-control" id="city" placeholder="Bhuj" />
+    <input type="text" name="city" class="form-control" id="city"  style="text-transform:uppercase" placeholder="Bhuj" />
   </div>
 
  
