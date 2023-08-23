@@ -457,7 +457,7 @@
 
                             <div class="col-md-4">
                                 <label for="formFileMultiple" class="form-label">Identity Proof</label>
-                                <input class="form-control" type="file" name="id_proof" id="formFileMultiple" multiple required />
+                                <input class="form-control" type="file" name="id_proof[]" id="formFileMultiple" multiple required />
                             </div>
   
                             <div class="col-md-4">

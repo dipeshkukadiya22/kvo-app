@@ -47,7 +47,10 @@ class BookingController extends Controller
         $details->subcommunity = strtoupper($req->subcommunity);
         $details->gender = $req->inlineRadioOptions;
         $details->member_id=$req->name;
-        $details->id_proof=$req->id_proof;
+        $image=$req->id_proof;
+        if(count($req->id_proof)==1){ $details->id_proof=$req->id_proof[0]; }
+        else{$details->id_proof=$req->id_proof[0];$details->id_proof1=$req->id_proof[1];}
+       
         $details->occupation=$req->occupation;
         $details->reason=$req->reason;
      
@@ -291,8 +294,8 @@ class BookingController extends Controller
         $details->community = $req->community;
         $details->subcommunity = strtoupper($req->subcommunity);
         $details->gender = $req->inlineRadioOptions;
-        //dd($req->id_proof);
-        //$details->id_proof=$req->id_proof;
+        dd($req->id_proof);
+        $details->id_proof=$req->id_proof;
         $details->occupation=$req->occupation;
         $details->reason=$req->reason;
         $details->save();
