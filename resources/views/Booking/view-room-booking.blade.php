@@ -476,25 +476,23 @@ div.card-datatable [class*=col-md-] {
                                                 <input type="text" class="form-control" name="reason" id="reason" placeholder="Reason to stay" required>
                                               </div>
 
-                                              <!-- Multi  <div class="col-md-4">
-                                                <label for="formFileMultiple" class="form-label">Identity Proof</label>
-                                                <input class="form-control" type="file" name="id_proof" id="formFileMultiple" multiple required />
-                                            -->
                                               <div class="col-12">
                                                 <div action="/upload" class="dropzone needsclick" id="dropzone-multi" >
-                                                  <div class="dz-message needsclick">
+                                                  <div class="dz-message needsclick" id="dz-img">
                                                     Drop files here or click to upload
                                                     <span class="note needsclick"
                                                       >(This is just a demo dropzone. Selected files are <strong>not</strong> actually
                                                       uploaded.)</span
-                                                    >
+                                                    ><img id="id_proof1" width="250px" style="padding: 10px">
+                                                      <img id="id_proof2" width="250px" style="padding: 10px">
+                                                      
                                                   </div>
                                                   <div class="fallback">
-                                                  <input class="form-control" type="file" name="id_proof" id="formFileMultiple" multiple required />
+                                                  <input class="form-control" type="file" name="id_proof" id="id_proof" multiple required />
                                                   </div>
                                                 </div>
                                               </div>
-                                              <!-- Multi  -->
+                                          
 
                                               
                                               <div class="col-12 d-flex justify-content-between">
@@ -799,6 +797,9 @@ function edit(id)
                 success:function(response){
                   var gender=response[0]['gender'];
                   var community=response[0]['community'];
+                  document.getElementById("id_proof1").src="assets/img/avatars/"+response[0]['id_proof'];
+                  if(response[0]['id_proof1'] != null){
+                  document.getElementById("id_proof2").src="assets/img/avatars/"+response[0]['id_proof1'];}
                   $("#select2Basic").val(response[0]['m_name']);
                   $("#full_name_form").val(response[0]['m_name']);
                   $("#age").val(response[0]['age']);
@@ -820,6 +821,7 @@ function edit(id)
                   $("#ac_amount").val(response[0]['ac_amount']);
                   $("#non_ac_amount").val(response[0]['non_ac_amount']);
                   $("#dmt_amount").val(response[0]['door_mt_amount']);
+                  
                   var room=response[0]['room_list'];
                   var ArrNames =room .split(",");
                 
