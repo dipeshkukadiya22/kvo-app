@@ -261,7 +261,7 @@ class BookingController extends Controller
         return response()->json($data);   
     }
     public function view_room_booking(){
-        $checkout= DB::select("SELECT * FROM room_details join personal_details on personal_details.p_id=room_details.member_id join add_members on add_members.p_id=personal_details.member_id where room_details.status='BOOKED' or room_details.status='ADVANCE'");
+        $checkout= DB::select("SELECT * FROM room_details join personal_details on personal_details.p_id=room_details.member_id join add_members on add_members.p_id=personal_details.member_id where room_details.status='BOOKED' or room_details.status='ADVANCE' order by r_id desc");
         $member = add_members::all();
         $ar_list= DB::select("SELECT *, add_room.room_no as id FROM add_room");
         return view('Booking.view-room-booking',['checkout'=>$checkout,'member'=>$member,'a_list'=>$ar_list]);
