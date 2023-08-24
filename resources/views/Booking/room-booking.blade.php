@@ -131,9 +131,9 @@
                               </div>
 
                               <div class="mb-3">
-                                <label class="form-label" for="basic-default-email">Email</label>
-                                <input type="email" name="email" id="basic-default-email" class="form-control" placeholder="Email" required/>
-                              </div>
+                                        <label class="form-label" for="basic-default-email">Email</label>
+                                        <input type="email" name="email" id="basic-default-email" class="form-control" placeholder="Email" required/>
+                                    </div>
                               <div class="mb-3">
                                 <label class="form-label" for="city">City</label>
                                 <input type="text" name="city" class="form-control" id="city" style="text-transform:uppercase" placeholder="Bhuj" required/>
@@ -233,6 +233,7 @@
                                       <option value="{{$row->p_id}}" {{(!empty($member) && $member->m_name == $row->m_name) ? "selected" : ""}}>{{$row->m_name}}&nbsp;&nbsp;-&nbsp;&nbsp;{{$row->phone_no}}</option>
                                   @endforeach
                                 </select>
+                                {{ print_r($row->name) }}
                                 
                                 <input type="hidden" id="email_user" value="{{!empty($m_data)  ? $m_data:''}}">
                               </div>
@@ -240,17 +241,19 @@
 
     
                               <div class="col-md-4">
-                            <label class="form-label" for="basic-default-email"><span class="required">Email</span></label>
-                            <input type="email" id="member_email" name="email" class="form-control" placeholder="john.doe" value="{{ (!empty($member) )? $member->email : '' }}" required>
-                            <!--<div class="error-message" id="email-error-message"></div>-->
-                          </div>
+                                  <label class="form-label" for="basic-default-email"><span class="required">Email</span></label>
+                                  <input type="email" id="member_email" name="email" class="form-control" placeholder="john.doe" value="{{ (!empty($member) )? $member->email : '' }}" required/>
+                                  {{ print_r($row->email) }}
+                              </div>
+
     
                               <div class="col-md-4">
                                 
                                 <label class="form-label" for="multicol-phone"><span class="required">Phone Number</span></label>
-                                <input type="number" id="member-phone" name="phone_no" class="form-control phone-mask" placeholder="658 799 8941" aria-label="658 799 8941" value="{{ (!empty($member)) ? $member->phone_no : '' }}"    maxlength="10"
+                                <input type="number" id="member-phone" name="phone_no" class="form-control phone-mask" placeholder="658 799 8941" aria-label="658 799 8941" value="{{ (!empty($member)) ? $row->phone_no : '' }}"    maxlength="10"
                               required
                               oninput="javascript: if (this.value.length > 10) this.value = this.value.slice(0, 10);"/>
+                              {{ print_r($row->phone_no) }}
                               </div>
                               
 
