@@ -230,8 +230,8 @@
                                                 <div class="d-inline-block">
                                                     <a onclick="edit({{$row->room_no}})" class="btn btn-sm btn-icon item-edit"><img src="./assets/icon/orange-edit.png" width="20px"></a>
                                                    
-                                                    <a href="{{route('cancel_room', $row->room_no)}}" class="text-danger delete-record" >
-                                                        <i class="ti ti-trash"></i>
+                                                    <!--<a href="{{route('cancel_room', $row->room_no)}}" class="text-danger delete-record" >
+                                                        <i class="ti ti-trash"></i>-->
                                                     </a>
 
                                                 </div>

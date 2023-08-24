@@ -116,10 +116,11 @@
                           <div class="offcanvas-body mx-0 flex-grow-0">
 
                             <!-- Browser Default -->
-                            <form class="browser-default-validation" method="POST" action="{{route('room-booking')}}">
-                              @csrf
+                             
                               <div class="mb-3">
-                                <label class="form-label required" for="basic-default-name" >Name</label>
+                            <form class="browser-default-validation" method="POST" tabindex="1" action="{{route('room-booking')}}">
+                            @csrf
+                                <label class="form-label required" for="basic-default-name"  >Name</label>
                                 <input type="text" name="m_name" class="form-control" style="text-transform:uppercase" id="basic-default-name"  style="text-transform:uppercase"  placeholder="Name" required />
                               </div>
                               
@@ -138,12 +139,6 @@
                                 <input type="text" name="city" class="form-control" id="city" style="text-transform:uppercase" placeholder="Bhuj" required/>
                               </div>
     
-                              <!-- <div class="col-4">
-                                <label class="form-label" for="collapsible-address">Address</label>
-                                <textarea name="collapsible_address"  class="form-control" id="collapsible_address" rows="1" placeholder="1456, Mall Road" ></textarea>
-                              </div> -->
-                             
-                              
                               <div class="row">
                                 <div class="col-12">
                                   <button type="submit" class="btn btn-primary mb-2 d-grid w-100" >Submit</button>
@@ -245,41 +240,38 @@
 
     
                               <div class="col-md-4">
-                            <label class="form-label" for="basic-default-email">Email</label>
+                            <label class="form-label" for="basic-default-email"><span class="required">Email</span></label>
                             <input type="email" id="member_email" name="email" class="form-control" placeholder="john.doe" value="{{ (!empty($member)) ? $member->email : '' }}" required>
-                            <div class="error-message" id="email-error-message"></div>
+                            <!--<div class="error-message" id="email-error-message"></div>-->
                           </div>
     
                               <div class="col-md-4">
                                 
-                                <label class="form-label" for="multicol-phone" required>Phone Number</label>
+                                <label class="form-label" for="multicol-phone"><span class="required">Phone Number</span></label>
                                 <input type="number" id="member-phone" name="phone_no" class="form-control phone-mask" placeholder="658 799 8941" aria-label="658 799 8941" value="{{ (!empty($member)) ? $member->phone_no : '' }}"  pattern="[1-9]{1}[0-9]{9}" maxlength="10" required>
                               </div>
                               
 
                               <div class="col-md-4">
-                                <label class="form-label" for="basic-default-name" required>Age</label>
+                                <label class="form-label" for="basic-default-name"><span class="required">Age</span></label>
                                 <input type="number" class="form-control" name="age" id="basic-default-age" placeholder="Age" required/>
                               </div>
     
                               <div class="col-4">
-                                <label class="form-label" for="collapsible-address" required>Address</label>
-                               
-                                
-                                
+                                <label class="form-label" for="collapsible-address"><span class="required">Address</span></label>
                                 <textarea name="collapsibleaddress" style="text-transform:uppercase" class="form-control" style="text-transform:uppercase" id="member-address" rows="1" placeholder="1456, Mall Road" required>{{ (!empty($member) ) ? $member->address : '' }}</textarea>
                               </div>
                                                         
                               
                               <!-- Basic -->
                               <div class="col-md-4">
-                                <label for="select2Basic" class="form-label" required>Community</label>
+                                <label for="select2Basic" class="form-label"><span class="required">Community</span></label>
                                 <select id="select2Basic" class="select2 form-select form-select-lg" data-allow-clear="true" name="community" required>
                                   <option value="Hindu" selected>Hindu</option>
                                   <option value="Jain">Jain</option>
                                   <option value="Isalam">Isalam</option>
                                   <option value="Sikh">Sikh</option>
-                                  <option value="Budda">Budd</option>
+                                  <option value="Budda">Budda</option>
                                   <option value="Other Religions">Other Religions</option>
 
 
@@ -290,7 +282,7 @@
 
                               
                               <div class="col-md-4">
-                                <label for="defaultFormControlInput" class="form-label">Sub Community</label>
+                                <label for="defaultFormControlInput" class="form-label"><span class="required">Sub Community</span></label>
                                 <input type="text" class="form-control" name="subcommunity" id="defaultFormControlInput" placeholder="John Doe" aria-describedby="defaultFormControlHelp" required/>
                               </div>
 
@@ -298,11 +290,11 @@
                               
                               <div class="col-md-4">
                                 <label for="defaultFormControlInput" class="form-label">City</label>
-                                <input type="text" class="form-control" name="city" id="member_city" style="text-transform:uppercase" placeholder="John Doe" aria-describedby="defaultFormControlHelp" value="{{ (!empty($member)) ? $member->city : '' }}" required/>
+                                <input type="text" class="form-control" name="city" id="member_city" style="text-transform:uppercase" placeholder="John Doe" aria-describedby="defaultFormControlHelp" value="{{ (!empty($member)) ? $member->city : '' }}"/>
                               </div>
 
                               <div class="col-md-4">
-                                <label class="d-block form-label">Gender</label>
+                                <label class="d-block form-label"><span class="required">Gender</span></label>
                                 <div class="form-check form-check-inline">
                                   <input class="form-check-input" type="radio" name="inlineRadioOptions" id="personalRadio1" value="MALE" checked/>
                                   <label class="form-check-label" for="inlineRadio1" >Male</label>
@@ -315,17 +307,7 @@
                               </div>
     
                             <div class="col-12 d-flex justify-content-end">
-                              {{-- <button class="btn btn-label-secondary btn-prev" disabled>
-                                <i class="ti ti-arrow-left me-sm-1"></i>
-                                <span class="align-middle d-sm-inline-block d-none">Previous</span>
-                              </button> --}}
-                              {{-- <div>
-                              <input type="button" class="btn btn-primary btn-next">
-                                <span class="align-middle d-sm-inline-block d-none me-sm-1">Next</span>
-                                <i class="ti ti-arrow-right"></i>
-                              </div> --}}
-
-                              <button type="button" class="btn btn-primary btn-next" id="btn-step1">
+                              <button type="button"  class="btn btn-primary btn-next" id="btn-step1">
                                 <span class="align-middle d-sm-inline-block d-none me-sm-1">Next</span>
                                 <i class="ti ti-arrow-right"></i>
                               </button>
@@ -445,17 +427,17 @@
                             <hr>
                             
                             <div class="col-md-4">
-                              <label class="form-label" for="basic-default-name">No. of Person</label>
-                              <input type="number" class="form-control"  name="no_of_person" id="no_of_person_id" placeholder="No of Person" value="1"/>
+                              <label class="form-label" for="basic-default-name"><span class="required">No. of Person</span></label>
+                              <input type="number" class="form-control"  name="no_of_person" id="no_of_person_id" placeholder="No of Person" value="1" required/>
                             </div>
                             <!-- Datetime Picker-->
                             <div class="col-md-4">
-                              <label for="flatpickr-datetime" class="form-label">Check-In Date</label>
-                              <input type="text" class="form-control" name="check_in_date" placeholder="DD-MM-YYYY HH:MM" id="flatpickr-datetime" />
+                              <label for="flatpickr-datetime" class="form-label"><span class="required">Check-In Date</span></label>
+                              <input type="text" class="form-control" name="check_in_date" placeholder="DD-MM-YYYY HH:MM" id="flatpickr-datetime" required/>
                             </div>
 
                             <div class="col-md-4">
-                                <label for="formFileMultiple" class="form-label">Identity Proof</label>
+                                <label for="formFileMultiple" class="form-label"><span class="required">Identity Proof</span></label>
                                 <input class="form-control" type="file" name="id_proof[]" id="formFileMultiple" multiple required />
                             </div>
   
@@ -467,7 +449,7 @@
                            
   
                             <div class="col-md-4">
-                              <label class="form-label" for="deposit-amount">Deposit Rs</label>
+                              <label class="form-label" for="deposit-amount"><span class="required">Deposit Rs</span></label>
                               <input type="number" class="form-control" name="deposite_rs" id="deposit-amount" placeholder="Deposit Rs" required>
                             </div>
                             
@@ -477,18 +459,18 @@
                             </div>
 
                             <div class="col-md-4">
-                              <label class="form-label" for="deposit-amount">No of Days</label>
+                              <label class="form-label" for="deposit-amount"><span class="required">No of Days</span></label>
                               <input type="number" class="form-control" name="no_of_days" id="no_of_days" placeholder="no_of_days" required>
                             </div>
                             
                             <div class="col-md-4">
                               <label class="form-label" for="rupees-in-words">Occupation</label>
-                              <input type="text" class="form-control" name="occupation" id="occupation" placeholder="Occupation" required>
+                              <input type="text" class="form-control" name="occupation" id="occupation" placeholder="Occupation" >
                             </div>
 
                             <div class="col-md-4">
                               <label class="form-label" for="rupees-in-words">Reason</label>
-                              <input type="text" class="form-control" name="reason" id="reason" placeholder="Reason to stay" required>
+                              <input type="text" class="form-control" name="reason" id="reason" placeholder="Reason to stay">
                             </div>
   
                             
@@ -603,12 +585,7 @@
                                 <i class="ti ti-arrow-left me-sm-1"></i>
                                 <span class="align-middle d-sm-inline-block d-none">Previous</span>
                               </button>
-                              {{-- <div>
-                                <input type="button"  class="btn btn-primary btn-next">
-                                <span class="align-middle d-sm-inline-block d-none me-sm-1">Next</span>
-                                <i class="ti ti-arrow-right"></i>
-                              </div> --}}
-                              <button type="button" class="btn btn-primary btn-next">
+                              <button type="button" class="btn btn-primary btn-next" id="btn-step3">
                                 <span class="align-middle d-sm-inline-block d-none me-sm-1">Next</span>
                                 <i class="ti ti-arrow-right"></i>
                               </button>
@@ -745,8 +722,6 @@
     <script src="{{ asset('assets/js/form-wizard-icons.js') }}"></script>
 
     <script src="{{ asset ('assets/js/forms-extras.js') }}"></script>
-
-
     <script>
       function convertToWords() {
       var depositAmount = parseFloat(document.getElementById("deposit-amount").value);
@@ -1055,19 +1030,6 @@ $(document).ready(function () {
   </script> -->
    
 <script>
-  $(document).ready(function() {
-    let currentStep = 1;
-
-    $(".btn-next").on("click", function() {
-     
-     $('#member_age').val($('#basic-default-age').val());
-    
-    });
-  });
-</script>
-
-
-<script>
  
   $(document).ready(function() {
     // let currentStep = 1;
@@ -1078,20 +1040,22 @@ $(document).ready(function () {
     //   dateFormat: "d-m-Y H:i",
     //   defaultDate: currentDateTime
     // });
-    $(".btn-next").on("click", function() {
+    $("#btn-step1").on("click", function() {
+
+      $('#member_age').val($('#basic-default-age').val());
+
       const selectedList1 = $('#select2Multiple11').val();
       const selectedList2 = $('#select2Multiple22').val();
       const selectedList3 = $('#select2Multiple33').val();
       const selectedDate = $('#flatpickr-datetime').val();
       const acAmount = parseFloat($('#ac-amount').val()) || 0; 
       const nonAcAmount = parseFloat($('#non-ac-amount').val()) || 0;
-      const doorMtAmount = parseFloat($('#door-mt-amount').val()) || 0;
+      const doorMtAmount = parseFloat($('#door_mt_amount').val()) || 0;
 
-    const totalAmount = acAmount + nonAcAmount + doorMtAmount;
+      const totalAmount = acAmount + nonAcAmount + doorMtAmount;
 
-    $('#room_amount').text( totalAmount);
+      $('#room_amount').text( totalAmount);
       const selectedRooms = 'A.C. Room:= ' + selectedList1 + ', Non A.C. Room:= ' + selectedList2 + ', Door Metri A.C. / Non A.C. Room:= ' + selectedList3;
-
       $('#room_lst').text(selectedRooms);
 
       if (selectedDate && selectedDate.length > 0) {
@@ -1107,7 +1071,7 @@ $(document).ready(function () {
   $(document).ready(function() {
     let currentStep = 1;
  
-    $(".btn-next").on("click", function() {
+    $("#btn-step3").on("click", function() {
       $(".rep-table").empty();
       const fullName = $('#full_name_form').val();
       const age = $('#member_age').val();
@@ -1242,10 +1206,7 @@ $(document).ready(function () {
 
 <script>
  $("#room_booking").submit(function(){
-      
-    
-    
-     
+
       var address = document.getElementById('member-address').value;
       var city = document.getElementById('member_city').value;
     
@@ -1294,40 +1255,69 @@ contactInput.addEventListener('input', function () {
   }
 });
 </script>
-<!-- <script>
-document.addEventListener('DOMContentLoaded', function() {
-  // Get reference to the "Next" button
-  const nextButton = document.getElementById('btn-step1');
 
-  // Add click event listener to the "Next" button
-  nextButton.addEventListener('click', function() {
-    // Get the email field
-    const emailField = document.getElementById('member_email');
-
-    // Check if the email field is empty
-    if (emailField.value.trim() === '') {
-      const errorMsg = "Email field is required.";
-      
-    }
-  });
-});
-</script> -->
 <script>
 $(document).ready(function() {
-  $(".btn-next").click(function() {
 
-  const nextButton = document.getElementById("btn-step1"); // Get the "Next" button
+  $("#repeat-next").click(function() {
+    const no_of_personErrorMessage = document.getElementById('no_of_person_id'); 
 
+    const no_of_personField = document.getElementById('no_of_person_id'); // Get the email input field
+    
+   // Get the error message container
 
+    if (no_of_personField.value.trim() === '') {
+      no_of_personField.classList.add('required-input'); // Apply red border style
+      no_of_personErrorMessage.textContent = 'Please fill in this field.'; // Display error message
+      no_of_personField.focus(); // Focus on the empty field
+     
+     //$("#btn-step1").prop('disabled',true);
+    }
+  });
+
+  $("#btn-step1").click(function() {
     const emailErrorMessage = document.getElementById('email-error-message'); 
+    const ageErrorMessage = document.getElementById('basic-default-age'); 
+    const phoneErrorMessage = document.getElementById(' multicol-phone');
+    const subcommunityErrorMessage = document.getElementById('defaultFormControlInput'); 
+    const addressErrorMessage = document.getElementById('member-address'); 
     const emailField = document.getElementById('member_email'); // Get the email input field
+    const ageField = document.getElementById('basic-default-age'); // Get the email input field
+    const phoneField = document.getElementById('multicol-phone'); // Get the email input field
+    const subcommunityField = document.getElementById('defaultFormControlInput'); // Get the email input field
+    const addressField = document.getElementById('member-address'); // Get the email input field
    // Get the error message container
 
     if (emailField.value.trim() === '') {
       emailField.classList.add('required-input'); // Apply red border style
-      emailErrorMessage.textContent = 'Please fill in this field.'; // Display error message
+      emailErrorMessage.textContent = 'Please fill email in this field.'; // Display error message
       emailField.focus(); // Focus on the empty field
-      event.preventDefault(); // Prevent form submission
+     
+     //$("#btn-step1").prop('disabled',true);
+    }
+    if (ageField.value.trim() === '') {
+      ageField.classList.add('required-input'); // Apply red border style
+      ageErrorMessage.textContent = 'Please fill age in this field.'; // Display error message
+      ageField.focus(); // Focus on the empty field
+    
+    }
+    if (phoneField.value.trim() === '') {
+      phoneField.classList.add('required-input'); // Apply red border style
+      phoneErrorMessage.textContent = 'Please fill phone in this field.'; // Display error message
+      phoneField.focus(); // Focus on the empty field
+      //event.preventDefault(); // Prevent form submission
+    }
+    if (subcommunityField.value.trim() === '') {
+      subcommunityField.classList.add('required-input'); // Apply red border style
+      subcommunityErrorMessage.textContent = 'Please fill subcommunity in this field.'; // Display error message
+      subcommunityField.focus(); // Focus on the empty field
+    
+    }
+    if (addressField.value.trim() === '') {
+      addressField.classList.add('required-input'); // Apply red border style
+      addressErrorMessage.textContent = 'Please fill address in this field.'; // Display error message
+      addressField.focus(); // Focus on the empty field
+    
     }
     
   });
