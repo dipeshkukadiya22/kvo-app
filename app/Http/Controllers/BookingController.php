@@ -352,7 +352,7 @@ class BookingController extends Controller
     return back();
     }
 
-    public function cancel_room($id) {
+    /*public function cancel_room($id) {
         $room = add_room::find($id);
         if (!$room) {
             return redirect() -> route('room-list') ;
@@ -361,6 +361,10 @@ class BookingController extends Controller
         $room->room_detail_id = 0;
         $room->save();
         return back();
+    }*/
+    public function cancel_booking($id) {
+        $room = room_details::find($id);
+       dd($room);
     }
     
 }

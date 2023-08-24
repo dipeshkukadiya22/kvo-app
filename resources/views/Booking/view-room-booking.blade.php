@@ -135,7 +135,7 @@ div.card-datatable [class*=col-md-] {
                                                     <a onclick="edit({{$row->r_id}})" class="btn btn-sm btn-icon item-edit"><img src="./assets/icon/orange-edit.png" width="20px"></a>
 
 
-                                                    <a href="javascript:;" class="text-danger delete-record"><img src="./assets/icon/orange-trash.png" width="20px"></a> 
+                                                    <a href="#" class="text-danger delete-record"><img src="./assets/icon/orange-trash.png" width="20px"></a> 
                                                     
                                                   </div>
                                               </td>
@@ -880,7 +880,7 @@ function edit(id)
             }
   
       </script>
-      
+
 
 <script>
  
