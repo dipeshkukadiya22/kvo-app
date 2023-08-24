@@ -560,7 +560,7 @@ div.card-datatable [class*=col-md-] {
                                                             <input class="form-check-input" type="radio" name="gender" id="inlineRadio2" value="FEMALE" />
                                                             <label class="form-check-label" for="inlineRadio2">Female</label>
                                                         </div>
-                                                        <div class="mb-3 col-lg-6 col-xl-3 col-12 mb-0" >
+                                                        <div class="mb-3 col-lg-6 col-xl-3 col-12 mb-0" hidden>
                                                         <label class="form-label" for="form-repeater-1-2">gender</label>
                                                         <input type="text" id="gender_data" name="gender_data" class="form-control" placeholder="your age" value="MALE"/>
                                                       </div>
@@ -816,8 +816,13 @@ function edit(id)
                   $("#member_city").val(response[0]['city']);
                   $('#member_email').val(response[0]['email']);
                   $('#member_phone').val(response[0]['phone_no']);
-                  if(gender=="MALE"){$("#MALE").attr('checked',true);}
-                  if(gender=="FEMALE"){$("#FEMALE").attr('checked',true);}
+                  if(gender=="MALE"){
+                    $("#MALE").attr('checked',true);
+                    $("#inlineRadio1").attr('checked',true);
+                  }
+                  if(gender=="FEMALE"){
+                    $("#FEMALE").attr('checked',true);
+                    $("#inlineRadio2").attr('checked',true);}
                   $("#no_of_person_id").val(response[0]['no_of_person']);
                   $("#booking_id").val(response[0]['r_id']);
                   $("#person_id").val(response[0]['person_id']);

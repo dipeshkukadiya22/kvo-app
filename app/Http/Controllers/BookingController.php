@@ -47,11 +47,10 @@ class BookingController extends Controller
         $details->subcommunity = strtoupper($req->subcommunity);
         $details->gender = $req->inlineRadioOptions;
         $details->member_id=$req->name;
-        $dir="assets/image/";
-        $file=$dir.basename($req->id_proof[0],'name');
-        //dd("check");
-        //dd($file);
-        if(count($req->id_proof)==1){ $details->id_proof=$file; }
+       /* $dir="assets/image/";
+        $file1=$dir.basename($req->id_proof[0],'name');
+        dd($file);*/
+        if(count($req->id_proof)==1){ $details->id_proof=$req->id_proof[0]; }
         else{$details->id_proof=$req->id_proof[0];$details->id_proof1=$req->id_proof[1];}
         
         $details->occupation=$req->occupation;
@@ -119,7 +118,8 @@ class BookingController extends Controller
             $m_details->save();
         }
         $ar_list = DB::select("SELECT add_room.*, room_details.check_in_date, room_details.* FROM add_room LEFT JOIN room_details ON add_room.room_no = room_details.r_id WHERE add_room.status = 1");
-        return view ('Booking.room-booking',['pdetails'=>$pdetails,'m_data'=>$m_data,'data'=>$data,'p_details'=>$p_details,'m_name'=>$m_name,'a_list'=>$ar_list,'acroom'=>$acroom,'depositeno'=>$depositeno,'p_id'=>$p_id]);
+        return back();
+       // return view ('Booking.room-booking',['pdetails'=>$pdetails,'m_data'=>$m_data,'data'=>$data,'p_details'=>$p_details,'m_name'=>$m_name,'a_list'=>$ar_list,'acroom'=>$acroom,'depositeno'=>$depositeno,'p_id'=>$p_id]);
 
     }
 
@@ -280,7 +280,7 @@ class BookingController extends Controller
     public function view_room_booking(){
         $checkout= DB::select("SELECT * FROM room_details join personal_details on personal_details.p_id=room_details.member_id join add_members on add_members.p_id=personal_details.member_id where room_details.status='BOOKED' or room_details.status='ADVANCE' order by r_id desc");
         $member = add_members::all();
-        $ar_list= DB::select("SELECT *, add_room.room_no as id FROM add_room");
+        $ar_list= DB::select("SELECT *, add_room.room_no as id FROM add_room ");
         return view('Booking.view-room-booking',['checkout'=>$checkout,'member'=>$member,'a_list'=>$ar_list]);
     }
     public function update_room_booking(Request $req) 
@@ -332,16 +332,15 @@ class BookingController extends Controller
             {
                 $data=DB::UPDATE("UPDATE add_room SET STATUS='1',room_detail_id='$req->booking_id' where room_no='$room'");
             }}
-    
             $total_member = $req->no_of_person_id;
-           
             for ($i =1; $i < $total_member; $i++){
                 $m_details =member_details::find($req->m_id[$i]);
+                dd(count($m_details));
                 //dd($m_details->toArray());
                 $m_details->full_name = strtoupper($req->full_name[$i]);
                 //dd($req->full_name);
                 $m_details->age=$req->m_age[$i];
-                //$m_details->gender=$req->gender;
+                $m_details->gender=$req->gender;
                 //dd($req->gender);
                 $m_details->relation=$req->relation[$i];
                 

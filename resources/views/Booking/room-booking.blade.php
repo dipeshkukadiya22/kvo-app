@@ -530,7 +530,7 @@
                                           <label class="form-check-label" for="gender">Female</label>
                                         </div>
 
-                                        <div class="mb-3 col-lg-6 col-xl-3 col-12 mb-0" >
+                                        <div class="mb-3 col-lg-6 col-xl-3 col-12 mb-0" hidden>
                                         <label class="form-label" for="form-repeater-1-2">gender</label>
                                         <input type="text" id="gender_data" name="gender_data" class="form-control" placeholder="your age" value="MALE"/>
                                       </div>
