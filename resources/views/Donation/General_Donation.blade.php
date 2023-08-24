@@ -99,7 +99,7 @@
                             <select id="name" name="name" class="select2 form-select form-select-lg" data-allow-clear="true" required>
                             <option value=""></option>
                                 @foreach($member as $row)
-                                    <option value="{{$row->p_id}}">{{$row->m_name}}</option>
+                                    <option value="{{$row->p_id}}">{{$row->m_name}} - {{$row->phone_no}}</option>
                                 @endforeach
                             </select>
                           </div>
