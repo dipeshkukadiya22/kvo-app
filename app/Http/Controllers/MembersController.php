@@ -15,7 +15,7 @@ class MembersController extends Controller
     }
 
     public function edit_members($id) {
-        $data = add_members::find($id);
+        $data =DB::SELECT("SELECT * from add_members where p_id='$id'");
         return $data;
     }
     

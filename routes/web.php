@@ -66,7 +66,7 @@ Route::POST('RoomList', [BookingController::class, 'RoomList'])->name('RoomList'
 
 /* View Members Route */
 Route::get('view-members', [MembersController::class, 'ViewMembers'])->name('ViewMembers');
-Route::get('edit_members/{id}', [MembersController::class, 'edit_members'])->name('edit_members');
+Route::get('/edit_members/{id}', [MembersController::class, 'edit_members'])->name('edit_members');
 Route::get('delete_members/{id}', [MembersController::class, 'delete_members'])->name('delete_members');
 Route::POST('update_members', [MembersController::class, 'update_members'])->name('update_members');
 

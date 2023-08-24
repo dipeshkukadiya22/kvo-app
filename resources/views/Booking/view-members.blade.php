@@ -99,8 +99,8 @@
                                               
                                               <td>
                                                 <div class="d-inline-block">
-                                                <a class="btn btn-sm btn-icon item-edit" data-bs-toggle="offcanvas"
-                                                    data-bs-target="#offcanvasBackdrop" aria-controls="offcanvasBackdrop"><i class="text-primary ti ti-edit"></i></a>
+                                                <a onclick="edit({{$row->p_id}})"  class="btn btn-sm btn-icon item-edit" aria-controls="offcanvasBackdrop"><i class="text-primary ti ti-edit"></i></a>
+                                                
                                                 <a  class="text-danger delete-record"><i class="ti ti-trash"></i></a>
                                                 </div>
                                               </td>
@@ -369,26 +369,28 @@
     </script>
 
 <script>
-  
-const editLinks = document.querySelectorAll(".item-edit");
-    // Loop through each delete link and attach a click event listener
-    editLinks.forEach(link => {
-        link.addEventListener("click", function() {
-            // Show a confirmation dialog using SweetAlert2
-            var id=$(this).closest("tr").find(".id").val();
-            $.ajax({
-                url:"{{url('edit_members')}}" +"/"+ id,
-                type:'GET',
-                  success:function(response){
-                        $("#p_id").val(response['p_id']);
-                        $("#m_name1").val(response['m_name']);
-                        $("#email1").val(response['email']);
-                        $("#phone_no1").val(response['phone_no']);
-                        $("#city1").val(response['city']);  
-                      }
-                    });
-            });
-        });
+ function edit(id)
+{  
+  alert(id);
+      const myOffcanvas = document.getElementById('offcanvasBackdrop');
+      let a=new bootstrap.Offcanvas(myOffcanvas);
+      a.show();
+    
+                var id=$(this).closest("tr").find(".id").val();
+                $.ajax({
+                    url:"{{url('edit_members')}}" +"/"+ id,
+                    type:'GET',
+                      success:function(response){
+                        alert(response[0]['p_id']);
+                           /* $("#p_id").val(response['p_id']);
+                            $("#m_name1").val(response['m_name']);
+                            $("#email1").val(response['email']);
+                            $("#phone_no1").val(response['phone_no']);
+                            $("#city1").val(response['city']);  */
+                          }
+                        });
+             
+      }
 </script>
 <script>
     // Get all elements with class "delete-record"
