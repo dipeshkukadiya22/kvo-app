@@ -178,7 +178,7 @@ class BookingController extends Controller
 
     public function checkout(){
         //$checkout= DB::select("SELECT * FROM room_details JOIN ( SELECT add_room.room_detail_id, MAX(add_room.room_no) AS room_no, MAX(add_room.status) AS room_status FROM add_room WHERE add_room.status = 1 GROUP BY add_room.room_detail_id ) AS filtered_rooms ON room_details.r_id = filtered_rooms.room_detail_id JOIN personal_details ON personal_details.p_id = room_details.member_id JOIN add_members ON personal_details.member_id = add_members.p_id");
-        $checkout= DB::select("SELECT * FROM `room_details` join personal_details on room_details.member_id=personal_details.p_id join add_members on add_members.p_id=personal_details.member_id WHERE status='B' or status='C' order by r_id desc");
+        $checkout= DB::select("SELECT * FROM `room_details` join personal_details on room_details.member_id=personal_details.p_id join add_members on add_members.p_id=personal_details.member_id WHERE status='BOOKED' or status='CHECKOUT' order by r_id desc");
         $rec_no=checkout::get()->last()->rec_no;
         if(!$rec_no)
         {$rec_no=1;}
