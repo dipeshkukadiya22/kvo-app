@@ -242,7 +242,7 @@
     
                               <div class="col-md-4">
                                   <label class="form-label" for="basic-default-email"><span class="required">Email</span></label>
-                                  <input type="email" id="member_email" name="email" class="form-control" placeholder="john.doe" value="{{ (!empty($member) )? $member->email : '' }}" required/>
+                                  <input type="email" id="member_email" name="email" class="form-control" placeholder="john.doe" value="{{ (isset($member) )? $member->email : '' }}" required/>
                                   {{ print_r($row->email) }}
                               </div>
 
