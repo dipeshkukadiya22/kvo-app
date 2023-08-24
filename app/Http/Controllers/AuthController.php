@@ -40,7 +40,7 @@ class AuthController extends Controller
                     setcookie("user_password", $_POST['password']);
                 }
                 Session()->flash('message', 'Login succssesful');
-                return redirect()->route('View_Religious_Donation');
+                return redirect()->route('Religious_Donation');
                }else{
                 Session()->flash('message', 'Login Failed!');
                 return redirect("login")->with("fail","Login Failed");
