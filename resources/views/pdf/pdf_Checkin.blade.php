@@ -149,7 +149,7 @@
                     @for($i=0;$i<(10-$n);$i++)
                     <tr>
 					<td class="tg-0pky tc"></td>
-					<td class="tg-0pky tc">{{$room_booking[0]->id_proof1}}</td>
+					<td class="tg-0pky tc"></td>
 					<td class="tg-0pky tc"></td>
                     <td class="tg-0pky tc"></td>
                     <td class="tg-0pky tc"></td>

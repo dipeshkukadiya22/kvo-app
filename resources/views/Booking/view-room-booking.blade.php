@@ -130,7 +130,7 @@ div.card-datatable [class*=col-md-] {
                                               <td>{{$row->deposite_rs}}</td>
                                               <td>
                                                   <div class="d-inline-block">
-                                                    <a href=@if($row->status=='BOOKED')"{{route('pdf_CheckIn',$row->r_id)}}" @endif class="text-primary"><img src="./assets/icon/orange-eye.png" width="20px"></a>
+                                                    <a href=@if($row->status=='BOOKED')"{{route('pdf_CheckIn',$row->r_id)}}" @endif ><img src="./assets/icon/orange-eye.png" width="20px"></a>
 
                                                     <a onclick="edit({{$row->r_id}})" class="btn btn-sm btn-icon item-edit"><img src="./assets/icon/orange-edit.png" width="20px"></a>
 
