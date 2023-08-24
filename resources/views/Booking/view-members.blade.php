@@ -147,7 +147,7 @@
 
                                   <div class="mb-3">
                                     <label class="form-label" for="multicol-phone">Phone Number</label>
-                                    <input type="number" id="phone_no1" name="phone_no1" class="form-control phone-mask" placeholder="658 799 8941" aria-label="658 799 8941" value="" />
+                                    <input type="number" id="phone_no1" name="phone_no1" class="form-control phone-mask" placeholder="658 799 8941" aria-label="658 799 8941" oninput="javascript: if (this.value.length > 10) this.value = this.value.slice(0, 10);" />
                                   </div>
                                   <div class="mb-3">
                                     <label class="form-label" for="city">City</label>

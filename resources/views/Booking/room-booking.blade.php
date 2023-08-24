@@ -141,7 +141,7 @@
     
                               <div class="row">
                                 <div class="col-12">
-                                  <button type="submit" class="btn btn-primary mb-2 d-grid w-100" >Submit</button>
+                                  <button type="submit" class="btn btn-primary mb-2 d-grid w-100" id="submitbtn" >Submit</button>
                                   <button type="button" class="btn btn-label-secondary d-grid w-100" data-bs-dismiss="offcanvas"> Cancel</button>
                                 </div>
                               </div>
@@ -241,7 +241,7 @@
     
                               <div class="col-md-4">
                             <label class="form-label" for="basic-default-email"><span class="required">Email</span></label>
-                            <input type="email" id="member_email" name="email" class="form-control" placeholder="john.doe" value="{{ (!empty($member)) ? $member->email : '' }}" required>
+                            <input type="email" id="member_email" name="email" class="form-control" placeholder="john.doe" value="{{ (!empty($member) )? $member->email : '' }}" required>
                             <!--<div class="error-message" id="email-error-message"></div>-->
                           </div>
     
@@ -512,7 +512,7 @@
                                   </div>
                                   <div class="mb-3 col-lg-6 col-xl-3 col-12 mb-0">
                                     <label class="form-label" for="form-repeater-1-2">Age</label>
-                                    <input type="number" id="member_age" name="m_age[]" class="form-control" placeholder="your age" />
+                                    <input type="number" id="member_age" name="m_age[]" class="form-control" placeholder="your age"  />
                                   </div>
                                   
                                   
@@ -1000,6 +1000,25 @@ $(document).ready(function () {
                  
                 $.each(data,function(key,value){
                   console.log('id::'+$('#select2Basic').val());
+                  if($('#select2Basic').val()==value['p_id']){
+                   console.log(value['email']);
+                   $('#member_email').val(value['email']);
+                   $('#member-phone').val(value['phone_no']);
+                   $('#member-address').val(value['address']);
+                   $('#member_city').val(value['city']);
+                   $('#full_name_form').val(value['m_name']);
+                   }
+                });
+            
+            });
+        });
+    </script>
+
+<script>
+        $(document).ready(function () {
+            $("#submitbtn").click(function () { 
+                $.each(data,function(key,value){
+                 
                   if($('#select2Basic').val()==value['p_id']){
                    console.log(value['email']);
                    $('#member_email').val(value['email']);

@@ -49,6 +49,7 @@ Route::get('cancel_room/{id}',[BookingController::class, 'cancel_room'])->name('
 // room checkout
 Route::get('view_room_booking', [BookingController::class, 'view_room_booking'])->name('view_room_booking');
 Route::post('update_room_booking', [BookingController::class, 'update_room_booking'])->name('update_room_booking');
+//Route::get('cancel_booking/{id}', [BookingController::class, 'cancel_booking'])->name('cancel_booking');
 Route::get('get_data/{id}', [BookingController::class, 'get_data'])->name('get_data');
 Route::get('get_memberdata/{id}', [BookingController::class, 'get_memberdata'])->name('get_memberdata');
 Route::get('checkout', [BookingController::class, 'checkout'])->name('checkout');
