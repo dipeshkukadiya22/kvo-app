@@ -47,10 +47,13 @@ class BookingController extends Controller
         $details->subcommunity = strtoupper($req->subcommunity);
         $details->gender = $req->inlineRadioOptions;
         $details->member_id=$req->name;
-        $image=$req->id_proof;
-        if(count($req->id_proof)==1){ $details->id_proof=$req->id_proof[0]; }
+        $dir="assets/image/";
+        $file=$dir.basename($req->id_proof[0],'name');
+        //dd("check");
+        //dd($file);
+        if(count($req->id_proof)==1){ $details->id_proof=$file; }
         else{$details->id_proof=$req->id_proof[0];$details->id_proof1=$req->id_proof[1];}
-       
+        
         $details->occupation=$req->occupation;
         $details->reason=$req->reason;
      
