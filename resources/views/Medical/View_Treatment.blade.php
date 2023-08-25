@@ -664,7 +664,7 @@ $("#name").change(function(){
         
                 url:"{{url('get')}}" +"/"+ id,
                 type:'GET',
-                  success:function(response){   
+                  success:function(response){
                         $("#city").val(response['city']); 
                         $("#phone").val(response['phone_no']); 
                   }

@@ -167,11 +167,8 @@
                               <option value="NAVNEETNAGAR">નવનીતનગર</option>
                             </select>
                           </div>
-                          <div class="col-12">
-                            <h6 class="mt-2 fw-semibold">2. Donation Details</h6>
-                            <hr class="mt-0" />
-                          </div>
-                          <div class="col-md-12">
+                          
+                          <div class="col-md-8">
                             <label class="form-label" for="multicol-phone">મળેલ દાન</label>
                             <input
                               type="text"
