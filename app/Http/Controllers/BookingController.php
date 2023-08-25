@@ -30,6 +30,7 @@ class BookingController extends Controller
         $p_details=personal_details::with('member')->get();
         $data = personal_details::find($req->p_id);
         $m_data = add_members::all();
+        dd($m_data);
         $depositeno = room_details::get()->last()->deposite_no;
         $p_id=room_details::get()->last()->r_id;
 
@@ -118,7 +119,7 @@ class BookingController extends Controller
             $m_details->save();
         }
         $ar_list = DB::select("SELECT add_room.*, room_details.check_in_date, room_details.* FROM add_room LEFT JOIN room_details ON add_room.room_no = room_details.r_id WHERE add_room.status = 1");
-        return back();
+        return back()->with;
        // return view ('Booking.room-booking',['pdetails'=>$pdetails,'m_data'=>$m_data,'data'=>$data,'p_details'=>$p_details,'m_name'=>$m_name,'a_list'=>$ar_list,'acroom'=>$acroom,'depositeno'=>$depositeno,'p_id'=>$p_id]);
 
     }
@@ -128,10 +129,10 @@ class BookingController extends Controller
         $p_details=personal_details::with('member')->get();
         $member = new add_members();
         $depositeno = room_details::get()->last()->deposite_no;
-        $member->m_name = $req->m_name;
+        $member->m_name = strtoupper($req->m_name);
         $member->email = $req->email;
         $member->phone_no = $req->phone_no;
-        $member->city = $req->city;
+        $member->city = strtoupper($req->city);
         $member->save();
 
         $m_data=add_members::all();
@@ -139,7 +140,7 @@ class BookingController extends Controller
 
         $r_list = DB::select("SELECT add_room.*, room_details.check_in_date, room_details.* FROM add_room LEFT JOIN room_details ON add_room.room_no = room_details.r_id WHERE add_room.status = 1");
    
-        return back();
+        return back()->with[''];
     }
     
    

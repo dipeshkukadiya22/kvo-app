@@ -242,8 +242,8 @@
     
                               <div class="col-md-4">
                                   <label class="form-label" for="basic-default-email"><span class="required">Email</span></label>
-                                  <input type="email" id="member_email" name="email" class="form-control" placeholder="john.doe" value="{{ (isset($member) )? $member->email : '' }}" required/>
-                                  {{ print_r($row->email) }}
+                                  <input type="email" id="member_email" name="email" class="form-control" placeholder="john.doe" value="{{ (!empty($member) )? $member->email : '' }}" required/>
+                              
                               </div>
 
     
@@ -1064,7 +1064,7 @@ $(document).ready(function () {
     //   dateFormat: "d-m-Y H:i",
     //   defaultDate: currentDateTime
     // });
-    $("#btn-step1").on("click", function() {
+    $("#repeat-next").on("click", function() {
 
       $('#member_age').val($('#basic-default-age').val());
 
