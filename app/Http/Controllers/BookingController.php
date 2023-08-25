@@ -7,8 +7,10 @@ use App\Models\member_details;
 use App\Models\add_room;
 use App\Models\checkout;
 use Carbon\Carbon;
+use Image;
 use DB;
 use Illuminate\Http\Request;
+use Spatie\LaravelIgnition\Solutions\SolutionProviders\InvalidRouteActionSolutionProvider;
 
 class BookingController extends Controller
 {
@@ -30,13 +32,10 @@ class BookingController extends Controller
         $p_details=personal_details::with('member')->get();
         $data = personal_details::find($req->p_id);
         $m_data = add_members::all();
-        dd($m_data);
         $depositeno = room_details::get()->last()->deposite_no;
         $p_id=room_details::get()->last()->r_id;
-
         $ar_list = DB::select("SELECT *, add_room.room_no as id FROM add_room WHERE add_room.status = 0");
         $acroom = DB::select("SELECT * FROM add_room WHERE room_facility = 'A.C. Room'");
-        //$acroomlist= DB::select("SELECT *, add_room.room_no as id FROM add_room WHERE add_room.status = 0");
         $pdetails = DB::select("SELECT * from room_details join add_room on add_room.room_detail_id=room_details.r_id join personal_details on personal_details.p_id=room_details.member_id join add_members on add_members.p_id = personal_details.member_id WHERE add_room.status = 1");
      
         /*Insert Personal deatil*/
@@ -48,9 +47,7 @@ class BookingController extends Controller
         $details->subcommunity = strtoupper($req->subcommunity);
         $details->gender = $req->inlineRadioOptions;
         $details->member_id=$req->name;
-       /* $dir="assets/image/";
-        $file1=$dir.basename($req->id_proof[0],'name');
-        dd($file);*/
+       
         if(count($req->id_proof)==1){ $details->id_proof=$req->id_proof[0]; }
         else{$details->id_proof=$req->id_proof[0];$details->id_proof1=$req->id_proof[1];}
         
@@ -88,8 +85,6 @@ class BookingController extends Controller
             $booking->advance_date= date("Y-m-d H:i",strtotime($req->check_in_date));
             $booking->status="ADVANCE";
             $booking->booking_type="ADVANCE";}
-        
-    
         $booking->save();
         if(!empty($req->select2Multiple1)){
         foreach($req->select2Multiple1 as $room)
@@ -119,13 +114,10 @@ class BookingController extends Controller
             $m_details->save();
         }
         $ar_list = DB::select("SELECT add_room.*, room_details.check_in_date, room_details.* FROM add_room LEFT JOIN room_details ON add_room.room_no = room_details.r_id WHERE add_room.status = 1");
-        return back()->with;
-       // return view ('Booking.room-booking',['pdetails'=>$pdetails,'m_data'=>$m_data,'data'=>$data,'p_details'=>$p_details,'m_name'=>$m_name,'a_list'=>$ar_list,'acroom'=>$acroom,'depositeno'=>$depositeno,'p_id'=>$p_id]);
-
+        return back();
     }
 
     public function add_member(Request $req){
-        
         $p_details=personal_details::with('member')->get();
         $member = new add_members();
         $depositeno = room_details::get()->last()->deposite_no;
@@ -133,19 +125,22 @@ class BookingController extends Controller
         $member->email = $req->email;
         $member->phone_no = $req->phone_no;
         $member->city = strtoupper($req->city);
-        $member->save();
-
-        $m_data=add_members::all();
-        $ar_list= DB::select("SELECT *, add_room.room_no as id FROM add_room WHERE add_room.status = 0");
-
-        $r_list = DB::select("SELECT add_room.*, room_details.check_in_date, room_details.* FROM add_room LEFT JOIN room_details ON add_room.room_no = room_details.r_id WHERE add_room.status = 1");
-   
-        return back()->with[''];
+       // $member->save();
+       echo response()->json($member);
+      // return json_encode($member);   
     }
-    
-   
-    // RoomList
-
+    public function get_member()
+    {
+        $data=add_members::get()->last();
+        return $data;
+    }
+    public function check_num($num)
+    {
+        $phone_no=DB::SELECT("SELECT * from add_members where phone_no='$num'");
+        if($phone_no)
+        {return 1;}
+        else{return 0;}
+    }
     public function get_room_list(){
         $list =$data=DB::select("SELECT * , add_room.room_no as id from add_room");
         $get_list = DB::select("SELECT * from room_details join add_room on add_room.room_detail_id=room_details.r_id join personal_details on personal_details.p_id=room_details.member_id WHERE add_room.status = 1");
@@ -336,7 +331,7 @@ class BookingController extends Controller
             $total_member = $req->no_of_person_id;
             for ($i =1; $i < $total_member; $i++){
                 $m_details =member_details::find($req->m_id[$i]);
-                dd(count($m_details));
+                dd($req);
                 //dd($m_details->toArray());
                 $m_details->full_name = strtoupper($req->full_name[$i]);
                 //dd($req->full_name);

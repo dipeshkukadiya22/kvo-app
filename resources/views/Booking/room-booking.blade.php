@@ -127,7 +127,6 @@
                               <div class="mb-3">
                                 <label class="form-label" for="multicol-phone">Phone Number</label>
                                 <input type="number" name="phone_no" id="multicol-phone" class="form-control phone-mask" placeholder="658 799 8941"  maxlength="10" required oninput="javascript: if (this.value.length > 10) this.value = this.value.slice(0, 10);"/>
-
                               </div>
 
                               <div class="mb-3">
@@ -230,10 +229,10 @@
                                 <select id="select2Basic" class="select2 form-select" data-allow-clear="true" name="name" placeholder="select name" required>
                                   <option value=""></option>
                                   @foreach ($m_data as $row)  
-                                      <option value="{{$row->p_id}}" {{(!empty($member) && $member->m_name == $row->m_name) ? "selected" : ""}}>{{$row->m_name}}&nbsp;&nbsp;-&nbsp;&nbsp;{{$row->phone_no}}</option>
+                                      <option value="{{$row->p_id}}" {{!empty($member) && $member->m_name == $row->m_name ? "selected" : ""}}>{{$row->m_name}}&nbsp;&nbsp;-&nbsp;&nbsp;{{$row->phone_no}}</option>
                                   @endforeach
                                 </select>
-                                {{ print_r($row->name) }}
+                               
                                 
                                 <input type="hidden" id="email_user" value="{{!empty($m_data)  ? $m_data:''}}">
                               </div>
@@ -253,7 +252,6 @@
                                 <input type="number" id="member-phone" name="phone_no" class="form-control phone-mask" placeholder="658 799 8941" aria-label="658 799 8941" value="{{ (!empty($member)) ? $row->phone_no : '' }}"    maxlength="10"
                               required
                               oninput="javascript: if (this.value.length > 10) this.value = this.value.slice(0, 10);"/>
-                              {{ print_r($row->phone_no) }}
                               </div>
                               
 
@@ -288,7 +286,7 @@
                               
                               <div class="col-md-4">
                                 <label for="defaultFormControlInput" class="form-label"><span class="required">Sub Community</span></label>
-                                <input type="text" class="form-control" name="subcommunity" id="defaultFormControlInput" placeholder="John Doe" aria-describedby="defaultFormControlHelp" required/>
+                                <input type="text" class="form-control" name="subcommunity" id="defaultFormControlInput" style="text-transform:uppercase" placeholder="John Doe" aria-describedby="defaultFormControlHelp" required/>
                               </div>
 
                               
@@ -728,12 +726,47 @@
 
     <script src="{{ asset ('assets/js/forms-extras.js') }}"></script>
     <script>
+      $("#multicol-phone").focusout(function(){
+        var contact=document.getElementById("multicol-phone").value;
+        $.ajax({
+                url:"{{url('check_num')}}"+"/"+ contact,
+                type:'GET',
+                success:function(response){
+                    if(response==1)
+                      { $("#submitbtn").prop('disabled',true);}
+                    else{ $("#submitbtn").prop('disabled',false);}
+                    }
+                });
+      });
+      $("#submitbtn").click(function(){
+    var name = document.getElementById("basic-default-name").value;
+    var phone = document.getElementById("multicol-phone").value;
+    var email = document.getElementById("basic-default-email").value;
+    var city = document.getElementById("city").value;
+    $.ajax({
+        method: "POST",
+        url: "{{ url('add_member') }}",
+        data: {
+            _token: $("#csrf").val(),
+            name: name,
+            email: email,
+            phone: phone,
+            city: city
+        },
+        success: function(response){
+          $("#member_email").val(response[0]['email']); // Assuming the server returns a JSON object with a “name” property
+        }
+    });
+    alert("submit");
+});
+      </script>
+    <script>
       function convertToWords() {
       var depositAmount = parseFloat(document.getElementById("deposit-amount").value);
       var inWords = numberToWords(depositAmount);
       document.getElementById("rupees-in-words").value = inWords;
     }
-    
+   
     function numberToWords(number) {
       var units = [
         "Zero", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine",
@@ -1017,24 +1050,7 @@ $(document).ready(function () {
         });
     </script>
 
-<script>
-        $(document).ready(function () {
-            $("#submitbtn").click(function () { 
-                $.each(data,function(key,value){
-                 
-                  if($('#select2Basic').val()==value['p_id']){
-                   console.log(value['email']);
-                   $('#member_email').val(value['email']);
-                   $('#member-phone').val(value['phone_no']);
-                   $('#member-address').val(value['address']);
-                   $('#member_city').val(value['city']);
-                   $('#full_name_form').val(value['m_name']);
-                   }
-                });
-            
-            });
-        });
-    </script>
+
 
   <!-- <script>
      $(document).ready(function () {

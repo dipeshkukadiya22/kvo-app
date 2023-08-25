@@ -132,8 +132,9 @@ div.card-datatable [class*=col-md-] {
                                                   <div class="d-inline-block">
                                                     <a href=@if($row->status=='BOOKED')"{{route('pdf_CheckIn',$row->r_id)}}" @endif ><img src="./assets/icon/orange-eye.png" width="20px"></a>
 
+                                                    <!--<a onclick="pdf({{$row->r_id}})" class="btn btn-sm btn-icon item-edit"><img src="./assets/icon/orange-eye.png" width="20px"></a>-->
+                                                    
                                                     <a onclick="edit({{$row->r_id}})" class="btn btn-sm btn-icon item-edit"><img src="./assets/icon/orange-edit.png" width="20px"></a>
-
 
                                                     <a href="#" class="text-danger delete-record"><img src="./assets/icon/orange-trash.png" width="20px"></a> 
                                                     
@@ -147,7 +148,30 @@ div.card-datatable [class*=col-md-] {
                                 </div>
                             </div>
                         </div>
+                        <!--modal pdf-->
+                        <div id="myModal" class="modal fade" role="dialog">
+                          <div class="modal-dialog modal-lg">
 
+                            <!-- Modal content-->
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                    <h4 class="modal-title">Modal Header</h4>
+                                </div>
+                                <div class="modal-body">
+
+                                    <embed src="~/Content/Article List.pdf"
+                                          frameborder="0" width="100%" height="400px">
+
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                          </div>
+                        <!--End pdf modal-->
                         <div class="modal fade" id="exLargeModal" tabindex="-1" aria-hidden="true">
                           <div class="modal-dialog modal-xl" role="document">
                             <div class="modal-content">
@@ -794,6 +818,14 @@ div.card-datatable [class*=col-md-] {
     });
     </script>
     <script>
+      function pdf(id)
+      {
+        alert("start");
+          const myOffcanvas = document.getElementById(' myModal');
+          let a=new bootstrap.Modal(myOffcanvas);
+          a.show();
+       alert(id);
+      }
 function edit(id)
 {
           const myOffcanvas = document.getElementById('exLargeModal');
