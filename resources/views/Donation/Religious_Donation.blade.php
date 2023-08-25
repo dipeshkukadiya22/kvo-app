@@ -137,7 +137,7 @@
                             <input
                               type="text"
                               class="form-control"
-                              id="basic-default-name"
+                              id="haste"
                               name="haste"
                               style="text-transform:uppercase"
                               placeholder="John Doe"
@@ -357,26 +357,6 @@
                         	</div>
                           <div class="col-md-4">
                             <label class="d-block form-label">નાણા મળેલ</label>
-                            <div class="form-check form-check-inline mb-2">
-                              <input
-                                type="radio"
-                                id="basic_default_radio-male"
-                                name="basic_default_radio"
-                                class="form-check-input"
-                                value="CHEQUE"
-                                required />
-                              <label class="form-check-label" for="basic_default_radio">ચેક</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                              <input
-                                type="radio"
-                                id="basic_default_radio-female"
-                                name="basic_default_radio"
-                                class="form-check-input"
-                                value="DRAFT"
-                                required />
-                              <label class="form-check-label" for="basic_default_radio">ડ્રાફ્ટ</label>
-                            </div>
                             <div class="form-check form-check-inline">
                               <input
                                 type="radio"
@@ -387,6 +367,18 @@
                                 required checked/>
                               <label class="form-check-label" for="basic_default_radio">રોકડા</label>
                             </div>
+                            <div class="form-check form-check-inline mb-2">
+                              <input
+                                type="radio"
+                                id="basic_default_radio-male"
+                                name="basic_default_radio"
+                                class="form-check-input"
+                                value="CHEQUE"
+                                required />
+                              <label class="form-check-label" for="basic_default_radio">ચેક</label>
+                            </div>
+                            
+                           
                             <div class="form-check form-check-inline">
                               <input
                                 type="radio"
@@ -645,6 +637,7 @@ function NumToWord(inputNumber, outputControl) {
                   success:function(response){   
                         $("#member_city").val(response['city']); 
                         $("#member-phone").val(response['phone_no']); 
+                        $("#haste").val(response['m_name']);
                   }
                 });
             });

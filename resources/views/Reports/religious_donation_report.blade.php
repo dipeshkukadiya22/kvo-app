@@ -375,6 +375,7 @@ div.card-datatable [class*=col-md-] {
             },
             {
               extend: 'pdf',
+              orientation: 'landscape',
               text: '<i class="ti ti-file-description me-1"></i>Pdf',
               className: 'dropdown-item',
               exportOptions: {

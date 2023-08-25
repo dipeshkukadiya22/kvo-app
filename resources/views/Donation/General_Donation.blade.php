@@ -160,6 +160,13 @@
                               required />
                          
                           </div>
+                          <div class="col-md-4">
+                            <label class="form-label" for="basic-default-country">સંસ્થા</label>
+                            <select class="form-select" name="community" id="basic-default-country" required>
+                              <option value="VIJAYNAGAR">વિજયનગર</option>
+                              <option value="NAVNEETNAGAR">નવનીતનગર</option>
+                            </select>
+                          </div>
                           <div class="col-12">
                             <h6 class="mt-2 fw-semibold">2. Donation Details</h6>
                             <hr class="mt-0" />
@@ -234,6 +241,7 @@
                   success:function(response){   
                         $("#city1").val(response['city']); 
                         $("#phone").val(response['phone_no']); 
+                        $("#haste").val(response['m_name']);
                     
                   }
                 });

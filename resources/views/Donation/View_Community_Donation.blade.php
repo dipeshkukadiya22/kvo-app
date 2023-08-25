@@ -179,7 +179,7 @@ button.swal2-cancel.btn.btn-label-danger {
                                         <label class="form-label" for="multicol-phone">શેઠશ્રી રતનશી ટોકરશી વોરા મેડિકલ ચેકઅપ સેન્ટર</label>
                                         <div class="input-group">
                                             <span class="input-group-text">₹</span>
-                                            <input type="number" class="form-control amount-input" name="medical_checkup" id="medical_checkup" placeholder="Amount" aria-label="Amount (to the nearest dollar)" required>
+                                            <input type="number" class="form-control amount-input" name="medical_checkup" id="medical_checkup" placeholder="Amount" aria-label="Amount (to the nearest dollar)"/>
                                             
                                         </div>
                                     </div>
@@ -188,7 +188,7 @@ button.swal2-cancel.btn.btn-label-danger {
                                         <label class="form-label" for="multicol-phone">મહાજનનું મામેરું</label>
                                         <div class="input-group">
                                             <span class="input-group-text">₹</span>
-                                            <input type="number" class="form-control amount-input" name="mahajan" id="mahajan" placeholder="Amount" aria-label="Amount (to the nearest dollar)" required>
+                                            <input type="number" class="form-control amount-input" name="mahajan" id="mahajan" placeholder="Amount" aria-label="Amount (to the nearest dollar)"/>
                                             
                                         </div>
                                     </div>
@@ -197,7 +197,7 @@ button.swal2-cancel.btn.btn-label-danger {
                                         <label class="form-label" for="multicol-phone">માતુશ્રી લાખણીબાઈ રામજી તેજશી ગાલા નવનીત ભોજનશાળા</label>
                                         <div class="input-group">
                                             <span class="input-group-text">₹</span>
-                                            <input type="number" class="form-control amount-input" name="bhojanshala" id="bhojanshala"placeholder="Amount" aria-label="Amount (to the nearest dollar)" required>
+                                            <input type="number" class="form-control amount-input" name="bhojanshala" id="bhojanshala"placeholder="Amount" aria-label="Amount (to the nearest dollar)"/>
                                             
                                         </div>
                                     </div>
@@ -206,7 +206,7 @@ button.swal2-cancel.btn.btn-label-danger {
                                         <label class="form-label" for="multicol-phone">શૈક્ષણિક</label>
                                         <div class="input-group">
                                         <span class="input-group-text">₹</span>
-                                        <input type="number" class="form-control amount-input" name="shaikshanik" id="shaikshanik" placeholder="Amount" aria-label="Amount (to the nearest dollar)" required>
+                                        <input type="number" class="form-control amount-input" name="shaikshanik" id="shaikshanik" placeholder="Amount" aria-label="Amount (to the nearest dollar)"/>
                                         
                                         </div>
                                     </div>
@@ -215,7 +215,7 @@ button.swal2-cancel.btn.btn-label-danger {
                                         <label class="form-label" for="multicol-phone">લવાજમ</label>
                                         <div class="input-group">
                                         <span class="input-group-text">₹</span>
-                                        <input type="number" class="form-control amount-input" name="lavajam" id="lavajam" placeholder="Amount" aria-label="Amount (to the nearest dollar)" required>
+                                        <input type="number" class="form-control amount-input" name="lavajam" id="lavajam" placeholder="Amount" aria-label="Amount (to the nearest dollar)"/>
                                         
                                         </div>
                                     </div>
@@ -224,7 +224,7 @@ button.swal2-cancel.btn.btn-label-danger {
                                         <label class="form-label" for="multicol-phone">ઑક્સીજન ડોનેશન</label>
                                         <div class="input-group">
                                         <span class="input-group-text">₹</span>
-                                        <input type="number" class="form-control amount-input" name="oxygen" id="oxygen" placeholder="Amount" aria-label="Amount (to the nearest dollar)" required>
+                                        <input type="number" class="form-control amount-input" name="oxygen" id="oxygen" placeholder="Amount" aria-label="Amount (to the nearest dollar)"/>
                                         
                                         </div>
                                     </div>
@@ -233,7 +233,7 @@ button.swal2-cancel.btn.btn-label-danger {
                                         <label class="form-label" for="multicol-phone">એમ્બ્યુલન્સ ડોનેશન</label>
                                         <div class="input-group">
                                         <span class="input-group-text">₹</span>
-                                        <input type="number" class="form-control amount-input" name="ambulance" id="ambulance" placeholder="Amount" aria-label="Amount (to the nearest dollar)" required>
+                                        <input type="number" class="form-control amount-input" name="ambulance" id="ambulance" placeholder="Amount" aria-label="Amount (to the nearest dollar)"/>
                                         
                                         </div>
                                     </div>
@@ -242,7 +242,7 @@ button.swal2-cancel.btn.btn-label-danger {
                                         <label class="form-label" for="multicol-phone">ઈતર</label>
                                         <div class="input-group">
                                         <span class="input-group-text">₹</span>
-                                        <input type="number" class="form-control amount-input" name="other" id="other" placeholder="Amount" aria-label="Amount (to the nearest dollar)" required>
+                                        <input type="number" class="form-control amount-input" name="other" id="other" placeholder="Amount" aria-label="Amount (to the nearest dollar)"/>
                                         
                                         </div>
                                     </div>
@@ -254,6 +254,7 @@ button.swal2-cancel.btn.btn-label-danger {
                                         class="form-control"
                                         id="remarks"
                                         name="remarks" 
+                                        style="text-transform:capitalize"
                                         {{-- placeholder="John Doe" --}}
                                          />
                                     </div>
@@ -279,23 +280,6 @@ button.swal2-cancel.btn.btn-label-danger {
                                         </div>
                                     <div class="col-md-12">
                                         <label class="d-block form-label">નાણા મળેલ</label>
-                                        <div class="form-check form-check-inline mb-2">
-                                        <input
-                                            type="radio"
-                                            id="cheque"
-                                            name="basic_default_radio"
-                                            class="form-check-input" />
-                                        <label class="form-check-label" for="basic_default_radio">ચેક</label>
-                                        </div>
-                                        <div class="form-check form-check-inline">
-                                        <input
-                                            type="radio"
-                                            id="draft"
-                                            name="basic_default_radio"
-                                            class="form-check-input"
-                                            />
-                                        <label class="form-check-label" for="basic_default_radio">ડ્રાફ્ટ</label>
-                                        </div>
                                         <div class="form-check form-check-inline">
                                         <input
                                             type="radio"
@@ -305,6 +289,16 @@ button.swal2-cancel.btn.btn-label-danger {
                                             />
                                         <label class="form-check-label" for="basic_default_radio">રોકડા</label>
                                         </div>
+                                        <div class="form-check form-check-inline mb-2">
+                                        <input
+                                            type="radio"
+                                            id="cheque"
+                                            name="basic_default_radio"
+                                            class="form-check-input" />
+                                        <label class="form-check-label" for="basic_default_radio">ચેક</label>
+                                        </div>
+                                        
+                                        
                                         <div class="form-check form-check-inline">
                                         <input
                                             type="radio"
@@ -781,7 +775,6 @@ button.swal2-cancel.btn.btn-label-danger {
                 $("#payment").val(response[0]['payment_mode']); 
                   if(payment=="CASH"){$("#cash").attr('checked',true);}
                   if(payment=="UPI"){$("#upi").attr('checked',true);}
-                  if(payment=="DRAFT"){$("#draft").attr('checked',true);}
                   if(payment=="CHEQUE"){$("#cheque").attr('checked',true);}
                   member_id.forEach(myFunction)
                   function myFunction(item, index, arr) {
@@ -798,9 +791,6 @@ button.swal2-cancel.btn.btn-label-danger {
       });
       $("#cheque").change(function(){
         document.getElementById("payment").value="CHEQUE";
-      });
-      $("#draft").change(function(){
-        document.getElementById("payment").value="DRAFT";
       });
       $("#upi").change(function(){
         document.getElementById("payment").value="UPI";

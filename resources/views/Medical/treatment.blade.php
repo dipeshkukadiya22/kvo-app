@@ -111,17 +111,13 @@
                     </div>
                     <div class="col-md-4">
                         <label class="d-block form-label">નાણા મળેલ</label>
-                      <div class="form-check form-check-inline mb-2">
-                        <input type="radio" id="cheque" name="basic-default-radio" class="form-check-input" />
-                        <label class="form-check-label" for="basic-default-radio">ચેક </label>
-                      </div>
-                            <div class="form-check form-check-inline">
-                              <input type="radio" id="draft" name="basic-default-radio" class="form-check-input"  />
-                              <label class="form-check-label" for="basic-default-radio">ડ્રાફ્ટ </label>
-                            </div>
-                            <div class="form-check form-check-inline">
+                        <div class="form-check form-check-inline">
                               <input type="radio" id="cash" name="basic-default-radio" class="form-check-input" checked/>
                               <label class="form-check-label" for="basic-default-radio">રોકડા </label>
+                            </div>
+                            <div class="form-check form-check-inline mb-2">
+                              <input type="radio" id="cheque" name="basic-default-radio" class="form-check-input" />
+                              <label class="form-check-label" for="basic-default-radio">ચેક </label>
                             </div>
                             <div class="form-check form-check-inline">
                               <input type="radio" id="upi" name="basic-default-radio" class="form-check-input" />
@@ -179,9 +175,6 @@
       });
       $("#cheque").change(function(){
         document.getElementById("payment").value="CHEQUE";
-      });
-      $("#draft").change(function(){
-        document.getElementById("payment").value="DRAFT";
       });
       $("#upi").change(function(){
         document.getElementById("payment").value="UPI";

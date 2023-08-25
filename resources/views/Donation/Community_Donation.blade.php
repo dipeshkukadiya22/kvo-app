@@ -138,7 +138,7 @@
                               value="{{ (!empty($member)) ? $member->phone_no : '' }}"
                               aria-label="658 799 8941"
                               required
-                              oninput="javascript: if (this.value.length > 10) this.value = this.value.slice(0, 10);"/>
+                              oninput="javascript: if (this.value.length > 10) this.value = this.value.slice(0, 10);" readonly/>
 
                           </div>
                           <div class="col-md-2">
@@ -150,6 +150,7 @@
                               id="member_city"
                               placeholder="John Doe"
                               value="{{ (!empty($member)) ? $member->donation : '' }}"
+                              readonly
                               required />
                          
                           </div>
@@ -281,26 +282,6 @@
                         	</div>
                           <div class="col-md-4">
                             <label class="d-block form-label">નાણા મળેલ</label>
-                            <div class="form-check form-check-inline mb-2">
-                              <input
-                                type="radio"
-                                id="basic_default_radio-male"
-                                name="basic_default_radio"
-                                class="form-check-input"
-                                value="CHEQUE"
-                                required />
-                              <label class="form-check-label" for="basic_default_radio">ચેક</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                              <input
-                                type="radio"
-                                id="basic_default_radio-female"
-                                name="basic_default_radio"
-                                class="form-check-input"
-                                value="DRAFT"
-                                required />
-                              <label class="form-check-label" for="basic_default_radio">ડ્રાફ્ટ</label>
-                            </div>
                             <div class="form-check form-check-inline">
                               <input
                                 type="radio"
@@ -311,6 +292,17 @@
                                 required checked/>
                               <label class="form-check-label" for="basic_default_radio">રોકડા</label>
                             </div>
+                            <div class="form-check form-check-inline mb-2">
+                              <input
+                                type="radio"
+                                id="basic_default_radio-male"
+                                name="basic_default_radio"
+                                class="form-check-input"
+                                value="CHEQUE"
+                                required />
+                              <label class="form-check-label" for="basic_default_radio">ચેક</label>
+                            </div>
+                           
                             <div class="form-check form-check-inline">
                               <input
                                 type="radio"

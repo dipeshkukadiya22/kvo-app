@@ -91,6 +91,7 @@ button.swal2-cancel.btn.btn-label-danger {
                                                   <th>મોબાઈલ નંબર</th>
                                                   <th>ગામ</th>
                                                   <th>હસ્તે</th>
+                                                  <th>સંસ્થા</th>
                                                   <th>વિગત</th>
                                                   <th>Action</th>
                                               </tr>
@@ -104,6 +105,7 @@ button.swal2-cancel.btn.btn-label-danger {
                                               <td>{{$row->phone_no}}</td>
                                               <td>{{$row->city}}</td>
                                               <td>{{$row->haste}}</td>
+                                              <td>{{$row->community}}</td>
                                               <td>{{$row->details}}</td>
                                             
                                               <td>
@@ -188,10 +190,17 @@ button.swal2-cancel.btn.btn-label-danger {
                                         <label class="form-label" for="multicol-username">હસ્તે </label>
                                         <input type="text" id="haste" name="haste" class="form-control"  style="text-transform:uppercase" placeholder="" required>  
                                     </div>
+                                    <div class="col-md-12">
+                                        <label class="form-label" for="multicol-username">સંસ્થા</label>
+                                        <select id="community" name="community" class="select2 form-select form-select-lg" data-allow-clear="false" >
+                                          <option value="VIJAYNAGAR">વિજયનગર</option>
+                                          <option value="NAVNEETNAGAR">નવનીતનગર</option>
+                                        </select>    
+                                    </div>
 
                                     <div class="col-md-12">
                                         <label class="form-label" for="collapsible-address">વિગત</label>
-                                        <textarea name="details" class="form-control" id="details" rows="1" placeholder="Hello," required></textarea>
+                                        <textarea name="details" class="form-control" id="details" style="text-transform:uppercase" rows="1" placeholder="Hello," required></textarea>
                                       
                                     </div>
                                     <div class="col-md-12">
@@ -618,12 +627,16 @@ button.swal2-cancel.btn.btn-label-danger {
             type:'GET',
               success:function(response){  
                 var sr_no=response[0]['p_id'];
+                var community=response[0]['community'];
                 $("#depo_id").val(response[0]['depo_id']);
                 $("#phone").val(response[0]['phone_no']);
                 $("#date").val(response[0]['date']);
                 $("#city").val(response[0]['city']);
                 $("#haste").val(response[0]['haste']);
+                $("#haste").val(response[0]['haste']);
                 $("#details").val(response[0]['details']);
+                if(community=="VIJAYNAGAR"){$("#community option[value='VIJAYNAGAR']").attr('selected', 'selected'); }
+                if(community=="NAVNEETNAGAR"){$("#community option[value='NAVNEETNAGAR']").attr('selected', 'selected'); }     
                 member_id.forEach(myFunction)
                     function myFunction(item, index, arr) {
                         if((member_id[index])==sr_no)

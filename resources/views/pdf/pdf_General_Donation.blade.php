@@ -5,7 +5,7 @@
 
 				@font-face {
 					font-family: KAP119;
-					src: url('C:/xampp latest/htdocs/kvo-app/vendor/dompdf/dompdf/lib/fonts/KAP119.ttf');
+					src: url('C:/xampplatest/htdocs/kvo-app/vendor/dompdf/dompdf/lib/fonts/KAP119.ttf');
 				}
 
 
@@ -107,6 +107,9 @@
 				<tr>
 					<td class="tg-0pky" colspan="2"><span class="gujfont">GFDo </span><span>{{$general_donation[0]->m_name . " - " . $general_donation[0]->phone_no}}</span></td>
 					<td class="tg-0pky"><span class="gujfont">C:T[o </span><span>{{$general_donation[0]->haste}}</span></td>
+				</tr>
+				<tr>
+					<td class="tg-0pky" colspan="3"><span class="gujfont">;\:YFo </span><span>{{$general_donation[0]->community}}</span></td>
 				</tr>
 				<tr>
 					<td class="tg-0pky title" colspan="3"><span class="gujfont">VF5GF TZOYL GLR[GL —JUT[ —JHIGUZ < GJGLT GUZ _GF,I DF8[ D/[, K[ </span></td>

@@ -190,6 +190,7 @@ button.swal2-cancel.btn.btn-label-danger {
                                             class="form-control"
                                             id="haste"
                                             name="haste"
+                                            style="text-transform:uppercase"
                                             />
                                     </div>
                                     
@@ -317,6 +318,7 @@ button.swal2-cancel.btn.btn-label-danger {
                                         class="form-control"
                                         id="remarks"
                                         name="remarks" 
+                                        style="text-transform:capitalize"
                                         {{-- placeholder="John Doe" --}}
                                          />
                                     </div>
@@ -342,23 +344,6 @@ button.swal2-cancel.btn.btn-label-danger {
                                         </div>
                                     <div class="col-md-12">
                                         <label class="d-block form-label">નાણા મળેલ</label>
-                                        <div class="form-check form-check-inline mb-2">
-                                        <input
-                                            type="radio"
-                                            id="cheque"
-                                            name="basic_default_radio"
-                                            class="form-check-input" />
-                                        <label class="form-check-label" for="basic_default_radio">ચેક</label>
-                                        </div>
-                                        <div class="form-check form-check-inline">
-                                        <input
-                                            type="radio"
-                                            id="draft"
-                                            name="basic_default_radio"
-                                            class="form-check-input"
-                                            value="Draft"/>
-                                        <label class="form-check-label" for="basic_default_radio">ડ્રાફ્ટ</label>
-                                        </div>
                                         <div class="form-check form-check-inline">
                                         <input
                                             type="radio"
@@ -368,6 +353,17 @@ button.swal2-cancel.btn.btn-label-danger {
                                             />
                                         <label class="form-check-label" for="basic_default_radio">રોકડા</label>
                                         </div>
+                                        <div class="form-check form-check-inline mb-2">
+                                        <input
+                                            type="radio"
+                                            id="cheque"
+                                            name="basic_default_radio"
+                                            class="form-check-input" />
+                                        <label class="form-check-label" for="basic_default_radio">ચેક</label>
+                                        </div>
+                                       
+                                        
+                                        
                                         <div class="form-check form-check-inline">
                                         <input
                                             type="radio"
@@ -857,7 +853,6 @@ function delete_religious_donation(id)
                       $("#remarks").val(response[0]['remarks']);  
                         if(payment=="CASH"){$("#cash").attr('checked',true);}
                         if(payment=="UPI"){$("#upi").attr('checked',true);}
-                        if(payment=="DRAFT"){$("#draft").attr('checked',true);}
                         if(payment=="CHEQUE"){$("#cheque").attr('checked',true);}
                         if(community=="VIJAYNAGAR"){$("#community option[value='VIJAYNAGAR']").attr('selected', 'selected'); }
                         if(community=="NAVNEETNAGAR"){$("#community option[value='NAVNEETNAGAR']").attr('selected', 'selected'); }
@@ -878,9 +873,6 @@ function delete_religious_donation(id)
       });
       $("#cheque").change(function(){
         document.getElementById("payment").value="CHEQUE";
-      });
-      $("#draft").change(function(){
-        document.getElementById("payment").value="DRAFT";
       });
       $("#upi").change(function(){
         document.getElementById("payment").value="UPI";

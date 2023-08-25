@@ -5,7 +5,7 @@
 
 				@font-face {
 					font-family: KAP119;
-					src: url('C:/xampp latest/htdocs/kvo-app/vendor/dompdf/dompdf/lib/fonts/KAP119.ttf');
+					src: url('C:/xampplatest/htdocs/kvo-app/vendor/dompdf/dompdf/lib/fonts/KAP119.ttf');
 				}
 
 				@page  
@@ -132,23 +132,28 @@
 					</tr>
 					<tr>
 					<td class="tg-0pky gujfont">$</td>
-					<td class="tg-0pky gujfont">X{1—6S < ,JFHD < VF¬S®;LHG 0MG[XG </td>
-					<td class="tg-0pky">{{$community_donation[0] -> shaikshanik + $community_donation[0] -> lavajam + $community_donation[0] -> oxygen}}</td>
+					<td class="tg-0pky gujfont">X{1—6S</td>
+					<td class="tg-0pky">{{$community_donation[0] -> shaikshanik }}</td>
 					</tr>
 					<tr>
 					<td class="tg-0pky gujfont">5</td>
+					<td class="tg-0pky gujfont">JFlQ"S ,JFHD</td>
+					<td class="tg-0pky">{{$community_donation[0] -> lavajam}}</td>
+					</tr>
+					<tr>
+					<td class="tg-0pky gujfont">^</td>
+					<td class="tg-0pky gujfont">< VF¬S®;LHG 0MG[XG</td>
+					<td class="tg-0pky">{{$community_donation[0] -> oxygen}}</td>
+					</tr>
+					<tr>
+					<td class="tg-0pky gujfont">&</td>
 					<td class="tg-0pky gujfont">V[daI],g; 0MG[XG</td>
 					<td class="tg-0pky">{{$community_donation[0] -> ambulance}}</td>
 					</tr>
 					<tr>
-					<td class="tg-0pky gujfont">^</td>
+					<td class="tg-0pky gujfont">*</td>
 					<td class="tg-0pky gujfont">>TZ</td>
 					<td class="tg-0pky">{{$community_donation[0] -> other}}</td>
-					</tr>
-					<tr>
-					<td class="tg-0pky gujfont">&</td>
-					<td class="tg-0pky gujfont"></td>
-					<td class="tg-0pky"></td>
 					</tr>
 					<tr>
 					<td class="tg-0pky"></td>

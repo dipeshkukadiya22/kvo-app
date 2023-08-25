@@ -112,6 +112,14 @@ div.card-datatable [class*=col-md-] {
                                 <div class="card-body">
                                     <form id="kvo_general_donation_report" method="GET" class="browser-default-validation" action="{{route('show_general_donation_report')}}">
                                         <div class="row g-3">
+                                          @csrf
+                                          <div class="col-md-3 mb-3">
+                                                <label class="form-label" for="basic-default-country">સંસ્થા</label>
+                                                <select class="form-select" id="basic-default-country" name="trust" required>
+                                                <option value="VIJAYNAGAR" {{ ($trust == "VIJAYNAGAR") ? "selected" :""}}>વિજયનગર</option>
+                                                <option value="NAVNEETNAGAR" {{ ($trust == "NAVNEETNAGAR") ? "selected" :""}}>નવનીતનગર</option>
+                                                </select>
+                                            </div>
                                           
                                            <!-- Range Picker-->
                                             <div class="col-md-3 col-12 mb-4">
@@ -328,6 +336,7 @@ div.card-datatable [class*=col-md-] {
               extend: 'pdf',
               text: '<i class="ti ti-file-description me-1"></i>Pdf',
               className: 'dropdown-item',
+              orientation: 'landscape',
               exportOptions: {
                 columns: [0,1 ,2, 3,4],
                 // prevent avatar to be display

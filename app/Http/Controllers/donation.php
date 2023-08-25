@@ -243,6 +243,7 @@ class donation extends Controller
         $donation=new GeneralDonation();
         $donation->date=Date(('Y-m-d'),strtotime($req->date));
         $donation->haste=strtoupper($req->haste);
+        $donation -> community = $req -> community;
         $donation->details=strtoupper($req->details);
         $donation->member_id=$req->name;
         $donation->save();
@@ -264,7 +265,9 @@ class donation extends Controller
         $donation=GeneralDonation::find($req->depo_id);
         $donation->date=Date(('Y-m-d'),strtotime($req->date));
         $donation->haste=strtoupper($req->haste);
-        $donation->details=ucfirst($req->details);
+        $donation->community=$req->community;
+        
+        $donation->details=strtoupper($req->details);
         $donation->member_id=$req->name;
         $donation->save();
         return back()->with("Update General Donation");

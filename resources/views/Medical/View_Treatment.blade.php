@@ -219,24 +219,6 @@ button.swal2-cancel.btn.btn-label-danger {
                                     </div>
                                     <div class="col-md-12">
                                         <label class="d-block form-label">નાણા મળેલ</label>
-                                        <div class="form-check form-check-inline mb-2">
-                                        <input
-                                            type="radio"
-                                            id="cheque"
-                                            name="basic_default_radio"
-                                            class="form-check-input"
-                                            />
-                                        <label class="form-check-label" for="basic_default_radio">ચેક</label>
-                                        </div>
-                                        <div class="form-check form-check-inline">
-                                        <input
-                                            type="radio"
-                                            id="draft"
-                                            name="basic_default_radio"
-                                            class="form-check-input"
-                                            />
-                                        <label class="form-check-label" for="basic_default_radio">ડ્રાફ્ટ</label>
-                                        </div>
                                         <div class="form-check form-check-inline">
                                         <input
                                             type="radio"
@@ -246,6 +228,17 @@ button.swal2-cancel.btn.btn-label-danger {
                                             checked/>
                                         <label class="form-check-label" for="basic_default_radio">રોકડા</label>
                                         </div>
+                                        <div class="form-check form-check-inline mb-2">
+                                        <input
+                                            type="radio"
+                                            id="cheque"
+                                            name="basic_default_radio"
+                                            class="form-check-input"
+                                            />
+                                        <label class="form-check-label" for="basic_default_radio">ચેક</label>
+                                        </div>
+                                      
+                                       
                                         <div class="form-check form-check-inline">
                                         <input
                                             type="radio"
@@ -683,9 +676,7 @@ $("#name").change(function(){
       $("#cheque").change(function(){
         document.getElementById("payment").value="CHEQUE";
       });
-      $("#draft").change(function(){
-        document.getElementById("payment").value="DRAFT";
-      });
+ 
       $("#upi").change(function(){
         document.getElementById("payment").value="UPI";
       });
@@ -775,7 +766,7 @@ $("#name").change(function(){
                     $("#payment").val(response[0]['payment_mode']);
                     if(payment=="CASH"){$("#cash").attr('checked',true);}
                     if(payment=="UPI"){$("#upi").attr('checked',true);}
-                    if(payment=="DRAFT"){$("#draft").attr('checked',true);}
+                   
                     if(payment=="CHEQUE"){$("#cheque").attr('checked',true);}
                     member_id.forEach(myFunction)
                     function myFunction(item, index, arr) {
