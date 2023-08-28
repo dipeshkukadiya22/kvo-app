@@ -620,7 +620,7 @@
                <ul class="menu-sub">
                
                 <li class="menu-item">
-                  <a href="{{route('General_Donation')}}" class="menu-link">
+                  <a href="{{route('view_general_donation')}}" class="menu-link">
                     <i class="menu-icon tf-icons ti ti-layout-kanban"></i>
                     <div data-i18n="General Donation">General Donation</div>
                   </a>
