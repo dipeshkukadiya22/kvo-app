@@ -31,7 +31,7 @@ class Expense extends Controller
         $Mahajan_Expense -> amount = $req -> amount;
         $Mahajan_Expense -> inword = $req -> inword;
         $Mahajan_Expense -> save();
-        return view('Expense.View_Mahajan_Expense',['expense' => $expense,'member' => $member]);
+        return redirect()->route('view_mahajan_expense')->with('message', 'Form submitted successfully!')->with(['expense' => $expense,'member' => $member]);
     }
     
     public function view_mahajan_expense()
@@ -55,7 +55,7 @@ class Expense extends Controller
         $Mahajan_Expense -> amount = $req -> amount;
         $Mahajan_Expense -> inword = $req -> total_in_word;
         $Mahajan_Expense->save();
-        return back()->with("Update Mahajan Expense");
+        return redirect()->route("view_mahajan_expense");
     }
     public function delete_mahajan_expense($id)
     {
@@ -81,7 +81,7 @@ class Expense extends Controller
        $sangh_Expense -> amount = $req->amount;
        $sangh_Expense -> inword = $req->ankers;
        $sangh_Expense -> save();
-       return view('Expense.View_Sangh_Expense',['expense' => $expense,'member' => $member]);
+       return redirect()->route('View_Sangh_Expense')->with('message', 'Form submitted successfully!')->with (['expense' => $expense,'member' => $member]);
    }
    public function view_sangh_expense()
     {
@@ -104,7 +104,7 @@ class Expense extends Controller
         $Mahajan_Expense -> amount = $req -> amount;
         $Mahajan_Expense -> inword = $req -> total_in_word;
         $Mahajan_Expense->save();
-        return back()->with("Update Sangh Expense");
+        return redirect()->route("View_Sangh_Expense");
     }
     public function delete_sangh_expense($id)
     {

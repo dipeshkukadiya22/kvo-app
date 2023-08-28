@@ -36,7 +36,7 @@ class MedicalController extends Controller
         $data->payment_mode=$req->payment;
         $data->amount_in_words=$req->ankers;
         $data->save();
-       return view('Medical.View_Treatment',['member' => $member,'member_data' => $member_data,'rec_no' => $rec_no]);
+       return redirect()->route('view_treatment')->with('message', 'Form submitted successfully!')->with(['member' => $member,'member_data' => $member_data,'rec_no' => $rec_no]);
     }
     public function get_member($id)
     {
@@ -54,7 +54,7 @@ class MedicalController extends Controller
         $data->payment_mode=$req->payment;
         $data->amount_in_words=$req->total_in_word;
         $data->save();
-        return back()->with("Update Treatment");
+        return redirect()->route("view_treatment");
     }
     public function get($id){
         $data=add_members::find($id);

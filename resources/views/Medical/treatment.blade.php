@@ -88,7 +88,7 @@
                     </div>
                     <div class="col-md-4">
                       <label class="form-label" for="multicol-username">ડોક્ટરનું નામ </label>
-                      <input type="text" id="doctor_name" name="doctor_name" class="form-control" placeholder="Dr. Shah" required>
+                      <input type="text" id="doctor_name" name="doctor_name" class="form-control" style="text-transform:uppercase" placeholder="Dr. Shah" required>
                       <datalist id="doctor_name">
                                   @foreach($treatment as $item)
                                                                 <option value="{{$item->doctor_name}}">{{$item->doctor_name}}</option>

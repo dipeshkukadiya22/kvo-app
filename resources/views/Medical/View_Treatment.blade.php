@@ -190,7 +190,7 @@ button.swal2-cancel.btn.btn-label-danger {
 
                                     <div class="col-md-12">
                                         <label class="form-label" for="multicol-username">ડોક્ટરનું નામ </label>
-                                        <input type="text" id="doctor_name" name="doctor_name" class="form-control" placeholder="Dr. Shah" required>  
+                                        <input type="text" id="doctor_name" name="doctor_name" style="text-transform:uppercase" class="form-control" placeholder="Dr. Shah" required>  
                                         </div>
                                     
 

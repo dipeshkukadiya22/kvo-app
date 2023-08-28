@@ -251,7 +251,7 @@ class donation extends Controller
         $donation->details=strtoupper($req->details);
         $donation->member_id=$req->name;
         $donation->save();
-        return view('Donation.View_General_Donation',['member'=>$member,'donation_data'=>$donation_data]);
+        return redirect() -> route('view_general_donation')-> with ('message', 'Form submitted successfully!')->with (['member'=>$member,'donation_data'=>$donation_data]);
     }
     public function view_general_donation()
     {
@@ -274,7 +274,7 @@ class donation extends Controller
         $donation->details=strtoupper($req->details);
         $donation->member_id=$req->name;
         $donation->save();
-        return back()->with("Update General Donation");
+        return redirect()->route('view_general_donation');
     }
     public function delete_general_donation($id)
     {
