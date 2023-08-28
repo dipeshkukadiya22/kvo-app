@@ -65,6 +65,10 @@ button.swal2-cancel.btn.btn-label-danger {
 
             <div class="container-xxl flex-grow-1 container-p-y">
                 <div class="content-header row">
+                <div class="col-12" style= "display: flex; justify-content: flex-end;">
+                  <button class="btn btn-transparent"    type="button" >
+                    <a href="{{route('Community_Donation')}}"><span class="ti-xs ti ti-plus me-1"></span>Add New Community donation </a></button>
+                  </div>
                   <div class="content-header-left col-md-9 col-12 mb-2">
                     {{-- <div class="row breadcrumbs-top">
                       <div class="col-12">

@@ -119,7 +119,7 @@
                               class="form-control"
                               id="depo_id"
                               name="depo_id"
-                              value={{$depo_id + 1 }}
+                              value="{{$depo_id + 1}}"
                               required readonly/>
                           </div>
                           <div class="col-md-4">
@@ -146,7 +146,7 @@
                               minlength="10"
                               maxlength="10"
                               required
-                              oninput="javascript: if (this.value.length > 10) this.value = this.value.slice(0, 10);"/>
+                              oninput="javascript: if (this.value.length > 10) this.value = this.value.slice(0, 10);" readonly/>
                           </div>
                        
                           <div class="col-md-4">
@@ -157,7 +157,7 @@
                               id="city1"
                               name="city"
                               placeholder="John Doe"
-                              required />
+                              required readonly/>
                          
                           </div>
                           <div class="col-md-4">

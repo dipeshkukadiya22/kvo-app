@@ -12,7 +12,8 @@ class MedicalController extends Controller
     public function show(){
         $rec_no=medical::get()->last()->sr_no;
         $member=DB::select("SELECT * FROM add_members");
-        return view ('Medical.treatment',['member' => $member,'rec_no' => $rec_no]);
+        $treatment=DB::select("select DISTINCT doctor_name from medical");
+        return view ('Medical.treatment',['member' => $member,'rec_no' => $rec_no,'treatment'=>$treatment]);
     }
     public function view_treatment()
     {
@@ -22,6 +23,10 @@ class MedicalController extends Controller
     }
     public function add(Request $req)
     {
+        $member_data=DB::select("SELECT * FROM add_members");
+        $member=DB::select("SELECT m.sr_no,m.date,m.doctor_name,m.amount,m.payment_mode,M.m_name,M.city,M.phone_no,M.p_id FROM medical As m join add_members As M where m.p_id=M.p_id order by m.sr_no desc");
+        $rec_no=medical::get()->last()->sr_no;
+        
         $data=new medical();
         $data->p_id=strtoupper($req->name);
         $data->date=Date("Y-m-d",strtotime($req->date));
@@ -31,7 +36,7 @@ class MedicalController extends Controller
         $data->payment_mode=$req->payment;
         $data->amount_in_words=$req->ankers;
         $data->save();
-        return back()->with("Add Treatment");
+       return view('Medical.View_Treatment',['member' => $member,'member_data' => $member_data,'rec_no' => $rec_no]);
     }
     public function get_member($id)
     {

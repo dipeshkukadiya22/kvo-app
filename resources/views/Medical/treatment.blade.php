@@ -37,9 +37,11 @@
                     </div>
                 </div>
                 
+                
                 <div class="content-header-right d-flex justify-content-end col-md-3 col-12">
                     <div class="form-group breadcrumb-right py-3">
                       <!-- Enable backdrop (default) Offcanvas -->
+                      
                       <div class="mt-0">
                         <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasBackdrop" aria-controls="offcanvasBackdrop">
                           <span class="ti-xs ti ti-plus me-1"></span>Add Member </button>
@@ -87,6 +89,11 @@
                     <div class="col-md-4">
                       <label class="form-label" for="multicol-username">ડોક્ટરનું નામ </label>
                       <input type="text" id="doctor_name" name="doctor_name" class="form-control" placeholder="Dr. Shah" required>
+                      <datalist id="doctor_name">
+                                  @foreach($treatment as $item)
+                                                                <option value="{{$item->doctor_name}}">{{$item->doctor_name}}</option>
+                                                            @endforeach
+                                                    </datalist>
                     </div>
                     <div class="col-md-4">
                       <label class="form-label" for="multicol-username">ગામનું નામ </label>

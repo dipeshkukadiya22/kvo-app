@@ -32,7 +32,8 @@ class donation extends Controller
     }
     public function Religious_Donation(Request $req){
 
-
+        $donation=DB::SELECT("SELECT * FROM `religious_donation` join add_members where religious_donation.member_id=add_members.p_id ORDER by religious_donation_id desc");
+        $member=add_members::get();
         $m_name =(religious_donation::get()->last()->m_name);
         $p_details=religious_donation::with('member')->get();
         $m_data = add_members::all();
@@ -74,14 +75,14 @@ class donation extends Controller
         // return view ('Donation.Religious_Donation');
         if($religious_donation) { 
 
-            return redirect() -> route('Religious_Donation') -> with ('message', 'Form submitted successfully!') -> with 
-            (['p_details'=>$p_details,'m_name'=>$m_name,'m_data'=>$m_data, 'data'=>$data, 'religious_donation_id' => $religious_donation_id ]);
+            return redirect() -> route('View_Religious_Donation') -> with ('message', 'Form submitted successfully!') -> with 
+            (['p_details'=>$p_details,'m_name'=>$m_name,'m_data'=>$m_data, 'data'=>$data, 'religious_donation_id' => $religious_donation_id,'donation' => $donation,'member' =>$member]);
 
         }
         else{
 
-            return redirect() -> route('Religious_Donation') -> with ('message', 'your data not submit') -> with 
-            (['p_details'=>$p_details,'m_name'=>$m_name,'m_data'=>$m_data, 'data'=>$data, 'religious_donation_id' => $religious_donation_id ]);
+            return redirect() -> route('View_Religious_Donation') -> with ('message', 'your data not submit') -> with 
+            (['p_details'=>$p_details,'m_name'=>$m_name,'m_data'=>$m_data, 'data'=>$data, 'religious_donation_id' => $religious_donation_id,'donation' => $donation,'member' =>$member ]);
 
         }
     }
@@ -144,7 +145,8 @@ class donation extends Controller
     
     public function Community_Donation(Request $req){
 
-
+        $donation=DB::SELECT("SELECT * FROM `community_donation` join add_members where add_members.p_id=community_donation.member_id ORDER by donation_id desc");
+        $member=add_members::all();
         $m_name =(community_donation::get()->last()->m_name);
         $p_details=community_donation::with('member')->get();
         $m_data = add_members::all();
@@ -178,14 +180,14 @@ class donation extends Controller
 
         if($community_donation) { 
 
-            return redirect() -> route('Community_Donation') -> with ('message', 'Form submitted successfully!') -> with 
-            (['p_details'=>$p_details,'m_name'=>$m_name,'m_data'=>$m_data, 'data'=>$data, 'donation_id' => $donation_id ]);
+            return redirect() -> route('View_Community_Donation') -> with ('message', 'Form submitted successfully!') -> with 
+            (['p_details'=>$p_details,'m_name'=>$m_name,'m_data'=>$m_data, 'data'=>$data, 'donation_id' => $donation_id,'donation'=> $donation,'member' => $member ]);
 
         }
         else{
 
-            return redirect() -> route('Community_Donation') -> with ('message', 'your data not submit') -> with 
-            (['p_details'=>$p_details,'m_name'=>$m_name,'m_data'=>$m_data, 'data'=>$data, 'donation_id' => $donation_id ]);
+            return redirect() -> route('View_Community_Donation') -> with ('message', 'your data not submit') -> with 
+            (['p_details'=>$p_details,'m_name'=>$m_name,'m_data'=>$m_data, 'data'=>$data, 'donation_id' => $donation_id, 'donation'=> $donation,'member' => $member ]);
 
         }
 
@@ -240,6 +242,8 @@ class donation extends Controller
     }
     public function add_general_donation(Request $req)
     {
+        $donation_data=DB::SELECT("SELECT * FROM `GeneralDonation` join add_members WHERE GeneralDonation.member_id=add_members.p_id");
+        $member = DB::SELECT("select * from add_members");
         $donation=new GeneralDonation();
         $donation->date=Date(('Y-m-d'),strtotime($req->date));
         $donation->haste=strtoupper($req->haste);
@@ -247,13 +251,14 @@ class donation extends Controller
         $donation->details=strtoupper($req->details);
         $donation->member_id=$req->name;
         $donation->save();
-        return back()->with("Add General Donation");
+        return view('Donation.View_General_Donation',['member'=>$member,'donation_data'=>$donation_data]);
     }
     public function view_general_donation()
     {
-        $donation=DB::SELECT("SELECT * FROM `GeneralDonation` join add_members WHERE GeneralDonation.member_id=add_members.p_id order by depo_id desc");
+        $donation_data=DB::SELECT("SELECT * FROM `GeneralDonation` join add_members WHERE GeneralDonation.member_id=add_members.p_id ");
         $member = DB::SELECT("select * from add_members");
-        return view('Donation.View_General_Donation',['donation'=>$donation,'member' => $member]);
+     
+        return view('Donation.View_General_Donation',['member' => $member,'donation_data'=>$donation_data]);
     }
     public function get_general_donation($id)
     {
@@ -266,7 +271,6 @@ class donation extends Controller
         $donation->date=Date(('Y-m-d'),strtotime($req->date));
         $donation->haste=strtoupper($req->haste);
         $donation->community=$req->community;
-        
         $donation->details=strtoupper($req->details);
         $donation->member_id=$req->name;
         $donation->save();

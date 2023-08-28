@@ -62,10 +62,16 @@ button.swal2-cancel.btn.btn-label-danger {
             @include('layouts.header')
 
             <!-- Content -->
-
+            
             <div class="container-xxl flex-grow-1 container-p-y">
                 <div class="content-header row">
+                <div class="col-12" style= "display: flex; justify-content: flex-end;">
+                  <button class="btn btn-transparent"    type="button" >
+                    <a href="{{route('show')}}"><span class="ti-xs ti ti-plus me-1"></span>Add New Treatment </a></button>
+                  </div>
                   <div class="content-header-left col-md-9 col-12 mb-2">
+                  
+                  
                     {{-- <div class="row breadcrumbs-top">
                       <div class="col-12">
                         <h4 class="fw-bold py-3">View all Medical Treatment</h4>
@@ -76,8 +82,10 @@ button.swal2-cancel.btn.btn-label-danger {
                 <div class="row mb-4">
                   <div class="col-md mb-4 mb-md-0">
                     <div class="card">
+                    
                       <!-- Basic table -->
                     <section id="basic-datatable">
+                    
                         <div class="row">
                             <div class="col-12">
                                 <div class="card">
@@ -130,7 +138,7 @@ button.swal2-cancel.btn.btn-label-danger {
                                 </div>
                             </div>
                         </div>
-
+                      
 
                         <!-- Enable backdrop (default) Offcanvas -->
                         <div class="mt-0">
@@ -193,7 +201,7 @@ button.swal2-cancel.btn.btn-label-danger {
 
                                     <div class="col-md-12">
                                         <label class="form-label" for="collapsible-address">વિશેષ નોંધ </label>
-                                        <textarea name="remark" class="form-control" id="remark" rows="1" placeholder="Hello,"></textarea>
+                                        <textarea name="remark" class="form-control" id="remark"     style="text-transform:capitalize" rows="1" placeholder="Hello,"></textarea>
                                       
                                     </div>
 

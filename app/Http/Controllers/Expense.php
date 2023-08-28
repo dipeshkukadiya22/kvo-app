@@ -22,14 +22,16 @@ class Expense extends Controller
 
     public function add_mahajan_expense(Request $req)
     {
+        $expense=DB::SELECT("SELECT * FROM `Mahajan_Expense` join add_members WHERE Mahajan_Expense.member_id=add_members.p_id");
+        $member=add_members::get()->all();
         $Mahajan_Expense = new Mahajan_Expense();
         $Mahajan_Expense-> date = Date('Y-m-d',strtotime($req->date));
         $Mahajan_Expense -> member_id = $req -> name;
-        $Mahajan_Expense -> details =ucfirst($req -> details);
+        $Mahajan_Expense -> details =strtoupper($req -> details);
         $Mahajan_Expense -> amount = $req -> amount;
         $Mahajan_Expense -> inword = $req -> inword;
         $Mahajan_Expense -> save();
-        return back()->with("Add Mahajan Expense");
+        return view('Expense.View_Mahajan_Expense',['expense' => $expense,'member' => $member]);
     }
     
     public function view_mahajan_expense()
@@ -49,7 +51,7 @@ class Expense extends Controller
         $Mahajan_Expense = Mahajan_Expense::find($req->depo_id);
         $Mahajan_Expense-> date = Date('Y-m-d',strtotime($req->date));
         $Mahajan_Expense -> member_id = $req -> name;
-        $Mahajan_Expense -> details =ucfirst($req -> details);
+        $Mahajan_Expense -> details =strtoupper($req -> details);
         $Mahajan_Expense -> amount = $req -> amount;
         $Mahajan_Expense -> inword = $req -> total_in_word;
         $Mahajan_Expense->save();
@@ -70,14 +72,16 @@ class Expense extends Controller
    }
    public function add_sangh_expense(Request $req)
    {
+         $expense=DB::SELECT("SELECT * FROM `Sangh_Expense` join add_members WHERE Sangh_Expense.member_id=add_members.p_id");
+        $member=add_members::get()->all();
        $sangh_Expense = new Sangh_Expense();
        $sangh_Expense-> date = Date('Y-m-d',strtotime($req->date));
        $sangh_Expense -> member_id = $req -> name;
-       $sangh_Expense -> details =ucfirst($req->details);
+       $sangh_Expense -> details =strtoupper($req->details);
        $sangh_Expense -> amount = $req->amount;
        $sangh_Expense -> inword = $req->ankers;
        $sangh_Expense -> save();
-       return back()->with("Add Sangh Expense");
+       return view('Expense.View_Sangh_Expense',['expense' => $expense,'member' => $member]);
    }
    public function view_sangh_expense()
     {
@@ -96,7 +100,7 @@ class Expense extends Controller
         $Mahajan_Expense = Sangh_Expense::find($req->depo_id);
         $Mahajan_Expense-> date = Date('Y-m-d',strtotime($req->date));
         $Mahajan_Expense -> member_id = $req -> name;
-        $Mahajan_Expense -> details =ucfirst($req -> details);
+        $Mahajan_Expense -> details =strtoupper($req -> details);
         $Mahajan_Expense -> amount = $req -> amount;
         $Mahajan_Expense -> inword = $req -> total_in_word;
         $Mahajan_Expense->save();

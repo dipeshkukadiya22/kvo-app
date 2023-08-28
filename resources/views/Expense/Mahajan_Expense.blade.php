@@ -134,15 +134,15 @@
                               name="details"
                               class="form-control"
                               id="details"
-                              style="text-transform:capitalize"
-                              rows="1"></textarea>
+                              style="text-transform:uppercase"
+                              rows="1" required></textarea>
                           </div>
                           <div class="col-md-4">
                             <label class="form-label" for="multicol-phone">રૂપિયા</label>
                             <div class="input-group">
                               <span class="input-group-text">₹</span>
                               <input type="text" id="Text1" name="amount" class="form-control" placeholder="Amount" aria-label="Amount (to the nearest dollar)"
-                              onkeypress="return onlyNumbers(this.value);" onkeyup="NumToWord(this.value,'ankers');" maxlength="9">
+                              onkeypress="return onlyNumbers(this.value);" onkeyup="NumToWord(this.value,'ankers');" maxlength="9" required/>
                             </div>
                           </div>
                           {{-- <div id="divDisplayWords"> --}}

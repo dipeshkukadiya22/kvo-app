@@ -165,7 +165,7 @@
                               value="{{ (!empty($member)) ? $member->phone_no : '' }}"
                               aria-label="658 799 8941" 
                               required
-                              oninput="javascript: if (this.value.length > 10) this.value = this.value.slice(0, 10);"/>
+                              oninput="javascript: if (this.value.length > 10) this.value = this.value.slice(0, 10);" readonly/>
                           </div>
 
                           <div class="col-md-4">
@@ -178,7 +178,7 @@
                               placeholder="John Doe"
                               style="text-transform:uppercase"
                               value="{{ (!empty($member)) ? $member->donation : '' }}"
-                              required />
+                              required readonly />
                          
                           </div>
 
