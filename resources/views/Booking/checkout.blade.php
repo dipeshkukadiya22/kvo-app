@@ -96,7 +96,7 @@ div.card-datatable [class*=col-md-] {
                           <li class="nav-item">
                             <button
                               type="button" class="nav-link active" role="tab" data-bs-toggle="tab" data-bs-target="#navs-pills-top-bookedroom" aria-controls="navs-pills-top-allroom" aria-selected="true">
-                              Booked Rooms <span id="allRoomsCount">0</span>
+                              Booked Rooms (<span id="allRoomsCount">0</span>)
                             </button>
                           </li>
                           <li class="nav-item">
@@ -113,13 +113,13 @@ div.card-datatable [class*=col-md-] {
                   <form id="kvo_add_checkout" class="browser-default-validation" method="POST" action="{{route('add_checkout')}}">
                     <div class="card">
                       <!-- Basic table -->
-                    <section id="basic-datatable">
+                      <section id="basic-datatable">
                         <div class="row">
                             <div class="col-12">
                                 <div class="card">
                                 <div class="tab-content p-0">
                                 <div class="tab-pane fade show active" id="navs-pills-top-bookedroom" role="tabpanel">
-                                    <div class="card-datatable pt-0">
+                                    <div class="card-datatable table-responsive pt-0">
                                         <table id="DataTables_Table_0" class="datatables-basic table">
                                           <thead>
                                          @csrf
@@ -136,6 +136,7 @@ div.card-datatable [class*=col-md-] {
                                                 <th>Action</th>
                                               </tr>
                                           </thead>
+                                          <tbody>
                                           @foreach($bookedRoom as $row)
                                           <tr>
                                              <input type="hidden" class="id" value="{{$row->r_id}}">
@@ -150,7 +151,7 @@ div.card-datatable [class*=col-md-] {
                                               <td>{{$row->deposite_rs}}</td>
                                               <td>
                                                   <div class="d-inline-block">
-                                                    <a href=@if($row->status=='CHECKOUT')"{{route('pdf_CheckOut',1)}}"; @endif class="text-primary"><img src="./assets/icon/orange-eye.png" width="20px"></a>
+                                                    <a href="{{route('pdf_CheckIn',$row->r_id)}}" class="text-primary"><img src="./assets/icon/orange-eye.png" width="20px"></a>
 
                                                     <a @if($row->status=='BOOKED') onclick="edit_checkout({{$row->r_id}})"; @endif class="btn btn-sm btn-icon item-edit"><img src="./assets/icon/orange-edit.png" width="20px"></a>
 
@@ -160,20 +161,13 @@ div.card-datatable [class*=col-md-] {
                                               </td>
                                           </tr>
                                           @endforeach
-                                          
-                                        </table>
-                                    </div>
-                                    </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                                          </tbody>
+                                          </table>
+                                        </div>
+                                      </div>
+                                
                         <!--START checkedout room TAB-->
-                        <div class="row">
-                            <div class="col-12">
-                                <div class="card">
-                                <div class="tab-content p-0">
-                                <div class="tab-pane fade show active" id="navs-pills-top-checkoutroom" role="tabpanel">
+                                <div class="tab-pane fade" id="navs-pills-top-checkoutroom" role="tabpanel">
                                     <div class="card-datatable pt-0">
                                         <table id="DataTables_Table_0" class="datatables-basic table">
                                           <thead>
@@ -207,9 +201,9 @@ div.card-datatable [class*=col-md-] {
                                               <td>{{$row->payment_mode}}</td>
                                               <td>
                                                   <div class="d-inline-block">
-                                                    <a href=@if($row->status=='CHECKOUT')"{{route('pdf_CheckOut',1)}}"; @endif class="text-primary"><img src="./assets/icon/orange-eye.png" width="20px"></a>
+                                                    <a href="{{route('pdf_CheckOut',$row->rec_no)}}" class="text-primary"><img src="./assets/icon/orange-eye.png" width="20px"></a>
 
-                                                    <a @if($row->status=='BOOKED') onclick="edit_checkout({{$row->r_id}})"; @endif class="btn btn-sm btn-icon item-edit"><img src="./assets/icon/orange-edit.png" width="20px"></a>
+                                                    <!--<a @if($row->status=='BOOKED') onclick="edit_checkout({{$row->r_id}})"; @endif class="btn btn-sm btn-icon item-edit"><img src="./assets/icon/orange-edit.png" width="20px"></a>-->
 
                                                    
                                                     
@@ -219,8 +213,8 @@ div.card-datatable [class*=col-md-] {
                                           @endforeach
                                           
                                         </table>
-                                    </div>
-                                    </div>
+                                        </div>
+                                      </div>
                                     </div>
                                 </div>
                             </div>
