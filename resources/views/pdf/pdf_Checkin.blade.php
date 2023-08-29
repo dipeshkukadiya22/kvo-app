@@ -74,11 +74,12 @@
 
 
 				td {
-					height: 23px;
+					height: 18px;
 				}
 
 				th.imgcenter{
 					text-align: center !important;
+					
 				}
 
                 .bigtitle{

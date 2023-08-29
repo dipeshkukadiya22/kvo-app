@@ -159,7 +159,7 @@
               <div class="row mb-4">
                 
                 <!-- Default Icons Wizard -->
-                <div class="col-12 mb-4">
+                <div class="col-12 mb-4" id="wizard-validation">
                   <div class="bs-stepper wizard-icons wizard-icons-example mt-2">
                     <div class="bs-stepper-header">
                       <div class="step" data-target="#account-details">
@@ -214,7 +214,8 @@
                       </div>
                     </div>
                     <div class="bs-stepper-content">
-                     <form class="browser-default-validation" action="{{route('RoomBooking')}}" method="POST" id="room_booking">
+                    <form class="browser-default-validation" onSubmit="return false" action="{{ route('RoomBooking') }}" method="POST" id="room_booking">
+
                         @csrf
                         <!-- Account Details -->
                         <div id="account-details" class="content">
@@ -292,8 +293,8 @@
                               
                               
                               <div class="col-md-4">
-                                <label for="defaultFormControlInput" class="form-label">City</label>
-                                <input type="text" class="form-control" name="city" id="member_city" style="text-transform:uppercase" placeholder="John Doe" aria-describedby="defaultFormControlHelp" value="{{ (!empty($member)) ? $member->city : '' }}"/>
+                                <label for="defaultFormControlInput" class="form-label"><span class="required">City</span></label>
+                                <input type="text" class="form-control" name="city" id="member_city" style="text-transform:uppercase" placeholder="John Doe" aria-describedby="defaultFormControlHelp" value="{{ (!empty($member)) ? $member->city : '' }}" required/>
                               </div>
 
                               <div class="col-md-4">
@@ -310,9 +311,9 @@
                               </div>
     
                             <div class="col-12 d-flex justify-content-end">
-                              <button type="button"  class="btn btn-primary btn-next" id="btn-step1">
-                                <span class="align-middle d-sm-inline-block d-none me-sm-1">Next</span>
-                                <i class="ti ti-arrow-right"></i>
+                              
+                              <button class="btn btn-primary btn-next"> <span class="align-middle d-sm-inline-block d-none me-sm-1" id="btn-step1">Next</span>
+                               <i class="ti ti-arrow-right"></i>
                               </button>
                               
                              
@@ -431,7 +432,7 @@
                             
                             <div class="col-md-4">
                               <label class="form-label" for="basic-default-name"><span class="required">No. of Person</span></label>
-                              <input type="number" class="form-control"  name="no_of_person" id="no_of_person_id" placeholder="No of Person" value="1" required/>
+                              <input type="number" class="form-control check-field"  name="no_of_person" id="no_of_person_id" placeholder="No of Person" value="1" required/>
                             </div>
                             <!-- Datetime Picker-->
                             <div class="col-md-4">
@@ -453,7 +454,7 @@
   
                             <div class="col-md-4">
                               <label class="form-label" for="deposit-amount"><span class="required">Deposit Rs</span></label>
-                              <input type="number" class="form-control" name="deposite_rs" id="deposit-amount" placeholder="Deposit Rs" required>
+                              <input type="number" class="form-control check-field" name="deposite_rs" id="deposit-amount" placeholder="Deposit Rs" required>
                             </div>
                             
                             <div class="col-md-4">
@@ -467,13 +468,13 @@
                             </div>
                             
                             <div class="col-md-4">
-                              <label class="form-label" for="rupees-in-words">Occupation</label>
-                              <input type="text" class="form-control" name="occupation" id="occupation" placeholder="Occupation" >
+                              <label class="form-label" for="rupees-in-words"><span class="required">Occupation</span></label>
+                              <input type="text" class="form-control" name="occupation" id="occupation" placeholder="Occupation" required/>
                             </div>
 
                             <div class="col-md-4">
-                              <label class="form-label" for="rupees-in-words">Reason</label>
-                              <input type="text" class="form-control" name="reason" id="reason" placeholder="Reason to stay">
+                              <label class="form-label" for="rupees-in-words"><span class="required">Reason</span></label>
+                              <input type="text" class="form-control" name="reason" id="reason" placeholder="Reason to stay" required/>
                             </div>
   
                             
@@ -491,10 +492,12 @@
                           </div>
                         </div>
                         <!-- All No of Person -->
+                    
                         <div id="address" class="content">
                           <div class="content-header mb-3">
                             <small>Enter Member Details.</small>
                           </div>
+                        
                           
                           <div class="row g-3">
                             <!-- Form Repeater -->
@@ -507,11 +510,11 @@
                              <div class="rep-form1">
                           
                                 <div class="row formrepeater1">
-                                  <div class="mb-3 col-lg-6 col-xl-3 col-12 mb-0">
+                                  <div class="mb-3 col-md-6 col-xl-3 col-12 mb-0">
                                     <label class="form-label" for="form-repeater-1-1">Full Name</label>
                                     <input type="text" id="full_name_form" style="text-transform:uppercase"  name="full_name[]" class="form-control" placeholder="john doe" value="{{ (!empty($member) )? $member->m_name : '' }}"/>
                                   </div>
-                                  <div class="mb-3 col-lg-6 col-xl-3 col-12 mb-0">
+                                  <div class="mb-3 col-lg-6 col-xl-2 col-12 mb-0">
                                     <label class="form-label" for="form-repeater-1-2">Age</label>
                                     <input type="number" id="member_age" name="m_age[]" class="form-control" placeholder="your age"  />
                                   </div>
@@ -538,7 +541,7 @@
 
 
                                   </div>
-                                  <div class="col-md-4">
+                                  <div class="mb-3 col-lg-6 col-xl-2 col-12 mb-0">
                                     <label class="form-label" for="basic-default-country">Relation</label>
                                     <select class="form-select" name="relation[]" id="member_relation" required>
                                       <option value="SELF" selected>SELF</option>
@@ -559,11 +562,12 @@
                                     </select>
                                   </div>
                                   <div class="mb-3 col-lg-12 col-xl-2 col-12 d-flex align-items-center mb-0">
-                                    <button class="btn btn-label-danger mt-4" data-repeater-delete>
-                                      <i class="ti ti-x ti-xs me-1"></i>
-                                      <span class="align-middle">Delete</span>
-                                    </button>
+                                  <button type="button" class="btn btn-label-danger mt-3" data-repeater-delete>
+                                    <i class="ti ti-x ti-xs me-1"></i>
+                                    <span class="align-middle">Delete</span>
+                                  </button>
                                   </div>
+                                 
                                 </div>
                               </div>
                               <div class="row rep-form">
@@ -594,6 +598,7 @@
                               </button>
                             </div>
                           </div>
+                       
                         </div>
                         
                         <!-- Review -->
@@ -635,7 +640,7 @@
                                   <thead>
                                     <tr>
                                       <th>No.</th>
-                                      <th>Full Name</th>
+                                      <th >Full Name</th>
                                       <th>Age </th>
                                       <th>Gender</th>
                                       <th>Relations</th>
@@ -646,7 +651,7 @@
                                  
                                       <tr>
                                         <td></td>
-                                        <td id="member_full_name"></td>
+                                        <td id="member_full_name" ></td>
                                         <td id="members_age"></td>
                                         <td id="member_gen"></td>
                                         <td id="member_rel"></td>
@@ -669,11 +674,15 @@
                               <i class="ti ti-arrow-left me-sm-1"></i>
                               <span class="align-middle d-sm-inline-block d-none">Previous</span>
                             </button>
-                            <button type="submit" class="btn btn-success btn-submit">Submit</button>
+                          
+                            <button type="submit" id="submit-button" class="btn btn-success btn-submit">Submit</button>
+
+
+                            
                             
                           </div>
                         </div>
-                      </form>
+                     </form>
                     </div>
                   </div>
                 </div>
@@ -701,6 +710,7 @@
     <script src="{{ asset('assets/vendor/libs/pickr/pickr.js') }}"></script>
     <script src="{{ asset('assets/vendor/libs/bs-stepper/bs-stepper.js') }}"></script>
     <script src="{{ asset ('assets/vendor/libs/jquery-repeater/jquery-repeater.js') }}"></script>
+    
 
     <script src="{{ asset('assets/vendor/libs/bloodhound/bloodhound.js') }}"></script>
 
@@ -726,6 +736,7 @@
 
     <script src="{{ asset ('assets/js/forms-extras.js') }}"></script>
     <script>
+     
       $("#multicol-phone").focusout(function(){
         var contact=document.getElementById("multicol-phone").value;
         $.ajax({
@@ -1095,7 +1106,7 @@ $(document).ready(function () {
       const totalAmount = acAmount + nonAcAmount + doorMtAmount;
 
       $('#room_amount').text( totalAmount);
-      const selectedRooms = 'A.C. Room:= ' + selectedList1 + ', Non A.C. Room:= ' + selectedList2 + ', Door Metri A.C. / Non A.C. Room:= ' + selectedList3;
+      const selectedRooms = 'A.C. Room:= ' + selectedList1 + 'phone, Non A.C. Room:= ' + selectedList2 + ', Door Metri A.C. / Non A.C. Room:= ' + selectedList3;
       $('#room_lst').text(selectedRooms);
 
       if (selectedDate && selectedDate.length > 0) {
@@ -1138,19 +1149,20 @@ $(document).ready(function () {
       if (isNaN(numForms) || numForms <= 0) {
        
         return false;
-      }
+      } let j=2;
       for (let i = 1; i < numForms; i++) {
-        let j=2;
+       
      
         $(".rep-table").append(
-          '<tr>' +
-          '<td>'+ j +'</td>' +
-          '<td class="member_full_name' + i + '">' + $('#full_name_form' + i).val() + '</td>' +
-          '<td class="members_age' + i + '">' + $('#member_age' + i).val() + '</td>' +
-          '<td class="member_gen'+ i +'">' + $('input[name="gender'+i+'[]"]:checked').val() + '</td>' +
-          '<td class="member_rel' + i + '">' + $('#member_relation' + i).val() + '</td>' +
-          '</tr>'
+        '<tr>' +
+        '<td>'+ j +'</td>' +
+        '<td class="member_full_name' + i + '">' + $('#full_name_form' + i).val().toUpperCase() + '</td>' +
+        '<td class="members_age' + i + '">' + $('#member_age' + i).val() + '</td>' +
+        '<td class="member_gen'+ i +'">' + $('input[name="gender'+i+'[]"]:checked').val() + '</td>' +
+        '<td class="member_rel' + i + '">' + $('#member_relation' + i).val() + '</td>' +
+        '</tr>'
          );
+
 
         j++;
 
@@ -1185,11 +1197,11 @@ $(document).ready(function () {
         $(".rep-form").append(
 
           '<div class="row formrepeater">'+
-                                 ' <div class="mb-3 col-lg-6 col-xl-3 col-12 mb-0">'+
+                                 ' <div class="mb-3 col-md-6 col-xl-3 col-12 mb-0">'+
                                    ' <label class="form-label" for="form-repeater-1-1">Full Name</label>'+
                                    ' <input type="text" id="full_name_form'+i+'" style="text-transform:uppercase" name="full_name[]" class="form-control" placeholder="john doe" value="{{ (!empty($member) )? $member->m_name : '' }}"/>'+
                                  ' </div>'+
-                                 ' <div class="mb-3 col-lg-6 col-xl-3 col-12 mb-0">'+
+                                 ' <div class="mb-3 col-lg-6 col-xl-2 col-12 mb-0">'+
                                   '  <label class="form-label" for="form-repeater-1-2">Age</label>'+
                                   '  <input type="number" id="member_age'+i+'" name="m_age[]" class="form-control" placeholder="your age" />'+
                                 '  </div>'+
@@ -1207,7 +1219,7 @@ $(document).ready(function () {
                                       '  <label class="form-check-label" for="inlineRadio2' + i + '" selected>Female</label>'+
                                     '  </div>'+
                                 '  </div>'+
-                                ' <div class="col-md-4">'+
+                                '    <div class="mb-3 col-lg-6 col-xl-2 col-12 mb-0">'+
                                     '  <label class="form-label" for="basic-default-country">Relation</label>'+
                                     '  <select class="form-select" name="relation[]" id="member_relation'+i+'" required>'+
                                     '   <option value="" disabled selected>Select relation</option>'+
@@ -1243,7 +1255,7 @@ $(document).ready(function () {
     });
   });
 </script>
-
+<!-- 
 <script>
  $("#room_booking").submit(function(){
 
@@ -1279,7 +1291,7 @@ $(document).ready(function () {
           });
       }
   });
-  </script>
+  </script> -->
 </script>
 <script>
 const contactInput = document.getElementById('phone_no');
@@ -1364,29 +1376,52 @@ $(document).ready(function() {
 });
 </script>
 
+<script>
+const wizardValidation = document.querySelector('#wizard-validation');
 
+if (typeof wizardValidation !== undefined && wizardValidation !== null) {
+  // Wizard form
+  const wizardValidationForm = wizardValidation.querySelector('#room_booking');
+  // Wizard steps
+  const wizardValidationFormStep1 = wizardValidationForm.querySelector('#account-details');
+  const wizardValidationFormStep2 = wizardValidationForm.querySelector('#personal-info');
+  const wizardValidationFormStep3 = wizardValidationForm.querySelector('#address');
+  // Wizard next prev button
+  const wizardValidationNext = [].slice.call(wizardValidationForm.querySelectorAll('.btn-next'));
+  const wizardValidationPrev = [].slice.call(wizardValidationForm.querySelectorAll('.btn-prev'));
 
+  let validationStepper = new Stepper(wizardValidation, {
+    linear: true
+  });
+const FormValidation1 = FormValidation.formValidation(wizardValidationFormStep1, {
+  fields: {
+    name: {
+      validators: {
+        notEmpty: {
+          message: 'The name is required'
+        }
+      }
+    },
+    email: {
+      validators: {
+        notEmpty: {
+          message: 'The Email is required'
+        },
+        emailAddress: {
+          message: 'The value is not a valid email address'
+        }
+      }
+    },
+    // ... other fields ...
+  },
+  plugins: {
+    // ... plugins ...
+  }
+}).on('core.form.valid', function() {
+  validationStepper.next();
+});
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+</script>
 
 
 
