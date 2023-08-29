@@ -265,8 +265,8 @@ div.card-datatable [class*=col-md-] {
                                 <div class="row g-3">
                                   <!-- Datetime Picker-->
                                   <div class="col mb-3">
-                                    <label for="check-in-date" class="form-label">આગમન તારીખ / સમય</label>
-                                    <input type="text" class="form-control" name="check_in_date" id="check_in_date" readonly>
+                                    <label for="flatpickr-date" class="form-label">આગમન તારીખ / સમય</label>
+                                    <input type="text" class="form-control" name="check_in_date" id="check_in_date"  readonly> 
                                   </div>
 
                                   <!-- Datetime Picker-->
@@ -574,11 +574,9 @@ div.card-datatable [class*=col-md-] {
                       $("#bookingId").val(response[0]['r_id']);
                       $("#name").val(response[0]['m_name']);
                       $("#city").val(response[0]['city']);
-                      var checkdate=response[0]['check_in_date'];
-                      var date=new Date(checkdate);
-                      var res=date.toLocalDateString('en-GB');
-                      alert(res);
-                      $("#check_in_date").val();
+                      var date=new Date(response[0]['check_in_date']);
+                      var checkdate=date.getDate()+"-"+date.getMonth()+"-"+date.getFullYear()+" "+date.getHours()+":"+date.getMinutes();
+                      $("#check_in_date").val(checkdate);
                       $("#deposite").val(response[0]['deposite_rs']);
                       var room=response[0]['room_list'];
                       var ArrNames =room .split(",");
