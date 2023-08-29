@@ -35,6 +35,7 @@
 .form-label {
     font-weight: bold;
 }
+
 .form-select-sm {
     display: block;
     width: 100%;
@@ -229,6 +230,7 @@ div.card-datatable [class*=col-md-] {
                                 <h5 class="modal-title" id="exampleModalLabel4">Detail Update</h5>
                                 <button
                                   type="button"
+                                  id="close"
                                   class="btn-close"
                                   data-bs-dismiss="modal"
                                   aria-label="Close"></button>
@@ -263,8 +265,8 @@ div.card-datatable [class*=col-md-] {
                                 <div class="row g-3">
                                   <!-- Datetime Picker-->
                                   <div class="col mb-3">
-                                    <label for="flatpickr-datetime" class="form-label">આગમન તારીખ / સમય</label>
-                                    <input type="date" class="form-control" name="check_in_date" id="check_in_date" placeholder="DD-MM-YYYY HH:MM" readonly/>
+                                    <label for="check-in-date" class="form-label">આગમન તારીખ / સમય</label>
+                                    <input type="text" class="form-control" name="check_in_date" id="check_in_date" readonly>
                                   </div>
 
                                   <!-- Datetime Picker-->
@@ -300,22 +302,22 @@ div.card-datatable [class*=col-md-] {
                                           ડિલક્સ  રૂમ 
                                         </td>
                                         <td>
-                                          <input type="text" id="dlx_room" name="dlx_room" class="form-control" value=""  readonly/>
+                                          <input type="text" id="dlx_room" name="dlx_room" class="form-control clear-value" value=""  readonly/>
                                         </td>
                                         <td>
-                                          <input type="text" id="dlx_room_charge" name="dlx_room_charge" class="form-control"  readonly/>
+                                          <input type="text" id="dlx_room_charge" name="dlx_room_charge" class="form-control clear-value"  readonly/>
                                         </td>
                                         <td>
-                                          <input type="text" id="dlx_room_Excharge" name="dlx_room_Excharge" class="form-control"/>
+                                          <input type="text" id="dlx_room_Excharge" name="dlx_room_Excharge" class="form-control clear-value"/>
                                         </td>
                                         <td>
-                                          <input type="text" id="dlx_amount" name="dlx_amount" class="form-control"  readonly/>
+                                          <input type="text" id="dlx_amount" name="dlx_amount" class="form-control clear-value"  readonly/>
                                         </td>
                                         <td>
-                                          <input type="text" id="dlx_no_of_days" name="dlx_no_of_days" class="form-control"  readonly/>
+                                          <input type="text" id="dlx_no_of_days" name="dlx_no_of_days" class="form-control clear-value"  readonly/>
                                         </td>
                                         <td>
-                                          <input type="text" id="dlx_room_total" name="dlx_room_total" class="form-control" readonly/>
+                                          <input type="text" id="dlx_room_total" name="dlx_room_total" class="form-control clear-value" readonly/>
                                         </td>
                                       </tr>
 
@@ -324,22 +326,22 @@ div.card-datatable [class*=col-md-] {
                                           A.C. રૂમ
                                         </td>
                                         <td>
-                                          <input type="text" id="ac_room" name="ac_room" class="form-control" value=""  readonly/>
+                                          <input type="text" id="ac_room" name="ac_room" class="form-control clear-value" value=""  readonly/>
                                         </td>
                                         <td>
-                                          <input type="text" id="ac_room_charge" name="ac_room_charge" class="form-control"  readonly/>
+                                          <input type="text" id="ac_room_charge" name="ac_room_charge" class="form-control clear-value"  readonly/>
                                         </td>
                                         <td>
-                                          <input type="text" id="ac_room_Excharge" name="ac_room_Excharge" class="form-control"/>
+                                          <input type="text" id="ac_room_Excharge" name="ac_room_Excharge" class="form-control clear-value"/>
                                         </td>
                                         <td>
-                                          <input type="text" id="ac_amount" name="ac_amount" class="form-control"  readonly/>
+                                          <input type="text" id="ac_amount" name="ac_amount" class="form-control clear-value"  readonly/>
                                         </td>
                                         <td>
-                                          <input type="text" id="ac_no_of_days" name="ac_no_of_days" class="form-control"  readonly/>
+                                          <input type="text" id="ac_no_of_days" name="ac_no_of_days" class="form-control clear-value"  readonly/>
                                         </td>
                                         <td>
-                                          <input type="text" id="ac_room_total" name="ac_room_total" class="form-control" readonly/>
+                                          <input type="text" id="ac_room_total" name="ac_room_total" class="form-control clear-value" readonly/>
                                         </td>
                                       </tr>
 
@@ -348,22 +350,22 @@ div.card-datatable [class*=col-md-] {
                                            Non. A.C. રૂમ
                                         </td>
                                         <td>
-                                          <input type="text" id="non_ac_room" name="non_ac_room" class="form-control" value=""  readonly/>
+                                          <input type="text" id="non_ac_room" name="non_ac_room" class="form-control clear-value" value=""  readonly/>
                                         </td>
                                         <td>
-                                          <input type="text" id="non_ac_room_charge" name="non_ac_room_charge" class="form-control"  readonly/>
+                                          <input type="text" id="non_ac_room_charge" name="non_ac_room_charge" class="form-control clear-value"  readonly/>
                                         </td>
                                         <td>
-                                          <input type="text" id="non_ac_room_Excharge" name="non_ac_room_Excharge" class="form-control" />
+                                          <input type="text" id="non_ac_room_Excharge" name="non_ac_room_Excharge" class="form-control clear-value" />
                                         </td>
                                         <td>
-                                          <input type="text" id="non_ac_amount" name="non_ac_amount" class="form-control"  readonly/>
+                                          <input type="text" id="non_ac_amount" name="non_ac_amount" class="form-control clear-value"  readonly/>
                                         </td>
                                         <td>
-                                          <input type="text" id="non_ac_no_of_days" name="non_ac_no_of_days" class="form-control"  readonly/>
+                                          <input type="text" id="non_ac_no_of_days" name="non_ac_no_of_days" class="form-control clear-value"  readonly/>
                                         </td>
                                         <td>
-                                          <input type="text" id="non_ac_room_total" name="non_ac_room_total" class="form-control" readonly/>
+                                          <input type="text" id="non_ac_room_total" name="non_ac_room_total" class="form-control clear-value" readonly/>
                                         </td>
                                       </tr>
 
@@ -372,22 +374,22 @@ div.card-datatable [class*=col-md-] {
                                           A.C. ડોરમેટરી  
                                         </td>
                                         <td>
-                                          <input type="text" id="dmt_ac_room" name="dmt_ac_room" class="form-control" value=""  readonly/>
+                                          <input type="text" id="dmt_ac_room" name="dmt_ac_room" class="form-control clear-value" value=""  readonly/>
                                         </td>
                                         <td>
-                                          <input type="text" id="dmt_ac_room_charge" name="dmt_ac_room_charge" class="form-control"  readonly/>
+                                          <input type="text" id="dmt_ac_room_charge" name="dmt_ac_room_charge" class="form-control clear-value"  readonly/>
                                         </td>
                                         <td>
-                                          <input type="text" id="dmt_ac_room_Excharge" name="dmt_ac_room_Excharge" class="form-control" />
+                                          <input type="text" id="dmt_ac_room_Excharge" name="dmt_ac_room_Excharge" class="form-control clear-value" />
                                         </td>
                                         <td>
-                                          <input type="text" id="dmt_ac_amount" name="dmt_ac_amount" class="form-control"  readonly/>
+                                          <input type="text" id="dmt_ac_amount" name="dmt_ac_amount" class="form-control clear-value"  readonly/>
                                         </td>
                                         <td>
-                                          <input type="text" id="dmt_ac_no_of_days" name="dmt_ac_no_of_days" class="form-control"  readonly/>
+                                          <input type="text" id="dmt_ac_no_of_days" name="dmt_ac_no_of_days" class="form-control clear-value"  readonly/>
                                         </td>
                                         <td>
-                                          <input type="text" id="dmt_ac_room_total" name="dmt_ac_room_total" class="form-control" readonly/>
+                                          <input type="text" id="dmt_ac_room_total" name="dmt_ac_room_total" class="form-control clear-value" readonly/>
                                         </td>
                                       </tr>
 
@@ -396,22 +398,22 @@ div.card-datatable [class*=col-md-] {
                                           Non. A.C. ડોરમેટરી  
                                         </td>
                                         <td>
-                                          <input type="text" id="non_dmt_ac_room" name="non_dmt_ac_room" class="form-control" value=""  readonly/>
+                                          <input type="text" id="non_dmt_ac_room" name="non_dmt_ac_room" class="form-control clear-value" value=""  readonly/>
                                         </td>
                                         <td>
-                                          <input type="text" id="non_dmt_ac_room_charge" name="non_dmt_ac_room_charge" class="form-control"  readonly/>
+                                          <input type="text" id="non_dmt_ac_room_charge" name="non_dmt_ac_room_charge" class="form-control clear-value"  readonly/>
                                         </td>
                                         <td>
-                                          <input type="text" id="non_dmt_ac_room_Excharge" name="non_dmt_ac_room_Excharge" class="form-control"/>
+                                          <input type="text" id="non_dmt_ac_room_Excharge" name="non_dmt_ac_room_Excharge" class="form-control clear-value"/>
                                         </td>
                                         <td>
-                                          <input type="text" id="non_dmt_ac_amount" name="non_dmt_ac_amount" class="form-control"  readonly/>
+                                          <input type="text" id="non_dmt_ac_amount" name="non_dmt_ac_amount" class="form-control clear-value"  readonly/>
                                         </td>
                                         <td>
-                                          <input type="text" id="non_dmt_ac_no_of_days" name="non_dmt_ac_no_of_days" class="form-control"  readonly/>
+                                          <input type="text" id="non_dmt_ac_no_of_days" name="non_dmt_ac_no_of_days" class="form-control clear-value"  readonly/>
                                         </td>
                                         <td>
-                                          <input type="text" id="non_dmt_ac_room_total" name="non_dmt_ac_room_total" class="form-control" readonly/>
+                                          <input type="text" id="non_dmt_ac_room_total" name="non_dmt_ac_room_total" class="form-control clear-value" readonly/>
                                         </td>
                                       </tr>
 
@@ -572,10 +574,13 @@ div.card-datatable [class*=col-md-] {
                       $("#bookingId").val(response[0]['r_id']);
                       $("#name").val(response[0]['m_name']);
                       $("#city").val(response[0]['city']);
-                      $("#check_in_date").val(response[0]['check_in_date']);
+                      var checkdate=response[0]['check_in_date'];
+                      var date=new Date(checkdate);
+                      var res=date.toLocalDateString('en-GB');
+                      alert(res);
+                      $("#check_in_date").val();
                       $("#deposite").val(response[0]['deposite_rs']);
                       var room=response[0]['room_list'];
-                    
                       var ArrNames =room .split(",");
                       ArrNames.forEach(myFunction);
                       function myFunction(room, index) {
@@ -670,10 +675,6 @@ div.card-datatable [class*=col-md-] {
       enableTime: true,
       defaultDate: currentDate
       });
-
-      $('#check_in_date').flatpickr({
-      dateFormat: "Y-m-d H:i",
-      });
     });
 
     $("#CASH").change(function(){
@@ -721,7 +722,7 @@ div.card-datatable [class*=col-md-] {
               text: '<i class="ti ti-printer me-1" ></i>Print',
               className: 'dropdown-item',
               exportOptions: {
-                columns: [1 ,2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15],
+                columns: [0,1 ,2, 3, 4, 5, 6, 7, 8, 9],
                 // prevent avatar to be display
                 format: {
                   body: function (inner, coldex, rowdex) {
@@ -758,7 +759,7 @@ div.card-datatable [class*=col-md-] {
               text: '<i class="ti ti-file-text me-1" ></i>Csv',
               className: 'dropdown-item',
               exportOptions: {
-                columns: [1 ,2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15],
+                columns: [0,1 ,2, 3, 4, 5, 6, 7, 8, 9],
                 // prevent avatar to be display
                 format: {
                   body: function (inner, coldex, rowdex) {
@@ -782,7 +783,7 @@ div.card-datatable [class*=col-md-] {
               text: '<i class="ti ti-file-spreadsheet me-1"></i>Excel',
               className: 'dropdown-item',
               exportOptions: {
-                columns: [1 ,2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14],
+                columns: [0,1 ,2, 3, 4, 5, 6, 7, 8, 9],
                 // prevent avatar to be display
                 format: {
                   body: function (inner, coldex, rowdex) {
@@ -806,7 +807,7 @@ div.card-datatable [class*=col-md-] {
               text: '<i class="ti ti-file-description me-1"></i>Pdf',
               className: 'dropdown-item',
               exportOptions: {
-                columns: [1 ,2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15],
+                columns: [0,1 ,2, 3, 4, 5, 6, 7, 8, 9],
                 // prevent avatar to be display
                 format: {
                   body: function (inner, coldex, rowdex) {
@@ -847,11 +848,13 @@ div.card-datatable [class*=col-md-] {
 
   $(document).ready(function () {
       // Select all input fields with class 'amount-input'
-      $('.amount-input').on('input', function () {
-          var net_amount = 0;
-
-          // Convert the total to words and update the 'અંકે રૂપિયા' input field
-          NumToWord(net_amount, 'rupees-in-words');
+      $("#close").click(function(){
+      $('.clear-value').val("");
+      $("#ac_room_Excharge").prop('disabled', false);
+      $("#non_ac_room_Excharge").prop('disabled', false);
+      $("#dlx_room_Excharge").prop('disabled', false);
+      $("#dmt_ac_room_Excharge").prop('disabled', false);
+      $("#non_dmt_ac_room_Excharge").prop('disabled', false);
       });
   });
 
@@ -864,10 +867,7 @@ div.card-datatable [class*=col-md-] {
       return true;
   }
 
-  function NumToWord(inputNumber, outputControl) {
-      // Your NumToWord function implementation
-      // Make sure it works correctly separately
-  }
+
 </script>
 
 <script>
@@ -953,9 +953,6 @@ document.getElementById("net_amount").addEventListener("input", convertToWords);
     var excharge=parseInt(document.getElementById("dlx_room_Excharge").value); 
     var deposite=parseInt(document.getElementById("deposite").value);
     $("#dlx_room_total").val(amt+excharge);
-    // var total=parseInt(document.getElementById("dlx_room_total").value);
-    // $("#total").val(total);
-    
     const dlxtamount = parseInt($('#dlx_room_total').val()) || 0;
     const acamount = parseInt($('#ac_room_total').val()) || 0;
     const nonacamount = parseInt($('#non_ac_room_total').val()) || 0;
@@ -964,7 +961,7 @@ document.getElementById("net_amount").addEventListener("input", convertToWords);
     const totalAmount = dlxtamount + acamount + nonacamount + nonacdmtamount + acdmtamount;
     $('#total').val(totalAmount);
     $("#net_amount").val(totalAmount-deposite);
-   
+    convertToWords();
   });
 
   $("#ac_room_Excharge").change(function(){
@@ -972,9 +969,6 @@ document.getElementById("net_amount").addEventListener("input", convertToWords);
     var excharge=parseInt(document.getElementById("ac_room_Excharge").value); 
     var deposite=parseInt(document.getElementById("deposite").value);
     $("#ac_room_total").val(amt+excharge);
-    // var total=parseInt(document.getElementById("ac_room_total").value);
-    // $("#total").val(total);
-    // $("#net_amount").val(total-deposite);
     const dlxtamount = parseInt($('#dlx_room_total').val()) || 0;
     const acamount = parseInt($('#ac_room_total').val()) || 0;
     const nonacamount = parseInt($('#non_ac_room_total').val()) || 0;
@@ -983,6 +977,7 @@ document.getElementById("net_amount").addEventListener("input", convertToWords);
     const totalAmount = dlxtamount + acamount + nonacamount + nonacdmtamount + acdmtamount;
     $('#total').val(totalAmount);
     $("#net_amount").val(totalAmount-deposite);
+    convertToWords();
   });
 
   $("#non_ac_room_Excharge").change(function(){
@@ -990,9 +985,6 @@ document.getElementById("net_amount").addEventListener("input", convertToWords);
     var excharge=parseInt(document.getElementById("non_ac_room_Excharge").value); 
     var deposite=parseInt(document.getElementById("deposite").value);
     $("#non_ac_room_total").val(amt+excharge);
-    // var total=parseInt(document.getElementById("non_ac_room_total").value);
-    // $("#total").val(total);
-    // $("#net_amount").val(total-deposite);
     const dlxtamount = parseInt($('#dlx_room_total').val()) || 0;
     const acamount = parseInt($('#ac_room_total').val()) || 0;
     const nonacamount = parseInt($('#non_ac_room_total').val()) || 0;
@@ -1001,6 +993,7 @@ document.getElementById("net_amount").addEventListener("input", convertToWords);
     const totalAmount = dlxtamount + acamount + nonacamount + nonacdmtamount + acdmtamount;
     $('#total').val(totalAmount);
     $("#net_amount").val(totalAmount-deposite);
+    convertToWords();
   });
 
   $("#non_dmt_ac_room_Excharge").change(function(){
@@ -1019,7 +1012,7 @@ document.getElementById("net_amount").addEventListener("input", convertToWords);
     const totalAmount = dlxtamount + acamount + nonacamount + nonacdmtamount + acdmtamount;
     $('#total').val(totalAmount);
     $("#net_amount").val(totalAmount-deposite);
-  
+    convertToWords();
   });
 
   $("#dmt_ac_room_Excharge").change(function(){
@@ -1027,9 +1020,6 @@ document.getElementById("net_amount").addEventListener("input", convertToWords);
     var excharge=parseInt(document.getElementById("dmt_ac_room_Excharge").value); 
     var deposite=parseInt(document.getElementById("deposite").value);
     $("#dmt_ac_room_total").val(amt+excharge);
-    // var total=parseInt(document.getElementById("dmt_ac_room_total").value);
-    // $("#total").val(total);
-    // $("#net_amount").val(total-deposite);
     const dlxtamount = parseInt($('#dlx_room_total').val()) || 0;
     const acamount = parseInt($('#ac_room_total').val()) || 0;
     const nonacamount = parseInt($('#non_ac_room_total').val()) || 0;
@@ -1038,6 +1028,7 @@ document.getElementById("net_amount").addEventListener("input", convertToWords);
     const totalAmount = dlxtamount + acamount + nonacamount + nonacdmtamount + acdmtamount;
     $('#total').val(totalAmount);
     $("#net_amount").val(totalAmount-deposite);
+    convertToWords();
   });
 });
   </script>
