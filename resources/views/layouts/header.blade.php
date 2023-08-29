@@ -548,7 +548,7 @@
                 <i class="menu-icon tf-icons ti ti-smart-home"></i>
                 <div data-i18n="Dashboards">Dashboards</div>
               </a>
-              <ul class="menu-sub">
+              <!-- <ul class="menu-sub">
                 <li class="menu-item active">
                   <a href="index.html" class="menu-link">
                     <i class="menu-icon tf-icons ti ti-chart-pie-2"></i>
@@ -567,7 +567,7 @@
                     <div data-i18n="eCommerce">eCommerce</div>
                   </a>
                 </li>
-              </ul>
+              </ul> -->
             </li>
 
             <!-- Layouts -->
