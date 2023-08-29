@@ -1376,7 +1376,11 @@ $(document).ready(function() {
 });
 </script>
 
-<script>
+
+
+
+
+<!-- <script>
 const wizardValidation = document.querySelector('#wizard-validation');
 
 if (typeof wizardValidation !== undefined && wizardValidation !== null) {
@@ -1393,7 +1397,8 @@ if (typeof wizardValidation !== undefined && wizardValidation !== null) {
   let validationStepper = new Stepper(wizardValidation, {
     linear: true
   });
-const FormValidation1 = FormValidation.formValidation(wizardValidationFormStep1, {
+  const FormValidation1 = FormValidation.formValidation(wizardValidationFormStep1, {
+  
   fields: {
     name: {
       validators: {
@@ -1415,14 +1420,68 @@ const FormValidation1 = FormValidation.formValidation(wizardValidationFormStep1,
     // ... other fields ...
   },
   plugins: {
-    // ... plugins ...
+    trigger: new FormValidation.plugins.Trigger(),
+      bootstrap5: new FormValidation.plugins.Bootstrap5({
+        // Use this for enabling/changing valid/invalid class
+        // eleInvalidClass: '',
+        eleValidClass: ''
+      }),
+      autoFocus: new FormValidation.plugins.AutoFocus(),
+      submitButton: new FormValidation.plugins.SubmitButton()
+    }
+    init: instance => {
+      instance.on('plugins.message.placed', function(e) {
+        //* Move the error message out of the `input-group` element
+        if (e.element.parentElement.classList.contains('input-group')) {
+          e.element.parentElement.insertAdjacentElement('afterend', e.messageElement);
+        }
+      });
   }
 }).on('core.form.valid', function() {
   validationStepper.next();
 });
 
-</script>
+</script> -->
 
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const form = document.getElementById("room_booking");
+
+        // Validation function for dynamic form repeater
+        function validateDynamicForm() {
+            const dynamicForms = document.querySelectorAll(".dynamic-form [data-repeater-item]");
+
+            dynamicForms.forEach((form, index) => {
+                const fullNameField = form.querySelector("[name='full_name[]']");
+                // Add validation logic for other fields within the dynamic form
+                // ...
+
+                // Validate the fullNameField and other fields
+                if (fullNameField.value.trim() === "") {
+                    alert(`Full Name in section ${index + 1} is required.`);
+                    // You can also update error messages on the page instead of using alert
+                    return false;
+                }
+                // Add validation logic for other fields within the dynamic form
+                // ...
+            });
+
+            return true;
+        }
+
+        // Form submission handler
+        form.addEventListener("submit", function(event) {
+            // Validate dynamic form repeater section
+            if (!validateDynamicForm()) {
+                event.preventDefault();
+                return;
+            }
+
+            // Continue with submitting the form
+        });
+    });
+</script>
+s
 
 
 
