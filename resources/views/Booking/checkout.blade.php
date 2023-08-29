@@ -581,10 +581,7 @@ div.card-datatable [class*=col-md-] {
                       var room=response[0]['room_list'];
                       var ArrNames =room .split(",");
                       ArrNames.forEach(myFunction);
-                      function myFunction(room, index) {
-                         
-                        
-                      
+                      function myFunction(room, index) { 
                       if(room==301 || room==302 || room==401 || room==402)
                       {
                         $("#dlx_room").val(room);
@@ -659,8 +656,6 @@ div.card-datatable [class*=col-md-] {
                           } else {
                               $("#dlx_room_Excharge").val ("0");
                           }
-                          
-            
                   }
                 });
       }

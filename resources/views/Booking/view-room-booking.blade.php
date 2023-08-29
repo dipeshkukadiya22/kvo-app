@@ -106,7 +106,7 @@ div.card-datatable [class*=col-md-] {
                                               <tr>
                                                 <th>બુકિંગ નં.</th>
                                                 <th>નામ</th>
-                                                <th>Status</th>
+                                                {{--<th>Status</th>--}}
                                                 <th>રૂમ નંબર </th>
                                                 <th>આગમન તારીખ / સમય</th>
                                                 <th>ચેક આઉટ તારીખ / સમય</th>
@@ -121,7 +121,7 @@ div.card-datatable [class*=col-md-] {
                                              <input type="hidden" class="id" value="{{$row->r_id}}">
                                              <td>{{$row->r_id}}</td>
                                               <td>{{$row->m_name}}</td>
-                                              <td>{{$row->status}}</td>
+                                              {{--<td>{{$row->status}}</td>--}}
                                               <td>{{$row->room_list}}</td>
                                               <td>{{date("d-m-Y",strtotime($row->check_in_date))}}</td>
                                               <td>{{date("d-m-Y",strtotime($row->check_in_date . '+' .$row->no_of_days . 'days'))}}</td>
@@ -130,13 +130,13 @@ div.card-datatable [class*=col-md-] {
                                               <td>{{$row->deposite_rs}}</td>
                                               <td>
                                                   <div class="d-inline-block">
-                                                    <a href=@if($row->status=='BOOKED')"{{route('pdf_CheckIn',$row->r_id)}}" @endif ><img src="./assets/icon/orange-eye.png" width="20px"></a>
+                                                    <a href="{{route('pdf_CheckIn',$row->r_id)}}"><img src="./assets/icon/orange-eye.png" width="20px"></a>
 
                                                     <!--<a onclick="pdf({{$row->r_id}})" class="btn btn-sm btn-icon item-edit"><img src="./assets/icon/orange-eye.png" width="20px"></a>-->
                                                     
                                                     <a onclick="edit({{$row->r_id}})" class="btn btn-sm btn-icon item-edit"><img src="./assets/icon/orange-edit.png" width="20px"></a>
 
-                                                    <a href="#" class="text-danger delete-record"><img src="./assets/icon/orange-trash.png" width="20px"></a> 
+                                                    <a href="{{route('cancel_booking',$row->r_id)}}" class="text-danger delete-record"><img src="./assets/icon/orange-trash.png" width="20px"></a> 
                                                     
                                                   </div>
                                               </td>
@@ -267,7 +267,7 @@ div.card-datatable [class*=col-md-] {
                                                 <div class="col-md-4">
                                               
                                                     <label class="form-label" for="basic-default-email">Email</label>
-                                                    <input type="email" id="member_email" name="member_email" class="form-control" placeholder="john.doe" />
+                                                    <input type="email" id="member_email" name="member_email" class="form-control" placeholder="john.doe" readonly />
 
                                                 </div>                                                                                                            
 
@@ -275,19 +275,16 @@ div.card-datatable [class*=col-md-] {
                                                 <div class="col-md-4">
                                                   
                                                   <label class="form-label" for="multicol-phone">Phone Number</label>
-                                                  <input type="number" id="member_phone" name="member_phone" class="form-control phone-mask" placeholder="658 799 8941" aria-label="658 799 8941" maxlength="10" minlength="10" required/>
+                                                  <input type="number" id="member_phone" name="member_phone" class="form-control phone-mask" placeholder="658 799 8941" aria-label="658 799 8941" maxlength="10" minlength="10" readonly/>
                                                 </div>
 
                                                 <div class="col-md-4">
                                                   <label class="form-label" for="basic-default-name">Age</label>
-                                                  <input type="text" class="form-control" name="age" id="age" placeholder="Age" />
+                                                  <input type="text" class="form-control" name="age" id="age" placeholder="Age" readonly/>
                                                 </div>
                       
                                                 <div class="col-4">
-                                                  <label class="form-label" for="collapsible-address">Address</label>
-                                                
-                                                  
-                                                  
+                                                  <label class="form-label" for="collapsible-address" >Address</label>  
                                                   <textarea name="member_address"  class="form-control" id="member_address" rows="1" placeholder="1456, Mall Road"></textarea>
                                                 </div>
                                                                           
@@ -319,7 +316,7 @@ div.card-datatable [class*=col-md-] {
                                                 
                                                 <div class="col-md-4">
                                                   <label for="defaultFormControlInput" class="form-label">City</label>
-                                                  <input type="text" class="form-control" name="member_city" id="member_city" placeholder="John Doe" aria-describedby="defaultFormControlHelp" />
+                                                  <input type="text" class="form-control" name="member_city" id="member_city" placeholder="John Doe" aria-describedby="defaultFormControlHelp" readonly/>
                                                 </div>
 
                                                 <div class="col-md-4">
@@ -467,7 +464,7 @@ div.card-datatable [class*=col-md-] {
                                               <!-- Datetime Picker-->
                                               <div class="col-md-4">
                                                 <label for="flatpickr-datetime" class="form-label">Check-In Date</label>
-                                                <input type="text" class="form-control" name="check_in_date" placeholder="DD-MM-YYYY HH:MM" id="flatpickr-datetime" />
+                                                <input type="text" class="form-control" name="check_in_date" placeholder="DD-MM-YYYY HH:MM" id="flatpickr-datetime" readonly/>
                                               </div>
 
                                               <div class="col-md-4">
@@ -478,9 +475,6 @@ div.card-datatable [class*=col-md-] {
                                                 <label class="form-label" for="basic-default-name">Personal Details Id</label>
                                                 <input type="text" class="form-control" name="person_id" id="person_id" placeholder="Deposit No"  readonly/>
                                               </div>
-
-                                            
-                    
                                               <div class="col-md-4">
                                                 <label class="form-label" for="deposit-amount">Deposit Rs</label>
                                                 <input type="number" class="form-control" name="deposite_rs" id="deposit-amount" placeholder="Deposit Rs">
@@ -539,10 +533,6 @@ div.card-datatable [class*=col-md-] {
                                           </div>
                                           <!-- All No of Person -->
                                           <div id="address" class="content">
-                                                <button type="button" class="btn btn-primary" id="member_data">
-                                                  <span class="align-middle d-sm-inline-block d-none me-sm-1">show data</span>
-                                                  <i class="ti ti-arrow-right"></i>
-                                                </button>
                                             <div class="content-header">
                                               <small>Enter Member Details.</small>
                                             </div>
@@ -874,26 +864,37 @@ function edit(id)
                       function myFunction1(room, index) {
                         if(room==301 || room==302 || room==401 || room==402 )
                         {
+                          $("#select2Multiple11").append('<option value=' + room +'>'+ room+'-AC DELUXE ROOM' +'</option');
                           $("#select2Multiple11 option[value=" + room + "]").attr('selected', 'selected');
                         }
                         if(room==303 || room==304 ||room==305 || room==306 || room==403)
                         {
+                          $("#select2Multiple11").append('<option value=' + room +'>'+ room +'-AC RE. ROOM' +'</option');
                           $("#select2Multiple11 option[value=" + room + "]").attr('selected', 'selected');
                         }
                         if(room==203 || room==204 ||room==205 || room==206 || room==404 || room==405 || room==406)
                         {
+                          $("#select2Multiple22").append('<option value=' + room +'>'+ room +'-2BNAC'+'</option');
                           $("#select2Multiple22 option[value=" + room + "]").attr('selected', 'selected');
                         }
                         if(room==201)
                         {
+                          $("#select2Multiple22").append('<option value=' + room +'>'+ room +'-4BNAC' +'</option');
                           $("#select2Multiple22 option[value=" + room + "]").attr('selected', 'selected');
                         }
                         if(room==202)
                         {
+                          $("#select2Multiple22").append('<option value=' + room +'>'+ room +'-3BNAC' +'</option');
                           $("#select2Multiple22 option[value=" + room + "]").attr('selected', 'selected');
                         }
-                        if(room==1 || room==2 ||room==3 || room==4 ||room==5 || room==6 ||room==7 || room==8 ||room==9 || room==10 || room==11 || room==12 ||room==13 || room==14 ||room==15 || room==16 ||room==17 || room==18 ||room==19 || room==20)
+                        if(room==1 || room==2 ||room==3 || room==4 ||room==5 || room==6 ||room==7 || room==8 ||room==9 || room==10 )
                         {
+                          $("#select2Multiple33").append('<option value=' + room +'>'+ room +'-DMNAC'+'</option');
+                          $("#select2Multiple33 option[value=" + room + "]").attr('selected', 'selected');
+                        }
+                        if( room==11 || room==12 ||room==13 || room==14 ||room==15 || room==16 ||room==17 || room==18 ||room==19 || room==20)
+                        {
+                          $("#select2Multiple33").append('<option value=' + room +'>'+ room +'-DMAC'+'</option');
                           $("#select2Multiple33 option[value=" + room + "]").attr('selected', 'selected');
                         }
                       }   
@@ -1026,8 +1027,7 @@ $(document).ready(function () {
     });
   });
 </script>
-
-  <script>
+<script>
   $(document).ready(function() {
 
     $("#repeat-next").click(function() {
@@ -1044,7 +1044,7 @@ $(document).ready(function () {
         $(".rep-form").append(
 
           '<div class="row formrepeater">'+
-                                  '<div class="mb-3 col-lg-6 col-xl-3 col-12 mb-0" hidden>'+
+                                  '<div class="mb-3 col-lg-6 col-xl-3 col-12 mb-0">'+
                                       '<label class="form-label" for="form-repeater-1-1">member_id</label>'+
                                       '<input type="text" id="m_id'+i+'" name="m_id[]" class="fom_age[]rm-control" placeholder="john doe" value="" readonly/>'+
                                     '</div>'+
@@ -1284,7 +1284,7 @@ $(document).ready(function () {
     });
 
     
-    $('div.head-label').html('<h5 class="card-title mb-0">Checkout</h5>');
+    $('div.head-label').html('<h5 class="card-title mb-0">View Room Booking</h5>');
 
     </script>
 

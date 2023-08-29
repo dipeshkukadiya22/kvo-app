@@ -50,7 +50,7 @@ Route::get('cancel_room/{id}',[BookingController::class, 'cancel_room'])->name('
 // room checkout
 Route::get('view_room_booking', [BookingController::class, 'view_room_booking'])->name('view_room_booking');
 Route::post('update_room_booking', [BookingController::class, 'update_room_booking'])->name('update_room_booking');
-//Route::get('cancel_booking/{id}', [BookingController::class, 'cancel_booking'])->name('cancel_booking');
+Route::get('cancel_booking/{id}', [BookingController::class, 'cancel_booking'])->name('cancel_booking');
 Route::get('check_num/{id}', [BookingController::class, 'check_num'])->name('check_num');
 Route::get('get_data/{id}', [BookingController::class, 'get_data'])->name('get_data');
 Route::get('get_member', [BookingController::class, 'get_member'])->name('get_member');
