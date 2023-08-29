@@ -35,6 +35,7 @@
 .form-label {
     font-weight: bold;
 }
+
 .form-select-sm {
     display: block;
     width: 100%;
@@ -81,12 +82,31 @@ div.card-datatable [class*=col-md-] {
 
             <div class="container-xxl flex-grow-1 container-p-y">
                 <div class="content-header row">
-                  <div class="content-header-left col-md-9 col-12 mb-2">
-                    {{-- <div class="row breadcrumbs-top">
-                      <div class="col-12">
-                        <h4 class="fw-bold py-3">View all Community Donation</h4>
+                <div class="content-header-left col-md-6 col-12 mb-2">
+                        <div class="row breadcrumbs-top">
+                            <div class="col-12">
+                             {{-- <h4 class="fw-bold py-3"><span class="text-muted fw-light">Checkout</span> </h4>--}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="content-header-right d-flex justify-content-end col-md-6 col-12">
+                      
+                      <div class="form-group breadcrumb-right py-3 d-inline-flex">
+
+                        <ul class="nav nav-pills mb-3 me-2" role="tablist">
+                          <li class="nav-item">
+                            <button
+                              type="button" class="nav-link active" role="tab" data-bs-toggle="tab" data-bs-target="#navs-pills-top-bookedroom" aria-controls="navs-pills-top-allroom" aria-selected="true">
+                              Booked Rooms (<span id="allRoomsCount">0</span>)
+                            </button>
+                          </li>
+                          <li class="nav-item">
+                            <button type="button" class="nav-link" role="tab" data-bs-toggle="tab" data-bs-target="#navs-pills-top-checkoutroom"  aria-controls="navs-pills-top-available" aria-selected="false"> 
+                              Checked Out Rooms (<span id="availableRoomsCount">0</span>) </button>
+                          </li>
+                          
+                        </ul>
                       </div>
-                    </div> --}}
                   </div>
                 </div>
                 <div class="row mb-4">
@@ -94,32 +114,37 @@ div.card-datatable [class*=col-md-] {
                   <form id="kvo_add_checkout" class="browser-default-validation" method="POST" action="{{route('add_checkout')}}">
                     <div class="card">
                       <!-- Basic table -->
-                    <section id="basic-datatable">
+                      <section id="basic-datatable">
                         <div class="row">
                             <div class="col-12">
                                 <div class="card">
-                                    <div class="card-datatable pt-0">
+                                <div class="tab-content p-0">
+                                <div class="tab-pane fade show active" id="navs-pills-top-bookedroom" role="tabpanel">
+                                    <div class="card-datatable table-responsive pt-0">
                                         <table id="DataTables_Table_0" class="datatables-basic table">
                                           <thead>
                                          @csrf
                                               <tr>
-                                                <th>નામ</th>
-                                                <th>રૂમ નંબર </th>
-                                                <th>STATUS </th>
-                                                <th>આગમન તારીખ / સમય</th>
-                                                <th>ચેક આઉટ તારીખ / સમય</th>
-                                                <th>ભાડું</th>
-                                                <th>રોકાણ દિવસ</th>                       
-                                                <th>ડિપોઝિટ રકમ(₹) </th>
+                                                <th>Booking No.</th>
+                                                <th>Name</th>
+                                                <th>Room No. </th>
+                                                <!--<th>Status </th>-->
+                                                <th>Check-In-Date</th>
+                                                <th>Check-Out-Date</th>
+                                                <th>Rent</th>
+                                                <th>No of Days</th>                       
+                                                <th>Deposite(₹) </th>
                                                 <th>Action</th>
                                               </tr>
                                           </thead>
-                                          @foreach($checkout as $row)
+                                          <tbody>
+                                          @foreach($bookedRoom as $row)
                                           <tr>
                                              <input type="hidden" class="id" value="{{$row->r_id}}">
+                                              <td>{{$row->r_id}}</td>
                                               <td>{{$row->m_name}}</td>
                                               <td>{{$row->room_list}}</td>
-                                               <td>{{$row->status}}</td>
+                                              <!--<td>{{$row->status}}</td>}}-->
                                               <td>{{date("d-m-Y",strtotime($row->check_in_date))}}</td>
                                               <td>{{date("d-m-Y",strtotime($row->check_in_date . '+' .$row->no_of_days . 'days'))}}</td>
                                               <td>{{$row->ac_amount + $row->non_ac_amount + $row->door_mt_amount}}</td>
@@ -127,7 +152,7 @@ div.card-datatable [class*=col-md-] {
                                               <td>{{$row->deposite_rs}}</td>
                                               <td>
                                                   <div class="d-inline-block">
-                                                    <a href=@if($row->status=='CHECKOUT')"{{route('pdf_CheckOut',1)}}"; @endif class="text-primary"><img src="./assets/icon/orange-eye.png" width="20px"></a>
+                                                    <a href="{{route('pdf_CheckIn',$row->r_id)}}" class="text-primary"><img src="./assets/icon/orange-eye.png" width="20px"></a>
 
                                                     <a @if($row->status=='BOOKED') onclick="edit_checkout({{$row->r_id}})"; @endif class="btn btn-sm btn-icon item-edit"><img src="./assets/icon/orange-edit.png" width="20px"></a>
 
@@ -137,12 +162,66 @@ div.card-datatable [class*=col-md-] {
                                               </td>
                                           </tr>
                                           @endforeach
+                                          </tbody>
+                                          </table>
+                                        </div>
+                                      </div>
+                                
+                        <!--START checkedout room TAB-->
+                                <div class="tab-pane fade" id="navs-pills-top-checkoutroom" role="tabpanel">
+                                    <div class="card-datatable pt-0">
+                                        <table id="DataTables_Table_0" class="datatables-basic table">
+                                          <thead>
+                                         @csrf
+                                              <tr>
+                                                <th>Booking No.</th>
+                                                <th>Name</th>
+                                                <th>Room No. </th>
+                                                <!--<th>Status </th>-->
+                                                <th>Check-In-Date</th>
+                                                <th>Check-Out-Date</th>
+                                                <th>No of Days</th>                       
+                                                <th>Deposite(₹) </th>
+                                                <th>Amount(₹)</th>
+                                                <th>Payment Mode</th>
+                                                <th>Action</th>
+                                              </tr>
+                                          </thead>
+                                          @foreach($checkout as $row)
+                                          <tr>
+                                             <input type="hidden" class="id" value="{{$row->r_id}}">
+                                              <td>{{$row->r_id}}</td>
+                                              <td>{{$row->m_name}}</td>
+                                              <td>{{$row->room_list}}</td>
+                                              <!--<td>{{$row->status}}</td>}}-->
+                                              <td>{{date("d-m-Y",strtotime($row->check_in_date))}}</td>
+                                              <td>{{date("d-m-Y",strtotime($row->check_in_date . '+' .$row->no_of_days . 'days'))}}</td>
+                                              <td>{{$row->no_of_days}}</td>
+                                              <td>{{$row->deposite_rs}}</td>
+                                              <td>{{$row->payable_amount}}</td>
+                                              <td>{{$row->payment_mode}}</td>
+                                              <td>
+                                                  <div class="d-inline-block">
+                                                    <a href="{{route('pdf_CheckOut',$row->rec_no)}}" class="text-primary"><img src="./assets/icon/orange-eye.png" width="20px"></a>
+
+                                                    <!--<a @if($row->status=='BOOKED') onclick="edit_checkout({{$row->r_id}})"; @endif class="btn btn-sm btn-icon item-edit"><img src="./assets/icon/orange-edit.png" width="20px"></a>-->
+
+                                                   
+                                                    
+                                                  </div>
+                                              </td>
+                                          </tr>
+                                          @endforeach
                                           
                                         </table>
+                                        </div>
+                                      </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+
+                        <!--END TAB-->
 
                         <div class="modal fade" id="exLargeModal" tabindex="-1" aria-hidden="true">
                           <div class="modal-dialog modal-xl" role="document">
@@ -151,6 +230,7 @@ div.card-datatable [class*=col-md-] {
                                 <h5 class="modal-title" id="exampleModalLabel4">Detail Update</h5>
                                 <button
                                   type="button"
+                                  id="close"
                                   class="btn-close"
                                   data-bs-dismiss="modal"
                                   aria-label="Close"></button>
@@ -170,13 +250,8 @@ div.card-datatable [class*=col-md-] {
 
                                   <div class="col mb-3">
                                     <label for="select2Basic" class="form-label">નામ</label>
-                                    <select id="select2Basic" name="name" class="select2 form-select form-select-lg" data-allow-clear="false">
-                                    @foreach($member as $row)
-                                      <option value="{{$row->p_id}}">{{$row->m_name}}</option>
-                                     
-                                    @endforeach
-                                      
-                                    </select>
+                                    <input type="text" id="name" name="name" class="form-control" readonly/>
+                                    
                                   </div>
 
 
@@ -190,8 +265,8 @@ div.card-datatable [class*=col-md-] {
                                 <div class="row g-3">
                                   <!-- Datetime Picker-->
                                   <div class="col mb-3">
-                                    <label for="flatpickr-datetime" class="form-label">આગમન તારીખ / સમય</label>
-                                    <input type="date" class="form-control" name="check_in_date" id="check_in_date" placeholder="DD-MM-YYYY HH:MM" readonly/>
+                                    <label for="flatpickr-date" class="form-label">આગમન તારીખ / સમય</label>
+                                    <input type="text" class="form-control" name="check_in_date" id="check_in_date"  readonly> 
                                   </div>
 
                                   <!-- Datetime Picker-->
@@ -227,22 +302,22 @@ div.card-datatable [class*=col-md-] {
                                           ડિલક્સ  રૂમ 
                                         </td>
                                         <td>
-                                          <input type="text" id="dlx_room" name="dlx_room" class="form-control" value=""  readonly/>
+                                          <input type="text" id="dlx_room" name="dlx_room" class="form-control clear-value" value=""  readonly/>
                                         </td>
                                         <td>
-                                          <input type="text" id="dlx_room_charge" name="dlx_room_charge" class="form-control"  readonly/>
+                                          <input type="text" id="dlx_room_charge" name="dlx_room_charge" class="form-control clear-value"  readonly/>
                                         </td>
                                         <td>
-                                          <input type="text" id="dlx_room_Excharge" name="dlx_room_Excharge" class="form-control"/>
+                                          <input type="text" id="dlx_room_Excharge" name="dlx_room_Excharge" class="form-control clear-value"/>
                                         </td>
                                         <td>
-                                          <input type="text" id="dlx_amount" name="dlx_amount" class="form-control"  readonly/>
+                                          <input type="text" id="dlx_amount" name="dlx_amount" class="form-control clear-value"  readonly/>
                                         </td>
                                         <td>
-                                          <input type="text" id="dlx_no_of_days" name="dlx_no_of_days" class="form-control"  readonly/>
+                                          <input type="text" id="dlx_no_of_days" name="dlx_no_of_days" class="form-control clear-value"  readonly/>
                                         </td>
                                         <td>
-                                          <input type="text" id="dlx_room_total" name="dlx_room_total" class="form-control" readonly/>
+                                          <input type="text" id="dlx_room_total" name="dlx_room_total" class="form-control clear-value" readonly/>
                                         </td>
                                       </tr>
 
@@ -251,22 +326,22 @@ div.card-datatable [class*=col-md-] {
                                           A.C. રૂમ
                                         </td>
                                         <td>
-                                          <input type="text" id="ac_room" name="ac_room" class="form-control" value=""  readonly/>
+                                          <input type="text" id="ac_room" name="ac_room" class="form-control clear-value" value=""  readonly/>
                                         </td>
                                         <td>
-                                          <input type="text" id="ac_room_charge" name="ac_room_charge" class="form-control"  readonly/>
+                                          <input type="text" id="ac_room_charge" name="ac_room_charge" class="form-control clear-value"  readonly/>
                                         </td>
                                         <td>
-                                          <input type="text" id="ac_room_Excharge" name="ac_room_Excharge" class="form-control"/>
+                                          <input type="text" id="ac_room_Excharge" name="ac_room_Excharge" class="form-control clear-value"/>
                                         </td>
                                         <td>
-                                          <input type="text" id="ac_amount" name="ac_amount" class="form-control"  readonly/>
+                                          <input type="text" id="ac_amount" name="ac_amount" class="form-control clear-value"  readonly/>
                                         </td>
                                         <td>
-                                          <input type="text" id="ac_no_of_days" name="ac_no_of_days" class="form-control"  readonly/>
+                                          <input type="text" id="ac_no_of_days" name="ac_no_of_days" class="form-control clear-value"  readonly/>
                                         </td>
                                         <td>
-                                          <input type="text" id="ac_room_total" name="ac_room_total" class="form-control" readonly/>
+                                          <input type="text" id="ac_room_total" name="ac_room_total" class="form-control clear-value" readonly/>
                                         </td>
                                       </tr>
 
@@ -275,22 +350,22 @@ div.card-datatable [class*=col-md-] {
                                            Non. A.C. રૂમ
                                         </td>
                                         <td>
-                                          <input type="text" id="non_ac_room" name="non_ac_room" class="form-control" value=""  readonly/>
+                                          <input type="text" id="non_ac_room" name="non_ac_room" class="form-control clear-value" value=""  readonly/>
                                         </td>
                                         <td>
-                                          <input type="text" id="non_ac_room_charge" name="non_ac_room_charge" class="form-control"  readonly/>
+                                          <input type="text" id="non_ac_room_charge" name="non_ac_room_charge" class="form-control clear-value"  readonly/>
                                         </td>
                                         <td>
-                                          <input type="text" id="non_ac_room_Excharge" name="non_ac_room_Excharge" class="form-control" />
+                                          <input type="text" id="non_ac_room_Excharge" name="non_ac_room_Excharge" class="form-control clear-value" />
                                         </td>
                                         <td>
-                                          <input type="text" id="non_ac_amount" name="non_ac_amount" class="form-control"  readonly/>
+                                          <input type="text" id="non_ac_amount" name="non_ac_amount" class="form-control clear-value"  readonly/>
                                         </td>
                                         <td>
-                                          <input type="text" id="non_ac_no_of_days" name="non_ac_no_of_days" class="form-control"  readonly/>
+                                          <input type="text" id="non_ac_no_of_days" name="non_ac_no_of_days" class="form-control clear-value"  readonly/>
                                         </td>
                                         <td>
-                                          <input type="text" id="non_ac_room_total" name="non_ac_room_total" class="form-control" readonly/>
+                                          <input type="text" id="non_ac_room_total" name="non_ac_room_total" class="form-control clear-value" readonly/>
                                         </td>
                                       </tr>
 
@@ -299,22 +374,22 @@ div.card-datatable [class*=col-md-] {
                                           A.C. ડોરમેટરી  
                                         </td>
                                         <td>
-                                          <input type="text" id="dmt_ac_room" name="dmt_ac_room" class="form-control" value=""  readonly/>
+                                          <input type="text" id="dmt_ac_room" name="dmt_ac_room" class="form-control clear-value" value=""  readonly/>
                                         </td>
                                         <td>
-                                          <input type="text" id="dmt_ac_room_charge" name="dmt_ac_room_charge" class="form-control"  readonly/>
+                                          <input type="text" id="dmt_ac_room_charge" name="dmt_ac_room_charge" class="form-control clear-value"  readonly/>
                                         </td>
                                         <td>
-                                          <input type="text" id="dmt_ac_room_Excharge" name="dmt_ac_room_Excharge" class="form-control" />
+                                          <input type="text" id="dmt_ac_room_Excharge" name="dmt_ac_room_Excharge" class="form-control clear-value" />
                                         </td>
                                         <td>
-                                          <input type="text" id="dmt_ac_amount" name="dmt_ac_amount" class="form-control"  readonly/>
+                                          <input type="text" id="dmt_ac_amount" name="dmt_ac_amount" class="form-control clear-value"  readonly/>
                                         </td>
                                         <td>
-                                          <input type="text" id="dmt_ac_no_of_days" name="dmt_ac_no_of_days" class="form-control"  readonly/>
+                                          <input type="text" id="dmt_ac_no_of_days" name="dmt_ac_no_of_days" class="form-control clear-value"  readonly/>
                                         </td>
                                         <td>
-                                          <input type="text" id="dmt_ac_room_total" name="dmt_ac_room_total" class="form-control" readonly/>
+                                          <input type="text" id="dmt_ac_room_total" name="dmt_ac_room_total" class="form-control clear-value" readonly/>
                                         </td>
                                       </tr>
 
@@ -323,22 +398,22 @@ div.card-datatable [class*=col-md-] {
                                           Non. A.C. ડોરમેટરી  
                                         </td>
                                         <td>
-                                          <input type="text" id="non_dmt_ac_room" name="non_dmt_ac_room" class="form-control" value=""  readonly/>
+                                          <input type="text" id="non_dmt_ac_room" name="non_dmt_ac_room" class="form-control clear-value" value=""  readonly/>
                                         </td>
                                         <td>
-                                          <input type="text" id="non_dmt_ac_room_charge" name="non_dmt_ac_room_charge" class="form-control"  readonly/>
+                                          <input type="text" id="non_dmt_ac_room_charge" name="non_dmt_ac_room_charge" class="form-control clear-value"  readonly/>
                                         </td>
                                         <td>
-                                          <input type="text" id="non_dmt_ac_room_Excharge" name="non_dmt_ac_room_Excharge" class="form-control"/>
+                                          <input type="text" id="non_dmt_ac_room_Excharge" name="non_dmt_ac_room_Excharge" class="form-control clear-value"/>
                                         </td>
                                         <td>
-                                          <input type="text" id="non_dmt_ac_amount" name="non_dmt_ac_amount" class="form-control"  readonly/>
+                                          <input type="text" id="non_dmt_ac_amount" name="non_dmt_ac_amount" class="form-control clear-value"  readonly/>
                                         </td>
                                         <td>
-                                          <input type="text" id="non_dmt_ac_no_of_days" name="non_dmt_ac_no_of_days" class="form-control"  readonly/>
+                                          <input type="text" id="non_dmt_ac_no_of_days" name="non_dmt_ac_no_of_days" class="form-control clear-value"  readonly/>
                                         </td>
                                         <td>
-                                          <input type="text" id="non_dmt_ac_room_total" name="non_dmt_ac_room_total" class="form-control" readonly/>
+                                          <input type="text" id="non_dmt_ac_room_total" name="non_dmt_ac_room_total" class="form-control clear-value" readonly/>
                                         </td>
                                       </tr>
 
@@ -401,7 +476,7 @@ div.card-datatable [class*=col-md-] {
                                               <label class="form-check-label" for="basic_default_radio">UPI</label>
                                             </div>
                                             <div class="form-check form-check-inline" hidden>
-                                            <input type="text" id="payment" name="payment" class="form-control" />
+                                            <input type="text" id="payment" name="payment" class="form-control" value="CASH" />
                                             <label class="form-check-label" for="basic-default-radio">payment</label>
                                         </div>
                                           </div>
@@ -497,11 +572,13 @@ div.card-datatable [class*=col-md-] {
                       var sr_no=response[0]['m_id'];
              
                       $("#bookingId").val(response[0]['r_id']);
+                      $("#name").val(response[0]['m_name']);
                       $("#city").val(response[0]['city']);
-                      $("#check_in_date").val(response[0]['check_in_date']);
+                      var date=new Date(response[0]['check_in_date']);
+                      var checkdate=date.getDate()+"-"+date.getMonth()+"-"+date.getFullYear()+" "+date.getHours()+":"+date.getMinutes();
+                      $("#check_in_date").val(checkdate);
                       $("#deposite").val(response[0]['deposite_rs']);
                       var room=response[0]['room_list'];
-                    
                       var ArrNames =room .split(",");
                       ArrNames.forEach(myFunction);
                       function myFunction(room, index) {
@@ -567,8 +644,7 @@ div.card-datatable [class*=col-md-] {
                           if (m == "") {
                               $("#non_dmt_ac_room_Excharge").prop('disabled', true);
                           } else {
-                            alert("zero");
-                             $("#non_dmt_ac_room_Excharge").prop('disabled', true);
+
                               $("#non_dmt_ac_room_Excharge").val ("0");
                           }
                           var p=document.getElementById("dmt_ac_room").value;
@@ -596,10 +672,6 @@ div.card-datatable [class*=col-md-] {
       dateFormat: "d-m-Y H:i",
       enableTime: true,
       defaultDate: currentDate
-      });
-
-      $('#check_in_date').flatpickr({
-      dateFormat: "Y-m-d H:i",
       });
     });
 
@@ -648,7 +720,7 @@ div.card-datatable [class*=col-md-] {
               text: '<i class="ti ti-printer me-1" ></i>Print',
               className: 'dropdown-item',
               exportOptions: {
-                columns: [1 ,2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15],
+                columns: [0,1 ,2, 3, 4, 5, 6, 7, 8, 9],
                 // prevent avatar to be display
                 format: {
                   body: function (inner, coldex, rowdex) {
@@ -685,7 +757,7 @@ div.card-datatable [class*=col-md-] {
               text: '<i class="ti ti-file-text me-1" ></i>Csv',
               className: 'dropdown-item',
               exportOptions: {
-                columns: [1 ,2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15],
+                columns: [0,1 ,2, 3, 4, 5, 6, 7, 8, 9],
                 // prevent avatar to be display
                 format: {
                   body: function (inner, coldex, rowdex) {
@@ -709,7 +781,7 @@ div.card-datatable [class*=col-md-] {
               text: '<i class="ti ti-file-spreadsheet me-1"></i>Excel',
               className: 'dropdown-item',
               exportOptions: {
-                columns: [1 ,2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14],
+                columns: [0,1 ,2, 3, 4, 5, 6, 7, 8, 9],
                 // prevent avatar to be display
                 format: {
                   body: function (inner, coldex, rowdex) {
@@ -733,7 +805,7 @@ div.card-datatable [class*=col-md-] {
               text: '<i class="ti ti-file-description me-1"></i>Pdf',
               className: 'dropdown-item',
               exportOptions: {
-                columns: [1 ,2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15],
+                columns: [0,1 ,2, 3, 4, 5, 6, 7, 8, 9],
                 // prevent avatar to be display
                 format: {
                   body: function (inner, coldex, rowdex) {
@@ -774,11 +846,13 @@ div.card-datatable [class*=col-md-] {
 
   $(document).ready(function () {
       // Select all input fields with class 'amount-input'
-      $('.amount-input').on('input', function () {
-          var net_amount = 0;
-
-          // Convert the total to words and update the 'અંકે રૂપિયા' input field
-          NumToWord(net_amount, 'rupees-in-words');
+      $("#close").click(function(){
+      $('.clear-value').val("");
+      $("#ac_room_Excharge").prop('disabled', false);
+      $("#non_ac_room_Excharge").prop('disabled', false);
+      $("#dlx_room_Excharge").prop('disabled', false);
+      $("#dmt_ac_room_Excharge").prop('disabled', false);
+      $("#non_dmt_ac_room_Excharge").prop('disabled', false);
       });
   });
 
@@ -791,10 +865,7 @@ div.card-datatable [class*=col-md-] {
       return true;
   }
 
-  function NumToWord(inputNumber, outputControl) {
-      // Your NumToWord function implementation
-      // Make sure it works correctly separately
-  }
+
 </script>
 
 <script>
@@ -871,181 +942,15 @@ document.getElementById("net_amount").addEventListener("input", convertToWords);
 </script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-      
-  {{-- <script>
-    // Get all elements with class "delete-record"
-    const deleteLinks = document.querySelectorAll(".delete-record");
-
-    // Loop through each delete link and attach a click event listener
-    deleteLinks.forEach(link => {
-        link.addEventListener("click", function() {
-            // Show a confirmation dialog using SweetAlert2
-            Swal.fire({
-                title: "Are you sure?",
-                text: "You won't be able to revert this!",
-                icon: "warning",
-                showCancelButton: true,
-                confirmButtonColor: "#3085d6",
-                cancelButtonColor: "#d33",
-                confirmButtonText: "Yes, delete it!",
-            }).then((result) => {
-                // If the user confirms the deletion, proceed with the deletion logic
-                if (result.isConfirmed) {
-                    // Write your deletion logic here
-                    // For example, you can remove the entire row from the table:
-                    const row = this.closest("tr");
-                    if (row) {
-                        row.remove();
-                    }
-
-                    // Show a success message using SweetAlert2
-                    Swal.fire("Deleted!", "The record has been deleted.", "success");
-                }
-            });
-        });
-    });
-</script> --}}
-
-<script>
-  
-const editLinks = document.querySelectorAll(".item-edit");
-    // Loop through each delete link and attach a click event listener
-    editLinks.forEach(link => {
-        link.addEventListener("click", function() {
-            // Show a confirmation dialog using SweetAlert2
-            var id=$(this).closest("tr").find(".id").val();
-           /* var member_id=[];
-            var temp=document.getElementById('select2Basic');
-             for(i=0;i<temp.options.length;i++)
-                  {
-                    member_id[i]=temp.options[i].value;
-                  }*/
-            $.ajax({
-                url:"{{url('get_booking_data')}}" +"/"+ id,
-                type:'GET',
-                  success:function(response){
-                      var sr_no=response[0]['m_id'];
-                      $("#bookingId").val(response[0]['r_id']);
-                      $("#city").val(response[0]['city']);
-                      $("#check_in_date").val(response[0]['check_in_date']);
-                      $("#deposite").val(response[0]['deposite_rs']);
-                      var room=response[0]['room_list'];
-                    
-                      var ArrNames =room .split(",");
-                      ArrNames.forEach(myFunction);
-                      function myFunction(room, index) {
-                         
-                        
-                      
-                      if(room==301 || room==302 || room==401 || room==402)
-                      {
-                        $("#dlx_room").val(room);
-                        $("#dlx_room_charge").val(response[0]['ac_amount']);
-                        $("#dlx_no_of_days").val(response[0]['no_of_days']);
-                        $("#dlx_amount").val(response[0]['no_of_days'] * response[0]['ac_amount']);
-                        $("#dlx_room_total").val(response[0]['no_of_days'] * response[0]['ac_amount']);
-                      }
-                      if(room==303 || room==304 ||room==305 || room==306 || room==403)
-                      {
-                        $("#ac_room").val(room);
-                        $("#ac_room_charge").val(response[0]['ac_amount']);
-                        $("#ac_no_of_days").val(response[0]['no_of_days']);
-                        $("#ac_amount").val(response[0]['no_of_days'] * response[0]['ac_amount']);
-                        $("#ac_room_total").val(response[0]['no_of_days'] * response[0]['ac_amount']);
-                      }
-                      if(room==201 || room==202 ||room==203 || room==204 ||room==205 || room==206 || room==404 || room==405 || room==406)
-                      {
-                        $("#non_ac_room").val(room);
-                        $("#non_ac_room_charge").val(response[0]['non_ac_amount']);
-                        $("#non_ac_no_of_days").val(response[0]['no_of_days']);
-                        $("#non_ac_amount").val(response[0]['no_of_days'] * response[0]['non_ac_amount']);
-                        $("#non_ac_room_total").val(response[0]['no_of_days'] * response[0]['non_ac_amount']);
-                      }
-                      
-                      if(room==1 || room==2 ||room==3 || room==4 ||room==5 || room==6 ||room==7 || room==8 ||room==9 || room==10)
-                      {
-                        $("#non_dmt_ac_room").val(room);
-                        $("#non_dmt_ac_room_charge").val(response[0]['door_mt_amount']);
-                        $("#non_dmt_ac_no_of_days").val(response[0]['no_of_days']);
-                        $("#non_dmt_ac_amount").val(response[0]['no_of_days'] * response[0]['door_mt_amount']);
-                        $("#non_dmt_ac_room_total").val(response[0]['no_of_days'] * response[0]['door_mt_amount']);
-                      }
-
-                      if(room==11 || room==12 ||room==13 || room==14 ||room==15 || room==16 ||room==17 || room==18 ||room==19 || room==20)
-                      {
-                        $("#dmt_ac_room").val(room);
-                        $("#dmt_ac_room_charge").val(response[0]['door_mt_amount']);
-                        $("#dmt_ac_no_of_days").val(response[0]['no_of_days']);
-                        $("#dmt_ac_amount").val(response[0]['no_of_days'] * response[0]['door_mt_amount']);
-                        $("#dmt_ac_room_total").val(response[0]['no_of_days'] * response[0]['door_mt_amount']);
-                      }
-                    }
-                    var a=document.getElementById("ac_room").value;
-                          if (a == "") {
-                              $("#ac_room_Excharge").prop('disabled', true);
-                          } else {
-                              $("#ac_room_Excharge").val ("0");
-                          }
-                        var l=document.getElementById("non_ac_room").value;
-                          if (l == "") {
-                              $("#non_ac_room_Excharge").prop('disabled', true);
-                          } else {
-                              $("#non_ac_room_Excharge").val ("0");
-                          }
-                          var m=document.getElementById("non_dmt_ac_room").value;
-                          if (m == "") {
-                              $("#non_dmt_ac_room_Excharge").prop('disabled', true);
-                          } else {
-                              $("#non_dmt_ac_room_Excharge").val ("0");
-                          }
-                          var p=document.getElementById("dmt_ac_room").value;
-                          if (p == "") {
-                              $("#dmt_ac_room_Excharge").prop('disabled', true);
-                          } else {
-                              $("#dmt_ac_room_Excharge").val ("0");
-                          }
-                          var k=document.getElementById("dlx_room").value;
-                          if (k == "") {
-                              $("#dlx_room_Excharge").prop('disabled', true);
-                          } else {
-                              $("#dlx_room_Excharge").val ("0");
-                          }
-                          
-                    
-                  }
-                });
-              
-            });
-        });
-</script>
-<!-- <script>
-$(document).ready(function() {
-    const dlxtamount = parseInt($('#dlx_room_total').val()) || 0;
-    const acamount = parseInt($('#ac_room_total').val()) || 0;
-    const nonacamount = parseInt($('#non_ac_room_total').val()) || 0;
-    const nonacdmtamount = parseInt($('#non_dmt_ac_room_total').val()) || 0;
-    const acdmtamount = parseInt($('#dmt_ac_room_total').val()) || 0;
-
-    const totalAmount = dlxtamount + acamount + nonacamount + nonacdmtamount + acdmtamount;
-    alert(totalAmount);
-    $('#total').text(totalAmount);
-});
-</script> -->
-
 
 <script>
     $(document).ready(function() {
 
-     
-   
   $("#dlx_room_Excharge").change(function(){
     var amt=parseInt(document.getElementById("dlx_amount").value); 
     var excharge=parseInt(document.getElementById("dlx_room_Excharge").value); 
     var deposite=parseInt(document.getElementById("deposite").value);
     $("#dlx_room_total").val(amt+excharge);
-    // var total=parseInt(document.getElementById("dlx_room_total").value);
-    // $("#total").val(total);
-    
     const dlxtamount = parseInt($('#dlx_room_total').val()) || 0;
     const acamount = parseInt($('#ac_room_total').val()) || 0;
     const nonacamount = parseInt($('#non_ac_room_total').val()) || 0;
@@ -1054,7 +959,7 @@ $(document).ready(function() {
     const totalAmount = dlxtamount + acamount + nonacamount + nonacdmtamount + acdmtamount;
     $('#total').val(totalAmount);
     $("#net_amount").val(totalAmount-deposite);
-   
+    convertToWords();
   });
 
   $("#ac_room_Excharge").change(function(){
@@ -1062,9 +967,6 @@ $(document).ready(function() {
     var excharge=parseInt(document.getElementById("ac_room_Excharge").value); 
     var deposite=parseInt(document.getElementById("deposite").value);
     $("#ac_room_total").val(amt+excharge);
-    // var total=parseInt(document.getElementById("ac_room_total").value);
-    // $("#total").val(total);
-    // $("#net_amount").val(total-deposite);
     const dlxtamount = parseInt($('#dlx_room_total').val()) || 0;
     const acamount = parseInt($('#ac_room_total').val()) || 0;
     const nonacamount = parseInt($('#non_ac_room_total').val()) || 0;
@@ -1073,6 +975,7 @@ $(document).ready(function() {
     const totalAmount = dlxtamount + acamount + nonacamount + nonacdmtamount + acdmtamount;
     $('#total').val(totalAmount);
     $("#net_amount").val(totalAmount-deposite);
+    convertToWords();
   });
 
   $("#non_ac_room_Excharge").change(function(){
@@ -1080,9 +983,6 @@ $(document).ready(function() {
     var excharge=parseInt(document.getElementById("non_ac_room_Excharge").value); 
     var deposite=parseInt(document.getElementById("deposite").value);
     $("#non_ac_room_total").val(amt+excharge);
-    // var total=parseInt(document.getElementById("non_ac_room_total").value);
-    // $("#total").val(total);
-    // $("#net_amount").val(total-deposite);
     const dlxtamount = parseInt($('#dlx_room_total').val()) || 0;
     const acamount = parseInt($('#ac_room_total').val()) || 0;
     const nonacamount = parseInt($('#non_ac_room_total').val()) || 0;
@@ -1091,6 +991,7 @@ $(document).ready(function() {
     const totalAmount = dlxtamount + acamount + nonacamount + nonacdmtamount + acdmtamount;
     $('#total').val(totalAmount);
     $("#net_amount").val(totalAmount-deposite);
+    convertToWords();
   });
 
   $("#non_dmt_ac_room_Excharge").change(function(){
@@ -1109,7 +1010,7 @@ $(document).ready(function() {
     const totalAmount = dlxtamount + acamount + nonacamount + nonacdmtamount + acdmtamount;
     $('#total').val(totalAmount);
     $("#net_amount").val(totalAmount-deposite);
-  
+    convertToWords();
   });
 
   $("#dmt_ac_room_Excharge").change(function(){
@@ -1117,9 +1018,6 @@ $(document).ready(function() {
     var excharge=parseInt(document.getElementById("dmt_ac_room_Excharge").value); 
     var deposite=parseInt(document.getElementById("deposite").value);
     $("#dmt_ac_room_total").val(amt+excharge);
-    // var total=parseInt(document.getElementById("dmt_ac_room_total").value);
-    // $("#total").val(total);
-    // $("#net_amount").val(total-deposite);
     const dlxtamount = parseInt($('#dlx_room_total').val()) || 0;
     const acamount = parseInt($('#ac_room_total').val()) || 0;
     const nonacamount = parseInt($('#non_ac_room_total').val()) || 0;
@@ -1128,6 +1026,7 @@ $(document).ready(function() {
     const totalAmount = dlxtamount + acamount + nonacamount + nonacdmtamount + acdmtamount;
     $('#total').val(totalAmount);
     $("#net_amount").val(totalAmount-deposite);
+    convertToWords();
   });
 });
   </script>

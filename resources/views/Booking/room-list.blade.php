@@ -197,6 +197,7 @@
                                   <div class="card-datatable table-responsive pt-0">
                                     <table id="DataTables_Table_0" class="datatables-basic table">
                                       <thead>
+                                        @csrf
                                         <tr>
                                           <th></th>
                                           <th>Room No</th>
@@ -223,8 +224,6 @@
                                         @else
                                             <span class="text-success">{{$row->status == 0 ? 'Available' : ''}}</span>
                                         @endif
-
-
                                           </td>
                                             <td>
                                                 <div class="d-inline-block">

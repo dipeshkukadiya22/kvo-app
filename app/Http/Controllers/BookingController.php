@@ -174,8 +174,8 @@ class BookingController extends Controller
     }
 
     public function checkout(){
-        //$checkout= DB::select("SELECT * FROM room_details JOIN ( SELECT add_room.room_detail_id, MAX(add_room.room_no) AS room_no, MAX(add_room.status) AS room_status FROM add_room WHERE add_room.status = 1 GROUP BY add_room.room_detail_id ) AS filtered_rooms ON room_details.r_id = filtered_rooms.room_detail_id JOIN personal_details ON personal_details.p_id = room_details.member_id JOIN add_members ON personal_details.member_id = add_members.p_id");
-        $checkout= DB::select("SELECT * FROM `room_details` join personal_details on room_details.member_id=personal_details.p_id join add_members on add_members.p_id=personal_details.member_id WHERE status='BOOKED' or status='CHECKOUT' order by r_id desc");
+        $bookedRoom= DB::select("SELECT * FROM room_details JOIN ( SELECT add_room.room_detail_id, MAX(add_room.room_no) AS room_no, MAX(add_room.status) AS room_status FROM add_room WHERE add_room.status = 1 GROUP BY add_room.room_detail_id ) AS filtered_rooms ON room_details.r_id = filtered_rooms.room_detail_id JOIN personal_details ON personal_details.p_id = room_details.member_id JOIN add_members ON personal_details.member_id = add_members.p_id");
+        $checkout=DB::select("SELECT * FROM checkout join `room_details`on checkout.room_booking_id=room_details.r_id join personal_details on room_details.member_id=personal_details.p_id join add_members on add_members.p_id=personal_details.member_id WHERE room_details.status='CHECKOUT' order by r_id desc");
         $rec_no=checkout::get()->last()->rec_no;
         if(!$rec_no)
         {$rec_no=1;}
@@ -189,7 +189,7 @@ class BookingController extends Controller
             $queries = DB::getQueryLog();
             add_room::whereIn('room_no', $roomNumbers)->update(['status' => 0 , 'room_detail_id' => 0]);
         }
-        return view('Booking.checkout',['checkout'=>$checkout,'member'=>$member,'rec_no'=>$rec_no,'current_date'=> $current_date]);
+        return view('Booking.checkout',['bookedRoom'=>$bookedRoom,'member'=>$member,'rec_no'=>$rec_no,'current_date'=> $current_date,'checkout'=>$checkout]);
     }
     public function add_checkout(Request $req)
     {
@@ -199,7 +199,6 @@ class BookingController extends Controller
            
             $data=new checkout();
             $data->room_booking_id=$req->bookingId;
-            $data->member_id=$req->name;
             $data->check_out_date=Date("Y-m-d H:i",strtotime($req->check_out_date));
             $data->deluxe_room_total=$req->dlx_room_total;
             $data->deluxe_room_extra=$req->dlx_room_Excharge;
@@ -215,21 +214,21 @@ class BookingController extends Controller
             $data->amount_in_words=$req->rs_word;
             $data->payment_mode=$req->payment;
             $data->payable_amount=$req->net_amount;
-            $data->status=1;
             $data->remark=$req->remark;
-           $data->save();
-      
+            $data->save();
+            $a=DB::UPDATE("UPDATE room_details SET status='CHECKOUT' where r_id='$req->bookingId'");
+
         if($data) { 
             $room=DB::SELECT("SELECT room_list FROM `room_details` where r_id='$req->bookingId'");
             foreach ($room as $r) {
             $r_list = $r->room_list; 
             $roomNumbers = explode(',', $r_list);
             add_room::whereIn('room_no', $roomNumbers)->update(['status' => 0 , 'room_detail_id' => 0]);
-        }
-          
+            }
+           
             return redirect() -> route('checkout') -> with ('message', 'checkout submitted successfully!') -> with 
             (['checkout'=>$checkout,'member'=>$member]);
-
+           
 
         }
         else{
@@ -270,7 +269,7 @@ class BookingController extends Controller
         return response()->json($data);   
     }
     public function view_room_booking(){
-        $checkout= DB::select("SELECT * FROM room_details join personal_details on personal_details.p_id=room_details.member_id join add_members on add_members.p_id=personal_details.member_id where room_details.status='BOOKED' or room_details.status='ADVANCE' order by r_id desc");
+        $checkout= DB::select("SELECT * FROM room_details join personal_details on personal_details.p_id=room_details.member_id join add_members on add_members.p_id=personal_details.member_id where room_details.status='BOOKED' order by r_id desc");
         $member = add_members::all();
         $ar_list= DB::select("SELECT *, add_room.room_no as id FROM add_room ");
         return view('Booking.view-room-booking',['checkout'=>$checkout,'member'=>$member,'a_list'=>$ar_list]);
