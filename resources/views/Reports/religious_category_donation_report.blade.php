@@ -285,7 +285,7 @@ div.card-datatable [class*=col-md-] {
               text: '<i class="ti ti-file-text me-1" ></i>Csv',
               className: 'dropdown-item',
               exportOptions: {
-                columns: [1 ,2, 3, 4, 5],
+                columns: [1 ,2, 3, 4, 5 , 6 ,7],
                 // prevent avatar to be display
                 format: {
                   body: function (inner, coldex, rowdex) {

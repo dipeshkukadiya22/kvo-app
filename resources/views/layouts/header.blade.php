@@ -627,13 +627,13 @@
                 </li>
                 
                 <li class="menu-item">
-                  <a href="{{route('Community_Donation')}}" class="menu-link">
+                  <a href="{{route('View_Community_Donation')}}" class="menu-link">
                     <i class="menu-icon tf-icons ti ti-layout-kanban"></i>
                     <div data-i18n="Community Donation">Community Donation</div>
                   </a>
                 </li> 
                 <li class="menu-item">
-                  <a href="{{route('Religious_Donation')}}" class="menu-link">
+                  <a href="{{route('View_Religious_Donation')}}" class="menu-link">
                     <i class="menu-icon tf-icons ti ti-layout-kanban"></i>
                     <div data-i18n="Religious Donation">Religious Donation</div>
                   </a>
@@ -653,7 +653,7 @@
                 
                 
                 <li class="menu-item">
-                  <a href="{{route('show')}}" class="menu-link">
+                  <a href="{{route('view_treatment')}}" class="menu-link">
                     <i class="menu-icon tf-icons ti ti-help"></i>
                     <div data-i18n="TREATMENT">TREATMENT</div>
                   </a>
@@ -677,13 +677,13 @@
               
               <ul class="menu-sub">
                  <li class="menu-item">
-                  <a href="{{route('Sangh_Expense')}}" class="menu-link ">
+                  <a href="{{route('View_Sangh_Expense')}}" class="menu-link ">
                     <i class="menu-icon tf-icons ti ti-id"></i>
                     <div data-i18n="Sangh Expense">Sangh Expense</div>
                   </a>
                  </li> 
                  <li class="menu-item">
-                  <a href="{{route('Mahajan_Expense')}}" class="menu-link">
+                  <a href="{{route('view_mahajan_expense')}}" class="menu-link">
                     <i class="menu-icon tf-icons ti ti-id"></i>
                     <div data-i18n="Mahajan Expense">Mahajan Expense</div>
                   </a>
