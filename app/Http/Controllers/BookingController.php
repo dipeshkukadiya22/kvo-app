@@ -21,8 +21,7 @@ class BookingController extends Controller
         $ar_list= DB::select("SELECT *, add_room.room_no as id FROM add_room WHERE add_room.status = 0");
         $acroom = DB::select("SELECT * FROM add_room WHERE room_facility = 'A.C. Room'");
         $depositeno = room_details::get()->last()->deposite_no;
-        return view ('Booking.room-booking',['p_details'=>$p_details,'m_data'=>$m_data,'p_id'=>$p_id,'a_list'=>$ar_list,'acroom'=>$acroom,'depositeno'=>$depositeno]);
-       
+        return view ('Booking.room-booking',['p_details'=>$p_details,'m_data'=>$m_data,'p_id'=>$p_id,'a_list'=>$ar_list,'acroom'=>$acroom,'depositeno'=>$depositeno]); 
     }
 
     public function RoomBooking(Request $req)
@@ -47,8 +46,10 @@ class BookingController extends Controller
         $details->subcommunity = strtoupper($req->subcommunity);
         $details->gender = $req->inlineRadioOptions;
         $details->member_id=$req->name;
-       
+       // $fileName = basename($_FILES[$req->id_proof[0]]["name"]);
+        dd($req->id_proof[0]);
         if(count($req->id_proof)==1){ $details->id_proof=$req->id_proof[0]; }
+
         else{$details->id_proof=$req->id_proof[0];$details->id_proof1=$req->id_proof[1];}
         
         $details->occupation=$req->occupation;
@@ -125,7 +126,7 @@ class BookingController extends Controller
         $member->email = $req->email;
         $member->phone_no = $req->phone_no;
         $member->city = strtoupper($req->city);
-       // $member->save();
+        $member->save();
        echo response()->json($member);
       // return json_encode($member);   
     }
@@ -238,15 +239,10 @@ class BookingController extends Controller
         }
     }
     public function get_booking_data($id) {
-       // $data=DB::SELECT("SELECT *,add_members.p_id as m_id from room_details join add_room on add_room.room_detail_id=room_details.r_id join personal_details on personal_details.p_id=room_details.member_id join add_members on personal_details.member_id=add_members.p_id WHERE r_id='$id'");
-        $checkout=DB::SELECT("SELECT rec_no FROM checkout where room_booking_id='$id'");
-     
-        if($checkout)
-        {
-            $data=DB::SELECT("SELECT * FROM checkout WHERE room_booking_id='$id'");
-        }else{
-            $data=DB::SELECT("SELECT * FROM `room_details` join personal_details on room_details.member_id=personal_details.p_id join add_members on add_members.p_id=personal_details.member_id WHERE r_id='$id'");
-        }
+        $data=DB::SELECT("SELECT *,add_members.p_id as m_id from room_details join add_room on add_room.room_detail_id=room_details.r_id join personal_details on personal_details.p_id=room_details.member_id join add_members on personal_details.member_id=add_members.p_id WHERE r_id='$id'");
+       
+        $data=DB::SELECT("SELECT * FROM `room_details` join personal_details on room_details.member_id=personal_details.p_id join add_members on add_members.p_id=personal_details.member_id WHERE r_id='$id'");
+    
         return $data;
     }
     public function get_data($id)
@@ -361,6 +357,50 @@ class BookingController extends Controller
     public function cancel_booking($id) {
         $room = room_details::find($id);
        dd($room);
+    }
+    public function AdvanceRoomBooking()    
+    {
+        $m_data = add_members::all();
+        $p_id=room_details::get()->last()->r_id;
+        $ac_list=array();
+        $non_ac_list=array();
+        $dmt_list=array();
+        $single=array();
+      
+        $adv_booked_room=room_details::select("room_list")
+                            ->where('booking_type','=','ADVANCE')
+                            ->where('advance_date','=','2023-08-30')
+                            ->get();
+          // dd($adv_booked_room->toArray())  
+        foreach($adv_booked_room as $item)
+        {
+            $single = array_merge($single, explode(',', $item->room_list));
+        }
+ 
+        //dd($single);
+        $room_no=add_room::pluck('room_no')->toArray(); 
+        $available_roomlist = array_diff($room_no, $single);
+          // dd($available_roomlist);
+            foreach($available_roomlist as $list)
+            {
+                if($list ==301 || $list ==302 ||$list ==303 || $list ==304 ||
+                    $list ==305 || $list ==306 ||$list ==401 || $list==402 || $list ==403 )
+                {
+                    $ac_list[]=$list;
+                }
+                if($list ==201 || $list ==202 ||$list ==203 || $list ==204 ||
+                $list ==205 || $list ==206 ||$list ==404 || $list==405 || $list ==406 )
+                {
+                    $non_ac_list[]=$list;
+                }
+                if($list ==1 || $list ==2 ||$list ==3 || $list ==4 || $list ==5 || $list ==6 ||$list ==7 || $list==8 || $list ==9 ||$list==10||
+                    $list ==11 || $list ==12 ||$list ==13 || $list ==14 || $list ==15 || $list ==16 ||$list ==17 || $list==18 || $list ==19|| $list==20)
+                {
+                    $dmt_list[]=$list;
+                }
+
+            }
+        return view('Booking.AdvanceRoomBooking',['m_data'=>$m_data,'ac_list'=>$ac_list,'non_ac_list'=>$non_ac_list,'dmt_list'=>$dmt_list,'p_id'=>$p_id]);
     }
     
 }

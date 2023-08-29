@@ -119,7 +119,7 @@ div.card-datatable [class*=col-md-] {
                                              <input type="hidden" class="id" value="{{$row->r_id}}">
                                               <td>{{$row->m_name}}</td>
                                               <td>{{$row->room_list}}</td>
-                                                @if($row->status =="B")<td>BOOKED</td>@else<td>CHECKOUT</td>@endif
+                                               <td>{{$row->status}}</td>
                                               <td>{{date("d-m-Y",strtotime($row->check_in_date))}}</td>
                                               <td>{{date("d-m-Y",strtotime($row->check_in_date . '+' .$row->no_of_days . 'days'))}}</td>
                                               <td>{{$row->ac_amount + $row->non_ac_amount + $row->door_mt_amount}}</td>
@@ -127,9 +127,9 @@ div.card-datatable [class*=col-md-] {
                                               <td>{{$row->deposite_rs}}</td>
                                               <td>
                                                   <div class="d-inline-block">
-                                                    <a href=@if($row->status=='O')"{{route('pdf_CheckOut',1)}}";@else "#"; @endif class="text-primary"><img src="./assets/icon/orange-eye.png" width="20px"></a>
+                                                    <a href=@if($row->status=='CHECKOUT')"{{route('pdf_CheckOut',1)}}"; @endif class="text-primary"><img src="./assets/icon/orange-eye.png" width="20px"></a>
 
-                                                    <a @if($row->status=='B') onclick="edit_checkout({{$row->r_id}})";@else "#"; @endif class="btn btn-sm btn-icon item-edit"><img src="./assets/icon/orange-edit.png" width="20px"></a>
+                                                    <a @if($row->status=='BOOKED') onclick="edit_checkout({{$row->r_id}})"; @endif class="btn btn-sm btn-icon item-edit"><img src="./assets/icon/orange-edit.png" width="20px"></a>
 
                                                    
                                                     
@@ -567,6 +567,8 @@ div.card-datatable [class*=col-md-] {
                           if (m == "") {
                               $("#non_dmt_ac_room_Excharge").prop('disabled', true);
                           } else {
+                            alert("zero");
+                             $("#non_dmt_ac_room_Excharge").prop('disabled', true);
                               $("#non_dmt_ac_room_Excharge").val ("0");
                           }
                           var p=document.getElementById("dmt_ac_room").value;

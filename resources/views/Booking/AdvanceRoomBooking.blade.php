@@ -1,7 +1,7 @@
 
 @extends('layouts.app')
 
-@section('title', 'Room Booking')
+@section('title', 'Advance Room Booking')
 
 @section('pagecss')
 
@@ -117,34 +117,8 @@
 
                             <!-- Browser Default -->
                              
-                              <div class="mb-3">
-                            <form class="browser-default-validation" method="POST" tabindex="1" action="{{route('room-booking')}}">
-                            @csrf
-                                <label class="form-label required" for="basic-default-name"  >Name</label>
-                                <input type="text" name="m_name" class="form-control" style="text-transform:uppercase" id="basic-default-name"  style="text-transform:uppercase"  placeholder="Name" required />
-                              </div>
-                              
-                              <div class="mb-3">
-                                <label class="form-label" for="multicol-phone">Phone Number</label>
-                                <input type="number" name="phone_no" id="multicol-phone" class="form-control phone-mask" placeholder="658 799 8941"  maxlength="10" required oninput="javascript: if (this.value.length > 10) this.value = this.value.slice(0, 10);"/>
-                              </div>
-
-                              <div class="mb-3">
-                                        <label class="form-label" for="basic-default-email">Email</label>
-                                        <input type="email" name="email" id="basic-default-email" class="form-control" placeholder="Email" required/>
-                                    </div>
-                              <div class="mb-3">
-                                <label class="form-label" for="city">City</label>
-                                <input type="text" name="city" class="form-control" id="city" style="text-transform:uppercase" placeholder="Bhuj" required/>
-                              </div>
-    
-                              <div class="row">
-                                <div class="col-12">
-                                  <button type="submit" class="btn btn-primary mb-2 d-grid w-100" id="submitbtn" >Submit</button>
-                                  <button type="button" class="btn btn-label-secondary d-grid w-100" data-bs-dismiss="offcanvas"> Cancel</button>
-                                </div>
-                              </div>
-                            </form>
+                            @include('layouts.adduser')
+                           
                             <!-- /Browser Default -->
 
                             
@@ -162,68 +136,26 @@
                 <div class="col-12 mb-4">
                   <div class="bs-stepper wizard-icons wizard-icons-example mt-2">
                     <div class="bs-stepper-header">
-                      <div class="step" data-target="#account-details">
-                        <button type="button" class="step-trigger">
-                          <span class="bs-stepper-icon">
-                            <svg viewBox="0 0 24 24">
-                              <use xlink:href=" {{ asset('assets/svg/icons/form-wizard-user-plus.svg#wizardUserPlus') }}"></use>
-                            </svg>
-                          </span>
-                          <span class="bs-stepper-label">Personal Info</span>
-                        </button>
-                      </div>
-                      <div class="line">
-                        <i class="ti ti-chevron-right"></i>
-                      </div>
-                      <div class="step" data-target="#personal-info">
-                        <button type="button" class="step-trigger">
-                          <span class="bs-stepper-icon">
-                            <svg viewBox="0 0 24 24">
-                              <use xlink:href="{{ asset('assets/svg/icons/form-wizard-booking.svg#wizardBooking') }}"></use>
-                            </svg>
-                          </span>
-                          <span class="bs-stepper-label">Booking Details</span>
-                        </button>
-                      </div>
-                      <div class="line">
-                        <i class="ti ti-chevron-right"></i>
-                      </div>
-                      <div class="step" data-target="#address">
-                        <button type="button" class="step-trigger">
-                          <span class="bs-stepper-icon">
-                            <svg viewBox="0 0 24 24">
-                              <use xlink:href="{{ asset('assets/svg/icons/form-wizard-members.svg#wizardMembers') }}"></use>
-                            </svg>
-                          </span>
-                          <span class="bs-stepper-label">Member Details</span>
-                        </button>
-                      </div>
                       
-                      <div class="line">
-                        <i class="ti ti-chevron-right"></i>
-                      </div>
-                      <div class="step" data-target="#review-submit">
-                        <button type="button" class="step-trigger">
-                          <span class="bs-stepper-icon">
-                            <svg viewBox="0 0 54 54">
-                              <use xlink:href="{{ asset('assets/svg/icons/form-wizard-submit.svg#wizardSubmit') }}"></use>
-                            </svg>
-                          </span>
-                          <span class="bs-stepper-label">Review & Submit</span>
-                        </button>
-                      </div>
-                    </div>
+                     
+                      
+                     
                     <div class="bs-stepper-content">
                      <form class="browser-default-validation" action="{{route('RoomBooking')}}" method="POST" id="room_booking">
                         @csrf
                         <!-- Account Details -->
-                        <div id="account-details" class="content">
-                          <div class="content-header mb-3">
-                            <small>Enter Your Personal Details.</small>
-                          </div>
+                    
+                         
                           <div class="row g-3">
-                            
+                          <div class="col-12">
+                            <h6 class="fw-semibold">1. Personal Details</h6>
+                            <hr class="mt-0 mb-0" />
+                          </div>
                               <!-- Basic -->
+                              <div class="col-md-4">
+                                <label class="form-label" for="basic-default-name">Booking No</label>
+                                <input type="text" class="form-control" name="deposit_no" id="deposit_no" placeholder="Deposit No" value="{{$p_id+1}}" readonly/>
+                            </div>
                              <div class="col-md-4">
                                 <label for="select2Basic" class="form-label"><span class="required">Name</span></label>
                                 <select id="select2Basic" class="select2 form-select" data-allow-clear="true" name="name" placeholder="select name" required>
@@ -232,137 +164,59 @@
                                       <option value="{{$row->p_id}}" {{!empty($member) && $member->m_name == $row->m_name ? "selected" : ""}}>{{$row->m_name}}&nbsp;&nbsp;-&nbsp;&nbsp;{{$row->phone_no}}</option>
                                   @endforeach
                                 </select>
-                               
-                                
+                                   
                                 <input type="hidden" id="email_user" value="{{!empty($m_data)  ? $m_data:''}}">
-                              </div>
-                              
+                            </div>
 
-    
+                            
                               <div class="col-md-4">
                                   <label class="form-label" for="basic-default-email"><span class="required">Email</span></label>
                                   <input type="email" id="member_email" name="email" class="form-control" placeholder="john.doe" value="{{ (!empty($member) )? $member->email : '' }}" required/>
                               
                               </div>
 
-    
                               <div class="col-md-4">
-                                
                                 <label class="form-label" for="multicol-phone"><span class="required">Phone Number</span></label>
                                 <input type="number" id="member-phone" name="phone_no" class="form-control phone-mask" placeholder="658 799 8941" aria-label="658 799 8941" value="{{ (!empty($member)) ? $row->phone_no : '' }}"    maxlength="10"
                               required
                               oninput="javascript: if (this.value.length > 10) this.value = this.value.slice(0, 10);"/>
-                              </div>
-                              
-
-                              <div class="col-md-4">
-                                <label class="form-label" for="basic-default-name"><span class="required">Age</span></label>
-                                <input type="number" class="form-control" name="age" id="basic-default-age" placeholder="Age" required/>
-                              </div>
-    
-                              <div class="col-4">
-                                <label class="form-label" for="collapsible-address"><span class="required">Address</span></label>
-                                <textarea name="collapsibleaddress" style="text-transform:uppercase" class="form-control" style="text-transform:uppercase" id="member-address" rows="1" placeholder="1456, Mall Road" required>{{ (!empty($member) ) ? $member->address : '' }}</textarea>
-                              </div>
-                                                        
-                              
-                              <!-- Basic -->
-                              <div class="col-md-4">
-                                <label for="select2Basic" class="form-label"><span class="required">Community</span></label>
-                                <select id="select2Basic" class="select2 form-select form-select-lg" data-allow-clear="true" name="community" required>
-                                  <option value="Hindu" selected>Hindu</option>
-                                  <option value="Jain">Jain</option>
-                                  <option value="Isalam">Isalam</option>
-                                  <option value="Sikh">Sikh</option>
-                                  <option value="Budda">Budda</option>
-                                  <option value="Other Religions">Other Religions</option>
-
-
-                                </select>
-                              </div>
-
-                              
-
-                              
-                              <div class="col-md-4">
-                                <label for="defaultFormControlInput" class="form-label"><span class="required">Sub Community</span></label>
-                                <input type="text" class="form-control" name="subcommunity" id="defaultFormControlInput" style="text-transform:uppercase" placeholder="John Doe" aria-describedby="defaultFormControlHelp" required/>
-                              </div>
-
-                              
+                              </div> 
                               
                               <div class="col-md-4">
                                 <label for="defaultFormControlInput" class="form-label">City</label>
                                 <input type="text" class="form-control" name="city" id="member_city" style="text-transform:uppercase" placeholder="John Doe" aria-describedby="defaultFormControlHelp" value="{{ (!empty($member)) ? $member->city : '' }}"/>
                               </div>
-
-                              <div class="col-md-4">
-                                <label class="d-block form-label"><span class="required">Gender</span></label>
-                                <div class="form-check form-check-inline">
-                                  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="personalRadio1" value="MALE" checked/>
-                                  <label class="form-check-label" for="inlineRadio1" >Male</label>
-                                </div>
-                                <div class="form-check form-check-inline">
-                                  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="personalRadio2" value="FEMALE" />
-                                  <label class="form-check-label" for="inlineRadio2">Female</label>
-                                </div>
-                                
-                              </div>
-    
-                            <div class="col-12 d-flex justify-content-end">
-                              <button type="button"  class="btn btn-primary btn-next" id="btn-step1">
-                                <span class="align-middle d-sm-inline-block d-none me-sm-1">Next</span>
-                                <i class="ti ti-arrow-right"></i>
-                              </button>
-                              
-                             
-                            </div>
+                       <br/>
                           </div>
-                        </div>
+                   
                         <!-- Personal Info -->
-                        <div id="personal-info" class="content">
-                          <div class="content-header mb-3">
-                            <small>Enter Your Booking Details.</small>
-                          </div>
+                     
+                        
                           <div class="row g-3">
                             
                            
                             <!-- /Datetime Picker-->
-                            
-                            
-
-                              <!-- Primary -->
-                            {{-- <div class="col-md-4">
-                              <label for="select3Primary" class="form-label">Room Facility</label>
-                              <div class="select2-primary">
-                                <select id="select3Primary1" name="room_list" class="select2 form-select" multiple>
-                                  <option value="">Select Room</option>
-                                    <option value="A.C. Room No" name="room_facility"> A.C. Room.</option>
-                                    <option value="Non. A.C. Room No" name="room_facility">Non. A.C. Room</option>
-                                    <option value="Door Metri. Room No" name="room_facility">Door Metri. Room.</option>
-                                </select>
-                              </div>
-                            </div> --}}
-
 
                             <!-- Primary -->
 
-                            <div class="row">
-                            <div class="col-md-2">
+                            <div class="row mt-5">
+                             
+                                <div class="col-12">
+                                    <h6 class="fw-semibold">2. Booking Details</h6>
+                                     <hr class="mt-0 mb-0" />
+                                </div>
+                            
+                            <div class="col-md-2 mt-3">
                                 <label for="select2Multiple1" class="form-label">Ac Room</label> 
                               
                                 <select id="select2Multiple11" name="select2Multiple1[]" class="select2 form-select" multiple>
-                                  @foreach($a_list as $list)
-                                      @if ($list->room_facility == 'A.C. Room')
-                                          <option value="{{$list->room_no}}"{{(!empty($member) && $member->room_name == $list->room_name) ? "selected" : ""}}>
-                                              {{$list->room_no}}-{{$list->room_name}}
-                                          </option>
-                                      @endif
-                                  @endforeach
+                                     @foreach($ac_list as $list)
+                                        <option value="{{$list}}" >{{$list}}</option>
+                                    @endforeach
                               </select>
                             </div>
 
-                                <div class="col-md-2">
+                                <div class="col-md-2 mt-3">
                                   <label class="form-label" for="basic-default-name">Amount</label>
                                   <div class="input-group">
                                     <span class="input-group-text">₹</span>
@@ -370,27 +224,17 @@
                                   </div>
                                 </div>
 
-
-                                <!-- <div class="col-md-2">
-                                  <label for="TagifyCustomListSuggestion1" class="form-label">Non. A.C. Room</label>
-                                  <input id="TagifyCustomListSuggestion1" name="TagifyCustomListSuggestion1" class="form-control" placeholder="Select Roomlist" />
-                                </div> -->
-                                <div class="col-md-2">
+                                <div class="col-md-2 mt-3">
                                 <label for="select2Multiple2" class="form-label">Non Ac Room</label>
                                 <select id="select2Multiple22" name="select2Multiple2[]" class="select2 form-select" multiple>
-                                 
-                                @foreach ($a_list as $list)
-                                                @if ($list->room_facility == 'NON A.C ROOM')
-                                                    <option value="{{$list->room_no}}"{{(!empty($member) && $member->room_name == $list->room_name) ? "selected" : ""}}>
-                                                        {{$list->room_no}}-{{$list->room_name}}
-                                                    </option>
-                                                @endif
-                                  @endforeach
-                                 
+                                    @foreach($non_ac_list as $list)
+                                        <option value="{{$list}}" >{{$list}}</option>
+                                    @endforeach
+
                                 </select>
                               </div>
 
-                                <div class="col-md-2">
+                                <div class="col-md-2 mt-3">
                                   <label class="form-label" for="basic-default-name">Amount</label>
                                   <div class="input-group">
                                     <span class="input-group-text">₹</span>
@@ -402,32 +246,26 @@
                                   <label for="TagifyCustomListSuggestion2" class="form-label">Door Metri. A.C. / Non. A.C. Room </label>
                                   <input id="TagifyCustomListSuggestion2" name="TagifyCustomListSuggestion2" class="form-control" placeholder="Select Roomlist" />
                                 </div> -->
-                                <div class="col-md-2">
+                                <div class="col-md-2 mt-3">
                                 <label for="select2Multiple3" class="form-label">Door Mt Room</label>
                                 <select id="select2Multiple33" name="select2Multiple3[]" class="select2 form-select" multiple>
-                                
-                                @foreach ($a_list as $list)
-                                @if ($list->room_facility == 'DOOR MATRY NON A.C ROOM' || $list->room_facility == 'DOOR MATRY  A.C ROOM')
-                                    <option value="{{$list->room_no}}"{{(!empty($member) && $member->room_name == $list->room_name) ? "selected" : ""}}>
-                                        {{$list->room_no}}-{{$list->room_name}}
-                                    </option>
-                                @endif
-                                  @endforeach
-                                 
+                                    @foreach($dmt_list as $list)
+                                        <option value="{{$list}}" >{{$list}}</option>
+                                    @endforeach
                                 </select>
                               </div>
 
-                                <div class="col-md-2">
+                                <div class="col-md-2 mt-3">
                                   <label class="form-label" for="basic-default-name">Amount</label>
                                   <div class="input-group">
                                     <span class="input-group-text">₹</span>
                                     <input type="number" class="form-control"  name="door_mt_amount" id="door_mt_amount" placeholder="Amount" aria-label="Amount (to the nearest indian)"   />
                                   </div>
                                 </div>
-  
+                            
                             </div>
                          
-                            <hr>
+                      
                             
                             <div class="col-md-4">
                               <label class="form-label" for="basic-default-name"><span class="required">No. of Person</span></label>
@@ -438,16 +276,8 @@
                               <label for="flatpickr-datetime" class="form-label"><span class="required">Check-In Date</span></label>
                               <input type="text" class="form-control" name="check_in_date" placeholder="DD-MM-YYYY HH:MM" id="flatpickr-datetime" required/>
                             </div>
-
-                            <div class="col-md-4">
-                                <label for="formFileMultiple" class="form-label"><span class="required">Identity Proof</span></label>
-                                <input class="form-control" type="file" name="id_proof[]" id="formFileMultiple" multiple required />
-                            </div>
   
-                            <div class="col-md-4">
-                              <label class="form-label" for="basic-default-name">Booking No</label>
-                              <input type="text" class="form-control" name="deposit_no" id="deposit_no" placeholder="Deposit No" value="{{$p_id+1}}" readonly/>
-                            </div>
+                         
 
                            
   
@@ -476,202 +306,14 @@
                               <input type="text" class="form-control" name="reason" id="reason" placeholder="Reason to stay">
                             </div>
   
-                            
-                            <div class="col-12 d-flex justify-content-between">
-                              <button class="btn btn-label-secondary btn-prev">
-                                <i class="ti ti-arrow-left me-sm-1"></i>
-                                <span class="align-middle d-sm-inline-block d-none">Previous</span>
-                              </button>
-                            
-                              <button type="button"class="btn btn-primary btn-next"  id="repeat-next">
-                                <span class="align-middle d-sm-inline-block d-none me-sm-1">Next</span>
-                                <i class="ti ti-arrow-right"></i>
-                              </button>
-                            </div>
-                          </div>
-                        </div>
-                        <!-- All No of Person -->
-                        <div id="address" class="content">
-                          <div class="content-header mb-3">
-                            <small>Enter Member Details.</small>
-                          </div>
-                          
-                          <div class="row g-3">
-                            <!-- Form Repeater -->
-                          
-                            <div id="step2FormsContainer "class="col-12">
-                              <div class="dynamic-form">
-                              <div class="all-members" data-repeater-list="group-a">
-                              <div data-repeater-item>
-                             
-                             <div class="rep-form1">
-                          
-                                <div class="row formrepeater1">
-                                  <div class="mb-3 col-lg-6 col-xl-3 col-12 mb-0">
-                                    <label class="form-label" for="form-repeater-1-1">Full Name</label>
-                                    <input type="text" id="full_name_form" style="text-transform:uppercase"  name="full_name[]" class="form-control" placeholder="john doe" value="{{ (!empty($member) )? $member->m_name : '' }}"/>
-                                  </div>
-                                  <div class="mb-3 col-lg-6 col-xl-3 col-12 mb-0">
-                                    <label class="form-label" for="form-repeater-1-2">Age</label>
-                                    <input type="number" id="member_age" name="m_age[]" class="form-control" placeholder="your age"  />
-                                  </div>
-                                  
-                                  
-                                  <div class="mb-3 col-lg-6 col-xl-2 col-12 mb-0 ">
-                                  
-                                      <label class="d-block form-label">Gender</label>
-                                    
-                                      <div class="form-check form-check-inline">
-                                      <input class="form-check-input" type="radio" name="gender" id="gendermale" value="MALE" checked/>
-                                      <label class="form-check-label" for="gender">Male</label>
-
-                                        </div>
-                                        <div class="form-check form-check-inline">
-                                          <input class="form-check-input" type="radio" name="gender" id="genderfemale" value="FEMALE" />
-                                          <label class="form-check-label" for="gender">Female</label>
-                                        </div>
-
-                                        <div class="mb-3 col-lg-6 col-xl-3 col-12 mb-0" hidden>
-                                        <label class="form-label" for="form-repeater-1-2">gender</label>
-                                        <input type="text" id="gender_data" name="gender_data" class="form-control" placeholder="your age" value="MALE"/>
-                                      </div>
-
-
-                                  </div>
-                                  <div class="col-md-4">
-                                    <label class="form-label" for="basic-default-country">Relation</label>
-                                    <select class="form-select" name="relation[]" id="member_relation" required>
-                                      <option value="SELF" selected>SELF</option>
-                                      <option value="AUNTY">AUNTY</option>
-                                      <option value="BROTHER">BROTHER</option>
-                                      <option value="COUSIN">COUSIN</option>
-                                      <option value="DAUGHTER">DAUGHTER</option>
-                                      <option value="FATHER">FATHER</option>
-                                      <option value="FRIEND">FRIEND</option>
-                                      <option value="GRAND FATHER">GRAND FATHER</option>
-                                      <option value="GRAND MOTHER">GRAND MOTHER</option>
-                                      <option value="HUSBAND">HUSBAND</option>
-                                      <option value="MOTHER">MOTHER</option>
-                                      <option value="NEPHEW">NEPHEW</option>
-                                      <option value="SISTER">SISTER</option>
-                                      <option value="UNCLE">UNCLE</option>
-                                      <option value="WIFE">WIFE</option>
-                                    </select>
-                                  </div>
-                                  <div class="mb-3 col-lg-12 col-xl-2 col-12 d-flex align-items-center mb-0">
-                                    <button class="btn btn-label-danger mt-4" data-repeater-delete>
-                                      <i class="ti ti-x ti-xs me-1"></i>
-                                      <span class="align-middle">Delete</span>
-                                    </button>
-                                  </div>
-                                </div>
-                              </div>
-                              <div class="row rep-form">
-                              </div> 
-                                <hr />
-                              </div>
-                              </div>
-                              </div>
-                            </div>
-                            <div id="dynamicFormsContainer">
-                            </div>
-                            <div class="mb-0">
-                              <button class="btn btn-primary" data-repeater-create>
-                                <i class="ti ti-plus me-1"></i>
-                                <span class="align-middle">Add Members</span>
-                              </button>
-                            </div>
-                            
-                            <!-- /Form Repeater -->
-                            <div class="col-12 d-flex justify-content-between">
-                              <button class="btn btn-label-secondary btn-prev">
-                                <i class="ti ti-arrow-left me-sm-1"></i>
-                                <span class="align-middle d-sm-inline-block d-none">Previous</span>
-                              </button>
-                              <button type="button" class="btn btn-primary btn-next" id="btn-step3">
-                                <span class="align-middle d-sm-inline-block d-none me-sm-1">Next</span>
-                                <i class="ti ti-arrow-right"></i>
-                              </button>
-                            </div>
-                          </div>
-                        </div>
-                        
-                        <!-- Review -->
-                        <div id="review-submit" class="content">
-
-                          <!-- Invoice -->
-                          <div class="col-xl-12 col-md-12 col-12 mb-md-0 mb-4">
-                            <div class="invoice-preview-card">
-                              
-                              <div class="card-body">
-                                <div class="row p-sm-3 p-0 mb-3">
-                                 
-                                  <div class="col-xl-12 col-md-12 col-sm-5 col-12 mb-xl-0 mb-md-4 mb-sm-0 mb-4">
-                                    <h6 class="mb-4">Details:</h6>
-                                    <table>
-                                      <tbody>
-                                        
-                                        
-                                        <tr>
-                                          <td class="pe-4">Room Name:</td>
-                                          <td id="room_lst"></td>
-                                        </tr>
-                                        <tr>
-                                          <td class="pe-4">Check-In Date:</td>
-                                          <td id="check_date"></td>
-                                        </tr>
-                                        <tr>
-                                          <td class="pe-4">Amount:-</td>
-                                          <td id="room_amount"></td>
-                                        </tr>
-                                        
-                                      </tbody>
-                                    </table>
-                                  </div>
-                                </div>
-                              </div>
-                              <div class="table-responsive border-top">
-                                <table class="table mb-3">
-                                  <thead>
-                                    <tr>
-                                      <th>No.</th>
-                                      <th>Full Name</th>
-                                      <th>Age </th>
-                                      <th>Gender</th>
-                                      <th>Relations</th>
-                                      </tr>
-                                  </thead>
-                                  <tbody class="rep-table">
-                                   
-                                 
-                                      <tr>
-                                        <td></td>
-                                        <td id="member_full_name"></td>
-                                        <td id="members_age"></td>
-                                        <td id="member_gen"></td>
-                                        <td id="member_rel"></td>
-                                      
-                                      </tr>
-                                      
-                                                                       
-                                 
-                                  </tbody>
-                                </table>
-                              </div>
-
-                              
-                            </div>
-                          </div>
-                          <!-- /Invoice -->
-
-                          <div class="col-12 d-flex justify-content-between">
-                            <button class="btn btn-label-secondary btn-prev">
-                              <i class="ti ti-arrow-left me-sm-1"></i>
-                              <span class="align-middle d-sm-inline-block d-none">Previous</span>
-                            </button>
+                            <div class="col-12 flex justify-content">
                             <button type="submit" class="btn btn-success btn-submit">Submit</button>
-                            
                           </div>
+                          </div>
+                       
+                        <!-- All No of Person -->
+                       
+                          
                         </div>
                       </form>
                     </div>
@@ -743,24 +385,23 @@
     var phone = document.getElementById("multicol-phone").value;
     var email = document.getElementById("basic-default-email").value;
     var city = document.getElementById("city").value;
-    $.ajax({
-        method: "POST",
-        url: "{{ url('add_member') }}",
-        data: {
-            _token: $("#csrf").val(),
-            name: name,
-            email: email,
-            phone: phone,
-            city: city
-        },
-        success: function(response){
-          $("#member_email").val(response[0]['email']); // Assuming the server returns a JSON object with a “name” property
-        }
+        $.ajax({
+            method: "POST",
+            url: "{{ url('add_member') }}",
+            data: {
+                _token: $("#csrf").val(),
+                name: name,
+                email: email,
+                phone: phone,
+                city: city
+            },
+            success: function(response){
+            $("#member_email").val(response[0]['email']); // Assuming the server returns a JSON object with a “name” property
+            }
+        });
     });
-    alert("submit");
-});
-      </script>
-    <script>
+</script>
+<script>
       function convertToWords() {
       var depositAmount = parseFloat(document.getElementById("deposit-amount").value);
       var inWords = numberToWords(depositAmount);
@@ -846,194 +487,12 @@ $(document).ready(function() {
   });
 });
 
-$(document).ready(function () {   
-   /* $('body').on('change','#select', function() {
-         $('#show_selected').val(this.value);
-    });*/
-    $('#personalRadio2').change(function(){
-      $("#genderfemale").attr('checked',true);
-      $("#gender_data").val("FEMALE");
-    });
-    $('#personalRadio1').change(function(){
-      $("#gendermale").attr('checked',true);
-      $("#gender_data").val("MALE");
-    });
-});
-
-
-
 </script>
-<script>
-  $(document).ready(function() {
-    $('#select2Multiple1').select2();
-  });
-</script>
-
-
-<!-- <script>
-
-  /**
- * Tagify
- */
-
-'use strict';
-
-(function () {
-  // Basic
-  //------------------------------------------------------
-  const tagifyBasicEl = document.querySelector('#TagifyBasic');
-  const TagifyBasic = new Tagify(tagifyBasicEl);
-
-  // Read only
-  //------------------------------------------------------
-  const tagifyReadonlyEl = document.querySelector('#TagifyReadonly');
-  const TagifyReadonly = new Tagify(tagifyReadonlyEl);
-
-  // Custom list & inline suggestion
-  //------------------------------------------------------
-  const TagifyCustomInlineSuggestionEl = document.querySelector('#TagifyCustomInlineSuggestion');
-  const TagifyCustomListSuggestionEl = document.querySelector('#TagifyCustomListSuggestion');
-
-  const whitelist = [
-    '301 2BAC',
-    '302 2BAC',
-    '303 2BAC',
-    '304 2BAC'
-    
-  ];
-  // Inline
-  let TagifyCustomInlineSuggestion = new Tagify(TagifyCustomInlineSuggestionEl, {
-    whitelist: whitelist,
-    maxTags: 10,
-    dropdown: {
-      maxItems: 20,
-      classname: 'tags-inline',
-      enabled: 0,
-      closeOnSelect: false
-    }
-  });
-  // List
-  let TagifyCustomListSuggestion = new Tagify(TagifyCustomListSuggestionEl, {
-    whitelist: whitelist,
-    maxTags: 10,
-    dropdown: {
-      maxItems: 20,
-      classname: '',
-      enabled: 0,
-      closeOnSelect: false
-    }
-  });
-
-
-})();
-
-
-(function () {
-  // Basic
-  //------------------------------------------------------
-  const tagifyBasicEl = document.querySelector('#TagifyBasic');
-  const TagifyBasic = new Tagify(tagifyBasicEl);
-
-  // Read only
-  //------------------------------------------------------
-  const tagifyReadonlyEl = document.querySelector('#TagifyReadonly');
-  const TagifyReadonly = new Tagify(tagifyReadonlyEl);
-
-  // Custom list & inline suggestion
-  //------------------------------------------------------
-  const TagifyCustomInlineSuggestionEl = document.querySelector('#TagifyCustomInlineSuggestion1');
-  const TagifyCustomListSuggestionEl = document.querySelector('#TagifyCustomListSuggestion1');
-
-  const whitelist = [
-    '201 2BNAC',
-    '202 2BNAC',
-    '203 3BNAC',
-    '204 4BNAC'
-    
-  ];
-  // Inline
-  let TagifyCustomInlineSuggestion = new Tagify(TagifyCustomInlineSuggestionEl, {
-    whitelist: whitelist,
-    maxTags: 10,
-    dropdown: {
-      maxItems: 20,
-      classname: 'tags-inline',
-      enabled: 0,
-      closeOnSelect: false
-    }
-  });
-  // List
-  let TagifyCustomListSuggestion1 = new Tagify(TagifyCustomListSuggestionEl, {
-    whitelist: whitelist,
-    maxTags: 10,
-    dropdown: {
-      maxItems: 20,
-      classname: '',
-      enabled: 0,
-      closeOnSelect: false
-    }
-  });
-
-
-})();
-
-
-(function () {
-  // Basic
-  //------------------------------------------------------
-  const tagifyBasicEl = document.querySelector('#TagifyBasic');
-  const TagifyBasic = new Tagify(tagifyBasicEl);
-
-  // Read only
-  //------------------------------------------------------
-  const tagifyReadonlyEl = document.querySelector('#TagifyReadonly');
-  const TagifyReadonly = new Tagify(tagifyReadonlyEl);
-
-  // Custom list & inline suggestion
-  //------------------------------------------------------
-  const TagifyCustomInlineSuggestionEl = document.querySelector('#TagifyCustomInlineSuggestion2');
-  const TagifyCustomListSuggestionEl = document.querySelector('#TagifyCustomListSuggestion2');
-
-  const whitelist = [
-    '1 DMNAC',
-    '2 DMNAC',
-    '3 DMNAC',
-    '4 DMAC',
-    '5 DMAC',
-    '6 DMAC'
-  ];
-  // Inline
-  let TagifyCustomInlineSuggestion = new Tagify(TagifyCustomInlineSuggestionEl, {
-    whitelist: whitelist,
-    maxTags: 10,
-    dropdown: {
-      maxItems: 20,
-      classname: 'tags-inline',
-      enabled: 0,
-      closeOnSelect: false
-    }
-  });
-  // List
-  let TagifyCustomListSuggestion2 = new Tagify(TagifyCustomListSuggestionEl, {
-    whitelist: whitelist,
-    maxTags: 10,
-    dropdown: {
-      maxItems: 20,
-      classname: '',
-      enabled: 0,
-      closeOnSelect: false
-    }
-  });
-
-
-})();
-</script> -->
 
 <script>
         $(document).ready(function () {
-            $("#select2Basic").click(function () {
+            $("#select2Basic").change(function () {
                 var data = $.parseJSON($("#email_user").val());
-                 
                 $.each(data,function(key,value){
                   console.log('id::'+$('#select2Basic').val());
                   if($('#select2Basic').val()==value['p_id']){
@@ -1048,27 +507,8 @@ $(document).ready(function () {
             
             });
         });
-    </script>
+</script>
 
-
-
-  <!-- <script>
-     $(document).ready(function () {
-            $("#TagifyCustomListSuggestion").click(function () {
-                var data = $.parseJSON($("#roomlist").val());
-                 
-                $.each(data,function(key,value){
-                  console.log('id::'+$('#TagifyCustomListSuggestion').val());
-                  if($('#TagifyCustomListSuggestion').val()==value['room_no']){
-                   $('#TagifyCustomListSuggestion').val(value['TagifyCustomListSuggestion']);
-                   
-                   }
-                });
-            
-            });
-        });
-  </script> -->
-   
 <script>
  
   $(document).ready(function() {

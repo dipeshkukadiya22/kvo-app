@@ -42,6 +42,7 @@ Route::get('/login', [AuthController::class, 'LoginUser'])->name('LoginUser');
 
 Route::POST('RoomBooking', [BookingController::class, 'RoomBooking'])->name('RoomBooking');
 Route::get('room-booking', [BookingController::class, 'index']);
+Route::get('AdvanceRoomBooking', [BookingController::class, 'AdvanceRoomBooking'])->name('AdvanceRoomBooking');
 Route::POST('room-booking', [BookingController::class, 'add_member'])->name('room-booking');
 Route::get('cancel_room/{id}',[BookingController::class, 'cancel_room'])->name('cancel_room');
 
