@@ -65,6 +65,10 @@ button.swal2-cancel.btn.btn-label-danger {
 
             <div class="container-xxl flex-grow-1 container-p-y">
                 <div class="content-header row">
+                <div class="col-12" style= "display: flex; justify-content: flex-end;">
+                  <button class="btn btn-transparent"    type="button" >
+                    <a href="{{route('Community_Donation')}}"><span class="ti-xs ti ti-plus me-1"></span>Add New Community donation </a></button>
+                  </div>
                   <div class="content-header-left col-md-9 col-12 mb-2">
                     {{-- <div class="row breadcrumbs-top">
                       <div class="col-12">
@@ -85,7 +89,6 @@ button.swal2-cancel.btn.btn-label-danger {
                                         <table id="DataTables_Table_0" class="datatables-basic table">
                                           <thead>
                                               <tr>
-                                                  <th></th>
                                                   <th>પહોંચ નંબર</th>
                                                   <th>નામ</th>
                                                   <th>તારીખ</th>
@@ -96,90 +99,32 @@ button.swal2-cancel.btn.btn-label-danger {
                                                   <th>Action</th>
                                               </tr>
                                           </thead>
+                                          @foreach($donation as $row)
                                           <tr>
-                                              <td></td>
-                                              <td>1</td>
-                                              <td>Dipesh K</td>
-                                              <td>25 Jul, 2023</td>
-                                              <td>814124655</td>
-                                              <td>Bhuj</td>
-                                              <td>12000</td>
-                                              <td>UPI</td>
+                                          <input type="hidden" class="id" value="{{$row->donation_id}}">
+                                              <td>{{$row->donation_id}}</td>
+                                              <td>{{$row->m_name}}</td>
+                                              <td>{{Date("d-m-Y",strtotime($row->d_date))}}</td>
+                                              <td>{{$row->phone_no}}</td>
+                                              <td>{{$row->city}}</td>
+                                              <td>{{"₹ ".$row->total}}</td>
+                                              <td>{{$row->payment_mode}}</td>
                                               <td>
                                                   <div class="d-inline-block">
-                                                    <a href="javascript:;" class="text-primary"><i class="ti ti-eye"></i></a>
+                                                    <a href="{{route('pdf_Community_Donation',$row->donation_id)}}" class="text-primary"><img src="./assets/icon/orange-eye.png" width="20px"></a>
 
-                                                    <a href="javascript:;" class="btn btn-sm btn-icon item-edit" data-bs-toggle="offcanvas"
-                                                    data-bs-target="#offcanvasBackdrop" aria-controls="offcanvasBackdrop"><i class="text-primary ti ti-edit"></i></a>
+                                                    <a onclick="edit_community_donation({{$row->donation_id}})" class="btn btn-sm btn-icon item-edit"
+                                                    ><img src="./assets/icon/orange-edit.png" width="20px"></a>
 
-                                                    <a href="javascript:;" class="text-danger delete-record"><i class="ti ti-trash"></i></a>
+                                                    @php
+                                                    if(session('role')=="ADMIN"){ @endphp
+                                                    <a onclick="delete_community_donation({{$row->donation_id}})" class="text-danger delete-record"><img src="./assets/icon/orange-trash.png" width="20px"></a>
+                                                    @php } @endphp
                                                     
                                                   </div>
                                               </td>
                                           </tr>
-                                          <tr>
-                                            <td></td>
-                                            <td>2</td>
-                                            <td>Dipesh K</td>
-                                            <td>25 Jul, 2023</td>
-                                            <td>814124655</td>
-                                            <td>Bhuj</td>
-                                            <td>12000</td>
-                                            <td>UPI</td>
-                                            <td>
-                                                <div class="d-inline-block">
-                                                  <a href="javascript:;" class="text-primary"><i class="ti ti-eye"></i></a>
-
-                                                  <a href="javascript:;" class="btn btn-sm btn-icon item-edit" data-bs-toggle="offcanvas"
-                                                  data-bs-target="#offcanvasBackdrop" aria-controls="offcanvasBackdrop"><i class="text-primary ti ti-edit"></i></a>
-
-                                                  <a href="javascript:;" class="text-danger delete-record"><i class="ti ti-trash"></i></a>
-                                                  
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td></td>
-                                            <td>3</td>
-                                            <td>Dipesh K</td>
-                                            <td>25 Jul, 2023</td>
-                                            <td>814124655</td>
-                                            <td>Bhuj</td>
-                                            <td>12000</td>
-                                            <td>UPI</td>
-                                            <td>
-                                                <div class="d-inline-block">
-                                                  <a href="javascript:;" class="text-primary"><i class="ti ti-eye"></i></a>
-
-                                                  <a href="javascript:;" class="btn btn-sm btn-icon item-edit" data-bs-toggle="offcanvas"
-                                                  data-bs-target="#offcanvasBackdrop" aria-controls="offcanvasBackdrop"><i class="text-primary ti ti-edit"></i></a>
-
-                                                  <a href="javascript:;" class="text-danger delete-record"><i class="ti ti-trash"></i></a>
-                                                  
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td></td>
-                                            <td>4</td>
-                                            <td>Dipesh K</td>
-                                            <td>25 Jul, 2023</td>
-                                            <td>814124655</td>
-                                            <td>Bhuj</td>
-                                            <td>12000</td>
-                                            <td>UPI</td>
-                                            <td>
-                                                <div class="d-inline-block">
-                                                  <a href="javascript:;" class="text-primary"><i class="ti ti-eye"></i></a>
-
-                                                  <a href="javascript:;" class="btn btn-sm btn-icon item-edit" data-bs-toggle="offcanvas"
-                                                  data-bs-target="#offcanvasBackdrop" aria-controls="offcanvasBackdrop"><i class="text-primary ti ti-edit"></i></a>
-
-                                                  <a href="javascript:;" class="text-danger delete-record"><i class="ti ti-trash"></i></a>
-                                                  
-                                                </div>
-                                            </td>
-                                        </tr>
+                                         @endforeach
                                         </table>
                                     </div>
                                 </div>
@@ -189,7 +134,7 @@ button.swal2-cancel.btn.btn-label-danger {
 
                         <!-- Enable backdrop (default) Offcanvas -->
                         <div class="mt-0">
-                          
+                        
                           <div
                             class="offcanvas offcanvas-end"
                             tabindex="-1"
@@ -206,24 +151,39 @@ button.swal2-cancel.btn.btn-label-danger {
                             <div class="offcanvas-body mx-0 flex-grow-0">
 
                               <!-- Browser Default -->
-                              <form class="browser-default-validation">
+                              <form class="browser-default-validation" method="POST" action="{{route('update_community_donation')}}">
                                 <div class="row g-3">
                                     <div class="col-md-12">
+                                    @csrf
                                         <label class="form-label" name="p_number" for="basic-default-name">પહોંચ નંબર</label>
                                         <input
                                             type="text"
                                             class="form-control"
-                                            id="basic-default-name"
+                                            id="donation_id"
                                             name="donation_id"
                                             readonly
                                             />
                                     </div>
 
                                     <div class="col-md-12">
+                                        <label class="form-label" for="multicol-username">નામ </label>
+                                        <select id="name" name="name" class="select2 form-select form-select-lg" data-allow-clear="false" >
+                                       @foreach ($member as $row)
+                                          <option value="{{$row->p_id}}">{{$row->m_name}}</option>
+                                       @endforeach
+                                        </select>    
+                                    </div>
+
+                                    <div class="col-md-12">
+                                        <label for="flatpickr-date" class="form-label">તારીખ </label>
+                                        <input type="date" class="form-control" placeholder="DD-MM-YYYY" id="date" name="date" />    
+                                    </div>
+
+                                    <div class="col-md-12">
                                         <label class="form-label" for="multicol-phone">શેઠશ્રી રતનશી ટોકરશી વોરા મેડિકલ ચેકઅપ સેન્ટર</label>
                                         <div class="input-group">
                                             <span class="input-group-text">₹</span>
-                                            <input type="number" class="form-control amount-input" name="medical_checkup" placeholder="Amount" aria-label="Amount (to the nearest dollar)" required>
+                                            <input type="number" class="form-control amount-input" name="medical_checkup" id="medical_checkup" placeholder="Amount" aria-label="Amount (to the nearest dollar)"/>
                                             
                                         </div>
                                     </div>
@@ -232,7 +192,7 @@ button.swal2-cancel.btn.btn-label-danger {
                                         <label class="form-label" for="multicol-phone">મહાજનનું મામેરું</label>
                                         <div class="input-group">
                                             <span class="input-group-text">₹</span>
-                                            <input type="number" class="form-control amount-input" name="mahajan" placeholder="Amount" aria-label="Amount (to the nearest dollar)" required>
+                                            <input type="number" class="form-control amount-input" name="mahajan" id="mahajan" placeholder="Amount" aria-label="Amount (to the nearest dollar)"/>
                                             
                                         </div>
                                     </div>
@@ -241,7 +201,7 @@ button.swal2-cancel.btn.btn-label-danger {
                                         <label class="form-label" for="multicol-phone">માતુશ્રી લાખણીબાઈ રામજી તેજશી ગાલા નવનીત ભોજનશાળા</label>
                                         <div class="input-group">
                                             <span class="input-group-text">₹</span>
-                                            <input type="number" class="form-control amount-input" name="bhojanshala" placeholder="Amount" aria-label="Amount (to the nearest dollar)" required>
+                                            <input type="number" class="form-control amount-input" name="bhojanshala" id="bhojanshala"placeholder="Amount" aria-label="Amount (to the nearest dollar)"/>
                                             
                                         </div>
                                     </div>
@@ -250,7 +210,7 @@ button.swal2-cancel.btn.btn-label-danger {
                                         <label class="form-label" for="multicol-phone">શૈક્ષણિક</label>
                                         <div class="input-group">
                                         <span class="input-group-text">₹</span>
-                                        <input type="number" class="form-control amount-input" name="shaikshanik" placeholder="Amount" aria-label="Amount (to the nearest dollar)" required>
+                                        <input type="number" class="form-control amount-input" name="shaikshanik" id="shaikshanik" placeholder="Amount" aria-label="Amount (to the nearest dollar)"/>
                                         
                                         </div>
                                     </div>
@@ -259,7 +219,7 @@ button.swal2-cancel.btn.btn-label-danger {
                                         <label class="form-label" for="multicol-phone">લવાજમ</label>
                                         <div class="input-group">
                                         <span class="input-group-text">₹</span>
-                                        <input type="number" class="form-control amount-input" name="lavajam" placeholder="Amount" aria-label="Amount (to the nearest dollar)" required>
+                                        <input type="number" class="form-control amount-input" name="lavajam" id="lavajam" placeholder="Amount" aria-label="Amount (to the nearest dollar)"/>
                                         
                                         </div>
                                     </div>
@@ -268,7 +228,7 @@ button.swal2-cancel.btn.btn-label-danger {
                                         <label class="form-label" for="multicol-phone">ઑક્સીજન ડોનેશન</label>
                                         <div class="input-group">
                                         <span class="input-group-text">₹</span>
-                                        <input type="number" class="form-control amount-input" name="oxygen" placeholder="Amount" aria-label="Amount (to the nearest dollar)" required>
+                                        <input type="number" class="form-control amount-input" name="oxygen" id="oxygen" placeholder="Amount" aria-label="Amount (to the nearest dollar)"/>
                                         
                                         </div>
                                     </div>
@@ -277,7 +237,7 @@ button.swal2-cancel.btn.btn-label-danger {
                                         <label class="form-label" for="multicol-phone">એમ્બ્યુલન્સ ડોનેશન</label>
                                         <div class="input-group">
                                         <span class="input-group-text">₹</span>
-                                        <input type="number" class="form-control amount-input" name="ambulance" placeholder="Amount" aria-label="Amount (to the nearest dollar)" required>
+                                        <input type="number" class="form-control amount-input" name="ambulance" id="ambulance" placeholder="Amount" aria-label="Amount (to the nearest dollar)"/>
                                         
                                         </div>
                                     </div>
@@ -286,7 +246,7 @@ button.swal2-cancel.btn.btn-label-danger {
                                         <label class="form-label" for="multicol-phone">ઈતર</label>
                                         <div class="input-group">
                                         <span class="input-group-text">₹</span>
-                                        <input type="number" class="form-control amount-input" name="other" placeholder="Amount" aria-label="Amount (to the nearest dollar)" required>
+                                        <input type="number" class="form-control amount-input" name="other" id="other" placeholder="Amount" aria-label="Amount (to the nearest dollar)"/>
                                         
                                         </div>
                                     </div>
@@ -296,10 +256,11 @@ button.swal2-cancel.btn.btn-label-danger {
                                         <input
                                         type="text"
                                         class="form-control"
-                                        id="basic-default-name"
+                                        id="remarks"
                                         name="remarks" 
+                                        style="text-transform:capitalize"
                                         {{-- placeholder="John Doe" --}}
-                                        required />
+                                         />
                                     </div>
         
                                     <div class="col-md-12">
@@ -323,51 +284,43 @@ button.swal2-cancel.btn.btn-label-danger {
                                         </div>
                                     <div class="col-md-12">
                                         <label class="d-block form-label">નાણા મળેલ</label>
+                                        <div class="form-check form-check-inline">
+                                        <input
+                                            type="radio"
+                                            id="cash"
+                                            name="basic_default_radio"
+                                            class="form-check-input"
+                                            />
+                                        <label class="form-check-label" for="basic_default_radio">રોકડા</label>
+                                        </div>
                                         <div class="form-check form-check-inline mb-2">
                                         <input
                                             type="radio"
-                                            id="basic_default_radio-male"
+                                            id="cheque"
                                             name="basic_default_radio"
-                                            class="form-check-input"
-                                            value="cheque"
-                                            required />
+                                            class="form-check-input" />
                                         <label class="form-check-label" for="basic_default_radio">ચેક</label>
                                         </div>
+                                        
+                                        
                                         <div class="form-check form-check-inline">
                                         <input
                                             type="radio"
-                                            id="basic_default_radio-female"
+                                            id="upi"
                                             name="basic_default_radio"
                                             class="form-check-input"
-                                            value="Draft"
-                                            required />
-                                        <label class="form-check-label" for="basic_default_radio">ડ્રાફ્ટ</label>
-                                        </div>
-                                        <div class="form-check form-check-inline">
-                                        <input
-                                            type="radio"
-                                            id="basic_default_radio-female"
-                                            name="basic_default_radio"
-                                            class="form-check-input"
-                                            value="Cash"
-                                            required />
-                                        <label class="form-check-label" for="basic_default_radio">રોકડા</label>
-                                        </div>
-                                        <div class="form-check form-check-inline">
-                                        <input
-                                            type="radio"
-                                            id="basic_default_radio-female"
-                                            name="basic_default_radio"
-                                            class="form-check-input"
-                                            value="UPI"
-                                            required />
+                                             />
                                         <label class="form-check-label" for="basic_default_radio">UPI</label>
+                                        </div>
+                                        <div class="form-check form-check-inline" hidden>
+                                            <input type="text" id="payment" name="payment" class="form-control" />
+                                            <label class="form-check-label" for="basic-default-radio">payment</label>
                                         </div>
                                     </div>
                                     
                                     <div class="row">
                                         <div class="col-12">
-                                            <button type="button" class="btn btn-primary mb-2 d-grid w-100">Update</button>
+                                            <button type="submit" class="btn btn-primary mb-2 d-grid w-100">Update</button>
                                             <button
                                             type="button"
                                             class="btn btn-label-secondary d-grid w-100"
@@ -430,6 +383,7 @@ button.swal2-cancel.btn.btn-label-danger {
         
       dom: '<"card-header flex-column flex-md-row"<"head-label text-center"><"dt-action-buttons text-end pt-3 pt-md-0"B>><"row"<"col-sm-12 col-md-6"l><"col-sm-12 col-md-6 d-flex justify-content-center justify-content-md-end"f>>t<"row"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>',
       displayLength: 7,
+      order: [0,'desc'],
       lengthMenu: [7, 10, 25, 50, 75, 100],
       buttons: [
         {
@@ -442,7 +396,7 @@ button.swal2-cancel.btn.btn-label-danger {
               text: '<i class="ti ti-printer me-1" ></i>Print',
               className: 'dropdown-item',
               exportOptions: {
-                columns: [1 ,2, 3, 4, 5, 6],
+                columns: [0,1 ,2, 3, 4, 5, 6],
                 // prevent avatar to be display
                 format: {
                   body: function (inner, coldex, rowdex) {
@@ -479,7 +433,7 @@ button.swal2-cancel.btn.btn-label-danger {
               text: '<i class="ti ti-file-text me-1" ></i>Csv',
               className: 'dropdown-item',
               exportOptions: {
-                columns: [3, 4, 5, 6, 7],
+                columns: [0,1 ,2, 3, 4, 5, 6],
                 // prevent avatar to be display
                 format: {
                   body: function (inner, coldex, rowdex) {
@@ -503,7 +457,7 @@ button.swal2-cancel.btn.btn-label-danger {
               text: '<i class="ti ti-file-spreadsheet me-1"></i>Excel',
               className: 'dropdown-item',
               exportOptions: {
-                columns: [3, 4, 5, 6, 7],
+                columns: [0,1,2,3, 4, 5, 6],
                 // prevent avatar to be display
                 format: {
                   body: function (inner, coldex, rowdex) {
@@ -527,7 +481,7 @@ button.swal2-cancel.btn.btn-label-danger {
               text: '<i class="ti ti-file-description me-1"></i>Pdf',
               className: 'dropdown-item',
               exportOptions: {
-                columns: [3, 4, 5, 6, 7],
+                columns: [0,1,2,3, 4, 5, 6],
                 // prevent avatar to be display
                 format: {
                   body: function (inner, coldex, rowdex) {
@@ -551,7 +505,7 @@ button.swal2-cancel.btn.btn-label-danger {
               text: '<i class="ti ti-copy me-1" ></i>Copy',
               className: 'dropdown-item',
               exportOptions: {
-                columns: [3, 4, 5, 6, 7],
+                columns: [0,1,2,3, 4, 5, 6],
                 // prevent avatar to be display
                 format: {
                   body: function (inner, coldex, rowdex) {
@@ -762,42 +716,90 @@ button.swal2-cancel.btn.btn-label-danger {
   </script>
   <!-- end num to word -->
 
-  <script>
-    // Get all elements with class "delete-record"
-    const deleteLinks = document.querySelectorAll(".delete-record");
+<script>
+  function delete_community_donation(id)
+  {
+      Swal.fire({
+          title: "Are you sure?",
+          text: "You won't be able to revert this!",
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonColor: "#3085d6",
+          cancelButtonColor: "#d33",
+          confirmButtonText: "Yes, delete it!",
+      }).then((result) => {
+          // If the user confirms the deletion, proceed with the deletion logic
+          if (result.isConfirmed) {
+            $.ajax({
+              url:"{{url('delete_community_donation')}}" +"/"+ id,
+              type:'GET',
+              success:function(response){
+                  Swal.fire(
+                      'Deleted!',
+                      'Your Record has been deleted.',
+                      'success',
+                      );
+                      location.reload();
+                      }
+                  });
+          }
+      });
+  }
 
-    // Loop through each delete link and attach a click event listener
-    deleteLinks.forEach(link => {
-        link.addEventListener("click", function() {
-            // Show a confirmation dialog using SweetAlert2
-            Swal.fire({
-                title: "Are you sure?",
-                text: "You won't be able to revert this!",
-                icon: "warning",
-                showCancelButton: true,
-                confirmButtonColor: "#3085d6",
-                cancelButtonColor: "#d33",
-                confirmButtonText: "Yes, delete it!",
-            }).then((result) => {
-                // If the user confirms the deletion, proceed with the deletion logic
-                if (result.isConfirmed) {
-                    // Write your deletion logic here
-                    // For example, you can remove the entire row from the table:
-                    const row = this.closest("tr");
-                    if (row) {
-                        row.remove();
-                    }
-
-                    // Show a success message using SweetAlert2
-                    Swal.fire("Deleted!", "The record has been deleted.", "success");
-                }
-            });
-        });
-    });
+  function edit_community_donation(id)
+  {
+      const myOffcanvas = document.getElementById('offcanvasBackdrop');
+      let a=new bootstrap.Offcanvas(myOffcanvas);
+      a.show();
+      var member_id=[];
+      var temp=document.getElementById('name');
+        for(i=0;i<temp.options.length;i++)
+            {
+              member_id[i]=temp.options[i].value;
+            }
+      $.ajax({
+          url:"{{url('get_community_donation')}}" +"/"+ id,
+          type:'GET',
+            success:function(response){  
+              var payment=response[0]['payment_mode'];
+              var sr_no=response[0]['p_id'];
+                $("#donation_id").val(response[0]['donation_id']);
+                $("#date").val(response[0]['d_date']);
+                $("#medical_checkup").val(response[0]['medical_checkup']);
+                $("#bhojanshala").val(response[0]['bhojanshala']);
+                $("#mahajan").val(response[0]['mahajan']);
+                $("#shaikshanik").val(response[0]['shaikshanik']);
+                $("#oxygen").val(response[0]['oxygen']);
+                $("#lavajam").val(response[0]['lavajam']);
+                $("#ambulance").val(response[0]['ambulance']);
+                $("#other").val(response[0]['other']);
+                $("#remarks").val(response[0]['remarks']);
+                $("#total").val(response[0]['total']);
+                $("#ankers").val(response[0]['total_in_word']);
+                $("#payment").val(response[0]['payment_mode']); 
+                  if(payment=="CASH"){$("#cash").attr('checked',true);}
+                  if(payment=="UPI"){$("#upi").attr('checked',true);}
+                  if(payment=="CHEQUE"){$("#cheque").attr('checked',true);}
+                  member_id.forEach(myFunction)
+                  function myFunction(item, index, arr) {
+                      if((member_id[index])==sr_no)
+                      {
+                        $("#name option[value=" + sr_no + "]").attr('selected', 'selected'); 
+                      }
+                  }
+            }
+          });
+  }
+    $("#cash").change(function(){
+        document.getElementById("payment").value="CASH";
+      });
+      $("#cheque").change(function(){
+        document.getElementById("payment").value="CHEQUE";
+      });
+      $("#upi").change(function(){
+        document.getElementById("payment").value="UPI";
+      });
 </script>
-
-
-    
 
 @endsection
 

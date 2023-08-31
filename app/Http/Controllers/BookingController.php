@@ -126,10 +126,9 @@ class BookingController extends Controller
         $member->phone_no = $req->phone_no;
         $member->city = strtoupper($req->city);
         $member->save();
-       echo response()->json($member);
-      // return json_encode($member);   
     }
-    public function get_member()
+
+    public function get_members()
     {
         $data=add_members::get()->last();
         return $data;
