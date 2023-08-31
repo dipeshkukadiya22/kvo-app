@@ -539,10 +539,10 @@ div.card-datatable [class*=col-md-] {
                                           </div>
                                           <!-- All No of Person -->
                                           <div id="address" class="content">
-                                                <button type="button" class="btn btn-primary" id="member_data">
+                                                <!-- <button type="button" class="btn btn-primary" id="member_data">
                                                   <span class="align-middle d-sm-inline-block d-none me-sm-1">show data</span>
                                                   <i class="ti ti-arrow-right"></i>
-                                                </button>
+                                                </button> -->
                                             <div class="content-header">
                                               <small>Enter Member Details.</small>
                                             </div>

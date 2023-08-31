@@ -326,9 +326,8 @@ class BookingController extends Controller
             $total_member = $req->no_of_person_id;
             for ($i =1; $i < $total_member; $i++){
                 $m_details = member_details::find($req->m_id[$i]);
-             dd($m_details);
-                //dd($m_details->toArray());
                 $m_details->full_name = strtoupper($req->full_name[$i]);
+                
                 //dd($req->full_name);
                 $m_details->age=$req->m_age[$i];
                 $m_details->gender=$req->gender;
