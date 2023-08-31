@@ -758,7 +758,7 @@ $("#name").change(function(){
               member_id[i]=temp.options[i].value;
             }
         $.ajax({
-            url:"{{url('get_member')}}" +"/"+ id,
+            url:"{{url('get_treatment')}}" +"/"+ id,
             type:'GET',
               success:function(response){ 
                 var sr_no=response[0]['p_id'];

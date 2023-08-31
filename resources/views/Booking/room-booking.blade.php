@@ -214,7 +214,7 @@
                       </div>
                     </div>
                     <div class="bs-stepper-content">
-                    <form class="browser-default-validation" onSubmit="return false" action="{{ route('RoomBooking') }}" method="POST" id="room_booking">
+                    <form class="browser-default-validation" action="{{ route('RoomBooking') }}" method="POST" id="room_booking">
 
                         @csrf
                         <!-- Account Details -->

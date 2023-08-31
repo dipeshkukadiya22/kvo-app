@@ -46,7 +46,7 @@ class BookingController extends Controller
         $details->gender = $req->inlineRadioOptions;
         $details->member_id=$req->name;
        // $fileName = basename($_FILES[$req->id_proof[0]]["name"]);
-        dd($req->id_proof[0]);
+        //dd($req->id_proof[0]);
         if(count($req->id_proof)==1){ $details->id_proof=$req->id_proof[0]; }
 
         else{$details->id_proof=$req->id_proof[0];$details->id_proof1=$req->id_proof[1];}
@@ -128,7 +128,7 @@ class BookingController extends Controller
         $member->save();
     }
 
-    public function get_members()
+    public function get_member()
     {
         $data=add_members::get()->last();
         return $data;

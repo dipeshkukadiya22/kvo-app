@@ -7,12 +7,12 @@ use App\Http\Controllers\BookingController;
 
 use App\Http\Controllers\MembersController;
 use App\Http\Controllers\AuthController;
-
-
+use App\HTTP\Controllers\MedicalController;
+use App\HTTP\Controllers\ReportController;  
 use App\Http\Controllers\donation;
 use App\Http\Controllers\Expense;
 use App\Http\Controllers\pdfcontroller;
-use App\Http\Controllers\medical;
+
 
 
 /*
@@ -35,13 +35,20 @@ use App\Http\Controllers\medical;
 /* Auth Login Route */
 Route::get('/dashboard', [DashboardController::class, 'Dashboard'])->name('Dashboard');
 
-/* Auth Login Route */
-Route::get('/login', [AuthController::class, 'LoginUser'])->name('LoginUser');
+Route::group(['middleware'=>['user']],function(){
+    Route::POST('RoomBooking', [BookingController::class, 'RoomBooking'])->name('RoomBooking');
+    Route::get('room-booking', [BookingController::class, 'index']);
+    Route::get('Religious_Donation', [donation::class, 'index1'])->name('Religious_Donation');
+Route::POST('ReligiousDonation', [donation::class, 'Religious_Donation'])->name('ReligiousDonation');
+});
 
+/* Auth Login Route */
+Route::get('login',[AuthController::class,'LoginUser'])->name('login');
+Route::post('login',[AuthController::class,'check_user'])->name('check_user');
+Route::get('login',[AuthController::class,'destroy'])->name('destroy');
 /* Room Booking Route */
 
-Route::POST('RoomBooking', [BookingController::class, 'RoomBooking'])->name('RoomBooking');
-Route::get('room-booking', [BookingController::class, 'index']);
+
 Route::get('AdvanceRoomBooking', [BookingController::class, 'AdvanceRoomBooking'])->name('AdvanceRoomBooking');
 Route::POST('room-booking', [BookingController::class, 'add_member'])->name('room-booking');
 Route::get('cancel_room/{id}',[BookingController::class, 'cancel_room'])->name('cancel_room');
@@ -74,8 +81,7 @@ Route::get('/edit_members/{id}', [MembersController::class, 'edit_members'])->na
 Route::get('delete_members/{id}', [MembersController::class, 'delete_members'])->name('delete_members');
 Route::POST('update_members', [MembersController::class, 'update_members'])->name('update_members');
 
-Route::get('Religious_Donation', [donation::class, 'index1'])->name('Religious_Donation');
-Route::POST('ReligiousDonation', [donation::class, 'Religious_Donation'])->name('ReligiousDonation');
+
 Route::get('View_Religious_Donation', [donation::class, 'View_Religious_Donation'])->name('View_Religious_Donation');
 Route::get('/delete_religious_donation/{id}', [donation::class, 'delete_religious_donation'])->name('delete_religious_donation');
 Route::get('/get_religious_donation/{id}',[donation::class,'get_religious_donation'])->name('get_religious_donation');
@@ -108,7 +114,7 @@ Route::get('treatment',[MedicalController::class,'show'])->name('show');
 Route::post('add_treatment',[MedicalController::class,'add'])->name('add_treatment');
 Route::post('update_treatment',[MedicalController::class,'update'])->name('update_treatment');
 Route::get('/get/{id}',[MedicalController::class,'get'])->name('get');
-Route::get('/get_member/{id}',[MedicalController::class,'get_member'])->name('get_member');
+Route::get('/get_treatment/{id}',[MedicalController::class,'get_treatment'])->name('get_treatment');
 Route::get('view_treatment',[MedicalController::class,'view_treatment'])->name('view_treatment');
 Route::get('edit_treatment/{id}',[MedicalController::class,'edit_treatment'])->name('edit_treatment');
 Route::get('delete_treatment/{id}',[MedicalController::class,'delete_treatment'])->name('delete_treatment');
@@ -119,6 +125,8 @@ Route::get('/pdf_Medical_Treatment/{id}',[pdfcontroller::class,'pdf_Medical_Trea
 Route::get('/pdf_General_Donation/{id}',[pdfcontroller::class,'pdf_General_Donation'])->name('pdf_General_Donation');
 Route::get('/pdf_Mahajan_Expense/{id}',[pdfcontroller::class,'pdf_Mahajan_Expense'])->name('pdf_Mahajan_Expense');
 Route::get('/pdf_Sangh_Expense/{id}',[pdfcontroller::class,'pdf_Sangh_Expense'])->name('pdf_Sangh_Expense');
+Route::get('pdf_CheckIn/{id}',[pdfcontroller::class,'pdf_CheckIn'])->name('pdf_CheckIn');
+Route::get('pdf_CheckOut/{id}',[pdfcontroller::class,'pdf_CheckOut'])->name('pdf_CheckOut');
 Route::get('religious_donation_report', [ReportController::class, 'religious_donation_report'])->name('religious_donation_report');
 Route::get('show_religious_donation_report', [ReportController::class, 'show_religious_donation_report'])->name('show_religious_donation_report');
 Route::get('religious_category_donation_report', [ReportController::class, 'religious_category_donation_report'])->name('religious_category_donation_report');

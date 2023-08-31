@@ -577,38 +577,26 @@
                 <div data-i18n="ROOM-BOOKING">ROOM-BOOKING </div>
               </a>
 
-              <!-- <ul class="menu-sub">
+              <ul class="menu-sub">
                 <li class="menu-item">
-                  <a href="layouts-without-menu.html" class="menu-link">
+                  <a href="{{route('view_room_booking')}}" class="menu-link">
                     <i class="menu-icon tf-icons ti ti-menu-2"></i>
-                    <div data-i18n="Without menu">Without menu</div>
+                    <div data-i18n="View Room Booking">View Room Booking</div>
                   </a>
                 </li>
                 <li class="menu-item">
-                  <a href="../vertical-menu-template/" class="menu-link" target="_blank">
+                  <a href="{{route('get_room_list')}}" class="menu-link" target="_blank">
                     <i class="menu-icon tf-icons ti ti-layout-distribute-vertical"></i>
-                    <div data-i18n="Vertical">Vertical</div>
+                    <div data-i18n="Room List">Room List</div>
                   </a>
                 </li>
                 <li class="menu-item">
-                  <a href="layouts-fluid.html" class="menu-link">
+                  <a href="{{route('checkout')}}" class="menu-link">
                     <i class="menu-icon tf-icons ti ti-maximize"></i>
-                    <div data-i18n="Fluid">Fluid</div>
+                    <div data-i18n="Checkout">Checkout</div>
                   </a>
                 </li>
-                <li class="menu-item">
-                  <a href="layouts-container.html" class="menu-link">
-                    <i class="menu-icon tf-icons ti ti-arrows-maximize"></i>
-                    <div data-i18n="Container">Container</div>
-                  </a>
-                </li>
-                <li class="menu-item">
-                  <a href="layouts-blank.html" class="menu-link">
-                    <i class="menu-icon tf-icons ti ti-square"></i>
-                    <div data-i18n="Blank">Blank</div>
-                  </a>
-                </li>
-              </ul> -->
+              </ul> 
             </li>
 
             <!-- Apps -->
