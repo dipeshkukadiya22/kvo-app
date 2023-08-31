@@ -333,34 +333,18 @@ class BookingController extends Controller
                 $data=DB::UPDATE("UPDATE add_room SET STATUS='1',room_detail_id='$req->booking_id' where room_no='$room'");
             }}
             $total_member = $req->no_of_person_id;
-            dd($old_no_of_person);
-            dd($total_member);
-            if($old_no_of_person <  $total_member)/*Add New Member details*/
-            {
-                for($i=2;$i<=$total_member;$i++)
-                {
-                    $m_details = new member_details();
-                    $m_details->full_name = $req->full_name[$i];
-                    $m_details->age=$req->m_age[$i];
-                    $m_details->gender=$req->gender;
-                    $m_details->relation=$req->relation[$i];
-                    $m_details->personal_detail_id=$booking->member_id;
-                    $m_details->room_id=$req->deposit_no;
-                    $m_details->save();
-                    
-                }
-            }
-            if($old_no_of_person == $total_member)/*UPDATE Member details*/
-            {
-              for($i=1;$i<$total_member;$i++)
-                {    
-                $m_details=member_details::find($req->m_id);
-                $m_details->full_name =$req->full_name;
-                $m_details->age=$req->m_age;
-                $m_details->gender=$req->gender;
-                $m_details->relation=$req->relation; 
+            for ($i =1; $i < $total_member; $i++){
+                $m_details =member_details::find($req->m_id[$i]);
+             
+                //dd($m_details->toArray());
+                $m_details->full_name = strtoupper($req->full_name[$i]);
+                $m_details->age=$req->m_age[$i];
+                $m_details->gender=$req->gender  n;
+               $m_details->relation=$req->relation[$i]; 
+              
                 $m_details->save();
-                }}
+                }
+               
             $ar_list = DB::select("SELECT add_room.*, room_details.check_in_date, room_details.* FROM add_room LEFT JOIN room_details ON add_room.room_no = room_details.r_id WHERE add_room.status = 1");
 
    

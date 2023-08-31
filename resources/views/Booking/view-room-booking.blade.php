@@ -533,6 +533,10 @@ div.card-datatable [class*=col-md-] {
                                           </div>
                                           <!-- All No of Person -->
                                           <div id="address" class="content">
+                                                <button type="button" class="btn btn-primary" id="member_data">
+                                                  <span class="align-middle d-sm-inline-block d-none me-sm-1">show data</span>
+                                                  <i class="ti ti-arrow-right"></i>
+                                                </button>
                                             <div class="content-header">
                                               <small>Enter Member Details.</small>
                                             </div>
@@ -552,7 +556,7 @@ div.card-datatable [class*=col-md-] {
                                                       <input type="text" id="m_id" name="m_id[]" class="form-control" placeholder="john doe" value="" readonly/>
                                                     </div>
                                                       <div class="mb-3 col-lg-6 col-xl-3 col-12 mb-0">
-                                                      <label class="form-label" for="form-repeater-1-1">Full Name</label>
+                                                      <label class="form-labegenderl" for="form-repeater-1-1">Full Name</label>
                                                       <input type="text" id="full_name_form" name="full_name[]" class="form-control" placeholder="john doe" value="" readonly/>
 
                                                     </div>
@@ -952,9 +956,7 @@ function edit(id)
 </script>
 <script>
 $(document).ready(function () {   
-    $('body').on('change','#select', function() {
-         $('#show_selected').val(this.value);
-    });
+
     $('#FEMALE').change(function(){
       $("#inlineRadio2").attr('checked',true);
       $("#gender_data").val("FEMALE");
@@ -1001,26 +1003,27 @@ $(document).ready(function () {
       if (isNaN(numForms) || numForms <= 0) {
        
         return false;
-      }
+      }  let j=2;
       for (let i = 1; i < numForms; i++) {
-        let j=2;
+      
         $(".rep-table").append(
           '<tr>' +
           '<td>'+ j +'</td>' +
-          '<td class="member_full_name' + i + '">' + $('#full_name_form' + i).val() + '</td>' +
+          '<td class="member_full_name' + i + '">' + $('#full_name_form' + i).val()+ '</td>' +
           '<td class="members_age' + i + '">' + $('#member_age' + i).val() + '</td>' +
           '<td class="member_gen' + i + '">' + $('input[name="gender'+i+'[]"]:checked').val() + '</td>' +
           '<td class="member_rel' + i + '">' + $('#member_relation' + i).val() + '</td>' +
           '</tr>'
         );
-        
 
-        // Setting text for elements in the loop using jQuery
-        $('.member_full_name' + i).text($('#full_name_form' + i).val());
-        $('.members_age' + i).text($('#member_age' + i).val());
-        $('.member_gen' + i).text($('#gender'+i).val());
-        $('.member_rel' + i).text($('#member_relation' + i).val());
+
         j++;
+        // Setting text for elements in the loop using jQuery
+        // $('.member_full_name' + i).text($('#full_name_form' + i).val());
+        // $('.members_age' + i).text($('#member_age' + i).val());
+        // $('.member_gen' + i).text($('#gender'+i).val());
+        // $('.member_rel' + i).text($('#member_relation' + i).val());
+        // j++;
       }
 
       $(".rep-table").show();
@@ -1029,32 +1032,30 @@ $(document).ready(function () {
 </script>
 <script>
   $(document).ready(function() {
-
     $("#repeat-next").click(function() {
-    
-
+      console.log("click");
       let numForms = parseInt($("#no_of_person_id").val());
+
       // Clear previous forms if any
       $(".rep-form").empty();
-     
+
       // Clone and show the form templates
       //console.log('form:'.$('.reo-form').children());
       for (let i = 1; i < numForms; i++) {
-        let formTemplate = $(".rep-form1 .formrepeater").clone();
+        let formTemplate = $(".rep-form .formrepeater").clone();
         $(".rep-form").append(
 
           '<div class="row formrepeater">'+
-                                  '<div class="mb-3 col-lg-6 col-xl-3 col-12 mb-0">'+
+                                  '<div class="mb-3 col-lg-6 col-xl-3 col-12 mb-0" hidden>'+
                                       '<label class="form-label" for="form-repeater-1-1">member_id</label>'+
                                       '<input type="text" id="m_id'+i+'" name="m_id[]" class="fom_age[]rm-control" placeholder="john doe" value="" readonly/>'+
                                     '</div>'+
 
                                  ' <div class="mb-3 col-lg-6 col-xl-3 col-12 mb-0">'+
                                    ' <label class="form-label" for="form-repeater-1-1">Full Name</label>'+
-                                   ' <input type="text" id="full_name_form'+i+'" style="text-transform:uppercase" name="full_name[]" class="form-control" placeholder="john doe" value="">'+
-                                    
+                                   ' <input type="text" id="full_name_form'+i+'" style="text-transform:uppercase" name="full_name[]" class="form-control" placeholder="john doe" />'+
                                  ' </div>'+
-                                 ' <div class="mb-3 col-lg-6 col-xl-3 col-12 mb-0">'+
+                                 ' <div class="mb-3 col-lg-6 col-xl-2 col-12 mb-0">'+
                                   '  <label class="form-label" for="form-repeater-1-2">Age</label>'+
                                   '  <input type="number" id="member_age'+i+'" name="m_age[]" class="form-control" placeholder="your age" />'+
                                 '  </div>'+
@@ -1064,15 +1065,15 @@ $(document).ready(function () {
                                   
                                      ' <label class="d-block form-label">Gender</label>'+
                                      ' <div class="form-check form-check-inline">'+
-                                       ' <input class="form-check-input" type="radio" name="gender'+i+'[]" id="inlineRadio1_' + i + '" value="MALE" checked/>'+
+                                       ' <input class="form-check-input" type="radio" name="gender'+i+'[]" id="inlineRadio1' + i + '" value="MALE" checked/>'+
                                        ' <label class="form-check-label" for="inlineRadio1' + i + '">Male</label>'+
                                      ' </div>'+
                                      ' <div class="form-check form-check-inline">'+
-                                      '  <input class="form-check-input" type="radio" name="gender'+i+'[]" id="inlineRadio2_' + i + '" value="FEMALE" />'+
+                                      '  <input class="form-check-input" type="radio" name="gender'+i+'[]" id="inlineRadio2' + i + '" value="FEMALE" />'+
                                       '  <label class="form-check-label" for="inlineRadio2' + i + '" selected>Female</label>'+
                                     '  </div>'+
                                 '  </div>'+
-                                ' <div class="col-md-4">'+
+                                '    <div class="mb-3 col-lg-6 col-xl-2 col-12 mb-0">'+
                                     '  <label class="form-label" for="basic-default-country">Relation</label>'+
                                     '  <select class="form-select" name="relation[]" id="member_relation'+i+'" required>'+
                                     '   <option value="" disabled selected>Select relation</option>'+
@@ -1100,20 +1101,23 @@ $(document).ready(function () {
                                   '  </button>'+
                                   '</div>'+
                                ' </div>'
-        );
+                              ); 
+                             }
 
-        var id=document.getElementById("person_id").value;
+                              var id=document.getElementById("person_id").value;
         var relation=[];
         var temp=document.getElementById('member_relation');
              for(i=0;i<temp.options.length;i++)
                   {
                     relation[i]=temp.options[i].value;
                   }
+                  alert(id);
         $.ajax({
             url:"{{url('get_memberdata')}}" +"/"+ id,
             type:'GET',
               success:function(response){
                 var len=response.length;
+                
                for(i=0;i<=len;i++)
                 {     
                 $('#m_id' + i).val(response[i]['p_id']);
@@ -1122,18 +1126,19 @@ $(document).ready(function () {
                 var gender=response[i]['gender'];
                 var rel=response[i]['relation'];
                 $("#member_relation"+ i +" option[value=" + rel + "]").attr('selected', 'selected');
-                if(gender=="MALE"){$("#inlineRadio1_"+i).attr('checked',true);}
-                if(gender=="FEMALE"){$("#inlineRadio2_"+i).attr('checked',true);}
+                if(gender=="MALE"){$("#inlineRadio1"+i).attr('checked',true);}
+                if(gender=="FEMALE"){$("#inlineRadio2"+i).attr('checked',true);}
                 }
               }
-            });
-      }
+            });   
+    
 
       // Display the forms container
       $(".rep-form").show();
     });
   });
 </script>
+
 
     <!-- BEGIN: Page JS-->
    <script>
