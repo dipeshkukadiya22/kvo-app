@@ -1065,7 +1065,7 @@ $(document).ready(function () {
                                   
                                      ' <label class="d-block form-label">Gender</label>'+
                                      ' <div class="form-check form-check-inline">'+
-                                       ' <input class="form-check-input" type="radio" name="gender'+i+'[]" id="inlineRadio1' + i + '" value="MALE" checked/>'+
+                                       ' <input class="form-check-input" type="radio" name="gender'+i+'[]" id="inlineRadio1' + i + '" value="MALE" />'+
                                        ' <label class="form-check-label" for="inlineRadio1' + i + '">Male</label>'+
                                      ' </div>'+
                                      ' <div class="form-check form-check-inline">'+
@@ -1111,7 +1111,6 @@ $(document).ready(function () {
                   {
                     relation[i]=temp.options[i].value;
                   }
-                  alert(id);
         $.ajax({
             url:"{{url('get_memberdata')}}" +"/"+ id,
             type:'GET',
