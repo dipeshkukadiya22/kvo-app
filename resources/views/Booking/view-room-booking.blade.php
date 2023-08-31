@@ -83,6 +83,10 @@ div.card-datatable [class*=col-md-] {
 
             <div class="container-xxl flex-grow-1 container-p-y">
                 <div class="content-header row">
+                <div class="col-12" style= "display: flex; justify-content: flex-end;">
+                  <button class="btn btn-transparent"    type="button" >
+                    <a href="{{route('room-booking')}}"><span class="ti-xs ti ti-plus me-1"></span>Add New Room booking</a></button>
+                  </div>
                   <div class="content-header-left col-md-9 col-12 mb-2">
                     {{-- <div class="row breadcrumbs-top">
                       <div class="col-12">
@@ -280,7 +284,7 @@ div.card-datatable [class*=col-md-] {
 
                                                 <div class="col-md-4">
                                                   <label class="form-label" for="basic-default-name">Age</label>
-                                                  <input type="text" class="form-control" name="age" id="age" placeholder="Age" readonly/>
+                                                  <input type="text" class="form-control" name="age" id="age" placeholder="Age"  maxlength="2" required oninput="javascript: if (this.value.length > 2) this.value = this.value.slice(0, 2);" />
                                                 </div>
                       
                                                 <div class="col-4">
@@ -562,7 +566,7 @@ div.card-datatable [class*=col-md-] {
                                                     </div>
                                                     <div class="mb-3 col-lg-6 col-xl-3 col-12 mb-0">
                                                       <label class="form-label" for="form-repeater-1-2">Age</label>
-                                                      <input type="number" id="member_age" name="m_age[]" class="form-control" placeholder="your age" />
+                                                      <input type="number" id="member_age" name="m_age[]" class="form-control" placeholder="your age"  maxlength="2" required oninput="javascript: if (this.value.length > 2) this.value = this.value.slice(0, 2);"  />
                                                     </div>
                                                     
                                                     
@@ -1053,11 +1057,11 @@ $(document).ready(function () {
 
                                  ' <div class="mb-3 col-lg-6 col-xl-3 col-12 mb-0">'+
                                    ' <label class="form-label" for="form-repeater-1-1">Full Name</label>'+
-                                   ' <input type="text" id="full_name_form'+i+'" style="text-transform:uppercase" name="full_name[]" class="form-control" placeholder="john doe" />'+
+                                   ' <input type="text" id="full_name_form'+i+'" style="text-transform:uppercase" name="full_name[]" class="form-control" placeholder="john doe" required />'+
                                  ' </div>'+
                                  ' <div class="mb-3 col-lg-6 col-xl-2 col-12 mb-0">'+
                                   '  <label class="form-label" for="form-repeater-1-2">Age</label>'+
-                                  '  <input type="number" id="member_age'+i+'" name="m_age[]" class="form-control" placeholder="your age" />'+
+                                  '  <input type="number" id="member_age'+i+'" name="m_age[]" class="form-control" placeholder="your age"  maxlength="2" required oninput="javascript: if (this.value.length > 2) this.value = this.value.slice(0, 2);"  />'+
                                 '  </div>'+
                                   
                                   

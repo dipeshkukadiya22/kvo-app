@@ -5,7 +5,7 @@
 
 @font-face {
 					font-family: KAP119;
-					src: url('C:/xampp latest/htdocs/kvo-app/vendor/dompdf/dompdf/lib/fonts/KAP119.ttf');
+					src: url('C:/xampplatest/htdocs/kvo-app/vendor/dompdf/dompdf/lib/fonts/KAP119.ttf');
 				}
 
 				@page  
@@ -69,7 +69,7 @@
 				}
 
                 td.tg-0pky.tc {
-					text-align: center !important;
+					text-align: left !important;
 				}
 
 
@@ -141,7 +141,7 @@
                     @php $n++; @endphp
 					<tr>
 					<td class="tg-0pky tc">{{$n}}</td>
-					<td class="tg-0pky tc">{{$row->full_name}}</td>
+					<td class="tg-0pky tc" >{{$row->full_name}}</td>
 					<td class="tg-0pky tc">{{$row->age}}</td>
                     <td class="tg-0pky tc">{{$row->gender}}</td>
                     <td class="tg-0pky tc">{{$row->relation}}</td>
@@ -172,7 +172,7 @@
 			  <tbody>
 
 				<tr>
-					<td class="tg-0pky" colspan="4" ><span class="gujfont">SFIDL ;ZGFD]\o </span><span>{{$room_booking[0]->address}}</span></td>
+					<td class="tg-0pky" colspan="4" style="padding-bottom:40px; text-align:left"><span class="gujfont">SFIDL ;ZGFD]\o </span><span>{{$room_booking[0]->address}}</span></td>
 
 					<td class="tg-0pky gujfont" colspan="1" width="20%" style="padding-top:40px; text-align:center">IF+L ;CL</td>
 

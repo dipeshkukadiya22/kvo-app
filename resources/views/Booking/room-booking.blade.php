@@ -258,7 +258,7 @@
 
                               <div class="col-md-4">
                                 <label class="form-label" for="basic-default-name"><span class="required">Age</span></label>
-                                <input type="number" class="form-control" name="age" id="basic-default-age" placeholder="Age" required/>
+                                <input type="number" class="form-control" name="age" id="basic-default-age" placeholder="Age"  maxlength="2" required oninput="javascript: if (this.value.length > 2) this.value = this.value.slice(0, 2);" />
                               </div>
     
                               <div class="col-4">
@@ -469,12 +469,12 @@
                             
                             <div class="col-md-4">
                               <label class="form-label" for="rupees-in-words"><span class="required">Occupation</span></label>
-                              <input type="text" class="form-control" name="occupation" id="occupation" placeholder="Occupation" required/>
+                              <input type="text" class="form-control" name="occupation" style="text-transform:uppercase" id="occupation" placeholder="Occupation" required/>
                             </div>
 
                             <div class="col-md-4">
                               <label class="form-label" for="rupees-in-words"><span class="required">Reason</span></label>
-                              <input type="text" class="form-control" name="reason" id="reason" placeholder="Reason to stay" required/>
+                              <input type="text" class="form-control" name="reason" id="reason" style="text-transform:uppercase" placeholder="Reason to stay" required/>
                             </div>
   
                             
@@ -516,7 +516,7 @@
                                   </div>
                                   <div class="mb-3 col-lg-6 col-xl-2 col-12 mb-0">
                                     <label class="form-label" for="form-repeater-1-2">Age</label>
-                                    <input type="number" id="member_age" name="m_age[]" class="form-control" placeholder="your age"  />
+                                    <input type="number" id="member_age" name="m_age[]" class="form-control" placeholder="your age"  maxlength="2" required oninput="javascript: if (this.value.length > 2) this.value = this.value.slice(0, 2);"  />
                                   </div>
                                   
                                   
@@ -1200,7 +1200,7 @@ $(document).ready(function () {
                                  ' </div>'+
                                  ' <div class="mb-3 col-lg-6 col-xl-2 col-12 mb-0">'+
                                   '  <label class="form-label" for="form-repeater-1-2">Age</label>'+
-                                  '  <input type="number" id="member_age'+i+'" name="m_age[]" class="form-control" placeholder="your age" />'+
+                                  '  <input type="number" id="member_age'+i+'" name="m_age[]" class="form-control" placeholder="your age"  maxlength="2" required oninput="javascript: if (this.value.length > 2) this.value = this.value.slice(0, 2);"  />'+
                                 '  </div>'+
                                   
                                   
