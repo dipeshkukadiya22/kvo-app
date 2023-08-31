@@ -70,9 +70,7 @@ class BookingController extends Controller
         $member->phone_no = $req->phone_no;
         $member->city = strtoupper($req->city);
        
-        $member->save();
-        $m_data=add_members::all();
-        return back();
+       
     }
     
    
