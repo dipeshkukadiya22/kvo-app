@@ -14,11 +14,27 @@ class MembersController extends Controller
         return view('Booking.view-members',compact('data'));
     }
 
-    public function edit_members($id){
+    public function edit_members($id) {
+        $data =DB::SELECT("SELECT * from add_members where p_id='$id'");
+        return $data;
+    }
+    
+    public function update_members(Request $request) 
+    {
+      
+        $member = add_members::find($request->p_id);
+        $member->m_name = strtoupper($request->m_name1);
+        $member->email = $request->email1;
+        $member->phone_no = $request->phone_no1;
+        $member->city = strtoupper($request->city1);
+        $member->save();
+        return back()->with("Update Member Details");
+    }
+    public function delete_members($id){
       
         $data=add_members::find($id);
-      
-        return redirect()->route('edit_members');
+        $data->delete();
+        return back();
 
     }
 }

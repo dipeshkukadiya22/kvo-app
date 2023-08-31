@@ -1,4 +1,5 @@
 
+
 <form class="browser-default-validation" method="POST" action="{{route('room-booking')}}">
   @csrf
   <div class="mb-3">
@@ -42,3 +43,4 @@ function numberOnly(id) {
     element.value = element.value.replace(/[^0-9]/gi, "");
 }
 </script>
+

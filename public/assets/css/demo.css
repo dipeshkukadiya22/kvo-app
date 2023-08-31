@@ -114,3 +114,21 @@
   text-align: center;
   margin-top: 1rem;
 }
+
+.required:after {
+  content: "*";
+  position: relative;
+  font-size: inherit;
+  color: palevioletred;
+  padding-left: 0.25rem;
+  font-weight: 600;
+}
+.required-input {
+  border: 2px solid #ff0000; /* Red border */
+}
+
+.error-message {
+  color: #ff0000; /* Red color for error message */
+  font-size: 12px;
+  margin-top: 4px;
+}

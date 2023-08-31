@@ -78,31 +78,32 @@
                                           <table id="DataTables_Table_0" class="datatables-basic table">
                                             <thead>
                                                 <tr>
-                                                    <th></th>
                                                     <th>No</th>
                                                     <th>Full Name</th>
                                                     <th>Email</th>
                                                     <th>Phone Number</th>
                                                     <th>City</th>
-                                                    <th>Address</th>
+                                                  
                                                     <th>Action</th>
                                                 </tr>
                                             </thead>
                                            @foreach($data as $row)
                                             <tr>
-                                              <td></td>
+                                            <input type="hidden" class="id" value="{{$row->p_id}}">
                                               <td>{{$row->p_id}}</td>
                                               <td>{{$row->m_name}}</td>
                                               <td>{{$row->email}}</td>
                                               <td>{{$row->phone_no}}</td>
                                               <td>{{$row->city}}</td>
-                                              <td>{{$row->address}}</td>
+                                             
                                               
                                               <td>
                                                 <div class="d-inline-block">
-                                                  <a href="" class="btn btn-sm btn-icon item-edit" data-bs-toggle="offcanvas"
-                                                  data-bs-target="#offcanvasBackdrop" aria-controls="offcanvasBackdrop"><i class="text-primary ti ti-edit"></i></a>
-                                                  <a href="javascript:;" id="confirm-text" class="text-danger delete-record"><i class="ti ti-trash"></i></a>
+                                                <a onclick="edit({{$row->p_id}})"  class="btn btn-sm btn-icon item-edit" aria-controls="offcanvasBackdrop"><img src="./assets/icon/orange-edit.png" width="20px"></a>
+                                                
+                                               
+                                                <a onclick="delete_member({{$row->p_id}})" class="text-danger delete-record"><img src="./assets/icon/orange-trash.png" width="20px"></a>
+                                                  
                                                 </div>
                                               </td>
                                             </tr>
@@ -115,48 +116,52 @@
 
 
                           <!-- Enable backdrop (default) Offcanvas -->
-                          <div class="mt-0">
+                          <div class="mt-0" id="editmembers">
                             
                             <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasBackdrop" aria-labelledby="offcanvasBackdropLabel">
                               <div class="offcanvas-header border-bottom">
-                                <h5 id="offcanvasBackdropLabel" class="offcanvas-title">New Member</h5>
+                                <h5 id="offcanvasBackdropLabel" class="offcanvas-title">Edit Member</h5>
                                 <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                               </div>
                               <div class="offcanvas-body mx-0 flex-grow-0">
 
                                 <!-- Browser Default -->
                                 
-                                <form class="browser-default-validation" method="POST" action="">
- 
+                                <form id="kvo_update_member" class="browser-default-validation" method="POST" action="{{route('update_members')}}">
                                   @csrf
                                   <div class="mb-3">
                                     <label class="form-label" for="basic-default-name">Name</label>
-                                    <input type="text" class="form-control"  name="m_name" id="basic-default-name" placeholder="John Doe" value="{{ (!empty($member) )? $member->m_name : '' }}" />
+                                    <input type="text" class="form-control" style="text-transform:uppercase" name="p_id" id="p_id" placeholder="John Doe" value="" />
+                                  </div>
+
+                                  <div class="mb-3">
+                                    <label class="form-label" for="basic-default-name">Name</label>
+                                    <input type="text" class="form-control"  name="m_name1" id="m_name1" placeholder="John Doe" value="" />
                                   </div>
                                  
                                 
                                   <div class="mb-3">
                                     <label class="form-label" for="basic-default-email">Email</label>
-                                    <input type="email" id="basic-default-email" name="email" class="form-control" placeholder="john.doe" value="{{ (!empty($member) )? $member->email : '' }}"/>
+                                    <input type="email" id="email1" name="email1" class="form-control" placeholder="john.doe"  />
                                   </div>
 
                                   <div class="mb-3">
                                     <label class="form-label" for="multicol-phone">Phone Number</label>
-                                    <input type="number" id="multicol-phone" name="phone_no" class="form-control phone-mask" placeholder="658 799 8941" aria-label="658 799 8941" value="{{ (!empty($member) )? $member->phone_no : '' }}" />
+                                    <input type="number" id="phone_no1" name="phone_no1" class="form-control phone-mask" placeholder="658 799 8941" aria-label="658 799 8941" oninput="javascript: if (this.value.length > 10) this.value = this.value.slice(0, 10);" />
                                   </div>
                                   <div class="mb-3">
                                     <label class="form-label" for="city">City</label>
-                                    <input type="text" class="form-control" name="city" id="city" placeholder="Bhuj" {{ (!empty($member) )? $member->city : '' }} />
+                                    <input type="text" class="form-control" name="city1" style="text-transform:uppercase" id="city1" placeholder="Bhuj"  />
                                   </div>
         
-                                  <div class="mb-3">
+                                  <!-- <div class="mb-3">
                                     <label class="form-label" for="collapsible-address">Address</label>
-                                    <textarea name="collapsible-address" name="address" class="form-control"  id="collapsible-address" rows="2" placeholder="1456, Mall Road">{{ (!empty($member) )? $member->address : '' }}</textarea>
-                                  </div>
+                                    <textarea name="collapsible-address" name="address1" class="form-control"  id="address1" rows="2" placeholder="1456, Mall Road"></textarea>
+                                  </div> -->
                                   
                                   <div class="row">
                                     <div class="col-12">
-                                      <button type="submit" class="btn btn-primary mb-2 d-grid w-100">Submit</button>
+                                      <button type="submit" id="update_submit" class="btn btn-primary mb-2 d-grid w-100">Submit</button>
                                       <button type="button" class="btn btn-label-secondary d-grid w-100" data-bs-dismiss="offcanvas"> Cancel </button>
                                     </div>
                                   </div>
@@ -365,8 +370,79 @@
 
     </script>
 
-
-    
+<script>
+ function edit(id)
+{  
+     const myOffcanvas = document.getElementById('offcanvasBackdrop');
+      let a=new bootstrap.Offcanvas(myOffcanvas);
+      a.show();
+                $.ajax({
+                    url:"{{url('/edit_members')}}" +"/"+ id,
+                    type:'GET',
+                      success:function(response){
+                            $("#p_id").val(response[0]['p_id']);
+                            $("#m_name1").val(response[0]['m_name']);
+                            $("#email1").val(response[0]['email']);
+                            $("#phone_no1").val(response[0]['phone_no']);
+                            $("#city1").val(response[0]['city']);  
+                          }
+                        });
+             
+      }
+</script>
+<script>
+function delete_member(id)
+{    
+           Swal.fire({
+                title: "Are you sure?",
+                text: "You won't be able to revert this!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Yes, delete it!",
+            }).then((result) => {
+                // If the user confirms the deletion, proceed with the deletion logic
+                if (result.isConfirmed) {
+                  $.ajax({
+                    url:"{{url('delete_members')}}" +"/"+ id,
+                    type:'GET',
+                    success:function(response){
+                        Swal.fire(
+                            'Deleted!',
+                            'Your Record has been deleted.',
+                            'success',
+                            );
+                            location.reload();
+                            }
+                        });
+                }
+            });
+          }
+    $("#update_submit").click(function(){
+        var email=document.getElementById("email1").value;
+        var phone=document.getElementById("phone_no1").value;
+        var city=document.getElementById("city1").value;
+        if(email ==='' && phone === '' && city==='')
+        {
+            Swal.fire({
+                text: "Sorry, looks like there are some errors detected, please try again.",
+                icon: "error",
+            });
+            return false; // Prevent form submission
+        } else {
+            Swal.fire({
+                position: 'middle-center',
+                icon: 'success',
+                title: 'KVO Member Details has been successfully updated!',
+                showConfirmButton: false,
+                timer: 1500
+                }).then(function() {
+                $("kvo_update_member").submit();
+           });
+        }
+    });
+</script>
 
 @endsection
 

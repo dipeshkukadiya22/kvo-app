@@ -116,35 +116,31 @@
                           <div class="offcanvas-body mx-0 flex-grow-0">
 
                             <!-- Browser Default -->
-                            <form class="browser-default-validation" method="POST" action="{{route('room-booking')}}">
-                              @csrf
+                             
                               <div class="mb-3">
-                                <label class="form-label" for="basic-default-name">Name</label>
-                                <input type="text" name="m_name" class="form-control" id="basic-default-name"  style="text-transform:uppercase"  placeholder="John Doe" />
-                              </div>
-                              <div class="mb-3">
-                                <label class="form-label" for="basic-default-email">Email</label>
-                                <input type="email" name="email" id="basic-default-email" class="form-control" placeholder="john.doe"/>
+                            <form class="browser-default-validation" method="POST" tabindex="1" action="{{route('room-booking')}}">
+                            @csrf
+                                <label class="form-label required" for="basic-default-name"  >Name</label>
+                                <input type="text" name="m_name" class="form-control" style="text-transform:uppercase" id="basic-default-name"  style="text-transform:uppercase"  placeholder="Name" required />
                               </div>
                               
-  
                               <div class="mb-3">
                                 <label class="form-label" for="multicol-phone">Phone Number</label>
-                                <input type="number" name="phone_no" id="multicol-phone" class="form-control phone-mask" placeholder="658 799 8941" aria-label="658 799 8941" maxlength="10"  />
+                                <input type="number" name="phone_no" id="multicol-phone" class="form-control phone-mask" placeholder="658 799 8941"  maxlength="10" required oninput="javascript: if (this.value.length > 10) this.value = this.value.slice(0, 10);"/>
                               </div>
+
+                              <div class="mb-3">
+                                        <label class="form-label" for="basic-default-email">Email</label>
+                                        <input type="email" name="email" id="basic-default-email" class="form-control" placeholder="Email" required/>
+                                    </div>
                               <div class="mb-3">
                                 <label class="form-label" for="city">City</label>
-                                <input type="text" name="city" class="form-control" id="city" placeholder="Bhuj" />
+                                <input type="text" name="city" class="form-control" id="city" style="text-transform:uppercase" placeholder="Bhuj" required/>
                               </div>
     
-                              <div class="mb-3">
-                                <label class="form-label" for="collapsible-address">Address</label>
-                                <textarea name="address"  class="form-control" id="collapsible-address" rows="2" placeholder="1456, Mall Road"></textarea>
-                              </div>
-                              
                               <div class="row">
                                 <div class="col-12">
-                                  <button type="submit" class="btn btn-primary mb-2 d-grid w-100" >Submit</button>
+                                  <button type="submit" class="btn btn-primary mb-2 d-grid w-100" id="submitbtn" >Submit</button>
                                   <button type="button" class="btn btn-label-secondary d-grid w-100" data-bs-dismiss="offcanvas"> Cancel</button>
                                 </div>
                               </div>
@@ -163,7 +159,7 @@
               <div class="row mb-4">
                 
                 <!-- Default Icons Wizard -->
-                <div class="col-12 mb-4">
+                <div class="col-12 mb-4" id="wizard-validation">
                   <div class="bs-stepper wizard-icons wizard-icons-example mt-2">
                     <div class="bs-stepper-header">
                       <div class="step" data-target="#account-details">
@@ -218,7 +214,8 @@
                       </div>
                     </div>
                     <div class="bs-stepper-content">
-                     <form action="{{route('RoomBooking')}}" method="POST" enctype="multipart/form-data">
+                    <form class="browser-default-validation" onSubmit="return false" action="{{ route('RoomBooking') }}" method="POST" id="room_booking">
+
                         @csrf
                         <!-- Account Details -->
                         <div id="account-details" class="content">
@@ -229,56 +226,59 @@
                             
                               <!-- Basic -->
                              <div class="col-md-4">
-                                <label for="select2Basic" class="form-label" >Name</label>
+                                <label for="select2Basic" class="form-label"><span class="required">Name</span></label>
                                 <select id="select2Basic" class="select2 form-select" data-allow-clear="true" name="name" placeholder="select name" required>
                                   <option value=""></option>
                                   @foreach ($m_data as $row)  
-                                      <option value="{{$row->p_id}}" {{(!empty($member) && $member->m_name == $row->m_name) ? "selected" : ""}}>{{$row->m_name}}&nbsp;&nbsp;-&nbsp;&nbsp;{{$row->phone_no}}</option>
+                                      <option value="{{$row->p_id}}" {{!empty($member) && $member->m_name == $row->m_name ? "selected" : ""}}>{{$row->m_name}}&nbsp;&nbsp;-&nbsp;&nbsp;{{$row->phone_no}}</option>
                                   @endforeach
                                 </select>
-                        
+                               
+                                
+                                <input type="hidden" id="email_user" value="{{!empty($m_data)  ? $m_data:''}}">
                               </div>
+                              
+
     
                               <div class="col-md-4">
-                            
-                                  <label class="form-label" for="basic-default-email">Email</label>
-                                  <input type="email" id="basic-default-email" name="email" class="form-control" placeholder="john.doe" value="{{ (!empty($member) )? $member->email : '' }}" />
-
-                              </div>                                                                                                            
+                                  <label class="form-label" for="basic-default-email"><span class="required">Email</span></label>
+                                  <input type="email" id="member_email" name="email" class="form-control" placeholder="john.doe" value="{{ (!empty($member) )? $member->email : '' }}" required/>
+                              
+                              </div>
 
     
                               <div class="col-md-4">
                                 
-                                <label class="form-label" for="multicol-phone">Phone Number</label>
-                                <input type="number" id="multicol-phone" name="phone_no" class="form-control phone-mask" placeholder="658 799 8941" aria-label="658 799 8941" value="{{ (!empty($member)) ? $member->phone_no : '' }}" />
+                                <label class="form-label" for="multicol-phone"><span class="required">Phone Number</span></label>
+                                <input type="number" id="member-phone" name="phone_no" class="form-control phone-mask" placeholder="658 799 8941" aria-label="658 799 8941" value="{{ (!empty($member)) ? $row->phone_no : '' }}"    maxlength="10"
+                              required
+                              oninput="javascript: if (this.value.length > 10) this.value = this.value.slice(0, 10);"/>
                               </div>
+                              
 
                               <div class="col-md-4">
-                                <label class="form-label" for="basic-default-name">Age</label>
-                                <input type="text" class="form-control" name="age" id="basic-default-name" placeholder="Age" />
+                                <label class="form-label" for="basic-default-name"><span class="required">Age</span></label>
+                                <input type="number" class="form-control" name="age" id="basic-default-age" placeholder="Age" required/>
                               </div>
     
                               <div class="col-4">
-                                <label class="form-label" for="collapsible-address">Address</label>
-                                <textarea name="collapsible-address"  name="address" class="form-control" id="collapsible-address" rows="1" placeholder="1456, Mall Road" value="">{{ (!empty($member) ) ? $member->address : '' }}</textarea>
+                                <label class="form-label" for="collapsible-address"><span class="required">Address</span></label>
+                                <textarea name="collapsibleaddress" style="text-transform:uppercase" class="form-control" style="text-transform:uppercase" id="member-address" rows="1" placeholder="1456, Mall Road" required>{{ (!empty($member) ) ? $member->address : '' }}</textarea>
                               </div>
                                                         
                               
                               <!-- Basic -->
                               <div class="col-md-4">
-                                <label for="select2Basic" class="form-label">Community</label>
-                                <select id="select2Basic" class="select2 form-select form-select-lg" data-allow-clear="true">
-                                  <option value="AK">Alaska</option>
-                                  <option value="HI">Hawaii</option>
-                                  <option value="CA">California</option>
-                                  <option value="NV">Nevada</option>
-                                  <option value="OR">Oregon</option>
-                                  <option value="WA">Washington</option>
-                                  <option value="AZ">Arizona</option>
-                                  <option value="CO">Colorado</option>
-                                  <option value="ID">Idaho</option>
-                                  <option value="MT">Montana</option>
-                                  <option value="NE">Nebraska</option>
+                                <label for="select2Basic" class="form-label"><span class="required">Community</span></label>
+                                <select id="select2Basic" class="select2 form-select form-select-lg" data-allow-clear="true" name="community" required>
+                                  <option value="Hindu" selected>Hindu</option>
+                                  <option value="Jain">Jain</option>
+                                  <option value="Isalam">Isalam</option>
+                                  <option value="Sikh">Sikh</option>
+                                  <option value="Budda">Budda</option>
+                                  <option value="Other Religions">Other Religions</option>
+
+
                                 </select>
                               </div>
 
@@ -286,39 +286,37 @@
 
                               
                               <div class="col-md-4">
-                                <label for="defaultFormControlInput" class="form-label">Sub Community</label>
-                                <input type="text" class="form-control" name="community" id="defaultFormControlInput" placeholder="John Doe" aria-describedby="defaultFormControlHelp" />
+                                <label for="defaultFormControlInput" class="form-label"><span class="required">Sub Community</span></label>
+                                <input type="text" class="form-control" name="subcommunity" id="defaultFormControlInput" style="text-transform:uppercase" placeholder="John Doe" aria-describedby="defaultFormControlHelp" required/>
                               </div>
 
                               
                               
                               <div class="col-md-4">
-                                <label for="defaultFormControlInput" class="form-label">City</label>
-                                <input type="text" class="form-control" name="city" id="defaultFormControlInput" placeholder="John Doe" aria-describedby="defaultFormControlHelp" value="{{ (!empty($member)) ? $member->city : '' }}" />
+                                <label for="defaultFormControlInput" class="form-label"><span class="required">City</span></label>
+                                <input type="text" class="form-control" name="city" id="member_city" style="text-transform:uppercase" placeholder="John Doe" aria-describedby="defaultFormControlHelp" value="{{ (!empty($member)) ? $member->city : '' }}" required/>
                               </div>
 
                               <div class="col-md-4">
-                                <label class="d-block form-label">Gender</label>
+                                <label class="d-block form-label"><span class="required">Gender</span></label>
                                 <div class="form-check form-check-inline">
-                                  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1" />
-                                  <label class="form-check-label" for="inlineRadio1">Male</label>
+                                  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="personalRadio1" value="MALE" checked/>
+                                  <label class="form-check-label" for="inlineRadio1" >Male</label>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2" />
+                                  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="personalRadio2" value="FEMALE" />
                                   <label class="form-check-label" for="inlineRadio2">Female</label>
                                 </div>
                                 
                               </div>
     
                             <div class="col-12 d-flex justify-content-end">
-                              {{-- <button class="btn btn-label-secondary btn-prev" disabled>
-                                <i class="ti ti-arrow-left me-sm-1"></i>
-                                <span class="align-middle d-sm-inline-block d-none">Previous</span>
-                              </button> --}}
-                              <button class="btn btn-primary btn-next">
-                                <span class="align-middle d-sm-inline-block d-none me-sm-1">Next</span>
-                                <i class="ti ti-arrow-right"></i>
+                              
+                              <button class="btn btn-primary btn-next"> <span class="align-middle d-sm-inline-block d-none me-sm-1" id="btn-step1">Next</span>
+                               <i class="ti ti-arrow-right"></i>
                               </button>
+                              
+                             
                             </div>
                           </div>
                         </div>
@@ -329,94 +327,155 @@
                           </div>
                           <div class="row g-3">
                             
-                            <div class="col-md-4">
-                              <label class="form-label" for="basic-default-name">No. of Person</label>
-                              <input type="text" class="form-control"  name="no_of_person" id="basic-default-name" placeholder="No of Person" />
-                            </div>
-                            <!-- Datetime Picker-->
-                            <div class="col-md-4">
-                              <label for="flatpickr-datetime" class="form-label">Check-In Date</label>
-                              <input type="text" class="form-control" name="check_in_date" placeholder="DD-MM-YYYY HH:MM" id="flatpickr-datetime" />
-                            </div>
+                           
                             <!-- /Datetime Picker-->
                             
                             
 
                               <!-- Primary -->
-                            <div class="col-md-4">
+                            {{-- <div class="col-md-4">
                               <label for="select3Primary" class="form-label">Room Facility</label>
                               <div class="select2-primary">
-                                <select id="select3Primary" name="room_list" class="select2 form-select" multiple>
+                                <select id="select3Primary1" name="room_list" class="select2 form-select" multiple>
                                   <option value="">Select Room</option>
-                                    <option value="room-1" name="room_facility">Non. A.C. Room No.</option>
-                                    <option value="room-2" name="room_facility">Room 2</option>
-                                    <option value="room-3" name="room_facility">Door Metri. Room No.</option>
+                                    <option value="A.C. Room No" name="room_facility"> A.C. Room.</option>
+                                    <option value="Non. A.C. Room No" name="room_facility">Non. A.C. Room</option>
+                                    <option value="Door Metri. Room No" name="room_facility">Door Metri. Room.</option>
                                 </select>
                               </div>
-                            </div>
+                            </div> --}}
 
 
                             <!-- Primary -->
-                           <!-- <div class="col-md-4">
-                              <label for="select2Primary" class="form-label">Room List</label>
-                              <div class="select2-primary">
-                                <select id="select2Primary" name="room_list" class="select2 form-select" multiple>
-                                  <option value="">Select Room</option>
-                                    <option value="room-1">Room 1</option>
-                                    <option value="room-2">Room 2</option>
-                                    <option value="room-3">Room 3</option>
-                                    <option value="room-3">Room 4</option>
-                                    <option value="room-3">Room 5</option>
-                                    <option value="room-3">Room 6</option>
-                                    <option value="room-3">Room 7</option>
-                                    <option value="room-3">Room 8</option>
+
+                            <div class="row">
+                            <div class="col-md-2">
+                                <label for="select2Multiple1" class="form-label">Ac Room</label> 
+                              
+                                <select id="select2Multiple11" name="select2Multiple1[]" class="select2 form-select" multiple>
+                                  @foreach($a_list as $list)
+                                      @if ($list->room_facility == 'A.C. Room')
+                                          <option value="{{$list->room_no}}"{{(!empty($member) && $member->room_name == $list->room_name) ? "selected" : ""}}>
+                                              {{$list->room_no}}-{{$list->room_name}}
+                                          </option>
+                                      @endif
+                                  @endforeach
+                              </select>
+                            </div>
+
+                                <div class="col-md-2">
+                                  <label class="form-label" for="basic-default-name">Amount</label>
+                                  <div class="input-group">
+                                    <span class="input-group-text">₹</span>
+                                    <input type="number" class="form-control"  name="ac_amount" placeholder="Amount" aria-label="Amount (to the nearest indian)" id="ac-amount" />
+                                  </div>
+                                </div>
+
+
+                                <!-- <div class="col-md-2">
+                                  <label for="TagifyCustomListSuggestion1" class="form-label">Non. A.C. Room</label>
+                                  <input id="TagifyCustomListSuggestion1" name="TagifyCustomListSuggestion1" class="form-control" placeholder="Select Roomlist" />
+                                </div> -->
+                                <div class="col-md-2">
+                                <label for="select2Multiple2" class="form-label">Non Ac Room</label>
+                                <select id="select2Multiple22" name="select2Multiple2[]" class="select2 form-select" multiple>
+                                 
+                                @foreach ($a_list as $list)
+                                                @if ($list->room_facility == 'NON A.C ROOM')
+                                                    <option value="{{$list->room_no}}"{{(!empty($member) && $member->room_name == $list->room_name) ? "selected" : ""}}>
+                                                        {{$list->room_no}}-{{$list->room_name}}
+                                                    </option>
+                                                @endif
+                                  @endforeach
+                                 
                                 </select>
                               </div>
-                            </div> -->
-                            
-                            <!-- Custom Suggestions: List -->
-                            <div class="col-md-4">
-                              <label for="TagifyCustomListSuggestion" class="form-label">Room List</label>
-                              <input
-                                id="TagifyCustomListSuggestion"
-                                name="TagifyCustomListSuggestion"
-                                class="form-control"
-                                placeholder="Select Roomlist"
-                                />
-                            </div>
 
-                            <div class="col-md-4">
-                              <label class="form-label" for="basic-default-name">Amount</label>
-                              <div class="input-group">
-                                <span class="input-group-text">₹</span>
-                                <input type="number" class="form-control"  name="amount" placeholder="Amount" aria-label="Amount (to the nearest indian)" value="800" />
+                                <div class="col-md-2">
+                                  <label class="form-label" for="basic-default-name">Amount</label>
+                                  <div class="input-group">
+                                    <span class="input-group-text">₹</span>
+                                    <input type="number" class="form-control"  name="non_ac_amount" placeholder="Amount" aria-label="Amount (to the nearest indian)" id="non-ac-amount" />
+                                  </div>
+                                </div>
+
+                                <!-- <div class="col-md-2">
+                                  <label for="TagifyCustomListSuggestion2" class="form-label">Door Metri. A.C. / Non. A.C. Room </label>
+                                  <input id="TagifyCustomListSuggestion2" name="TagifyCustomListSuggestion2" class="form-control" placeholder="Select Roomlist" />
+                                </div> -->
+                                <div class="col-md-2">
+                                <label for="select2Multiple3" class="form-label">Door Mt Room</label>
+                                <select id="select2Multiple33" name="select2Multiple3[]" class="select2 form-select" multiple>
+                                
+                                @foreach ($a_list as $list)
+                                @if ($list->room_facility == 'DOOR MATRY NON A.C ROOM' || $list->room_facility == 'DOOR MATRY  A.C ROOM')
+                                    <option value="{{$list->room_no}}"{{(!empty($member) && $member->room_name == $list->room_name) ? "selected" : ""}}>
+                                        {{$list->room_no}}-{{$list->room_name}}
+                                    </option>
+                                @endif
+                                  @endforeach
+                                 
+                                </select>
                               </div>
+
+                                <div class="col-md-2">
+                                  <label class="form-label" for="basic-default-name">Amount</label>
+                                  <div class="input-group">
+                                    <span class="input-group-text">₹</span>
+                                    <input type="number" class="form-control"  name="door_mt_amount" id="door_mt_amount" placeholder="Amount" aria-label="Amount (to the nearest indian)"   />
+                                  </div>
+                                </div>
+  
+                            </div>
+                         
+                            <hr>
+                            
+                            <div class="col-md-4">
+                              <label class="form-label" for="basic-default-name"><span class="required">No. of Person</span></label>
+                              <input type="number" class="form-control check-field"  name="no_of_person" id="no_of_person_id" placeholder="No of Person" value="1" required/>
+                            </div>
+                            <!-- Datetime Picker-->
+                            <div class="col-md-4">
+                              <label for="flatpickr-datetime" class="form-label"><span class="required">Check-In Date</span></label>
+                              <input type="text" class="form-control" name="check_in_date" placeholder="DD-MM-YYYY HH:MM" id="flatpickr-datetime" required/>
+                            </div>
+
+                            <div class="col-md-4">
+                                <label for="formFileMultiple" class="form-label"><span class="required">Identity Proof</span></label>
+                                <input class="form-control" type="file" name="id_proof[]" id="formFileMultiple" multiple required />
                             </div>
   
-                           
-  
                             <div class="col-md-4">
-                              <label for="formFileMultiple" class="form-label">Identity Proof</label>
-                              <input class="form-control" type="file" name="id_proof" id="formFileMultiple" multiple />
-                            </div>
-  
-                            <div class="col-md-4">
-                              <label class="form-label" for="basic-default-name">Deposit No</label>
-                              <input type="text" class="form-control" name="deposit_no" id="basic-default-name" placeholder="Deposit No"  readonly/>
+                              <label class="form-label" for="basic-default-name">Booking No</label>
+                              <input type="text" class="form-control" name="deposit_no" id="deposit_no" placeholder="Deposit No" value="{{$p_id+1}}" readonly/>
                             </div>
 
                            
   
                             <div class="col-md-4">
-                              <label class="form-label" for="deposit-amount">Deposit Rs</label>
-                              <input type="number" class="form-control" name="deposite_rs" id="deposit-amount" placeholder="Deposit Rs">
+                              <label class="form-label" for="deposit-amount"><span class="required">Deposit Rs</span></label>
+                              <input type="number" class="form-control check-field" name="deposite_rs" id="deposit-amount" placeholder="Deposit Rs" required>
                             </div>
                             
                             <div class="col-md-4">
                               <label class="form-label" for="rupees-in-words">Deposit Rs (rupees in words)</label>
                               <input type="text" class="form-control" name="rs_word" id="rupees-in-words" placeholder="Rupees in words" readonly>
                             </div>
+
+                            <div class="col-md-4">
+                              <label class="form-label" for="deposit-amount"><span class="required">No of Days</span></label>
+                              <input type="number" class="form-control" name="no_of_days" id="no_of_days" placeholder="no_of_days" required>
+                            </div>
                             
+                            <div class="col-md-4">
+                              <label class="form-label" for="rupees-in-words"><span class="required">Occupation</span></label>
+                              <input type="text" class="form-control" name="occupation" id="occupation" placeholder="Occupation" required/>
+                            </div>
+
+                            <div class="col-md-4">
+                              <label class="form-label" for="rupees-in-words"><span class="required">Reason</span></label>
+                              <input type="text" class="form-control" name="reason" id="reason" placeholder="Reason to stay" required/>
+                            </div>
   
                             
                             <div class="col-12 d-flex justify-content-between">
@@ -424,7 +483,8 @@
                                 <i class="ti ti-arrow-left me-sm-1"></i>
                                 <span class="align-middle d-sm-inline-block d-none">Previous</span>
                               </button>
-                              <button class="btn btn-primary btn-next">
+                            
+                              <button type="button"class="btn btn-primary btn-next"  id="repeat-next">
                                 <span class="align-middle d-sm-inline-block d-none me-sm-1">Next</span>
                                 <i class="ti ti-arrow-right"></i>
                               </button>
@@ -432,64 +492,92 @@
                           </div>
                         </div>
                         <!-- All No of Person -->
+                    
                         <div id="address" class="content">
                           <div class="content-header mb-3">
                             <small>Enter Member Details.</small>
                           </div>
+                        
+                          
                           <div class="row g-3">
                             <!-- Form Repeater -->
-                            <div class="col-12">
+                          
+                            <div id="step2FormsContainer "class="col-12">
+                              <div class="dynamic-form">
                               <div class="all-members" data-repeater-list="group-a">
                               <div data-repeater-item>
-                                <div class="row">
-                                  <div class="mb-3 col-lg-6 col-xl-3 col-12 mb-0">
+                             
+                             <div class="rep-form1">
+                          
+                                <div class="row formrepeater1">
+                                  <div class="mb-3 col-md-6 col-xl-3 col-12 mb-0">
                                     <label class="form-label" for="form-repeater-1-1">Full Name</label>
-                                    <input type="text" id="form-repeater-1-1"  name="full_name" class="form-control" placeholder="john doe" />
+                                    <input type="text" id="full_name_form" style="text-transform:uppercase"  name="full_name[]" class="form-control" placeholder="john doe" value="{{ (!empty($member) )? $member->m_name : '' }}"/>
                                   </div>
-                                  <div class="mb-3 col-lg-6 col-xl-3 col-12 mb-0">
-                                    <label class="form-label" for="form-repeater-1-2">Age</label>
-                                    <input type="text" id="form-repeater-1-2" name="m_age" class="form-control" placeholder="your age" />
-                                  </div>
-                                  
-                                  
                                   <div class="mb-3 col-lg-6 col-xl-2 col-12 mb-0">
+                                    <label class="form-label" for="form-repeater-1-2">Age</label>
+                                    <input type="number" id="member_age" name="m_age[]" class="form-control" placeholder="your age"  />
+                                  </div>
+                                  
+                                  
+                                  <div class="mb-3 col-lg-6 col-xl-2 col-12 mb-0 ">
                                   
                                       <label class="d-block form-label">Gender</label>
+                                    
                                       <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="MALE" />
-                                        <label class="form-check-label" for="inlineRadio1">Male</label>
+                                      <input class="form-check-input" type="radio" name="gender" id="gendermale" value="MALE" checked/>
+                                      <label class="form-check-label" for="gender">Male</label>
+
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                          <input class="form-check-input" type="radio" name="gender" id="genderfemale" value="FEMALE" />
+                                          <label class="form-check-label" for="gender">Female</label>
+                                        </div>
+
+                                        <div class="mb-3 col-lg-6 col-xl-3 col-12 mb-0" hidden>
+                                        <label class="form-label" for="form-repeater-1-2">gender</label>
+                                        <input type="text" id="gender_data" name="gender_data" class="form-control" placeholder="your age" value="MALE"/>
                                       </div>
-                                      <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="FEMALE" />
-                                        <label class="form-check-label" for="inlineRadio2">Female</label>
-                                      </div>
-                                
-                                  
+
+
                                   </div>
-                                  <div class="col-md-4">
+                                  <div class="mb-3 col-lg-6 col-xl-2 col-12 mb-0">
                                     <label class="form-label" for="basic-default-country">Relation</label>
-                                    <select class="form-select" name="relation" id="basic-default-country" required>
+                                    <select class="form-select" name="relation[]" id="member_relation" required>
                                       <option value="SELF" selected>SELF</option>
-                                      <option value="MOTHER">MOTHER</option>
-                                      <option value="FATHER">FATHER</option>
+                                      <option value="AUNTY">AUNTY</option>
                                       <option value="BROTHER">BROTHER</option>
+                                      <option value="COUSIN">COUSIN</option>
+                                      <option value="DAUGHTER">DAUGHTER</option>
+                                      <option value="FATHER">FATHER</option>
+                                      <option value="FRIEND">FRIEND</option>
+                                      <option value="GRAND FATHER">GRAND FATHER</option>
+                                      <option value="GRAND MOTHER">GRAND MOTHER</option>
+                                      <option value="HUSBAND">HUSBAND</option>
+                                      <option value="MOTHER">MOTHER</option>
+                                      <option value="NEPHEW">NEPHEW</option>
                                       <option value="SISTER">SISTER</option>
                                       <option value="UNCLE">UNCLE</option>
-                                      <option value="AUNTY">AUNTY</option>
-                                      <option value="GRAND MOTHER">GRAND MOTHER</option>
-                                      <option value="GRAND FATHER">GRAND FATHER</option>
-                                      <option value="FRIEND">FRIEND</option>
+                                      <option value="WIFE">WIFE</option>
                                     </select>
                                   </div>
                                   <div class="mb-3 col-lg-12 col-xl-2 col-12 d-flex align-items-center mb-0">
-                                    <button class="btn btn-label-danger mt-4" data-repeater-delete>
-                                      <i class="ti ti-x ti-xs me-1"></i>
-                                      <span class="align-middle">Delete</span>
-                                    </button>
+                                  <button type="button" class="btn btn-label-danger mt-3" data-repeater-delete>
+                                    <i class="ti ti-x ti-xs me-1"></i>
+                                    <span class="align-middle">Delete</span>
+                                  </button>
                                   </div>
+                                 
                                 </div>
+                              </div>
+                              <div class="row rep-form">
+                              </div> 
                                 <hr />
                               </div>
+                              </div>
+                              </div>
+                            </div>
+                            <div id="dynamicFormsContainer">
                             </div>
                             <div class="mb-0">
                               <button class="btn btn-primary" data-repeater-create>
@@ -497,19 +585,20 @@
                                 <span class="align-middle">Add Members</span>
                               </button>
                             </div>
-                            </div>
+                            
                             <!-- /Form Repeater -->
                             <div class="col-12 d-flex justify-content-between">
                               <button class="btn btn-label-secondary btn-prev">
                                 <i class="ti ti-arrow-left me-sm-1"></i>
                                 <span class="align-middle d-sm-inline-block d-none">Previous</span>
                               </button>
-                              <button class="btn btn-primary btn-next">
+                              <button type="button" class="btn btn-primary btn-next" id="btn-step3">
                                 <span class="align-middle d-sm-inline-block d-none me-sm-1">Next</span>
                                 <i class="ti ti-arrow-right"></i>
                               </button>
                             </div>
                           </div>
+                       
                         </div>
                         
                         <!-- Review -->
@@ -526,26 +615,21 @@
                                     <h6 class="mb-4">Details:</h6>
                                     <table>
                                       <tbody>
+                                        
+                                        
                                         <tr>
                                           <td class="pe-4">Room Name:</td>
-                                          <td><strong>Room 2</strong></td>
-                                        </tr>
-                                        <tr>
-                                          <td class="pe-4">Room Facility</td>
-                                          <td>A.C. Room No</td>
+                                          <td id="room_lst"></td>
                                         </tr>
                                         <tr>
                                           <td class="pe-4">Check-In Date:</td>
-                                          <td>12-08-2023 11:00 am</td>
+                                          <td id="check_date"></td>
                                         </tr>
                                         <tr>
-                                          <td class="pe-4">Amount:</td>
-                                          <td>7500</td>
+                                          <td class="pe-4">Amount:-</td>
+                                          <td id="room_amount"></td>
                                         </tr>
-                                        <tr>
-                                          <td class="pe-4">SWIFT code:</td>
-                                          <td>BR91905</td>
-                                        </tr>
+                                        
                                       </tbody>
                                     </table>
                                   </div>
@@ -556,39 +640,26 @@
                                   <thead>
                                     <tr>
                                       <th>No.</th>
-                                      <th>Full Name</th>
+                                      <th >Full Name</th>
                                       <th>Age </th>
                                       <th>Gender</th>
                                       <th>Relations</th>
                                       </tr>
                                   </thead>
-                                  <tbody>
+                                  <tbody class="rep-table">
                                    
-                                    <tr>
-                                      <td></td>
-                                      <td></td>
-                                      <td></td>
-                                      <td></td>
-                                      <td></td>
-                                     
-                                    </tr>
-                                  
+                                 
+                                      <tr>
+                                        <td></td>
+                                        <td id="member_full_name" ></td>
+                                        <td id="members_age"></td>
+                                        <td id="member_gen"></td>
+                                        <td id="member_rel"></td>
+                                      
+                                      </tr>
+                                      
                                                                        
-                                    <tr>
-                                      <td colspan="3" class="align-top px-4 py-4">
-                                        
-                                      </td>
-                                      <td class="text-end pe-3 py-4">
-                                        <p class="mb-2 pt-3">Subtotal:</p>
-                                        <p class="mb-2">Tax:</p>
-                                        <p class="mb-0 pb-3">Total:</p>
-                                      </td>
-                                      <td class="ps-2 py-4">
-                                        <p class="fw-semibold mb-2 pt-3">$154.25</p>
-                                        <p class="fw-semibold mb-2">$50.00</p>
-                                        <p class="fw-semibold mb-0 pb-3">$204.25</p>
-                                      </td>
-                                    </tr>
+                                 
                                   </tbody>
                                 </table>
                               </div>
@@ -603,10 +674,15 @@
                               <i class="ti ti-arrow-left me-sm-1"></i>
                               <span class="align-middle d-sm-inline-block d-none">Previous</span>
                             </button>
-                            <button type="submit" class="btn btn-success btn-submit">Submit</button>
+                          
+                            <button type="submit" id="submit-button" class="btn btn-success btn-submit">Submit</button>
+
+
+                            
+                            
                           </div>
                         </div>
-                      </form>
+                     </form>
                     </div>
                   </div>
                 </div>
@@ -634,6 +710,7 @@
     <script src="{{ asset('assets/vendor/libs/pickr/pickr.js') }}"></script>
     <script src="{{ asset('assets/vendor/libs/bs-stepper/bs-stepper.js') }}"></script>
     <script src="{{ asset ('assets/vendor/libs/jquery-repeater/jquery-repeater.js') }}"></script>
+    
 
     <script src="{{ asset('assets/vendor/libs/bloodhound/bloodhound.js') }}"></script>
 
@@ -658,15 +735,49 @@
     <script src="{{ asset('assets/js/form-wizard-icons.js') }}"></script>
 
     <script src="{{ asset ('assets/js/forms-extras.js') }}"></script>
-
-
+    <script>
+     
+      $("#multicol-phone").focusout(function(){
+        var contact=document.getElementById("multicol-phone").value;
+        $.ajax({
+                url:"{{url('check_num')}}"+"/"+ contact,
+                type:'GET',
+                success:function(response){
+                    if(response==1)
+                      { $("#submitbtn").prop('disabled',true);}
+                    else{ $("#submitbtn").prop('disabled',false);}
+                    }
+                });
+      });
+      $("#submitbtn").click(function(){
+    var name = document.getElementById("basic-default-name").value;
+    var phone = document.getElementById("multicol-phone").value;
+    var email = document.getElementById("basic-default-email").value;
+    var city = document.getElementById("city").value;
+    $.ajax({
+        method: "POST",
+        url: "{{ url('add_member') }}",
+        data: {
+            _token: $("#csrf").val(),
+            name: name,
+            email: email,
+            phone: phone,
+            city: city
+        },
+        success: function(response){
+          $("#member_email").val(response[0]['email']); // Assuming the server returns a JSON object with a “name” property
+        }
+    });
+    alert("submit");
+});
+      </script>
     <script>
       function convertToWords() {
       var depositAmount = parseFloat(document.getElementById("deposit-amount").value);
       var inWords = numberToWords(depositAmount);
       document.getElementById("rupees-in-words").value = inWords;
     }
-    
+   
     function numberToWords(number) {
       var units = [
         "Zero", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine",
@@ -747,17 +858,27 @@ $(document).ready(function() {
 });
 
 $(document).ready(function () {   
-    $('body').on('change','#select', function() {
-         $('#show_selected').val(this.value);
+    $('#personalRadio2').change(function(){
+      $("#genderfemale").attr('checked',true);
+      $("#gender_data").val("FEMALE");
+    });
+    $('#personalRadio1').change(function(){
+      $("#gendermale").attr('checked',true);
+      $("#gender_data").val("MALE");
     });
 });
 
 
 
 </script>
-
-
 <script>
+  $(document).ready(function() {
+    $('#select2Multiple1').select2();
+  });
+</script>
+
+
+<!-- <script>
 
   /**
  * Tagify
@@ -782,13 +903,11 @@ $(document).ready(function () {
   const TagifyCustomListSuggestionEl = document.querySelector('#TagifyCustomListSuggestion');
 
   const whitelist = [
-    'Room 1',
-    'Room 2',
-    'Room 3',
-    'Room 4',
-    'Room 5',
-    'Room 6',
-    'Room 7'
+    '301 2BAC',
+    '302 2BAC',
+    '303 2BAC',
+    '304 2BAC'
+    
   ];
   // Inline
   let TagifyCustomInlineSuggestion = new Tagify(TagifyCustomInlineSuggestionEl, {
@@ -816,13 +935,555 @@ $(document).ready(function () {
 
 })();
 
+
+(function () {
+  // Basic
+  //------------------------------------------------------
+  const tagifyBasicEl = document.querySelector('#TagifyBasic');
+  const TagifyBasic = new Tagify(tagifyBasicEl);
+
+  // Read only
+  //------------------------------------------------------
+  const tagifyReadonlyEl = document.querySelector('#TagifyReadonly');
+  const TagifyReadonly = new Tagify(tagifyReadonlyEl);
+
+  // Custom list & inline suggestion
+  //------------------------------------------------------
+  const TagifyCustomInlineSuggestionEl = document.querySelector('#TagifyCustomInlineSuggestion1');
+  const TagifyCustomListSuggestionEl = document.querySelector('#TagifyCustomListSuggestion1');
+
+  const whitelist = [
+    '201 2BNAC',
+    '202 2BNAC',
+    '203 3BNAC',
+    '204 4BNAC'
+    
+  ];
+  // Inline
+  let TagifyCustomInlineSuggestion = new Tagify(TagifyCustomInlineSuggestionEl, {
+    whitelist: whitelist,
+    maxTags: 10,
+    dropdown: {
+      maxItems: 20,
+      classname: 'tags-inline',
+      enabled: 0,
+      closeOnSelect: false
+    }
+  });
+  // List
+  let TagifyCustomListSuggestion1 = new Tagify(TagifyCustomListSuggestionEl, {
+    whitelist: whitelist,
+    maxTags: 10,
+    dropdown: {
+      maxItems: 20,
+      classname: '',
+      enabled: 0,
+      closeOnSelect: false
+    }
+  });
+
+
+})();
+
+
+(function () {
+  // Basic
+  //------------------------------------------------------
+  const tagifyBasicEl = document.querySelector('#TagifyBasic');
+  const TagifyBasic = new Tagify(tagifyBasicEl);
+
+  // Read only
+  //------------------------------------------------------
+  const tagifyReadonlyEl = document.querySelector('#TagifyReadonly');
+  const TagifyReadonly = new Tagify(tagifyReadonlyEl);
+
+  // Custom list & inline suggestion
+  //------------------------------------------------------
+  const TagifyCustomInlineSuggestionEl = document.querySelector('#TagifyCustomInlineSuggestion2');
+  const TagifyCustomListSuggestionEl = document.querySelector('#TagifyCustomListSuggestion2');
+
+  const whitelist = [
+    '1 DMNAC',
+    '2 DMNAC',
+    '3 DMNAC',
+    '4 DMAC',
+    '5 DMAC',
+    '6 DMAC'
+  ];
+  // Inline
+  let TagifyCustomInlineSuggestion = new Tagify(TagifyCustomInlineSuggestionEl, {
+    whitelist: whitelist,
+    maxTags: 10,
+    dropdown: {
+      maxItems: 20,
+      classname: 'tags-inline',
+      enabled: 0,
+      closeOnSelect: false
+    }
+  });
+  // List
+  let TagifyCustomListSuggestion2 = new Tagify(TagifyCustomListSuggestionEl, {
+    whitelist: whitelist,
+    maxTags: 10,
+    dropdown: {
+      maxItems: 20,
+      classname: '',
+      enabled: 0,
+      closeOnSelect: false
+    }
+  });
+
+
+})();
+</script> -->
+
+<script>
+        $(document).ready(function () {
+            $("#select2Basic").click(function () {
+                var data = $.parseJSON($("#email_user").val());
+                 
+                $.each(data,function(key,value){
+                  console.log('id::'+$('#select2Basic').val());
+                  if($('#select2Basic').val()==value['p_id']){
+                   console.log(value['email']);
+                   $('#member_email').val(value['email']);
+                   $('#member-phone').val(value['phone_no']);
+                   $('#member-address').val(value['address']);
+                   $('#member_city').val(value['city']);
+                   $('#full_name_form').val(value['m_name']);
+                   }
+                });
+            
+            });
+        });
+    </script>
+
+
+
+  <!-- <script>
+     $(document).ready(function () {
+            $("#TagifyCustomListSuggestion").click(function () {
+                var data = $.parseJSON($("#roomlist").val());
+                 
+                $.each(data,function(key,value){
+                  console.log('id::'+$('#TagifyCustomListSuggestion').val());
+                  if($('#TagifyCustomListSuggestion').val()==value['room_no']){
+                   $('#TagifyCustomListSuggestion').val(value['TagifyCustomListSuggestion']);
+                   
+                   }
+                });
+            
+            });
+        });
+  </script> -->
+   
+<script>
+ 
+  $(document).ready(function() {
+    // let currentStep = 1;
+    // var currentDateTime = new Date();
+
+    // $('#flatpickr-datetime').flatpickr({
+    //   enableTime: true,
+    //   dateFormat: "d-m-Y H:i",
+    //   defaultDate: currentDateTime
+    // });
+    $("#repeat-next").on("click", function() {
+
+      $('#member_age').val($('#basic-default-age').val());
+
+      const selectedList1 = $('#select2Multiple11').val();
+      const selectedList2 = $('#select2Multiple22').val();
+      const selectedList3 = $('#select2Multiple33').val();
+      const selectedDate = $('#flatpickr-datetime').val();
+      const acAmount = parseFloat($('#ac-amount').val()) || 0; 
+      const nonAcAmount = parseFloat($('#non-ac-amount').val()) || 0;
+      const doorMtAmount = parseFloat($('#door_mt_amount').val()) || 0;
+
+      const totalAmount = acAmount + nonAcAmount + doorMtAmount;
+
+      $('#room_amount').text( totalAmount);
+      const selectedRooms = 'A.C. Room:= ' + selectedList1 + 'phone, Non A.C. Room:= ' + selectedList2 + ', Door Metri A.C. / Non A.C. Room:= ' + selectedList3;
+      $('#room_lst').text(selectedRooms);
+
+      if (selectedDate && selectedDate.length > 0) {
+        $('#check_date').text( selectedDate);
+        // currentStep++;
+      }
+     
+    });
+  });
+</script>
+
+<script>
+  $(document).ready(function() {
+    let currentStep = 1;
+ 
+    $("#btn-step3").on("click", function() {
+      $(".rep-table").empty();
+      const fullName = $('#full_name_form').val();
+      const age = $('#member_age').val();
+      const selectedGender = $('input[name="gender"]').val();
+      const relation = $('#member_relation').val();
+
+      $('#member_full_name').text(fullName);
+      $('#members_age').text(age);
+      $('#member_gen').text(selectedGender);
+      $('#member_rel').text(relation);
+
+      $(".rep-table").append(
+        '<tr>' +
+        '<td>'+ '1' +'</td>' +
+        '<td id="member_full_name">' + $('#full_name_form').val() + '</td>' +
+        '<td id="members_age">' + $('#member_age').val() + '</td>' +
+        '<td id="member_gen">' + $('#gender_data').val() + '</td>' +
+        '<td id="member_rel">' + $('#member_relation').val() + '</td>' +
+        '</tr>'
+      );
+
+      let numForms = parseInt($("#no_of_person_id").val());
+     
+      if (isNaN(numForms) || numForms <= 0) {
+       
+        return false;
+      } let j=2;
+      for (let i = 1; i < numForms; i++) {
+       
+     
+        $(".rep-table").append(
+        '<tr>' +
+        '<td>'+ j +'</td>' +
+        '<td class="member_full_name' + i + '">' + $('#full_name_form' + i).val().toUpperCase() + '</td>' +
+        '<td class="members_age' + i + '">' + $('#member_age' + i).val() + '</td>' +
+        '<td class="member_gen'+ i +'">' + $('input[name="gender'+i+'[]"]:checked').val() + '</td>' +
+        '<td class="member_rel' + i + '">' + $('#member_relation' + i).val() + '</td>' +
+        '</tr>'
+         );
+
+
+        j++;
+
+        // Setting text for elements in the loop using jQuery
+      /*  $('.member_full_name' + i).text($('#full_name_form' + i).val());
+        $('.members_age' + i).text($('#member_age' + i).val());
+        $('.member_gen' + i).text($('#gender'+i).val());
+        $('.member_rel' + i).text($('#member_relation' + i).val());
+        j++;*/
+      }
+
+      $(".rep-table").show();
+    });
+  });
+</script>
+
+
+ 
+<script>
+  $(document).ready(function() {
+    $("#repeat-next").click(function() {
+      console.log("click");
+      let numForms = parseInt($("#no_of_person_id").val());
+
+      // Clear previous forms if any
+      $(".rep-form").empty();
+
+      // Clone and show the form templates
+      //console.log('form:'.$('.reo-form').children());
+      for (let i = 1; i < numForms; i++) {
+        let formTemplate = $(".rep-form .formrepeater").clone();
+        $(".rep-form").append(
+
+          '<div class="row formrepeater">'+
+                                 ' <div class="mb-3 col-md-6 col-xl-3 col-12 mb-0">'+
+                                   ' <label class="form-label" for="form-repeater-1-1">Full Name</label>'+
+                                   ' <input type="text" id="full_name_form'+i+'" style="text-transform:uppercase" name="full_name[]" class="form-control" placeholder="john doe" value="{{ (!empty($member) )? $member->m_name : '' }}"/>'+
+                                 ' </div>'+
+                                 ' <div class="mb-3 col-lg-6 col-xl-2 col-12 mb-0">'+
+                                  '  <label class="form-label" for="form-repeater-1-2">Age</label>'+
+                                  '  <input type="number" id="member_age'+i+'" name="m_age[]" class="form-control" placeholder="your age" />'+
+                                '  </div>'+
+                                  
+                                  
+                                '  <div class="mb-3 col-lg-6 col-xl-2 col-12 mb-0 ">'+
+                                  
+                                     ' <label class="d-block form-label">Gender</label>'+
+                                     ' <div class="form-check form-check-inline">'+
+                                       ' <input class="form-check-input" type="radio" name="gender'+i+'[]" id="gendermale' + i + '" value="MALE" checked/>'+
+                                       ' <label class="form-check-label" for="inlineRadio1' + i + '">Male</label>'+
+                                     ' </div>'+
+                                     ' <div class="form-check form-check-inline">'+
+                                      '  <input class="form-check-input" type="radio" name="gender'+i+'[]" id="genderfemale' + i + '" value="FEMALE" />'+
+                                      '  <label class="form-check-label" for="inlineRadio2' + i + '" selected>Female</label>'+
+                                    '  </div>'+
+                                '  </div>'+
+                                '    <div class="mb-3 col-lg-6 col-xl-2 col-12 mb-0">'+
+                                    '  <label class="form-label" for="basic-default-country">Relation</label>'+
+                                    '  <select class="form-select" name="relation[]" id="member_relation'+i+'" required>'+
+                                    '   <option value="" disabled selected>Select relation</option>'+
+                                    '  <option value="AUNTY">AUNTY</option>'+
+                                    '  <option value="BROTHER">BROTHER</option>'+
+                                    '  <option value="COUSIN">COUSIN</option>'+
+                                    '  <option value="DAUGHTER">DAUGHTER</option>'+
+                                    '  <option value="FATHER">FATHER</option>'+
+                                    '  <option value="FRIEND">FRIEND</option>'+
+                                    '  <option value="GRAND FATHER">GRAND FATHER</option>'+
+                                    '  <option value="GRAND MOTHER">GRAND MOTHER</option>'+
+                                    '  <option value="HUSBAND">HUSBAND</option>'+
+                                    '  <option value="MOTHER">MOTHER</option>'+
+                                    '  <option value="NEPHEW">NEPHEW</option>'+
+                                    '  <option value="SISTER">SISTER</option>'+
+                                    '  <option value="UNCLE">UNCLE</option>'+
+                                    '  <option value="WIFE">WIFE</option>'+
+                        
+                                  '  </select>'+
+                                 ' </div>'+
+                                 ' <div class="mb-3 col-lg-12 col-xl-2 col-12 d-flex align-items-center mb-0">'+
+                                  '  <button class="btn btn-label-danger mt-4" data-repeater-delete>'+
+                                   '   <i class="ti ti-x ti-xs me-1"></i>'+
+                                   '   <span class="align-middle">Delete</span>'+
+                                  '  </button>'+
+                                  '</div>'+
+                               ' </div>'
+        );
+      }
+
+      // Display the forms container
+      $(".rep-form").show();
+    });
+  });
+</script>
+<!-- 
+<script>
+ $("#room_booking").submit(function(){
+
+      var address = document.getElementById('member-address').value;
+      var city = document.getElementById('member_city').value;
+    
+  
+      if (address  === '' && city === '' ) {
+  
+          Swal.fire({
+              text: "Sorry, looks like there are some errors detected, please try again.",
+              icon: "error",
+              buttonsStyling: false,
+              confirmButtonText: "Ok, got it!",
+              customClass: {
+                  confirmButton: "btn btn-primary"
+              }
+          });
+          return false; // Prevent form submission
+      } else {
+          Swal.fire({
+              text: "Form has been successfully submitted!",
+              icon: "success",
+              buttonsStyling: false,
+              confirmButtonText: "Ok, got it!",
+              customClass: {
+                  confirmButton: "btn btn-primary"
+              }
+          }).then(function(t) {
+              if (t.isConfirmed) {
+                  location.reload();
+              }
+          });
+      }
+  });
+  </script> -->
+</script>
+<script>
+const contactInput = document.getElementById('phone_no');
+
+contactInput.addEventListener('input', function () {
+  const desiredLength = 10;
+  const inputValue = this.value.trim();
+  
+  if (inputValue.length !== desiredLength) {
+    this.setCustomValidity(`Contact number should be exactly ${desiredLength} digits.`);
+  } else {
+    this.setCustomValidity('');
+  }
+});
+</script>
+
+<script>
+$(document).ready(function() {
+
+  $("#repeat-next").click(function() {
+    const no_of_personErrorMessage = document.getElementById('no_of_person_id'); 
+
+    const no_of_personField = document.getElementById('no_of_person_id'); // Get the email input field
+    
+   // Get the error message container
+
+    if (no_of_personField.value.trim() === '') {
+      no_of_personField.classList.add('required-input'); // Apply red border style
+      no_of_personErrorMessage.textContent = 'Please fill in this field.'; // Display error message
+      no_of_personField.focus(); // Focus on the empty field
+     
+     //$("#btn-step1").prop('disabled',true);
+    }
+  });
+
+  $("#btn-step1").click(function() {
+    const emailErrorMessage = document.getElementById('email-error-message'); 
+    const ageErrorMessage = document.getElementById('basic-default-age'); 
+    const phoneErrorMessage = document.getElementById(' multicol-phone');
+    const subcommunityErrorMessage = document.getElementById('defaultFormControlInput'); 
+    const addressErrorMessage = document.getElementById('member-address'); 
+    const emailField = document.getElementById('member_email'); // Get the email input field
+    const ageField = document.getElementById('basic-default-age'); // Get the email input field
+    const phoneField = document.getElementById('multicol-phone'); // Get the email input field
+    const subcommunityField = document.getElementById('defaultFormControlInput'); // Get the email input field
+    const addressField = document.getElementById('member-address'); // Get the email input field
+   // Get the error message container
+
+    if (emailField.value.trim() === '') {
+      emailField.classList.add('required-input'); // Apply red border style
+      emailErrorMessage.textContent = 'Please fill email in this field.'; // Display error message
+      emailField.focus(); // Focus on the empty field
+     
+     //$("#btn-step1").prop('disabled',true);
+    }
+    if (ageField.value.trim() === '') {
+      ageField.classList.add('required-input'); // Apply red border style
+      ageErrorMessage.textContent = 'Please fill age in this field.'; // Display error message
+      ageField.focus(); // Focus on the empty field
+    
+    }
+    if (phoneField.value.trim() === '') {
+      phoneField.classList.add('required-input'); // Apply red border style
+      phoneErrorMessage.textContent = 'Please fill phone in this field.'; // Display error message
+      phoneField.focus(); // Focus on the empty field
+      //event.preventDefault(); // Prevent form submission
+    }
+    if (subcommunityField.value.trim() === '') {
+      subcommunityField.classList.add('required-input'); // Apply red border style
+      subcommunityErrorMessage.textContent = 'Please fill subcommunity in this field.'; // Display error message
+      subcommunityField.focus(); // Focus on the empty field
+    
+    }
+    if (addressField.value.trim() === '') {
+      addressField.classList.add('required-input'); // Apply red border style
+      addressErrorMessage.textContent = 'Please fill address in this field.'; // Display error message
+      addressField.focus(); // Focus on the empty field
+    
+    }
+    
+  });
+});
 </script>
 
 
 
 
-@endsection
+
+<!-- <script>
+const wizardValidation = document.querySelector('#wizard-validation');
+
+if (typeof wizardValidation !== undefined && wizardValidation !== null) {
+  // Wizard form
+  const wizardValidationForm = wizardValidation.querySelector('#room_booking');
+  // Wizard steps
+  const wizardValidationFormStep1 = wizardValidationForm.querySelector('#account-details');
+  const wizardValidationFormStep2 = wizardValidationForm.querySelector('#personal-info');
+  const wizardValidationFormStep3 = wizardValidationForm.querySelector('#address');
+  // Wizard next prev button
+  const wizardValidationNext = [].slice.call(wizardValidationForm.querySelectorAll('.btn-next'));
+  const wizardValidationPrev = [].slice.call(wizardValidationForm.querySelectorAll('.btn-prev'));
+
+  let validationStepper = new Stepper(wizardValidation, {
+    linear: true
+  });
+  const FormValidation1 = FormValidation.formValidation(wizardValidationFormStep1, {
+  
+  fields: {
+    name: {
+      validators: {
+        notEmpty: {
+          message: 'The name is required'
+        }
+      }
+    },
+    email: {
+      validators: {
+        notEmpty: {
+          message: 'The Email is required'
+        },
+        emailAddress: {
+          message: 'The value is not a valid email address'
+        }
+      }
+    },
+    // ... other fields ...
+  },
+  plugins: {
+    trigger: new FormValidation.plugins.Trigger(),
+      bootstrap5: new FormValidation.plugins.Bootstrap5({
+        // Use this for enabling/changing valid/invalid class
+        // eleInvalidClass: '',
+        eleValidClass: ''
+      }),
+      autoFocus: new FormValidation.plugins.AutoFocus(),
+      submitButton: new FormValidation.plugins.SubmitButton()
+    }
+    init: instance => {
+      instance.on('plugins.message.placed', function(e) {
+        //* Move the error message out of the `input-group` element
+        if (e.element.parentElement.classList.contains('input-group')) {
+          e.element.parentElement.insertAdjacentElement('afterend', e.messageElement);
+        }
+      });
+  }
+}).on('core.form.valid', function() {
+  validationStepper.next();
+});
+
+</script> -->
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const form = document.getElementById("room_booking");
+
+        // Validation function for dynamic form repeater
+        function validateDynamicForm() {
+            const dynamicForms = document.querySelectorAll(".dynamic-form [data-repeater-item]");
+
+            dynamicForms.forEach((form, index) => {
+                const fullNameField = form.querySelector("[name='full_name[]']");
+                // Add validation logic for other fields within the dynamic form
+                // ...
+
+                // Validate the fullNameField and other fields
+                if (fullNameField.value.trim() === "") {
+                    alert(`Full Name in section ${index + 1} is required.`);
+                    // You can also update error messages on the page instead of using alert
+                    return false;
+                }
+                // Add validation logic for other fields within the dynamic form
+                // ...
+            });
+
+            return true;
+        }
+
+        // Form submission handler
+        form.addEventListener("submit", function(event) {
+            // Validate dynamic form repeater section
+            if (!validateDynamicForm()) {
+                event.preventDefault();
+                return;
+            }
+
+            // Continue with submitting the form
+        });
+    });
+</script>
+s
+
+
+
 
 @endsection
 
+@endsection
 
