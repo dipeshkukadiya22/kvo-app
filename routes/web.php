@@ -53,7 +53,7 @@ Route::post('update_room_booking', [BookingController::class, 'update_room_booki
 Route::get('cancel_booking/{id}', [BookingController::class, 'cancel_booking'])->name('cancel_booking');
 Route::get('check_num/{id}', [BookingController::class, 'check_num'])->name('check_num');
 Route::get('get_data/{id}', [BookingController::class, 'get_data'])->name('get_data');
-Route::get('get_member', [BookingController::class, 'get_member'])->name('get_member');
+Route::get('get_members', [BookingController::class, 'get_members'])->name('get_members');
 Route::get('get_memberdata/{id}', [BookingController::class, 'get_memberdata'])->name('get_memberdata');
 Route::get('checkout', [BookingController::class, 'checkout'])->name('checkout');
 Route::POST('checkout1', [BookingController::class, 'add_checkout'])->name('add_checkout');
@@ -62,7 +62,7 @@ Route::get('/get_roomdata/{id}', [BookingController::class, 'get_roomdata'])->na
 Route::post('update_roomdata', [BookingController::class, 'update_roomdata'])->name('update_roomdata');
 /* Room list Route */
 Route::get('room-list', [BookingController::class, 'get_room_list'])->name('get_room_list');
-Route::POST('RoomList', [BookingController::class, 'RoomList'])->name('RoomList');
+//temp Route::POST('RoomList', [BookingController::class, 'RoomList'])->name('RoomList');
 //Route::POST('add_room', [BookingController::class, 'RoomList'])->name('RoomList');
 /* View Members Route */
 Route::get('view-members', [MembersController::class, 'ViewMembers'])->name('ViewMembers');
@@ -76,7 +76,7 @@ Route::get('/room-list', [BookingController::class, 'RoomList'])->name('RoomList
 
 /* View Members Route */
 Route::get('/view-members', [MembersController::class, 'ViewMembers'])->name('ViewMembers');
-Route::POST('/edit_members', [MembersController::class, 'edit_members'])->name('edit_members');
+//Route::POST('/edit_members', [MembersController::class, 'edit_members'])->name('edit_members');
 
 
 Route::get('Religious_Donation', [donation::class, 'index1'])->name('Religious_Donation');

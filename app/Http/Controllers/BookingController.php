@@ -129,7 +129,7 @@ class BookingController extends Controller
         echo response()->json($member);
       // return json_encode($member);   
     }
-    public function get_member()
+    public function get_members()
     {
         $data=add_members::get()->last();
         return $data;
