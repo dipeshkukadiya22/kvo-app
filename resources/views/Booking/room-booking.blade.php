@@ -311,13 +311,13 @@
                               </div>
     
                             <div class="col-12 d-flex justify-content-end">
-                              
                               <button class="btn btn-primary btn-next"> <span class="align-middle d-sm-inline-block d-none me-sm-1" id="btn-step1">Next</span>
                                <i class="ti ti-arrow-right"></i>
                               </button>
                               
-                             
+                              
                             </div>
+                            
                           </div>
                         </div>
                         <!-- Personal Info -->
@@ -479,16 +479,11 @@
   
                             
                             <div class="col-12 d-flex justify-content-between">
-                              <button class="btn btn-label-secondary btn-prev">
-                                <i class="ti ti-arrow-left me-sm-1"></i>
-                                <span class="align-middle d-sm-inline-block d-none">Previous</span>
-                              </button>
-                            
-                              <button type="button"class="btn btn-primary btn-next"  id="repeat-next">
-                                <span class="align-middle d-sm-inline-block d-none me-sm-1">Next</span>
-                                <i class="ti ti-arrow-right"></i>
-                              </button>
-                            </div>
+                            <button class="btn btn-label-secondary btn-prev"> <i class="ti ti-arrow-left me-sm-1 me-0"></i>
+                              <span class="align-middle d-sm-inline-block d-none">Previous</span>
+                            </button>
+                            <button class="btn btn-primary btn-next"> <span class="align-middle d-sm-inline-block d-none me-sm-1">Next</span> <i class="ti ti-arrow-right"></i></button>
+                          </div>
                           </div>
                         </div>
                         <!-- All No of Person -->
@@ -1372,74 +1367,6 @@ $(document).ready(function() {
   });
 });
 </script>
-
-
-
-
-
-<!-- <script>
-const wizardValidation = document.querySelector('#wizard-validation');
-
-if (typeof wizardValidation !== undefined && wizardValidation !== null) {
-  // Wizard form
-  const wizardValidationForm = wizardValidation.querySelector('#room_booking');
-  // Wizard steps
-  const wizardValidationFormStep1 = wizardValidationForm.querySelector('#account-details');
-  const wizardValidationFormStep2 = wizardValidationForm.querySelector('#personal-info');
-  const wizardValidationFormStep3 = wizardValidationForm.querySelector('#address');
-  // Wizard next prev button
-  const wizardValidationNext = [].slice.call(wizardValidationForm.querySelectorAll('.btn-next'));
-  const wizardValidationPrev = [].slice.call(wizardValidationForm.querySelectorAll('.btn-prev'));
-
-  let validationStepper = new Stepper(wizardValidation, {
-    linear: true
-  });
-  const FormValidation1 = FormValidation.formValidation(wizardValidationFormStep1, {
-  
-  fields: {
-    name: {
-      validators: {
-        notEmpty: {
-          message: 'The name is required'
-        }
-      }
-    },
-    email: {
-      validators: {
-        notEmpty: {
-          message: 'The Email is required'
-        },
-        emailAddress: {
-          message: 'The value is not a valid email address'
-        }
-      }
-    },
-    // ... other fields ...
-  },
-  plugins: {
-    trigger: new FormValidation.plugins.Trigger(),
-      bootstrap5: new FormValidation.plugins.Bootstrap5({
-        // Use this for enabling/changing valid/invalid class
-        // eleInvalidClass: '',
-        eleValidClass: ''
-      }),
-      autoFocus: new FormValidation.plugins.AutoFocus(),
-      submitButton: new FormValidation.plugins.SubmitButton()
-    }
-    init: instance => {
-      instance.on('plugins.message.placed', function(e) {
-        //* Move the error message out of the `input-group` element
-        if (e.element.parentElement.classList.contains('input-group')) {
-          e.element.parentElement.insertAdjacentElement('afterend', e.messageElement);
-        }
-      });
-  }
-}).on('core.form.valid', function() {
-  validationStepper.next();
-});
-
-</script> -->
-
 <script>
     document.addEventListener("DOMContentLoaded", function() {
         const form = document.getElementById("room_booking");
@@ -1478,7 +1405,87 @@ if (typeof wizardValidation !== undefined && wizardValidation !== null) {
         });
     });
 </script>
-s
+<script>
+  const wizardValidation = document.querySelector('#wizard-validation');
+
+  if (typeof wizardValidation !== 'undefined' && wizardValidation !== null) {
+    // Wizard form
+    const wizardValidationForm = wizardValidation.querySelector('#room_booking');
+    // Wizard steps
+    const wizardValidationFormStep1 = wizardValidationForm.querySelector('#account-details');
+
+    let validationStepper = new Stepper(wizardValidation, {
+      linear: true
+    });
+
+    const formValidationInstance = FormValidation.formValidation(wizardValidationFormStep1, {
+      fields: {
+        name: {
+          validators: {
+            notEmpty: {
+              message: 'The name is required'
+            },
+            stringLength: {
+              min: 6,
+              max: 30,
+              message: 'The name must be between 6 and 30 characters long'
+            },
+            regexp: {
+              regexp: /^[a-zA-Z0-9 ]+$/,
+              message: 'The name can only consist of letters, numbers, and spaces'
+            }
+          }
+        },
+        email: {
+          validators: {
+            notEmpty: {
+              message: 'The Email is required'
+            },
+            emailAddress: {
+              message: 'The value is not a valid email address'
+            }
+          }
+        },
+        // Add other fields for the first step here
+      },
+      plugins: {
+        trigger: new FormValidation.plugins.Trigger(),
+        bootstrap5: new FormValidation.plugins.Bootstrap5(),
+        autoFocus: new FormValidation.plugins.AutoFocus(),
+        submitButton: new FormValidation.plugins.SubmitButton(),
+      },
+      init: instance => {
+        instance.on('plugins.message.placed', function(e) {
+          if (e.element.parentElement.classList.contains('input-group')) {
+            e.element.parentElement.insertAdjacentElement('afterend', e.messageElement);
+          }
+        });
+      }
+    }).on('core.form.valid', function() {
+      validationStepper.next();
+    });
+
+    const wizardValidationNext = [].slice.call(wizardValidationForm.querySelectorAll('.btn-next'));
+    wizardValidationNext.forEach(item => {
+      item.addEventListener('click', event => {
+        formValidationInstance.validate().then(result => {
+          if (result === 'Valid') {
+            validationStepper.next();
+          }
+        });
+      });
+    });
+
+    const wizardValidationPrev = [].slice.call(wizardValidationForm.querySelectorAll('.btn-prev'));
+    wizardValidationPrev.forEach(item => {
+      item.addEventListener('click', event => {
+        validationStepper.previous();
+      });
+    });
+  }
+</script>
+
+
 
 
 
