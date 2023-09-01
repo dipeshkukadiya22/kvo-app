@@ -124,7 +124,7 @@
                               required readonly/>
                           </div>
                           <div class="col-12">
-                            <h6 class="mt-2 fw-semibold">2. Expence Details</h6>
+                            <h6 class="mt-2 fw-semibold">2. Expense Details</h6>
                             <hr class="mt-0" />
                           </div>
                           <div class="col-md-4">
@@ -207,6 +207,45 @@
     })
     });
     </script>
+     @if(session('new_member') === 1)
+        <script>
+             var member_id=[];
+          var temp=document.getElementById('name');
+          var value;
+          for(i=0;i<temp.options.length;i++)
+            {
+              member_id[i]=temp.options[i].value;
+              value=member_id[i];
+            }
+            $("#name option[value=" + value + "]").attr('selected', 'selected');
+            $.ajax({
+                url:"{{url('get_member')}}",
+                type:'GET',
+                success:function(response){
+                  
+                  
+                }
+              });
+        </script>
+    @endif
+    <script>
+      $("#multicol-phone").focusout(function(){
+        var contact=document.getElementById("multicol-phone").value;
+      
+        $.ajax({
+                url:"{{url('check_num')}}"+"/"+ contact,
+                type:'GET',
+                success:function(response){
+                    if(response==1)
+                      { $("#submitbtn").prop('disabled',true);
+                        $("#error").html("Phone no alraedy exit");
+                      }
+                    else{ $("#submitbtn").prop('disabled',false);
+                    $("#error").html("");}
+                    }
+                });
+      });
+      </script>
 
    
 

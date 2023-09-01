@@ -208,7 +208,37 @@
     })
     });
     </script>
-
+     @if(session('new_member') === 1)
+        <script>
+             var member_id=[];
+          var temp=document.getElementById('select2Basic');
+          var value;
+          for(i=0;i<temp.options.length;i++)
+            {
+              member_id[i]=temp.options[i].value;
+              value=member_id[i];
+            }
+            $("#select2Basic option[value=" + value + "]").attr('selected', 'selected');
+        </script>
+    @endif
+    <script>
+      $("#multicol-phone").focusout(function(){
+        var contact=document.getElementById("multicol-phone").value;
+      
+        $.ajax({
+                url:"{{url('check_num')}}"+"/"+ contact,
+                type:'GET',
+                success:function(response){
+                    if(response==1)
+                      { $("#submitbtn").prop('disabled',true);
+                        $("#error").html("Phone no alraedy exit");
+                      }
+                    else{ $("#submitbtn").prop('disabled',false);
+                    $("#error").html("");}
+                    }
+                });
+      });
+      </script>
     <!-- start num to word -->
 
     <script  type="text/javascript">

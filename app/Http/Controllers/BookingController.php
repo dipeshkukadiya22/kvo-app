@@ -126,7 +126,13 @@ class BookingController extends Controller
         $member->phone_no = $req->phone_no;
         $member->city = strtoupper($req->city);
         $member->save();
-        echo response()->json($member);
+        if($member)
+        {
+            return back()->with('new_member',1);
+        }
+        else{
+            return back()>with('new_member',0);
+        }
     }
 
     public function get_member()
@@ -173,8 +179,8 @@ class BookingController extends Controller
     }
 
     public function checkout(){
-        $bookedRoom= DB::select("SELECT * FROM room_details JOIN ( SELECT add_room.room_detail_id, MAX(add_room.room_no) AS room_no, MAX(add_room.status) AS room_status FROM add_room WHERE add_room.status = 1 GROUP BY add_room.room_detail_id ) AS filtered_rooms ON room_details.r_id = filtered_rooms.room_detail_id JOIN personal_details ON personal_details.p_id = room_details.member_id JOIN add_members ON personal_details.member_id = add_members.p_id");
-        $checkout=DB::select("SELECT * FROM checkout join `room_details`on checkout.room_booking_id=room_details.r_id join personal_details on room_details.member_id=personal_details.p_id join add_members on add_members.p_id=personal_details.member_id WHERE room_details.status='CHECKOUT' order by r_id desc");
+        $bookedRoom= DB::select("SELECT * FROM room_details JOIN ( SELECT add_room.room_detail_id, MAX(add_room.room_no) AS room_no, MAX(add_room.status) AS room_status FROM add_room WHERE add_room.status = 1 GROUP BY add_room.room_detail_id ) AS filtered_rooms ON room_details.r_id = filtered_rooms.room_detail_id JOIN personal_details ON personal_details.p_id = room_details.member_id JOIN add_members ON personal_details.member_id = add_members.p_id ");
+        $checkout=DB::select("SELECT * FROM checkout join `room_details`on checkout.room_booking_id=room_details.r_id join personal_details on room_details.member_id=personal_details.p_id join add_members on add_members.p_id=personal_details.member_id WHERE room_details.status='CHECKOUT' order by r_id DESC");
         $rec_no=checkout::get()->last()->rec_no;
         if(!$rec_no)
         {$rec_no=1;}

@@ -505,30 +505,24 @@
                           
                           <div class="row g-3">
                             <!-- Form Repeater -->
-                          
-                            <div id="step2FormsContainer "class="col-12">
-                              <div class="dynamic-form">
-                              <div class="all-members" data-repeater-list="group-a">
-                              <div data-repeater-item>
-                             
-                             <div class="rep-form1">
-                          
-                                <div class="row formrepeater1">
-                                  <div class="mb-3 col-md-6 col-xl-3 col-12 mb-0">
-                                    <label class="form-label" for="form-repeater-1-1">Full Name</label>
-                                    <input type="text" id="full_name_form" style="text-transform:uppercase"  name="full_name[]" class="form-control" placeholder="john doe" value="{{ (!empty($member) )? $member->m_name : '' }}"/>
-                                  </div>
-                                  <div class="mb-3 col-lg-6 col-xl-2 col-12 mb-0">
-                                    <label class="form-label" for="form-repeater-1-2">Age</label>
-                                    <input type="number" id="member_age" name="m_age[]" class="form-control" placeholder="your age"  />
-                                  </div>
-                                  
-                                  
-                                  <div class="mb-3 col-lg-6 col-xl-2 col-12 mb-0 ">
-                                  
-                                      <label class="d-block form-label">Gender</label>
-                                    
-                                      <div class="form-check form-check-inline">
+                            <div class="form-repeater">
+                              <div id="step2FormsContainer "class="col-12">
+                                <div class="dynamic-form">
+                                <div class="all-members" data-repeater-list="group-a">
+                                <div data-repeater-item>
+                               <div class="rep-form1">
+                                  <div class="row formrepeater1">
+                                    <div class="mb-3 col-lg-6 col-xl-3 col-12 mb-0">
+                                      <label class="form-label" for="form-repeater-1-1">Full Name</label>
+                                      <input type="text" id="full_name_form"  name="full_name" class="form-control" placeholder="john doe" value="{{ (!empty($member) )? $member->m_name : '' }}"/>
+                                    </div>
+                                    <div class="mb-3 col-lg-4 col-xl-3 col-12 mb-0">
+                                      <label class="form-label" for="form-repeater-1-2">Age</label>
+                                      <input type="text" id="member_age" name="m_age" class="form-control" placeholder="your age" />
+                                    </div>
+                                    <div class="mb-3 col-lg-6 col-xl-2 col-12 mb-0 ">
+                                        <label class="d-block form-label">Gender</label>
+                                        <div class="form-check form-check-inline">
                                       <input class="form-check-input" type="radio" name="gender" id="gendermale" value="MALE" checked/>
                                       <label class="form-check-label" for="gender">Male</label>
 
@@ -542,52 +536,45 @@
                                         <label class="form-label" for="form-repeater-1-2">gender</label>
                                         <input type="text" id="gender_data" name="gender_data" class="form-control" placeholder="your age" value="MALE"/>
                                       </div>
-
-
+                                    </div>
+                                    <div class="col-md-2">
+                                      <label class="form-label" for="basic-default-country">Relation</label>
+                                      <select class="form-select" name="relation" id="member_relation" required>
+                                        <option value="SELF" selected>SELF</option>
+                                        <option value="MOTHER">MOTHER</option>
+                                        <option value="FATHER">FATHER</option>
+                                        <option value="BROTHER">BROTHER</option>
+                                        <option value="SISTER">SISTER</option>
+                                        <option value="UNCLE">UNCLE</option>
+                                        <option value="AUNTY">AUNTY</option>
+                                        <option value="GRAND MOTHER">GRAND MOTHER</option>
+                                        <option value="GRAND FATHER">GRAND FATHER</option>
+                                        <option value="FRIEND">FRIEND</option>
+                                      </select>
+                                    </div>
+                                    <div class="mb-3 col-lg-12 col-xl-2 col-12 d-flex align-items-center mb-0">
+                                      <button class="btn btn-label-danger mt-4" data-repeater-delete>
+                                        <i class="ti ti-x ti-xs me-1"></i>
+                                        <span class="align-middle">Delete</span>
+                                      </button>
+                                    </div>
                                   </div>
-                                  <div class="mb-3 col-lg-6 col-xl-2 col-12 mb-0">
-                                    <label class="form-label" for="basic-default-country">Relation</label>
-                                    <select class="form-select" name="relation[]" id="member_relation" required>
-                                      <option value="SELF" selected>SELF</option>
-                                      <option value="AUNTY">AUNTY</option>
-                                      <option value="BROTHER">BROTHER</option>
-                                      <option value="COUSIN">COUSIN</option>
-                                      <option value="DAUGHTER">DAUGHTER</option>
-                                      <option value="FATHER">FATHER</option>
-                                      <option value="FRIEND">FRIEND</option>
-                                      <option value="GRAND FATHER">GRAND FATHER</option>
-                                      <option value="GRAND MOTHER">GRAND MOTHER</option>
-                                      <option value="HUSBAND">HUSBAND</option>
-                                      <option value="MOTHER">MOTHER</option>
-                                      <option value="NEPHEW">NEPHEW</option>
-                                      <option value="SISTER">SISTER</option>
-                                      <option value="UNCLE">UNCLE</option>
-                                      <option value="WIFE">WIFE</option>
-                                    </select>
-                                  </div>
-                                  <div class="mb-3 col-lg-12 col-xl-2 col-12 d-flex align-items-center mb-0">
-                                  <button type="button" class="btn btn-label-danger mt-3" data-repeater-delete>
-                                    <i class="ti ti-x ti-xs me-1"></i>
-                                    <span class="align-middle">Delete</span>
-                                  </button>
-                                  </div>
-                                 
+                                </div>
+                                <div class="row rep-form">
+                                </div>
+                                  <hr />
+                                </div>
+                                </div>
                                 </div>
                               </div>
-                              <div class="row rep-form">
-                              </div> 
-                                <hr />
+                              <div id="dynamicFormsContainer">
                               </div>
+                              <div class="mb-0">
+                                <button class="btn btn-primary" data-repeater-create>
+                                  <i class="ti ti-plus me-1"></i>
+                                  <span class="align-middle">Add Members</span>
+                                </button>
                               </div>
-                              </div>
-                            </div>
-                            <div id="dynamicFormsContainer">
-                            </div>
-                            <div class="mb-0">
-                              <button class="btn btn-primary" data-repeater-create>
-                                <i class="ti ti-plus me-1"></i>
-                                <span class="align-middle">Add Members</span>
-                              </button>
                             </div>
                             
                             <!-- /Form Repeater -->
@@ -713,7 +700,7 @@
     <script src="{{ asset('assets/vendor/libs/jquery-timepicker/jquery-timepicker.js') }}"></script>
     <script src="{{ asset('assets/vendor/libs/pickr/pickr.js') }}"></script>
     <script src="{{ asset('assets/vendor/libs/bs-stepper/bs-stepper.js') }}"></script>
-    <script src="{{ asset ('assets/vendor/libs/jquery-repeater/jquery-repeater.js') }}"></script>
+   
     
 
     <script src="{{ asset('assets/vendor/libs/bloodhound/bloodhound.js') }}"></script>
@@ -739,8 +726,30 @@
     <script src="{{ asset('assets/js/form-wizard-icons.js') }}"></script>
 
     <script src="{{ asset ('assets/js/forms-extras.js') }}"></script>
+
+     @if(session('new_member') === 1)
+        <script>
+             var member_id=[];
+          var temp=document.getElementById('select2Basic');
+          var value;
+          for(i=0;i<temp.options.length;i++)
+            {
+              member_id[i]=temp.options[i].value;
+              value=member_id[i];
+            }
+            $("#select2Basic option[value=" + value + "]").attr('selected', 'selected');
+            $.ajax({
+                url:"{{url('get_member')}}",
+                type:'GET',
+                success:function(response){
+                  $('#member_email').val(response['email']);
+                  $('#member-phone').val(response['phone_no']);
+                  $('#member_city').val(response['city']);
+                }
+              });
+        </script>
+    @endif
     <script>
-     
       $("#multicol-phone").focusout(function(){
         var contact=document.getElementById("multicol-phone").value;
         $.ajax({
@@ -1201,11 +1210,11 @@ $(document).ready(function () {
         $(".rep-form").append(
 
           '<div class="row formrepeater">'+
-                                 ' <div class="mb-3 col-md-6 col-xl-3 col-12 mb-0">'+
+                                 ' <div class="mb-3 col-lg-6 col-xl-3 col-12 mb-0">'+
                                    ' <label class="form-label" for="form-repeater-1-1">Full Name</label>'+
                                    ' <input type="text" id="full_name_form'+i+'" style="text-transform:uppercase" name="full_name[]" class="form-control" placeholder="john doe" value="{{ (!empty($member) )? $member->m_name : '' }}"/>'+
                                  ' </div>'+
-                                 ' <div class="mb-3 col-lg-6 col-xl-2 col-12 mb-0">'+
+                                 ' <div class="mb-3 col-lg-6 col-xl-3 col-12 mb-0">'+
                                   '  <label class="form-label" for="form-repeater-1-2">Age</label>'+
                                   '  <input type="number" id="member_age'+i+'" name="m_age[]" class="form-control" placeholder="your age" />'+
                                 '  </div>'+
@@ -1223,7 +1232,7 @@ $(document).ready(function () {
                                       '  <label class="form-check-label" for="inlineRadio2' + i + '" selected>Female</label>'+
                                     '  </div>'+
                                 '  </div>'+
-                                '    <div class="mb-3 col-lg-6 col-xl-2 col-12 mb-0">'+
+                                '    <div class="col-md-4">'+
                                     '  <label class="form-label" for="basic-default-country">Relation</label>'+
                                     '  <select class="form-select" name="relation[]" id="member_relation'+i+'" required>'+
                                     '   <option value="" disabled selected>Select relation</option>'+
@@ -1485,10 +1494,11 @@ if (typeof wizardValidation !== undefined && wizardValidation !== null) {
         });
     });
 </script>
-s
 
 
 
+
+<script src="{{ asset ('assets/vendor/libs/jquery-repeater/jquery-repeater.js') }}"></script>
 
 @endsection
 
