@@ -66,7 +66,7 @@ button.swal2-cancel.btn.btn-label-danger {
             <div class="container-xxl flex-grow-1 container-p-y">
                 <div class="content-header row">
                 <div class="col-12" style= "display: flex; justify-content: flex-end;">
-                  <button class="btn btn-transparent"    type="button" >
+                  <button class="btn btn-transparent darkbtn"    type="button" >
                     <a href="{{route('General_Donation')}}"><span class="ti-xs ti ti-plus me-1"></span>Add New General donation </a></button>
                   </div>
                   <div class="content-header-left col-md-9 col-12 mb-2">
@@ -86,18 +86,19 @@ button.swal2-cancel.btn.btn-label-danger {
                             <div class="col-12">
                                 <div class="card">
                                     <div class="card-datatable table-responsive pt-0">
-                                        <table id="DataTables_Table_0" class="datatables-basic table">
+                                        <table id="DataTables_Table_0" class="datatables-basic table" >
                                           <thead>
-                                              <tr>
-                                                  <th>પહોંચ નંબર</th>
-                                                  <th>નામ</th>
-                                                  <th>તારીખ</th>
-                                                  <th>મોબાઈલ નંબર</th>
-                                                  <th>ગામ</th>
-                                                  <th>હસ્તે</th>
-                                                  <th>સંસ્થા</th>
-                                                  <th>વિગત</th>
-                                                  <th>Action</th>
+		
+                                              <tr >
+                                                  <th style='width:70px'>Rec No</th>
+                                                  <th style='width:70px'>Name</th>
+                                                  <th style='width:70px'>Date</th>
+                                                  <th style='width:70px'>Mobile No</th>
+                                                  <th style='width:70px'>City</th>
+                                                  <th style='width:70px'>Haste</th>
+                                                  <th style='width:70px'>Trust</th>
+                                                  <th style='width:70px'>Details</th>
+                                                  <th style='width:70px'>Action</th>
                                               </tr>
                                           </thead>
                                           @foreach($donation_data as $row)
@@ -114,7 +115,7 @@ button.swal2-cancel.btn.btn-label-danger {
                                             
                                               <td>
                                                   <div class="d-inline-block">
-                                                    <a href="{{route('pdf_General_Donation',$row->depo_id)}}" class="text-primary" ><img src="./assets/icon/orange-eye.png" width="20px"></a>
+                                                    <a href="{{route('pdf_General_Donation',$row->depo_id)}}" target="_blank" class="text-primary" ><img src="./assets/icon/orange-eye.png" width="20px"></a>
 
                                                     <a onclick="edit_general_donation({{$row->depo_id}})" class="btn btn-sm btn-icon item-edit"
                                                     ><img src="./assets/icon/orange-edit.png" width="20px"></a>
@@ -378,8 +379,20 @@ button.swal2-cancel.btn.btn-label-danger {
               text: '<i class="ti ti-file-description me-1"></i>Pdf',
               className: 'dropdown-item',
               title: 'General Donation',
+              customize: function (doc) {
+                                // Here's where you can control the cell padding
+                                doc.styles.tableHeader.margin =
+                                  doc.styles.tableBodyOdd.margin =
+                                  doc.styles.tableBodyEven.margin = [3, 3, 3, 3];
+                                  doc.pageMargins = [10, 10, 10,10];
+                                  doc.defaultStyle.fontSize = 9;
+                                  doc.styles.tableHeader.fontSize = 10;
+                                  doc.styles.title.fontSize = 20;
+                                  doc.content[1].margin = [ 20, 0, 20, 0 ] //left, top, right, bottom
+                            },
+
               exportOptions: {
-                columns: [0,1 ,2, 3, 4, 5, 6],
+                columns: [0,1 ,2, 3, 4, 5, 6, 7],
                 // prevent avatar to be display
                 format: {
                   body: function (inner, coldex, rowdex) {

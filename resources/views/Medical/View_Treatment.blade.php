@@ -95,14 +95,14 @@ button.swal2-cancel.btn.btn-label-danger {
                                         <table id="DataTables_Table_0" class="datatables-basic table">
                                           <thead>
                                               <tr>
-                                                  <th>પહોંચ નંબર</th>
-                                                  <th>નામ</th>
-                                                  <th>તારીખ</th>
-                                                  <th>મોબાઈલ નંબર</th>
-                                                  <th>ગામ</th>
-                                                  <th>ડૉક્ટરનું નામ</th>
-                                                  <th>ટોટલ</th>
-                                                  <td>નાણા મળેલ</td>
+                                                  <th>Rec No</th>
+                                                  <th>Name</th>
+                                                  <th>Date</th>
+                                                  <th>Mobile No</th>
+                                                  <th>City</th>
+                                                  <th>Doctor Name</th>
+                                                  <th>Total</th>
+                                                  <th>Payment Mode</th>
                                                   <th>Action</th>
                                               </tr>
                                           </thead>
@@ -120,7 +120,7 @@ button.swal2-cancel.btn.btn-label-danger {
                                               <td>
                                                   <div class="d-inline-block">
                                             
-                                                    <a href="{{route('pdf_Medical_Treatment',$row->sr_no)}}" class="text-primary" ><img src="./assets/icon/orange-eye.png" width="20px"></a>
+                                                    <a href="{{route('pdf_Medical_Treatment',$row->sr_no)}}" target="_blank" class="text-primary" ><img src="./assets/icon/orange-eye.png" width="20px"></a>
 
                                                     <a onclick="edit_treatment({{$row->sr_no}})" class="btn btn-sm btn-icon item-edit"
                                                     ><img src="./assets/icon/orange-edit.png" width="20px"></a>
@@ -430,6 +430,17 @@ button.swal2-cancel.btn.btn-label-danger {
               text: '<i class="ti ti-file-description me-1"></i>Pdf',
               className: 'dropdown-item',
               title: 'Medical Treatment',
+              customize: function (doc) {
+                                // Here's where you can control the cell padding
+                                doc.styles.tableHeader.margin =
+                                  doc.styles.tableBodyOdd.margin =
+                                  doc.styles.tableBodyEven.margin = [3, 3, 3, 3];
+                                  doc.pageMargins = [10, 10, 10,10];
+                                  doc.defaultStyle.fontSize = 9;
+                                  doc.styles.tableHeader.fontSize = 10;
+                                  doc.styles.title.fontSize = 20;
+                                  doc.content[1].margin = [ 20, 0, 20, 0 ] //left, top, right, bottom
+                            },
               exportOptions: {
                 columns: [0,1 ,2, 3, 4, 5, 6],
                 // prevent avatar to be display

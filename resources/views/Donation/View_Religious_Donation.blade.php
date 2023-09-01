@@ -66,7 +66,7 @@ button.swal2-cancel.btn.btn-label-danger {
             <div class="container-xxl flex-grow-1 container-p-y">
                 <div class="content-header row">
                 <div class="col-12" style= "display: flex; justify-content: flex-end;">
-                  <button class="btn btn-transparent"    type="button" >
+                  <button class="btn btn-transparent darkbtn"    type="button" >
                     <a href="{{route('Religious_Donation')}}"><span class="ti-xs ti ti-plus me-1"></span>Add New Religious donation </a></button>
                   </div>
                   <div class="content-header-left col-md-9 col-12 mb-2">
@@ -89,13 +89,13 @@ button.swal2-cancel.btn.btn-label-danger {
                                         <table id="DataTables_Table_0" class="datatables-basic table">
                                           <thead>
                                               <tr>
-                                                  <th>પહોંચ નંબર</th>
-                                                  <th>નામ</th>
-                                                  <th>તારીખ</th>
-                                                  <th>સંસ્થા</th>
-                                                  <th>હસ્તે</th>
-                                                  <th>ટોટલ</th>
-                                                  <td>નાણા મળેલ</td>
+                                                  <th>Rec No</th>
+                                                  <th>Name</th>
+                                                  <th>Date</th>
+                                                  <th>Trust</th>
+                                                  <th>Haste</th>
+                                                  <th>Total</th>
+                                                  <th>Payment Mode</th>
                                                   <th>Action</th>
                                               </tr>
                                           </thead>
@@ -111,7 +111,7 @@ button.swal2-cancel.btn.btn-label-danger {
                                               <td>{{$row->payment_mode}}</td>
                                               <td>
                                                   <div class="d-inline-block">
-                                                    <a href="{{route('pdf_Religious_Donation',$row->religious_donation_id)}}" class="text-primary"><img src="./assets/icon/orange-eye.png" width="20px"></a>
+                                                    <a href="{{route('pdf_Religious_Donation',$row->religious_donation_id)}}" target="_blank" class="text-primary"><img src="./assets/icon/orange-eye.png" width="20px"></a>
 
                                                     <a onclick="edit_religious_donation({{$row->religious_donation_id}})" class="btn btn-sm btn-icon item-edit"
                                                     ><img src="./assets/icon/orange-edit.png" width="20px"></a>
@@ -547,8 +547,19 @@ button.swal2-cancel.btn.btn-label-danger {
               text: '<i class="ti ti-file-description me-1"></i>Pdf',
               className: 'dropdown-item',
               title: 'Religious Donation',
+              customize: function (doc) {
+                                // Here's where you can control the cell padding
+                                doc.styles.tableHeader.margin =
+                                  doc.styles.tableBodyOdd.margin =
+                                  doc.styles.tableBodyEven.margin = [3, 3, 3, 3];
+                                  doc.pageMargins = [10, 10, 10,10];
+                                  doc.defaultStyle.fontSize = 9;
+                                  doc.styles.tableHeader.fontSize = 10;
+                                  doc.styles.title.fontSize = 20;
+                                  doc.content[1].margin = [ 20, 0, 20, 0 ] //left, top, right, bottom
+                            },
               exportOptions: {
-                columns: [0,1 ,2, 3, 4, 5, 6,7],
+                columns: [0, 1 ,2, 3, 4, 5, 6],
                 // prevent avatar to be display
                 format: {
                   body: function (inner, coldex, rowdex) {

@@ -84,7 +84,7 @@ div.card-datatable [class*=col-md-] {
             <div class="container-xxl flex-grow-1 container-p-y">
                 <div class="content-header row">
                 <div class="col-12" style= "display: flex; justify-content: flex-end;">
-                  <button class="btn btn-transparent"    type="button" >
+                  <button class="btn btn-transparent darkbtn"    type="button" >
                     <a href="{{route('room-booking')}}"><span class="ti-xs ti ti-plus me-1"></span>Add New Room booking</a></button>
                   </div>
                   <div class="content-header-left col-md-9 col-12 mb-2">
@@ -108,15 +108,15 @@ div.card-datatable [class*=col-md-] {
                                           <thead>
                                          
                                               <tr>
-                                                <th>બુકિંગ નં.</th>
-                                                <th>નામ</th>
+                                                <th>Booking No.</th>
+                                                <th>Name</th>
                                                 {{--<th>Status</th>--}}
-                                                <th>રૂમ નંબર </th>
-                                                <th>આગમન તારીખ / સમય</th>
-                                                <th>ચેક આઉટ તારીખ / સમય</th>
-                                                <th>ભાડું</th>
-                                                <th>રોકાણ દિવસ</th>                       
-                                                <th>ડિપોઝિટ રકમ(₹) </th>
+                                                <th>Room No </th>
+                                                <th>Check In Date</th>
+                                                <th>Check Out Date</th>
+                                                <th>Rent</th>
+                                                <th>Days Of Stay</th>                       
+                                                <th>Deposite(₹) </th>
                                                 <th>Action</th>
                                               </tr>
                                           </thead>
@@ -134,7 +134,7 @@ div.card-datatable [class*=col-md-] {
                                               <td>{{$row->deposite_rs}}</td>
                                               <td>
                                                   <div class="d-inline-block">
-                                                    <a href="{{route('pdf_CheckIn',$row->r_id)}}"><img src="./assets/icon/orange-eye.png" width="20px"></a>
+                                                    <a href="{{route('pdf_CheckIn',$row->r_id)}}" target="_blank"><img src="./assets/icon/orange-eye.png" width="20px"></a>
 
                                                     <!--<a onclick="pdf({{$row->r_id}})" class="btn btn-sm btn-icon item-edit"><img src="./assets/icon/orange-eye.png" width="20px"></a>-->
                                                     

@@ -33,12 +33,12 @@ class MedicalController extends Controller
         $data->doctor_name=strtoupper($req->doctor_name);
         $data->amount=$req->amount;
         $data->remark=ucfirst($req->remark);
-        $data->payment_mode=$req->payment;
+        $data->payment_mode=strtoupper($req->payment);
         $data->amount_in_words=$req->ankers;
         $data->save();
        return redirect()->route('view_treatment')->with('message', 'Form submitted successfully!')->with(['member' => $member,'member_data' => $member_data,'rec_no' => $rec_no]);
     }
-    public function get_member($id)
+    public function get_treatment($id)
     {
         $member=DB::select("SELECT m.sr_no,m.date,m.doctor_name,m.amount,m.payment_mode,m.amount_in_words,m.remark,M.m_name,M.city,M.phone_no,M.p_id FROM medical As m join add_members As M where m.p_id=M.p_id and m.sr_no='$id'");
         return $member;
@@ -51,7 +51,7 @@ class MedicalController extends Controller
         $data->doctor_name=strtoupper($req->doctor_name);
         $data->amount=$req->amount;
         $data->remark=ucfirst($req->remark);
-        $data->payment_mode=$req->payment;
+        $data->payment_mode=strtoupper($req->payment);
         $data->amount_in_words=$req->total_in_word;
         $data->save();
         return redirect()->route("view_treatment");
