@@ -548,90 +548,77 @@ div.card-datatable [class*=col-md-] {
                                             <div class="row g-3">
                                               <!-- Form Repeater -->
                                             
-                                              <div id="step2FormsContainer "class="col-12">
-                                                <div class="dynamic-form">
-                                                <div class="all-members" data-repeater-list="group-a">
-                                                <div data-repeater-item>
-                                              
-                                                <div class="rep-form1">
-                                                    <div class="row formrepeater1" >
-                                                      <div class="mb-3 col-lg-6 col-xl-3 col-12 mb-0" hidden  >
-                                                      <label class="form-label" for="form-repeater-1-1">member_id</label>
-                                                      <input type="text" id="m_id" name="m_id[]" class="form-control" placeholder="john doe" value="" readonly/>
-                                                    </div>
-                                                      <div class="mb-3 col-lg-6 col-xl-3 col-12 mb-0">
-                                                      <label class="form-labegenderl" for="form-repeater-1-1">Full Name</label>
-                                                      <input type="text" id="full_name_form" name="full_name[]" class="form-control" placeholder="john doe" value="" readonly/>
+                                              <div class="form-repeater">
+                              <div id="step2FormsContainer "class="col-12">
+                                <div class="dynamic-form">
+                                <div class="all-members" data-repeater-list="group-a">
+                                <div data-repeater-item>
+                               <div class="rep-form1">
+                                  <div class="row formrepeater1">
+                                    <div class="mb-3 col-lg-6 col-xl-3 col-12 mb-0">
+                                      <label class="form-label" for="form-repeater-1-1">Full Name</label>
+                                      <input type="text" id="full_name_form"  name="full_name" class="form-control" placeholder="john doe"/>
+                                    </div>
+                                    <div class="mb-3 col-lg-4 col-xl-3 col-12 mb-0">
+                                      <label class="form-label" for="form-repeater-1-2">Age</label>
+                                      <input type="text" id="member_age" name="m_age" class="form-control" placeholder="your age" />
+                                    </div>
+                                    <div class="mb-3 col-lg-6 col-xl-2 col-12 mb-0 ">
+                                        <label class="d-block form-label">Gender</label>
+                                        <div class="form-check form-check-inline">
+                                      <input class="form-check-input" type="radio" name="gender" id="gendermale" value="MALE" checked/>
+                                      <label class="form-check-label" for="gender">Male</label>
 
-                                                    </div>
-                                                    <div class="mb-3 col-lg-6 col-xl-3 col-12 mb-0">
-                                                      <label class="form-label" for="form-repeater-1-2">Age</label>
-                                                      <input type="number" id="member_age" name="m_age[]" class="form-control" placeholder="your age"  maxlength="2" required oninput="javascript: if (this.value.length > 2) this.value = this.value.slice(0, 2);"  />
-                                                    </div>
-                                                    
-                                                    
-                                                    <div class="mb-3 col-lg-6 col-xl-2 col-12 mb-0 ">
-                                                    
-                                                        <label class="d-block form-label">Gender</label>
-                                                      
-                                                        <div class="form-check form-check-inline">
-                                                            <input class="form-check-input" type="radio" name="gender" id="inlineRadio1" value="MALE" checked />
-                                                            <label class="form-check-label" for="inlineRadio1">Male</label>
-                                                        </div>
-                                                        <div class="form-check form-check-inline">
-                                                            <input class="form-check-input" type="radio" name="gender" id="inlineRadio2" value="FEMALE" />
-                                                            <label class="form-check-label" for="inlineRadio2">Female</label>
-                                                        </div>
-                                                        <div class="mb-3 col-lg-6 col-xl-3 col-12 mb-0" hidden>
-                                                        <label class="form-label" for="form-repeater-1-2">gender</label>
-                                                        <input type="text" id="gender_data" name="gender_data" class="form-control" placeholder="your age" value="MALE"/>
-                                                      </div>
-                                                    </div>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                          <input class="form-check-input" type="radio" name="gender" id="genderfemale" value="FEMALE" />
+                                          <label class="form-check-label" for="gender">Female</label>
+                                        </div>
 
-                                                    <div class="col-md-4">
-                                                      <label class="form-label" for="basic-default-country">Relation</label>
-                                                      <select class="form-select" name="relation[]" id="member_relation" required>
-                                                          <option value="SELF" >SELF</option>
-                                                          <option value="AUNTY">AUNTY</option>
-                                                          <option value="BROTHER">BROTHER</option>
-                                                          <option value="COUSIN">COUSIN</option>
-                                                          <option value="DAUGHTER">DAUGHTER</option>
-                                                          <option value="FATHER">FATHER</option>
-                                                          <option value="FRIEND">FRIEND</option>
-                                                          <option value="GRAND FATHER">GRAND FATHER</option>
-                                                          <option value="GRAND MOTHER">GRAND MOTHER</option>
-                                                          <option value="HUSBAND">HUSBAND</option>
-                                                          <option value="MOTHER">MOTHER</option>
-                                                          <option value="NEPHEW">NEPHEW</option>
-                                                          <option value="SISTER">SISTER</option>
-                                                          <option value="UNCLE">UNCLE</option>
-                                                          <option value="WIFE">WIFE</option>
-                                                      </select>
-                                                    </div>
-                                                    <div class="mb-3 col-lg-12 col-xl-2 col-12 d-flex align-items-center mb-0">
-                                                      <button class="btn btn-label-danger mt-4" data-repeater-delete>
-                                                        <i class="ti ti-x ti-xs me-1"></i>
-                                                        <span class="align-middle">Delete</span>
-                                                      </button>
-                                                    </div>
-                                                  </div>
-                                                </div>
-                                                <div class="row rep-form">
-                                                </div> 
-                                                  <hr />
-                                                </div>
-                                                </div>
-                                                </div>
-                                              </div>
-                                              <div id="dynamicFormsContainer">
-                                              </div>
-                                              <div class="mb-0">
-                                                <button class="btn btn-primary" data-repeater-create>
-                                                  <i class="ti ti-plus me-1"></i>
-                                                  <span class="align-middle">Add Members</span>
-                                                </button>
-                                              </div>
-                                              
+                                        <div class="mb-3 col-lg-6 col-xl-3 col-12 mb-0" hidden>
+                                        <label class="form-label" for="form-repeater-1-2">gender</label>
+                                        <input type="text" id="gender_data" name="gender_data" class="form-control" placeholder="your age" value="MALE"/>
+                                      </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                      <label class="form-label" for="basic-default-country">Relation</label>
+                                      <select class="form-select" name="relation" id="member_relation" required>
+                                        <option value="SELF" selected>SELF</option>
+                                        <option value="MOTHER">MOTHER</option>
+                                        <option value="FATHER">FATHER</option>
+                                        <option value="BROTHER">BROTHER</option>
+                                        <option value="SISTER">SISTER</option>
+                                        <option value="UNCLE">UNCLE</option>
+                                        <option value="AUNTY">AUNTY</option>
+                                        <option value="GRAND MOTHER">GRAND MOTHER</option>
+                                        <option value="GRAND FATHER">GRAND FATHER</option>
+                                        <option value="FRIEND">FRIEND</option>
+                                      </select>
+                                    </div>
+                                    <div class="mb-3 col-lg-12 col-xl-2 col-12 d-flex align-items-center mb-0">
+                                      <button class="btn btn-label-danger mt-4" data-repeater-delete>
+                                        <i class="ti ti-x ti-xs me-1"></i>
+                                        <span class="align-middle">Delete</span>
+                                      </button>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="row rep-form">
+                                </div>
+                                  <hr />
+                                </div>
+                                </div>
+                                </div>
+                              </div>
+                              <div id="dynamicFormsContainer">
+                              </div>
+                              <div class="mb-0">
+                                <button class="btn btn-primary" data-repeater-create>
+                                  <i class="ti ti-plus me-1"></i>
+                                  <span class="align-middle">Add Members</span>
+                                </button>
+                              </div>
+                            </div>
                                               <!-- /Form Repeater -->
                                               <div class="col-12 d-flex justify-content-between">
                                                 <button class="btn btn-label-secondary btn-prev">
@@ -1404,6 +1391,7 @@ document.getElementById("deposit-amount").addEventListener("input", convertToWor
     });
 </script> --}}
 
+<script src="{{ asset ('assets/vendor/libs/jquery-repeater/jquery-repeater.js') }}"></script>
 
 @endsection
 
