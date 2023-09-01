@@ -132,3 +132,11 @@
   font-size: 12px;
   margin-top: 4px;
 }
+
+button.btn.btn-transparent.darkbtn.waves-effect.waves-light {
+  background-color: #ca5300 !important;
+}
+
+button.btn.btn-transparent.darkbtn.waves-effect.waves-light a {
+  color: white !important;
+}

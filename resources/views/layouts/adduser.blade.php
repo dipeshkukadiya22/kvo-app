@@ -14,7 +14,7 @@
 
 
   <div class="mb-3">
-    <label class="form-label" for="multicol-phone">Phone Number</label>
+    <label class="form-label" for="multicol-phone"><span class="required">Phone Number</span></label>
     <input type="text" name="phone_no" id="multicol-phone" class="form-control phone-mask" placeholder="658 799 8941" minlength="10" maxlength="10"
                             
                               oninput="numberOnly(this.id);"   required/>

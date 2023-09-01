@@ -125,8 +125,9 @@
                               </div>
                               
                               <div class="mb-3">
-                                <label class="form-label" for="multicol-phone">Phone Number</label>
-                                <input type="number" name="phone_no" id="multicol-phone" class="form-control phone-mask" placeholder="658 799 8941"  maxlength="10" required oninput="javascript: if (this.value.length > 10) this.value = this.value.slice(0, 10);"/>
+                                <label class="form-label" for="multicol-phone"><span class="required">Phone Number</span></label>
+                                <input type="number" name="phone_no" id="multicol-phone" class="form-control phone-mask " placeholder="658 799 8941"  maxlength="10" required oninput="javascript: if (this.value.length > 10) this.value = this.value.slice(0, 10);"/>
+                                <div id="error" class="error-message" ></div>
                               </div>
 
                               <div class="mb-3">
@@ -214,7 +215,7 @@
                       </div>
                     </div>
                     <div class="bs-stepper-content">
-                    <form class="browser-default-validation" action="{{ route('RoomBooking') }}" method="POST" id="room_booking">
+                    <form class="browser-default-validation"  action="{{ route('RoomBooking') }}" method="POST" id="room_booking">
 
                         @csrf
                         <!-- Account Details -->
@@ -258,7 +259,7 @@
 
                               <div class="col-md-4">
                                 <label class="form-label" for="basic-default-name"><span class="required">Age</span></label>
-                                <input type="number" class="form-control" name="age" id="basic-default-age" placeholder="Age"  maxlength="2" required oninput="javascript: if (this.value.length > 2) this.value = this.value.slice(0, 2);" />
+                                <input type="number" class="form-control" name="age" id="basic-default-age" placeholder="Age" required/>
                               </div>
     
                               <div class="col-4">
@@ -311,13 +312,13 @@
                               </div>
     
                             <div class="col-12 d-flex justify-content-end">
+                              
                               <button class="btn btn-primary btn-next"> <span class="align-middle d-sm-inline-block d-none me-sm-1" id="btn-step1">Next</span>
                                <i class="ti ti-arrow-right"></i>
                               </button>
                               
-                              
+                             
                             </div>
-                            
                           </div>
                         </div>
                         <!-- Personal Info -->
@@ -469,21 +470,26 @@
                             
                             <div class="col-md-4">
                               <label class="form-label" for="rupees-in-words"><span class="required">Occupation</span></label>
-                              <input type="text" class="form-control" name="occupation" style="text-transform:uppercase" id="occupation" placeholder="Occupation" required/>
+                              <input type="text" class="form-control" name="occupation" id="occupation" placeholder="Occupation" required/>
                             </div>
 
                             <div class="col-md-4">
                               <label class="form-label" for="rupees-in-words"><span class="required">Reason</span></label>
-                              <input type="text" class="form-control" name="reason" id="reason" style="text-transform:uppercase" placeholder="Reason to stay" required/>
+                              <input type="text" class="form-control" name="reason" id="reason" placeholder="Reason to stay" required/>
                             </div>
   
                             
                             <div class="col-12 d-flex justify-content-between">
-                            <button class="btn btn-label-secondary btn-prev"> <i class="ti ti-arrow-left me-sm-1 me-0"></i>
-                              <span class="align-middle d-sm-inline-block d-none">Previous</span>
-                            </button>
-                            <button class="btn btn-primary btn-next"> <span class="align-middle d-sm-inline-block d-none me-sm-1">Next</span> <i class="ti ti-arrow-right"></i></button>
-                          </div>
+                              <button class="btn btn-label-secondary btn-prev">
+                                <i class="ti ti-arrow-left me-sm-1"></i>
+                                <span class="align-middle d-sm-inline-block d-none">Previous</span>
+                              </button>
+                            
+                              <button type="button"class="btn btn-primary btn-next"  id="repeat-next">
+                                <span class="align-middle d-sm-inline-block d-none me-sm-1">Next</span>
+                                <i class="ti ti-arrow-right"></i>
+                              </button>
+                            </div>
                           </div>
                         </div>
                         <!-- All No of Person -->
@@ -511,7 +517,7 @@
                                   </div>
                                   <div class="mb-3 col-lg-6 col-xl-2 col-12 mb-0">
                                     <label class="form-label" for="form-repeater-1-2">Age</label>
-                                    <input type="number" id="member_age" name="m_age[]" class="form-control" placeholder="your age"  maxlength="2" required oninput="javascript: if (this.value.length > 2) this.value = this.value.slice(0, 2);"  />
+                                    <input type="number" id="member_age" name="m_age[]" class="form-control" placeholder="your age"  />
                                   </div>
                                   
                                   
@@ -739,8 +745,11 @@
                 type:'GET',
                 success:function(response){
                     if(response==1)
-                      { $("#submitbtn").prop('disabled',true);}
-                    else{ $("#submitbtn").prop('disabled',false);}
+                      { $("#submitbtn").prop('disabled',true);
+                        $("#error").html("Phone no alraedy exit");
+                      }
+                    else{ $("#submitbtn").prop('disabled',false);
+                    $("#error").html("");}
                     }
                 });
       });
@@ -760,10 +769,10 @@
             city: city
         },
         success: function(response){
+          alert(response[0]['email']);
           $("#member_email").val(response[0]['email']); // Assuming the server returns a JSON object with a “name” property
         }
     });
-    alert("submit");
 });
       </script>
     <script>
@@ -1195,7 +1204,7 @@ $(document).ready(function () {
                                  ' </div>'+
                                  ' <div class="mb-3 col-lg-6 col-xl-2 col-12 mb-0">'+
                                   '  <label class="form-label" for="form-repeater-1-2">Age</label>'+
-                                  '  <input type="number" id="member_age'+i+'" name="m_age[]" class="form-control" placeholder="your age"  maxlength="2" required oninput="javascript: if (this.value.length > 2) this.value = this.value.slice(0, 2);"  />'+
+                                  '  <input type="number" id="member_age'+i+'" name="m_age[]" class="form-control" placeholder="your age" />'+
                                 '  </div>'+
                                   
                                   
@@ -1367,6 +1376,74 @@ $(document).ready(function() {
   });
 });
 </script>
+
+
+
+
+
+<!-- <script>
+const wizardValidation = document.querySelector('#wizard-validation');
+
+if (typeof wizardValidation !== undefined && wizardValidation !== null) {
+  // Wizard form
+  const wizardValidationForm = wizardValidation.querySelector('#room_booking');
+  // Wizard steps
+  const wizardValidationFormStep1 = wizardValidationForm.querySelector('#account-details');
+  const wizardValidationFormStep2 = wizardValidationForm.querySelector('#personal-info');
+  const wizardValidationFormStep3 = wizardValidationForm.querySelector('#address');
+  // Wizard next prev button
+  const wizardValidationNext = [].slice.call(wizardValidationForm.querySelectorAll('.btn-next'));
+  const wizardValidationPrev = [].slice.call(wizardValidationForm.querySelectorAll('.btn-prev'));
+
+  let validationStepper = new Stepper(wizardValidation, {
+    linear: true
+  });
+  const FormValidation1 = FormValidation.formValidation(wizardValidationFormStep1, {
+  
+  fields: {
+    name: {
+      validators: {
+        notEmpty: {
+          message: 'The name is required'
+        }
+      }
+    },
+    email: {
+      validators: {
+        notEmpty: {
+          message: 'The Email is required'
+        },
+        emailAddress: {
+          message: 'The value is not a valid email address'
+        }
+      }
+    },
+    // ... other fields ...
+  },
+  plugins: {
+    trigger: new FormValidation.plugins.Trigger(),
+      bootstrap5: new FormValidation.plugins.Bootstrap5({
+        // Use this for enabling/changing valid/invalid class
+        // eleInvalidClass: '',
+        eleValidClass: ''
+      }),
+      autoFocus: new FormValidation.plugins.AutoFocus(),
+      submitButton: new FormValidation.plugins.SubmitButton()
+    }
+    init: instance => {
+      instance.on('plugins.message.placed', function(e) {
+        //* Move the error message out of the `input-group` element
+        if (e.element.parentElement.classList.contains('input-group')) {
+          e.element.parentElement.insertAdjacentElement('afterend', e.messageElement);
+        }
+      });
+  }
+}).on('core.form.valid', function() {
+  validationStepper.next();
+});
+
+</script> -->
+
 <script>
     document.addEventListener("DOMContentLoaded", function() {
         const form = document.getElementById("room_booking");
@@ -1405,87 +1482,7 @@ $(document).ready(function() {
         });
     });
 </script>
-<script>
-  const wizardValidation = document.querySelector('#wizard-validation');
-
-  if (typeof wizardValidation !== 'undefined' && wizardValidation !== null) {
-    // Wizard form
-    const wizardValidationForm = wizardValidation.querySelector('#room_booking');
-    // Wizard steps
-    const wizardValidationFormStep1 = wizardValidationForm.querySelector('#account-details');
-
-    let validationStepper = new Stepper(wizardValidation, {
-      linear: true
-    });
-
-    const formValidationInstance = FormValidation.formValidation(wizardValidationFormStep1, {
-      fields: {
-        name: {
-          validators: {
-            notEmpty: {
-              message: 'The name is required'
-            },
-            stringLength: {
-              min: 6,
-              max: 30,
-              message: 'The name must be between 6 and 30 characters long'
-            },
-            regexp: {
-              regexp: /^[a-zA-Z0-9 ]+$/,
-              message: 'The name can only consist of letters, numbers, and spaces'
-            }
-          }
-        },
-        email: {
-          validators: {
-            notEmpty: {
-              message: 'The Email is required'
-            },
-            emailAddress: {
-              message: 'The value is not a valid email address'
-            }
-          }
-        },
-        // Add other fields for the first step here
-      },
-      plugins: {
-        trigger: new FormValidation.plugins.Trigger(),
-        bootstrap5: new FormValidation.plugins.Bootstrap5(),
-        autoFocus: new FormValidation.plugins.AutoFocus(),
-        submitButton: new FormValidation.plugins.SubmitButton(),
-      },
-      init: instance => {
-        instance.on('plugins.message.placed', function(e) {
-          if (e.element.parentElement.classList.contains('input-group')) {
-            e.element.parentElement.insertAdjacentElement('afterend', e.messageElement);
-          }
-        });
-      }
-    }).on('core.form.valid', function() {
-      validationStepper.next();
-    });
-
-    const wizardValidationNext = [].slice.call(wizardValidationForm.querySelectorAll('.btn-next'));
-    wizardValidationNext.forEach(item => {
-      item.addEventListener('click', event => {
-        formValidationInstance.validate().then(result => {
-          if (result === 'Valid') {
-            validationStepper.next();
-          }
-        });
-      });
-    });
-
-    const wizardValidationPrev = [].slice.call(wizardValidationForm.querySelectorAll('.btn-prev'));
-    wizardValidationPrev.forEach(item => {
-      item.addEventListener('click', event => {
-        validationStepper.previous();
-      });
-    });
-  }
-</script>
-
-
+s
 
 
 
