@@ -1,4 +1,5 @@
-/@extends('Auth.layouts.app')
+
+@extends('Auth.layouts.app')
 
 @section('Login - KVO')
 
@@ -76,7 +77,7 @@
                                 <div>
                                     {{Session::get("fail")}}
                                 </div>
-                                @endif
+              @endif
             </form>
 
           </div>
