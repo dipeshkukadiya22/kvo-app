@@ -263,12 +263,12 @@
                               <div class="col-md-4">
                                 <label class="form-label" for="basic-default-name"><span class="required">Age</span></label>
                                 <input type="number" class="form-control" name="age" id="basic-default-age" placeholder="Age" required/>
-                              </div>
+                                <div id="age" class="error-message" ></div></div>
     
                               <div class="col-4">
                                 <label class="form-label" for="collapsible-address"><span class="required">Address</span></label>
                                 <textarea name="collapsibleaddress" style="text-transform:uppercase" class="form-control" style="text-transform:uppercase" id="member-address" rows="1" placeholder="1456, Mall Road" required>{{ (!empty($member) ) ? $member->address : '' }}</textarea>
-                              </div>
+                                <div id="addres" class="error-message" ></div></div>
                                                         
                               
                               <!-- Basic -->
@@ -292,14 +292,14 @@
                               <div class="col-md-4">
                                 <label for="defaultFormControlInput" class="form-label"><span class="required">Sub Community</span></label>
                                 <input type="text" class="form-control" name="subcommunity" id="defaultFormControlInput" style="text-transform:uppercase" placeholder="John Doe" aria-describedby="defaultFormControlHelp" required/>
-                              </div>
+                                <div id="scommunity" class="error-message" ></div> </div>
 
                               
                               
                               <div class="col-md-4">
                                 <label for="defaultFormControlInput" class="form-label"><span class="required">City</span></label>
                                 <input type="text" class="form-control" name="city" id="member_city" style="text-transform:uppercase" placeholder="John Doe" aria-describedby="defaultFormControlHelp" value="{{ (!empty($member)) ? $member->city : '' }}" required/>
-                              </div>
+                                <div id="city1" class="error-message" ></div></div>
 
                               <div class="col-md-4">
                                 <label class="d-block form-label"><span class="required">Gender</span></label>
@@ -437,7 +437,7 @@
                             <div class="col-md-4">
                               <label class="form-label" for="basic-default-name"><span class="required">No. of Person</span></label>
                               <input type="number" class="form-control check-field"  name="no_of_person" id="no_of_person_id" placeholder="No of Person" value="1" required/>
-                            </div>
+                              <div id="noofperson" class="error-message" ></div></div>
                             <!-- Datetime Picker-->
                             <div class="col-md-4">
                               <label for="flatpickr-datetime" class="form-label"><span class="required">Check-In Date</span></label>
@@ -447,7 +447,7 @@
                             <div class="col-md-4">
                                 <label for="formFileMultiple" class="form-label"><span class="required">Identity Proof</span></label>
                                 <input class="form-control" type="file" name="id_proof[]" id="formFileMultiple" multiple required />
-                            </div>
+                                <div id="idproof" class="error-message" ></div></div>
   
                             <div class="col-md-4">
                               <label class="form-label" for="basic-default-name">Booking No</label>
@@ -860,10 +860,34 @@
     </script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
-$(document).ready(function() {
-  $(".btn-dropdown").click(function() {
-    $(this).parent().toggleClass("active");
-  });
+     $("#btn-step1").hover(function(){
+      var age=document.getElementById("basic-default-age").value;
+        var address=document.getElementById("member-address").value;
+        var subcommunity=document.getElementById("defaultFormControlInput").value;
+        var city=document.getElementById("member_city").value;
+        if(age === ""){ $("#age").html("Enter Age");} else{ $("#age").html("");}
+        if(address === ""){ $("#addres").html("Enter Address");} else{ $("#addres").html("");}
+        if(subcommunity === ""){ $("#scommunity").html("Enter Subcommunity");} else{ $("#scommunity").html("");}
+        if(city === ""){ $("#city1").html("Enter City");} else{ $("#city1").html("");}
+      });
+      $("#repeat-next").hover(function(e){
+        var noofperson=document.getElementById("no_of_person_id").value;
+        var idproof=document.getElementById("formFileMultiple").value;
+        var deposite=document.getElementById("deposit-amount").value;
+        var noofdays=document.getElementById("no_of_days").value;
+        var occupation1=document.getElementById("occupation").value;
+        var reason1=document.getElementById("reason").value;
+        if(noofperson === ""){ $("#noofperson").html("Enter No of Person");} else{ $("#noofperson").html("");}
+        if(idproof === ""){ $("#idproof").html("Upload Idproof");} else{ $("#idproof").html("");}
+        if(deposite === ""){ $("#deposite").html("Enter Deposite Amount");} else{ $("#deposite").html("");}
+        if(noofdays === ""){ $("#noofdays").html("Enter No of Days");} else{ $("#noofdays").html("");}
+        if(occupation1 === ""){ $("#occupation1").html("Enter Occupation");} else{ $("#occupation1").html("");}
+        if(reason1 === ""){ $("#reason1").html("Enter Reason");} else{ $("#reason1").html("");}
+      });
+    $(document).ready(function() {
+      $(".btn-dropdown").click(function() {
+      $(this).parent().toggleClass("active");
+    });
 
   // Hide the dropdown when clicking outside of it
   $(document).click(function(event) {
