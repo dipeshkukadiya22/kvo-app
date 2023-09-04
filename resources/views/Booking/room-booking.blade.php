@@ -263,13 +263,9 @@
 
                               <div class="col-md-4">
                                 <label class="form-label" for="basic-default-name"><span class="required">Age</span></label>
-<<<<<<< HEAD
                                 <input type="number" class="form-control" name="age" id="basic-default-age" placeholder="Age" oninput="format(this)" required/>
                               </div>
-=======
-                                <input type="number" class="form-control" name="age" id="basic-default-age" placeholder="Age" required/>
-                                <div id="age" class="error-message" ></div></div>
->>>>>>> e6c3a194ad37cb766aebf5aa24e17f6a2de46659
+
     
                               <div class="col-4">
                                 <label class="form-label" for="collapsible-address"><span class="required">Address</span></label>
@@ -297,13 +293,9 @@
                               
                               <div class="col-md-4">
                                 <label for="defaultFormControlInput" class="form-label"><span class="required">Sub Community</span></label>
-<<<<<<< HEAD
                                 <input type="text" class="form-control" name="subcommunity" id="defaultFormControlInput" style="text-transform:uppercase" aria-describedby="defaultFormControlHelp" required/>
                               </div>
-=======
-                                <input type="text" class="form-control" name="subcommunity" id="defaultFormControlInput" style="text-transform:uppercase" placeholder="John Doe" aria-describedby="defaultFormControlHelp" required/>
-                                <div id="scommunity" class="error-message" ></div> </div>
->>>>>>> e6c3a194ad37cb766aebf5aa24e17f6a2de46659
+
 
                               <div class="col-md-4">
                                 <label for="formFileMultiple" class="form-label"><span class="required">Identity Proof</span></label>
@@ -334,13 +326,9 @@
                               
                               <div class="col-md-4">
                                 <label for="defaultFormControlInput" class="form-label"><span class="required">City</span></label>
-<<<<<<< HEAD
                                 <input type="text" class="form-control" name="city" id="member_city" style="text-transform:uppercase" placeholder="city" aria-describedby="defaultFormControlHelp" value="{{ (!empty($member)) ? $member->city : '' }}" required/>
                               </div>
-=======
-                                <input type="text" class="form-control" name="city" id="member_city" style="text-transform:uppercase" placeholder="John Doe" aria-describedby="defaultFormControlHelp" value="{{ (!empty($member)) ? $member->city : '' }}" required/>
-                                <div id="city1" class="error-message" ></div></div>
->>>>>>> e6c3a194ad37cb766aebf5aa24e17f6a2de46659
+
 
                               <div class="col-md-4">
                                 <label class="d-block form-label"><span class="required">Gender</span></label>
@@ -549,32 +537,29 @@
                          
                             <hr>
                             <div class="col-md-4">
-<<<<<<< HEAD
+
                               <label class="form-label" for="basic-default-name">Booking No</label>
                               <input type="text" class="form-control" name="deposit_no" id="deposit_no" placeholder="Deposit No" value="{{$p_id+1}}" readonly/>
                             </div>
-                            
-=======
+                            <div>
+                        
                               <label class="form-label" for="basic-default-name"><span class="required">No. of Person</span></label>
                               <input type="number" class="form-control check-field"  name="no_of_person" id="no_of_person_id" placeholder="No of Person" value="1" required/>
-                              <div id="noofperson" class="error-message" ></div></div>
->>>>>>> e6c3a194ad37cb766aebf5aa24e17f6a2de46659
+                              <div id="noofperson" class="error-message" ></div>
+                            </div>
+
                             <!-- Datetime Picker-->
                             <div class="col-md-4">
                               <label for="flatpickr-datetime" class="form-label"><span class="required">Check-In Date</span></label>
                               <input type="text" class="form-control" name="check_in_date" placeholder="DD-MM-YYYY HH:MM" id="flatpickr-datetime" required/>
                             </div>
 
-<<<<<<< HEAD
-                            
 
-                           
-=======
                             <div class="col-md-4">
                                 <label for="formFileMultiple" class="form-label"><span class="required">Identity Proof</span></label>
                                 <input class="form-control" type="file" name="id_proof[]" id="formFileMultiple" multiple required />
                                 <div id="idproof" class="error-message" ></div></div>
->>>>>>> e6c3a194ad37cb766aebf5aa24e17f6a2de46659
+
   
                             
 
