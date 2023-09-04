@@ -273,7 +273,7 @@ class donation extends Controller
         $donation->community=$req->community;
         $donation->details=strtoupper($req->details);
         $donation->member_id=$req->name;
-        $donation->save();
+        $status=$donation->save();
         return redirect()->route('view_general_donation');
     }
     public function delete_general_donation($id)

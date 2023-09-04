@@ -214,7 +214,7 @@ button.swal2-cancel.btn.btn-label-danger {
                                     
                                     <div class="row">
                                         <div class="col-12">
-                                            <button type="submit" class="btn btn-primary mb-2 d-grid w-100">Update</button>
+                                            <button type="submit" id="submitbtn" class="btn btn-primary mb-2 d-grid w-100">Update</button>
                                             <button
                                             type="button"
                                             class="btn btn-label-secondary d-grid w-100"
@@ -447,9 +447,8 @@ button.swal2-cancel.btn.btn-label-danger {
 
     </script>
 
-
-<script>
-    $(document).ready(function () {
+    <script>
+      $(document).ready(function () {
         // Select all input fields with class 'amount-input'
         $('.amount-input').on('input', function () {
             var total = 0;
@@ -468,7 +467,7 @@ button.swal2-cancel.btn.btn-label-danger {
             // Convert the total to words and update the 'અંકે રૂપિયા' input field
             NumToWord(total, 'ankers');
         });
-    });
+      });
   
     function onlyNumbers(evt) {
         var e = event || evt; // For trans-browser compatibility
@@ -633,6 +632,7 @@ button.swal2-cancel.btn.btn-label-danger {
         const myOffcanvas = document.getElementById('offcanvasBackdrop');
         let a=new bootstrap.Offcanvas(myOffcanvas);
         a.show();
+       // $('#submitbtn').prop('disabled','true');
         var member_id=[];
         var temp=document.getElementById('name');
           for(i=0;i<temp.options.length;i++)
@@ -664,8 +664,11 @@ button.swal2-cancel.btn.btn-label-danger {
               }
             });
     }
-</script>
 
+</script>
+<script>
+
+  </script>
 <script>
   function delete_general_donation(id)
   {
@@ -695,10 +698,18 @@ button.swal2-cancel.btn.btn-label-danger {
           }
       });
   }
-
-    $("#kvo_update_general_donation").submit(function(){
-        var haste=document.getElementById("haste").value;
+  let form = document.querySelector('kvo_update_general_donation');
+alert("hi");
+// Listen for input events on the form
+form.addEventListener('input', function (event) {
+  alert("input");
+	// Do something...
+});
+ /* $("#kvo_update_general_donation :input").change(function() {
+     $("#kvo_update_general_donation").data("changed",true);
+    var haste=document.getElementById("haste").value;
         var details=document.getElementById("details").value;
+     
         if(haste ==='' && details === '')
         {
             Swal.fire({
@@ -717,7 +728,30 @@ button.swal2-cancel.btn.btn-label-danger {
                 $("kvo_update_general_donation").submit();
            });
         }
-    });
+});
+  /*  $("#kvo_update_general_donation").submit(function(){
+        var haste=document.getElementById("haste").value;
+        var details=document.getElementById("details").value;
+     
+        if(haste ==='' && details === '')
+        {
+            Swal.fire({
+                text: "Sorry, looks like there are some errors detected, please try again.",
+                icon: "error",
+            });
+            return false; // Prevent form submission
+        } else {
+            Swal.fire({
+                position: 'middle-center',
+                icon: 'success',
+                title: 'General Donation has been successfully updated!',
+                showConfirmButton: false,
+                timer: 1500
+                }).then(function() {
+                $("kvo_update_general_donation").submit();
+           });
+        }
+    });*/
 </script>
 
 @endsection

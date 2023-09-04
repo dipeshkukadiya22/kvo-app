@@ -87,7 +87,7 @@
                 <div class="col-md mb-4 mb-md-0">
                   <div class="card">
                     <div class="card-body">
-                      <form class="browser-default-validation" method="POST" action="{{route('add_general_donation')}}">
+                      <form class="browser-default-validation needs-validation" method="POST" action="{{route('add_general_donation')}}">
                         <div class="row g-3">
                           <div class="col-12">
                             <h6 class="fw-semibold">1. Personal Details</h6>
@@ -120,7 +120,7 @@
                               id="depo_id"
                               name="depo_id"
                               value="{{$depo_id + 1}}"
-                              required readonly/>
+                               readonly/>
                           </div>
                           <div class="col-md-4">
                             <label class="form-label" for="basic-default-name">હસ્તે</label>
@@ -130,8 +130,12 @@
                               id="haste"
                               name="haste"
                               style="text-transform:uppercase"
+<<<<<<< HEAD
                               placeholder="John Doe"
                               value="SELF"
+=======
+                              placeholder=""
+>>>>>>> e6c3a194ad37cb766aebf5aa24e17f6a2de46659
                               required />
                          
                         	</div>
@@ -237,7 +241,11 @@
                 success:function(response){
                   $('#phone').val(response['phone_no']);
                   $('#city1').val(response['city']);
+<<<<<<< HEAD
                  
+=======
+                  $('#haste').val("SELF");
+>>>>>>> e6c3a194ad37cb766aebf5aa24e17f6a2de46659
                 }
               });
         </script>
@@ -278,13 +286,39 @@
                   success:function(response){   
                         $("#city1").val(response['city']); 
                         $("#phone").val(response['phone_no']); 
+<<<<<<< HEAD
                      
+=======
+                        $("#haste").val("SELF");
+>>>>>>> e6c3a194ad37cb766aebf5aa24e17f6a2de46659
                     
                   }
                 });
             });
     </script>
+    <script>
+      // Example starter JavaScript for disabling form submissions if there are invalid fields
+    (() => {
+  'use strict';
 
+  // Fetch all the forms we want to apply custom Bootstrap validation styles to
+  const forms = document.querySelectorAll('.needs-validation');
+
+  // Loop over them and prevent submission
+  Array.prototype.slice.call(forms).forEach((form) => {
+ 
+    form.addEventListener('submit', (event) => {
+      alert("hi");
+      if (!form.checkValidity()) {
+        
+        event.preventDefault();
+        event.stopPropagation();
+      }
+      form.classList.add('was-validated');
+    }, false);
+  });
+})();
+    </script>
 @endsection
 
 @endsection
