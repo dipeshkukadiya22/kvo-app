@@ -130,25 +130,25 @@
                                 <form id="kvo_update_member" class="browser-default-validation" method="POST" action="{{route('update_members')}}">
                                   @csrf
                                   <div class="mb-3">
-                                    <label class="form-label" for="basic-default-name">Name</label>
-                                    <input type="text" class="form-control" style="text-transform:uppercase" name="p_id" id="p_id" placeholder="John Doe" value="" />
+                                    <label class="form-label" for="basic-default-name">No.</label>
+                                    <input type="text" class="form-control"  name="p_id" id="p_id" placeholder="" value="" readonly/>
                                   </div>
 
                                   <div class="mb-3">
                                     <label class="form-label" for="basic-default-name">Name</label>
-                                    <input type="text" class="form-control"  name="m_name1" id="m_name1" placeholder="John Doe" value="" />
+                                    <input type="text" class="form-control" style="text-transform:uppercase" name="m_name1" id="m_name1" placeholder="John Doe" value="" />
                                   </div>
                                  
                                 
                                   <div class="mb-3">
                                     <label class="form-label" for="basic-default-email">Email</label>
-                                    <input type="email" id="email1" name="email1" class="form-control" placeholder="john.doe"  />
+                                    <input type="email" id="email1" name="email1" class="form-control" placeholder="john@gmail.com"  />
                                   </div>
 
                                   <div class="mb-3">
                                     <label class="form-label" for="multicol-phone">Phone Number</label>
                                     <input type="number" id="phone_no1" name="phone_no1" class="form-control phone-mask" placeholder="658 799 8941" aria-label="658 799 8941" oninput="javascript: if (this.value.length > 10) this.value = this.value.slice(0, 10);" />
-                                  </div>
+                                    <div id="error" class="error-message" ></div>
                                   <div class="mb-3">
                                     <label class="form-label" for="city">City</label>
                                     <input type="text" class="form-control" name="city1" style="text-transform:uppercase" id="city1" placeholder="Bhuj"  />
@@ -161,7 +161,7 @@
                                   
                                   <div class="row">
                                     <div class="col-12">
-                                      <button type="submit" id="update_submit" class="btn btn-primary mb-2 d-grid w-100">Submit</button>
+                                      <button type="submit" id="submitbtn" class="btn btn-primary mb-2 d-grid w-100">Submit</button>
                                       <button type="button" class="btn btn-label-secondary d-grid w-100" data-bs-dismiss="offcanvas"> Cancel </button>
                                     </div>
                                   </div>
@@ -200,6 +200,24 @@
     <script src="{{ asset('assets/js/extended-ui-sweetalert2.js') }}"></script>
 
     <!-- BEGIN: Page JS-->
+    <script>
+      $("#phone_no1").focusout(function(){
+        var contact=document.getElementById("phone_no1").value;
+      
+        $.ajax({
+                url:"{{url('check_num')}}"+"/"+ contact,
+                type:'GET',
+                success:function(response){
+                    if(response==1)
+                      { $("#submitbtn").prop('disabled',true);
+                        $("#error").html("Phone no alraedy exit");
+                      }
+                    else{ $("#submitbtn").prop('disabled',false);
+                    $("#error").html("");}
+                    }
+                });
+      });
+      </script>
    <script>
     
     var dt_basic_table = $('.datatables-basic');
@@ -419,7 +437,7 @@ function delete_member(id)
                 }
             });
           }
-    $("#update_submit").click(function(){
+    $("#submitbtn").click(function(){
         var email=document.getElementById("email1").value;
         var phone=document.getElementById("phone_no1").value;
         var city=document.getElementById("city1").value;

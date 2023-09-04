@@ -236,7 +236,7 @@
                 success:function(response){
                   $('#phone').val(response['phone_no']);
                   $('#city1').val(response['city']);
-                  $('#haste').val(response['m_name']);
+                  $('#haste').val("SELF");
                 }
               });
         </script>
@@ -277,7 +277,7 @@
                   success:function(response){   
                         $("#city1").val(response['city']); 
                         $("#phone").val(response['phone_no']); 
-                        $("#haste").val(response['m_name']);
+                        $("#haste").val("SELF");
                     
                   }
                 });
