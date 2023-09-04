@@ -196,7 +196,8 @@ div.card-datatable [class*=col-md-] {
                                               <!--<td>{{$row->status}}</td>}}-->
                                               <td>{{date("d-m-Y",strtotime($row->check_in_date))}}</td>
                                               <td>{{date("d-m-Y",strtotime($row->check_in_date . '+' .$row->no_of_days . 'days'))}}</td>
-                                              <td>{{$row->no_of_days}}</td>
+                                              @php $date=Date("Y-m-d");$ck_dte=$row->check_in_date; $days=date_diff($date,"2023-09-8");@endphp
+                                              <td></td>
                                               <td>{{$row->deposite_rs}}</td>
                                               <td>{{$row->payable_amount}}</td>
                                               <td>{{$row->payment_mode}}</td>
@@ -266,13 +267,13 @@ div.card-datatable [class*=col-md-] {
                                   <!-- Datetime Picker-->
                                   <div class="col mb-3">
                                     <label for="flatpickr-date" class="form-label">આગમન તારીખ / સમય</label>
-                                    <input type="text" class="form-control" name="check_in_date" id="check_in_date"  readonly> 
+                                    <input type="text" class="form-control" name="check_in_date" id="check_in_date"  readonly/> 
                                   </div>
 
                                   <!-- Datetime Picker-->
                                   <div class="col mb-3">
                                     <label for="flatpickr-datetime" class="form-label">ચેક આઉટ તારીખ / સમય</label>
-                                    <input type="date" class="form-control" name="check_out_date" id="check_out_date" placeholder="DD-MM-YYYY HH:MM"  />
+                                    <input type="text" class="form-control" name="check_out_date" id="check_out_date" readonly/>
                                   </div>
 
   
@@ -570,7 +571,7 @@ div.card-datatable [class*=col-md-] {
                 type:'GET',
                   success:function(response){
                       var sr_no=response[0]['m_id'];
-             
+                      var amt=0;
                       $("#bookingId").val(response[0]['r_id']);
                       $("#name").val(response[0]['m_name']);
                       $("#city").val(response[0]['city']);
@@ -589,6 +590,7 @@ div.card-datatable [class*=col-md-] {
                         $("#dlx_no_of_days").val(response[0]['no_of_days']);
                         $("#dlx_amount").val(response[0]['no_of_days'] * response[0]['ac_amount']);
                         $("#dlx_room_total").val(response[0]['no_of_days'] * response[0]['ac_amount']);
+                        amt+=parseInt(document.getElementById('dlx_room_total').value);
                       }
                       if(room==303 || room==304 ||room==305 || room==306 || room==403)
                       {
@@ -597,6 +599,7 @@ div.card-datatable [class*=col-md-] {
                         $("#ac_no_of_days").val(response[0]['no_of_days']);
                         $("#ac_amount").val(response[0]['no_of_days'] * response[0]['ac_amount']);
                         $("#ac_room_total").val(response[0]['no_of_days'] * response[0]['ac_amount']);
+                        amt+=prseInt(document.getElementById('ac_room_total').value);
                       }
                       if(room==201 || room==202 ||room==203 || room==204 ||room==205 || room==206 || room==404 || room==405 || room==406)
                       {
@@ -605,6 +608,7 @@ div.card-datatable [class*=col-md-] {
                         $("#non_ac_no_of_days").val(response[0]['no_of_days']);
                         $("#non_ac_amount").val(response[0]['no_of_days'] * response[0]['non_ac_amount']);
                         $("#non_ac_room_total").val(response[0]['no_of_days'] * response[0]['non_ac_amount']);
+                        amt+=parseInt(document.getElementById('non_ac_room_total').value);
                       }
                       
                       if(room==1 || room==2 ||room==3 || room==4 ||room==5 || room==6 ||room==7 || room==8 ||room==9 || room==10)
@@ -614,6 +618,7 @@ div.card-datatable [class*=col-md-] {
                         $("#non_dmt_ac_no_of_days").val(response[0]['no_of_days']);
                         $("#non_dmt_ac_amount").val(response[0]['no_of_days'] * response[0]['door_mt_amount']);
                         $("#non_dmt_ac_room_total").val(response[0]['no_of_days'] * response[0]['door_mt_amount']);
+                        amt+=parseInt(document.getElementById('non_dmt_ac_room_total').value);
                       }
 
                       if(room==11 || room==12 ||room==13 || room==14 ||room==15 || room==16 ||room==17 || room==18 ||room==19 || room==20)
@@ -623,6 +628,7 @@ div.card-datatable [class*=col-md-] {
                         $("#dmt_ac_no_of_days").val(response[0]['no_of_days']);
                         $("#dmt_ac_amount").val(response[0]['no_of_days'] * response[0]['door_mt_amount']);
                         $("#dmt_ac_room_total").val(response[0]['no_of_days'] * response[0]['door_mt_amount']);
+                        amt+=parseInt(document.getElementById('dmt_ac_room_total').value);
                       }
                     }
                     var a=document.getElementById("ac_room").value;
@@ -656,6 +662,10 @@ div.card-datatable [class*=col-md-] {
                           } else {
                               $("#dlx_room_Excharge").val ("0");
                           }
+                          var deposite=parseInt(document.getElementById("deposite").value);
+                          $('#total').val(amt);
+                          $("#net_amount").val(amt-deposite);
+                          convertToWords();
                   }
                 });
       }
@@ -704,6 +714,7 @@ div.card-datatable [class*=col-md-] {
       dom: '<"card-header flex-column flex-md-row"<"head-label text-center"><"dt-action-buttons text-end pt-3 pt-md-0"B>><"row"<"col-sm-12 col-md-6"l><"col-sm-12 col-md-6 d-flex justify-content-center justify-content-md-end"f>>t<"row"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>',
       displayLength: 7,
       lengthMenu: [7, 10, 25, 50, 75, 100],
+      order:[0,'desc'],
       buttons: [
         {
           extend: 'collection',

@@ -89,13 +89,13 @@ button.swal2-cancel.btn.btn-label-danger {
                                         <table id="DataTables_Table_0" class="datatables-basic table">
                                           <thead>
                                               <tr>
-                                                  <th>Rec No</th>
-                                                  <th>Name</th>
-                                                  <th>Date</th>
-                                                  <th>City</th>
-                                                  <th>Amount</th>
-                                                  <th>Details</th>
-                                                  <th>Action</th>
+                                                  <th><b>Rec No</b></th>
+                                                  <th><b>Name</b></th>
+                                                  <th><b>Date</b></th>
+                                                  <th><b>City</b></th>
+                                                  <th><b>Amount</b></th>
+                                                  <th><b>Details</b></th>
+                                                  <th><b>Action</b></th>
                                               </tr>
                                           </thead>
                                           @foreach($expense as $row)
@@ -202,7 +202,7 @@ button.swal2-cancel.btn.btn-label-danger {
 
                                     <div class="col-md-12">
                                         <label class="form-label" for="collapsible-address">વિગત</label>
-                                        <textarea name="details" class="form-control" id="details" rows="1" style="text-transform:uppercase" placeholder="Hello,"></textarea>
+                                        <textarea name="details" class="form-control" id="details" rows="1" style="text-transform:uppercase" placeholder="Hello," required></textarea>
                                       
                                     </div>
                                     <div class="col-md-12">
@@ -274,7 +274,7 @@ button.swal2-cancel.btn.btn-label-danger {
       ],
         
       dom: '<"card-header flex-column flex-md-row"<"head-label text-center"><"dt-action-buttons text-end pt-3 pt-md-0"B>><"row"<"col-sm-12 col-md-6"l><"col-sm-12 col-md-6 d-flex justify-content-center justify-content-md-end"f>>t<"row"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>',
-      displayLength: 7,
+      displayLength: 10,
       order: [0,'desc'],
       lengthMenu: [7, 10, 25, 50, 75, 100],
       buttons: [

@@ -131,6 +131,7 @@
                               name="haste"
                               style="text-transform:uppercase"
                               placeholder="John Doe"
+                              value="SELF"
                               required />
                          
                         	</div>
@@ -180,7 +181,7 @@
                           </div>
                           <div class="row mt-3">
                             <div class="col-12">
-                              <button type="submit" class="btn btn-primary">Submit</button>
+                              <button type="submit" class="btn btn-primary"  target="_blank">Submit</button>
                             </div>
                           </div>
                         </div>
@@ -236,7 +237,7 @@
                 success:function(response){
                   $('#phone').val(response['phone_no']);
                   $('#city1').val(response['city']);
-                  $('#haste').val(response['m_name']);
+                 
                 }
               });
         </script>
@@ -277,7 +278,7 @@
                   success:function(response){   
                         $("#city1").val(response['city']); 
                         $("#phone").val(response['phone_no']); 
-                        $("#haste").val(response['m_name']);
+                     
                     
                   }
                 });

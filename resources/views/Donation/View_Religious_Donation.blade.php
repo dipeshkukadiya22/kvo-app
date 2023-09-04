@@ -89,14 +89,14 @@ button.swal2-cancel.btn.btn-label-danger {
                                         <table id="DataTables_Table_0" class="datatables-basic table">
                                           <thead>
                                               <tr>
-                                                  <th>Rec No</th>
-                                                  <th>Name</th>
-                                                  <th>Date</th>
-                                                  <th>Trust</th>
-                                                  <th>Haste</th>
-                                                  <th>Total</th>
-                                                  <th>Payment Mode</th>
-                                                  <th>Action</th>
+                                                  <th><b>Rec No</b></th>
+                                                  <th><b>Name</b></th>
+                                                  <th><b>Date</b></th>
+                                                  <th><b>Trust</b></th>
+                                                  <th><b>Haste</b></th>
+                                                  <th><b>Total</b></th>
+                                                  <th><b>Payment Mode</b></th>
+                                                  <th><b>Action</b></th>
                                               </tr>
                                           </thead>
                                           @foreach($donation as $row)
@@ -445,7 +445,7 @@ button.swal2-cancel.btn.btn-label-danger {
       ],
         
       dom: '<"card-header flex-column flex-md-row"<"head-label text-center"><"dt-action-buttons text-end pt-3 pt-md-0"B>><"row"<"col-sm-12 col-md-6"l><"col-sm-12 col-md-6 d-flex justify-content-center justify-content-md-end"f>>t<"row"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>',
-      displayLength: 7,
+      displayLength: 10,
       lengthMenu: [7, 10, 25, 50, 75, 100],
       order: [0,'desc'],
       buttons: [

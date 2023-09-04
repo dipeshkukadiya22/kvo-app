@@ -80,7 +80,7 @@
           <script>
             document.write(new Date().getFullYear());
           </script>
-          , made with ❤️ by <a href="https://pixinvent.com" target="_blank" class="fw-semibold">TEQUE7</a>
+          , made with ❤️ by <a href="https://teque7.com/" target="_blank" class="fw-semibold">TEQUE7</a>
         </div>
         <!-- <div>
           <a href="https://themeforest.net/licenses/standard" class="footer-link me-4" target="_blank"

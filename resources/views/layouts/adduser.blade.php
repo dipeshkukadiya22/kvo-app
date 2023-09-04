@@ -9,9 +9,7 @@
 
   <div class="mb-3">
     <label class="form-label" for="multicol-phone"><span class="required">Phone Number</span></label>
-    <input type="text" name="phone_no" id="multicol-phone" class="form-control phone-mask" placeholder="658 799 8941" minlength="10" maxlength="10"
-                            
-                              oninput="numberOnly(this.id);"   required/>
+    <input type="text" name="phone_no" id="multicol-phone" class="form-control phone-mask" placeholder="658 799 8941"pattern="[1-9]{1}[0-9]{9}" maxlength="10" required/>
                               <div id="error" class="error-message" ></div>
   </div>
   <div class="mb-3">
@@ -35,9 +33,18 @@
   </div>
 </form>
 <script>
-function numberOnly(id) {
-    var element = document.getElementById(id);
-    element.value = element.value.replace(/[^0-9]/gi, "");
-}
+const contactInput = document.getElementById('phone_no');
+
+contactInput.addEventListener('input', function () {
+  const desiredLength = 10;
+  const inputValue = this.value.trim();
+  
+  if (inputValue.length !== desiredLength) {
+    this.setCustomValidity(`Contact number should be exactly ${desiredLength} digits.`);
+  } else {
+    this.setCustomValidity('');
+  }
+});
+
 </script>
 

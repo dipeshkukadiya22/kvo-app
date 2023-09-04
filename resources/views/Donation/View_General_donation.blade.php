@@ -90,15 +90,15 @@ button.swal2-cancel.btn.btn-label-danger {
                                           <thead>
 		
                                               <tr >
-                                                  <th style='width:70px'>Rec No</th>
-                                                  <th style='width:70px'>Name</th>
-                                                  <th style='width:70px'>Date</th>
-                                                  <th style='width:70px'>Mobile No</th>
-                                                  <th style='width:70px'>City</th>
-                                                  <th style='width:70px'>Haste</th>
-                                                  <th style='width:70px'>Trust</th>
-                                                  <th style='width:70px'>Details</th>
-                                                  <th style='width:70px'>Action</th>
+                                                  <th style='width:70px'><b>Rec No</b></th>
+                                                  <th style='width:70px'><b>Name</b></th>
+                                                  <th style='width:70px'><b>Date</b></th>
+                                                  <th style='width:70px'><b>Mobile No</b></th>
+                                                  <th style='width:70px'><b>City</b></th>
+                                                  <th style='width:70px'><b>Haste</b></th>
+                                                  <th style='width:70px'><b>Trust</b></th>
+                                                  <th style='width:70px'><b>Details</b></th>
+                                                  <th style='width:70px'><b>Action</b></th>
                                               </tr>
                                           </thead>
                                           @foreach($donation_data as $row)
@@ -277,7 +277,7 @@ button.swal2-cancel.btn.btn-label-danger {
       ],
         
       dom: '<"card-header flex-column flex-md-row"<"head-label text-center"><"dt-action-buttons text-end pt-3 pt-md-0"B>><"row"<"col-sm-12 col-md-6"l><"col-sm-12 col-md-6 d-flex justify-content-center justify-content-md-end"f>>t<"row"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>',
-      displayLength: 7,
+      displayLength: 10,
       order: [0,'desc'],
       lengthMenu: [7, 10, 25, 50, 75, 100],
       buttons: [
