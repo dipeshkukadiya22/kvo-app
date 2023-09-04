@@ -263,9 +263,8 @@
 
                               <div class="col-md-4">
                                 <label class="form-label" for="basic-default-name"><span class="required">Age</span></label>
-                                <input type="number" class="form-control" name="age" id="basic-default-age" placeholder="Age" oninput="format(this)" required/>
+                                <input type="number" class="form-control" name="age" id="basic-default-age" placeholder="Age" required/>
                               </div>
-
     
                               <div class="col-4">
                                 <label class="form-label" for="collapsible-address"><span class="required">Address</span></label>
@@ -293,42 +292,15 @@
                               
                               <div class="col-md-4">
                                 <label for="defaultFormControlInput" class="form-label"><span class="required">Sub Community</span></label>
-                                <input type="text" class="form-control" name="subcommunity" id="defaultFormControlInput" style="text-transform:uppercase" aria-describedby="defaultFormControlHelp" required/>
+                                <input type="text" class="form-control" name="subcommunity" id="defaultFormControlInput" style="text-transform:uppercase" placeholder="John Doe" aria-describedby="defaultFormControlHelp" required/>
                               </div>
-
-
-                              <div class="col-md-4">
-                                <label for="formFileMultiple" class="form-label"><span class="required">Identity Proof</span></label>
-                                <input class="form-control" type="file" name="id_proof[]" id="formFileMultiple" multiple required />
-                            </div>
-
-                            <div class="col-md-4">
-                              <label class="form-label" for="basic-default-name"><span class="required">No. of Person</span></label>
-                              <input type="text"  class="form-control check-field"  name="no_of_person" id="no_of_person_id" placeholder="No of Person" value="1" maxlength="1"  oninput="this.value=this.value.replace(/[^1-9]/g,'');"  required/>
-                            </div>
-
-                            <div class="col-md-4">
-                              <label class="form-label" for="deposit-amount"><span class="required">No of Days</span></label>
-                              <input type="number" class="form-control" name="no_of_days" id="no_of_days" placeholder="No Of Days" required>
-                            </div>
-                            
-                            <div class="col-md-4">
-                              <label class="form-label" for="rupees-in-words"><span class="required">Occupation</span></label>
-                              <input type="text" class="form-control" style="text-transform:uppercase" name="occupation" id="occupation" placeholder="Occupation" required/>
-                            </div>
-
-                            <div class="col-md-4">
-                              <label class="form-label" for="rupees-in-words"><span class="required">Reason</span></label>
-                              <input type="text" class="form-control" style="text-transform:uppercase" name="reason" id="reason" placeholder="Reason to stay" required/>
-                            </div>
 
                               
                               
                               <div class="col-md-4">
                                 <label for="defaultFormControlInput" class="form-label"><span class="required">City</span></label>
-                                <input type="text" class="form-control" name="city" id="member_city" style="text-transform:uppercase" placeholder="city" aria-describedby="defaultFormControlHelp" value="{{ (!empty($member)) ? $member->city : '' }}" required/>
+                                <input type="text" class="form-control" name="city" id="member_city" style="text-transform:uppercase" placeholder="John Doe" aria-describedby="defaultFormControlHelp" value="{{ (!empty($member)) ? $member->city : '' }}" required/>
                               </div>
-
 
                               <div class="col-md-4">
                                 <label class="d-block form-label"><span class="required">Gender</span></label>
@@ -537,17 +509,9 @@
                          
                             <hr>
                             <div class="col-md-4">
-
-                              <label class="form-label" for="basic-default-name">Booking No</label>
-                              <input type="text" class="form-control" name="deposit_no" id="deposit_no" placeholder="Deposit No" value="{{$p_id+1}}" readonly/>
-                            </div>
-                            <div>
-                        
                               <label class="form-label" for="basic-default-name"><span class="required">No. of Person</span></label>
                               <input type="number" class="form-control check-field"  name="no_of_person" id="no_of_person_id" placeholder="No of Person" value="1" required/>
-                              <div id="noofperson" class="error-message" ></div>
                             </div>
-
                             <!-- Datetime Picker-->
                             <div class="col-md-4">
                               <label for="flatpickr-datetime" class="form-label"><span class="required">Check-In Date</span></label>
@@ -555,13 +519,20 @@
                             </div>
 
 
+<<<<<<< HEAD
+                            
+
+                           
+=======
                             <div class="col-md-4">
                                 <label for="formFileMultiple" class="form-label"><span class="required">Identity Proof</span></label>
                                 <input class="form-control" type="file" name="id_proof[]" id="formFileMultiple" multiple required />
-                                <div id="idproof" class="error-message" ></div></div>
-
+                            </div>
   
-                            
+                            <div class="col-md-4">
+                              <label class="form-label" for="basic-default-name">Booking No</label>
+                              <input type="text" class="form-control" name="deposit_no" id="deposit_no" placeholder="Deposit No" value="{{$p_id+1}}" readonly/>
+                            </div>
 
                            
   
