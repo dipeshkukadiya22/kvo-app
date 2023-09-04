@@ -65,6 +65,7 @@ div.card-datatable [class*=col-md-] {
       opacity: 1;
   }
   
+  
 </style>
 
 @endsection
@@ -108,16 +109,16 @@ div.card-datatable [class*=col-md-] {
                                           <thead>
                                          
                                               <tr>
-                                                <th>Booking No.</th>
-                                                <th>Name</th>
+                                                <th><b>Booking No.</b></th>
+                                                <th><b>Name</b></th>
                                                 {{--<th>Status</th>--}}
-                                                <th>Room No </th>
-                                                <th>Check In Date</th>
-                                                <th>Check Out Date</th>
-                                                <th>Rent</th>
-                                                <th>Days Of Stay</th>                       
-                                                <th>Deposite(₹) </th>
-                                                <th>Action</th>
+                                                <th><b>Room No </b> </th>
+                                                <th><b><b>Check In Date</b></th>
+                                                <th><b>Check Out Date</b></th>
+                                                <th><b>Rent</b></th>
+                                                <th><b>Days Of Stay</b></th>                       
+                                                <th><b>Deposite(₹) </b></th>
+                                                <th><b>Action</b></th>
                                               </tr>
                                           </thead>
                                           @foreach($checkout as $row)
@@ -468,7 +469,7 @@ div.card-datatable [class*=col-md-] {
                                               <!-- Datetime Picker-->
                                               <div class="col-md-4">
                                                 <label for="flatpickr-datetime" class="form-label">Check-In Date</label>
-                                                <input type="text" class="form-control" name="check_in_date" placeholder="DD-MM-YYYY HH:MM" id="flatpickr-datetime" readonly/>
+                                                <input type="text" class="form-control" name="check_in_date" placeholder="DD-MM-YYYY HH:MM" id="flatpickr-datetime"/>
                                               </div>
 
                                               <div class="col-md-4">
@@ -1148,7 +1149,7 @@ $(document).ready(function () {
       ],
         
       dom: '<"card-header flex-column flex-md-row"<"head-label text-center"><"dt-action-buttons text-end pt-3 pt-md-0"B>><"row"<"col-sm-12 col-md-6"l><"col-sm-12 col-md-6 d-flex justify-content-center justify-content-md-end"f>>t<"row"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>',
-      displayLength: 7,
+      displayLength: 10,
       lengthMenu: [7, 10, 25, 50, 75, 100],
       order:[0,'desc'],
       buttons: [
