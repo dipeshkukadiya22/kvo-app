@@ -61,7 +61,7 @@
                   <div class="content-header-left col-md-9 col-12 mb-2">
                     <div class="row breadcrumbs-top">
                       <div class="col-12">
-                        <h4 class="fw-bold py-3">જનરલ ડોનેશન રિપોર્ટ</h4>
+                        <h4 class="fw-bold py-3"></h4>
                       </div>
                     </div>
                   </div>
@@ -384,7 +384,7 @@
       
       
     });
-    $('div.head-label').html('<h5 class="card-title mb-0">DataTable with Buttons</h5>');
+    $('div.head-label').html('<h5 class="card-title mb-0">View All Members</h5>');
 
     </script>
 

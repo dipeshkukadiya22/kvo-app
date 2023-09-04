@@ -134,10 +134,10 @@
                               id="member-phone"
                               name="phone_no" 
                               class="form-control phone-mask"
-                              placeholder="658 799 8941"
+                              placeholder=""
                               value="{{ (!empty($member)) ? $member->phone_no : '' }}"
-                              aria-label="658 799 8941"
-                              required
+                              aria-label=""
+                            
                               oninput="javascript: if (this.value.length > 10) this.value = this.value.slice(0, 10);" readonly/>
 
                           </div>
