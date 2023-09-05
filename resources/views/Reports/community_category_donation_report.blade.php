@@ -113,7 +113,7 @@ div.card-datatable [class*=col-md-] {
                                     <form id="kvo_religious_category_donation_report" method="GET" class="browser-default-validation" action="{{route('show_community_category_donation_report')}}">
                                         <div class="row g-3">
   
-                                            <div class="col-md-3 mb-3">
+                                            <div class="col-md-4 mb-3">
                                                 <label class="form-label" for="basic-default-country">Donation Details</label>
                                                 <select class="form-select" id="category" name="category" required>
                                                 <option value="medical_checkup" {{ ($category == "medical_checkup") ? "selected" :""}}>શેઠશ્રી રતનશી ટોકરશી વોરા મેડિકલ ચેકઅપ સેન્ટર</option>

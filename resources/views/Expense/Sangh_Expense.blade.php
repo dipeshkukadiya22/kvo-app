@@ -96,7 +96,7 @@
                           @csrf
                           <div class="col-md-4">
                             <label for="select2Basic" class="form-label">નામ</label>
-                            <select id="name" name="name" class="select2 form-select form-select-lg" data-allow-clear="true" required>
+                            <select id="name" name="name" class="select2 form-select form-select-lg" data-allow-clear="true" placeholder="Select Name" required>
                             <option value=""></option>
                                 @foreach($member as $row)
                                     <option value="{{$row->p_id}}">{{$row->m_name." - ".$row->phone_no }}</option>
@@ -121,7 +121,7 @@
                               id="depo_id"
                               name="depo_id"
                               value="{{$depo_id + 1}}"
-                              required readonly/>
+                              readonly/>
                           </div>
                           <div class="col-12">
                             <h6 class="mt-2 fw-semibold">2. Expense Details</h6>
@@ -152,9 +152,9 @@
                               class="form-control"
                               id="ankers"
                               name="ankers"
+                              tabindex=-1
                               value=""
-                              {{-- placeholder="John Doe" --}}
-                              required readonly/>
+                              readonly/>
                         	</div>
                           <div class="row mt-3">
                             <div class="col-12">
@@ -207,13 +207,11 @@
     });
     $("#amount").focusout(function(){
       var amt=parseInt(document.getElementById("amount").value);
-      if(amt === 0)
-      {
+      if(amt === 0){
           $("#submitbtn1").prop('disabled',true);
+          $("#amount").focus();
           $("#amt").html("Fil Valid Amount ");
-      }
-      else
-      {
+      }else{
         $("#submitbtn1").prop('disabled',false);
         $("#amt").html("");
       }

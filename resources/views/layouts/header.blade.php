@@ -288,6 +288,12 @@
                   </a>
                 </li>
                 <li class="menu-item">
+                  <a href="{{route('community_category_donation_report')}}" class="menu-link">
+                    <i class="menu-icon tf-icons ti ti-checkbox"></i>
+                    <div data-i18n="Community Category Donation">Community Category Donation</div>
+                  </a>
+                </li>
+                <li class="menu-item">
                   <a href="{{route('religious_category_donation_report')}}" class="menu-link">
                     <i class="menu-icon tf-icons ti ti-checkbox"></i>
                     <div data-i18n="Religious Category Donation">Religious Category Donation</div>

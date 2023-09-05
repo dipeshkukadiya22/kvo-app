@@ -236,23 +236,24 @@ div.card-datatable [class*=col-md-] {
     
     var dt_basic_table = $('.datatables-basic');
     var dt_basic = dt_basic_table.DataTable({
-
-      
-        
+   
       dom: '<"card-header flex-column flex-md-row"<"head-label text-center"><"dt-action-buttons text-end pt-3 pt-md-0"B>><"row"<"col-sm-12 col-md-6"l><"col-sm-12 col-md-6 d-flex justify-content-center justify-content-md-end"f>>t<"row"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>',
       displayLength: 7,
       order : [0,'desc'],
       lengthMenu: [7, 10, 25, 50, 75, 100],
+      
       buttons: [
         {
           extend: 'collection',
           className: 'btn btn-label-primary dropdown-toggle',
+          title: 'Medical Report123',
           text: '<i class="ti ti-file-export me-sm-1"></i> <span class="d-none d-sm-inline-block">Export</span>',
           buttons: [
             {
               extend: 'print',
               text: '<i class="ti ti-printer me-1" ></i>Print',
               className: 'dropdown-item',
+              title: 'Medical Report123',
               exportOptions: {
                 columns: [0,1 ,2, 3,4,5],
                 // prevent avatar to be display
@@ -290,6 +291,7 @@ div.card-datatable [class*=col-md-] {
               extend: 'csv',
               text: '<i class="ti ti-file-text me-1" ></i>Csv',
               className: 'dropdown-item',
+              title: 'Medical Report123',
               exportOptions: {
                 columns: [0,1 ,2, 3,4,5],
                 // prevent avatar to be display
@@ -314,6 +316,7 @@ div.card-datatable [class*=col-md-] {
               extend: 'excel',
               text: '<i class="ti ti-file-spreadsheet me-1"></i>Excel',
               className: 'dropdown-item',
+              title: 'Medical Report123', 
               exportOptions: {
                 columns: [0,1 ,2, 3,4,5],
                 // prevent avatar to be display
@@ -374,7 +377,6 @@ div.card-datatable [class*=col-md-] {
     $('div.head-label').html('<h5 class="card-title mb-0">તબીબી સારવાર રિપોર્ટ</h5>');
 
     </script>
-
 
 <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
