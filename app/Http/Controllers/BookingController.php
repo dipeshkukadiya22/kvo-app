@@ -47,9 +47,9 @@ class BookingController extends Controller
         $details->member_id=$req->name;
        // $fileName = basename($_FILES[$req->id_proof[0]]["name"]);
         //dd($req->id_proof[0]);
-        if(count($req->id_proof)==1){ $details->id_proof=$req->id_proof[0]; }
+        /*if(count($req->id_proof)==1){ $details->id_proof=$req->id_proof[0]; }
 
-        else{$details->id_proof=$req->id_proof[0];$details->id_proof1=$req->id_proof[1];}
+        else{$details->id_proof=$req->id_proof[0];$details->id_proof1=$req->id_proof[1];}*/
         
         $details->occupation=$req->occupation;
         $details->reason=$req->reason;
