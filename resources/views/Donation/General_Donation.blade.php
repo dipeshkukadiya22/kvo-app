@@ -283,12 +283,8 @@
                   success:function(response){   
                         $("#city1").val(response['city']); 
                         $("#phone").val(response['phone_no']); 
-<<<<<<< HEAD
-                     
-=======
                         $("#haste").val("SELF");
->>>>>>> e6c3a194ad37cb766aebf5aa24e17f6a2de46659
-                    
+
                   }
                 });
             });
