@@ -141,6 +141,7 @@
                               name="haste"
                               style="text-transform:uppercase"
                               placeholder="John Doe"
+                              value="SELF"
                               required />
                          
                         	</div>
@@ -458,7 +459,7 @@
                 success:function(response){
                   $('#member-phone').val(response['phone_no']);
                   $('#member_city').val(response['city']);
-                  $('#haste').val(response['m_name']);
+               
                   
                 }
               });
@@ -678,7 +679,7 @@ function NumToWord(inputNumber, outputControl) {
                   success:function(response){   
                         $("#member_city").val(response['city']); 
                         $("#member-phone").val(response['phone_no']); 
-                        $("#haste").val(response['m_name']);
+                        
                   }
                 });
             });

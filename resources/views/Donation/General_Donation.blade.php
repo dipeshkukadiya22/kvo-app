@@ -130,7 +130,12 @@
                               id="haste"
                               name="haste"
                               style="text-transform:uppercase"
+<<<<<<< HEAD
+                              placeholder="John Doe"
+                              value="SELF"
+=======
                               placeholder=""
+>>>>>>> e6c3a194ad37cb766aebf5aa24e17f6a2de46659
                               required />
                          
                         	</div>
@@ -180,7 +185,7 @@
                           </div>
                           <div class="row mt-3">
                             <div class="col-12">
-                              <button type="submit" class="btn btn-primary">Submit</button>
+                              <button type="submit" class="btn btn-primary"  target="_blank">Submit</button>
                             </div>
                           </div>
                         </div>
@@ -236,7 +241,11 @@
                 success:function(response){
                   $('#phone').val(response['phone_no']);
                   $('#city1').val(response['city']);
+<<<<<<< HEAD
+                 
+=======
                   $('#haste').val("SELF");
+>>>>>>> e6c3a194ad37cb766aebf5aa24e17f6a2de46659
                 }
               });
         </script>
@@ -277,7 +286,11 @@
                   success:function(response){   
                         $("#city1").val(response['city']); 
                         $("#phone").val(response['phone_no']); 
+<<<<<<< HEAD
+                     
+=======
                         $("#haste").val("SELF");
+>>>>>>> e6c3a194ad37cb766aebf5aa24e17f6a2de46659
                     
                   }
                 });

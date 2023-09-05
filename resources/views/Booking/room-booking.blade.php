@@ -129,7 +129,7 @@
                               
                               <div class="mb-3">
                                 <label class="form-label" for="multicol-phone"><span class="required">Phone Number</span></label>
-                                <input type="number" name="phone_no" id="multicol-phone" class="form-control phone-mask " placeholder="658 799 8941"  maxlength="10" required oninput="javascript: if (this.value.length > 10) this.value = this.value.slice(0, 10);"/>
+                                <input type="number" name="phone_no" id="multicol-phone" class="form-control phone-mask " placeholder="658 799 8941"  pattern="[1-9]{1}[0-9]{9}" maxlength="10" required/>
                                 <div id="error" class="error-message" ></div>
                               </div>
 
@@ -179,19 +179,6 @@
                       <div class="line">
                         <i class="ti ti-chevron-right"></i>
                       </div>
-                      <div class="step" data-target="#personal-info">
-                        <button type="button" class="step-trigger">
-                          <span class="bs-stepper-icon">
-                            <svg viewBox="0 0 24 24">
-                              <use xlink:href="{{ asset('assets/svg/icons/form-wizard-booking.svg#wizardBooking') }}"></use>
-                            </svg>
-                          </span>
-                          <span class="bs-stepper-label">Booking Details</span>
-                        </button>
-                      </div>
-                      <div class="line">
-                        <i class="ti ti-chevron-right"></i>
-                      </div>
                       <div class="step" data-target="#address">
                         <button type="button" class="step-trigger">
                           <span class="bs-stepper-icon">
@@ -200,6 +187,20 @@
                             </svg>
                           </span>
                           <span class="bs-stepper-label">Member Details</span>
+                        </button>
+                      </div>
+                      
+                      <div class="line">
+                        <i class="ti ti-chevron-right"></i>
+                      </div>
+                      <div class="step" data-target="#personal-info">
+                        <button type="button" class="step-trigger">
+                          <span class="bs-stepper-icon">
+                            <svg viewBox="0 0 24 24">
+                              <use xlink:href="{{ asset('assets/svg/icons/form-wizard-booking.svg#wizardBooking') }}"></use>
+                            </svg>
+                          </span>
+                          <span class="bs-stepper-label">Booking Details</span>
                         </button>
                       </div>
                       
@@ -246,7 +247,7 @@
     
                               <div class="col-md-4">
                                   <label class="form-label" for="basic-default-email"><span class="required">Email</span></label>
-                                  <input type="email" id="member_email" name="email" class="form-control" placeholder="john.doe" value="{{ (!empty($member) )? $member->email : '' }}" required/>
+                                  <input type="email" id="member_email" name="email" class="form-control" placeholder="john@gmail.com" value="{{ (!empty($member) )? $member->email : '' }}" required/>
                               
                               </div>
 
@@ -262,8 +263,9 @@
 
                               <div class="col-md-4">
                                 <label class="form-label" for="basic-default-name"><span class="required">Age</span></label>
-                                <input type="number" class="form-control" name="age" id="basic-default-age" placeholder="Age" required/>
-                                <div id="age" class="error-message" ></div></div>
+                                <input type="number" class="form-control" name="age" id="basic-default-age" placeholder="Age" oninput="format(this)" required/>
+                              </div>
+
     
                               <div class="col-4">
                                 <label class="form-label" for="collapsible-address"><span class="required">Address</span></label>
@@ -277,9 +279,9 @@
                                 <select id="select2Basic" class="select2 form-select form-select-lg" data-allow-clear="true" name="community" required>
                                   <option value="Hindu" selected>Hindu</option>
                                   <option value="Jain">Jain</option>
-                                  <option value="Isalam">Isalam</option>
+                                  <option value="Isalam">Muslim</option>
                                   <option value="Sikh">Sikh</option>
-                                  <option value="Budda">Budda</option>
+                                  <option value="Budda">Buddhist</option>
                                   <option value="Other Religions">Other Religions</option>
 
 
@@ -291,15 +293,42 @@
                               
                               <div class="col-md-4">
                                 <label for="defaultFormControlInput" class="form-label"><span class="required">Sub Community</span></label>
-                                <input type="text" class="form-control" name="subcommunity" id="defaultFormControlInput" style="text-transform:uppercase" placeholder="John Doe" aria-describedby="defaultFormControlHelp" required/>
-                                <div id="scommunity" class="error-message" ></div> </div>
+                                <input type="text" class="form-control" name="subcommunity" id="defaultFormControlInput" style="text-transform:uppercase" aria-describedby="defaultFormControlHelp" required/>
+                              </div>
+
+
+                              <div class="col-md-4">
+                                <label for="formFileMultiple" class="form-label"><span class="required">Identity Proof</span></label>
+                                <input class="form-control" type="file" name="id_proof[]" id="formFileMultiple" multiple required />
+                            </div>
+
+                            <div class="col-md-4">
+                              <label class="form-label" for="basic-default-name"><span class="required">No. of Person</span></label>
+                              <input type="text"  class="form-control check-field"  name="no_of_person" id="no_of_person_id" placeholder="No of Person" value="1" maxlength="1"  oninput="this.value=this.value.replace(/[^1-9]/g,'');"  required/>
+                            </div>
+
+                            <div class="col-md-4">
+                              <label class="form-label" for="deposit-amount"><span class="required">No of Days</span></label>
+                              <input type="number" class="form-control" name="no_of_days" id="no_of_days" placeholder="No Of Days" required>
+                            </div>
+                            
+                            <div class="col-md-4">
+                              <label class="form-label" for="rupees-in-words"><span class="required">Occupation</span></label>
+                              <input type="text" class="form-control" style="text-transform:uppercase" name="occupation" id="occupation" placeholder="Occupation" required/>
+                            </div>
+
+                            <div class="col-md-4">
+                              <label class="form-label" for="rupees-in-words"><span class="required">Reason</span></label>
+                              <input type="text" class="form-control" style="text-transform:uppercase" name="reason" id="reason" placeholder="Reason to stay" required/>
+                            </div>
 
                               
                               
                               <div class="col-md-4">
                                 <label for="defaultFormControlInput" class="form-label"><span class="required">City</span></label>
-                                <input type="text" class="form-control" name="city" id="member_city" style="text-transform:uppercase" placeholder="John Doe" aria-describedby="defaultFormControlHelp" value="{{ (!empty($member)) ? $member->city : '' }}" required/>
-                                <div id="city1" class="error-message" ></div></div>
+                                <input type="text" class="form-control" name="city" id="member_city" style="text-transform:uppercase" placeholder="city" aria-describedby="defaultFormControlHelp" value="{{ (!empty($member)) ? $member->city : '' }}" required/>
+                              </div>
+
 
                               <div class="col-md-4">
                                 <label class="d-block form-label"><span class="required">Gender</span></label>
@@ -324,34 +353,108 @@
                             </div>
                           </div>
                         </div>
+                        <!--member details-->
+                        <div id="address" class="content">
+                          <div class="content-header mb-3">
+                            <small>Enter Member Details.</small>
+                          </div>
+                        
+                          
+                          <div class="row g-3">
+                            <!-- Form Repeater -->
+                            <div class="form-repeater">
+                              <div id="step2FormsContainer "class="col-12">
+                                <div class="dynamic-form">
+                                <div class="all-members" data-repeater-list="group-a">
+                                <div data-repeater-item>
+                               <div class="rep-form1">
+                                  <div class="row formrepeater1">
+                                    <div class="mb-3 col-lg-6 col-xl-3 col-12 mb-0">
+                                      <label class="form-label" for="form-repeater-1-1">Full Name</label>
+                                      <input type="text" id="full_name_form"  name="full_name" class="form-control" placeholder="john doe" value="{{ (!empty($member) )? $member->m_name : '' }}" onkeydown="return /[a-z]/i.test(event.key)" />
+                                    </div>
+                                    <div class="mb-3 col-lg-4 col-xl-3 col-12 mb-0">
+                                      <label class="form-label" for="form-repeater-1-2">Age</label>
+                                      <input type="text" id="member_age" name="m_age" class="form-control" placeholder="your age" oninput="format(this)"  />
+                                    </div>
+                                    <div class="mb-3 col-lg-6 col-xl-2 col-12 mb-0 ">
+                                        <label class="d-block form-label">Gender</label>
+                                        <div class="form-check form-check-inline">
+                                      <input class="form-check-input" type="radio" name="gender" id="gendermale" value="MALE" checked/>
+                                      <label class="form-check-label" for="gender">Male</label>
+
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                          <input class="form-check-input" type="radio" name="gender" id="genderfemale" value="FEMALE" />
+                                          <label class="form-check-label" for="gender">Female</label>
+                                        </div>
+
+                                        <div class="mb-3 col-lg-6 col-xl-3 col-12 mb-0" hidden>
+                                        <label class="form-label" for="form-repeater-1-2">gender</label>
+                                        <input type="text" id="gender_data" name="gender_data" class="form-control" placeholder="your age" value="MALE"/>
+                                      </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                      <label class="form-label" for="basic-default-country">Relation</label>
+                                      <select class="form-select" name="relation" id="member_relation" required>
+                                        <option value="SELF" selected>SELF</option>
+                                        <option value="MOTHER">MOTHER</option>
+                                        <option value="FATHER">FATHER</option>
+                                        <option value="BROTHER">BROTHER</option>
+                                        <option value="SISTER">SISTER</option>
+                                        <option value="UNCLE">UNCLE</option>
+                                        <option value="AUNTY">AUNTY</option>
+                                        <option value="GRAND MOTHER">GRAND MOTHER</option>
+                                        <option value="GRAND FATHER">GRAND FATHER</option>
+                                        <option value="FRIEND">FRIEND</option>
+                                      </select>
+                                    </div>
+                                    <div class="mb-3 col-lg-12 col-xl-2 col-12 d-flex align-items-center mb-0">
+                                      <button class="btn btn-label-danger mt-4" data-repeater-delete>
+                                        <i class="ti ti-x ti-xs me-1"></i>
+                                        <span class="align-middle">Delete</span>
+                                      </button>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="row rep-form">
+                                </div>
+                                  <hr />
+                                </div>
+                                </div>
+                                </div>
+                              </div>
+                              <div id="dynamicFormsContainer">
+                              </div>
+                              <div class="mb-0">
+                                <button class="btn btn-primary" data-repeater-create>
+                                  <i class="ti ti-plus me-1"></i>
+                                  <span class="align-middle">Add Members</span>
+                                </button>
+                              </div>
+                            </div>
+                            
+                            <!-- /Form Repeater -->
+                            <div class="col-12 d-flex justify-content-between">
+                              <button class="btn btn-label-secondary btn-prev">
+                                <i class="ti ti-arrow-left me-sm-1"></i>
+                                <span class="align-middle d-sm-inline-block d-none">Previous</span>
+                              </button>
+                              <button type="button" class="btn btn-primary btn-next" id="btn-step3">
+                                <span class="align-middle d-sm-inline-block d-none me-sm-1">Next</span>
+                                <i class="ti ti-arrow-right"></i>
+                              </button>
+                            </div>
+                          </div>
+                       
+                        </div>
                         <!-- Personal Info -->
                         <div id="personal-info" class="content">
                           <div class="content-header mb-3">
                             <small>Enter Your Booking Details.</small>
                           </div>
                           <div class="row g-3">
-                            
                            
-                            <!-- /Datetime Picker-->
-                            
-                            
-
-                              <!-- Primary -->
-                            {{-- <div class="col-md-4">
-                              <label for="select3Primary" class="form-label">Room Facility</label>
-                              <div class="select2-primary">
-                                <select id="select3Primary1" name="room_list" class="select2 form-select" multiple>
-                                  <option value="">Select Room</option>
-                                    <option value="A.C. Room No" name="room_facility"> A.C. Room.</option>
-                                    <option value="Non. A.C. Room No" name="room_facility">Non. A.C. Room</option>
-                                    <option value="Door Metri. Room No" name="room_facility">Door Metri. Room.</option>
-                                </select>
-                              </div>
-                            </div> --}}
-
-
-                            <!-- Primary -->
-
                             <div class="row">
                             <div class="col-md-2">
                                 <label for="select2Multiple1" class="form-label">Ac Room</label> 
@@ -433,32 +536,38 @@
                             </div>
                          
                             <hr>
-                            
                             <div class="col-md-4">
+
+                              <label class="form-label" for="basic-default-name">Booking No</label>
+                              <input type="text" class="form-control" name="deposit_no" id="deposit_no" placeholder="Deposit No" value="{{$p_id+1}}" readonly/>
+                            </div>
+                            <div>
+                        
                               <label class="form-label" for="basic-default-name"><span class="required">No. of Person</span></label>
                               <input type="number" class="form-control check-field"  name="no_of_person" id="no_of_person_id" placeholder="No of Person" value="1" required/>
-                              <div id="noofperson" class="error-message" ></div></div>
+                              <div id="noofperson" class="error-message" ></div>
+                            </div>
+
                             <!-- Datetime Picker-->
                             <div class="col-md-4">
                               <label for="flatpickr-datetime" class="form-label"><span class="required">Check-In Date</span></label>
                               <input type="text" class="form-control" name="check_in_date" placeholder="DD-MM-YYYY HH:MM" id="flatpickr-datetime" required/>
                             </div>
 
+
                             <div class="col-md-4">
                                 <label for="formFileMultiple" class="form-label"><span class="required">Identity Proof</span></label>
                                 <input class="form-control" type="file" name="id_proof[]" id="formFileMultiple" multiple required />
                                 <div id="idproof" class="error-message" ></div></div>
+
   
-                            <div class="col-md-4">
-                              <label class="form-label" for="basic-default-name">Booking No</label>
-                              <input type="text" class="form-control" name="deposit_no" id="deposit_no" placeholder="Deposit No" value="{{$p_id+1}}" readonly/>
-                            </div>
+                            
 
                            
   
                             <div class="col-md-4">
                               <label class="form-label" for="deposit-amount"><span class="required">Deposit Rs</span></label>
-                              <input type="number" class="form-control check-field" name="deposite_rs" id="deposit-amount" placeholder="Deposit Rs" required>
+                              <input type="number" class="form-control check-field" name="deposite_rs" id="deposit-amount" placeholder="Deposit Rs" required/>
                             </div>
                             
                             <div class="col-md-4">
@@ -466,20 +575,7 @@
                               <input type="text" class="form-control" name="rs_word" id="rupees-in-words" placeholder="Rupees in words" readonly>
                             </div>
 
-                            <div class="col-md-4">
-                              <label class="form-label" for="deposit-amount"><span class="required">No of Days</span></label>
-                              <input type="number" class="form-control" name="no_of_days" id="no_of_days" placeholder="no_of_days" required>
-                            </div>
                             
-                            <div class="col-md-4">
-                              <label class="form-label" for="rupees-in-words"><span class="required">Occupation</span></label>
-                              <input type="text" class="form-control" name="occupation" id="occupation" placeholder="Occupation" required/>
-                            </div>
-
-                            <div class="col-md-4">
-                              <label class="form-label" for="rupees-in-words"><span class="required">Reason</span></label>
-                              <input type="text" class="form-control" name="reason" id="reason" placeholder="Reason to stay" required/>
-                            </div>
   
                             
                             <div class="col-12 d-flex justify-content-between">
@@ -497,100 +593,7 @@
                         </div>
                         <!-- All No of Person -->
                     
-                        <div id="address" class="content">
-                          <div class="content-header mb-3">
-                            <small>Enter Member Details.</small>
-                          </div>
-                        
-                          
-                          <div class="row g-3">
-                            <!-- Form Repeater -->
-                            <div class="form-repeater">
-                              <div id="step2FormsContainer "class="col-12">
-                                <div class="dynamic-form">
-                                <div class="all-members" data-repeater-list="group-a">
-                                <div data-repeater-item>
-                               <div class="rep-form1">
-                                  <div class="row formrepeater1">
-                                    <div class="mb-3 col-lg-6 col-xl-3 col-12 mb-0">
-                                      <label class="form-label" for="form-repeater-1-1">Full Name</label>
-                                      <input type="text" id="full_name_form"  name="full_name" class="form-control" placeholder="john doe" value="{{ (!empty($member) )? $member->m_name : '' }}"/>
-                                    </div>
-                                    <div class="mb-3 col-lg-4 col-xl-3 col-12 mb-0">
-                                      <label class="form-label" for="form-repeater-1-2">Age</label>
-                                      <input type="text" id="member_age" name="m_age" class="form-control" placeholder="your age" />
-                                    </div>
-                                    <div class="mb-3 col-lg-6 col-xl-2 col-12 mb-0 ">
-                                        <label class="d-block form-label">Gender</label>
-                                        <div class="form-check form-check-inline">
-                                      <input class="form-check-input" type="radio" name="gender" id="gendermale" value="MALE" checked/>
-                                      <label class="form-check-label" for="gender">Male</label>
-
-                                        </div>
-                                        <div class="form-check form-check-inline">
-                                          <input class="form-check-input" type="radio" name="gender" id="genderfemale" value="FEMALE" />
-                                          <label class="form-check-label" for="gender">Female</label>
-                                        </div>
-
-                                        <div class="mb-3 col-lg-6 col-xl-3 col-12 mb-0" hidden>
-                                        <label class="form-label" for="form-repeater-1-2">gender</label>
-                                        <input type="text" id="gender_data" name="gender_data" class="form-control" placeholder="your age" value="MALE"/>
-                                      </div>
-                                    </div>
-                                    <div class="col-md-2">
-                                      <label class="form-label" for="basic-default-country">Relation</label>
-                                      <select class="form-select" name="relation" id="member_relation" required>
-                                        <option value="SELF" selected>SELF</option>
-                                        <option value="MOTHER">MOTHER</option>
-                                        <option value="FATHER">FATHER</option>
-                                        <option value="BROTHER">BROTHER</option>
-                                        <option value="SISTER">SISTER</option>
-                                        <option value="UNCLE">UNCLE</option>
-                                        <option value="AUNTY">AUNTY</option>
-                                        <option value="GRAND MOTHER">GRAND MOTHER</option>
-                                        <option value="GRAND FATHER">GRAND FATHER</option>
-                                        <option value="FRIEND">FRIEND</option>
-                                      </select>
-                                    </div>
-                                    <div class="mb-3 col-lg-12 col-xl-2 col-12 d-flex align-items-center mb-0">
-                                      <button class="btn btn-label-danger mt-4" data-repeater-delete>
-                                        <i class="ti ti-x ti-xs me-1"></i>
-                                        <span class="align-middle">Delete</span>
-                                      </button>
-                                    </div>
-                                  </div>
-                                </div>
-                                <div class="row rep-form">
-                                </div>
-                                  <hr />
-                                </div>
-                                </div>
-                                </div>
-                              </div>
-                              <div id="dynamicFormsContainer">
-                              </div>
-                              <div class="mb-0">
-                                <button class="btn btn-primary" data-repeater-create>
-                                  <i class="ti ti-plus me-1"></i>
-                                  <span class="align-middle">Add Members</span>
-                                </button>
-                              </div>
-                            </div>
-                            
-                            <!-- /Form Repeater -->
-                            <div class="col-12 d-flex justify-content-between">
-                              <button class="btn btn-label-secondary btn-prev">
-                                <i class="ti ti-arrow-left me-sm-1"></i>
-                                <span class="align-middle d-sm-inline-block d-none">Previous</span>
-                              </button>
-                              <button type="button" class="btn btn-primary btn-next" id="btn-step3">
-                                <span class="align-middle d-sm-inline-block d-none me-sm-1">Next</span>
-                                <i class="ti ti-arrow-right"></i>
-                              </button>
-                            </div>
-                          </div>
                        
-                        </div>
                         
                         <!-- Review -->
                         <div id="review-submit" class="content">
@@ -631,7 +634,7 @@
                                   <thead>
                                     <tr>
                                       <th>No.</th>
-                                      <th >Full Name</th>
+                                      <th>Full Name</th>
                                       <th>Age </th>
                                       <th>Gender</th>
                                       <th>Relations</th>
@@ -745,6 +748,7 @@
                   $('#member_email').val(response['email']);
                   $('#member-phone').val(response['phone_no']);
                   $('#member_city').val(response['city']);
+                  $('#full_name_form').val(response['m_name']);
                 }
               });
         </script>
@@ -781,7 +785,7 @@
             city: city
         },
         success: function(response){
-          alert(response[0]['email']);
+          
           $("#member_email").val(response[0]['email']); // Assuming the server returns a JSON object with a “name” property
         }
     });
@@ -1116,6 +1120,17 @@ $(document).ready(function () {
             });
         });
   </script> -->
+  <script>
+      $(document).ready(function() {
+        $("#btn-step1").on("click", function() {
+          $('#member_age').val($('#basic-default-age').val());
+        });
+      });
+  </script>
+ 
+
+
+
    
 <script>
  
@@ -1130,8 +1145,6 @@ $(document).ready(function () {
     // });
     $("#repeat-next").on("click", function() {
 
-      $('#member_age').val($('#basic-default-age').val());
-
       const selectedList1 = $('#select2Multiple11').val();
       const selectedList2 = $('#select2Multiple22').val();
       const selectedList3 = $('#select2Multiple33').val();
@@ -1143,7 +1156,7 @@ $(document).ready(function () {
       const totalAmount = acAmount + nonAcAmount + doorMtAmount;
 
       $('#room_amount').text( totalAmount);
-      const selectedRooms = 'A.C. Room:= ' + selectedList1 + 'phone, Non A.C. Room:= ' + selectedList2 + ', Door Metri A.C. / Non A.C. Room:= ' + selectedList3;
+      const selectedRooms = 'A.C. Room:= ' + selectedList1 + ', Non A.C. Room:= ' + selectedList2 + ', Door Metri A.C. / Non A.C. Room:= ' + selectedList3;
       $('#room_lst').text(selectedRooms);
 
       if (selectedDate && selectedDate.length > 0) {
@@ -1159,10 +1172,10 @@ $(document).ready(function () {
   $(document).ready(function() {
     let currentStep = 1;
  
-    $("#btn-step3").on("click", function() {
+    $("#repeat-next").on("click", function() {
       $(".rep-table").empty();
       const fullName = $('#full_name_form').val();
-      const age = $('#member_age').val();
+      const age = $('#members_age').val();
       const selectedGender = $('input[name="gender"]').val();
       const relation = $('#member_relation').val();
 
@@ -1220,9 +1233,11 @@ $(document).ready(function () {
  
 <script>
   $(document).ready(function() {
-    $("#repeat-next").click(function() {
+    $("#btn-step1").click(function() {
+      
       console.log("click");
       let numForms = parseInt($("#no_of_person_id").val());
+      alert(numForms);
 
       // Clear previous forms if any
       $(".rep-form").empty();
@@ -1345,7 +1360,7 @@ contactInput.addEventListener('input', function () {
 });
 </script>
 
-<script>
+<!-- <script>
 $(document).ready(function() {
 
   $("#repeat-next").click(function() {
@@ -1411,7 +1426,7 @@ $(document).ready(function() {
     
   });
 });
-</script>
+</script> -->
 
 
 
@@ -1518,6 +1533,29 @@ if (typeof wizardValidation !== undefined && wizardValidation !== null) {
         });
     });
 </script>
+<script>
+  function format(input){
+    if(input.value < 0) input.value=Math.abs(input.value);
+    if(input.value.length > 2) input.value = input.value.slice(0, 2);
+    
+}
+</script>
+<script>
+const contactInput = document.getElementById('phone_no');
+
+contactInput.addEventListener('input', function () {
+  const desiredLength = 10;
+  const inputValue = this.value.trim();
+  
+  if (inputValue.length !== desiredLength) {
+    this.setCustomValidity(`Contact number should be exactly ${desiredLength} digits.`);
+  } else {
+    this.setCustomValidity('');
+  }
+});
+
+</script>
+
 
 
 
