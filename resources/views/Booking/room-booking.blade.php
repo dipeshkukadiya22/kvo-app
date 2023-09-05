@@ -243,7 +243,13 @@
                                 <input type="hidden" id="email_user" value="{{!empty($m_data)  ? $m_data:''}}">
                               </div>
                               
-
+                              <div class="col-md-4">
+                                
+                                <label class="form-label" for="multicol-phone"><span class="required">Phone Number</span></label>
+                                <input type="number" id="member-phone" name="phone_no" class="form-control phone-mask" placeholder="658 799 8941" aria-label="658 799 8941" value="{{ (!empty($member)) ? $row->phone_no : '' }}"    maxlength="10"
+                                  required
+                                  oninput="javascript: if (this.value.length > 10) this.value = this.value.slice(0, 10);"/>
+                                  </div>
     
                               <div class="col-md-4">
                                   <label class="form-label" for="basic-default-email"><span class="required">Email</span></label>
@@ -252,13 +258,7 @@
                               </div>
 
     
-                              <div class="col-md-4">
-                                
-                                <label class="form-label" for="multicol-phone"><span class="required">Phone Number</span></label>
-                                <input type="number" id="member-phone" name="phone_no" class="form-control phone-mask" placeholder="658 799 8941" aria-label="658 799 8941" value="{{ (!empty($member)) ? $row->phone_no : '' }}"    maxlength="10"
-                              required
-                              oninput="javascript: if (this.value.length > 10) this.value = this.value.slice(0, 10);"/>
-                              </div>
+                              
                               
 
                               <div class="col-md-4">
@@ -361,8 +361,8 @@
                         
                           
                           <div class="row g-3">
-                            <!-- Form Repeater -->
-                            <div class="form-repeater">
+                           <!-- Form Repeater -->
+                           <div class="form-repeater">
                               <div id="step2FormsContainer "class="col-12">
                                 <div class="dynamic-form">
                                 <div class="all-members" data-repeater-list="group-a">
@@ -410,10 +410,10 @@
                                       </select>
                                     </div>
                                     <div class="mb-3 col-lg-12 col-xl-2 col-12 d-flex align-items-center mb-0">
-                                      <button class="btn btn-label-danger mt-4" data-repeater-delete>
-                                        <i class="ti ti-x ti-xs me-1"></i>
-                                        <span class="align-middle">Delete</span>
-                                      </button>
+                                    <button class="btn btn-label-danger mt-4" data-repeater-delete>
+                                      <i class="ti ti-x ti-xs me-1"></i>
+                                      <span class="align-middle">Delete</span>
+                                   </button>
                                     </div>
                                   </div>
                                 </div>
@@ -541,29 +541,13 @@
                               <label class="form-label" for="basic-default-name">Booking No</label>
                               <input type="text" class="form-control" name="deposit_no" id="deposit_no" placeholder="Deposit No" value="{{$p_id+1}}" readonly/>
                             </div>
-                            <div>
-                        
-                              <label class="form-label" for="basic-default-name"><span class="required">No. of Person</span></label>
-                              <input type="number" class="form-control check-field"  name="no_of_person" id="no_of_person_id" placeholder="No of Person" value="1" required/>
-                              <div id="noofperson" class="error-message" ></div>
-                            </div>
+                            
 
                             <!-- Datetime Picker-->
                             <div class="col-md-4">
                               <label for="flatpickr-datetime" class="form-label"><span class="required">Check-In Date</span></label>
                               <input type="text" class="form-control" name="check_in_date" placeholder="DD-MM-YYYY HH:MM" id="flatpickr-datetime" required/>
                             </div>
-
-
-                            <div class="col-md-4">
-                                <label for="formFileMultiple" class="form-label"><span class="required">Identity Proof</span></label>
-                                <input class="form-control" type="file" name="id_proof[]" id="formFileMultiple" multiple required />
-                                <div id="idproof" class="error-message" ></div></div>
-
-  
-                            
-
-                           
   
                             <div class="col-md-4">
                               <label class="form-label" for="deposit-amount"><span class="required">Deposit Rs</span></label>
@@ -1495,7 +1479,7 @@ if (typeof wizardValidation !== undefined && wizardValidation !== null) {
 
 </script> -->
 
-<script>
+<!-- <script>
     document.addEventListener("DOMContentLoaded", function() {
         const form = document.getElementById("room_booking");
 
@@ -1532,7 +1516,7 @@ if (typeof wizardValidation !== undefined && wizardValidation !== null) {
             // Continue with submitting the form
         });
     });
-</script>
+</script> -->
 <script>
   function format(input){
     if(input.value < 0) input.value=Math.abs(input.value);

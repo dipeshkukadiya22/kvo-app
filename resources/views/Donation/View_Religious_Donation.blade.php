@@ -151,7 +151,7 @@ button.swal2-cancel.btn.btn-label-danger {
                             <div class="offcanvas-body mx-0 flex-grow-0">
 
                               <!-- Browser Default -->
-                              <form class="browser-default-validation" method="POST" action="{{route('update_religious_donation')}}">
+                              <form class="browser-default-validation" id="browser-default-validation" method="POST" action="{{route('update_religious_donation')}}">
                                 <div class="row g-3">
                                     <div class="col-md-12">
                                     @csrf
@@ -892,6 +892,39 @@ function delete_religious_donation(id)
       $("#upi").change(function(){
         document.getElementById("payment").value="UPI";
       });
+  </script>
+  <script>
+    let flag=0;
+  $("#browser-default-validation :input").change(function() {
+    flag=1;
+    });
+    $("#browser-default-validation").submit(function(){
+        var name=document.getElementById("name").value;
+        var haste=document.getElementById("haste").value;
+        var community=document.getElementById("community").value;
+        if(name ==='' && haste ==='' && community === '')
+        {
+            Swal.fire({
+                text: "Sorry, looks like there are some errors detected, please try again.",
+                icon: "error",
+            });
+            return false; // Prevent form submission
+        } else {
+          if(flag ===1){
+                Swal.fire(
+                  'Updated!',
+                  'Community Donation Details!',
+                  'success'
+                )
+          }else{
+              Swal.fire(
+                  'No change!',
+                  'Community Donation Details!',
+                  'error'
+                )
+          }
+        }
+    });
   </script>
 @endsection
 

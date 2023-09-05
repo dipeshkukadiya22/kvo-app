@@ -800,6 +800,38 @@ $("#name").change(function(){
             });    
     }
 </script>
+<script>
+  let flag=0;
+  $("#kvo_update_treatmet :input").change(function() {
+    flag=1;
+    });
+    $("#kvo_update_treatmet").submit(function(){
+        var doctor_name=document.getElementById("doctor_name").value;
+        var amount=document.getElementById("amount").value;
+        if(doctor_name ==='' && amount === '')
+        {
+            Swal.fire({
+                text: "Sorry, looks like there are some errors detected, please try again.",
+                icon: "error",
+            });
+            return false; // Prevent form submission
+        } else {
+          if(flag ===1){
+                Swal.fire(
+                  'Updated!',
+                  'Treatment Details!',
+                  'success'
+                )
+          }else{
+              Swal.fire(
+                  'No change!',
+                  'Treatment Details!',
+                  'error'
+                )
+          }
+        }
+    });
+</script>
 
 @endsection
 

@@ -118,101 +118,93 @@ div.card-datatable [class*=col-md-] {
                         <div class="row">
                             <div class="col-12">
                                 <div class="card">
-                                <div class="tab-content p-0">
-                                <div class="tab-pane fade show active" id="navs-pills-top-bookedroom" role="tabpanel">
-                                    <div class="card-datatable table-responsive pt-0">
-                                        <table id="DataTables_Table_0" class="datatables-basic table">
-                                          <thead>
-                                         @csrf
-                                              <tr>
-                                                <th>Booking No.</th>
-                                                <th>Name</th>
-                                                <th>Room No. </th>
-                                                <th>Check-In-Date</th>
-                                                <th>Check-Out-Date</th>
-                                                <th>Rent</th>
-                                                <th>No of Days</th>                       
-                                                <th>Deposite(₹) </th>
-                                                <th>Action</th>
-                                              </tr>
-                                          </thead>
-                                          <tbody>
-                                          @foreach($bookedRoom as $row)
-                                          <tr>
-                                             <input type="hidden" class="id" value="{{$row->r_id}}">
-                                              <td>{{$row->r_id}}</td>
-                                              <td>{{$row->m_name}}</td>
-                                              <td>{{$row->room_list}}</td>
-                                              <td>{{date("d-m-Y",strtotime($row->check_in_date))}}</td>
-                                              <td>{{date("d-m-Y",strtotime($row->check_in_date . '+' .$row->no_of_days . 'days'))}}</td>
-                                              <td>{{$row->ac_amount + $row->non_ac_amount + $row->door_mt_amount}}</td>
-                                              <td>{{$row->no_of_days}}</td>
-                                              <td>{{$row->deposite_rs}}</td>
-                                              <td>
-                                                  <div class="d-inline-block">
-                                                    <a href="{{route('pdf_CheckIn',$row->r_id)}}" class="text-primary"><img src="./assets/icon/orange-eye.png" width="20px"></a>
+                                    <div class="tab-content p-0">
+                                            <div class="tab-pane fade show active" id="navs-pills-top-bookedroom" role="tabpanel">
+                                              <div class="card-datatable table-responsive pt-0">
+                                                <table id="DataTables_Table_0" class="datatables-basic table">
+                                                  <thead>
+                                                    @csrf
+                                                    <tr>
+                                                      <th>Booking No.</th>
+                                                      <th>Name</th>
+                                                      <th>Room No. </th>
+                                                      <th>Check-In-Date</th>
+                                                      <th>Check-Out-Date</th>
+                                                      <th>Rent</th>
+                                                      <th>No of Days</th>                       
+                                                      <th>Deposite(₹) </th>
+                                                      <th>Action</th>
+                                                    </tr>
+                                                  </thead>  
+                                                      @foreach($bookedRoom as $row)
+                                                        <tr>
+                                                          <input type="hidden" class="id" value="{{$row->r_id}}">
+                                                            <td>{{$row->r_id}}</td>
+                                                            <td>{{$row->m_name}}</td>
+                                                            <td>{{$row->room_list}}</td>
+                                                            <td>{{date("d-m-Y",strtotime($row->check_in_date))}}</td>
+                                                            <td>{{date("d-m-Y",strtotime($row->check_in_date . '+' .$row->no_of_days . 'days'))}}</td>
+                                                            <td>{{$row->ac_amount + $row->non_ac_amount + $row->door_mt_amount}}</td>
+                                                            <td>{{$row->no_of_days}}</td>
+                                                            <td>{{$row->deposite_rs}}</td>
+                                                            <td>
+                                                                <div class="d-inline-block">
+                                                                  <a href="{{route('pdf_CheckIn',$row->r_id)}}" class="text-primary"><img src="./assets/icon/orange-eye.png" width="20px"></a>
+                                                                  <a @if($row->status=='BOOKED') onclick="edit_checkout({{$row->r_id}})"; @endif class="btn btn-sm btn-icon item-edit"><img src="./assets/icon/orange-edit.png" width="20px"></a>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                      @endforeach
+                                                </table>
+                                              </div>
+                                            </div>
+                                          </div>
+                                          </div>
+                                        <!--START checkedout room TAB-->
+                                        <div class="tab-pane fade" id="navs-pills-top-checkoutroom" role="tabpanel">
+                                          <div class="card-datatable pt-0">
+                                            <table id="DataTables_Table_1"class="datatables-basic table">
+                                              <thead>
+                                                <tr>
+                                                  <th style='width:10px'>Booking No.</th>
+                                                  <th style='width:30px'>Name</th>
+                                                  <th style='width:50px'>Room No. </th>
+                                                  <th style='width:25px'>Check-In-Date</th>
+                                                  <th style='width:25px'>Check-Out-Date</th>                     
+                                                  <th style='width:10px'>Deposite(₹) </th>
+                                                  <th style='width:20px'>Amount(₹)</th>
+                                                  <th style='width:20px'>Payment Mode</th>
+                                                  <th style='width:10px'>Action</th>
+                                                </tr>
+                                                </thead>
+                                              <tbody>
+                                                  @foreach($checkout as $row)
+                                                    <tr>
+                                                      <input type="hidden" class="id" value="{{$row->r_id}}">
+                                                      <td style='width:10px'>{{$row->r_id}}</td>
+                                                      <td style='width:10px'>{{$row->m_name}}</td>
+                                                      <td style='width:50px'>{{$row->room_list}}</td>
+                                                      <td style='width:25px'>{{date("d-m-Y",strtotime($row->check_in_date))}}</td>
+                                                      <td style='width:25px'>456</td>
+                                                      <td style='width:20px'>{{$row->deposite_rs}}</td>
+                                                      <td style='width:20px'>{{$row->payable_amount}}</td>
+                                                      <td style='width:10px'>{{$row->payment_mode}}</td>
+                                                      <td>
+                                                          <div class="d-inline-block">
+                                                            <a href="{{route('pdf_CheckOut',$row->rec_no)}}" class="text-primary"><img src="./assets/icon/orange-eye.png" width="20px"></a>
 
-                                                    <a @if($row->status=='BOOKED') onclick="edit_checkout({{$row->r_id}})"; @endif class="btn btn-sm btn-icon item-edit"><img src="./assets/icon/orange-edit.png" width="20px"></a>
-
-                                                   
-                                                    
-                                                  </div>
-                                              </td>
-                                          </tr>
-                                          @endforeach
-                                          </tbody>
-                                          </table>
+                                                            <!--<a @if($row->status=='BOOKED') onclick="edit_checkout({{$row->r_id}})"; @endif class="btn btn-sm btn-icon item-edit"><img src="./assets/icon/orange-edit.png" width="20px"></a>-->
+                                                          </div>
+                                                      </td>
+                                                    </tr>
+                                                  @endforeach
+                                                </tbody>
+                                            </table>
+                                          </div>
                                         </div>
-                                      </div>
-                                
-                        <!--START checkedout room TAB-->
-                                <div class="tab-pane fade" id="navs-pills-top-checkoutroom" role="tabpanel">
-                                    <div class="card-datatable pt-0">
-                                        <table id="DataTables_Table_1"class="datatables-basic table">
-                                          <thead>
-                                              <tr>
-                                                <th style='width:10px'>Booking No.</th>
-                                                <th style='width:30px'>Name</th>
-                                                <th style='width:50px'>Room No. </th>
-                                                <th style='width:25px'>Check-In-Date</th>
-                                                <th style='width:25px'>Check-Out-Date</th>                     
-                                                <th style='width:10px'>Deposite(₹) </th>
-                                                <th style='width:20px'>Amount(₹)</th>
-                                                <th style='width:20px'>Payment Mode</th>
-                                                <th style='width:10px'>Action</th>
-                                              </tr>
-                                          </thead>
-                                          <tbody>
-                                          @foreach($checkout as $row)
-                                          <tr>
-                                             <input type="hidden" class="id" value="{{$row->r_id}}">
-                                              <td style='width:10px'>{{$row->r_id}}</td>
-                                              <td style='width:10px'>{{$row->m_name}}</td>
-                                              <td style='width:50px'>{{$row->room_list}}</td>
-                                              <td style='width:25px'>{{date("d-m-Y",strtotime($row->check_in_date))}}</td>
-                                              <td style='width:25px'>456</td>
-                                              <td style='width:20px'>{{$row->deposite_rs}}</td>
-                                              <td style='width:20px'>{{$row->payable_amount}}</td>
-                                              <td style='width:10px'>{{$row->payment_mode}}</td>
-                                              <td>
-                                                  <div class="d-inline-block">
-                                                    <a href="{{route('pdf_CheckOut',$row->rec_no)}}" class="text-primary"><img src="./assets/icon/orange-eye.png" width="20px"></a>
-
-                                                    <!--<a @if($row->status=='BOOKED') onclick="edit_checkout({{$row->r_id}})"; @endif class="btn btn-sm btn-icon item-edit"><img src="./assets/icon/orange-edit.png" width="20px"></a>-->
-                                                  </div>
-                                              </td>
-                                          </tr>
-                                          @endforeach
-                                          </tbody>
-                                        </table>
-                                        </div>
-                                      </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!--END TAB-->
+                                      
+                                        <!--END TAB-->
+                                      
 
                         <div class="modal fade" id="exLargeModal" tabindex="-1" aria-hidden="true">
                           <div class="modal-dialog modal-xl" role="document">
@@ -293,7 +285,7 @@ div.card-datatable [class*=col-md-] {
                                           <input type="text" id="dlx_room_charge" name="dlx_room_charge" class="form-control clear-value"  readonly/>
                                         </td>
                                         <td>
-                                          <input type="text" id="dlx_room_Excharge" name="dlx_room_Excharge" class="form-control clear-value"/>
+                                          <input type="text" id="dlx_room_Excharge" name="dlx_room_Excharge" class="form-control clear-value" disabled/>
                                         </td>
                                         <td>
                                           <input type="text" id="dlx_amount" name="dlx_amount" class="form-control clear-value"  readonly/>
@@ -317,7 +309,7 @@ div.card-datatable [class*=col-md-] {
                                           <input type="text" id="ac_room_charge" name="ac_room_charge" class="form-control clear-value"  readonly/>
                                         </td>
                                         <td>
-                                          <input type="text" id="ac_room_Excharge" name="ac_room_Excharge" class="form-control clear-value"/>
+                                          <input type="text" id="ac_room_Excharge" name="ac_room_Excharge" class="form-control clear-value" disabled/>
                                         </td>
                                         <td>
                                           <input type="text" id="ac_amount" name="ac_amount" class="form-control clear-value"  readonly/>
@@ -341,7 +333,7 @@ div.card-datatable [class*=col-md-] {
                                           <input type="text" id="non_ac_room_charge" name="non_ac_room_charge" class="form-control clear-value"  readonly/>
                                         </td>
                                         <td>
-                                          <input type="text" id="non_ac_room_Excharge" name="non_ac_room_Excharge" class="form-control clear-value" />
+                                          <input type="text" id="non_ac_room_Excharge" name="non_ac_room_Excharge" class="form-control clear-value" disabled/>
                                         </td>
                                         <td>
                                           <input type="text" id="non_ac_amount" name="non_ac_amount" class="form-control clear-value"  readonly/>
@@ -365,7 +357,7 @@ div.card-datatable [class*=col-md-] {
                                           <input type="text" id="dmt_ac_room_charge" name="dmt_ac_room_charge" class="form-control clear-value"  readonly/>
                                         </td>
                                         <td>
-                                          <input type="text" id="dmt_ac_room_Excharge" name="dmt_ac_room_Excharge" class="form-control clear-value" />
+                                          <input type="text" id="dmt_ac_room_Excharge" name="dmt_ac_room_Excharge" class="form-control clear-value" disabled/>
                                         </td>
                                         <td>
                                           <input type="text" id="dmt_ac_amount" name="dmt_ac_amount" class="form-control clear-value"  readonly/>
@@ -389,7 +381,7 @@ div.card-datatable [class*=col-md-] {
                                           <input type="text" id="non_dmt_ac_room_charge" name="non_dmt_ac_room_charge" class="form-control clear-value"  readonly/>
                                         </td>
                                         <td>
-                                          <input type="text" id="non_dmt_ac_room_Excharge" name="non_dmt_ac_room_Excharge" class="form-control clear-value"/>
+                                          <input type="text" id="non_dmt_ac_room_Excharge" name="non_dmt_ac_room_Excharge" class="form-control clear-value" disabled/>
                                         </td>
                                         <td>
                                           <input type="text" id="non_dmt_ac_amount" name="non_dmt_ac_amount" class="form-control clear-value"  readonly/>
@@ -502,9 +494,6 @@ div.card-datatable [class*=col-md-] {
                             </div>
                           </div>
                         </div>
-
-                        
-                        
                     </section>
                      <!--/ Basic table -->
                   </div>
@@ -512,6 +501,7 @@ div.card-datatable [class*=col-md-] {
                 </div>
             </div>
         </div>
+  </body>
 
 @section('pagejs')
 
@@ -572,6 +562,7 @@ div.card-datatable [class*=col-md-] {
                       if(room==301 || room==302 || room==401 || room==402)
                       {
                         $("#dlx_room").val(room);
+                        $("#dlx_room_Excharge").prop('disabled', false);
                         $("#dlx_room_charge").val(response[0]['ac_amount']);
                         $("#dlx_no_of_days").val(days);
                         $("#dlx_amount").val(days * response[0]['ac_amount']);
@@ -581,6 +572,7 @@ div.card-datatable [class*=col-md-] {
                       if(room==303 || room==304 ||room==305 || room==306 || room==403)
                       {
                         $("#ac_room").val(room);
+                        $("#ac_room_Excharge").prop('disabled', false);
                         $("#ac_room_charge").val(response[0]['ac_amount']);
                         $("#ac_no_of_days").val(days);
                         $("#ac_amount").val(days * response[0]['ac_amount']);
@@ -590,6 +582,7 @@ div.card-datatable [class*=col-md-] {
                       if(room==201 || room==202 ||room==203 || room==204 ||room==205 || room==206 || room==404 || room==405 || room==406)
                       {
                         $("#non_ac_room").val(room);
+                        $("#non_ac_room_Excharge").prop('disabled', false);
                         $("#non_ac_room_charge").val(response[0]['non_ac_amount']);
                         $("#non_ac_no_of_days").val(days);
                         $("#non_ac_amount").val(days * response[0]['non_ac_amount']);
@@ -600,6 +593,7 @@ div.card-datatable [class*=col-md-] {
                       if(room==1 || room==2 ||room==3 || room==4 ||room==5 || room==6 ||room==7 || room==8 ||room==9 || room==10)
                       {
                         $("#non_dmt_ac_room").val(room);
+                        $("#non_dmt_ac_room_Excharge").prop('disabled', false);
                         $("#non_dmt_ac_room_charge").val(response[0]['door_mt_amount']);
                         $("#non_dmt_ac_no_of_days").val(days);
                         $("#non_dmt_ac_amount").val(days * response[0]['door_mt_amount']);
@@ -610,6 +604,7 @@ div.card-datatable [class*=col-md-] {
                       if(room==11 || room==12 ||room==13 || room==14 ||room==15 || room==16 ||room==17 || room==18 ||room==19 || room==20)
                       {
                         $("#dmt_ac_room").val(room);
+                        $("#dmt_ac_room_Excharge").prop('disabled', false);
                         $("#dmt_ac_room_charge").val(response[0]['door_mt_amount']);
                         $("#dmt_ac_no_of_days").val(days);
                         $("#dmt_ac_amount").val(days * response[0]['door_mt_amount']);
@@ -617,7 +612,7 @@ div.card-datatable [class*=col-md-] {
                         amt+=parseInt(document.getElementById('dmt_ac_room_total').value);
                       }
                     }
-                    var a=document.getElementById("ac_room").value;
+                      /*var a=document.getElementById("ac_room").value;
                           if (a == "") {
                               $("#ac_room_Excharge").prop('disabled', true);
                           } else {
@@ -647,7 +642,7 @@ div.card-datatable [class*=col-md-] {
                               $("#dlx_room_Excharge").prop('disabled', true);
                           } else {
                               $("#dlx_room_Excharge").val ("0");
-                          }
+                          }*/
                           var deposite=parseInt(document.getElementById("deposite").value);
                           $('#total').val(amt);
                           $("#net_amount").val(amt-deposite);
@@ -832,11 +827,6 @@ div.card-datatable [class*=col-md-] {
       // Select all input fields with class 'amount-input'
       $("#close").click(function(){
       $('.clear-value').val("");
-      $("#ac_room_Excharge").prop('disabled', false);
-      $("#non_ac_room_Excharge").prop('disabled', false);
-      $("#dlx_room_Excharge").prop('disabled', false);
-      $("#dmt_ac_room_Excharge").prop('disabled', false);
-      $("#non_dmt_ac_room_Excharge").prop('disabled', false);
       });
   });
 
@@ -931,6 +921,12 @@ document.getElementById("net_amount").addEventListener("input", convertToWords);
     $(document).ready(function() {
 
   $("#dlx_room_Excharge").change(function(){
+    var value=document.getElementById("dlx_room_Excharge").value;
+    if(value ==="")
+    {
+      $("dlx_room_Excharge").val(0);
+    }
+    else{
     var amt=parseInt(document.getElementById("dlx_amount").value); 
     var excharge=parseInt(document.getElementById("dlx_room_Excharge").value); 
     var deposite=parseInt(document.getElementById("deposite").value);
@@ -944,9 +940,16 @@ document.getElementById("net_amount").addEventListener("input", convertToWords);
     $('#total').val(totalAmount);
     $("#net_amount").val(totalAmount-deposite);
     convertToWords();
+    }
   });
 
   $("#ac_room_Excharge").change(function(){
+    var value=document.getElementById("ac_room_Excharge").value;
+    if(value ==="")
+    {
+      $("ac_room_Excharge").val(0);
+    }
+    else{
     var amt=parseInt(document.getElementById("ac_amount").value); 
     var excharge=parseInt(document.getElementById("ac_room_Excharge").value); 
     var deposite=parseInt(document.getElementById("deposite").value);
@@ -960,9 +963,16 @@ document.getElementById("net_amount").addEventListener("input", convertToWords);
     $('#total').val(totalAmount);
     $("#net_amount").val(totalAmount-deposite);
     convertToWords();
+    }
   });
 
   $("#non_ac_room_Excharge").change(function(){
+    var value=document.getElementById("non_ac_room_Excharge").value;
+    if(value ==="")
+    {
+      $("non_ac_room_Excharge").val(0);
+    }
+    else{
     var amt=parseInt(document.getElementById("non_ac_amount").value); 
     var excharge=parseInt(document.getElementById("non_ac_room_Excharge").value); 
     var deposite=parseInt(document.getElementById("deposite").value);
@@ -976,9 +986,16 @@ document.getElementById("net_amount").addEventListener("input", convertToWords);
     $('#total').val(totalAmount);
     $("#net_amount").val(totalAmount-deposite);
     convertToWords();
+    }
   });
 
   $("#non_dmt_ac_room_Excharge").change(function(){
+    var value=document.getElementById("non_dmt_ac_room_Excharge").value;
+    if(value ==="")
+    {
+      $("non_dmt_ac_room_Excharge").val(0);
+    }
+    else{
     var amt=parseInt(document.getElementById("non_dmt_ac_amount").value); 
     var excharge=parseInt(document.getElementById("non_dmt_ac_room_Excharge").value); 
     var deposite=parseInt(document.getElementById("deposite").value);
@@ -992,7 +1009,11 @@ document.getElementById("net_amount").addEventListener("input", convertToWords);
     $('#total').val(totalAmount);
     $("#net_amount").val(totalAmount-deposite);
     convertToWords();
+   
+    }
   });
+
+
 
   $("#dmt_ac_room_Excharge").change(function(){
     var value=document.getElementById("dmt_ac_room_Excharge").value;

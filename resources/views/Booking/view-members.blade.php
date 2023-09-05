@@ -462,6 +462,41 @@ function delete_member(id)
     });
 </script>
 
+<script>
+  let flag=0;
+  $("#kvo_update_member :input").change(function() {
+    flag=1;
+    });
+    $("#kvo_update_member").submit(function(){
+        var m_name1=document.getElementById("m_name1").value;
+        var email1=document.getElementById("email1").value;
+        var phone_no1=document.getElementById("phone_no1").value;
+        var city1=document.getElementById("city1").value;
+        if(m_name1 ==='' && m_name1 === '' && phone_no1 ==='' && city1 ==='')
+        {
+            Swal.fire({
+                text: "Sorry, looks like there are some errors detected, please try again.",
+                icon: "error",
+            });
+            return false; // Prevent form submission
+        } else {
+          if(flag ===1){
+                Swal.fire(
+                  'Updated!',
+                  'Member Details!',
+                  'success'
+                )
+          }else{
+              Swal.fire(
+                  'No change!',
+                  'Member Details!',
+                  'error'
+                )
+          }
+        }
+    });
+</script>
+
 @endsection
 
 @endsection

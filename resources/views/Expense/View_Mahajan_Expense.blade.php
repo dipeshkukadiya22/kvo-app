@@ -691,10 +691,38 @@ button.swal2-cancel.btn.btn-label-danger {
 
 
 
+    // $("#kvo_update_general_donation").submit(function(){
+    //     var haste=document.getElementById("haste").value;
+    //     var details=document.getElementById("details").value;
+    //     if(haste ==='' && details === '')
+    //     {
+    //         Swal.fire({
+    //             text: "Sorry, looks like there are some errors detected, please try again.",
+    //             icon: "error",
+    //         });
+    //         return false; // Prevent form submission
+    //     } else {
+    //         Swal.fire({
+    //             position: 'middle-center',
+    //             icon: 'success',
+    //             title: 'General Donation has been successfully updated!',
+    //             showConfirmButton: false,
+    //             timer: 1500
+    //             }).then(function() {
+    //             $("kvo_update_general_donation").submit();
+    //        });
+    //     }
+    // });
+</script>
+<script>
+  let flag=0;
+  $("#kvo_update_general_donation :input").change(function() {
+    flag=1;
+    });
     $("#kvo_update_general_donation").submit(function(){
-        var haste=document.getElementById("haste").value;
-        var details=document.getElementById("details").value;
-        if(haste ==='' && details === '')
+        var amount=document.getElementById("amount").value;
+       
+        if(amount ==='' )
         {
             Swal.fire({
                 text: "Sorry, looks like there are some errors detected, please try again.",
@@ -702,15 +730,19 @@ button.swal2-cancel.btn.btn-label-danger {
             });
             return false; // Prevent form submission
         } else {
-            Swal.fire({
-                position: 'middle-center',
-                icon: 'success',
-                title: 'General Donation has been successfully updated!',
-                showConfirmButton: false,
-                timer: 1500
-                }).then(function() {
-                $("kvo_update_general_donation").submit();
-           });
+          if(flag ===1){
+                Swal.fire(
+                  'Updated!',
+                  'Mahajan expense Details!',
+                  'success'
+                )
+          }else{
+              Swal.fire(
+                  'No change!',
+                  'Mahajan Expense Details!',
+                  'error'
+                )
+          }
         }
     });
 </script>

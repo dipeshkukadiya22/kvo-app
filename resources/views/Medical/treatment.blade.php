@@ -109,7 +109,7 @@
                         <span class="input-group-text">₹</span>
                         <input type="text" id="amount" name="amount" class="form-control" placeholder="Amount" aria-label="Amount (to the nearest dollar)"
                           onkeypress="return onlyNumbers(this.value);" onkeyup="NumToWord(this.value,'ankers');" maxlength="9" required>
-                      </div>
+                      </div><div id="amt" class="error-message" ></div>
                     </div>
                           {{-- <div id="divDisplayWords"> --}}
                     <div class="col-md-4">
@@ -137,7 +137,7 @@
                           </div>
                   </div>
                   <div class="pt-4">
-                    <button type="submit" class="btn btn-primary me-sm-3 me-1 waves-effect waves-light">Submit</button>
+                    <button type="submit" id="submitbtn1" class="btn btn-primary me-sm-3 me-1 waves-effect waves-light">Submit</button>
                     <!-- <button type="reset" class="btn btn-label-secondary waves-effect">Cancel</button> -->
                   </div>
                 </form>
@@ -331,6 +331,19 @@ function NumToWord(inputNumber, outputControl) {
         </script>
     @endif
     <script>
+      $("#amount").focusout(function(){
+      var amt=parseInt(document.getElementById("amount").value);
+
+      if(amt === 0){
+          $("#submitbtn1").prop('disabled',true);
+          $("#amount").focus();
+          $("#amt").html("Fil Valid Amount ");
+      }else{
+        $("#submitbtn1").prop('disabled',false);
+        $("#amt").html("");
+      }
+    });
+ 
       $("#multicol-phone").focusout(function(){
         var contact=document.getElementById("multicol-phone").value;
       

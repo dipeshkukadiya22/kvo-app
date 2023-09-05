@@ -130,12 +130,8 @@
                               id="haste"
                               name="haste"
                               style="text-transform:uppercase"
-<<<<<<< HEAD
-                              placeholder="John Doe"
-                              value="SELF"
-=======
                               placeholder=""
->>>>>>> e6c3a194ad37cb766aebf5aa24e17f6a2de46659
+                              value="SELF"
                               required />
                          
                         	</div>

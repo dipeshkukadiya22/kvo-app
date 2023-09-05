@@ -704,10 +704,38 @@ function delete_sangh_expense(id)
   }
 
 
+    // $("#kvo_update_sangh_expense").submit(function(){
+    //     var haste=document.getElementById("haste").value;
+    //     var details=document.getElementById("details").value;
+    //     if(haste ==='' && details === '')
+    //     {
+    //         Swal.fire({
+    //             text: "Sorry, looks like there are some errors detected, please try again.",
+    //             icon: "error",
+    //         });
+    //         return false; // Prevent form submission
+    //     } else {
+    //         Swal.fire({
+    //             position: 'middle-center',
+    //             icon: 'success',
+    //             title: 'General Donation has been successfully updated!',
+    //             showConfirmButton: false,
+    //             timer: 1500
+    //             }).then(function() {
+    //             $("kvo_update_general_donation").submit();
+    //        });
+    //     }
+    // });
+</script>
+<script>
+  let flag=0;
+  $("#kvo_update_sangh_expense :input").change(function() {
+    flag=1;
+    });
     $("#kvo_update_sangh_expense").submit(function(){
-        var haste=document.getElementById("haste").value;
+        var amount=document.getElementById("amount").value;
         var details=document.getElementById("details").value;
-        if(haste ==='' && details === '')
+        if(amount ==='' && details === '')
         {
             Swal.fire({
                 text: "Sorry, looks like there are some errors detected, please try again.",
@@ -715,19 +743,22 @@ function delete_sangh_expense(id)
             });
             return false; // Prevent form submission
         } else {
-            Swal.fire({
-                position: 'middle-center',
-                icon: 'success',
-                title: 'General Donation has been successfully updated!',
-                showConfirmButton: false,
-                timer: 1500
-                }).then(function() {
-                $("kvo_update_general_donation").submit();
-           });
+          if(flag ===1){
+                Swal.fire(
+                  'Updated!',
+                  'sangh Expense Details!',
+                  'success'
+                )
+          }else{
+              Swal.fire(
+                  'No change!',
+                  'Sangh Expense Details!',
+                  'error'
+                )
+          }
         }
     });
 </script>
-
 @endsection
 
 @endsection

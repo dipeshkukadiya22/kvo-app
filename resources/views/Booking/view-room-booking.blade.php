@@ -290,7 +290,7 @@ div.card-datatable [class*=col-md-] {
                       
                                                 <div class="col-4">
                                                   <label class="form-label" for="collapsible-address" >Address</label>  
-                                                  <textarea name="member_address"  class="form-control" id="member_address" rows="1" placeholder="1456, Mall Road"></textarea>
+                                                  <textarea name="member_address"  class="form-control" id="member_address" rows="1" placeholder="1456, Mall Road" required></textarea>
                                                 </div>
                                                                           
                                                 
@@ -1391,6 +1391,43 @@ document.getElementById("deposit-amount").addEventListener("input", convertToWor
         });
     });
 </script> --}}
+
+<script>
+  let flag=0;
+  $("#kvo_update_room_booking :input").change(function() {
+    flag=1;
+    });
+    $("#kvo_update_room_booking").submit(function(){
+        var age=document.getElementById("age").value;
+        var address=document.getElementById("member_address").value;
+        var no_of_days=document.getElementById("no_of_days").value;
+        var occupation=document.getElementById("occupation").value;
+        var reason=document.getElementById("reason").value;
+        var subcommunity=document.getElementById("subcommunity").value;
+        if(age ==='' && subcommunity === '' && address ==='' && no_of_days ==='' && occupation ==='' && reason ==='')
+        {
+            Swal.fire({
+                text: "Sorry, looks like there are some errors detected, please try again.",
+                icon: "error",
+            });
+            return false; // Prevent form submission
+        } else {
+          if(flag ===1){
+                Swal.fire(
+                  'Updated!',
+                  'Room Booking Details!',
+                  'success'
+                )
+          }else{
+              Swal.fire(
+                  'No change!',
+                  'Room Booking Details!',
+                  'error'
+                )
+          }
+        }
+    });
+</script>
 
 <script src="{{ asset ('assets/vendor/libs/jquery-repeater/jquery-repeater.js') }}"></script>
 
