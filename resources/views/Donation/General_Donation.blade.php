@@ -241,11 +241,8 @@
                 success:function(response){
                   $('#phone').val(response['phone_no']);
                   $('#city1').val(response['city']);
-<<<<<<< HEAD
-                 
-=======
                   $('#haste').val("SELF");
->>>>>>> e6c3a194ad37cb766aebf5aa24e17f6a2de46659
+
                 }
               });
         </script>
