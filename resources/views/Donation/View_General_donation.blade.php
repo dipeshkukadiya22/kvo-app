@@ -698,41 +698,13 @@ button.swal2-cancel.btn.btn-label-danger {
           }
       });
   }
-  let form = document.querySelector('kvo_update_general_donation');
-alert("hi");
-// Listen for input events on the form
-form.addEventListener('input', function (event) {
-  alert("input");
-	// Do something...
-});
- /* $("#kvo_update_general_donation :input").change(function() {
-     $("#kvo_update_general_donation").data("changed",true);
-    var haste=document.getElementById("haste").value;
-        var details=document.getElementById("details").value;
-     
-        if(haste ==='' && details === '')
-        {
-            Swal.fire({
-                text: "Sorry, looks like there are some errors detected, please try again.",
-                icon: "error",
-            });
-            return false; // Prevent form submission
-        } else {
-            Swal.fire({
-                position: 'middle-center',
-                icon: 'success',
-                title: 'General Donation has been successfully updated!',
-                showConfirmButton: false,
-                timer: 1500
-                }).then(function() {
-                $("kvo_update_general_donation").submit();
-           });
-        }
-});
-  /*  $("#kvo_update_general_donation").submit(function(){
+  let flag=0;
+  $("#kvo_update_general_donation :input").change(function() {
+    flag=1;     
+    });
+    $("#kvo_update_general_donation").submit(function(){
         var haste=document.getElementById("haste").value;
         var details=document.getElementById("details").value;
-     
         if(haste ==='' && details === '')
         {
             Swal.fire({
@@ -741,17 +713,22 @@ form.addEventListener('input', function (event) {
             });
             return false; // Prevent form submission
         } else {
-            Swal.fire({
-                position: 'middle-center',
-                icon: 'success',
-                title: 'General Donation has been successfully updated!',
-                showConfirmButton: false,
-                timer: 1500
-                }).then(function() {
-                $("kvo_update_general_donation").submit();
-           });
+          if(flag ===1){
+                Swal.fire(
+                  'Updated!',
+                  'General Donation Details!',
+                  'success'
+                )
+          }else{
+              Swal.fire(
+                  'No change!',
+                  'General Donation Details!',
+                  'error'
+                )
+          }
         }
-    });*/
+
+    });
 </script>
 
 @endsection
