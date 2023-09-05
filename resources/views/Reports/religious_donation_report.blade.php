@@ -185,8 +185,8 @@ div.card-datatable [class*=col-md-] {
                                                 <tr>
                                                     <td></td>  <td></td>  <td></td>  <td></td>  <td></td>  <td></td>  <td></td>  <td></td>  <td></td>
                                                     <td></td>  <td></td>  <td></td>  <td></td>  <td></td>  <td></td>  <td></td>
-                                                      <td>Total Amount</td>
-                                                      <td>{{$total[0]->amount}}</td>
+                                                      <td><b>Total Amount</b></td>
+                                                      <td><b>{{$total[0]->amount}}</b></td>
                                                     </tr>
                                                 @foreach($donation as $row)
                                                     <tr>
@@ -293,7 +293,7 @@ div.card-datatable [class*=col-md-] {
               text: '<i class="ti ti-printer me-1" ></i>Print',
               className: 'dropdown-item',
               exportOptions: {
-                columns: [0,1 ,2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14,15,16,17],
+                columns: [0,1 ,2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14,15,16,17,18],
                 // prevent avatar to be display
                 format: {
                   body: function (inner, coldex, rowdex) {
@@ -379,7 +379,7 @@ div.card-datatable [class*=col-md-] {
               text: '<i class="ti ti-file-description me-1"></i>Pdf',
               className: 'dropdown-item',
               exportOptions: {
-                columns: [1 ,2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15],
+                columns: [1 ,2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15,16,17],
                 // prevent avatar to be display
                 format: {
                   body: function (inner, coldex, rowdex) {

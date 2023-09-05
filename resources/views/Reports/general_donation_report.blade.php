@@ -336,7 +336,6 @@ div.card-datatable [class*=col-md-] {
               extend: 'pdf',
               text: '<i class="ti ti-file-description me-1"></i>Pdf',
               className: 'dropdown-item',
-              orientation: 'landscape',
               exportOptions: {
                 columns: [0,1 ,2, 3,4],
                 // prevent avatar to be display

@@ -184,13 +184,20 @@ div.card-datatable [class*=col-md-] {
                                                     <th id="display_category" colspan="5" style="text-align:center;"></th>
                                                   </tr>
                                                     <tr>
-                                                        <th>નામ</th>
-                                                        <th>તારીખ</th>
-                                                        <th>હસ્તે</th>
-                                                        <th>રકમ</th>
-                                                        <th>નાણા મળેલ</th>
+                                                        <th><b>Name</b></th>
+                                                        <th><b>Date</b></th>
+                                                        <th><b>Haste</b></th>
+                                                        <th><b>Amount</b></th>
+                                                        <th><b>Payment Mode</b></th>
                                                     </tr>
                                                 </thead>
+                                                <tr>
+                                                  <td></td>
+                                                  <td></td>
+                                                  <td></td>
+                                                  <td><b>Total Amount</b></td>
+                                                  <td><b>{{$total[0]->amount}}</b></td>
+                                                </tr>
                                                 @foreach($donation as $row)
                                                 <tr>
                                                         <td>{{$row->m_name}}</td>
@@ -200,13 +207,7 @@ div.card-datatable [class*=col-md-] {
                                                         <td>{{$row->payment_mode}}</td>
                                                 </tr>
                                                 @endforeach
-                                                <tr>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td>Total Amount:</td>
-                                                        <td>{{$total[0]->amount}}</td>
-                                                        <td></td>
-                                                </tr>
+                                                
                                           
                                                 </table>
                                             </div>

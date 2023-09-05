@@ -112,10 +112,12 @@ class ReportController extends Controller
     public function expense_report(){
         $daterange=Date("01-m-Y")."-".Date("31-m-Y");
         $trust="SANGH";
+        
         $date1=date('Y-m-d',strtotime(substr($daterange,0,10)));
         $date2=date('Y-m-d',strtotime(substr($daterange,13)));
+        $total=DB::SELECT("SELECT SUM(amount) AS amount FROM ( SELECT amount, member_id, date FROM Sangh_Expense UNION ALL SELECT amount, member_id, date FROM Mahajan_Expense ) AS combined_expenses INNER JOIN add_members ON add_members.p_id = combined_expenses.member_id WHERE combined_expenses.date BETWEEN '$date1' AND '$date2'");
         $expense=DB::SELECT("SELECT * FROM `Sangh_Expense` join add_members on add_members.p_id=Sangh_Expense.member_id where date BETWEEN '$date1' and '$date2'");
-        return view('Reports.expense_report',['expense'=>$expense,'daterange'=>$daterange,'trust' => $trust]);
+        return view('Reports.expense_report',['expense'=>$expense,'daterange'=>$daterange,'trust' => $trust,'total'=>$total]);
     }
     public function show_expense_report(Request $req){
         $daterange=$req->daterange;
@@ -123,27 +125,31 @@ class ReportController extends Controller
         $date1=date('Y-m-d',strtotime(substr($daterange,0,10)));
         $date2=date('Y-m-d',strtotime(substr($daterange,13)));
         if($trust=="SANGH"){
+            $total=DB::SELECT("SELECT sum(amount) as amount FROM `Sangh_Expense` as r join add_members on add_members.p_id=r.member_id where date BETWEEN  '$date1' and '$date2' ");
             $expense=DB::SELECT("SELECT * FROM `Sangh_Expense` join add_members on add_members.p_id=Sangh_Expense.member_id where date BETWEEN '$date1' and '$date2'");
         }
         else{
+            $total=DB::SELECT("SELECT sum(amount) as amount FROM `Mahajan_Expense` as r join add_members on add_members.p_id=r.member_id where date BETWEEN  '$date1' and '$date2' ");
             $expense=DB::SELECT("SELECT * FROM `Mahajan_Expense` join add_members on add_members.p_id=Mahajan_Expense.member_id where date BETWEEN '$date1' and '$date2'");
         }
        
-        return view('Reports.expense_report',['expense'=>$expense,'daterange'=>$daterange,'trust'=>$trust]);
+        return view('Reports.expense_report',['expense'=>$expense,'daterange'=>$daterange,'trust'=>$trust,'total'=>$total]);
     }
     public function medical_report(){
         $daterange=Date("01-m-Y")."-".Date("31-m-Y");
         $date1=date('Y-m-d',strtotime(substr($daterange,0,10)));
         $date2=date('Y-m-d',strtotime(substr($daterange,13)));
         $data=DB::SELECT("SELECT * FROM medical join add_members on add_members.p_id=medical.p_id where date BETWEEN '$date1' and '$date2'");
-        return view('Reports.medical_report',['data'=>$data,'daterange'=>$daterange]);
+        $total=DB::SELECT("SELECT sum(amount) as amount FROM `medical` join add_members on medical.p_id=add_members.p_id where date BETWEEN  '$date1' and '$date2'");
+        return view('Reports.medical_report',['data'=>$data,'daterange'=>$daterange,'total'=>$total]);
     }
     public function show_medical_report(Request $req){
         $daterange=$req->daterange;
         $date1=date('Y-m-d',strtotime(substr($daterange,0,10)));
         $date2=date('Y-m-d',strtotime(substr($daterange,13)));
+        $total=DB::SELECT("SELECT sum(amount) as amount FROM `medical` join add_members on medical.sr_no=add_members.p_id where date BETWEEN  '$date1' and '$date2'");
         $data=DB::SELECT("SELECT * FROM medical join add_members on add_members.p_id=medical.p_id where date BETWEEN '$date1' and '$date2'");
-        return view('Reports.medical_report',['data'=>$data,'daterange'=>$daterange]);
+        return view('Reports.medical_report',['data'=>$data,'daterange'=>$daterange,'total'=>$total]);
     }
 
 }

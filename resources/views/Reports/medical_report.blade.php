@@ -161,6 +161,14 @@ div.card-datatable [class*=col-md-] {
                                                         <th>Details</th>
                                                     </tr>
                                                 </thead>
+                                                <tr>
+                                                  <td></td>
+                                                  <td></td>
+                                                  <td></td>
+                                                  <td></td>
+                                                  <td><b>Total Amount</b></td>
+                                                  <td><b>{{$total[0]->amount}}</b></td>
+                                                </tr>
                                                 @foreach($data as $row)
                                                 <tr>
                                                         <td>{{$row->sr_no}}</td>

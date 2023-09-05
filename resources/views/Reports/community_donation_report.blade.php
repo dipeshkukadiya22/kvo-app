@@ -168,8 +168,8 @@ div.card-datatable [class*=col-md-] {
                                                 </thead>
                                                 <tr>
                                                     <td></td>  <td></td>  <td></td>  <td></td>  <td></td>  <td></td>  <td></td>  <td></td>  <td></td>
-                                                      <td>Total Amount</td>
-                                                      <td>{{$total[0]->amount}}</td>
+                                                      <td><b>Total Amount</b></td>
+                                                      <td><b>{{$total[0]->amount}}</b></td>
                                                     </tr>
                                                 @foreach($donation as $row)
                                                     <tr>
@@ -269,7 +269,7 @@ div.card-datatable [class*=col-md-] {
               text: '<i class="ti ti-printer me-1" ></i>Print',
               className: 'dropdown-item',
               exportOptions: {
-                columns: [0,1 ,2, 3, 4, 5, 6, 7, 8, 9, 10],
+                columns: [0,1 ,2, 3, 4, 5, 6, 7, 8, 9, 10, 11],
                 // prevent avatar to be display
                 format: {
                   body: function (inner, coldex, rowdex) {
@@ -306,7 +306,7 @@ div.card-datatable [class*=col-md-] {
               text: '<i class="ti ti-file-text me-1" ></i>Csv',
               className: 'dropdown-item',
               exportOptions: {
-                columns: [0,1 ,2, 3, 4, 5, 6, 7, 8, 9, 10],
+                columns: [0,1 ,2, 3, 4, 5, 6, 7, 8, 9,10],
                 // prevent avatar to be display
                 format: {
                   body: function (inner, coldex, rowdex) {
@@ -330,7 +330,7 @@ div.card-datatable [class*=col-md-] {
               text: '<i class="ti ti-file-spreadsheet me-1"></i>Excel',
               className: 'dropdown-item',
               exportOptions: {
-                columns: [0,1 ,2, 3, 4, 5, 6, 7, 8, 9, 10],
+                columns: [0,1 ,2, 3, 4, 5, 6, 7, 8, 9,10],
                 // prevent avatar to be display
                 format: {
                   body: function (inner, coldex, rowdex) {
@@ -351,10 +351,11 @@ div.card-datatable [class*=col-md-] {
             },
             {
               extend: 'pdf',
+              orientation: 'landscape',
               text: '<i class="ti ti-file-description me-1"></i>Pdf',
               className: 'dropdown-item',
               exportOptions: {
-                columns: [1 ,2, 3, 4, 5, 6, 7, 8, 9, 10],
+                columns: [0,1 ,2, 3, 4, 5, 6, 7, 8, 9,10],
                 // prevent avatar to be display
                 format: {
                   body: function (inner, coldex, rowdex) {
