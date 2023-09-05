@@ -128,7 +128,6 @@ div.card-datatable [class*=col-md-] {
                                                 <th>Booking No.</th>
                                                 <th>Name</th>
                                                 <th>Room No. </th>
-                                                <!--<th>Status </th>-->
                                                 <th>Check-In-Date</th>
                                                 <th>Check-Out-Date</th>
                                                 <th>Rent</th>
@@ -144,7 +143,6 @@ div.card-datatable [class*=col-md-] {
                                               <td>{{$row->r_id}}</td>
                                               <td>{{$row->m_name}}</td>
                                               <td>{{$row->room_list}}</td>
-                                              <!--<td>{{$row->status}}</td>}}-->
                                               <td>{{date("d-m-Y",strtotime($row->check_in_date))}}</td>
                                               <td>{{date("d-m-Y",strtotime($row->check_in_date . '+' .$row->no_of_days . 'days'))}}</td>
                                               <td>{{$row->ac_amount + $row->non_ac_amount + $row->door_mt_amount}}</td>
@@ -170,50 +168,42 @@ div.card-datatable [class*=col-md-] {
                         <!--START checkedout room TAB-->
                                 <div class="tab-pane fade" id="navs-pills-top-checkoutroom" role="tabpanel">
                                     <div class="card-datatable pt-0">
-                                        <table id="DataTables_Table_0" class="datatables-basic table">
+                                        <table id="DataTables_Table_1"class="datatables-basic table">
                                           <thead>
-                                         @csrf
                                               <tr>
-                                                <th>Booking No.</th>
-                                                <th>Name</th>
-                                                <th>Room No. </th>
-                                                <!--<th>Status </th>-->
-                                                <th>Check-In-Date</th>
-                                                <th>Check-Out-Date</th>
-                                                <th>No of Days</th>                       
-                                                <th>Deposite(₹) </th>
-                                                <th>Amount(₹)</th>
-                                                <th>Payment Mode</th>
-                                                <th>Action</th>
+                                                <th style='width:10px'>Booking No.</th>
+                                                <th style='width:30px'>Name</th>
+                                                <th style='width:50px'>Room No. </th>
+                                                <th style='width:25px'>Check-In-Date</th>
+                                                <th style='width:25px'>Check-Out-Date</th>                     
+                                                <th style='width:10px'>Deposite(₹) </th>
+                                                <th style='width:20px'>Amount(₹)</th>
+                                                <th style='width:20px'>Payment Mode</th>
+                                                <th style='width:10px'>Action</th>
                                               </tr>
                                           </thead>
+                                          <tbody>
                                           @foreach($checkout as $row)
                                           <tr>
                                              <input type="hidden" class="id" value="{{$row->r_id}}">
-                                              <td>{{$row->r_id}}</td>
-                                              <td>{{$row->m_name}}</td>
-                                              <td>{{$row->room_list}}</td>
-                                              <!--<td>{{$row->status}}</td>}}-->
-                                              <td>{{date("d-m-Y",strtotime($row->check_in_date))}}</td>
-                                              <td>{{date("d-m-Y",strtotime($row->check_in_date . '+' .$row->no_of_days . 'days'))}}</td>
-                                              @php $date=Date("Y-m-d");$ck_dte=$row->check_in_date; $days=date_diff($date,"2023-09-8");@endphp
-                                              <td></td>
-                                              <td>{{$row->deposite_rs}}</td>
-                                              <td>{{$row->payable_amount}}</td>
-                                              <td>{{$row->payment_mode}}</td>
+                                              <td style='width:10px'>{{$row->r_id}}</td>
+                                              <td style='width:10px'>{{$row->m_name}}</td>
+                                              <td style='width:50px'>{{$row->room_list}}</td>
+                                              <td style='width:25px'>{{date("d-m-Y",strtotime($row->check_in_date))}}</td>
+                                              <td style='width:25px'>456</td>
+                                              <td style='width:20px'>{{$row->deposite_rs}}</td>
+                                              <td style='width:20px'>{{$row->payable_amount}}</td>
+                                              <td style='width:10px'>{{$row->payment_mode}}</td>
                                               <td>
                                                   <div class="d-inline-block">
                                                     <a href="{{route('pdf_CheckOut',$row->rec_no)}}" class="text-primary"><img src="./assets/icon/orange-eye.png" width="20px"></a>
 
                                                     <!--<a @if($row->status=='BOOKED') onclick="edit_checkout({{$row->r_id}})"; @endif class="btn btn-sm btn-icon item-edit"><img src="./assets/icon/orange-edit.png" width="20px"></a>-->
-
-                                                   
-                                                    
                                                   </div>
                                               </td>
                                           </tr>
                                           @endforeach
-                                          
+                                          </tbody>
                                         </table>
                                         </div>
                                       </div>
@@ -273,16 +263,10 @@ div.card-datatable [class*=col-md-] {
                                   <!-- Datetime Picker-->
                                   <div class="col mb-3">
                                     <label for="flatpickr-datetime" class="form-label">ચેક આઉટ તારીખ / સમય</label>
-                                    <input type="text" class="form-control" name="check_out_date" id="check_out_date" readonly/>
+                                    <input type="text" class="form-control" name="check_out_date" id="check_out_date" value="@php echo date('d-m-Y H:i') @endphp" readonly/>
                                   </div>
-
-  
-                                  
-
                                 </div>
-
-                               
-                                <!-- Basic Bootstrap Table -->
+                                  <!-- Basic Bootstrap Table -->
                                 <div class="table-responsive text-nowrap">
                                   <table class="table">
                                     <thead>
@@ -576,8 +560,10 @@ div.card-datatable [class*=col-md-] {
                       $("#name").val(response[0]['m_name']);
                       $("#city").val(response[0]['city']);
                       var date=new Date(response[0]['check_in_date']);
-                      var checkdate=date.getDate()+"-"+date.getMonth()+"-"+date.getFullYear()+" "+date.getHours()+":"+date.getMinutes();
-                      $("#check_in_date").val(checkdate);
+                      var checkindate=date.getDate()+"-"+date.getMonth()+"-"+date.getFullYear()+" "+date.getHours()+":"+date.getMinutes();
+                      var date1=new Date();
+                      var days=Math.round((date1.getTime()-date.getTime())/(1000*3600*24));
+                      $("#check_in_date").val(checkindate);
                       $("#deposite").val(response[0]['deposite_rs']);
                       var room=response[0]['room_list'];
                       var ArrNames =room .split(",");
@@ -587,27 +573,27 @@ div.card-datatable [class*=col-md-] {
                       {
                         $("#dlx_room").val(room);
                         $("#dlx_room_charge").val(response[0]['ac_amount']);
-                        $("#dlx_no_of_days").val(response[0]['no_of_days']);
-                        $("#dlx_amount").val(response[0]['no_of_days'] * response[0]['ac_amount']);
-                        $("#dlx_room_total").val(response[0]['no_of_days'] * response[0]['ac_amount']);
+                        $("#dlx_no_of_days").val(days);
+                        $("#dlx_amount").val(days * response[0]['ac_amount']);
+                        $("#dlx_room_total").val(days * response[0]['ac_amount']);
                         amt+=parseInt(document.getElementById('dlx_room_total').value);
                       }
                       if(room==303 || room==304 ||room==305 || room==306 || room==403)
                       {
                         $("#ac_room").val(room);
                         $("#ac_room_charge").val(response[0]['ac_amount']);
-                        $("#ac_no_of_days").val(response[0]['no_of_days']);
-                        $("#ac_amount").val(response[0]['no_of_days'] * response[0]['ac_amount']);
-                        $("#ac_room_total").val(response[0]['no_of_days'] * response[0]['ac_amount']);
+                        $("#ac_no_of_days").val(days);
+                        $("#ac_amount").val(days * response[0]['ac_amount']);
+                        $("#ac_room_total").val(days * response[0]['ac_amount']);
                         amt+=prseInt(document.getElementById('ac_room_total').value);
                       }
                       if(room==201 || room==202 ||room==203 || room==204 ||room==205 || room==206 || room==404 || room==405 || room==406)
                       {
                         $("#non_ac_room").val(room);
                         $("#non_ac_room_charge").val(response[0]['non_ac_amount']);
-                        $("#non_ac_no_of_days").val(response[0]['no_of_days']);
-                        $("#non_ac_amount").val(response[0]['no_of_days'] * response[0]['non_ac_amount']);
-                        $("#non_ac_room_total").val(response[0]['no_of_days'] * response[0]['non_ac_amount']);
+                        $("#non_ac_no_of_days").val(days);
+                        $("#non_ac_amount").val(days * response[0]['non_ac_amount']);
+                        $("#non_ac_room_total").val(days * response[0]['non_ac_amount']);
                         amt+=parseInt(document.getElementById('non_ac_room_total').value);
                       }
                       
@@ -615,9 +601,9 @@ div.card-datatable [class*=col-md-] {
                       {
                         $("#non_dmt_ac_room").val(room);
                         $("#non_dmt_ac_room_charge").val(response[0]['door_mt_amount']);
-                        $("#non_dmt_ac_no_of_days").val(response[0]['no_of_days']);
-                        $("#non_dmt_ac_amount").val(response[0]['no_of_days'] * response[0]['door_mt_amount']);
-                        $("#non_dmt_ac_room_total").val(response[0]['no_of_days'] * response[0]['door_mt_amount']);
+                        $("#non_dmt_ac_no_of_days").val(days);
+                        $("#non_dmt_ac_amount").val(days * response[0]['door_mt_amount']);
+                        $("#non_dmt_ac_room_total").val(days * response[0]['door_mt_amount']);
                         amt+=parseInt(document.getElementById('non_dmt_ac_room_total').value);
                       }
 
@@ -625,9 +611,9 @@ div.card-datatable [class*=col-md-] {
                       {
                         $("#dmt_ac_room").val(room);
                         $("#dmt_ac_room_charge").val(response[0]['door_mt_amount']);
-                        $("#dmt_ac_no_of_days").val(response[0]['no_of_days']);
-                        $("#dmt_ac_amount").val(response[0]['no_of_days'] * response[0]['door_mt_amount']);
-                        $("#dmt_ac_room_total").val(response[0]['no_of_days'] * response[0]['door_mt_amount']);
+                        $("#dmt_ac_no_of_days").val(days);
+                        $("#dmt_ac_amount").val(days * response[0]['door_mt_amount']);
+                        $("#dmt_ac_room_total").val(days * response[0]['door_mt_amount']);
                         amt+=parseInt(document.getElementById('dmt_ac_room_total').value);
                       }
                     }
@@ -671,14 +657,6 @@ div.card-datatable [class*=col-md-] {
       }
     </script>
     <script>
-      jQuery(document).ready(function($){
-      var currentDate = new Date();
-      $('#check_out_date').flatpickr({
-      dateFormat: "d-m-Y H:i",
-      enableTime: true,
-      defaultDate: currentDate
-      });
-    });
 
     $("#CASH").change(function(){
         document.getElementById("payment").value="CASH";
@@ -726,7 +704,7 @@ div.card-datatable [class*=col-md-] {
               text: '<i class="ti ti-printer me-1" ></i>Print',
               className: 'dropdown-item',
               exportOptions: {
-                columns: [0,1 ,2, 3, 4, 5, 6, 7, 8, 9],
+                columns: [0,1 ,2, 3, 4, 5, 6, 7, 8],
                 // prevent avatar to be display
                 format: {
                   body: function (inner, coldex, rowdex) {
@@ -763,7 +741,7 @@ div.card-datatable [class*=col-md-] {
               text: '<i class="ti ti-file-text me-1" ></i>Csv',
               className: 'dropdown-item',
               exportOptions: {
-                columns: [0,1 ,2, 3, 4, 5, 6, 7, 8, 9],
+                columns: [0,1 ,2, 3, 4, 5, 6, 7, 8],
                 // prevent avatar to be display
                 format: {
                   body: function (inner, coldex, rowdex) {
@@ -787,7 +765,7 @@ div.card-datatable [class*=col-md-] {
               text: '<i class="ti ti-file-spreadsheet me-1"></i>Excel',
               className: 'dropdown-item',
               exportOptions: {
-                columns: [0,1 ,2, 3, 4, 5, 6, 7, 8, 9],
+                columns: [0,1 ,2, 3, 4, 5, 6, 7, 8],
                 // prevent avatar to be display
                 format: {
                   body: function (inner, coldex, rowdex) {
@@ -811,7 +789,7 @@ div.card-datatable [class*=col-md-] {
               text: '<i class="ti ti-file-description me-1"></i>Pdf',
               className: 'dropdown-item',
               exportOptions: {
-                columns: [0,1 ,2, 3, 4, 5, 6, 7, 8, 9],
+                columns: [0,1 ,2, 3, 4, 5, 6, 7, 8],
                 // prevent avatar to be display
                 format: {
                   body: function (inner, coldex, rowdex) {
@@ -1036,8 +1014,6 @@ document.getElementById("net_amount").addEventListener("input", convertToWords);
   });
 });
   </script>
-
-
 
 @endsection
 
