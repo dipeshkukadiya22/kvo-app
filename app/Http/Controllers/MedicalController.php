@@ -26,7 +26,7 @@ class MedicalController extends Controller
         $member_data=DB::select("SELECT * FROM add_members");
         $member=DB::select("SELECT m.sr_no,m.date,m.doctor_name,m.amount,m.payment_mode,M.m_name,M.city,M.phone_no,M.p_id FROM medical As m join add_members As M where m.p_id=M.p_id order by m.sr_no desc");
         $rec_no=medical::get()->last()->sr_no;
-        
+     
         $data=new medical();
         $data->p_id=strtoupper($req->name);
         $data->date=Date("Y-m-d",strtotime($req->date));
@@ -36,7 +36,19 @@ class MedicalController extends Controller
         $data->payment_mode=strtoupper($req->payment);
         $data->amount_in_words=$req->ankers;
         $data->save();
-       return redirect()->route('view_treatment')->with('message', 'Form submitted successfully!')->with(['member' => $member,'member_data' => $member_data,'rec_no' => $rec_no]);
+
+        
+        if($data)
+        {
+            $result=app('App\HTTP\Controllers\pdfcontroller')-> pdf_Medical_Treatment($data->sr_no);
+            dd($result);
+            //dd("check");
+           // return redirect()->route('view_treatment')->with('message', 'Form submitted successfully!')->with(['member' => $member,'member_data' => $member_data,'rec_no' => $rec_no]);
+        }else{
+            return redirect()->route('view_treatment')->with('message', 'Form Not submitted successfully!')->with(['member' => $member,'member_data' => $member_data,'rec_no' => $rec_no]);
+        }
+       
+     
     }
     public function get_treatment($id)
     {

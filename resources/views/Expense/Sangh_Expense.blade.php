@@ -142,7 +142,7 @@
                               <span class="input-group-text">₹</span>
                               <input type="text" id="amount" name="amount" class="form-control" placeholder="Amount" aria-label="Amount (to the nearest dollar)"
                               onkeypress="return onlyNumbers(this.value);" onkeyup="NumToWord(this.value,'ankers');" maxlength="9" required/>
-                            </div>
+                              </div><div id="amt" class="error-message" ></div>
                           </div>
                           {{-- <div id="divDisplayWords"> --}}
                           <div class="col-md-4">
@@ -158,7 +158,7 @@
                         	</div>
                           <div class="row mt-3">
                             <div class="col-12">
-                              <button type="submit" class="btn btn-primary">Submit</button>
+                              <button type="submit" id="submitbtn1" class="btn btn-primary">Submit</button>
                             </div>
                           </div>
                         </div>
@@ -204,7 +204,20 @@
       $('#date').flatpickr({
       dateFormat: "d-m-Y",
       defaultDate: currentDate
-    })
+    });
+    $("#amount").focusout(function(){
+      var amt=parseInt(document.getElementById("amount").value);
+      if(amt === 0)
+      {
+          $("#submitbtn1").prop('disabled',true);
+          $("#amt").html("Fil Valid Amount ");
+      }
+      else
+      {
+        $("#submitbtn1").prop('disabled',false);
+        $("#amt").html("");
+      }
+    });
     });
     </script>
      @if(session('new_member') === 1)

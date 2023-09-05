@@ -105,7 +105,8 @@ class pdfcontroller extends Controller
     return $pdf->stream();
     }
     public function pdf_Medical_Treatment($id)
-    {   
+    {  
+        //dd("HI") ;
         $medical=DB::select("SELECT * FROM medical join add_members where add_members.p_id=medical.p_id and sr_no='$id'");
         $pdf = Pdf::loadView('pdf.pdf_Medical_Treatment',['medical' => $medical])->setPaper('a5', 'landscape')->setOptions(['defaultFont' => 'KAP119']);
         return $pdf->stream();
