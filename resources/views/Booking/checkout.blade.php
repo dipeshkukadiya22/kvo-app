@@ -983,9 +983,6 @@ document.getElementById("net_amount").addEventListener("input", convertToWords);
     var excharge=parseInt(document.getElementById("non_dmt_ac_room_Excharge").value); 
     var deposite=parseInt(document.getElementById("deposite").value);
     $("#non_dmt_ac_room_total").val(amt+excharge);
-    // var total=parseInt(document.getElementById("non_dmt_ac_room_total").value);
-    // $("#total").val(total);
-    // $("#net_amount").val(total-deposite);
     const dlxtamount = parseInt($('#dlx_room_total').val()) || 0;
     const acamount = parseInt($('#ac_room_total').val()) || 0;
     const nonacamount = parseInt($('#non_ac_room_total').val()) || 0;
@@ -998,7 +995,13 @@ document.getElementById("net_amount").addEventListener("input", convertToWords);
   });
 
   $("#dmt_ac_room_Excharge").change(function(){
-    var amt=parseInt(document.getElementById("door_mt_amount").value); 
+    var value=document.getElementById("dmt_ac_room_Excharge").value;
+    if(value ==="")
+    {
+      $("#dmt_ac_room_Excharge").val(0);
+    }
+    else{
+    var amt=parseInt(document.getElementById("dmt_ac_room_charge").value); 
     var excharge=parseInt(document.getElementById("dmt_ac_room_Excharge").value); 
     var deposite=parseInt(document.getElementById("deposite").value);
     $("#dmt_ac_room_total").val(amt+excharge);
@@ -1011,6 +1014,7 @@ document.getElementById("net_amount").addEventListener("input", convertToWords);
     $('#total').val(totalAmount);
     $("#net_amount").val(totalAmount-deposite);
     convertToWords();
+    }
   });
 });
   </script>
