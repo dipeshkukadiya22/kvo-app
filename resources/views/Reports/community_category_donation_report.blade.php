@@ -136,9 +136,11 @@ div.card-datatable [class*=col-md-] {
                                                 id="daterange"
                                                 class="form-control"
                                                 placeholder="YYYY-MM-DD to YYYY-MM-DD"
-                                                value="{{$daterange}}"
+                                                value={{$daterange}}
+                                        
+
                                                  />
-                                                 {{print_r($daterange)}}
+                                              
                                             </div>
                                             <!-- /Range Picker-->
                                             <div class="col-md-3 submit-button">
