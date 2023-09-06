@@ -337,7 +337,7 @@ function NumToWord(inputNumber, outputControl) {
       if(amt === 0){
           $("#submitbtn1").prop('disabled',true);
           $("#amount").focus();
-          $("#amt").html("Fil Valid Amount ");
+          $("#amt").html("Enter Valid Amount ");
       }else{
         $("#submitbtn1").prop('disabled',false);
         $("#amt").html("");
