@@ -109,16 +109,16 @@ div.card-datatable [class*=col-md-] {
                                           <thead>
                                          
                                               <tr >
-                                                <th style="font-size:15px"><b>Booking No.</b></th>
-                                                <th  style="font-size:15px"><b>Name</b></th>
+                                                <th style="font-size:14px"><b>Booking No.</b></th>
+                                                <th  style="font-size:14px"><b>Name</b></th>
                                                 {{--<th>Status</th>--}}
                                                 <th style="font-size:15px"><b>Room No </b> </th>
                                                 <th style="font-size:15px"><b><b>Check In Date</b></th>
                                                 <th style="font-size:15px"><b>Check Out Date</b></th>
                                                 <th style="font-size:15px"><b>Rent</b></th>
                                                 <th style="font-size:15px"><b>Days Of Stay</b></th>                       
-                                                <th style="font-size:15px"><b>Deposite(₹) </b></th>
-                                                <th style="font-size:15px"><b>Action</b></th>
+                                                <th style="font-size:14px"><b>Deposite(₹) </b></th>
+                                                <th style="font-size:14px"><b>Action</b></th>
                                               </tr>
                                           </thead>
                                           @foreach($checkout as $row)
@@ -1040,7 +1040,7 @@ $(document).ready(function () {
           '<div class="row formrepeater">'+
                                   '<div class="mb-3 col-lg-6 col-xl-3 col-12 mb-0" hidden>'+
                                       '<label class="form-label" for="form-repeater-1-1">member_id</label>'+
-                                      '<input type="text" id="m_id'+i+'" name="m_id[]" class="fom_age[]rm-control" placeholder="john doe" value="" readonly/>'+
+                                      '<input type="text" id="m_id'+i+'" name="m_id[]" class="form-control" placeholder="john doe" value="" readonly/>'+
                                     '</div>'+
 
                                  ' <div class="mb-3 col-lg-6 col-xl-3 col-12 mb-0">'+
