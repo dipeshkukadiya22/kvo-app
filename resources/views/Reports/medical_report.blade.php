@@ -153,12 +153,12 @@ div.card-datatable [class*=col-md-] {
                                                 <table id="DataTables_Table_0" class="datatables-basic table">
                                                 <thead>
                                                     <tr>
-                                                        <th>Receipt No</th>
-                                                        <th>Patient</th>
-                                                        <th>Date</th>
-                                                        <th>Doctor Name</th>
-                                                        <th>Amount</th>
-                                                        <th>Details</th>
+                                                        <th style="font-size:15px"><b>Receipt No</b></th>
+                                                        <th style="font-size:15px"><b>Patient</b></th>
+                                                        <th style="font-size:15px"><b>Date</b></th>
+                                                        <th style="font-size:15px"><b>Doctor Name</b></th>
+                                                        <th style="font-size:15px"><b>Amount</b></th>
+                                                        <th style="font-size:15px"><b>Details</b></th>
                                                     </tr>
                                                 </thead>
                                                 <tr>

@@ -108,17 +108,17 @@ div.card-datatable [class*=col-md-] {
                                         <table id="DataTables_Table_0" class="datatables-basic table">
                                           <thead>
                                          
-                                              <tr>
-                                                <th><b>Booking No.</b></th>
-                                                <th><b>Name</b></th>
+                                              <tr >
+                                                <th style="font-size:15px"><b>Booking No.</b></th>
+                                                <th  style="font-size:15px"><b>Name</b></th>
                                                 {{--<th>Status</th>--}}
-                                                <th><b>Room No </b> </th>
-                                                <th><b><b>Check In Date</b></th>
-                                                <th><b>Check Out Date</b></th>
-                                                <th><b>Rent</b></th>
-                                                <th><b>Days Of Stay</b></th>                       
-                                                <th><b>Deposite(₹) </b></th>
-                                                <th><b>Action</b></th>
+                                                <th style="font-size:15px"><b>Room No </b> </th>
+                                                <th style="font-size:15px"><b><b>Check In Date</b></th>
+                                                <th style="font-size:15px"><b>Check Out Date</b></th>
+                                                <th style="font-size:15px"><b>Rent</b></th>
+                                                <th style="font-size:15px"><b>Days Of Stay</b></th>                       
+                                                <th style="font-size:15px"><b>Deposite(₹) </b></th>
+                                                <th style="font-size:15px"><b>Action</b></th>
                                               </tr>
                                           </thead>
                                           @foreach($checkout as $row)

@@ -184,19 +184,19 @@ div.card-datatable [class*=col-md-] {
                                                     <th id="display_category" colspan="5" style="text-align:center;"></th>
                                                   </tr>
                                                     <tr>
-                                                        <th><b>Name</b></th>
-                                                        <th><b>Date</b></th>
-                                                        <th><b>Haste</b></th>
-                                                        <th><b>Amount</b></th>
-                                                        <th><b>Payment Mode</b></th>
+                                                        <th style="font-size:15px"><b>Name</b></th>
+                                                        <th style="font-size:15px"><b>Date</b></th>
+                                                        <th style="font-size:15px"><b>Haste</b></th>
+                                                        <th style="font-size:15px"><b>Amount</b></th>
+                                                        <th style="font-size:15px"><b>Payment Mode</b></th>
                                                     </tr>
                                                 </thead>
                                                 <tr>
                                                   <td></td>
                                                   <td></td>
                                                   <td></td>
-                                                  <td><b>Total Amount</b></td>
-                                                  <td><b>{{$total[0]->amount}}</b></td>
+                                                  <td style="font-size:15px"><b>Total Amount</b></td>
+                                                  <td style="font-size:15px"><b>{{$total[0]->amount}}</b></td>
                                                 </tr>
                                                 @foreach($donation as $row)
                                                 <tr>

@@ -90,15 +90,15 @@ button.swal2-cancel.btn.btn-label-danger {
                                           <thead>
 		
                                               <tr >
-                                                  <th style='width:70px'><b>Rec No</b></th>
-                                                  <th style='width:70px'><b>Name</b></th>
-                                                  <th style='width:70px'><b>Date</b></th>
-                                                  <th style='width:70px'><b>Mobile No</b></th>
-                                                  <th style='width:70px'><b>City</b></th>
-                                                  <th style='width:70px'><b>Haste</b></th>
-                                                  <th style='width:70px'><b>Trust</b></th>
-                                                  <th style='width:70px'><b>Details</b></th>
-                                                  <th style='width:70px'><b>Action</b></th>
+                                                  <th style="font-size:15px"><b>Rec No</b></th>
+                                                  <th style="font-size:15px"><b>Name</b></th>
+                                                  <th style="font-size:15px"><b>Date</b></th>
+                                                  <th style="font-size:15px"><b>Mobile No</b></th>
+                                                  <th style="font-size:15px"><b>City</b></th>
+                                                  <th style="font-size:15px"><b>Haste</b></th>
+                                                  <th style="font-size:15px"><b>Trust</b></th>
+                                                  <th style="font-size:15px"><b>Details</b></th>
+                                                  <th style="font-size:15px"><b>Action</b></th>
                                               </tr>
                                           </thead>
                                           @foreach($donation_data as $row)

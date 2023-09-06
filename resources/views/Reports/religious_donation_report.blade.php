@@ -162,24 +162,24 @@ div.card-datatable [class*=col-md-] {
                                                 <table id="DataTables_Table_0" class="datatables-basic table">
                                                 <thead>
                                                     <tr>
-                                                        <th>Name</th>
-                                                        <th>Date</th>
-                                                        <th>Haste</th>
-                                                        <th>Sarv sadharan </th>
-                                                        <th>Jivdaya </th>
-                                                        <th>Sadhu Sadhvi</th>
-                                                        <th>Sadharmik Kharda </th>
-                                                        <th>Chaaturmash</th>
-                                                        <th>Kayami Tithi</th>
-                                                        <th>Devdravya</th>
-                                                        <th>Kesar Sukhad </th>
-                                                        <th>Dhup-Dip</th>
-                                                        <th>Snatra Pooja</th>
-                                                        <th>Angi Aangi-Pooja</th>
-                                                        <th>Moti Pooja</th>
-                                                        <th>Dhrut Boli</th>
-                                                        <th>Other</th>
-                                                        <th>Total</th>
+                                                        <th style="font-size:15px"><b>Name</b></th>
+                                                        <th style="font-size:15px"><b>Date</b></th>
+                                                        <th style="font-size:15px"><b>Haste</b></th>
+                                                        <th style="font-size:15px"><b>Sarv sadharan </b></th>
+                                                        <th style="font-size:15px"><b>Jivdaya</b> </th>
+                                                        <th style="font-size:15px"><b>Sadhu Sadhv</b></th>
+                                                        <th style="font-size:15px"><b>Sadharmik Kharda</b> </th>
+                                                        <th style="font-size:15px"><b>Chaaturmash</b></th>
+                                                        <th style="font-size:15px"><b>Kayami Tithi</b></th>
+                                                        <th style="font-size:15px"><b>Devdravya</b></th>
+                                                        <th style="font-size:15px"><b>Kesar Sukhad </b></th>
+                                                        <th style="font-size:15px"><b>Dhup-Dip</b></th>
+                                                        <th style="font-size:15px"><b>Snatra Pooja</b></th>
+                                                        <th style="font-size:15px"><b>Angi Aangi-Pooja</b></th>
+                                                        <th style="font-size:15px"><b>Moti Pooja</b></th>
+                                                        <th style="font-size:15px"><b>Dhrut Boli</b></th>
+                                                        <th style="font-size:15px"><b>Other</b></th>
+                                                        <th style="font-size:15px"><b>Total</b></th>
                                                     </tr>
                                                 </thead>
                                                 <tr>

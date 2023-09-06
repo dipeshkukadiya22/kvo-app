@@ -161,11 +161,11 @@ div.card-datatable [class*=col-md-] {
                                                 <table id="DataTables_Table_0" class="datatables-basic table">
                                                 <thead>
                                                     <tr>
-                                                        <th>Re No</th>
-                                                        <th>Name</th>
-                                                        <th>Date</th>
-                                                        <th>Haste</th>
-                                                        <th>Details</th>
+                                                        <th style="font-size:15px"><b>Re No</b></th>
+                                                        <th style="font-size:15px"><b>Name</b></th>
+                                                        <th style="font-size:15px"><b>Date</b></th>
+                                                        <th style="font-size:15px"><b>Haste</b></th>
+                                                        <th style="font-size:15px"><b>Details</b></th>
                                                     </tr>
                                                 </thead>
                                                 @foreach($donation as $row)

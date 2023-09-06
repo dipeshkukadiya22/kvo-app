@@ -164,11 +164,11 @@ div.card-datatable [class*=col-md-] {
                                                     <th id="display_category" colspan="5" style="text-align:center;"></th>
                                                   </tr>
                                                     <tr>
-                                                        <th>Voucher</th>
-                                                        <th>Name</th>
-                                                        <th>Date</th>
-                                                        <th>Amount</th>
-                                                        <th>Details</th>
+                                                        <th style="font-size:15px"><b>Voucher</b></th>
+                                                        <th style="font-size:15px"><b>Name</b></th>
+                                                        <th style="font-size:15px"><b>Date</b></th>
+                                                        <th style="font-size:15px"><b>Amount</b></th>
+                                                        <th style="font-size:15px"><b>Details</b></th>
                                                     </tr>
                                                 </thead>
                                                 <tr>

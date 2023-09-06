@@ -153,17 +153,17 @@ div.card-datatable [class*=col-md-] {
                                                 <table id="DataTables_Table_0" class="datatables-basic table">
                                                 <thead>
                                                     <tr>
-                                                        <th>Name</th>
-                                                        <th>Date</th>
-                                                        <th> Medical Checkup center</th>
-                                                        <th>Mahajan Mameru</th>
-                                                        <th>Navnit Bhojanshala</th>
-                                                        <th>Educational</th>
-                                                        <th>Lavajam</th>
-                                                        <th>Oxygen Donation</th>
-                                                        <th>Ambulance Donation</th>
-                                                        <th>Other</th>
-                                                        <th>Total</th>
+                                                        <th style="font-size:15px"><b>Name</b></th>
+                                                        <th style="font-size:15px"><b>Date</b></th>
+                                                        <th style="font-size:15px"><b> Medical Checkup center</b></th>
+                                                        <th style="font-size:15px"><b>Mahajan Mameru</b></th>
+                                                        <th style="font-size:15px"><b>Navnit Bhojanshala</b></th>
+                                                        <th style="font-size:15px"><b>Educational</b></th>
+                                                        <th style="font-size:15px"><b>Lavajam</b></th>
+                                                        <th style="font-size:15px"><b>Oxygen Donation</b></th>
+                                                        <th style="font-size:15px"><b>Ambulance Donation</b></th>
+                                                        <th style="font-size:15px"><b>Other</b></th>
+                                                        <th style="font-size:15px"><b>Total</b></th>
                                                     </tr>
                                                 </thead>
                                                 <tr>

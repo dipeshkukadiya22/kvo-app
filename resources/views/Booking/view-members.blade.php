@@ -78,13 +78,12 @@
                                           <table id="DataTables_Table_0" class="datatables-basic table">
                                             <thead>
                                                 <tr>
-                                                    <th><b>No</b></th>
-                                                    <th><b>Full Name</b></th>
-                                                    <th><b>Email</b></th>
-                                                    <th><b>Phone Number</b></th>
-                                                    <th><b>City</b></th>
-                                                  
-                                                    <th>Action</th>
+                                                    <th style="font-size:15px"><b>No</b></th>
+                                                    <th style="font-size:15px"><b>Full Name</b></th>
+                                                    <th style="font-size:15px"><b>Email</b></th>
+                                                    <th style="font-size:15px"><b>Phone Number</b></th>
+                                                    <th style="font-size:15px"><b>City</b></th>
+                                                    <th style="font-size:15px"><b>Action</b></th>
                                                 </tr>
                                             </thead>
                                            @foreach($data as $row)

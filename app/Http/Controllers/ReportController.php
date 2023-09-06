@@ -8,13 +8,15 @@ class ReportController extends Controller
     //religious_donation
 
     public function religious_donation_report(){
-        $daterange=Date("01-m-Y")."-".Date("31-m-Y");
-        $date1=date('Y-m-d',strtotime(substr($daterange,0,10)));
-        $date2=date('Y-m-d',strtotime(substr($daterange,13)));
-        $trust="VIJAYNAGAR";
-        $total=DB::SELECT("SELECT sum(total) as amount FROM `religious_donation` join add_members on add_members.p_id=religious_donation.member_id where r_date BETWEEN  '$date1' and '$date2' and community='$trust'");
-        $donation=DB::SELECT("SELECT * FROM `religious_donation` join add_members on add_members.p_id=religious_donation.member_id where r_date BETWEEN  '$date1' and '$date2' and community='$trust'");
-        return view('Reports.religious_donation_report',['daterange'=>$daterange,'donation'=>$donation,"trust"=>$trust,'total'=>$total]);
+        
+        $startDate = date('Y-m-01');
+        $endDate = date('Y-m-t');
+    
+        $trust = "VIJAYNAGAR";
+        $total = DB::SELECT("SELECT sum(total) as amount FROM `religious_donation` join add_members on add_members.p_id=religious_donation.member_id where r_date BETWEEN '$startDate' and '$endDate' and community='$trust'");
+        $donation = DB::SELECT("SELECT * FROM `religious_donation` join add_members on add_members.p_id=religious_donation.member_id where r_date BETWEEN '$startDate' and '$endDate' and community='$trust'");
+    
+        return view('Reports.religious_donation_report', ['startDate' => $startDate, 'endDate' => $endDate, 'donation' => $donation, "trust" => $trust, 'total' => $total]);
     }
     public function show_religious_donation_report(Request $req){
         $daterange=$req->daterange;

@@ -138,6 +138,7 @@ div.card-datatable [class*=col-md-] {
                                                 placeholder="YYYY-MM-DD to YYYY-MM-DD"
                                                 value="{{$daterange}}"
                                                  />
+                                                 {{print_r($daterange)}}
                                             </div>
                                             <!-- /Range Picker-->
                                             <div class="col-md-3 submit-button">
@@ -170,10 +171,10 @@ div.card-datatable [class*=col-md-] {
                                                     <th id="display_category" colspan="5" style="text-align:center;"></th>
                                                   </tr>
                                                     <tr>
-                                                        <th>નામ</th>
-                                                        <th>તારીખ</th>
-                                                        <th>રકમ</th>
-                                                        <th>નાણા મળેલ</th>
+                                                        <th style="font-size:15px"><b>Name</b></th>
+                                                        <th style="font-size:15px"><b>Date</b></th>
+                                                        <th style="font-size:15px"><b>Amount</b></th>
+                                                        <th style="font-size:15px"><b>Payment Mode</b></th>
                                                     </tr>
                                                 </thead>
                                                 @foreach($donation as $row)
@@ -577,7 +578,7 @@ div.card-datatable [class*=col-md-] {
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
 
     <script>
-        $(function() {
+         $(function() {
             $('input[name="daterange"]').daterangepicker({
             opens: 'left'
             }, function(start, end, label) {

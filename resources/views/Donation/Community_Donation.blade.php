@@ -33,12 +33,7 @@
       background-color: #efefef;
       opacity: 1;
   }
-input.no-border {
-    border-color: #DBDADE !important;
-}
-input.check-required {
-    border-color: red !important;
-}
+
 </style>
 
 @endsection
@@ -104,7 +99,7 @@ input.check-required {
                 <div class="col-md mb-4 mb-md-0">
                   <div class="card">
                     <div class="card-body">
-                      <form  id="kvo_community_donation" class="browser-default-validation" method="POST" action="{{route ('CommunityDonation')}}">
+                      <form  class="browser-default-validation" method="POST" action="{{route ('CommunityDonation')}}">
                         @csrf
                         <div class="row g-3">
                           <div class="col-12">
@@ -123,8 +118,8 @@ input.check-required {
                           </div>
 
                           <div class="col-md-4">
-                            <label for="select2Basic" class="form-label ">નામ</label>
-                            <select id="select2Basic" class="select2 form-select form-select-lg check-required" data-allow-clear="true" name="name" placeholder="select name" required>
+                            <label for="select2Basic" class="form-label">નામ</label>
+                            <select id="select2Basic" class="select2 form-select form-select-lg" data-allow-clear="true" name="name" placeholder="select name" required>
                               <option value=""></option>
                               @foreach ($m_data as $row)  
                               <option value="{{$row->p_id}}"> {{$row->m_name}} - {{$row->phone_no}} </option>
@@ -139,10 +134,10 @@ input.check-required {
                               id="member-phone"
                               name="phone_no" 
                               class="form-control phone-mask"
-                              placeholder=""
+                              placeholder="658 799 8941"
                               value="{{ (!empty($member)) ? $member->phone_no : '' }}"
-                              aria-label=""
-                            
+                              aria-label="658 799 8941"
+                              required
                               oninput="javascript: if (this.value.length > 10) this.value = this.value.slice(0, 10);" readonly/>
 
                           </div>
@@ -155,7 +150,9 @@ input.check-required {
                               id="member_city"
                               placeholder="John Doe"
                               value="{{ (!empty($member)) ? $member->donation : '' }}"
-                              readonly />
+                              readonly
+                              required />
+                         
                           </div>
                           <div class="col-md-2">
                             <label class="form-label"  for="basic-default-dob">તારીખ</label>
@@ -172,11 +169,12 @@ input.check-required {
                             <h6 class="mt-4 fw-semibold">2. Donation Details</h6>
                             <hr class="mt-0 mb-0" />
                           </div>
-                          <div class="col-md-4 form-outline">
+                          <div class="col-md-4">
                             <label class="form-label" for="multicol-phone">શેઠશ્રી રતનશી ટોકરશી વોરા મેડિકલ ચેકઅપ સેન્ટર</label>
                             <div class="input-group">
                               <span class="input-group-text">₹</span>
-                              <input type="number" class="form-control  check-required" name="medical_checkup" placeholder="Amount" aria-label="Amount (to the nearest dollar)" >
+                              <input type="number" class="form-control amount-input" name="medical_checkup" placeholder="Amount" aria-label="Amount (to the nearest dollar)" >
+                              
                             </div>
                           </div>
 
@@ -184,7 +182,7 @@ input.check-required {
                             <label class="form-label" for="multicol-phone">મહાજનનું મામેરું</label>
                             <div class="input-group">
                               <span class="input-group-text">₹</span>
-                              <input type="number" class="form-control  no-border" name="mahajan" placeholder="Amount" aria-label="Amount (to the nearest dollar)" >
+                              <input type="number" class="form-control amount-input" name="mahajan" placeholder="Amount" aria-label="Amount (to the nearest dollar)" >
                               
                             </div>
                           </div>
@@ -192,7 +190,7 @@ input.check-required {
                             <label class="form-label" for="multicol-phone">માતુશ્રી લાખણીબાઈ રામજી તેજશી ગાલા નવનીત ભોજનશાળા</label>
                             <div class="input-group">
                               <span class="input-group-text">₹</span>
-                              <input type="number" class="form-control  no-border" name="bhojanshala" placeholder="Amount" aria-label="Amount (to the nearest dollar)">
+                              <input type="number" class="form-control amount-input" name="bhojanshala" placeholder="Amount" aria-label="Amount (to the nearest dollar)">
                               
                             </div>
                           </div>
@@ -200,7 +198,7 @@ input.check-required {
                             <label class="form-label" for="multicol-phone">શૈક્ષણિક</label>
                             <div class="input-group">
                               <span class="input-group-text">₹</span>
-                              <input type="number" class="form-control no-border" name="shaikshanik" placeholder="Amount" aria-label="Amount (to the nearest dollar)">
+                              <input type="number" class="form-control amount-input" name="shaikshanik" placeholder="Amount" aria-label="Amount (to the nearest dollar)">
                               
                             </div>
                           </div>
@@ -208,7 +206,7 @@ input.check-required {
                             <label class="form-label" for="multicol-phone">લવાજમ</label>
                             <div class="input-group">
                               <span class="input-group-text">₹</span>
-                              <input type="number" class="form-control no-border" name="lavajam" placeholder="Amount" aria-label="Amount (to the nearest dollar)" >
+                              <input type="number" class="form-control amount-input" name="lavajam" placeholder="Amount" aria-label="Amount (to the nearest dollar)" >
                               
                             </div>
                           </div>
@@ -216,7 +214,7 @@ input.check-required {
                             <label class="form-label" for="multicol-phone">ઑક્સીજન ડોનેશન</label>
                             <div class="input-group">
                               <span class="input-group-text">₹</span>
-                              <input type="number" class="form-control no-border" name="oxygen" placeholder="Amount" aria-label="Amount (to the nearest dollar)" >
+                              <input type="number" class="form-control amount-input" name="oxygen" placeholder="Amount" aria-label="Amount (to the nearest dollar)" >
                               
                             </div>
                           </div>
@@ -224,7 +222,7 @@ input.check-required {
                             <label class="form-label" for="multicol-phone">એમ્બ્યુલન્સ ડોનેશન</label>
                             <div class="input-group">
                               <span class="input-group-text">₹</span>
-                              <input type="number" class="form-control no-border" name="ambulance" placeholder="Amount" aria-label="Amount (to the nearest dollar)" >
+                              <input type="number" class="form-control amount-input" name="ambulance" placeholder="Amount" aria-label="Amount (to the nearest dollar)" >
                               
                             </div>
                           </div>
@@ -232,20 +230,37 @@ input.check-required {
                             <label class="form-label" for="multicol-phone">ઈતર</label>
                             <div class="input-group">
                               <span class="input-group-text">₹</span>
-                              <input type="number" class="form-control no-border" name="other"  placeholder="Amount" aria-label="Amount (to the nearest dollar)">
+                              <input type="number" class="form-control amount-input" name="other"  placeholder="Amount" aria-label="Amount (to the nearest dollar)">
                               
                             </div>
                           </div>
+                          <!--<div class="col-md-4">
+                            <label class="form-label" for="multicol-phone">શ્રી અન્ય ખાતે</label>
+                            <div class="input-group">
+                              <span class="input-group-text">₹</span>
+                              <input type="number" class="form-control" placeholder="Amount" aria-label="Amount (to the nearest dollar)">
+                              
+                            </div>
+                          </div>-->
                           <div class="col-md-4">
                             <label class="form-label" for="basic-default-name">અન્ય વિગત</label>
                             <input
                               type="text"
-                              class="form-control no-border"
+                              class="form-control"
                               id="basic-default-name"
                               name="remarks" 
                               style="text-transform:capitalize"
                               />
                         	</div>
+                          {{-- <div class="col-md-4">
+                            <label class="form-label" for="multicol-phone">ટોટલ</label>
+                            <div class="input-group">
+                              <span class="input-group-text">₹</span>
+                              <input  type="text" id="Text1" class="form-control" name="total" placeholder="Amount" aria-label="Amount (to the nearest dollar)"
+                              onkeypress="return onlyNumbers(this.value);" onkeyup="NumToWord(this.value,'ankers');" maxlength="9" required>
+                            </div>
+                          </div> --}}
+
                           <div class="col-md-4">
                             <label class="form-label" for="multicol-phone">ટોટલ</label>
                             <div class="input-group">
@@ -263,40 +278,40 @@ input.check-required {
                               name="total_in_word" 
                               value=""
                               {{-- placeholder="John Doe" --}}
-                              readonly/>
+                              required readonly/>
                         	</div>
-                          <div class="col-md-4 no-border">
+                          <div class="col-md-4">
                             <label class="d-block form-label">નાણા મળેલ</label>
                             <div class="form-check form-check-inline">
                               <input
                                 type="radio"
                                 id="basic_default_radio-female"
                                 name="basic_default_radio"
-                                class="form-check-input no-border "
+                                class="form-check-input"
                                 value="CASH"
                                 required checked/>
-                              <label class="form-check-label no-border " for="basic_default_radio">રોકડા</label>
+                              <label class="form-check-label" for="basic_default_radio">રોકડા</label>
                             </div>
-                            <div class="form-check form-check-inline mb-2 no-border">
+                            <div class="form-check form-check-inline mb-2">
                               <input
                                 type="radio"
                                 id="basic_default_radio-male"
                                 name="basic_default_radio"
-                                class="form-check-input no-border"
+                                class="form-check-input"
                                 value="CHEQUE"
-                              />
-                              <label class="form-check-label no-border" for="basic_default_radio">ચેક</label>
+                                required />
+                              <label class="form-check-label" for="basic_default_radio">ચેક</label>
                             </div>
                            
-                            <div class="form-check form-check-inline no-border">
+                            <div class="form-check form-check-inline">
                               <input
                                 type="radio"
                                 id="basic_default_radio-female"
                                 name="basic_default_radio"
-                                class="form-check-input no-border"
+                                class="form-check-input"
                                 value="UPI"
-                               />
-                              <label class="form-check-label no-border" for="basic_default_radio">UPI</label>
+                                required />
+                              <label class="form-check-label" for="basic_default_radio">UPI</label>
                             </div>
                           </div>
                           <div class="row mt-3">
@@ -395,46 +410,6 @@ input.check-required {
       // Make sure it works correctly separately
   }
 </script>
-@if(session('new_member') === 1)
-        <script>
-             var member_id=[];
-          var temp=document.getElementById('select2Basic');
-          var value;
-          for(i=0;i<temp.options.length;i++)
-            {
-              member_id[i]=temp.options[i].value;
-              value=member_id[i];
-            }
-            $("#select2Basic option[value=" + value + "]").attr('selected', 'selected');
-            $.ajax({
-                url:"{{url('get_member')}}",
-                type:'GET',
-                success:function(response){
-                  $('#member-phone').val(response['phone_no']);
-                  $('#member_city').val(response['city']);
-                  
-                }
-              });
-        </script>
-    @endif
-    <script>
-      $("#multicol-phone").focusout(function(){
-        var contact=document.getElementById("multicol-phone").value;
-      
-        $.ajax({
-                url:"{{url('check_num')}}"+"/"+ contact,
-                type:'GET',
-                success:function(response){
-                    if(response==1)
-                      { $("#submitbtn").prop('disabled',true);
-                        $("#error").html("Phone no alraedy exit");
-                      }
-                    else{ $("#submitbtn").prop('disabled',false);
-                    $("#error").html("");}
-                    }
-                });
-      });
-      </script>
 
     <!-- start num to word -->
 
@@ -596,24 +571,35 @@ function NumToWord(inputNumber, outputControl) {
 </script>
 
 
- <script>
-(() => {
-  'use strict';
+{{-- <script>
+  document.addEventListener("DOMContentLoaded", function() {
+    // Find the form element by its ID
+    const form = document.getElementById("donationForm");
 
-  // Fetch all the forms we want to apply custom Bootstrap validation styles to
-  const forms = document.querySelectorAll('.browser-default-validation');
-  // Loop over them and prevent submission
-  Array.prototype.slice.call(forms).forEach((form) => {
-    form.addEventListener('submit', (event) => {
-      if (!form.checkValidity()) {
-        event.preventDefault();
-        event.stopPropagation();
-      }
-      form.classList.add('was-validated');
-    }, false);
+    // Add a submit event listener to the form
+    form.addEventListener("submit", function(event) {
+      event.preventDefault(); // Prevent the default form submission
+
+      // Simulate form submission or perform AJAX request if needed
+      // For demonstration purposes, we are using a 1-second timeout
+      setTimeout(function() {
+        // Show the SweetAlert popup after the form is submitted
+        Swal.fire({
+          icon: "success",
+          title: "Form Submitted",
+          text: "Your data has been submitted successfully!",
+          confirmButtonText: "OK",
+        }).then((result) => {
+          // Optionally, you can redirect to another page after the user clicks "OK"
+          if (result.isConfirmed) {
+            // Replace "your-page-url" with the desired destination URL
+            window.location.href = window.location.href;
+          }
+        });
+      }, 1000); // Adjust the timeout value if needed
+    });
   });
-})();
-</script>
+</script> --}}
 
 
 

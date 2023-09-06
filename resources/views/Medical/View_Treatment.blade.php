@@ -95,15 +95,15 @@ button.swal2-cancel.btn.btn-label-danger {
                                         <table id="DataTables_Table_0" class="datatables-basic table">
                                           <thead>
                                               <tr>
-                                                  <th><b>Rec No</b></th>
-                                                  <th><b>Name</b></th>
-                                                  <th><b>Date</b></th>
-                                                  <th><b>Mobile No</b></th>
-                                                  <th><b>City</b></th>
-                                                  <th><b>Doctor Name</b></th>
-                                                  <th><b>Total</b></th>
-                                                  <th><b>Payment Mode</b></th>
-                                                  <th><b>Action</b></th>
+                                                  <th style="font-size:15px"><b>Rec No</b></th>
+                                                  <th style="font-size:15px"><b>Name</b></th>
+                                                  <th style="font-size:15px"><b>Date</b></th>
+                                                  <th style="font-size:15px"><b>Mobile No</b></th>
+                                                  <th style="font-size:15px"><b>City</b></th>
+                                                  <th style="font-size:15px"><b>Doctor Name</b></th>
+                                                  <th style="font-size:15px"><b>Total</b></th>
+                                                  <th style="font-size:15px"><b>Payment Mode</b></th>
+                                                  <th style="font-size:15px"><b>Action</b></th>
                                               </tr>
                                           </thead>
                                           @foreach($member as $row)
