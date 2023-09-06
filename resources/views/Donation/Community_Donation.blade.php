@@ -33,7 +33,9 @@
       background-color: #efefef;
       opacity: 1;
   }
-
+  .validate {
+    border-color: green !important;
+  }
 </style>
 
 @endsection
@@ -99,7 +101,7 @@
                 <div class="col-md mb-4 mb-md-0">
                   <div class="card">
                     <div class="card-body">
-                      <form  class="browser-default-validation" method="POST" action="{{route ('CommunityDonation')}}">
+                      <form id="kvo_community_donation" class="browser-default-validation"  method="POST" action="{{route ('CommunityDonation')}}">
                         @csrf
                         <div class="row g-3">
                           <div class="col-12">
@@ -168,12 +170,12 @@
                           <div class="col-12">
                             <h6 class="mt-4 fw-semibold">2. Donation Details</h6>
                             <hr class="mt-0 mb-0" />
-                          </div>
+                            </div>
                           <div class="col-md-4">
                             <label class="form-label" for="multicol-phone">શેઠશ્રી રતનશી ટોકરશી વોરા મેડિકલ ચેકઅપ સેન્ટર</label>
                             <div class="input-group">
                               <span class="input-group-text">₹</span>
-                              <input type="number" class="form-control amount-input" name="medical_checkup" placeholder="Amount" aria-label="Amount (to the nearest dollar)" >
+                              <input type="number" class="form-control amount-input" id="medical_checkup" name="medical_checkup" placeholder="Amount" aria-label="Amount (to the nearest dollar)" >
                               
                             </div>
                           </div>
@@ -182,15 +184,14 @@
                             <label class="form-label" for="multicol-phone">મહાજનનું મામેરું</label>
                             <div class="input-group">
                               <span class="input-group-text">₹</span>
-                              <input type="number" class="form-control amount-input" name="mahajan" placeholder="Amount" aria-label="Amount (to the nearest dollar)" >
-                              
+                              <input type="number" class="form-control amount-input" name="mahajan" id="mahajan" placeholder="Amount" aria-label="Amount (to the nearest dollar)" >
                             </div>
                           </div>
                           <div class="col-md-4">
                             <label class="form-label" for="multicol-phone">માતુશ્રી લાખણીબાઈ રામજી તેજશી ગાલા નવનીત ભોજનશાળા</label>
                             <div class="input-group">
                               <span class="input-group-text">₹</span>
-                              <input type="number" class="form-control amount-input" name="bhojanshala" placeholder="Amount" aria-label="Amount (to the nearest dollar)">
+                              <input type="number" class="form-control amount-input" name="bhojanshala" id="bhojanshala" placeholder="Amount" aria-label="Amount (to the nearest dollar)">
                               
                             </div>
                           </div>
@@ -198,7 +199,7 @@
                             <label class="form-label" for="multicol-phone">શૈક્ષણિક</label>
                             <div class="input-group">
                               <span class="input-group-text">₹</span>
-                              <input type="number" class="form-control amount-input" name="shaikshanik" placeholder="Amount" aria-label="Amount (to the nearest dollar)">
+                              <input type="number" class="form-control amount-input" name="shaikshanik" id="shaikshanik" placeholder="Amount" aria-label="Amount (to the nearest dollar)">
                               
                             </div>
                           </div>
@@ -206,7 +207,7 @@
                             <label class="form-label" for="multicol-phone">લવાજમ</label>
                             <div class="input-group">
                               <span class="input-group-text">₹</span>
-                              <input type="number" class="form-control amount-input" name="lavajam" placeholder="Amount" aria-label="Amount (to the nearest dollar)" >
+                              <input type="number" class="form-control amount-input" name="lavajam" id="lavajam" placeholder="Amount" aria-label="Amount (to the nearest dollar)" >
                               
                             </div>
                           </div>
@@ -214,7 +215,7 @@
                             <label class="form-label" for="multicol-phone">ઑક્સીજન ડોનેશન</label>
                             <div class="input-group">
                               <span class="input-group-text">₹</span>
-                              <input type="number" class="form-control amount-input" name="oxygen" placeholder="Amount" aria-label="Amount (to the nearest dollar)" >
+                              <input type="number" class="form-control amount-input" name="oxygen" id="oxygen" placeholder="Amount" aria-label="Amount (to the nearest dollar)" >
                               
                             </div>
                           </div>
@@ -222,7 +223,7 @@
                             <label class="form-label" for="multicol-phone">એમ્બ્યુલન્સ ડોનેશન</label>
                             <div class="input-group">
                               <span class="input-group-text">₹</span>
-                              <input type="number" class="form-control amount-input" name="ambulance" placeholder="Amount" aria-label="Amount (to the nearest dollar)" >
+                              <input type="number" class="form-control amount-input" name="ambulance" id="ambulance" placeholder="Amount" aria-label="Amount (to the nearest dollar)" >
                               
                             </div>
                           </div>
@@ -230,7 +231,7 @@
                             <label class="form-label" for="multicol-phone">ઈતર</label>
                             <div class="input-group">
                               <span class="input-group-text">₹</span>
-                              <input type="number" class="form-control amount-input" name="other"  placeholder="Amount" aria-label="Amount (to the nearest dollar)">
+                              <input type="number" class="form-control amount-input" name="other" id="other" placeholder="Amount" aria-label="Amount (to the nearest dollar)">
                               
                             </div>
                           </div>
@@ -600,7 +601,23 @@ function NumToWord(inputNumber, outputControl) {
     });
   });
 </script> --}}
-
+<script>
+    $("#kvo_community_donation").submit(function(){
+      var ambulance=document.getElementById("ambulance");
+      var oxygen=document.getElementById("oxygen");
+      var lavajam=document.getElementById("lavajam");
+      var shaikshanik=document.getElementById("shaikshanik");
+      var bhojanshala=document.getElementById("bhojanshala");
+      var mahajan=document.getElementById("mahajan");
+      var medical_checkup=document.getElementById("medical_checkup");
+      var other=document.getElementById("other");
+        if((ambulance.value === "" ) && (oxygen.value === "") && ( lavajam.value === "" ) && ( shaikshanik.value === "") &&
+           ( bhojanshala.value === "" ) && ( mahajan.value === "") && (medical_checkup.value === "" ) && ( other.value === "")){
+              event.preventDefault();
+              event.stopPropagation();
+            }    
+      });
+</script>
 
 
 @if (Session::get('message'))

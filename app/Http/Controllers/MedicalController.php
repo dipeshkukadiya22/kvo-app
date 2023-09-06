@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\add_members;
+use Illuminate\Support\Facades\App;
+use Barryvdh\DomPDF\Facade\Pdf;
 use App\Models\medical;
 use Illuminate\Http\Request;
 
@@ -36,14 +38,12 @@ class MedicalController extends Controller
         $data->payment_mode=strtoupper($req->payment);
         $data->amount_in_words=$req->ankers;
         $data->save();
-
-        
+   
         if($data)
-        {
-            $result=app('App\HTTP\Controllers\pdfcontroller')-> pdf_Medical_Treatment($data->sr_no);
-            dd($result);
-            //dd("check");
-           // return redirect()->route('view_treatment')->with('message', 'Form submitted successfully!')->with(['member' => $member,'member_data' => $member_data,'rec_no' => $rec_no]);
+         {       
+            $medical=DB::select("SELECT * FROM medical join add_members where add_members.p_id=medical.p_id and sr_no='$data->sr_no'");
+            $pdf = Pdf::loadView('pdf.pdf_Medical_Treatment',['medical' => $medical])->setPaper('a5', 'landscape')->setOptions(['defaultFont' => 'KAP119']);
+            return $pdf->stream();
         }else{
             return redirect()->route('view_treatment')->with('message', 'Form Not submitted successfully!')->with(['member' => $member,'member_data' => $member_data,'rec_no' => $rec_no]);
         }
