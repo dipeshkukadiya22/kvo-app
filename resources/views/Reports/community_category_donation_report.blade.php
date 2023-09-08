@@ -390,7 +390,15 @@ div.card-datatable [class*=col-md-] {
     <!-- Page JS -->
     <script src="{{ asset ('assets/js/form-validation.js') }}"></script>
 
- 
+    $(document).ready(function() {
+    // let currentStep = 1;
+    // var currentDateTime = new Date();
+
+    // $('#flatpickr-datetime').flatpickr({
+    //   enableTime: true,
+    //   dateFormat: "d-m-Y H:i",
+    //   defaultDate: currentDateTime
+    // });
     <script>
       jQuery(document).ready(function($){
         $('#basic-default-dob').flatpickr({
@@ -432,11 +440,13 @@ div.card-datatable [class*=col-md-] {
 
     <!-- BEGIN: Page JS-->
    <script>
-    
+      var category=document.getElementById("category").value;
+      var date=document.getElementById("daterange").value;
+      var documentTitle='Community Donation Report '+" [ "+ category +" ]";
+      
     var dt_basic_table = $('.datatables-basic');
     var dt_basic = dt_basic_table.DataTable({
-
-      
+  
         
       dom: '<"card-header flex-column flex-md-row"<"head-label text-center"><"dt-action-buttons text-end pt-3 pt-md-0"B>><"row"<"col-sm-12 col-md-6"l><"col-sm-12 col-md-6 d-flex justify-content-center justify-content-md-end"f>>t<"row"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>',
       displayLength: 7,
@@ -451,6 +461,7 @@ div.card-datatable [class*=col-md-] {
               extend: 'print',
               text: '<i class="ti ti-printer me-1" ></i>Print',
               className: 'dropdown-item',
+              title:'document',
               exportOptions: {
                 columns: [0,1 ,2, 3],
                 // prevent avatar to be display
@@ -512,6 +523,7 @@ div.card-datatable [class*=col-md-] {
               extend: 'excel',
               text: '<i class="ti ti-file-spreadsheet me-1"></i>Excel',
               className: 'dropdown-item',
+              title:documentTitle,
               exportOptions: {
                 columns: [0,1 ,2, 3],
                 // prevent avatar to be display

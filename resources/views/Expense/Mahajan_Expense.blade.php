@@ -411,11 +411,14 @@
       });
   });
   $("#kvo_add_mahajan_expense").submit(function(){
-                Swal.fire(
-                  'Insert Successfully!',
-                  '',
-                  'success'
-                )   
+                Swal.fire({
+                  title:'Insert Successfully!',
+                  text:'',
+                  icon:'success',
+                  showCancelButton: false,
+  
+              
+                })   
     });
 </script>
 
