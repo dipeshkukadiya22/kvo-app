@@ -610,9 +610,9 @@ function NumToWord(inputNumber, outputControl) {
         if((ambulance.value === "" ) && (oxygen.value === "") && ( lavajam.value === "" ) && ( shaikshanik.value === "") &&
            ( bhojanshala.value === "" ) && ( mahajan.value === "") && (medical_checkup.value === "" ) && ( other.value === "")){
             Swal.fire(
-                  'Donation Amount Required!',
+                  'Amount Required!',
                   '',
-                  'error'
+                  'warning'
                 )
               event.preventDefault();
               event.stopPropagation();

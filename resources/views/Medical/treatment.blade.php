@@ -7,7 +7,7 @@
   <!-- Vendors CSS -->
   <link rel="stylesheet" href="{{ asset ('assets/vendor/libs/flatpickr/flatpickr.css') }}" />
   <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.0/themes/base/jquery-ui.css">
-
+  <link rel="stylesheet" href="{{ asset('assets/vendor/libs/sweetalert2/sweetalert2.css') }}" />
   <!-- Page CSS --> 
   <style>
 .form-label {
@@ -62,7 +62,7 @@
               </div>
               
               <div class="card mb-4">
-                <form class="card-body" id="add_treatment" method="post" action="{{route('add_treatment')}}">  
+                <form class="card-body" id="KVO_add_treatment" method="post" action="{{route('add_treatment')}}">  
                   <div class="row g-3">
                   <div class="col-md-4">
                   @csrf
@@ -71,7 +71,7 @@
                     </div>
                     <div class="col-md-4">
                       <label for="select2Basic" class="form-label">દર્દીનું નામ </label>
-                      <select id="name" name="name" class="select2 form-select " data-allow-clear="true" >
+                      <select id="name" name="name" class="select2 form-select " data-allow-clear="true" required>
                       <option value=""></option>
                         @foreach($member as $row)
                           <option value="{{$row->p_id}}">{{$row->m_name}} - {{$row->phone_no}}</option>
@@ -88,8 +88,8 @@
                     </div>
                     <div class="col-md-4">
                       <label class="form-label" for="multicol-username">ડોક્ટરનું નામ </label>
-                      <input type="text" id="doctor_name" name="doctor_name" class="form-control" style="text-transform:uppercase" placeholder="Dr. Shah" required>
-                        <datalist id="doctor_name">
+                      <input type="text" id="doctor_name" list="doctor" name="doctor_name" class="form-control" style="text-transform:uppercase" placeholder="Dr. Shah" required>
+                        <datalist id="doctor">
                                   @foreach($treatment as $item)
                                       <option value="{{$item->doctor_name}}">{{$item->doctor_name}}</option>
                                   @endforeach
@@ -157,12 +157,13 @@
 <script src="{{ asset('assets/vendor/libs/jquery-timepicker/jquery-timepicker.js') }}"></script>
 <script src="{{ asset('assets/vendor/libs/pickr/pickr.js') }}"></script>
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
+<script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
+<script src="{{ asset('assets/vendor/libs/sweetalert2/sweetalert2.js') }}"></script>
 
 <!-- Page JS -->
-
+<script src="{{ asset('assets/js/extended-ui-sweetalert2.js') }}"></script>
 <script src="{{ asset('assets/js/forms-pickers.js') }}"></script>
-
+<script src="{{ asset ('assets/js/main.js') }}"></script>
 
     <script>
     $("#name").change(function(){
@@ -346,7 +347,6 @@ function NumToWord(inputNumber, outputControl) {
  
       $("#multicol-phone").focusout(function(){
         var contact=document.getElementById("multicol-phone").value;
-      
         $.ajax({
                 url:"{{url('check_num')}}"+"/"+ contact,
                 type:'GET',
@@ -376,6 +376,14 @@ function NumToWord(inputNumber, outputControl) {
           });
       });
   });
+
+  $("#KVO_add_treatment").submit(function(){
+                Swal.fire(
+                  'Insert Successfully!',
+                  '',
+                  'success'
+                )   
+    });
 </script>
 
 

@@ -14,6 +14,7 @@
 <link rel="stylesheet" href="{{ asset ('assets/vendor/libs/typeahead-js/typeahead.css') }}" />
 <link rel="stylesheet" href="{{ asset ('assets/vendor/libs/tagify/tagify.css') }}" />
 <link rel="stylesheet" href="{{ asset ('assets/vendor/libs/formvalidation/dist/css/formValidation.min.css') }}" />
+<link rel="stylesheet" href="{{ asset('assets/vendor/libs/sweetalert2/sweetalert2.css') }}" />
 
 <!-- Page CSS -->
 <style>
@@ -189,10 +190,10 @@
     <script src="{{ asset ('assets/vendor/libs/formvalidation/dist/js/FormValidation.min.js') }}"></script>
     <script src="{{ asset ('assets/vendor/libs/formvalidation/dist/js/plugins/Bootstrap5.min.js') }}"></script>
     <script src="{{ asset ('assets/vendor/libs/formvalidation/dist/js/plugins/AutoFocus.min.js') }}"></script>
-
+    <script src="{{ asset('assets/vendor/libs/sweetalert2/sweetalert2.js') }}"></script>
     <!-- Main JS -->
     <script src="{{ asset ('assets/js/main.js') }}"></script>
-
+    <script src="{{ asset('assets/js/extended-ui-sweetalert2.js') }}"></script>
     <script src="{{ asset ('assets/js/forms-selects.js') }}"></script>
 
     <!-- Page JS -->
@@ -210,7 +211,7 @@
       if(amt === 0){
           $("#submitbtn1").prop('disabled',true);
           $("#amount").focus();
-          $("#amt").html("Fil Valid Amount ");
+          $("#amt").html("Enter Valid Amount ");
       }else{
         $("#submitbtn1").prop('disabled',false);
         $("#amt").html("");
@@ -399,6 +400,14 @@
             }
             document.getElementById(outputControl).value = finalOutput;
         }
+        
+  $("#kvo_add_sangh_expense").submit(function(){
+                Swal.fire(
+                  'Insert Successfully!',
+                  '',
+                  'success'
+                )   
+    });
     </script>
 
     <!-- end num to word -->

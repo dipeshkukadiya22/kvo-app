@@ -21,7 +21,8 @@ class MedicalController extends Controller
     {
         $member=DB::select("SELECT m.sr_no,m.date,m.doctor_name,m.amount,m.payment_mode,M.m_name,M.city,M.phone_no,M.p_id FROM medical As m join add_members As M where m.p_id=M.p_id order by m.sr_no desc");
         $member_data=DB::select("SELECT * FROM add_members");
-        return view('Medical.View_Treatment',['member' => $member,'member_data' => $member_data]);
+        $treatment=DB::select("select DISTINCT doctor_name from medical");
+        return view('Medical.View_Treatment',['member' => $member,'member_data' => $member_data,'treatment'=>$treatment]);
     }
     public function add(Request $req)
     {

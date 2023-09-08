@@ -95,7 +95,7 @@ button.swal2-cancel.btn.btn-label-danger {
                                                   <th style="font-size:15px"><b>City</b></th>
                                                   <th style="font-size:15px"><b>Amount</b></th>
                                                   <th style="font-size:15px"><b>Details</b></th>
-                                                  <th style="font-size:15px"><b>Action</b></th>
+                                                  <th style="font-size:15px"><b>Actions</b></th>
                                               </tr>
                                           </thead>
                                           @foreach($expense as $row)
@@ -266,7 +266,6 @@ button.swal2-cancel.btn.btn-label-danger {
         {
           // Actions
           targets: -1,
-          title: 'Actions',
           orderable: false,
           searchable: false,
           
@@ -440,7 +439,7 @@ button.swal2-cancel.btn.btn-label-danger {
       
       
     });
-    $('div.head-label').html('<h5 class="card-title mb-0">View all Sangh Expense</h5>');
+    $('div.head-label').html('<h5 class="card-title mb-0">View Sangh Expense</h5>');
 
     </script>
 
@@ -693,7 +692,7 @@ function delete_sangh_expense(id)
                     success:function(response){
                         Swal.fire(
                             'Deleted!',
-                            'Your Record has been deleted.',
+                            '',
                             'success',
                             );
                             location.reload();
@@ -746,13 +745,13 @@ function delete_sangh_expense(id)
           if(flag ===1){
                 Swal.fire(
                   'Updated!',
-                  'sangh Expense Details!',
+                  '',
                   'success'
                 )
           }else{
               Swal.fire(
                   'No change!',
-                  'Sangh Expense Details!',
+                  '',
                   'error'
                 )
           }

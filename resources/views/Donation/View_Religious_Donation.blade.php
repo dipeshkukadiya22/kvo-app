@@ -814,7 +814,7 @@ function delete_religious_donation(id)
                     success:function(response){
                         Swal.fire(
                             'Deleted!',
-                            'Your Record has been deleted.',
+                            '',
                             'success',
                             );
                             location.reload();

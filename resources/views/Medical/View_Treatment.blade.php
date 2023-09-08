@@ -192,8 +192,13 @@ button.swal2-cancel.btn.btn-label-danger {
 
                                     <div class="col-md-12">
                                         <label class="form-label" for="multicol-username">ડોક્ટરનું નામ </label>
-                                        <input type="text" id="doctor_name" name="doctor_name" style="text-transform:uppercase" class="form-control" placeholder="Dr. Shah" required>  
-                                        </div>
+                                        <input type="text" id="doctor_name" list="doctor" name="doctor_name" style="text-transform:uppercase" class="form-control" placeholder="Dr. Shah" required>  
+                                        <datalist id="doctor">
+                                        @foreach($treatment as $item)
+                                            <option value="{{$item->doctor_name}}">{{$item->doctor_name}}</option>
+                                        @endforeach
+                                        </datalist>
+                                      </div>
                                     
 
                                     <div class="col-md-12">
@@ -724,7 +729,7 @@ $("#name").change(function(){
               success:function(response){
                   Swal.fire(
                       'Deleted!',
-                      'Your Record has been deleted.',
+                      '',
                       'success',
                       );
                       location.reload();
@@ -819,13 +824,13 @@ $("#name").change(function(){
           if(flag ===1){
                 Swal.fire(
                   'Updated!',
-                  'Treatment Details!',
+                  '',
                   'success'
                 )
           }else{
               Swal.fire(
                   'No change!',
-                  'Treatment Details!',
+                  'd',
                   'error'
                 )
           }

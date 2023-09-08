@@ -95,7 +95,7 @@ button.swal2-cancel.btn.btn-label-danger {
                                                   <th style="font-size:15px"><b>City</b></th>
                                                   <th style="font-size:15px"><b>Amount</b></th>
                                                   <th style="font-size:15px"><b>Details</b></th>
-                                                  <th style="font-size:15px"><b>Action</b></th>
+                                                  <th style="font-size:15px"><b>Actions</b></th>
                                               </tr>
                                           </thead>
                                           @foreach($expense as $row)
@@ -266,7 +266,6 @@ button.swal2-cancel.btn.btn-label-danger {
         {
           // Actions
           targets: -1,
-          title: 'Actions',
           orderable: false,
           searchable: false,
           
@@ -440,7 +439,7 @@ button.swal2-cancel.btn.btn-label-danger {
       
       
     });
-    $('div.head-label').html('<h5 class="card-title mb-0">View all Community Donation</h5>');
+    $('div.head-label').html('<h5 class="card-title mb-0">View Mahajan Expense</h5>');
 
     </script>
 
@@ -679,7 +678,7 @@ button.swal2-cancel.btn.btn-label-danger {
                     success:function(response){
                         Swal.fire(
                             'Deleted!',
-                            'Your Record has been deleted.',
+                            '',
                             'success',
                             );
                             location.reload();
@@ -688,31 +687,6 @@ button.swal2-cancel.btn.btn-label-danger {
                 }
             });
   }
-
-
-
-    // $("#kvo_update_general_donation").submit(function(){
-    //     var haste=document.getElementById("haste").value;
-    //     var details=document.getElementById("details").value;
-    //     if(haste ==='' && details === '')
-    //     {
-    //         Swal.fire({
-    //             text: "Sorry, looks like there are some errors detected, please try again.",
-    //             icon: "error",
-    //         });
-    //         return false; // Prevent form submission
-    //     } else {
-    //         Swal.fire({
-    //             position: 'middle-center',
-    //             icon: 'success',
-    //             title: 'General Donation has been successfully updated!',
-    //             showConfirmButton: false,
-    //             timer: 1500
-    //             }).then(function() {
-    //             $("kvo_update_general_donation").submit();
-    //        });
-    //     }
-    // });
 </script>
 <script>
   let flag=0;
@@ -733,13 +707,13 @@ button.swal2-cancel.btn.btn-label-danger {
           if(flag ===1){
                 Swal.fire(
                   'Updated!',
-                  'Mahajan expense Details!',
+                  '',
                   'success'
                 )
           }else{
               Swal.fire(
                   'No change!',
-                  'Mahajan Expense Details!',
+                  '',
                   'error'
                 )
           }

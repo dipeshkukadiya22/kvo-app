@@ -18,6 +18,8 @@
 <link rel="stylesheet" href="{{ asset('assets/vendor/libs/toastr/toastr.css') }}" />
 <link rel="stylesheet" href="{{ asset('assets/vendor/libs/animate-css/animate.css') }}" />
 
+<link rel="stylesheet" href="{{ asset('assets/vendor/libs/sweetalert2/sweetalert2.css') }}" />
+
 <!-- Page CSS -->
 <style>
 
@@ -95,7 +97,7 @@
                 <div class="col-md mb-4 mb-md-0">
                   <div class="card">
                     <div class="card-body">
-                      <form class="browser-default-validation" method="POST" action="{{route('ReligiousDonation')}}">
+                      <form id="KVO_religious_donation" class="browser-default-validation" method="POST" action="{{route('ReligiousDonation')}}">
                         @csrf
                         <div class="row g-3">
                           <div class="col-12">
@@ -121,16 +123,6 @@
                               @endforeach
                             </select>
                           </div>
-
-                           {{-- <div class="col-md-4">
-                            <label for="select2Basic" class="form-label">નામ</label>
-                            <select name="name" id="select2Basic" class="select2 form-select form-select-lg" data-allow-clear="true"  required>
-                              <option value="AK">Alaska</option>
-                              <option value="HI">Hawaii</option>
-                              <option value="CA">California</option>
-                              <option value="NV">Nevada</option>
-                            </select>
-                          </div> --}}
 
                           <div class="col-md-4">
                             <label class="form-label" for="basic-default-name">હસ્તે</label>
@@ -162,9 +154,8 @@
                               id="member-phone"
                               name="phone_no" 
                               class="form-control phone-mask"
-                              placeholder="658 799 8941"
+                              placeholder=""
                               value="{{ (!empty($member)) ? $member->phone_no : '' }}"
-                              aria-label="658 799 8941" 
                               required
                               oninput="javascript: if (this.value.length > 10) this.value = this.value.slice(0, 10);" readonly/>
                           </div>
@@ -176,10 +167,10 @@
                               class="form-control"
                               name="city"
                               id="member_city"
-                              placeholder="John Doe"
+                              placeholder=""
                               style="text-transform:uppercase"
                               value="{{ (!empty($member)) ? $member->donation : '' }}"
-                              required readonly />
+                              readonly />
                          
                           </div>
 
@@ -424,9 +415,10 @@
     <script src="{{ asset ('assets/vendor/libs/formvalidation/dist/js/FormValidation.min.js') }}"></script>
     <script src="{{ asset ('assets/vendor/libs/formvalidation/dist/js/plugins/Bootstrap5.min.js') }}"></script>
     <script src="{{ asset ('assets/vendor/libs/formvalidation/dist/js/plugins/AutoFocus.min.js') }}"></script>
-
+    <script src="{{ asset('assets/vendor/libs/sweetalert2/sweetalert2.js') }}"></script>
     <!-- Main JS -->
     <script src="{{ asset ('assets/js/main.js') }}"></script>
+    <script src="{{ asset('assets/js/extended-ui-sweetalert2.js') }}"></script>
 
     <script src="{{ asset ('assets/js/forms-selects.js') }}"></script>
     
@@ -437,7 +429,7 @@
       jQuery(document).ready(function($){
       var currentDate = new Date();
       $('#basic-default-dob').flatpickr({
-      dateFormat: "d M, Y",
+      dateFormat: "d-m-Y",
       defaultDate: currentDate
     })
     });
@@ -684,6 +676,30 @@ function NumToWord(inputNumber, outputControl) {
                 });
             });
 </script>
+<script>
+    $("#KVO_religious_donation").submit(function(){
+      var flag=0;
+      $(".amount-input").each(function(){
+        // Test if the div element is empty
+       if($(this).val() != "")
+       {flag=1;}
+      });
+      if(flag === 0)
+      {
+        Swal.fire(
+                  'Amount Required!',
+                  '',
+                  'warning'
+                )
+        event.preventDefault();
+      } else{
+              Swal.fire(
+                  'Insert Successfully!',
+                  '',
+                  'success'
+                )
+            }
+      });
 </script>
 
 <script src="{{ asset('assets/vendor/libs/toastr/toastr.js') }}"></script>
