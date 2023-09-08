@@ -14,7 +14,7 @@
 <link rel="stylesheet" href="{{ asset ('assets/vendor/libs/typeahead-js/typeahead.css') }}" />
 <link rel="stylesheet" href="{{ asset ('assets/vendor/libs/tagify/tagify.css') }}" />
 <link rel="stylesheet" href="{{ asset ('assets/vendor/libs/formvalidation/dist/css/formValidation.min.css') }}" />
-
+<link rel="stylesheet" href="{{ asset('assets/vendor/libs/sweetalert2/sweetalert2.css') }}" />
 <!-- Page CSS -->
 <style>
 
@@ -87,7 +87,7 @@
                 <div class="col-md mb-4 mb-md-0">
                   <div class="card">
                     <div class="card-body">
-                      <form class="browser-default-validation needs-validation" method="POST" action="{{route('add_general_donation')}}">
+                      <form id="KVO_general_donation" class="browser-default-validation" method="POST" action="{{route('add_general_donation')}}">
                         <div class="row g-3">
                           <div class="col-12">
                             <h6 class="fw-semibold">1. Personal Details</h6>
@@ -142,8 +142,7 @@
                               id="phone"
                               name="phone"
                               class="form-control phone-mask"
-                              placeholder="658 799 8941"
-                              aria-label="658 799 8941"
+                              placeholder=""
                               minlength="10"
                               maxlength="10"
                               required
@@ -157,7 +156,7 @@
                               class="form-control"
                               id="city1"
                               name="city"
-                              placeholder="John Doe"
+                              placeholder=""
                               required readonly/>
                          
                           </div>
@@ -212,10 +211,11 @@
     <script src="{{ asset ('assets/vendor/libs/formvalidation/dist/js/FormValidation.min.js') }}"></script>
     <script src="{{ asset ('assets/vendor/libs/formvalidation/dist/js/plugins/Bootstrap5.min.js') }}"></script>
     <script src="{{ asset ('assets/vendor/libs/formvalidation/dist/js/plugins/AutoFocus.min.js') }}"></script>
-
+    <script src="{{ asset('assets/vendor/libs/sweetalert2/sweetalert2.js') }}"></script>
+   
     <!-- Main JS -->
     <script src="{{ asset ('assets/js/main.js') }}"></script>
-
+    <script src="{{ asset('assets/js/extended-ui-sweetalert2.js') }}"></script>
     <script src="{{ asset ('assets/js/forms-selects.js') }}"></script>
     
     <!-- Page JS -->
@@ -269,7 +269,6 @@
         defaultDate: currentDate
     })
     });
-
     $("#name").change(function(){
       const id=document.getElementById("name").value;
       $.ajax({
@@ -283,28 +282,26 @@
 
                   }
                 });
+            });     
+      $("#KVO_general_donation").submit(function(){
+        var details=document.getElementById("details").value;
+        if(details === '' )
+        {
+            Swal.fire({
+                text: "Sorry, looks like there are some errors detected, please try again.",
+                icon: "error",
             });
+            return false; // Prevent form submission
+        } else {
+                Swal.fire(
+                  'Insert Successfully!',
+                  '',
+                  'success'
+                )
+              }
+    });
     </script>
-    <script>
-      // Example starter JavaScript for disabling form submissions if there are invalid fields
-    (() => {
-  'use strict';
-
-  // Fetch all the forms we want to apply custom Bootstrap validation styles to
-  const forms = document.querySelectorAll('.needs-validation');
-  // Loop over them and prevent submission
-  Array.prototype.slice.call(forms).forEach((form) => {
-    form.addEventListener('submit', (event) => {
-      if (!form.checkValidity()) {
-        
-        event.preventDefault();
-        event.stopPropagation();
-      }
-      form.classList.add('was-validated');
-    }, false);
-  });
-})();
-    </script>
+    
 @endsection
 
 @endsection

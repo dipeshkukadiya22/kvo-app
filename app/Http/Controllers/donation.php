@@ -103,6 +103,7 @@ class donation extends Controller
         $donation->haste=strtoupper($req->haste);
         $donation->remarks=ucfirst($req->remarks);
         $donation->member_id=$req->name;
+        $donation->r_date=$req->date;
         $donation->community=$req->community;
         $donation->sarv_sadharan=$req->sarva_sadharan;  
         $donation->jiv_daya=$req->jiv_daya;
@@ -219,6 +220,7 @@ class donation extends Controller
     public function update_community_donation(Request $req)
     {
         $community_donation=community_donation::find($req->donation_id);
+        $community_donation->member_id=$req->name;
         $community_donation -> d_date = $req -> date;
         $community_donation -> medical_checkup = $req -> medical_checkup;
         $community_donation -> mahajan = $req -> mahajan;

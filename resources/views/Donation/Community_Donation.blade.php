@@ -18,10 +18,9 @@
 <link rel="stylesheet" href="{{ asset('assets/vendor/libs/toastr/toastr.css') }}" />
 <link rel="stylesheet" href="{{ asset('assets/vendor/libs/animate-css/animate.css') }}" />
 
+<link rel="stylesheet" href="{{ asset('assets/vendor/libs/sweetalert2/sweetalert2.css') }}" />
+
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
-{{-- <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.all.min.js"></script> --}}
-
 <!-- Page CSS -->
 <style>
 
@@ -136,10 +135,8 @@
                               id="member-phone"
                               name="phone_no" 
                               class="form-control phone-mask"
-                              placeholder="658 799 8941"
+                              placeholder=""
                               value="{{ (!empty($member)) ? $member->phone_no : '' }}"
-                              aria-label="658 799 8941"
-                              required
                               oninput="javascript: if (this.value.length > 10) this.value = this.value.slice(0, 10);" readonly/>
 
                           </div>
@@ -150,10 +147,9 @@
                               class="form-control"
                               name="city"
                               id="member_city"
-                              placeholder="John Doe"
+                              placeholder=""
                               value="{{ (!empty($member)) ? $member->donation : '' }}"
-                              readonly
-                              required />
+                              readonly/>
                          
                           </div>
                           <div class="col-md-2">
@@ -348,11 +344,11 @@
     <script src="{{ asset ('assets/vendor/libs/formvalidation/dist/js/FormValidation.min.js') }}"></script>
     <script src="{{ asset ('assets/vendor/libs/formvalidation/dist/js/plugins/Bootstrap5.min.js') }}"></script>
     <script src="{{ asset ('assets/vendor/libs/formvalidation/dist/js/plugins/AutoFocus.min.js') }}"></script>
-    
+    <script src="{{ asset('assets/vendor/libs/sweetalert2/sweetalert2.js') }}"></script>
 
     <!-- Main JS -->
     <script src="{{ asset ('assets/js/main.js') }}"></script>
-
+    <script src="{{ asset('assets/js/extended-ui-sweetalert2.js') }}"></script>
     <script src="{{ asset ('assets/js/forms-selects.js') }}"></script>
     
     <!-- Page JS -->
@@ -368,7 +364,7 @@
         jQuery(document).ready(function($){
         var currentDate = new Date();
         $('#basic-default-dob').flatpickr({
-        dateFormat: "d M, Y",
+        dateFormat: "d-m-Y",
         defaultDate: currentDate
     })
     });
@@ -613,9 +609,21 @@ function NumToWord(inputNumber, outputControl) {
       var other=document.getElementById("other");
         if((ambulance.value === "" ) && (oxygen.value === "") && ( lavajam.value === "" ) && ( shaikshanik.value === "") &&
            ( bhojanshala.value === "" ) && ( mahajan.value === "") && (medical_checkup.value === "" ) && ( other.value === "")){
+            Swal.fire(
+                  'Donation Amount Required!',
+                  '',
+                  'error'
+                )
               event.preventDefault();
               event.stopPropagation();
             }    
+            else{
+              Swal.fire(
+                  'Insert Successfully!',
+                  '',
+                  'success'
+                )
+            }
       });
 </script>
 

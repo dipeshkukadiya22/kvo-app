@@ -91,14 +91,14 @@ button.swal2-cancel.btn.btn-label-danger {
 		
                                               <tr >
                                                   <th style="font-size:15px"><b>Rec No</b></th>
-                                                  <th style="font-size:15px"><b>Name</b></th>
-                                                  <th style="font-size:15px"><b>Date</b></th>
+                                                  <th style="width:150px;font-size:15px"><b>Name</b></th>
+                                                  <th style="width:80px;font-size:15px"><b>Date</b></th>
                                                   <th style="font-size:15px"><b>Mobile No</b></th>
                                                   <th style="font-size:15px"><b>City</b></th>
-                                                  <th style="font-size:15px"><b>Haste</b></th>
+                                                  <th style="width:80px;font-size:15px"><b>Haste</b></th>
                                                   <th style="font-size:15px"><b>Trust</b></th>
                                                   <th style="font-size:15px"><b>Details</b></th>
-                                                  <th style="font-size:15px"><b>Action</b></th>
+                                                  <th style="width:80px;font-size:15px"><b>Actions</b></th>
                                               </tr>
                                           </thead>
                                           @foreach($donation_data as $row)
@@ -269,7 +269,6 @@ button.swal2-cancel.btn.btn-label-danger {
         {
           // Actions
           targets: -1,
-          title: 'Actions',
           orderable: false,
           searchable: false,
           
@@ -689,7 +688,7 @@ button.swal2-cancel.btn.btn-label-danger {
               success:function(response){
                   Swal.fire(
                       'Deleted!',
-                      'Your Record has been deleted.',
+                      '',
                       'success',
                       );
                       location.reload();
@@ -716,13 +715,13 @@ button.swal2-cancel.btn.btn-label-danger {
           if(flag ===1){
                 Swal.fire(
                   'Updated!',
-                  'General Donation Details!',
+                  '',
                   'success'
                 )
           }else{
               Swal.fire(
                   'No change!',
-                  'General Donation Details!',
+                  '',
                   'error'
                 )
           }

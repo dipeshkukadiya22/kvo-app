@@ -96,7 +96,7 @@ button.swal2-cancel.btn.btn-label-danger {
                                                   <th style="font-size:15px"><b>City</b></th>
                                                   <th style="font-size:15px"><b>Total</b></th>
                                                   <th style="font-size:15px"><b>Payment Mode</b></th>
-                                                  <th style="font-size:15px"><b>Action</b></th>
+                                                  <th style="font-size:15px"><b>Actions</b></th>
                                               </tr>
                                           </thead>
                                           @foreach($donation as $row)
@@ -109,7 +109,7 @@ button.swal2-cancel.btn.btn-label-danger {
                                               <td>{{$row->city}}</td>
                                               <td>{{"₹ ".$row->total}}</td>
                                               <td>{{$row->payment_mode}}</td>
-                                              <td>
+                                              <td style="width=25px">
                                                   <div class="d-inline-block">
                                                     <a href="{{route('pdf_Community_Donation',$row->donation_id)}}" target="_blank" class="text-primary"><img src="./assets/icon/orange-eye.png" width="20px"></a>
 
@@ -169,6 +169,7 @@ button.swal2-cancel.btn.btn-label-danger {
                                         <label class="form-label" for="multicol-username">નામ </label>
                                         <select id="name" name="name" class="select2 form-select form-select-lg" data-allow-clear="false" >
                                        @foreach ($member as $row)
+                                       <option value="" disabled selected hidden>Choose a drink</option>
                                           <option value="{{$row->p_id}}">{{$row->m_name}}</option>
                                        @endforeach
                                         </select>    
@@ -374,7 +375,6 @@ button.swal2-cancel.btn.btn-label-danger {
         {
           // Actions
           targets: -1,
-          title: 'Actions',
           orderable: false,
           searchable: false,
           
@@ -748,7 +748,7 @@ button.swal2-cancel.btn.btn-label-danger {
               success:function(response){
                   Swal.fire(
                       'Deleted!',
-                      'Your Record has been deleted.',
+                      '',
                       'success',
                       );
                       location.reload();
@@ -832,13 +832,13 @@ button.swal2-cancel.btn.btn-label-danger {
           if(flag ===1){
                 Swal.fire(
                   'Updated!',
-                  'Community Donation Details!',
+                  '',
                   'success'
                 )
           }else{
               Swal.fire(
                   'No change!',
-                  'Community Donation Details!',
+                  '',
                   'error'
                 )
           }

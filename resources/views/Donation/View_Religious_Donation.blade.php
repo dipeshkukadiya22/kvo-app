@@ -96,7 +96,7 @@ button.swal2-cancel.btn.btn-label-danger {
                                                   <th style="font-size:15px"><b>Haste</b></th>
                                                   <th style="font-size:15px"><b>Total</b></th>
                                                   <th style="font-size:15px"><b>Payment Mode</b></th>
-                                                  <th style="font-size:15px"><b>Action</b></th>
+                                                  <th style="font-size:15px"><b>Actions</b></th>
                                               </tr>
                                           </thead>
                                           @foreach($donation as $row)
@@ -309,7 +309,7 @@ button.swal2-cancel.btn.btn-label-danger {
                                     </div>
 
                                     <div class="col-md-12">
-                                        <label class="form-label" for="multicol-phone">શ્રી  ખાતે</label>
+                                        <label class="form-label" for="multicol-phone">શ્રી અન્ય ખાતે</label>
                                         <div class="input-group">
                                         <span class="input-group-text">₹</span>
                                         <input type="number" class="form-control amount-input" name="other" id="other" placeholder="Amount" aria-label="Amount (to the nearest dollar)">
@@ -437,7 +437,6 @@ button.swal2-cancel.btn.btn-label-danger {
         {
           // Actions
           targets: -1,
-          title: 'Actions',
           orderable: false,
           searchable: false,
           
@@ -913,13 +912,13 @@ function delete_religious_donation(id)
           if(flag ===1){
                 Swal.fire(
                   'Updated!',
-                  'Community Donation Details!',
+                  '',
                   'success'
                 )
           }else{
               Swal.fire(
                   'No change!',
-                  'Community Donation Details!',
+                  '',
                   'error'
                 )
           }
