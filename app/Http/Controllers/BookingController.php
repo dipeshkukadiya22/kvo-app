@@ -54,7 +54,6 @@ class BookingController extends Controller
         $details->occupation=$req->occupation;
         $details->reason=$req->reason;
      
-        $details->save();
     
 
         /*Insert Room Booking deatil*/
@@ -85,34 +84,57 @@ class BookingController extends Controller
             $booking->advance_date= date("Y-m-d H:i",strtotime($req->check_in_date));
             $booking->status="ADVANCE";
             $booking->booking_type="ADVANCE";}
-        $booking->save();
-        if(!empty($req->select2Multiple1)){
-        foreach($req->select2Multiple1 as $room)
+       
+       
+       
+        $status=$details->save();
+        if($status)
         {
-            $data=DB::UPDATE("UPDATE add_room SET STATUS='1',room_detail_id='$req->deposit_no' where room_no='$room'");
-        }}
-        if(!empty($req->select2Multiple2)){
-        foreach($req->select2Multiple2 as $room)
-        {
-            $data=DB::UPDATE("UPDATE add_room SET STATUS='1',room_detail_id='$req->deposit_no' where room_no='$room'");
-        }}
-        if(!empty($req->select2Multiple3)){
-        foreach($req->select2Multiple3 as $room)
-        {
-            $data=DB::UPDATE("UPDATE add_room SET STATUS='1',room_detail_id='$req->deposit_no' where room_no='$room'");
-        }}
+            $booking_status=$booking->save();
+            if($booking_status)
+            {
+                /*if(!empty($req->select2Multiple1)){
+                    foreach($req->select2Multiple1 as $room)
+                    {
+                        $data=DB::UPDATE("UPDATE add_room SET STATUS='1',room_detail_id='$req->deposit_no' where room_no='$room'");
+                    }}
+                    if(!empty($req->select2Multiple2)){
+                    foreach($req->select2Multiple2 as $room)
+                    {
+                        $data=DB::UPDATE("UPDATE add_room SET STATUS='1',room_detail_id='$req->deposit_no' where room_no='$room'");
+                    }}
+                    if(!empty($req->select2Multiple3)){
+                    foreach($req->select2Multiple3 as $room)
+                    {
+                        $data=DB::UPDATE("UPDATE add_room SET STATUS='1',room_detail_id='$req->deposit_no' where room_no='$room'");
+                    }}*/
 
-        $total_member = $req->no_of_person;
-        for ($i =0; $i < $total_member; $i++){
-            $m_details = new member_details();
-            $m_details->full_name = strtoupper($req->full_name[$i]);
-            $m_details->age=$req->m_age[$i];
-            $m_details->gender=$req->gender;
-            $m_details->relation=$req->relation[$i];
-            $m_details->personal_detail_id=$personal_details_id;
-            $m_details->room_id=$req->deposit_no;
-            $m_details->save();
+                    $total_member = $req->no_of_person;
+                    for ($i = 1; $i <= $total_member; $i++) {
+                        $m_details = new member_details();
+                        $m_details->full_name = $req->input('full_name'.$i);
+                        $m_details->age = $req->input('m_age'.$i);
+                        $m_details->gender = $req->input('gender' . $i);
+                        $m_details->relation = $req->input('relation' . $i);
+                        $m_details->personal_detail_id = $personal_details_id;
+                        $m_details->room_id = $req->deposit_no;
+                        
+                        $m_details->save();
+                    }
+                    
+                  
+
+                    // $m_details = new member_details();
+                    // $m_details->full_name = $req->full_name;
+                    // $m_details->age= $req->m_age;
+                    // $m_details->gender=$req->gender;
+                    // $m_details->relation=$req->relation;
+                    // $m_details->save();  
+
+            }
         }
+      
+      
         $ar_list = DB::select("SELECT add_room.*, room_details.check_in_date, room_details.* FROM add_room LEFT JOIN room_details ON add_room.room_no = room_details.r_id WHERE add_room.status = 1");
         return back();
     }

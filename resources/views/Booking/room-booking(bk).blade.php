@@ -363,21 +363,21 @@
                                         <div class="row formrepeater1">
                                           <div class="mb-3 col-lg-6 col-xl-3 col-12 mb-0">
                                             <label class="form-label" for="form-repeater-1-1">Full Name</label>
-                                            <input type="text" id="full_name_form"  name="full_name0" class="form-control" placeholder="john doe" value="{{ (!empty($member) )? $member->m_name : '' }}" onkeydown="return /[a-z]/i.test(event.key)" readonly/>
+                                            <input type="text" id="full_name_form"  name="full_name[]" class="form-control" placeholder="john doe" value="{{ (!empty($member) )? $member->m_name : '' }}" onkeydown="return /[a-z]/i.test(event.key)" />
                                           </div>
                                           <div class="mb-3 col-lg-4 col-xl-3 col-12 mb-0">
                                             <label class="form-label" for="form-repeater-1-2">Age</label>
-                                            <input type="text" id="member_age" name="m_age0" class="form-control" placeholder="your age" oninput="format(this)"  readonly/>
+                                            <input type="text" id="member_age" name="m_age[]" class="form-control" placeholder="your age" oninput="format(this)"  />
                                           </div>
                                           <div class="mb-3 col-lg-6 col-xl-2 col-12 mb-0 ">
                                               <label class="d-block form-label">Gender</label>
                                               <div class="form-check form-check-inline">
-                                                <input class="form-check-input" type="radio" name="gender0" id="gendermale" value="MALE" checked/>
+                                                <input class="form-check-input" type="radio" name="gender" id="gendermale" value="MALE" checked/>
                                                 <label class="form-check-label" for="gender">Male</label>
 
                                                   </div>
                                                   <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="radio" name="gender0" id="genderfemale" value="FEMALE" />
+                                                    <input class="form-check-input" type="radio" name="gender" id="genderfemale" value="FEMALE" />
                                                     <label class="form-check-label" for="gender">Female</label>
                                                   </div>
                                                   <div class="mb-3 col-lg-6 col-xl-3 col-12 mb-0" hidden>
@@ -387,7 +387,7 @@
                                           </div>
                                           <div class="col-md-3">
                                             <label class="form-label" for="basic-default-country">Relation</label>
-                                            <select class="form-select" name="relation" id="member_relation" required>
+                                            <select class="form-select" name="relation[]" id="member_relation" required>
                                               <option value="SELF" selected>SELF</option>
                                               <option value="MOTHER">MOTHER</option>
                                               <option value="FATHER">FATHER</option>
@@ -1095,7 +1095,12 @@ $(document).ready(function () {
         });
   </script> -->
   <script>
- 
+  $(document).ready(function() {
+    $("#btn-step1").on("click", function() {
+
+      $('#member_age').val($('#basic-default-age').val());
+    });
+  });
 </script>
  
 
@@ -1131,6 +1136,7 @@ $(document).ready(function () {
 
       if (selectedDate && selectedDate.length > 0) {
         $('#check_date').text( selectedDate);
+        // currentStep++;
       }
      
     });
@@ -1186,11 +1192,11 @@ $(document).ready(function () {
         j++;
 
         // Setting text for elements in the loop using jQuery
-        // $('.member_full_name' + i).text($('#full_name_form' + i).val());
-        // $('.members_age' + i).text($('#member_age' + i).val());
-        // $('.member_gen' + i).text($('#gender'+i).val());
-        // $('.member_rel' + i).text($('#member_relation' + i).val());
-        // j++;
+      /*  $('.member_full_name' + i).text($('#full_name_form' + i).val());
+        $('.members_age' + i).text($('#member_age' + i).val());
+        $('.member_gen' + i).text($('#gender'+i).val());
+        $('.member_rel' + i).text($('#member_relation' + i).val());
+        j++;*/
       }
 
       $(".rep-table").show();
@@ -1203,8 +1209,8 @@ $(document).ready(function () {
 <script>
   $(document).ready(function() {
     $("#btn-step1").click(function() {
+ 
       console.log("click");
-      $('#member_age').val($('#basic-default-age').val());
       let numForms = parseInt($("#no_of_person_id").val());
 
 
@@ -1220,7 +1226,7 @@ $(document).ready(function () {
           '<div class="row formrepeater">'+
                                  ' <div class="mb-3 col-lg-6 col-xl-3 col-12 mb-0">'+
                                    ' <label class="form-label" for="form-repeater-1-1">Full Name</label>'+
-                                   ' <input type="text" id="full_name_form'+i+'" style="text-transform:uppercase" name="full_name'+i+'[]" class="form-control" placeholder="john doe" value="{{ (!empty($member) )? $member->m_name : '' }}"/>'+
+                                   ' <input type="text" id="full_name_form'+i+'" style="text-transform:uppercase" name="full_name[]" class="form-control" placeholder="john doe" value="{{ (!empty($member) )? $member->m_name : '' }}"/>'+
                                  ' </div>'+
                                  ' <div class="mb-3 col-lg-4 col-xl-3 col-12 mb-0">'+
                                   '  <label class="form-label" for="form-repeater-1-2">Age</label>'+
