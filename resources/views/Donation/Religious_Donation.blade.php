@@ -289,17 +289,7 @@
                               
                             </div>
                           </div>
-                          <div class="col-md-4">
-                            <label class="form-label" for="basic-default-name">શ્રી અન્ય ખાતે</label>
-                            <input
-                              type="text"
-                              class="form-control"
-                              name="other_account_name"
-                              id="basic-default-name"
-                              style="text-transform:capitalize"
-                              {{-- placeholder="John Doe" --}}
-                              />
-                        	</div>
+                       
                           <div class="col-md-4">
                             <label class="form-label" for="multicol-phone">શ્રી અન્ય ખાતે</label>
                             <div class="input-group">

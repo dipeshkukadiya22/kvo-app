@@ -14,7 +14,7 @@
   </div>
   <div class="mb-3">
     <label class="form-label" for="basic-default-email">Email</label>
-    <input type="email" name="email" id="basic-default-email" class="form-control" placeholder="john.doe" required/>
+    <input type="email" name="email" id="basic-default-email" class="form-control" placeholder="john@abc.doe" required/>
   </div>
   
   <div class="mb-3">
