@@ -42,10 +42,11 @@ class MedicalController extends Controller
    
         if($data)
          {      
-            return redirect()->route('view_treatment')->with('message', 'Form submitted successfully!')->with(['member' => $member,'member_data' => $member_data,'rec_no' => $rec_no]); 
-            /*$medical=DB::select("SELECT * FROM medical join add_members where add_members.p_id=medical.p_id and sr_no='$data->sr_no'");
+            //return redirect()->route('view_treatment')->with('message', 'Form submitted successfully!')->with(['member' => $member,'member_data' => $member_data,'rec_no' => $rec_no]); 
+            $medical=DB::select("SELECT * FROM medical join add_members where add_members.p_id=medical.p_id and sr_no='$data->sr_no'");
             $pdf = Pdf::loadView('pdf.pdf_Medical_Treatment',['medical' => $medical])->setPaper('a5', 'landscape')->setOptions(['defaultFont' => 'KAP119']);
-            return $pdf->stream();*/
+            return $pdf->stream();
+           
         }else{
             return redirect()->route('view_treatment')->with('message', 'Form Not submitted successfully!')->with(['member' => $member,'member_data' => $member_data,'rec_no' => $rec_no]);
         }

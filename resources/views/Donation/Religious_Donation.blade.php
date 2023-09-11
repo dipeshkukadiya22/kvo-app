@@ -97,7 +97,7 @@
                 <div class="col-md mb-4 mb-md-0">
                   <div class="card">
                     <div class="card-body">
-                      <form id="KVO_religious_donation" class="browser-default-validation" method="POST" action="{{route('ReligiousDonation')}}">
+                      <form id="KVO_religious_donation" class="browser-default-validation" method="POST" action="{{route('ReligiousDonation')}}"target="_blank" >
                         @csrf
                         <div class="row g-3">
                           <div class="col-12">
@@ -687,7 +687,9 @@ function NumToWord(inputNumber, outputControl) {
                   'Insert Successfully!',
                   '',
                   'success'
-                )
+                  ).then(function() {
+                window.location.href = 'View_Religious_Donation';
+  });
             }
       });
 </script>

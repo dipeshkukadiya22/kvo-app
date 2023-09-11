@@ -62,7 +62,7 @@
               </div>
               
               <div class="card mb-4">
-                <form class="card-body" id="KVO_add_treatment" method="post" action="{{route('add_treatment')}}">  
+                <form class="card-body" id="KVO_add_treatment" method="post" action="{{route('add_treatment')}}"  target="_blank" >  
                   <div class="row g-3">
                   <div class="col-md-4">
                   @csrf
@@ -377,14 +377,16 @@ function NumToWord(inputNumber, outputControl) {
           });
       });
   });
-
   $("#KVO_add_treatment").submit(function(){
-                Swal.fire(
-                  'Insert Successfully!',
-                  '',
-                  'success'
-                )   
-    });
+  Swal.fire(
+    'Insert Successfully!',
+    '',
+    'success'
+  ).then(function() {
+    window.location.href = 'view_treatment';
+  });
+});
+
 </script>
 
 

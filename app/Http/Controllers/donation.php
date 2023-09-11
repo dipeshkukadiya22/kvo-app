@@ -6,6 +6,7 @@ use App\Models\community_donation;
 use Illuminate\Support\Facades\DB;
 use App\Models\GeneralDonation;
 use App\Models\add_members;
+use Barryvdh\DomPDF\Facade\Pdf;
 use App\Models\religious_donation;
 
 use Carbon\Carbon;
@@ -75,9 +76,9 @@ class donation extends Controller
         // return view ('Donation.Religious_Donation');
         if($religious_donation) { 
 
-            return redirect() -> route('View_Religious_Donation') -> with ('message', 'Form submitted successfully!') -> with 
-            (['p_details'=>$p_details,'m_name'=>$m_name,'m_data'=>$m_data, 'data'=>$data, 'religious_donation_id' => $religious_donation_id,'donation' => $donation,'member' =>$member]);
-
+            $religious_donation=DB::select("SELECT * FROM `religious_donation` join add_members where religious_donation.member_id=add_members.p_id and religious_donation.religious_donation_id='$religious_donation->religious_donation_id'");
+            $pdf = Pdf::loadView('pdf.pdf_Religious_Donation',['religious_donation'=>$religious_donation])->setPaper('a5', 'landscape')->setOptions(['defaultFont' => 'KAP119']);
+            return $pdf->stream();
         }
         else{
 
@@ -180,10 +181,12 @@ class donation extends Controller
         $community_donation -> save();
 
         if($community_donation) { 
-
-            return redirect() -> route('View_Community_Donation') -> with ('message', 'Form submitted successfully!') -> with 
-            (['p_details'=>$p_details,'m_name'=>$m_name,'m_data'=>$m_data, 'data'=>$data, 'donation_id' => $donation_id,'donation'=> $donation,'member' => $member ]);
-
+            
+            
+            $community_donation=DB::select("SELECT * FROM `community_donation` join add_members WHERE add_members.p_id=community_donation.member_id and donation_id='$community_donation->donation_id'");
+            $pdf = Pdf::loadView('pdf.pdf_Community_Donation',['community_donation'=>$community_donation])->setPaper('a5', 'landscape')->setOptions(['defaultFont' => 'KAP119']);
+            return $pdf->stream();
+           
         }
         else{
 
@@ -253,7 +256,16 @@ class donation extends Controller
         $donation->details=strtoupper($req->details);
         $donation->member_id=$req->name;
         $donation->save();
+        if($donation)
+         {     
+            //$donation_data=DB::SELECT("SELECT * FROM `GeneralDonation` join add_members WHERE GeneralDonation.member_id=add_members.p_id");
+            $general_donation=DB::select("SELECT * FROM `GeneralDonation` join add_members where GeneralDonation.member_id=add_members.p_id and depo_id='$donation->depo_id'");
+            $pdf = Pdf::loadView('pdf.pdf_General_Donation',['member'=>$member,'general_donation'=>$general_donation])->setPaper('a5', 'landscape')->setOptions(['defaultFont' => 'KAP119']);
+            return $pdf->stream();
+           
+        }else{
         return redirect() -> route('view_general_donation')-> with ('message', 'Form submitted successfully!')->with (['member'=>$member,'donation_data'=>$donation_data]);
+        }
     }
     public function view_general_donation()
     {

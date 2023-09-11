@@ -845,6 +845,35 @@ button.swal2-cancel.btn.btn-label-danger {
         }
     });
 </script>
+<script>
+    $("#browser-default-validation").submit(function(){
+      var ambulance=document.getElementById("ambulance");
+      var oxygen=document.getElementById("oxygen");
+      var lavajam=document.getElementById("lavajam");
+      var shaikshanik=document.getElementById("shaikshanik");
+      var bhojanshala=document.getElementById("bhojanshala");
+      var mahajan=document.getElementById("mahajan");
+      var medical_checkup=document.getElementById("medical_checkup");
+      var other=document.getElementById("other");
+        if((ambulance.value === "" ) && (oxygen.value === "") && ( lavajam.value === "" ) && ( shaikshanik.value === "") &&
+           ( bhojanshala.value === "" ) && ( mahajan.value === "") && (medical_checkup.value === "" ) && ( other.value === "")){
+            Swal.fire(
+                  'Amount Required!',
+                  '',
+                  'warning'
+                )
+              event.preventDefault();
+              event.stopPropagation();
+            }    
+            else{
+              Swal.fire(
+                  'Update Successfully!',
+                  '',
+                  'success'
+                )
+            }
+      });
+</script>
 
 @endsection
 

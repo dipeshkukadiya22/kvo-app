@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Models\Mahajan_Expense;
+use Barryvdh\DomPDF\Facade\Pdf;
 use App\Models\Sangh_Expense;
 use App\Models\add_members;
 
@@ -31,7 +32,16 @@ class Expense extends Controller
         $Mahajan_Expense -> amount = $req -> amount;
         $Mahajan_Expense -> inword = $req -> inword;
         $Mahajan_Expense -> save();
+        if($Mahajan_Expense) { 
+
+            $mahajan_expense=DB::select("SELECT * FROM `Mahajan_Expense` join add_members WHERE Mahajan_Expense.member_id=add_members.p_id and depo_id='$Mahajan_Expense->depo_id'");
+            $pdf = Pdf::loadView('pdf.pdf_Mahajan_Expense',['mahajan_expense'=>$mahajan_expense])->setPaper('a5', 'landscape')->setOptions(['defaultFont' => 'KAP119']);
+            return $pdf->stream();
+        }
+        else{
+
         return redirect()->route('view_mahajan_expense')->with('message', 'Form submitted successfully!')->with(['expense' => $expense,'member' => $member]);
+        }
     }
     
     public function view_mahajan_expense()

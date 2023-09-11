@@ -87,7 +87,7 @@
                 <div class="col-md mb-4 mb-md-0">
                   <div class="card">
                     <div class="card-body">
-                      <form id="KVO_general_donation" class="browser-default-validation" method="POST" action="{{route('add_general_donation')}}">
+                      <form id="KVO_general_donation" class="browser-default-validation" method="POST" action="{{route('add_general_donation')}}" target="_blank">
                         <div class="row g-3">
                           <div class="col-12">
                             <h6 class="fw-semibold">1. Personal Details</h6>
@@ -297,7 +297,9 @@
                   'Insert Successfully!',
                   '',
                   'success'
-                )
+                  ).then(function() {
+                window.location.href = 'View_General_Donation';
+  });
               }
     });
     </script>

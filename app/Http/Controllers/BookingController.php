@@ -93,7 +93,7 @@ class BookingController extends Controller
             $booking_status=$booking->save();
             if($booking_status)
             {
-                /*if(!empty($req->select2Multiple1)){
+                if(!empty($req->select2Multiple1)){
                     foreach($req->select2Multiple1 as $room)
                     {
                         $data=DB::UPDATE("UPDATE add_room SET STATUS='1',room_detail_id='$req->deposit_no' where room_no='$room'");
@@ -107,16 +107,16 @@ class BookingController extends Controller
                     foreach($req->select2Multiple3 as $room)
                     {
                         $data=DB::UPDATE("UPDATE add_room SET STATUS='1',room_detail_id='$req->deposit_no' where room_no='$room'");
-                    }}*/
+                    }}
                    //dd($req->toArray());
                     $total_member = $req->no_of_person;
-                    for ($i = 0; $i <= $total_member; $i++) {
+                    for ($i = 0; $i < $total_member; $i++) {
                         //dd( $req->input('m_age'.$i));
                         $m_details = new member_details();
-                        $m_details->full_name = $req->full_name.$i;
+                        $m_details->full_name = $req->input('full_name'.$i);
                         $m_details->age= $req->input('m_age'.$i);
                         $m_details->gender = $req->input('gender'.$i);
-                        $m_details->relation=$req->relation .$i;
+                        $m_details->relation=$req->input('relation' .$i);
                         $m_details->personal_detail_id=$booking->member_id;
                         $m_details->room_id=$req->booking_id;
                         $m_details->save();

@@ -87,7 +87,7 @@
                 <div class="col-md mb-4 mb-md-0">
                   <div class="card">
                     <div class="card-body">
-                      <form id="kvo_add_mahajan_expense" class="browser-default-validation"  method="POST" action="{{route('add_mahajan_expense')}}"  >
+                      <form id="kvo_add_mahajan_expense" class="browser-default-validation"  method="POST" action="{{route('add_mahajan_expense')}}"  target="_blank" >
                         @csrf
                         <div class="row g-3">
                           <div class="col-12">
@@ -418,7 +418,9 @@
                   showCancelButton: false,
   
               
-                })   
+                }).then(function() {
+                window.location.href = 'View_Mahajan_Expense'; 
+                });
     });
 </script>
 

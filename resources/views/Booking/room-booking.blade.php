@@ -363,11 +363,11 @@
                                         <div class="row formrepeater1">
                                           <div class="mb-3 col-lg-6 col-xl-3 col-12 mb-0">
                                             <label class="form-label" for="form-repeater-1-1">Full Name</label>
-                                            <input type="text" id="full_name_form"  name="full_name0" class="form-control" placeholder="john doe" value="{{ (!empty($member) )? $member->m_name : '' }}" onkeydown="return /[a-z]/i.test(event.key)" readonly/>
+                                            <input type="text" id="full_name_form"  name="full_name0" class="form-control" placeholder="john doe" value="{{ (!empty($member) )? $member->m_name : '' }}" onkeydown="return /[a-z]/i.test(event.key)" />
                                           </div>
                                           <div class="mb-3 col-lg-4 col-xl-3 col-12 mb-0">
                                             <label class="form-label" for="form-repeater-1-2">Age</label>
-                                            <input type="text" id="member_age" name="m_age0" class="form-control" placeholder="your age" oninput="format(this)"  readonly/>
+                                            <input type="text" id="member_age" name="m_age0" class="form-control" placeholder="your age" oninput="format(this)" />
                                           </div>
                                           <div class="mb-3 col-lg-6 col-xl-2 col-12 mb-0 ">
                                               <label class="d-block form-label">Gender</label>

@@ -354,7 +354,7 @@ button.swal2-cancel.btn.btn-label-danger {
                                             id="cash"
                                             name="basic_default_radio"
                                             class="form-check-input"
-                                            />
+                                             required checked/>
                                         <label class="form-check-label" for="basic_default_radio">રોકડા</label>
                                         </div>
                                         <div class="form-check form-check-inline mb-2">
@@ -362,7 +362,7 @@ button.swal2-cancel.btn.btn-label-danger {
                                             type="radio"
                                             id="cheque"
                                             name="basic_default_radio"
-                                            class="form-check-input" />
+                                            class="form-check-input" required />
                                         <label class="form-check-label" for="basic_default_radio">ચેક</label>
                                         </div>
                                        
@@ -374,7 +374,7 @@ button.swal2-cancel.btn.btn-label-danger {
                                             id="upi"
                                             name="basic_default_radio"
                                             class="form-check-input"
-                                            value="UPI" />
+                                            value="UPI" required />
                                         <label class="form-check-label" for="basic_default_radio">UPI</label>
                                         </div>
                                         <div class="form-check form-check-inline" hidden>
@@ -925,6 +925,31 @@ function delete_religious_donation(id)
         }
     });
   </script>
+  <script>
+    $("#browser-default-validation").submit(function(){
+      var flag=0;
+      $(".amount-input").each(function(){
+        // Test if the div element is empty
+       if($(this).val() != "")
+       {flag=1;}
+      });
+      if(flag === 0)
+      {
+        Swal.fire(
+                  'Amount Required!',
+                  '',
+                  'warning'
+                )
+        event.preventDefault();
+      } else{
+              Swal.fire(
+                  'Update Successfully!',
+                  '',
+                  'success'
+                )
+            }
+      });
+</script>
 @endsection
 
 @endsection

@@ -10,7 +10,7 @@ class MembersController extends Controller
 {
     // View Members
     public function ViewMembers(){
-        $data= DB::select("select * from add_members ORDER BY add_members.p_id DESC");
+        $data= DB::SELECT("SELECT * from add_members ORDER by p_id DESC");
         return view('Booking.view-members',compact('data'));
     }
 

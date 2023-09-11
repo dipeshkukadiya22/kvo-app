@@ -100,7 +100,7 @@
                 <div class="col-md mb-4 mb-md-0">
                   <div class="card">
                     <div class="card-body">
-                      <form id="kvo_community_donation" class="browser-default-validation"  method="POST" action="{{route ('CommunityDonation')}}">
+                      <form id="kvo_community_donation" class="browser-default-validation"  method="POST" action="{{route ('CommunityDonation')}}"  target="_blank">
                         @csrf
                         <div class="row g-3">
                           <div class="col-12">
@@ -622,7 +622,9 @@ function NumToWord(inputNumber, outputControl) {
                   'Insert Successfully!',
                   '',
                   'success'
-                )
+                  ).then(function() {
+                window.location.href = 'View_Community_Donation';
+  });
             }
       });
 </script>

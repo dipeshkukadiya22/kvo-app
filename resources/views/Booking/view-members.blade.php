@@ -57,7 +57,7 @@
             <!-- Content -->
 
             <div class="container-xxl flex-grow-1 container-p-y">
-            <!-- <div class="content-header row">
+            <div class="content-header row">
                 <div class="content-header-left col-md-9 col-12 mb-2">
                     <div class="row breadcrumbs-top">
                         <div class="col-12">
@@ -65,9 +65,10 @@
                         </div>
                     </div>
                 </div>
+                
                 <div class="content-header-right d-flex justify-content-end col-md-3 col-12">
-                    <div class="form-group breadcrumb-right py-3">
-                    Enable backdrop (default) Offcanvas
+                <div class="form-group breadcrumb-right py-3">
+                      <!-- Enable backdrop (default) Offcanvas -->
                       <div class="mt-0">
                         <button
                           class="btn btn-primary"
@@ -91,15 +92,15 @@
                               aria-label="Close"></button>
                           </div>
                           <div class="offcanvas-body mx-0 flex-grow-0">
-                            Browser Default 
+                            <!-- Browser Default -->
                             @include('layouts.adduser')
-                          /Browser Default 
+                            <!-- /Browser Default -->
                           </div>
                         </div>
                       </div>
                     </div>
                 </div>
-              </div> -->
+              </div>
 
                 <!-- End add members -->
                 <div class="row mb-4">
@@ -134,7 +135,7 @@
                                               
                                               <td>
                                                 <div class="d-inline-block">
-                                                <a onclick="edit({{$row->p_id}})"  class="btn btn-sm btn-icon item-edit" aria-controls="offcanvasBackdrop"><img src="./assets/icon/orange-edit.png" width="20px"></a>
+                                                <a onclick="edit({{$row->p_id}})"  class="btn btn-sm btn-icon item-edit" aria-controls="offcanvasBackdrop1"><img src="./assets/icon/orange-edit.png" width="20px"></a>
                                                 
                                                
                                                 <a onclick="delete_member({{$row->p_id}})" class="text-danger delete-record"><img src="./assets/icon/orange-trash.png" width="20px"></a>
@@ -153,7 +154,7 @@
                           <!-- Enable backdrop (default) Offcanvas -->
                           <div class="mt-0" id="editmembers">
                             
-                            <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasBackdrop" aria-labelledby="offcanvasBackdropLabel">
+                            <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasBackdrop1" aria-labelledby="offcanvasBackdropLabel">
                               <div class="offcanvas-header border-bottom">
                                 <h5 id="offcanvasBackdropLabel" class="offcanvas-title">Edit Member</h5>
                                 <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
@@ -181,9 +182,10 @@
                                   </div>
 
                                   <div class="mb-3">
-                                    <label class="form-label" for="multicol-phone">Phone Number</label>
-                                    <input type="number" id="phone_no1" name="phone_no1" class="form-control phone-mask" placeholder="658 799 8941" aria-label="658 799 8941" oninput="javascript: if (this.value.length > 10) this.value = this.value.slice(0, 10);" />
-                                    <div id="error" class="error-message" ></div>
+                                    <label class="form-label" for="multicol-phone"><span class="required">Phone Number</span></label>
+                                    <input type="text" name="phone_no1" id="phone_no1" class="form-control phone-mask" placeholder="658 799 8941" pattern="[1-9]{1}[0-9]{9}" maxlength="10" required/>
+                                    <div id="error" class="error-message"></div>
+                                </div>
                                   <div class="mb-3">
                                     <label class="form-label" for="city">City</label>
                                     <input type="text" class="form-control" name="city1" style="text-transform:uppercase" id="city1" placeholder="Bhuj"  />
@@ -236,8 +238,8 @@
 
     <!-- BEGIN: Page JS-->
     <script>
-      $("#phone_no1").focusout(function(){
-        var contact=document.getElementById("phone_no1").value;
+      $("#multicol-phone").focusout(function(){
+        var contact=document.getElementById("multicol-phone").value;
       
         $.ajax({
                 url:"{{url('check_num')}}"+"/"+ contact,
@@ -269,7 +271,7 @@
         }
       ],
         
-      dom: '<"card-header flex-column flex-md-row"<"head-label text-center"><"dt-action-buttons text-end pt-3 pt-md-0"B>><"row"<"col-sm-12 col-md-6"l><"col-sm-12 col-md-6 d-flex justify-content-center justify-content-md-end"f>>t<"row"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>',
+      // dom: '<"card-header flex-column flex-md-row"<"head-label text-center"><"dt-action-buttons text-end pt-3 pt-md-0"B>><"row"<"col-sm-12 col-md-6"l><"col-sm-12 col-md-6 d-flex justify-content-center justify-content-md-end"f>>t<"row"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>',
       displayLength: 10,
       lengthMenu: [7, 10, 25, 50, 75, 100],
       buttons: [
@@ -320,7 +322,7 @@
               text: '<i class="ti ti-file-text me-1" ></i>Csv',
               className: 'dropdown-item',
               exportOptions: {
-                columns: [3, 4, 5, 6, 7],
+                columns: [1 ,2, 3, 4, 5, 6],
                 // prevent avatar to be display
                 format: {
                   body: function (inner, coldex, rowdex) {
@@ -344,7 +346,7 @@
               text: '<i class="ti ti-file-spreadsheet me-1"></i>Excel',
               className: 'dropdown-item',
               exportOptions: {
-                columns: [3, 4, 5, 6, 7],
+                columns: [1 ,2, 3, 4, 5, 6],
                 // prevent avatar to be display
                 format: {
                   body: function (inner, coldex, rowdex) {
@@ -368,7 +370,7 @@
               text: '<i class="ti ti-file-description me-1"></i>Pdf',
               className: 'dropdown-item',
               exportOptions: {
-                columns: [3, 4, 5, 6, 7],
+                columns: [1 ,2, 3, 4, 5, 6],
                 // prevent avatar to be display
                 format: {
                   body: function (inner, coldex, rowdex) {
@@ -392,7 +394,7 @@
               text: '<i class="ti ti-copy me-1" ></i>Copy',
               className: 'dropdown-item',
               exportOptions: {
-                columns: [3, 4, 5, 6, 7],
+                columns: [1 ,2, 3, 4, 5, 6],
                 // prevent avatar to be display
                 format: {
                   body: function (inner, coldex, rowdex) {
@@ -426,7 +428,7 @@
 <script>
  function edit(id)
 {  
-     const myOffcanvas = document.getElementById('offcanvasBackdrop');
+     const myOffcanvas = document.getElementById('offcanvasBackdrop1');
       let a=new bootstrap.Offcanvas(myOffcanvas);
       a.show();
                 $.ajax({
@@ -472,31 +474,8 @@ function delete_member(id)
                 }
             });
           }
-    $("#submitbtn").click(function(){
-        var email=document.getElementById("email1").value;
-        var phone=document.getElementById("phone_no1").value;
-        var city=document.getElementById("city1").value;
-        if(email ==='' && phone === '' && city==='')
-        {
-            Swal.fire({
-                text: "Sorry, looks like there are some errors detected, please try again.",
-                icon: "error",
-            });
-            return false; // Prevent form submission
-        } else {
-            Swal.fire({
-                position: 'middle-center',
-                icon: 'success',
-                title: 'KVO Member Details has been successfully updated!',
-                showConfirmButton: false,
-                timer: 1500
-                }).then(function() {
-                $("kvo_update_member").submit();
-           });
-        }
-    });
-</script>
 
+</script>
 
 <script>
   let flag=0;
@@ -531,6 +510,20 @@ function delete_member(id)
           }
         }
     });
+</script>
+<script>
+const contactInput = document.getElementById('phone_no1'); // Change 'phone_no' to 'multicol-phone'
+
+contactInput.addEventListener('input', function () {
+    const desiredLength = 10;
+    const inputValue = this.value.replace(/\D/g, ''); // Remove non-digit characters
+    
+    if (inputValue.length !== desiredLength) {
+        this.setCustomValidity(`Contact number enter ${desiredLength} digits.`);
+    } else {
+        this.setCustomValidity('');
+    }
+});
 </script>
 
 @endsection
