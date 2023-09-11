@@ -9,9 +9,9 @@
 
   <div class="mb-3">
     <label class="form-label" for="multicol-phone"><span class="required">Phone Number</span></label>
-    <input type="text" name="phone_no" id="multicol-phone" class="form-control phone-mask" placeholder="658 799 8941"pattern="[1-9]{1}[0-9]{9}" maxlength="10" required/>
-                              <div id="error" class="error-message" ></div>
-  </div>
+    <input type="text" name="phone_no" id="multicol-phone" class="form-control phone-mask" placeholder="658 799 8941" pattern="[1-9]{1}[0-9]{9}" maxlength="10" required/>
+    <div id="error" class="error-message"></div>
+</div>
   <div class="mb-3">
     <label class="form-label" for="basic-default-email">Email</label>
     <input type="email" name="email" id="basic-default-email" class="form-control" placeholder="john@abc.doe" required/>
@@ -33,18 +33,17 @@
   </div>
 </form>
 <script>
-const contactInput = document.getElementById('phone_no');
+const contactInput = document.getElementById('multicol-phone'); // Change 'phone_no' to 'multicol-phone'
 
 contactInput.addEventListener('input', function () {
-  const desiredLength = 10;
-  const inputValue = this.value.trim();
-  
-  if (inputValue.length !== desiredLength) {
-    this.setCustomValidity(`Contact number should be exactly ${desiredLength} digits.`);
-  } else {
-    this.setCustomValidity('');
-  }
+    const desiredLength = 10;
+    const inputValue = this.value.replace(/\D/g, ''); // Remove non-digit characters
+    
+    if (inputValue.length !== desiredLength) {
+        this.setCustomValidity(`Contact number enter ${desiredLength} digits.`);
+    } else {
+        this.setCustomValidity('');
+    }
 });
-
 </script>
 

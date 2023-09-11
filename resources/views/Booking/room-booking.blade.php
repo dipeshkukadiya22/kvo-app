@@ -357,7 +357,7 @@
                             <div class="form-repeater">
                               <div id="step2FormsContainer "class="col-12">
                                 <div class="dynamic-form">
-                                  <div class="all-members" data-repeater-list="group-a">
+                                  <div class="all-members" >
                                     <div data-repeater-item>
                                       <div class="rep-form1">
                                         <div class="row formrepeater1">
@@ -382,12 +382,12 @@
                                                   </div>
                                                   <div class="mb-3 col-lg-6 col-xl-3 col-12 mb-0" hidden>
                                                   <label class="form-label" for="form-repeater-1-2">gender</label>
-                                                  <input type="text" id="gender_data" name="gender_data" class="form-control" placeholder="your age" value="MALE"/>
+                                                  <input type="text" id="gender_data" name="gender_data0" class="form-control" placeholder="your age" value="MALE"/>
                                                 </div>
                                           </div>
                                           <div class="col-md-3">
                                             <label class="form-label" for="basic-default-country">Relation</label>
-                                            <select class="form-select" name="relation" id="member_relation" required>
+                                            <select class="form-select" name="relation0" id="member_relation" required>
                                               <option value="SELF" selected>SELF</option>
                                               <option value="MOTHER">MOTHER</option>
                                               <option value="FATHER">FATHER</option>
@@ -1177,7 +1177,7 @@ $(document).ready(function () {
         '<td>'+ j +'</td>' +
         '<td class="member_full_name' + i + '">' + $('#full_name_form' + i).val().toUpperCase() + '</td>' +
         '<td class="members_age' + i + '">' + $('#member_age' + i).val() + '</td>' +
-        '<td class="member_gen'+ i +'">' + $('input[name="gender'+i+'[]"]:checked').val() + '</td>' +
+        '<td class="member_gen'+ i +'">' + $('input[name="gender'+i+'"]:checked').val() + '</td>' +
         '<td class="member_rel' + i + '">' + $('#member_relation' + i).val() + '</td>' +
         '</tr>'
          );
@@ -1220,11 +1220,11 @@ $(document).ready(function () {
           '<div class="row formrepeater">'+
                                  ' <div class="mb-3 col-lg-6 col-xl-3 col-12 mb-0">'+
                                    ' <label class="form-label" for="form-repeater-1-1">Full Name</label>'+
-                                   ' <input type="text" id="full_name_form'+i+'" style="text-transform:uppercase" name="full_name'+i+'[]" class="form-control" placeholder="john doe" value="{{ (!empty($member) )? $member->m_name : '' }}"/>'+
+                                   ' <input type="text" id="full_name_form'+i+'" style="text-transform:uppercase" name="full_name'+i+'" class="form-control" placeholder="john doe" value="{{ (!empty($member) )? $member->m_name : '' }}"/>'+
                                  ' </div>'+
                                  ' <div class="mb-3 col-lg-4 col-xl-3 col-12 mb-0">'+
                                   '  <label class="form-label" for="form-repeater-1-2">Age</label>'+
-                                  '  <input type="number" id="member_age'+i+'" name="m_age[]" class="form-control" placeholder="your age" />'+
+                                  '  <input type="number" id="member_age'+i+'" name="m_age'+i+'" class="form-control" placeholder="your age" />'+
                                 '  </div>'+
                                   
                                   
@@ -1232,17 +1232,17 @@ $(document).ready(function () {
                                   
                                      ' <label class="d-block form-label">Gender</label>'+
                                      ' <div class="form-check form-check-inline">'+
-                                       ' <input class="form-check-input" type="radio" name="gender'+i+'[]" id="gendermale' + i + '" value="MALE" checked/>'+
+                                       ' <input class="form-check-input" type="radio" name="gender'+i+'" id="gendermale' + i + '" value="MALE" checked/>'+
                                        ' <label class="form-check-label" for="inlineRadio1' + i + '">Male</label>'+
                                      ' </div>'+
                                      ' <div class="form-check form-check-inline">'+
-                                      '  <input class="form-check-input" type="radio" name="gender'+i+'[]" id="genderfemale' + i + '" value="FEMALE" />'+
+                                      '  <input class="form-check-input" type="radio" name="gender'+i+'" id="genderfemale' + i + '" value="FEMALE" />'+
                                       '  <label class="form-check-label" for="inlineRadio2' + i + '" selected>Female</label>'+
                                     '  </div>'+
                                 '  </div>'+
                                 '    <div class="col-md-3">'+
                                     '  <label class="form-label" for="basic-default-country">Relation</label>'+
-                                    '  <select class="form-select" name="relation[]" id="member_relation'+i+'" required>'+
+                                    '  <select class="form-select" name="relation'+i+'" id="member_relation'+i+'" required>'+
                                     '   <option value="" disabled selected>Select relation</option>'+
                                     '  <option value="AUNTY">AUNTY</option>'+
                                     '  <option value="BROTHER">BROTHER</option>'+

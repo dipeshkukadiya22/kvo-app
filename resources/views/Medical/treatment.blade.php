@@ -70,13 +70,14 @@
                       <input type="number" id="sr_no" class="form-control phone-mask" value={{$rec_no+1}} readonly>
                     </div>
                     <div class="col-md-4">
-                      <label for="select2Basic" class="form-label">દર્દીનું નામ </label>
-                      <select id="name" name="name" class="select2 form-select " data-allow-clear="true" required>
-                      <option value=""></option>
-                        @foreach($member as $row)
+                    <label for="select2Basic" class="form-label">નામ</label>
+                            <select id="name" name="name" class="select2 form-select form-select-lg" data-allow-clear="true" placeholder="Select Name" required>
+                            <option value=""></option>
+                            @foreach($member as $row)
                           <option value="{{$row->p_id}}">{{$row->m_name}} - {{$row->phone_no}}</option>
                         @endforeach
-                      </select>
+                            </select>
+                           
                     </div>
                     <div class="col-md-4">
                       <label class="form-label" for="multicol-phone">દર્દીના મોબાઇલ નં </label>
