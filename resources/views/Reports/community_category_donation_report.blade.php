@@ -437,6 +437,7 @@ div.card-datatable [class*=col-md-] {
 
 });
     </script>
+    
 
     <!-- BEGIN: Page JS-->
    <script>
