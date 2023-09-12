@@ -241,7 +241,10 @@ div.card-datatable [class*=col-md-] {
 
     <!-- BEGIN: Page JS-->
    <script>
+    var trust=document.getElementById("trust").value;
+     var documentTitle = 'Expense Report [' + trust.charAt(0).toUpperCase() + trust.substr(1).toLowerCase() +']';
     
+
     var dt_basic_table = $('.datatables-basic');
     var dt_basic = dt_basic_table.DataTable({
 
@@ -261,6 +264,7 @@ div.card-datatable [class*=col-md-] {
               extend: 'print',
               text: '<i class="ti ti-printer me-1" ></i>Print',
               className: 'dropdown-item',
+              title:documentTitle,
               exportOptions: {
                 columns: [0,1 ,2, 3,4],
                 // prevent avatar to be display
@@ -298,6 +302,7 @@ div.card-datatable [class*=col-md-] {
               extend: 'csv',
               text: '<i class="ti ti-file-text me-1" ></i>Csv',
               className: 'dropdown-item',
+              title:documentTitle,
               exportOptions: {
                 columns: [0,1 ,2, 3,4],
                 // prevent avatar to be display
@@ -322,6 +327,7 @@ div.card-datatable [class*=col-md-] {
               extend: 'excel',
               text: '<i class="ti ti-file-spreadsheet me-1"></i>Excel',
               className: 'dropdown-item',
+              title:documentTitle,
               exportOptions: {
                 columns: [0,1 ,2, 3,4],
                 // prevent avatar to be display
@@ -346,6 +352,18 @@ div.card-datatable [class*=col-md-] {
               extend: 'pdf',
               text: '<i class="ti ti-file-description me-1"></i>Pdf',
               className: 'dropdown-item',
+              title:documentTitle,
+              customize: function (doc) {
+                                // Here's where you can control the cell padding
+                                  doc.styles.tableHeader.margin = [0, 5, 5, 5];
+                                  doc.styles.tableBodyOdd.margin =
+                                  doc.styles.tableBodyEven.margin = [30, 5, 12, 12];
+                                  doc.pageMargins = [10, 30, 10,10];
+                                  doc.defaultStyle.fontSize = 10;
+                                  doc.styles.tableHeader.fontSize = 10;
+                                  doc.styles.title.fontSize = 17;
+                                  doc.content[1].margin = [ 25, 0, 25, 0 ] //left, top, right, bottom
+                                            },
               exportOptions: {
                 columns: [0,1 ,2, 3,4],
                 // prevent avatar to be display

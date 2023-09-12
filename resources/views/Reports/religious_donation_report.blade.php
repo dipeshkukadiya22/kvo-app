@@ -272,6 +272,8 @@ div.card-datatable [class*=col-md-] {
 
     <!-- BEGIN: Page JS-->
    <script>
+     var trust=document.getElementById("basic-default-country").value;
+     var documentTitle = 'Religious  Donation Report [' + trust.charAt(0).toUpperCase() + trust.substr(1).toLowerCase() +']';
     
     var dt_basic_table = $('.datatables-basic');
     var dt_basic = dt_basic_table.DataTable({
@@ -292,6 +294,7 @@ div.card-datatable [class*=col-md-] {
               extend: 'print',
               text: '<i class="ti ti-printer me-1" ></i>Print',
               className: 'dropdown-item',
+              title:documentTitle,
               exportOptions: {
                 columns: [0,1 ,2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14,15,16,17,18],
                 // prevent avatar to be display
@@ -329,6 +332,7 @@ div.card-datatable [class*=col-md-] {
               extend: 'csv',
               text: '<i class="ti ti-file-text me-1" ></i>Csv',
               className: 'dropdown-item',
+              title:documentTitle,
               exportOptions: {
                 columns: [0,1 ,2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14,15,16,17],
                 // prevent avatar to be display
@@ -353,6 +357,7 @@ div.card-datatable [class*=col-md-] {
               extend: 'excel',
               text: '<i class="ti ti-file-spreadsheet me-1"></i>Excel',
               className: 'dropdown-item',
+              title:documentTitle,
               exportOptions: {
                 columns: [0,1 ,2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14,15,16,17],
                 // prevent avatar to be display
@@ -378,6 +383,7 @@ div.card-datatable [class*=col-md-] {
               orientation: 'landscape',
               text: '<i class="ti ti-file-description me-1"></i>Pdf',
               className: 'dropdown-item',
+              title:documentTitle,
               exportOptions: {
                 columns: [1 ,2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15,16,17],
                 // prevent avatar to be display

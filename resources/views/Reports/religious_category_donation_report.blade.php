@@ -184,13 +184,21 @@ div.card-datatable [class*=col-md-] {
                                                     <th id="display_category" colspan="5" style="text-align:center;"></th>
                                                   </tr>
                                                     <tr>
-                                                        <th>નામ</th>
-                                                        <th>તારીખ</th>
-                                                        <th>હસ્તે</th>
-                                                        <th>રકમ</th>
-                                                        <th>નાણા મળેલ</th>
+                                                        <th style="font-size:15px">Name</th>
+                                                        <th style="font-size:15px">Date</th>
+                                                        <th style="font-size:15px">On Behalf</th>
+                                                        <th style="font-size:15px">Amount</th>
+                                                        <th style="font-size:15px">Payment Mode</th>
                                                     </tr>
                                                 </thead>
+                                                <tbody>
+                                                <tr>
+                                                        <td></td>
+                                                        <td></td>
+                                                        <td><b>Total Amount:</b></td>
+                                                        <td><b>{{$total[0]->amount}}</b></td>
+                                                        <td></td>
+                                                </tr>
                                                 @foreach($donation as $row)
                                                 <tr>
                                                         <td>{{$row->m_name}}</td>
@@ -200,14 +208,8 @@ div.card-datatable [class*=col-md-] {
                                                         <td>{{$row->payment_mode}}</td>
                                                 </tr>
                                                 @endforeach
-                                                <tr>
-                                                        <td></td>
-                                                        <td></td>
-                                                        <td>Total Amount:</td>
-                                                        <td>{{$total[0]->amount}}</td>
-                                                        <td></td>
-                                                </tr>
-                                          
+                                            
+                                                </tbody>                                          
                                                 </table>
                                             </div>
                                         </div>
@@ -225,149 +227,7 @@ div.card-datatable [class*=col-md-] {
 
 
 <!-- BEGIN: Page JS-->
-<script>
-    
-    var dt_basic_table = $('.datatables-basic');
-    var dt_basic = dt_basic_table.DataTable({
 
-        
-      dom: '<"card-header flex-column flex-md-row"<"head-label text-center"><"dt-action-buttons text-end pt-3 pt-md-0"B>><"row"<"col-sm-12 col-md-6"l><"col-sm-12 col-md-6 d-flex justify-content-center justify-content-md-end"f>>t<"row"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>',
-      displayLength: 7,
-      lengthMenu: [7, 10, 25, 50, 75, 100],
-  
-      buttons: [
-        {
-          extend: 'collection',
-          className: 'btn btn-label-primary dropdown-toggle',
-          text: '<i class="ti ti-file-export me-sm-1"></i> <span class="d-none d-sm-inline-block">Export</span>',
-          
-          buttons: [
-            {
-              extend: 'print',
-              text: '<i class="ti ti-printer me-1" ></i>Print',
-              className: 'dropdown-item',
-            
-              exportOptions: {
-                columns: [1 ,2, 3, 4, 5],
-                // prevent avatar to be display
-                format: {
-                  body: function (inner, coldex, rowdex) {
-                    if (inner.length <= 0) return inner;
-                    var el = $.parseHTML(inner);
-                    var result = '';
-                    $.each(el, function (index, item) {
-                      if (item.classList !== undefined && item.classList.contains('user-name')) {
-                        result = result + item.lastChild.firstChild.textContent;
-                      } else if (item.innerText === undefined) {
-                        result = result + item.textContent;
-                      } else result = result + item.innerText;
-                    });
-                    return result;
-                  }
-                }
-              },
-              customize: function (win) {
-                //customize print view for dark
-                $(win.document.body)
-                  .css('color', config.colors.headingColor)
-                  .css('border-color', config.colors.borderColor)
-                  .css('background-color', config.colors.bodyBg);
-                $(win.document.body)
-                  .find('table')
-                  .addClass('compact')
-                  .css('color', 'inherit')
-                  .css('border-color', 'inherit')
-                  .css('background-color', 'inherit');
-              }
-            },
-            {
-              extend: 'csv',
-              text: '<i class="ti ti-file-text me-1" ></i>Csv',
-              className: 'dropdown-item',
-              exportOptions: {
-                columns: [1 ,2, 3, 4, 5 , 6 ,7],
-                // prevent avatar to be display
-                format: {
-                  body: function (inner, coldex, rowdex) {
-                    if (inner.length <= 0) return inner;
-                    var el = $.parseHTML(inner);
-                    var result = '';
-                    $.each(el, function (index, item) {
-                      if (item.classList !== undefined && item.classList.contains('user-name')) {
-                        result = result + item.lastChild.firstChild.textContent;
-                      } else if (item.innerText === undefined) {
-                        result = result + item.textContent;
-                      } else result = result + item.innerText;
-                    });
-                    return result;
-                  }
-                }
-              }
-            },
-            {
-              extend: 'excel',
-              text: '<i class="ti ti-file-spreadsheet me-1"></i>Excel',
-              className: 'dropdown-item',
-           
-              exportOptions: {
-                columns: [1 ,2, 3, 4, 5],
-                // prevent avatar to be display
-                format: {
-                  body: function (inner, coldex, rowdex) {
-                    if (inner.length <= 0) return inner;
-                    var el = $.parseHTML(inner);
-                    var result = '';
-                    $.each(el, function (index, item) {
-                      if (item.classList !== undefined && item.classList.contains('user-name')) {
-                        result = result + item.lastChild.firstChild.textContent;
-                      } else if (item.innerText === undefined) {
-                        result = result + item.textContent;
-                      } else result = result + item.innerText;
-                    });
-                    return result;
-                  }
-                }
-              }
-            },
-            {
-              extend: 'pdf',
-              text: '<i class="ti ti-file-description me-1"></i>Pdf',
-              className: 'dropdown-item',
-              exportOptions: {
-                columns: [1 ,2, 3, 4, 5],
-                // prevent avatar to be display
-                format: {
-                  body: function (inner, coldex, rowdex) {
-                    if (inner.length <= 0) return inner;
-                    var el = $.parseHTML(inner);
-                    var result = '';
-                    $.each(el, function (index, item) {
-                      if (item.classList !== undefined && item.classList.contains('user-name')) {
-                        result = result + item.lastChild.firstChild.textContent;
-                      } else if (item.innerText === undefined) {
-                        result = result + item.textContent;
-                      } else result = result + item.innerText;
-                    });
-                    return result;
-                  }
-                }
-              }
-            }
-            
-          ]
-        },
-        
-      ],
-      
-     
-       // Scroll options
-       scrollX: true,
-      
-    });
-
-    
-
-    </script>
 
 
 @section('pagejs')
@@ -402,7 +262,164 @@ div.card-datatable [class*=col-md-] {
     <!-- Page JS -->
     <script src="{{ asset ('assets/js/form-validation.js') }}"></script>
 
- 
+    <script>
+    var trust=document.getElementById("basic-default-country").value;
+    var category=document.getElementById("category").value;
+    var documentTitle = 'Religious Category Donation Report [' + trust.charAt(0).toUpperCase() + trust.substr(1).toLowerCase() +'] [ ' +category.charAt(0).toUpperCase() + category.substr(1).toLowerCase() +']';
+
+
+
+var dt_basic_table = $('.datatables-basic');
+var dt_basic = dt_basic_table.DataTable({
+
+  
+dom: '<"card-header flex-column flex-md-row"<"head-label text-center"><"dt-action-buttons text-end pt-3 pt-md-0"B>><"row"<"col-sm-12 col-md-6"l><"col-sm-12 col-md-6 d-flex justify-content-center justify-content-md-end"f>>t<"row"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>',
+displayLength: 7,
+lengthMenu: [7, 10, 25, 50, 75, 100],
+buttons: [
+  {
+    extend: 'collection',
+    className: 'btn btn-label-primary dropdown-toggle',
+    text: '<i class="ti ti-file-export me-sm-1"></i> <span class="d-none d-sm-inline-block">Export</span>',
+    buttons: [
+      {
+        extend: 'print',
+        text: '<i class="ti ti-printer me-1" ></i>Print',
+        className: 'dropdown-item',
+        title:'document',
+        exportOptions: {
+          columns: [0,1 ,2, 3],
+          // prevent avatar to be display
+          format: {
+            body: function (inner, coldex, rowdex) {
+              if (inner.length <= 0) return inner;
+              var el = $.parseHTML(inner);
+              var result = '';
+              $.each(el, function (index, item) {
+                if (item.classList !== undefined && item.classList.contains('user-name')) {
+                  result = result + item.lastChild.firstChild.textContent;
+                } else if (item.innerText === undefined) {
+                  result = result + item.textContent;
+                } else result = result + item.innerText;
+              });
+              return result;
+            }
+          }
+        },
+        customize: function (win) {
+          //customize print view for dark
+          $(win.document.body)
+            .css('color', config.colors.headingColor)
+            .css('border-color', config.colors.borderColor)
+            .css('background-color', config.colors.bodyBg);
+          $(win.document.body)
+            .find('table')
+            .addClass('compact')
+            .css('color', 'inherit')
+            .css('border-color', 'inherit')
+            .css('background-color', 'inherit');
+        }
+      },
+      {
+        extend: 'csv',
+        text: '<i class="ti ti-file-text me-1" ></i>Csv',
+        className: 'dropdown-item',
+        title:documentTitle,
+        exportOptions: {
+          columns: [0,1 ,2, 3],
+          // prevent avatar to be display
+          format: {
+            body: function (inner, coldex, rowdex) {
+              if (inner.length <= 0) return inner;
+              var el = $.parseHTML(inner);
+              var result = '';
+              $.each(el, function (index, item) {
+                if (item.classList !== undefined && item.classList.contains('user-name')) {
+                  result = result + item.lastChild.firstChild.textContent;
+                } else if (item.innerText === undefined) {
+                  result = result + item.textContent;
+                } else result = result + item.innerText;
+              });
+              return result;
+            }
+          }
+        }
+      },
+      {
+        extend: 'excel',
+        text: '<i class="ti ti-file-spreadsheet me-1"></i>Excel',
+        className: 'dropdown-item',
+        title:documentTitle,
+        exportOptions: {
+          columns: [0,1 ,2, 3],
+          // prevent avatar to be display
+          format: {
+            body: function (inner, coldex, rowdex) {
+              if (inner.length <= 0) return inner;
+              var el = $.parseHTML(inner);
+              var result = '';
+              $.each(el, function (index, item) {
+                if (item.classList !== undefined && item.classList.contains('user-name')) {
+                  result = result + item.lastChild.firstChild.textContent;
+                } else if (item.innerText === undefined) {
+                  result = result + item.textContent;
+                } else result = result + item.innerText;
+              });
+              return result;
+            }
+          }
+        }
+      },
+      {
+        extend: 'pdf',
+        text: '<i class="ti ti-file-description me-1"></i>Pdf',
+        className: 'dropdown-item',
+        customize: function (doc) {
+                          // Here's where you can control the cell padding
+                            doc.styles.tableHeader.margin = [0, 5, 5, 5];
+                            doc.styles.tableBodyOdd.margin =
+                            doc.styles.tableBodyEven.margin = [50, 5, 12, 12];
+                            doc.pageMargins = [10, 30, 10,10];
+                            doc.defaultStyle.fontSize = 10;
+                            doc.styles.tableHeader.fontSize = 10;
+                            doc.styles.title.fontSize = 17;
+                            doc.content[1].margin = [ 25, 0, 25, 0 ] //left, top, right, bottom
+                                      },
+        title:documentTitle,
+        exportOptions: {
+          columns: [0,1 ,2, 3],
+          // prevent avatar to be display
+          format: {
+            body: function (inner, coldex, rowdex) {
+              if (inner.length <= 0) return inner;
+              var el = $.parseHTML(inner);
+              var result = '';
+              $.each(el, function (index, item) {
+                if (item.classList !== undefined && item.classList.contains('user-name')) {
+                  result = result + item.lastChild.firstChild.textContent;
+                } else if (item.innerText === undefined) {
+                  result = result + item.textContent;
+                } else result = result + item.innerText;
+              });
+              return result;
+            }
+          }
+        }
+      }
+      
+    ]
+  },
+  
+],
+
+
+ // Scroll options
+ scrollX: true,
+
+});
+
+
+</script>
     <script>
       jQuery(document).ready(function($){
         $('#basic-default-dob').flatpickr({
@@ -459,147 +476,7 @@ div.card-datatable [class*=col-md-] {
     </script>
 
     <!-- BEGIN: Page JS-->
-   <script>
-    
-    var dt_basic_table = $('.datatables-basic');
-    var dt_basic = dt_basic_table.DataTable({
 
-      
-        
-      dom: '<"card-header flex-column flex-md-row"<"head-label text-center"><"dt-action-buttons text-end pt-3 pt-md-0"B>><"row"<"col-sm-12 col-md-6"l><"col-sm-12 col-md-6 d-flex justify-content-center justify-content-md-end"f>>t<"row"<"col-sm-12 col-md-6"i><"col-sm-12 col-md-6"p>>',
-      displayLength: 7,
-      lengthMenu: [7, 10, 25, 50, 75, 100],
-      buttons: [
-        {
-          extend: 'collection',
-          className: 'btn btn-label-primary dropdown-toggle',
-          text: '<i class="ti ti-file-export me-sm-1"></i> <span class="d-none d-sm-inline-block">Export</span>',
-          buttons: [
-            {
-              extend: 'print',
-              text: '<i class="ti ti-printer me-1" ></i>Print',
-              className: 'dropdown-item',
-              exportOptions: {
-                columns: [0,1 ,2, 3, 4],
-                // prevent avatar to be display
-                format: {
-                  body: function (inner, coldex, rowdex) {
-                    if (inner.length <= 0) return inner;
-                    var el = $.parseHTML(inner);
-                    var result = '';
-                    $.each(el, function (index, item) {
-                      if (item.classList !== undefined && item.classList.contains('user-name')) {
-                        result = result + item.lastChild.firstChild.textContent;
-                      } else if (item.innerText === undefined) {
-                        result = result + item.textContent;
-                      } else result = result + item.innerText;
-                    });
-                    return result;
-                  }
-                }
-              },
-              customize: function (win) {
-                //customize print view for dark
-                $(win.document.body)
-                  .css('color', config.colors.headingColor)
-                  .css('border-color', config.colors.borderColor)
-                  .css('background-color', config.colors.bodyBg);
-                $(win.document.body)
-                  .find('table')
-                  .addClass('compact')
-                  .css('color', 'inherit')
-                  .css('border-color', 'inherit')
-                  .css('background-color', 'inherit');
-              }
-            },
-            {
-              extend: 'csv',
-              text: '<i class="ti ti-file-text me-1" ></i>Csv',
-              className: 'dropdown-item',
-              exportOptions: {
-                columns: [0,1 ,2, 3, 4],
-                // prevent avatar to be display
-                format: {
-                  body: function (inner, coldex, rowdex) {
-                    if (inner.length <= 0) return inner;
-                    var el = $.parseHTML(inner);
-                    var result = '';
-                    $.each(el, function (index, item) {
-                      if (item.classList !== undefined && item.classList.contains('user-name')) {
-                        result = result + item.lastChild.firstChild.textContent;
-                      } else if (item.innerText === undefined) {
-                        result = result + item.textContent;
-                      } else result = result + item.innerText;
-                    });
-                    return result;
-                  }
-                }
-              }
-            },
-            {
-              extend: 'excel',
-              text: '<i class="ti ti-file-spreadsheet me-1"></i>Excel',
-              className: 'dropdown-item',
-              exportOptions: {
-                columns: [0,1 ,2, 3, 4],
-                // prevent avatar to be display
-                format: {
-                  body: function (inner, coldex, rowdex) {
-                    if (inner.length <= 0) return inner;
-                    var el = $.parseHTML(inner);
-                    var result = '';
-                    $.each(el, function (index, item) {
-                      if (item.classList !== undefined && item.classList.contains('user-name')) {
-                        result = result + item.lastChild.firstChild.textContent;
-                      } else if (item.innerText === undefined) {
-                        result = result + item.textContent;
-                      } else result = result + item.innerText;
-                    });
-                    return result;
-                  }
-                }
-              }
-            },
-            {
-              extend: 'pdf',
-              text: '<i class="ti ti-file-description me-1"></i>Pdf',
-              className: 'dropdown-item',
-              exportOptions: {
-                columns: [0,1 ,2, 3, 4],
-                // prevent avatar to be display
-                format: {
-                  body: function (inner, coldex, rowdex) {
-                    if (inner.length <= 0) return inner;
-                    var el = $.parseHTML(inner);
-                    var result = '';
-                    $.each(el, function (index, item) {
-                      if (item.classList !== undefined && item.classList.contains('user-name')) {
-                        result = result + item.lastChild.firstChild.textContent;
-                      } else if (item.innerText === undefined) {
-                        result = result + item.textContent;
-                      } else result = result + item.innerText;
-                    });
-                    return result;
-                  }
-                }
-              }
-            }
-            
-          ]
-        },
-        
-      ],
-      
-     
-       // Scroll options
-       scrollX: true,
-      
-    });
-
-    
-    $('div.head-label').html('<h5 class="card-title mb-0">ધાર્મિક દાન રિપોર્ટ</h5>');
-
-    </script>
 
 
 <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>

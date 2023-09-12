@@ -153,7 +153,7 @@ class ReportController extends Controller
         $daterange=$req->daterange;
         $date1=date('Y-m-d',strtotime(substr($daterange,0,10)));
         $date2=date('Y-m-d',strtotime(substr($daterange,13)));
-        $total=DB::SELECT("SELECT sum(amount) as amount FROM `medical` join add_members on medical.sr_no=add_members.p_id where date BETWEEN  '$date1' and '$date2'");
+        $total=DB::SELECT("SELECT sum(amount) as amount FROM `medical` join add_members on medical.p_id=add_members.p_id where date BETWEEN  '$date1' and '$date2'");
         $data=DB::SELECT("SELECT * FROM medical join add_members on add_members.p_id=medical.p_id where date BETWEEN '$date1' and '$date2'");
         return view('Reports.medical_report',['data'=>$data,'daterange'=>$daterange,'total'=>$total]);
     }

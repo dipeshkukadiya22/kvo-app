@@ -13,6 +13,7 @@
 <link rel="stylesheet" href="{{ asset ('assets/vendor/libs/flatpickr/flatpickr.css') }}" />
 <link rel="stylesheet" href="{{ asset ('assets/vendor/libs/typeahead-js/typeahead.css') }}" />
 <link rel="stylesheet" href="{{ asset ('assets/vendor/libs/tagify/tagify.css') }}" />
+<link rel="stylesheet" href="{{ asset('assets/vendor/libs/toastr/toastr.css') }}" />
 <link rel="stylesheet" href="{{ asset ('assets/vendor/libs/formvalidation/dist/css/formValidation.min.css') }}" />
 <link rel="stylesheet" href="{{ asset('assets/vendor/libs/sweetalert2/sweetalert2.css') }}" />
 <!-- Page CSS -->
@@ -212,6 +213,7 @@
     <script src="{{ asset ('assets/vendor/libs/formvalidation/dist/js/plugins/Bootstrap5.min.js') }}"></script>
     <script src="{{ asset ('assets/vendor/libs/formvalidation/dist/js/plugins/AutoFocus.min.js') }}"></script>
     <script src="{{ asset('assets/vendor/libs/sweetalert2/sweetalert2.js') }}"></script>
+    <script src="{{ asset('assets/vendor/libs/toastr/toastr.js') }}"></script>
    
     <!-- Main JS -->
     <script src="{{ asset ('assets/js/main.js') }}"></script>
@@ -303,6 +305,14 @@
               }
     });
     </script>
+    @if (Session::get('message'))
+    <script>
+        toastr['success']("{{ Session::get('message') }}", 'Good Job!', {
+            closeButton: true,
+            tapToDismiss: false,
+        });
+    </script>
+@endif
     
 @endsection
 

@@ -144,7 +144,11 @@ div.card-datatable [class*=col-md-] {
                                             </div>
                                             <!-- /Range Picker-->
                                             <div class="col-md-3 submit-button">
-                                                <button type="submit" class="btn btn-block btn-primary">Submit</button>
+                                                <button type="submit" class="btn btn-block btn-primary" id="submitbtn">Submit</button>
+                                               
+                                            </div>
+                                            <div class="col-md-3 submit-button" hidden>
+                                            <input type="text" id="report_date" name="report_date" />
                                             </div>
                                         </div>
                                         
@@ -179,6 +183,13 @@ div.card-datatable [class*=col-md-] {
                                                         <th style="font-size:15px"><b>Payment Mode</b></th>
                                                     </tr>
                                                 </thead>
+                                                <tr>
+                                                        <td></td> <td></td>
+                                                        <td><b>Total Amount:</b></td>
+                                                        <td><b>{{$total[0]->amount}}</b></td>
+                                                       
+                                                </tr>
+                                          
                                                 @foreach($donation as $row)
                                                 <tr>
                                                         <td>{{$row->m_name}}</td>
@@ -187,13 +198,7 @@ div.card-datatable [class*=col-md-] {
                                                         <td>{{$row->payment_mode}}</td>
                                                 </tr>
                                                 @endforeach
-                                                <tr>
-                                                        <td></td> <td></td>
-                                                        <td>Total Amount:</td>
-                                                        <td>{{$total[0]->amount}}</td>
-                                                       
-                                                </tr>
-                                          
+                                                
                                                 </table>
                                             </div>
                                         </div>
@@ -211,6 +216,13 @@ div.card-datatable [class*=col-md-] {
 
 
 <!-- BEGIN: Page JS-->
+<script>
+$('#daterange').change(function() {
+    $('#report_date').val($(this).val());
+});
+ 
+</script>
+
 <script>
     
     var dt_basic_table = $('.datatables-basic');
@@ -437,17 +449,15 @@ div.card-datatable [class*=col-md-] {
 
 });
     </script>
-    
-
     <!-- BEGIN: Page JS-->
    <script>
       var category=document.getElementById("category").value;
       var date = document.getElementById("daterange").value;
-      var dates = date.split(" to ");
-      var startDate = dates[0];
-      var endDate = dates[1];
+      // var dates = date.split(" to ");
+      // var startDate = dates[0];
+      // var endDate = dates[1];
 
-      var documentTitle = 'Community Donation Report [' + category + '] [' + startDate + ' to ' + endDate + ']';
+      var documentTitle = 'Community Donation Report [' + category.charAt(0).toUpperCase() + category.substr(1).toLowerCase() + '] ';
 
       
     var dt_basic_table = $('.datatables-basic');
@@ -555,6 +565,17 @@ div.card-datatable [class*=col-md-] {
               extend: 'pdf',
               text: '<i class="ti ti-file-description me-1"></i>Pdf',
               className: 'dropdown-item',
+              customize: function (doc) {
+                                // Here's where you can control the cell padding
+                                  doc.styles.tableHeader.margin = [0, 5, 5, 5];
+                                  doc.styles.tableBodyOdd.margin =
+                                  doc.styles.tableBodyEven.margin = [50, 5, 12, 12];
+                                  doc.pageMargins = [10, 30, 10,10];
+                                  doc.defaultStyle.fontSize = 10;
+                                  doc.styles.tableHeader.fontSize = 10;
+                                  doc.styles.title.fontSize = 17;
+                                  doc.content[1].margin = [ 25, 0, 25, 0 ] //left, top, right, bottom
+                                            },
               title:documentTitle,
               exportOptions: {
                 columns: [0,1 ,2, 3],

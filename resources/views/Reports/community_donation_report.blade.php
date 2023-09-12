@@ -166,7 +166,7 @@ div.card-datatable [class*=col-md-] {
                                                         <th style="font-size:15px"><b>Total</b></th>
                                                     </tr>
                                                 </thead>
-                                                <tr>
+                                                  <tr>
                                                     <td></td>  <td></td>  <td></td>  <td></td>  <td></td>  <td></td>  <td></td>  <td></td>  <td></td>
                                                       <td><b>Total Amount</b></td>
                                                       <td><b>{{$total[0]->amount}}</b></td>
@@ -354,6 +354,7 @@ div.card-datatable [class*=col-md-] {
               orientation: 'landscape',
               text: '<i class="ti ti-file-description me-1"></i>Pdf',
               className: 'dropdown-item',
+              
               exportOptions: {
                 columns: [0,1 ,2, 3, 4, 5, 6, 7, 8, 9,10],
                 // prevent avatar to be display

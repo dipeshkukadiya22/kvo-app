@@ -597,7 +597,7 @@ function NumToWord(inputNumber, outputControl) {
     });
   });
 </script> --}}
-<script>
+<!-- <script>
     $("#kvo_community_donation").submit(function(){
       var ambulance=document.getElementById("ambulance");
       var oxygen=document.getElementById("oxygen");
@@ -627,7 +627,7 @@ function NumToWord(inputNumber, outputControl) {
   });
             }
       });
-</script>
+</script> -->
 
 
 @if (Session::get('message'))
