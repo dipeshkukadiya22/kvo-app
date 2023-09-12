@@ -187,6 +187,7 @@ class donation extends Controller
             $pdf = Pdf::loadView('pdf.pdf_Community_Donation',['community_donation'=>$community_donation])->setPaper('a5', 'landscape')->setOptions(['defaultFont' => 'KAP119']);
             return $pdf->stream();
            
+            
         }
         else{
 
