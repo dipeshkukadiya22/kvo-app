@@ -154,7 +154,7 @@
                   </a>
                 </li>
                 <li class="menu-item">
-                  <a href="{{route('get_room_list')}}" class="menu-link" target="_blank">
+                  <a href="{{route('get_room_list')}}" class="menu-link">
                     <i class="menu-icon tf-icons ti ti-layout-distribute-vertical"></i>
                     <div data-i18n="Room List">Room List</div>
                   </a>

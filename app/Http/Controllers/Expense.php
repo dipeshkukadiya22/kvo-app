@@ -35,11 +35,11 @@ class Expense extends Controller
         if($Mahajan_Expense) { 
 
             $mahajan_expense=DB::select("SELECT * FROM `Mahajan_Expense` join add_members WHERE Mahajan_Expense.member_id=add_members.p_id and depo_id='$Mahajan_Expense->depo_id'");
-            $pdf = Pdf::loadView('pdf.pdf_Mahajan_Expense',['mahajan_expense'=>$mahajan_expense])->setPaper('a5', 'landscape')->setOptions(['defaultFont' => 'KAP119']);
+            $pdf = Pdf::loadView('pdf.pdf_Expense_Receipt',['mahajan_expense'=>$mahajan_expense])->setPaper('a5', 'landscape')->setOptions(['defaultFont' => 'KAP119']);
             return $pdf->stream();
         }
-        else{
-
+        else
+        {
         return redirect()->route('view_mahajan_expense')->with('message', 'Form submitted successfully!')->with(['expense' => $expense,'member' => $member]);
         }
     }
@@ -91,7 +91,16 @@ class Expense extends Controller
        $sangh_Expense -> amount = $req->amount;
        $sangh_Expense -> inword = $req->ankers;
        $sangh_Expense -> save();
+       if($sangh_Expense) { 
+
+        $sangh_expense=DB::select("SELECT * FROM `Sangh_Expense` join add_members WHERE Sangh_Expense.member_id=add_members.p_id and depo_id='$sangh_Expense->depo_id'");
+        $pdf = Pdf::loadView('pdf.pdf_Religious_Expense_Receipt',['sangh_expense' => $sangh_expense])->setPaper('a5', 'landscape')->setOptions(['defaultFont' => 'KAP119']);
+        return $pdf->stream();
+    }
+    else
+    {
        return redirect()->route('View_Sangh_Expense')->with('message', 'Form submitted successfully!')->with (['expense' => $expense,'member' => $member]);
+    }
    }
    public function view_sangh_expense()
     {

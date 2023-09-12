@@ -717,13 +717,17 @@ button.swal2-cancel.btn.btn-label-danger {
                   'Updated!',
                   '',
                   'success'
-                )
-          }else{
+                  ).then(function() {
+                          window.location.href  = 'View_General_Donation';
+                      });
+              }else{
               Swal.fire(
                   'No change!',
                   '',
                   'error'
-                )
+                  ).then(function() {
+                window.location.href = 'View_General_Donation';
+            });
           }
         }
 

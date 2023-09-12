@@ -88,7 +88,7 @@
                 <div class="col-md mb-4 mb-md-0">
                   <div class="card">
                     <div class="card-body">
-                      <form id="kvo_add_sangh_expense" class="browser-default-validation" method="POST" action="{{route('add_sangh_expense')}}" >
+                      <form id="kvo_add_sangh_expense" class="browser-default-validation" method="POST" action="{{route('add_sangh_expense')}}"  target="_blank" >
                         <div class="row g-3">
                           <div class="col-12">
                             <h6 class="fw-semibold">1. Personal Details</h6>
@@ -406,7 +406,9 @@
                   'Insert Successfully!',
                   '',
                   'success'
-                )   
+                  ).then(function() {
+                window.location.href = 'View_Sangh_Expense';
+                 });   
     });
     </script>
 

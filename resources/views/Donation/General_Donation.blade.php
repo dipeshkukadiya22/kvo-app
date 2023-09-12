@@ -298,8 +298,8 @@
                   '',
                   'success'
                   ).then(function() {
-                window.location.href = 'View_General_Donation';
-  });
+                  window.location.href = 'View_General_Donation';
+                });
               }
     });
     </script>
