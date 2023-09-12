@@ -129,6 +129,7 @@ div.card-datatable [class*=col-md-] {
                                                 <input
                                                 type="text"
                                                 name="daterange"
+                                                id="daterange"
                                                 class="form-control"
                                                 placeholder="YYYY-MM-DD to YYYY-MM-DD"
                                                 value="{{$daterange}}"
@@ -273,7 +274,8 @@ div.card-datatable [class*=col-md-] {
     <!-- BEGIN: Page JS-->
    <script>
      var trust=document.getElementById("basic-default-country").value;
-     var documentTitle = 'Religious  Donation Report [' + trust.charAt(0).toUpperCase() + trust.substr(1).toLowerCase() +']';
+     var daterange=document.getElementById("daterange").value;
+     var documentTitle = 'Religious  Donation Report [' + trust.charAt(0).toUpperCase() + trust.substr(1).toLowerCase() +'] ['+daterange.split()+']';
     
     var dt_basic_table = $('.datatables-basic');
     var dt_basic = dt_basic_table.DataTable({

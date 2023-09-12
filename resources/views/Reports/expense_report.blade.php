@@ -242,7 +242,8 @@ div.card-datatable [class*=col-md-] {
     <!-- BEGIN: Page JS-->
    <script>
     var trust=document.getElementById("trust").value;
-     var documentTitle = 'Expense Report [' + trust.charAt(0).toUpperCase() + trust.substr(1).toLowerCase() +']';
+    var daterange=document.getElementById("daterange").value;
+     var documentTitle = 'Expense Report [' + trust.charAt(0).toUpperCase() + trust.substr(1).toLowerCase() +'] ['+daterange.split()+']';
     
 
     var dt_basic_table = $('.datatables-basic');

@@ -232,7 +232,8 @@ div.card-datatable [class*=col-md-] {
     <!-- BEGIN: Page JS-->
    <script>
     var trust=document.getElementById("basic-default-country").value;
-    var documentTitle = 'General Donation Report   [' + trust.charAt(0).toUpperCase() + trust.substr(1).toLowerCase() + ']';
+    var daterange=document.getElementById("daterange").value;
+    var documentTitle = 'General Donation Report   [' + trust.charAt(0).toUpperCase() + trust.substr(1).toLowerCase() + '] ['+daterange.split()+']';
    
     
     

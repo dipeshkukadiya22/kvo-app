@@ -265,7 +265,8 @@ div.card-datatable [class*=col-md-] {
     <script>
     var trust=document.getElementById("basic-default-country").value;
     var category=document.getElementById("category").value;
-    var documentTitle = 'Religious Category Donation Report [' + trust.charAt(0).toUpperCase() + trust.substr(1).toLowerCase() +'] [ ' +category.charAt(0).toUpperCase() + category.substr(1).toLowerCase() +']';
+    var daterange=document.getElementById("daterange").value;
+    var documentTitle = 'Religious Category Donation Report [' + trust.charAt(0).toUpperCase() + trust.substr(1).toLowerCase() +'] [ ' +category.charAt(0).toUpperCase() + category.substr(1).toLowerCase() +']  ['+daterange.split()+']';
 
 
 

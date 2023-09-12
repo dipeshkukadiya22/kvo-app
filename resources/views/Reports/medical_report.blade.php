@@ -233,6 +233,8 @@ div.card-datatable [class*=col-md-] {
 
     <!-- BEGIN: Page JS-->
    <script>
+    var daterange=document.getElementById("daterange").value;
+    var documentTitle = 'Medical Report ['+daterange.split()+']';
     
     var dt_basic_table = $('.datatables-basic');
     var dt_basic = dt_basic_table.DataTable({
@@ -253,7 +255,7 @@ div.card-datatable [class*=col-md-] {
               extend: 'print',
               text: '<i class="ti ti-printer me-1" ></i>Print',
               className: 'dropdown-item',
-              title: 'Medical Report',
+              title:documentTitle,
               exportOptions: {
                 columns: [0,1 ,2, 3,4,5],
                 // prevent avatar to be display
@@ -291,7 +293,7 @@ div.card-datatable [class*=col-md-] {
               extend: 'csv',
               text: '<i class="ti ti-file-text me-1" ></i>Csv',
               className: 'dropdown-item',
-              title: 'Medical Report',
+              title:documentTitle,
               exportOptions: {
                 columns: [0,1 ,2, 3,4,5],
                 // prevent avatar to be display
@@ -316,7 +318,7 @@ div.card-datatable [class*=col-md-] {
               extend: 'excel',
               text: '<i class="ti ti-file-spreadsheet me-1"></i>Excel',
               className: 'dropdown-item',
-              title: 'Medical Report', 
+              title:documentTitle,
               exportOptions: {
                 columns: [0,1 ,2, 3,4,5],
                 // prevent avatar to be display
@@ -341,6 +343,7 @@ div.card-datatable [class*=col-md-] {
               extend: 'pdf',
               text: '<i class="ti ti-file-description me-1"></i>Pdf',
               className: 'dropdown-item',
+              title:documentTitle,
               customize: function (doc) {
                                 // Here's where you can control the cell padding
                                   doc.styles.tableHeader.margin = [0, 5, 5, 5];

@@ -452,12 +452,9 @@ $('#daterange').change(function() {
     <!-- BEGIN: Page JS-->
    <script>
       var category=document.getElementById("category").value;
-      var date = document.getElementById("daterange").value;
-      // var dates = date.split(" to ");
-      // var startDate = dates[0];
-      // var endDate = dates[1];
-
-      var documentTitle = 'Community Donation Report [' + category.charAt(0).toUpperCase() + category.substr(1).toLowerCase() + '] ';
+      var daterange=document.getElementById("daterange").value;
+    
+      var documentTitle = 'Community Donation Report [' + category.charAt(0).toUpperCase() + category.substr(1).toLowerCase() + '] ['+daterange.split()+'] ';
 
       
     var dt_basic_table = $('.datatables-basic');
