@@ -441,8 +441,13 @@ div.card-datatable [class*=col-md-] {
     <!-- BEGIN: Page JS-->
    <script>
       var category=document.getElementById("category").value;
-      var date=document.getElementById("daterange").value;
-      var documentTitle='Community Donation Report '+" [ "+ category +" ]";
+      var date = document.getElementById("daterange").value;
+      var dates = date.split(" to ");
+      var startDate = dates[0];
+      var endDate = dates[1];
+
+      var documentTitle = 'Community Donation Report [' + category + '] [' + startDate + ' to ' + endDate + ']';
+
       
     var dt_basic_table = $('.datatables-basic');
     var dt_basic = dt_basic_table.DataTable({
@@ -499,6 +504,7 @@ div.card-datatable [class*=col-md-] {
               extend: 'csv',
               text: '<i class="ti ti-file-text me-1" ></i>Csv',
               className: 'dropdown-item',
+              title:documentTitle,
               exportOptions: {
                 columns: [0,1 ,2, 3],
                 // prevent avatar to be display
@@ -548,6 +554,7 @@ div.card-datatable [class*=col-md-] {
               extend: 'pdf',
               text: '<i class="ti ti-file-description me-1"></i>Pdf',
               className: 'dropdown-item',
+              title:documentTitle,
               exportOptions: {
                 columns: [0,1 ,2, 3],
                 // prevent avatar to be display
