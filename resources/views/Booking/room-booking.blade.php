@@ -258,8 +258,8 @@
                               
                               </div>
                               <div class="col-md-4">
-                                <label class="form-label" for="basic-default-name"><span class="required">Age</span></label>
-                                <input type="number" class="form-control" name="age" id="basic-default-age" placeholder="Age" oninput="format(this)" required/>
+                                <label class="form-label " for="basic-default-name"><span class="required">Age</span></label>
+                                <input type="number" class="form-control amount-check" name="age" id="basic-default-age" placeholder="Age" oninput="format(this)" required/>
                               </div>
 
     
@@ -288,7 +288,7 @@
 
                               
                               <div class="col-md-4">
-                                <label for="defaultFormControlInput" class="form-label"><span class="required">Sub Community</span></label>
+                                <label for="defaultFormControlInput" class="form-label input-amount"><span class="required">Sub Community</span></label>
                                 <input type="text" class="form-control" name="subcommunity" id="defaultFormControlInput" style="text-transform:uppercase" aria-describedby="defaultFormControlHelp" required/>
                               </div>
 
@@ -299,7 +299,7 @@
                             </div>
 
                             <div class="col-md-4">
-                              <label class="form-label" for="basic-default-name"><span class="required">No. of Person</span></label>
+                              <label class="form-label" for="basic-default-name input-amount"><span class="required">No. of Person</span></label>
                               <input type="text"  class="form-control check-field"  name="no_of_person" id="no_of_person_id" placeholder="No of Person" value="1" maxlength="1"  oninput="this.value=this.value.replace(/[^1-9]/g,'');"  required/>
                             </div>
 
@@ -704,6 +704,8 @@
 
     <script src="{{ asset ('assets/js/forms-extras.js') }}"></script>
 
+    <script src="{{ asset ('assets/vendor/libs/jquery-repeater/jquery-repeater.js') }}"></script>
+
      @if(session('new_member') === 1)
         <script>
              var member_id=[];
@@ -727,6 +729,7 @@
               });
         </script>
     @endif
+
     <script>
       $("#multicol-phone").focusout(function(){
         var contact=document.getElementById("multicol-phone").value;
@@ -837,45 +840,11 @@
     
     </script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script>
-//      $("#btn-step1").hover(function(){
-//       var age=document.getElementById("basic-default-age").value;
-//         var address=document.getElementById("member-address").value;
-//         var subcommunity=document.getElementById("defaultFormControlInput").value;
-//         var city=document.getElementById("member_city").value;
-//         if(age === ""){ $("#age").html("Enter Age");} else{ $("#age").html("");}
-//         if(address === ""){ $("#addres").html("Enter Address");} else{ $("#addres").html("");}
-//         if(subcommunity === ""){ $("#scommunity").html("Enter Subcommunity");} else{ $("#scommunity").html("");}
-//         if(city === ""){ $("#city1").html("Enter City");} else{ $("#city1").html("");}
-//       });
-//       $("#repeat-next").hover(function(e){
-//         var noofperson=document.getElementById("no_of_person_id").value;
-//         var idproof=document.getElementById("formFileMultiple").value;
-//         var deposite=document.getElementById("deposit-amount").value;
-//         var noofdays=document.getElementById("no_of_days").value;
-//         var occupation1=document.getElementById("occupation").value;
-//         var reason1=document.getElementById("reason").value;
-//         if(noofperson === ""){ $("#noofperson").html("Enter No of Person");} else{ $("#noofperson").html("");}
-//         if(idproof === ""){ $("#idproof").html("Upload Idproof");} else{ $("#idproof").html("");}
-//         if(deposite === ""){ $("#deposite").html("Enter Deposite Amount");} else{ $("#deposite").html("");}
-//         if(noofdays === ""){ $("#noofdays").html("Enter No of Days");} else{ $("#noofdays").html("");}
-//         if(occupation1 === ""){ $("#occupation1").html("Enter Occupation");} else{ $("#occupation1").html("");}
-//         if(reason1 === ""){ $("#reason1").html("Enter Reason");} else{ $("#reason1").html("");}
-//       });
-//     $(document).ready(function() {
-//       $(".btn-dropdown").click(function() {
-//       $(this).parent().toggleClass("active");
-//     });
 
-//   // Hide the dropdown when clicking outside of it
-//   $(document).click(function(event) {
-//     if (!$(event.target).closest(".dropdown-checkboxes").length) {
-//       $(".dropdown-checkboxes").removeClass("active");
-//     }
-//   });
-// });
-
-$(document).ready(function () {   
+  <script>
+  $(document).ready(function() {
+    $('#select2Multiple1').select2();
+  
     $('#personalRadio2').change(function(){
       $("#genderfemale").attr('checked',true);
       $("#gender_data").val("FEMALE");
@@ -884,235 +853,29 @@ $(document).ready(function () {
       $("#gendermale").attr('checked',true);
       $("#gender_data").val("MALE");
     });
-});
-
-
-
-</script>
-<script>
-  $(document).ready(function() {
-    $('#select2Multiple1').select2();
-  });
-</script>
-
-
-<!-- <script>
-
-  /**
- * Tagify
- */
-
-'use strict';
-
-(function () {
-  // Basic
-  //------------------------------------------------------
-  const tagifyBasicEl = document.querySelector('#TagifyBasic');
-  const TagifyBasic = new Tagify(tagifyBasicEl);
-
-  // Read only
-  //------------------------------------------------------
-  const tagifyReadonlyEl = document.querySelector('#TagifyReadonly');
-  const TagifyReadonly = new Tagify(tagifyReadonlyEl);
-
-  // Custom list & inline suggestion
-  //------------------------------------------------------
-  const TagifyCustomInlineSuggestionEl = document.querySelector('#TagifyCustomInlineSuggestion');
-  const TagifyCustomListSuggestionEl = document.querySelector('#TagifyCustomListSuggestion');
-
-  const whitelist = [
-    '301 2BAC',
-    '302 2BAC',
-    '303 2BAC',
-    '304 2BAC'
-    
-  ];
-  // Inline
-  let TagifyCustomInlineSuggestion = new Tagify(TagifyCustomInlineSuggestionEl, {
-    whitelist: whitelist,
-    maxTags: 10,
-    dropdown: {
-      maxItems: 20,
-      classname: 'tags-inline',
-      enabled: 0,
-      closeOnSelect: false
-    }
-  });
-  // List
-  let TagifyCustomListSuggestion = new Tagify(TagifyCustomListSuggestionEl, {
-    whitelist: whitelist,
-    maxTags: 10,
-    dropdown: {
-      maxItems: 20,
-      classname: '',
-      enabled: 0,
-      closeOnSelect: false
-    }
-  });
-
-
-})();
-
-
-(function () {
-  // Basic
-  //------------------------------------------------------
-  const tagifyBasicEl = document.querySelector('#TagifyBasic');
-  const TagifyBasic = new Tagify(tagifyBasicEl);
-
-  // Read only
-  //------------------------------------------------------
-  const tagifyReadonlyEl = document.querySelector('#TagifyReadonly');
-  const TagifyReadonly = new Tagify(tagifyReadonlyEl);
-
-  // Custom list & inline suggestion
-  //------------------------------------------------------
-  const TagifyCustomInlineSuggestionEl = document.querySelector('#TagifyCustomInlineSuggestion1');
-  const TagifyCustomListSuggestionEl = document.querySelector('#TagifyCustomListSuggestion1');
-
-  const whitelist = [
-    '201 2BNAC',
-    '202 2BNAC',
-    '203 3BNAC',
-    '204 4BNAC'
-    
-  ];
-  // Inline
-  let TagifyCustomInlineSuggestion = new Tagify(TagifyCustomInlineSuggestionEl, {
-    whitelist: whitelist,
-    maxTags: 10,
-    dropdown: {
-      maxItems: 20,
-      classname: 'tags-inline',
-      enabled: 0,
-      closeOnSelect: false
-    }
-  });
-  // List
-  let TagifyCustomListSuggestion1 = new Tagify(TagifyCustomListSuggestionEl, {
-    whitelist: whitelist,
-    maxTags: 10,
-    dropdown: {
-      maxItems: 20,
-      classname: '',
-      enabled: 0,
-      closeOnSelect: false
-    }
-  });
-
-
-})();
-
-
-(function () {
-  // Basic
-  //------------------------------------------------------
-  const tagifyBasicEl = document.querySelector('#TagifyBasic');
-  const TagifyBasic = new Tagify(tagifyBasicEl);
-
-  // Read only
-  //------------------------------------------------------
-  const tagifyReadonlyEl = document.querySelector('#TagifyReadonly');
-  const TagifyReadonly = new Tagify(tagifyReadonlyEl);
-
-  // Custom list & inline suggestion
-  //------------------------------------------------------
-  const TagifyCustomInlineSuggestionEl = document.querySelector('#TagifyCustomInlineSuggestion2');
-  const TagifyCustomListSuggestionEl = document.querySelector('#TagifyCustomListSuggestion2');
-
-  const whitelist = [
-    '1 DMNAC',
-    '2 DMNAC',
-    '3 DMNAC',
-    '4 DMAC',
-    '5 DMAC',
-    '6 DMAC'
-  ];
-  // Inline
-  let TagifyCustomInlineSuggestion = new Tagify(TagifyCustomInlineSuggestionEl, {
-    whitelist: whitelist,
-    maxTags: 10,
-    dropdown: {
-      maxItems: 20,
-      classname: 'tags-inline',
-      enabled: 0,
-      closeOnSelect: false
-    }
-  });
-  // List
-  let TagifyCustomListSuggestion2 = new Tagify(TagifyCustomListSuggestionEl, {
-    whitelist: whitelist,
-    maxTags: 10,
-    dropdown: {
-      maxItems: 20,
-      classname: '',
-      enabled: 0,
-      closeOnSelect: false
-    }
-  });
-
-
-})();
-</script> -->
-
-<script>
-        $(document).ready(function () {
-            $("#select2Basic").click(function () {
-                var data = $.parseJSON($("#email_user").val());
-                 
-                $.each(data,function(key,value){
-                  console.log('id::'+$('#select2Basic').val());
-                  if($('#select2Basic').val()==value['p_id']){
-                   console.log(value['email']);
-                   $('#member_email').val(value['email']);
-                   $('#member-phone').val(value['phone_no']);
-                   $('#member-address').val(value['address']);
-                   $('#member_city').val(value['city']);
-                   $('#full_name_form').val(value['m_name']);
-                   }
-                });
-            
-            });
+    $("#select2Basic").click(function () {
+        var data = $.parseJSON($("#email_user").val());
+          
+        $.each(data,function(key,value){
+          console.log('id::'+$('#select2Basic').val());
+          if($('#select2Basic').val()==value['p_id']){
+            console.log(value['email']);
+            $('#member_email').val(value['email']);
+            $('#member-phone').val(value['phone_no']);
+            $('#member-address').val(value['address']);
+            $('#member_city').val(value['city']);
+            $('#full_name_form').val(value['m_name']);
+            }
         });
+    
+    });
+  });
     </script>
-
-
-
-  <!-- <script>
-     $(document).ready(function () {
-            $("#TagifyCustomListSuggestion").click(function () {
-                var data = $.parseJSON($("#roomlist").val());
-                 
-                $.each(data,function(key,value){
-                  console.log('id::'+$('#TagifyCustomListSuggestion').val());
-                  if($('#TagifyCustomListSuggestion').val()==value['room_no']){
-                   $('#TagifyCustomListSuggestion').val(value['TagifyCustomListSuggestion']);
-                   
-                   }
-                });
-            
-            });
-        });
-  </script> -->
-  <script>
  
-</script>
- 
-
-
-
-   
 <script>
  
   $(document).ready(function() {
-    // let currentStep = 1;
-    // var currentDateTime = new Date();
-
-    // $('#flatpickr-datetime').flatpickr({
-    //   enableTime: true,
-    //   dateFormat: "d-m-Y H:i",
-    //   defaultDate: currentDateTime
-    // });
+ 
     $("#repeat-next").on("click", function() {
 
       const selectedList1 = $('#select2Multiple11').val();
@@ -1181,29 +944,39 @@ $(document).ready(function () {
         '<td class="member_rel' + i + '">' + $('#member_relation' + i).val() + '</td>' +
         '</tr>'
          );
-
-       
         j++;
-
-        // Setting text for elements in the loop using jQuery
-        // $('.member_full_name' + i).text($('#full_name_form' + i).val());
-        // $('.members_age' + i).text($('#member_age' + i).val());
-        // $('.member_gen' + i).text($('#gender'+i).val());
-        // $('.member_rel' + i).text($('#member_relation' + i).val());
-        // j++;
       }
 
       $(".rep-table").show();
     });
   });
 </script>
+<script>
+  let flag=0;
+ $(".browser-default-validation").change(function(){
+   let age=document.getElementById("basic-default-age");
+   let address=document.getElementById("member-address");
+   let occupation=document.getElementById("occupation");
+    let reason=document.getElementById("reason");
 
+   let sub=document.getElementById("defaultFormControlInput");
 
- 
+   if(age.value != "" && sub.value != "" && address.value != "" && occupation.value != "" && reason.value != "")
+    {
+      $("#btn-step1").prop('disabled',false);
+    }
+ }); 
+</script>
 <script>
   $(document).ready(function() {
+    $("#btn-step1").prop('disabled',true);
+    var temp=document.getElementById("subcommunity").value;
+    if(temp !="")
+    {
+      $("#btn-step1").prop('disabled',false);
+    }
     $("#btn-step1").click(function() {
-      console.log("click");
+      
       $('#member_age').val($('#basic-default-age').val());
       let numForms = parseInt($("#no_of_person_id").val());
 
@@ -1270,44 +1043,7 @@ $(document).ready(function () {
     });
   });
 </script>
-<!-- 
-<script>
- $("#room_booking").submit(function(){
 
-      var address = document.getElementById('member-address').value;
-      var city = document.getElementById('member_city').value;
-    
-  
-      if (address  === '' && city === '' ) {
-  
-          Swal.fire({
-              text: "Sorry, looks like there are some errors detected, please try again.",
-              icon: "error",
-              buttonsStyling: false,
-              confirmButtonText: "Ok, got it!",
-              customClass: {
-                  confirmButton: "btn btn-primary"
-              }
-          });
-          return false; // Prevent form submission
-      } else {
-          Swal.fire({
-              text: "Form has been successfully submitted!",
-              icon: "success",
-              buttonsStyling: false,
-              confirmButtonText: "Ok, got it!",
-              customClass: {
-                  confirmButton: "btn btn-primary"
-              }
-          }).then(function(t) {
-              if (t.isConfirmed) {
-                  location.reload();
-              }
-          });
-      }
-  });
-  </script> -->
-</script>
 <script>
   function format(input){
     if(input.value < 0) input.value=Math.abs(input.value);
@@ -1332,10 +1068,6 @@ contactInput.addEventListener('input', function () {
 </script>
 
 
-
-
-
-<script src="{{ asset ('assets/vendor/libs/jquery-repeater/jquery-repeater.js') }}"></script>
 
 @endsection
 
