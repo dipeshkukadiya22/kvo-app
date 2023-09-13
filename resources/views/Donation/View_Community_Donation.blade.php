@@ -815,42 +815,15 @@ button.swal2-cancel.btn.btn-label-danger {
         document.getElementById("payment").value="UPI";
       });
 </script>
-<script>
-  let flag=0;
-  $("#browser-default-validation :input").change(function() {
-    flag=1;
-    });
-    $("#browser-default-validation").submit(function(){
-        var name=document.getElementById("name").value;
-        var date=document.getElementById("date").value;
-        
-        if(name ==='' && date ==='' )
-        {
-            Swal.fire({
-                text: "Sorry, looks like there are some errors detected, please try again.",
-                icon: "error",
-            });
-            return false; // Prevent form submission
-        } else {
-            if(flag===0){
-              toastr['success']("{{ Session::get('message') }}", 'No Change!', {
-                closeButton: true,
-                tapToDismiss: false,
-             });
-              }else{
-                toastr['success']("{{ Session::get('message') }}", 'Updated!', {
+
+ @if (Session::get('message'))
+    <script>
+        toastr['success']("{{ Session::get('message') }}", 'Updated!', {
             closeButton: true,
             tapToDismiss: false,
         });
-              }
-        }
-    });
-</script>
-<!-- @if (Session::get('message'))
-    <script>
-        
     </script>
-@endif  -->
+@endif 
 
 @endsection
 
