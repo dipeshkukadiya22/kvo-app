@@ -599,29 +599,26 @@ function NumToWord(inputNumber, outputControl) {
 </script> --}}
 <script>
     $("#kvo_community_donation").submit(function(){
-      var ambulance=document.getElementById("ambulance");
-      var oxygen=document.getElementById("oxygen");
-      var lavajam=document.getElementById("lavajam");
-      var shaikshanik=document.getElementById("shaikshanik");
-      var bhojanshala=document.getElementById("bhojanshala");
-      var mahajan=document.getElementById("mahajan");
-      var medical_checkup=document.getElementById("medical_checkup");
-      var other=document.getElementById("other");
-        if((ambulance.value === "" ) && (oxygen.value === "") && ( lavajam.value === "" ) && ( shaikshanik.value === "") &&
-           ( bhojanshala.value === "" ) && ( mahajan.value === "") && (medical_checkup.value === "" ) && ( other.value === "")){
+        var flag=0;
+          $(".amount-input").each(function(){
+            // Test if the div element is empty
+          if($(this).val() != "")
+          {flag=1;}
+          });
+          if(flag === 0)
+          {
             Swal.fire(
-                  'Amount Required!',
-                  '',
-                  'warning'
-                )
-              event.preventDefault();
-            }    
-            else{
-              
-                window.location.href = 'View_Community_Donation';
-  
-            }
-      });
+                      'Amount Required!',
+                      '',
+                      'warning'
+                    )
+            event.preventDefault();
+          } else{
+                
+                    window.location.href = 'View_Community_Donation';
+      
+                }
+          });
 </script> 
 
 

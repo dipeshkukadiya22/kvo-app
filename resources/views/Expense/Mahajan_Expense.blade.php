@@ -411,8 +411,6 @@
       });
   });
   $("#kvo_add_mahajan_expense").submit(function(){
-    
-              
                 window.location.href = 'View_Mahajan_Expense'; 
                
     });
