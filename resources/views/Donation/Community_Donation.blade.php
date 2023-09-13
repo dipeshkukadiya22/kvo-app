@@ -568,28 +568,33 @@ function NumToWord(inputNumber, outputControl) {
 </script>
 
 <script>
-    $("#kvo_community_donation").submit(function(){
-        var flag=0;
-          $(".amount-input").each(function(){
-            // Test if the div element is empty
-          if($(this).val() != "")
-          {flag=1;}
+       $("#kvo_community_donation").submit(function (event) {
+            var flag = 0;
+            $(".amount-input").each(function () {
+              if ($(this).val() !== "") {
+                flag = 1;
+              }
+            });
+
+            if (flag === 0) {
+              event.preventDefault();
+              Swal.fire(
+                'Amount Required!',
+                '',
+                'warning'
+              );
+            } else {
+              // Redirect to the new location
+              window.location.href = 'View_General_Donation';
+              window.location.reload();
+            }
           });
-          if(flag === 0)
-          {
-            Swal.fire(
-                      'Amount Required!',
-                      '',
-                      'warning'
-                    )
-            event.preventDefault();
-          } else{
-                
-                   window.location.href = 'View_Community_Donation';
-      
-                }
-          });
-</script> 
+    </script>
+<script>
+$(document).ready(function () {
+ 
+});
+</script>
 
 @if (Session::get('message'))
     <script>

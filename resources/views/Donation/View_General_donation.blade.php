@@ -20,7 +20,7 @@
 <link rel="stylesheet" href="{{ asset ('assets/vendor/libs/datatables-bs5/datatables.bootstrap5.css') }}" />
 <link rel="stylesheet" href="{{ asset ('assets/vendor/libs/datatables-responsive-bs5/responsive.bootstrap5.css') }}" />
 <link rel="stylesheet" href="{{ asset ('assets/vendor/libs/datatables-checkboxes-jquery/datatables.checkboxes.css') }}" />
-
+<link rel="stylesheet" href="{{ asset('assets/vendor/libs/toastr/toastr.css') }}" />
 <!-- Row Group CSS -->
 <link rel="stylesheet" href="{{ asset ('assets/vendor/libs/datatables-rowgroup-bs5/rowgroup.bootstrap5.css') }}" />
 
@@ -257,6 +257,9 @@ button.swal2-cancel.btn.btn-label-danger {
 
     <!-- Page JS -->
     <script src="{{ asset('assets/js/extended-ui-sweetalert2.js') }}"></script>
+    <script src="{{ asset('assets/vendor/libs/toastr/toastr.js') }}"></script>
+
+<script src="{{ asset('assets/js/ui-toasts.js') }}"></script>
 
     <!-- BEGIN: Page JS-->
     
@@ -697,45 +700,16 @@ button.swal2-cancel.btn.btn-label-danger {
           }
       });
   }
-  let flag=0;
-  $("#kvo_update_general_donation :input").change(function() {
-    flag=1;     
-    });
-    $("#kvo_update_general_donation").submit(function(){
-        var haste=document.getElementById("haste").value;
-        var details=document.getElementById("details").value;
-        if(haste ==='' && details === '')
-        {
-            Swal.fire({
-                text: "Sorry, looks like there are some errors detected, please try again.",
-                icon: "error",
-            });
-            return false; // Prevent form submission
-        } else {
-          if(flag ===1){
-                Swal.fire(
-                  'Updated!',
-                  '',
-                  'success'
-                  ).then(function() {
-                          window.location.href  = 'View_General_Donation';
-                      });
-              }else{
-              Swal.fire(
-                  'No change!',
-                  '',
-                  'error'
-                  ).then(function() {
-                window.location.href = 'View_General_Donation';
-            });
-          }
-        }
-
-    });
+ 
 </script>
-<script>
-  
-</script>
+@if (Session::get('message'))
+    <script>
+        toastr['success']("{{ Session::get('message') }}", 'Updated!', {
+            closeButton: true,
+            tapToDismiss: false,
+        });
+    </script>
+@endif
 
 @endsection
 @endsection

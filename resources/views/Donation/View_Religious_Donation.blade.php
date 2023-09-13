@@ -20,7 +20,7 @@
 <link rel="stylesheet" href="{{ asset ('assets/vendor/libs/datatables-bs5/datatables.bootstrap5.css') }}" />
 <link rel="stylesheet" href="{{ asset ('assets/vendor/libs/datatables-responsive-bs5/responsive.bootstrap5.css') }}" />
 <link rel="stylesheet" href="{{ asset ('assets/vendor/libs/datatables-checkboxes-jquery/datatables.checkboxes.css') }}" />
-
+<link rel="stylesheet" href="{{ asset('assets/vendor/libs/toastr/toastr.css') }}" />
 <!-- Row Group CSS -->
 <link rel="stylesheet" href="{{ asset ('assets/vendor/libs/datatables-rowgroup-bs5/rowgroup.bootstrap5.css') }}" />
 
@@ -426,6 +426,9 @@ button.swal2-cancel.btn.btn-label-danger {
 
     <!-- Page JS -->
     <script src="{{ asset('assets/js/extended-ui-sweetalert2.js') }}"></script>
+    <script src="{{ asset('assets/vendor/libs/toastr/toastr.js') }}"></script>
+
+<script src="{{ asset('assets/js/ui-toasts.js') }}"></script>
 
     <!-- BEGIN: Page JS-->
    <script>
@@ -909,23 +912,21 @@ function delete_religious_donation(id)
             });
             return false; // Prevent form submission
         } else {
-          if(flag ===1){
-                Swal.fire(
-                  'Updated!',
-                  '',
-                  'success'
-                )
-          }else{
-              Swal.fire(
-                  'No change!',
-                  '',
-                  'error'
-                )
-          }
+          if(flag===0){
+              toastr['success']("{{ Session::get('message') }}", 'No Change!', {
+                closeButton: true,
+                tapToDismiss: false,
+             });
+              }else{
+                toastr['success']("{{ Session::get('message') }}", 'Updated!', {
+            closeButton: true,
+            tapToDismiss: false,
+        });
+              }
         }
     });
   </script>
-  <script>
+<script>
     $("#browser-default-validation").submit(function(){
       var flag=0;
       $(".amount-input").each(function(){
@@ -942,11 +943,10 @@ function delete_religious_donation(id)
                 )
         event.preventDefault();
       } else{
-              Swal.fire(
-                  'Update Successfully!',
-                  '',
-                  'success'
-                )
+              toastr['success']("{{ Session::get('message') }}", 'Updated!', {
+            closeButton: true,
+            tapToDismiss: false,
+        });
             }
       });
 </script>

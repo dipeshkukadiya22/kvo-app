@@ -742,19 +742,17 @@ function delete_sangh_expense(id)
             });
             return false; // Prevent form submission
         } else {
-          if(flag ===1){
-                Swal.fire(
-                  'Updated!',
-                  '',
-                  'success'
-                )
-          }else{
-              Swal.fire(
-                  'No change!',
-                  '',
-                  'error'
-                )
-          }
+          if(flag===0){
+              toastr['success']("{{ Session::get('message') }}", 'No Change!', {
+                closeButton: true,
+                tapToDismiss: false,
+             });
+              }else{
+                toastr['success']("{{ Session::get('message') }}", 'Updated!', {
+            closeButton: true,
+            tapToDismiss: false,
+        });
+              }
         }
     });
 </script>
