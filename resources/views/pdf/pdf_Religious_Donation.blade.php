@@ -10,7 +10,7 @@
 
 				@page  
 				{ 
-					margin: 20px;  
+					margin: 20px 30px; 
 				} 
 
 

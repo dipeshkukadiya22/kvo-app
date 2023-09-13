@@ -95,9 +95,7 @@ class ReportController extends Controller
     }
     public function community_category_donation_report(){
         $daterange=Date("m/01/Y")."-".Date("m/30/Y");
-      
         $date1=date('Y-m-d',strtotime(substr($daterange,0,10)));
-        
         $date2=date('Y-m-d',strtotime(substr($daterange,12)));
        //dd($date1);
         $category="medical_checkup";

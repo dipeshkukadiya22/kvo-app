@@ -386,6 +386,7 @@ div.card-datatable [class*=col-md-] {
               text: '<i class="ti ti-file-description me-1"></i>Pdf',
               className: 'dropdown-item',
               title:documentTitle,
+            
               exportOptions: {
                 columns: [1 ,2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15,16,17],
                 // prevent avatar to be display
@@ -431,12 +432,16 @@ div.card-datatable [class*=col-md-] {
     <script>
         $(function() {
             $('input[name="daterange"]').daterangepicker({
-            opens: 'left'
+                opens: 'left',
+                locale: {
+                    format: 'DD-MM-YYYY'
+                }
             }, function(start, end, label) {
-            console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
+                $('input[name="daterange"]').val(start.format("DD-MM-YYYY"));
             });
         });
     </script>
+
 
 
 

@@ -683,13 +683,9 @@ function NumToWord(inputNumber, outputControl) {
                 )
         event.preventDefault();
       } else{
-              Swal.fire(
-                  'Insert Successfully!',
-                  '',
-                  'success'
-                  ).then(function() {
+             
                 window.location.href = 'View_Religious_Donation';
-  });
+  
             }
       });
 </script>

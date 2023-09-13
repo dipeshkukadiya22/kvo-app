@@ -408,12 +408,18 @@ div.card-datatable [class*=col-md-] {
     <script>
         $(function() {
             $('input[name="daterange"]').daterangepicker({
-            opens: 'left'
+                opens: 'left',
+                locale: {
+                    format: 'DD-MM-YYYY'
+                }
             }, function(start, end, label) {
-            console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
+                $('input[name="daterange"]').val(start.format("DD-MM-YYYY"));
             });
         });
     </script>
+
+    
+   
 
 
 

@@ -411,16 +411,10 @@
       });
   });
   $("#kvo_add_mahajan_expense").submit(function(){
-                Swal.fire({
-                  title:'Insert Successfully!',
-                  text:'',
-                  icon:'success',
-                  showCancelButton: false,
-  
+    
               
-                }).then(function() {
                 window.location.href = 'View_Mahajan_Expense'; 
-                });
+               
     });
 </script>
 

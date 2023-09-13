@@ -378,13 +378,9 @@ function NumToWord(inputNumber, outputControl) {
       });
   });
   $("#KVO_add_treatment").submit(function(){
-  Swal.fire(
-    'Insert Successfully!',
-    '',
-    'success'
-  ).then(function() {
+   {
     window.location.href = 'view_treatment';
-  });
+  };
 });
 
 </script>

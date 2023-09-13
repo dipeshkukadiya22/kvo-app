@@ -597,7 +597,7 @@ function NumToWord(inputNumber, outputControl) {
     });
   });
 </script> --}}
-<!-- <script>
+<script>
     $("#kvo_community_donation").submit(function(){
       var ambulance=document.getElementById("ambulance");
       var oxygen=document.getElementById("oxygen");
@@ -615,29 +615,24 @@ function NumToWord(inputNumber, outputControl) {
                   'warning'
                 )
               event.preventDefault();
-              event.stopPropagation();
             }    
             else{
-              Swal.fire(
-                  'Insert Successfully!',
-                  '',
-                  'success'
-                  ).then(function() {
+              
                 window.location.href = 'View_Community_Donation';
-  });
+  
             }
       });
-</script> -->
+</script> 
 
 
-@if (Session::get('message'))
+<!-- @if (Session::get('message'))
     <script>
         toastr['success']("{{ Session::get('message') }}", 'Good Job!', {
             closeButton: true,
             tapToDismiss: false,
         });
     </script>
-@endif
+@endif -->
 
 
 @endsection

@@ -266,7 +266,7 @@ div.card-datatable [class*=col-md-] {
     var trust=document.getElementById("basic-default-country").value;
     var category=document.getElementById("category").value;
     var daterange=document.getElementById("daterange").value;
-    var documentTitle = 'Religious Category Donation Report [' + trust.charAt(0).toUpperCase() + trust.substr(1).toLowerCase() +'] [ ' +category.charAt(0).toUpperCase() + category.substr(1).toLowerCase() +']  ['+daterange.split()+']';
+    var documentTitle = 'Religious Donation Report [ ' +category.charAt(0).toUpperCase() + category.substr(1).toLowerCase() +'] [' + trust.charAt(0).toUpperCase() + trust.substr(1).toLowerCase() +'] ['+daterange.split()+']';
 
 
 
@@ -383,7 +383,7 @@ buttons: [
                             doc.pageMargins = [10, 30, 10,10];
                             doc.defaultStyle.fontSize = 10;
                             doc.styles.tableHeader.fontSize = 10;
-                            doc.styles.title.fontSize = 17;
+                            doc.styles.title.fontSize = 15;
                             doc.content[1].margin = [ 25, 0, 25, 0 ] //left, top, right, bottom
                                       },
         title:documentTitle,
@@ -487,12 +487,16 @@ buttons: [
     <script>
         $(function() {
             $('input[name="daterange"]').daterangepicker({
-            opens: 'left'
+                opens: 'left',
+                locale: {
+                    format: 'DD-MM-YYYY'
+                }
             }, function(start, end, label) {
-            console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
+                $('input[name="daterange"]').val(start.format("DD-MM-YYYY"));
             });
         });
     </script>
+
 
 
 

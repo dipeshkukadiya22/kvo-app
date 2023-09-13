@@ -352,7 +352,7 @@ div.card-datatable [class*=col-md-] {
                                   doc.pageMargins = [10, 30, 10,10];
                                   doc.defaultStyle.fontSize = 10;
                                   doc.styles.tableHeader.fontSize = 10;
-                                  doc.styles.title.fontSize = 17;
+                                  doc.styles.title.fontSize = 15;
                                   doc.content[1].margin = [ 25, 0, 25, 0 ] //left, top, right, bottom
                                             },
               exportOptions: {
@@ -399,12 +399,16 @@ div.card-datatable [class*=col-md-] {
     <script>
         $(function() {
             $('input[name="daterange"]').daterangepicker({
-            opens: 'left'
+                opens: 'left',
+                locale: {
+                    format: 'DD-MM-YYYY'
+                }
             }, function(start, end, label) {
-            console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
+                $('input[name="daterange"]').val(start.format("DD-MM-YYYY"));
             });
         });
     </script>
+
 
 
 

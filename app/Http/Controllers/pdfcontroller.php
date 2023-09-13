@@ -23,7 +23,7 @@ class pdfcontroller extends Controller
     public function pdf_Religious_Donation($id)
     {   
         $religious_donation=DB::select("SELECT * FROM `religious_donation` join add_members where religious_donation.member_id=add_members.p_id and religious_donation.religious_donation_id='$id'");
-        $pdf = Pdf::loadView('pdf.pdf_Religious_Donation',['religious_donation'=>$religious_donation])->setPaper('a5', 'potrait')->setOptions(['defaultFont' => 'NotoSansGujarati-Regular','enable_remote',True]);
+        $pdf = Pdf::loadView('pdf.pdf_Religious_Donation',['religious_donation'=>$religious_donation])->setPaper('a4', 'potrait')->setOptions(['defaultFont' => 'NotoSansGujarati-Regular','enable_remote',True]);
         return $pdf->stream();
 
     }

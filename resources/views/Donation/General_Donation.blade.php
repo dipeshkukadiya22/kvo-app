@@ -285,34 +285,28 @@
                   }
                 });
             });     
-      $("#KVO_general_donation").submit(function(){
-        var details=document.getElementById("details").value;
-        if(details === '' )
-        {
-            Swal.fire({
-                text: "Sorry, looks like there are some errors detected, please try again.",
-                icon: "error",
-            });
-            return false; // Prevent form submission
-        } else {
-                Swal.fire(
-                  'Insert Successfully!',
-                  '',
-                  'success'
-                  ).then(function() {
-                  window.location.href = 'View_General_Donation';
-                });
-              }
-    });
+      $("#KVO_general_donation").submit(function(event) {
+    var details = document.getElementById("details").value;
+    if (details === '') {
+        Swal.fire({
+            text: "Sorry, looks like there are some errors detected, please try again.",
+            icon: "error",
+        });
+        event.preventDefault(); // Prevent form submission
+    } else {
+        window.location.href = 'View_General_Donation';
+    }
+});
+
     </script>
-    @if (Session::get('message'))
+    <!-- @if (Session::get('message'))
     <script>
         toastr['success']("{{ Session::get('message') }}", 'Good Job!', {
             closeButton: true,
             tapToDismiss: false,
         });
     </script>
-@endif
+@endif -->
     
 @endsection
 

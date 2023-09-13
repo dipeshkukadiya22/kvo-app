@@ -404,7 +404,7 @@ div.card-datatable [class*=col-md-] {
     <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
 
-    <script>
+    <!-- <script>
         $(function() {
             $('input[name="daterange"]').daterangepicker({
             opens: 'left'
@@ -412,7 +412,20 @@ div.card-datatable [class*=col-md-] {
             console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
             });
         });
+    </script> -->
+    <script>
+        $(function() {
+            $('input[name="daterange"]').daterangepicker({
+                opens: 'left',
+                locale: {
+                    format: 'DD-MM-YYYY'
+                }
+            }, function(start, end, label) {
+                $('input[name="daterange"]').val(start.format("DD-MM-YYYY"));
+            });
+        });
     </script>
+
 
 
 

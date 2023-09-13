@@ -128,7 +128,7 @@ div.card-datatable [class*=col-md-] {
                                             </div>
                                             
                                            <!-- Range Picker-->
-                                            <div class="col-md-3 col-12 mb-4">
+                                           <div class="col-md-3 col-12 mb-4">
                                                 <label for="flatpickr-range" class="form-label">Date</label>
                                                 <input
                                                 type="text"
@@ -136,11 +136,8 @@ div.card-datatable [class*=col-md-] {
                                                 id="daterange"
                                                 class="form-control"
                                                 placeholder="YYYY-MM-DD to YYYY-MM-DD"
-                                                value={{$daterange}}
-                                        
-
+                                                value="{{$daterange}}"
                                                  />
-                                              
                                             </div>
                                             <!-- /Range Picker-->
                                             <div class="col-md-3 submit-button">
@@ -413,6 +410,7 @@ $('#daterange').change(function() {
     // });
     <script>
       jQuery(document).ready(function($){
+
         $('#basic-default-dob').flatpickr({
         dateFormat: "d M, Y",
       });
@@ -570,7 +568,7 @@ $('#daterange').change(function() {
                                   doc.pageMargins = [10, 30, 10,10];
                                   doc.defaultStyle.fontSize = 10;
                                   doc.styles.tableHeader.fontSize = 10;
-                                  doc.styles.title.fontSize = 17;
+                                  doc.styles.title.fontSize = 15;
                                   doc.content[1].margin = [ 25, 0, 25, 0 ] //left, top, right, bottom
                                             },
               title:documentTitle,
@@ -617,15 +615,19 @@ $('#daterange').change(function() {
     <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
 
-    <script>
-         $(function() {
+   <script>
+        $(function() {
             $('input[name="daterange"]').daterangepicker({
-            opens: 'left'
+                opens: 'left',
+                locale: {
+                    format: 'DD-MM-YYYY'
+                }
             }, function(start, end, label) {
-            console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
+                $('input[name="daterange"]').val(start.format("DD-MM-YYYY"));
             });
         });
     </script>
+
 
 
 

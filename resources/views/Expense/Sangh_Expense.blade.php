@@ -402,13 +402,9 @@
         }
         
   $("#kvo_add_sangh_expense").submit(function(){
-                Swal.fire(
-                  'Insert Successfully!',
-                  '',
-                  'success'
-                  ).then(function() {
+               {
                 window.location.href = 'View_Sangh_Expense';
-                 });   
+                 };   
     });
     </script>
 
