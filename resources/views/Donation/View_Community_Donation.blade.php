@@ -21,6 +21,7 @@
 <link rel="stylesheet" href="{{ asset ('assets/vendor/libs/datatables-responsive-bs5/responsive.bootstrap5.css') }}" />
 <link rel="stylesheet" href="{{ asset ('assets/vendor/libs/datatables-checkboxes-jquery/datatables.checkboxes.css') }}" />
 
+<link rel="stylesheet" href="{{ asset('assets/vendor/libs/toastr/toastr.css') }}" />
 <!-- Row Group CSS -->
 <link rel="stylesheet" href="{{ asset ('assets/vendor/libs/datatables-rowgroup-bs5/rowgroup.bootstrap5.css') }}" />
 
@@ -364,7 +365,9 @@ button.swal2-cancel.btn.btn-label-danger {
 
     <!-- Page JS -->
     <script src="{{ asset('assets/js/extended-ui-sweetalert2.js') }}"></script>
+    <script src="{{ asset('assets/vendor/libs/toastr/toastr.js') }}"></script>
 
+    <script src="{{ asset('assets/js/ui-toasts.js') }}"></script>
     <!-- BEGIN: Page JS-->
    <script>
     
@@ -829,23 +832,25 @@ button.swal2-cancel.btn.btn-label-danger {
             });
             return false; // Prevent form submission
         } else {
-          if(flag ===1){
-                Swal.fire(
-                  'Updated!',
-                  '',
-                  'success'
-                )
-          }else{
-              Swal.fire(
-                  'No change!',
-                  '',
-                  'error'
-                )
-          }
+            if(flag===0){
+              toastr['success']("{{ Session::get('message') }}", 'No Change!', {
+                closeButton: true,
+                tapToDismiss: false,
+             });
+              }else{
+                toastr['success']("{{ Session::get('message') }}", 'Updated!', {
+            closeButton: true,
+            tapToDismiss: false,
+        });
+              }
         }
     });
 </script>
-
+<!-- @if (Session::get('message'))
+    <script>
+        
+    </script>
+@endif  -->
 
 @endsection
 

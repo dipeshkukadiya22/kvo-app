@@ -107,7 +107,7 @@
           <ul class="menu-inner">
             <!-- Dashboards -->
             <li class="menu-item active">
-              <a href="javascript:void(0)" class="menu-link menu-toggle">
+              <a href="{{route('Dashboard')}}" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons ti ti-smart-home"></i>
                 <div data-i18n="Dashboards">Dashboards</div>
               </a>

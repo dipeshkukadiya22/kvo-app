@@ -567,36 +567,6 @@ function NumToWord(inputNumber, outputControl) {
             });
 </script>
 
-
-{{-- <script>
-  document.addEventListener("DOMContentLoaded", function() {
-    // Find the form element by its ID
-    const form = document.getElementById("donationForm");
-
-    // Add a submit event listener to the form
-    form.addEventListener("submit", function(event) {
-      event.preventDefault(); // Prevent the default form submission
-
-      // Simulate form submission or perform AJAX request if needed
-      // For demonstration purposes, we are using a 1-second timeout
-      setTimeout(function() {
-        // Show the SweetAlert popup after the form is submitted
-        Swal.fire({
-          icon: "success",
-          title: "Form Submitted",
-          text: "Your data has been submitted successfully!",
-          confirmButtonText: "OK",
-        }).then((result) => {
-          // Optionally, you can redirect to another page after the user clicks "OK"
-          if (result.isConfirmed) {
-            // Replace "your-page-url" with the desired destination URL
-            window.location.href = window.location.href;
-          }
-        });
-      }, 1000); // Adjust the timeout value if needed
-    });
-  });
-</script> --}}
 <script>
     $("#kvo_community_donation").submit(function(){
         var flag=0;
@@ -615,21 +585,20 @@ function NumToWord(inputNumber, outputControl) {
             event.preventDefault();
           } else{
                 
-                    window.location.href = 'View_Community_Donation';
+                   window.location.href = 'View_Community_Donation';
       
                 }
           });
 </script> 
 
-
-<!-- @if (Session::get('message'))
+@if (Session::get('message'))
     <script>
         toastr['success']("{{ Session::get('message') }}", 'Good Job!', {
             closeButton: true,
             tapToDismiss: false,
         });
     </script>
-@endif -->
+@endif 
 
 
 @endsection

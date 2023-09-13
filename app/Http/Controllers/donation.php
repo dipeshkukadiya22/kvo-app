@@ -239,7 +239,12 @@ class donation extends Controller
         $community_donation -> total_in_word = $req -> total_in_word;
         $community_donation -> payment_mode = $req -> payment;
         $community_donation->save();
-        return back()->with("Update Community Donation");
+        if($community_donation) {
+            return redirect() -> route('View_Community_Donation') -> with ('message', 'Details Changed Successfully!') ;
+        }
+        else{
+            return redirect() -> route('View_Community_Donation') -> with ('message', 'your data not submit') ;
+        }
     }
     public function General_Donation(){
         $member = DB::SELECT("select * from add_members");
