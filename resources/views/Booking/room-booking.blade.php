@@ -233,7 +233,7 @@
                               <!-- Basic -->
                              <div class="col-md-4">
                                 <label for="select2Basic" class="form-label"><span class="required">Name</span></label>
-                                <select id="select2Basic" class="select2 form-select form-select-lg" data-allow-clear="true" name="name" placeholder="select name" required>
+                                <select id="select2Basic" class="select2 form-select form-select-md" data-allow-clear="true" name="name" placeholder="select name" required>
                                   <option value=""></option>
                                   @foreach ($m_data as $row)  
                                       <option value="{{$row->p_id}}">{{$row->m_name}}&nbsp;&nbsp;-&nbsp;&nbsp;{{$row->phone_no}}</option>
