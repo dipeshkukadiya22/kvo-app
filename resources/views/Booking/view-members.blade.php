@@ -16,7 +16,7 @@
 <link rel="stylesheet" href="{{ asset ('assets/vendor/libs/formvalidation/dist/css/formValidation.min.css') }}" />
 
 <link rel="stylesheet" href="{{ asset ('assets/vendor/libs/datatables-buttons-bs5/buttons.bootstrap5.css') }}" />
-
+<link rel="stylesheet" href="{{ asset('assets/vendor/libs/toastr/toastr.css') }}" />
 <link rel="stylesheet" href="{{ asset ('assets/vendor/libs/datatables-bs5/datatables.bootstrap5.css') }}" />
 <link rel="stylesheet" href="{{ asset ('assets/vendor/libs/datatables-responsive-bs5/responsive.bootstrap5.css') }}" />
 <link rel="stylesheet" href="{{ asset ('assets/vendor/libs/datatables-checkboxes-jquery/datatables.checkboxes.css') }}" />
@@ -235,7 +235,9 @@
 
     <!-- Page JS -->
     <script src="{{ asset('assets/js/extended-ui-sweetalert2.js') }}"></script>
+    <script src="{{ asset('assets/vendor/libs/toastr/toastr.js') }}"></script>
 
+<script src="{{ asset('assets/js/ui-toasts.js') }}"></script>
     <!-- BEGIN: Page JS-->
     <script>
       $("#multicol-phone").focusout(function(){
@@ -476,8 +478,16 @@ function delete_member(id)
           }
 
 </script>
+@if (Session::get('message'))
+    <script>
+        toastr['success']("{{ Session::get('message') }}", 'Updated!', {
+            closeButton: true,
+            tapToDismiss: false,
+        });
+    </script>
+@endif
 
-<script>
+<!-- <script>
   let flag=0;
   $("#kvo_update_member :input").change(function() {
     flag=1;
@@ -510,7 +520,7 @@ function delete_member(id)
           }
         }
     });
-</script>
+</script> -->
 <script>
 const contactInput = document.getElementById('phone_no1'); // Change 'phone_no' to 'multicol-phone'
 

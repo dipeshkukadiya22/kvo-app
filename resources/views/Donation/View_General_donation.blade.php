@@ -90,10 +90,10 @@ button.swal2-cancel.btn.btn-label-danger {
                                           <thead>
 		
                                               <tr >
-                                                  <th style="font-size:15px"><b>Rec No</b></th>
+                                                  <th style="width:80px;font-size:15px"><b>Rec No</b></th>
                                                   <th style="width:150px;font-size:15px"><b>Name</b></th>
                                                   <th style="width:80px;font-size:15px"><b>Date</b></th>
-                                                  <th style="font-size:15px"><b>Mobile No</b></th>
+                                                  <th style="width:100px;font-size:15px"><b>Mobile No</b></th>
                                                   <th style="font-size:15px"><b>City</b></th>
                                                   <th style="width:80px;font-size:15px"><b>Haste</b></th>
                                                   <th style="font-size:15px"><b>Trust</b></th>
@@ -259,7 +259,7 @@ button.swal2-cancel.btn.btn-label-danger {
     <script src="{{ asset('assets/js/extended-ui-sweetalert2.js') }}"></script>
     <script src="{{ asset('assets/vendor/libs/toastr/toastr.js') }}"></script>
 
-<script src="{{ asset('assets/js/ui-toasts.js') }}"></script>
+    <script src="{{ asset('assets/js/ui-toasts.js') }}"></script>
 
     <!-- BEGIN: Page JS-->
     

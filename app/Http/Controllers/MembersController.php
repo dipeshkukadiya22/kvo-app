@@ -28,7 +28,12 @@ class MembersController extends Controller
         $member->phone_no = $request->phone_no1;
         $member->city = strtoupper($request->city1);
         $member->save();
-        return back()->with("Update Member Details");
+        if($member) {
+            return redirect() -> route('ViewMembers') -> with ('message', 'Details Changed Successfully!') ;
+        }
+        else{
+            return redirect() -> route('ViewMembers') -> with ('message', 'your data not submit') ;
+        }
     }
     public function delete_members($id){
       
