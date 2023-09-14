@@ -69,7 +69,12 @@ class MedicalController extends Controller
         $data->payment_mode=strtoupper($req->payment);
         $data->amount_in_words=$req->total_in_word;
         $data->save();
-        return redirect()->route("view_treatment");
+        if($data) {
+            return redirect() -> route('view_treatment') -> with ('message', 'Details Changed Successfully!') ;
+        }
+        else{
+            return redirect() -> route('view_treatment') -> with ('message', 'your data not submit') ;
+        }
     }
     public function get($id){
         $data=add_members::find($id);

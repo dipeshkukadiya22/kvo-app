@@ -24,6 +24,7 @@
 <!-- Row Group CSS -->
 <link rel="stylesheet" href="{{ asset ('assets/vendor/libs/datatables-rowgroup-bs5/rowgroup.bootstrap5.css') }}" />
 
+<link rel="stylesheet" href="{{ asset('assets/vendor/libs/toastr/toastr.css') }}" />
 <link rel="stylesheet" href="{{ asset('assets/vendor/libs/animate-css/animate.css') }}" />
 <link rel="stylesheet" href="{{ asset('assets/vendor/libs/sweetalert2/sweetalert2.css') }}" />
     
@@ -314,7 +315,9 @@ button.swal2-cancel.btn.btn-label-danger {
 
     <!-- Page JS -->
     <script src="{{ asset('assets/js/extended-ui-sweetalert2.js') }}"></script>
+    <script src="{{ asset('assets/vendor/libs/toastr/toastr.js') }}"></script>
 
+<script src="{{ asset('assets/js/ui-toasts.js') }}"></script>
     <!-- BEGIN: Page JS-->
     
    <script>
@@ -740,28 +743,28 @@ $("#name").change(function(){
   }   
 
 
-    $("#kvo_update_treatmet").submit(function(){
-        var doctor_name=document.getElementById("doctor_name").value;
-        var amount=document.getElementById("amount").value;
-        if(doctor_name ==='' && amount === '')
-        {
-            Swal.fire({
-                text: "Sorry, looks like there are some errors detected, please try again.",
-                icon: "error",
-            });
-            return false; // Prevent form submission
-        } else {
-            Swal.fire({
-                position: 'middle-center',
-                icon: 'success',
-                title: 'Medical Treatment data has been successfully updated!',
-                showConfirmButton: false,
-                timer: 1500
-                }).then(function() {
-                $("#kvo_update_treatment").submit();
-           });
-        }
-    });
+    // $("#kvo_update_treatmet").submit(function(){
+    //     var doctor_name=document.getElementById("doctor_name").value;
+    //     var amount=document.getElementById("amount").value;
+    //     if(doctor_name ==='' && amount === '')
+    //     {
+    //         Swal.fire({
+    //             text: "Sorry, looks like there are some errors detected, please try again.",
+    //             icon: "error",
+    //         });
+    //         return false; // Prevent form submission
+    //     } else {
+    //         Swal.fire({
+    //             position: 'middle-center',
+    //             icon: 'success',
+    //             title: 'Medical Treatment data has been successfully updated!',
+    //             showConfirmButton: false,
+    //             timer: 1500
+    //             }).then(function() {
+    //             $("#kvo_update_treatment").submit();
+    //        });
+    //     }
+    // });
 
 
     function edit_treatment(id)
@@ -805,7 +808,7 @@ $("#name").change(function(){
             });    
     }
 </script>
-<script>
+<!-- <script>
   let flag=0;
   $("#kvo_update_treatmet :input").change(function() {
     flag=1;
@@ -836,7 +839,15 @@ $("#name").change(function(){
           }
         }
     });
-</script>
+</script> -->
+@if (Session::get('message'))
+    <script>
+        toastr['success']("{{ Session::get('message') }}", 'Updated!', {
+            closeButton: true,
+            tapToDismiss: false,
+        });
+    </script>
+@endif
 
 @endsection
 

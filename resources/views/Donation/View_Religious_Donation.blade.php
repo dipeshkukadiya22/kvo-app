@@ -895,7 +895,7 @@ function delete_religious_donation(id)
         document.getElementById("payment").value="UPI";
       });
   </script>
-  <script>
+  <!-- <script>
     let flag=0;
   $("#browser-default-validation :input").change(function() {
     flag=1;
@@ -925,7 +925,7 @@ function delete_religious_donation(id)
               }
         }
     });
-  </script>
+  </script> -->
 <script>
     $("#browser-default-validation").submit(function(){
       var flag=0;

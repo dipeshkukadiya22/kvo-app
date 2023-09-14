@@ -549,7 +549,29 @@ function NumToWord(inputNumber, outputControl) {
 }
 </script>
 <!-- end num to word -->
+@if(session('new_member') === 1)
+        <script>
+             var member_id=[];
+          var temp=document.getElementById('select2Basic');
+          var value;
+          for(i=0;i<temp.options.length;i++)
+            {
+              member_id[i]=temp.options[i].value;
+              value=member_id[i];
+            }
+            $("#select2Basic option[value=" + value + "]").attr('selected', 'selected');
+            $.ajax({
+                url:"{{url('get_member')}}",
+                type:'GET',
+                success:function(response){
+                  $('#member-phone').val(response['phone_no']);
+                  $('#member_city').val(response['city']);
+              
 
+                }
+              });
+        </script>
+    @endif
 
 <!-- Make sure to include jQuery library before this script -->
 <script>
@@ -566,6 +588,24 @@ function NumToWord(inputNumber, outputControl) {
                 });
             });
 </script>
+<script>
+      $("#multicol-phone").focusout(function(){
+        var contact=document.getElementById("multicol-phone").value;
+      
+        $.ajax({
+                url:"{{url('check_num')}}"+"/"+ contact,
+                type:'GET',
+                success:function(response){
+                    if(response==1)
+                      { $("#submitbtn").prop('disabled',true);
+                        $("#error").html("Phone no alraedy exit");
+                      }
+                    else{ $("#submitbtn").prop('disabled',false);
+                    $("#error").html("");}
+                    }
+                });
+      });
+      </script>
 
 <script>
        $("#kvo_community_donation").submit(function (event) {
@@ -577,16 +617,16 @@ function NumToWord(inputNumber, outputControl) {
             });
 
             if (flag === 0) {
-              event.preventDefault();
+             
               Swal.fire(
                 'Amount Required!',
                 '',
                 'warning'
+             
               );
+              event.preventDefault();
             } else {
-              // Redirect to the new location
-              window.location.href = 'View_General_Donation';
-              window.location.reload();
+              window.location.href = "View_Community_Donation";
             }
           });
     </script>
@@ -596,14 +636,14 @@ $(document).ready(function () {
 });
 </script>
 
-@if (Session::get('message'))
-    <script>
-        toastr['success']("{{ Session::get('message') }}", 'Good Job!', {
-            closeButton: true,
-            tapToDismiss: false,
-        });
-    </script>
-@endif 
+// @if (Session::get('message'))
+//     <script>
+//         toastr['success']("{{ Session::get('message') }}", 'Good Job!', {
+//             closeButton: true,
+//             tapToDismiss: false,
+//         });
+//     </script>
+// @endif 
 
 
 @endsection
