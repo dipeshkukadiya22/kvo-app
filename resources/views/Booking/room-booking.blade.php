@@ -272,7 +272,7 @@
                               <!-- Basic -->
                               <div class="col-md-4">
                                 <label for="select2Basic" class="form-label"><span class="required">Community</span></label>
-                                <select id="select2Basic" class="select2 form-select form-select-lg" data-allow-clear="true" name="community" required>
+                                <select id="select2Basic1" class="select2 form-select form-select-lg" data-allow-clear="true" name="community" required>
                                   <option value="Hindu" selected>Hindu</option>
                                   <option value="Jain">Jain</option>
                                   <option value="Isalam">Muslim</option>
@@ -354,22 +354,22 @@
                             </div>
                           <div class="row g-3">
                               <!-- Form Repeater -->
-                            <div class="form-repeater">
+                              <div class="form-repeater">
                               <div id="step2FormsContainer "class="col-12">
                                 <div class="dynamic-form">
-                                  <div class="all-members" >
-                                    <div data-repeater-item>
-                                      <div class="rep-form1">
-                                        <div class="row formrepeater1">
-                                          <div class="mb-3 col-lg-6 col-xl-3 col-12 mb-0">
-                                            <label class="form-label" for="form-repeater-1-1">Full Name</label>
-                                            <input type="text" id="full_name_form"  name="full_name0" class="form-control" placeholder="john doe" value="{{ (!empty($member) )? $member->m_name : '' }}" onkeydown="return /[a-z]/i.test(event.key)" />
-                                          </div>
-                                          <div class="mb-3 col-lg-4 col-xl-3 col-12 mb-0">
-                                            <label class="form-label" for="form-repeater-1-2">Age</label>
-                                            <input type="text" id="member_age" name="m_age0" class="form-control" placeholder="your age" oninput="format(this)" />
-                                          </div>
-                                          <div class="mb-3 col-lg-6 col-xl-2 col-12 mb-0 ">
+                                <div class="all-members" data-repeater-list="group-a">
+                                <div data-repeater-item>
+                               <div class="rep-form1">
+                                  <div class="row formrepeater1">
+                                    <div class="mb-3 col-lg-6 col-xl-3 col-12 mb-0">
+                                      <label class="form-label" for="form-repeater-1-1">Full Name</label>
+                                      <input type="text" id="full_name_form"  name="full_name0" class="form-control" placeholder="john doe" value="{{ (!empty($member) )? $member->m_name : '' }}"/>
+                                    </div>
+                                    <div class="mb-3 col-lg-4 col-xl-2 col-12 mb-0">
+                                      <label class="form-label" for="form-repeater-1-2">Age</label>
+                                      <input type="text" id="member_age" name="m_age0" class="form-control" placeholder="your age" />
+                                    </div>
+                                    <div class="mb-3 col-lg-6 col-xl-2 col-12 mb-0 ">
                                               <label class="d-block form-label">Gender</label>
                                               <div class="form-check form-check-inline">
                                                 <input class="form-check-input" type="radio" name="gender0" id="gendermale" value="MALE" checked/>
@@ -385,45 +385,46 @@
                                                   <input type="text" id="gender_data" name="gender_data0" class="form-control" placeholder="your age" value="MALE"/>
                                                 </div>
                                           </div>
-                                          <div class="col-md-3">
-                                            <label class="form-label" for="basic-default-country">Relation</label>
-                                            <select class="form-select" name="relation0" id="member_relation" required>
-                                              <option value="SELF" selected>SELF</option>
-                                              <option value="MOTHER">MOTHER</option>
-                                              <option value="FATHER">FATHER</option>
-                                              <option value="BROTHER">BROTHER</option>
-                                              <option value="SISTER">SISTER</option>
-                                              <option value="UNCLE">UNCLE</option>
-                                              <option value="AUNTY">AUNTY</option>
-                                              <option value="GRAND MOTHER">GRAND MOTHER</option>
-                                              <option value="GRAND FATHER">GRAND FATHER</option>
-                                              <option value="FRIEND">FRIEND</option>
-                                            </select>
-                                          </div>
-                                          <div class="mb-3 col-lg-12 col-xl-1 col-12 d-flex align-items-center mb-0">
-                                            <button class="btn btn-label-danger mt-4" data-repeater-delete>
-                                              <i class="ti ti-x ti-xs me-1"></i>
-                                              <span class="align-middle">Delete</span>
-                                            </button>
-                                          </div>
-                                        </div>
-                                      </div>
-                                        <div class="row rep-form">
-                                        </div>
-                                        <hr />
-                                      </div>
+                                    <div class="col-md-3">
+                                      <label class="form-label" for="basic-default-country">Relation</label>
+                                      <select class="form-select" name="relation0" id="member_relation" required>
+                                        <option value="SELF" selected>SELF</option>
+                                        <option value="MOTHER">MOTHER</option>
+                                        <option value="FATHER">FATHER</option>
+                                        <option value="BROTHER">BROTHER</option>
+                                        <option value="SISTER">SISTER</option>
+                                        <option value="UNCLE">UNCLE</option>
+                                        <option value="AUNTY">AUNTY</option>
+                                        <option value="GRAND MOTHER">GRAND MOTHER</option>
+                                        <option value="GRAND FATHER">GRAND FATHER</option>
+                                        <option value="FRIEND">FRIEND</option>
+                                      </select>
+                                    </div>
+                                    <div class="mb-3 col-lg-12 col-xl-2 col-12 d-flex align-items-center mb-0">
+                                      <button class="btn btn-label-danger mt-4" data-repeater-delete>
+                                        <i class="ti ti-x ti-xs me-1"></i>
+                                        <span class="align-middle">Delete</span>
+                                      </button>
+                                    </div>
                                   </div>
                                 </div>
+                                <div class="row rep-form">
+                                </div>
+                                  <hr />
+                                </div>
+                                </div>
+                                </div>
                               </div>
-                                  <div id="dynamicFormsContainer">
-                                  </div>
-                                  <div class="mb-0">
-                                    <button class="btn btn-primary" data-repeater-create>
-                                      <i class="ti ti-plus me-1"></i>
-                                      <span class="align-middle">Add Members</span>
-                                    </button>
-                                  </div>
+                              <div id="dynamicFormsContainer">
+                              </div>
+                              <div class="mb-0">
+                                <button class="btn btn-primary" data-repeater-create>
+                                  <i class="ti ti-plus me-1"></i>
+                                  <span class="align-middle">Add Members</span>
+                                </button>
+                              </div>
                             </div>
+
                             
                             <!-- /Form Repeater -->
                                     <div class="col-12 d-flex justify-content-between">
@@ -1056,7 +1057,21 @@ $(document).ready(function () {
 </script> -->
 
 <script>
-        $(document).ready(function () {
+    $("#select2Basic").change(function () {
+      var id=$(this).val();
+      $.ajax({
+                url:"{{url('get')}}"+"/"+ id,
+                type:'GET',
+                success:function(response){
+                    $('#member_email').val(response['email']);
+                    $('#member-phone').val(response['phone_no']);
+                    $('#member_city').val(response['city']);
+                    $('#full_name_form').val(response['m_name']);
+                 
+                }
+              });
+    });
+      /*  $(document).ready(function () {
             $("#select2Basic").click(function () {
                 var data = $.parseJSON($("#email_user").val());
                  
@@ -1066,14 +1081,13 @@ $(document).ready(function () {
                    console.log(value['email']);
                    $('#member_email').val(value['email']);
                    $('#member-phone').val(value['phone_no']);
-                   $('#member-address').val(value['address']);
                    $('#member_city').val(value['city']);
                    $('#full_name_form').val(value['m_name']);
                    }
                 });
             
             });
-        });
+        });*/
     </script>
 
 
@@ -1197,8 +1211,6 @@ $(document).ready(function () {
     });
   });
 </script>
-
-
  
 <script>
   $(document).ready(function() {

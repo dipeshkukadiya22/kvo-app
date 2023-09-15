@@ -619,8 +619,8 @@ function NumToWord(inputNumber, outputControl) {
             if (flag === 0) {
              
               Swal.fire(
-                'Amount Required!',
-                '',
+                'Required!',
+                'Please Enter One Amount ',
                 'warning'
              
               );
