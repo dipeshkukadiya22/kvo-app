@@ -111,7 +111,7 @@ class BookingController extends Controller
                    //dd($req->toArray());
                    $total_member = $req->no_of_person;
                     for ($i = 0; $i < $total_member; $i++) {
-                        //dd( $req->toArray());
+                        dd( $req->toArray());
                         $m_details = new member_details();
                         $m_details->full_name = $req->input('full_name'.$i);
                         $m_details->age= $req->input('m_age'.$i);

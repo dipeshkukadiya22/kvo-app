@@ -354,13 +354,13 @@
                             </div>
                           <div class="row g-3">
                               <!-- Form Repeater -->
-                              <div class="form-repeater">
+                              <div class="form-repeater" >
                                 <div id="step2FormsContainer "class="col-12">
-                                  <div class="dynamic-form">
-                                    <div class="all-members" >
-                                      <div data-repeater-item>
+                                  <div class="dynamic-form" >
+                                    <div class="all-members" data-repeater-list="group-a" >
+                                      <div data-repeater-item >
                                         <div class="rep-form1">
-                                            <div class="row formrepeater1" data-repeater-list="group-a">
+                                            <div class="row formrepeater1"  >
                                               <div class="mb-3 col-lg-6 col-xl-3 col-12 mb-0">
                                                 <label class="form-label" for="form-repeater-1-1">Full Name</label>
                                                 <input type="text" id="full_name_form"  name="full_name0" class="form-control" placeholder="john doe" value="{{ (!empty($member) )? $member->m_name : '' }}"/>
@@ -407,15 +407,16 @@
                                                   </button>
                                                 </div>
                                               </div>
-                                          </div>
+                                            </div>
                                             <div class="row rep-form">
                                             </div>
                                             <hr />
                                         </div>
                                       </div>
                                     </div>
+                                    
                               </div>
-                              <div id="dynamicFormsContainer">
+                              <div id="dynamicFormsContainer" >
                               </div>
                               <div class="mb-0">
                                 <button class="btn btn-primary" data-repeater-create>
@@ -1261,7 +1262,7 @@ $(document).ready(function () {
         let formTemplate = $(".rep-form .formrepeater").clone();
         $(".rep-form").append(
           
-          '<div class="row formrepeater">'+
+          '<div class="row formrepeater" >'+
                                  ' <div class="mb-3 col-lg-6 col-xl-3 col-12 mb-0">'+
                                    ' <label class="form-label" for="form-repeater-1-1">Full Name</label>'+
                                    ' <input type="text" id="full_name_form'+i+'" style="text-transform:uppercase" name="full_name'+i+'" class="form-control" placeholder="john doe" value="{{ (!empty($member) )? $member->m_name : '' }}"/>'+
