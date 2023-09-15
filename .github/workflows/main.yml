@@ -1,0 +1,19 @@
+name: Deploy kvo on Production Build
+on:
+  push:
+    branches:
+      - kvo-prod
+jobs:
+  web-deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get the latest code
+        uses: actions/checkout@v3
+      - name: Sync files
+        uses: SamKirkland/FTP-Deploy-Action@4.0.0
+        with:
+          server: ftp.kvobhuj.org
+          username: kvoapp@mis.kvobhuj.org
+          password: kB@2023@
+          server-dir: /
