@@ -549,7 +549,29 @@ function NumToWord(inputNumber, outputControl) {
 }
 </script>
 <!-- end num to word -->
+@if(session('new_member') === 1)
+        <script>
+             var member_id=[];
+          var temp=document.getElementById('select2Basic');
+          var value;
+          for(i=0;i<temp.options.length;i++)
+            {
+              member_id[i]=temp.options[i].value;
+              value=member_id[i];
+            }
+            $("#select2Basic option[value=" + value + "]").attr('selected', 'selected');
+            $.ajax({
+                url:"{{url('get_member')}}",
+                type:'GET',
+                success:function(response){
+                  $('#member-phone').val(response['phone_no']);
+                  $('#member_city').val(response['city']);
+              
 
+                }
+              });
+        </script>
+    @endif
 
 <!-- Make sure to include jQuery library before this script -->
 <script>
@@ -566,39 +588,62 @@ function NumToWord(inputNumber, outputControl) {
                 });
             });
 </script>
+<script>
+      $("#multicol-phone").focusout(function(){
+        var contact=document.getElementById("multicol-phone").value;
+      
+        $.ajax({
+                url:"{{url('check_num')}}"+"/"+ contact,
+                type:'GET',
+                success:function(response){
+                    if(response==1)
+                      { $("#submitbtn").prop('disabled',true);
+                        $("#error").html("Phone no alraedy exit");
+                      }
+                    else{ $("#submitbtn").prop('disabled',false);
+                    $("#error").html("");}
+                    }
+                });
+      });
+      </script>
 
 <script>
-    $("#kvo_community_donation").submit(function(){
-        var flag=0;
-          $(".amount-input").each(function(){
-            // Test if the div element is empty
-          if($(this).val() != "")
-          {flag=1;}
-          });
-          if(flag === 0)
-          {
-            Swal.fire(
-                      'Amount Required!',
-                      '',
-                      'warning'
-                    )
-            event.preventDefault();
-          } else{
-                
-                   window.location.href = 'View_Community_Donation';
-      
-                }
-          });
-</script> 
+       $("#kvo_community_donation").submit(function (event) {
+            var flag = 0;
+            $(".amount-input").each(function () {
+              if ($(this).val() !== "") {
+                flag = 1;
+              }
+            });
 
-@if (Session::get('message'))
-    <script>
-        toastr['success']("{{ Session::get('message') }}", 'Good Job!', {
-            closeButton: true,
-            tapToDismiss: false,
-        });
+            if (flag === 0) {
+             
+              Swal.fire(
+                'Required!',
+                'Please Enter One Amount ',
+                'warning'
+             
+              );
+              event.preventDefault();
+            } else {
+              window.location.href = "View_Community_Donation";
+            }
+          });
     </script>
-@endif 
+<script>
+$(document).ready(function () {
+ 
+});
+</script>
+
+// @if (Session::get('message'))
+//     <script>
+//         toastr['success']("{{ Session::get('message') }}", 'Good Job!', {
+//             closeButton: true,
+//             tapToDismiss: false,
+//         });
+//     </script>
+// @endif 
 
 
 @endsection

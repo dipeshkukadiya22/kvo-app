@@ -2,7 +2,7 @@
 <nav class="layout-navbar navbar navbar-expand-xl align-items-center bg-navbar-theme" id="layout-navbar">
     <div class="container-xxl">
       <div class="navbar-brand app-brand demo d-none d-xl-flex py-0 me-4">
-        <a href="{{route('Dashboard')}}" class="app-brand-link gap-2">
+        <a href="{{route('ViewMembers')}}" class="app-brand-link gap-2">
           <span class="app-brand-logo demo">
           <svg width="32" height="22" viewBox="0 0 32 22" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path
@@ -60,7 +60,7 @@
           <li class="nav-item navbar-dropdown dropdown-user dropdown">
             <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
               <div class="avatar avatar-online">
-                <img src="../../assets/img/avatars/16.png" alt class="h-auto rounded-circle" />
+              <i style="font-size: 30px" class="fas fa-sign-out-alt"></i>
               </div>
             </a>
             <ul class="dropdown-menu dropdown-menu-end">
@@ -107,7 +107,7 @@
           <ul class="menu-inner">
             <!-- Dashboards -->
             <li class="menu-item active">
-              <a href="{{route('Dashboard')}}" class="menu-link menu-toggle">
+              <a href="{{route('ViewMembers')}}" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons ti ti-smart-home"></i>
                 <div data-i18n="Dashboards">Dashboards</div>
               </a>
@@ -134,7 +134,7 @@
             </li>
 
             <!-- Layouts -->
-            <li class="menu-item">
+            <li class="menu-item" hidden>
               <a href="{{route('room-booking')}}" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons ti ti-layout-sidebar"></i>
                 <div data-i18n="ROOM-BOOKING">ROOM-BOOKING </div>

@@ -210,19 +210,6 @@ div.card-datatable [class*=col-md-] {
                                         <div class="line">
                                           <i class="ti ti-chevron-right"></i>
                                         </div>
-                                        <div class="step" data-target="#personal-info">
-                                          <button type="button" class="step-trigger">
-                                            <span class="bs-stepper-icon">
-                                              <svg viewBox="0 0 24 24">
-                                                <use xlink:href="{{ asset('assets/svg/icons/form-wizard-booking.svg#wizardBooking') }}"></use>
-                                              </svg>
-                                            </span>
-                                            <span class="bs-stepper-label">Booking Details</span>
-                                          </button>
-                                        </div>
-                                        <div class="line">
-                                          <i class="ti ti-chevron-right"></i>
-                                        </div>
                                         <div class="step" data-target="#address">
                                           <button type="button" class="step-trigger">
                                             <span class="bs-stepper-icon">
@@ -231,6 +218,19 @@ div.card-datatable [class*=col-md-] {
                                               </svg>
                                             </span>
                                             <span class="bs-stepper-label">Member Details</span>
+                                          </button>
+                                        </div>
+                                        <div class="line">
+                                          <i class="ti ti-chevron-right"></i>
+                                        </div>
+                                        <div class="step" data-target="#personal-info">
+                                          <button type="button" class="step-trigger">
+                                            <span class="bs-stepper-icon">
+                                              <svg viewBox="0 0 24 24">
+                                                <use xlink:href="{{ asset('assets/svg/icons/form-wizard-booking.svg#wizardBooking') }}"></use>
+                                              </svg>
+                                            </span>
+                                            <span class="bs-stepper-label">Booking Details</span>
                                           </button>
                                         </div>
                                         
@@ -268,6 +268,11 @@ div.card-datatable [class*=col-md-] {
                                                       @endforeach
                                                   </select>-->
                                                 </div>
+                                                <div class="col-md-4">
+                                                  
+                                                  <label class="form-label" for="multicol-phone">Phone Number</label>
+                                                  <input type="number" id="member_phone" name="member_phone" class="form-control phone-mask" placeholder="658 799 8941" aria-label="658 799 8941" maxlength="10" minlength="10" readonly/>
+                                                </div>
                       
                                                 <div class="col-md-4">
                                               
@@ -277,11 +282,7 @@ div.card-datatable [class*=col-md-] {
                                                 </div>                                                                                                            
 
                       
-                                                <div class="col-md-4">
-                                                  
-                                                  <label class="form-label" for="multicol-phone">Phone Number</label>
-                                                  <input type="number" id="member_phone" name="member_phone" class="form-control phone-mask" placeholder="658 799 8941" aria-label="658 799 8941" maxlength="10" minlength="10" readonly/>
-                                                </div>
+                                               
 
                                                 <div class="col-md-4">
                                                   <label class="form-label" for="basic-default-name">Age</label>
@@ -308,18 +309,30 @@ div.card-datatable [class*=col-md-] {
                                                       
                                                   </select>
                                                 </div>
-
-                                                
-
-                                                
                                                 <div class="col-md-4">
                                                   <label for="defaultFormControlInput" class="form-label">Sub Community</label>
                                                   <input type="text" class="form-control" name="subcommunity" id="subcommunity" placeholder="John Doe" aria-describedby="defaultFormControlHelp" />
                                                 </div>
 
-                                                
-                                                
                                                 <div class="col-md-4">
+                                                <label class="form-label" for="basic-default-name">No. of Person</label>
+                                                <input type="text" class="form-control"  name="no_of_person_id" id="no_of_person_id" placeholder="No of Person" min="1" max="10"/>
+                                              </div>
+                                              <div class="col-md-4">
+                                                <label class="form-label" for="basic-default-name">No. of days</label>
+                                                <input type="text" class="form-control"  name="no_of_days" id="no_of_days" placeholder="No of Person" min="1" max="10"/>
+                                              </div>
+                        
+                                                <div class="col-md-4">
+                                                <label class="form-label" for="rupees-in-words">Occupation</label>
+                                                <input type="text" class="form-control" name="occupation" id="occupation" placeholder="Occupation" required>
+                                              </div>
+
+                                              <div class="col-md-4">
+                                                <label class="form-label" for="rupees-in-words">Reason</label>
+                                                <input type="text" class="form-control" name="reason" id="reason" placeholder="Reason to stay" required>
+                                              </div>
+                                              <div class="col-md-4">
                                                   <label for="defaultFormControlInput" class="form-label">City</label>
                                                   <input type="text" class="form-control" name="member_city" id="member_city" placeholder="John Doe" aria-describedby="defaultFormControlHelp" readonly/>
                                                 </div>
@@ -463,8 +476,8 @@ div.card-datatable [class*=col-md-] {
                                               <hr>
                                               
                                               <div class="col-md-4">
-                                                <label class="form-label" for="basic-default-name">No. of Person</label>
-                                                <input type="text" class="form-control"  name="no_of_person_id" id="no_of_person_id" placeholder="No of Person" min="1" max="10"/>
+                                                <label class="form-label" for="basic-default-name">Booking No</label>
+                                                <input type="text" class="form-control" name="booking_id" id="booking_id" placeholder="Deposit No"  readonly/>
                                               </div>
                                               <!-- Datetime Picker-->
                                               <div class="col-md-4">
@@ -472,10 +485,7 @@ div.card-datatable [class*=col-md-] {
                                                 <input type="text" class="form-control" name="check_in_date" placeholder="DD-MM-YYYY HH:MM" id="flatpickr-datetime"/>
                                               </div>
 
-                                              <div class="col-md-4">
-                                                <label class="form-label" for="basic-default-name">Booking No</label>
-                                                <input type="text" class="form-control" name="booking_id" id="booking_id" placeholder="Deposit No"  readonly/>
-                                              </div>
+                                              
                                               <div class="col-md-4" hidden>
                                                 <label class="form-label" for="basic-default-name">Personal Details Id</label>
                                                 <input type="text" class="form-control" name="person_id" id="person_id" placeholder="Deposit No"  readonly/>
@@ -489,20 +499,9 @@ div.card-datatable [class*=col-md-] {
                                                 <label class="form-label" for="rupees-in-words">Deposit Rs (rupees in words)</label>
                                                 <input type="text" class="form-control" name="rs_word" id="rupees-in-words" placeholder="Rupees in words" readonly>
                                               </div>
-                                              <div class="col-md-4">
-                                                <label class="form-label" for="basic-default-name">No. of days</label>
-                                                <input type="text" class="form-control"  name="no_of_days" id="no_of_days" placeholder="No of Person" min="1" max="10"/>
-                                              </div>
+                                              
 
-                                              <div class="col-md-4">
-                                                <label class="form-label" for="rupees-in-words">Occupation</label>
-                                                <input type="text" class="form-control" name="occupation" id="occupation" placeholder="Occupation" required>
-                                              </div>
-
-                                              <div class="col-md-4">
-                                                <label class="form-label" for="rupees-in-words">Reason</label>
-                                                <input type="text" class="form-control" name="reason" id="reason" placeholder="Reason to stay" required>
-                                              </div>
+    
 
                                               <div class="col-12">
                                                 <div action="/upload" class="dropzone needsclick" id="dropzone-multi" >
@@ -552,73 +551,72 @@ div.card-datatable [class*=col-md-] {
                                               <div class="form-repeater">
                               <div id="step2FormsContainer "class="col-12">
                                 <div class="dynamic-form">
-                                <div class="all-members" data-repeater-list="group-a">
-                                <div data-repeater-item>
-                               <div class="rep-form1">
-                                  <div class="row formrepeater1">
-                                    <div class="mb-3 col-lg-6 col-xl-3 col-12 mb-0">
-                                      <label class="form-label" for="form-repeater-1-1">Full Name</label>
-                                      <input type="text" id="full_name_form"  name="full_name" class="form-control" placeholder="john doe"/>
-                                    </div>
-                                    <div class="mb-3 col-lg-4 col-xl-3 col-12 mb-0">
-                                      <label class="form-label" for="form-repeater-1-2">Age</label>
-                                      <input type="text" id="member_age" name="m_age" class="form-control" placeholder="your age" />
-                                    </div>
-                                    <div class="mb-3 col-lg-6 col-xl-2 col-12 mb-0 ">
-                                        <label class="d-block form-label">Gender</label>
-                                        <div class="form-check form-check-inline">
-                                      <input class="form-check-input" type="radio" name="gender" id="gendermale" value="MALE" checked/>
-                                      <label class="form-check-label" for="gender">Male</label>
+                                  <div class="all-members" >
+                                    <div data-repeater-item>
+                                      <div class="rep-form1">
+                                        <div class="row formrepeater1">
+                                          <div class="mb-3 col-lg-6 col-xl-3 col-12 mb-0">
+                                            <label class="form-label" for="form-repeater-1-1">Full Name</label>
+                                            <input type="text" id="full_name_form"  name="full_name0" class="form-control" placeholder="john doe" readonly/>
+                                          </div>
+                                          <div class="mb-3 col-lg-6 col-xl-2 col-12 mb-0">
+                                            <label class="form-label" for="form-repeater-1-2">Age</label>
+                                            <input type="text" id="member_age" name="m_age0" class="form-control" placeholder="your age" oninput="format(this)" />
+                                          </div>
+                                          <div class="mb-3 col-lg-6 col-xl-2 col-12 mb-0 ">
+                                              <label class="d-block form-label">Gender</label>
+                                              <div class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="gender0" id="gendermale" value="MALE" checked/>
+                                                <label class="form-check-label" for="gender">Male</label>
 
+                                                  </div>
+                                                  <div class="form-check form-check-inline">
+                                                    <input class="form-check-input" type="radio" name="gender0" id="genderfemale" value="FEMALE" />
+                                                    <label class="form-check-label" for="gender">Female</label>
+                                                  </div>
+                                                  <div class="mb-3 col-lg-6 col-xl-3 col-12 mb-0" hidden>
+                                                  <label class="form-label" for="form-repeater-1-2">gender</label>
+                                                  <input type="text" id="gender_data" name="gender_data0" class="form-control" placeholder="your age" value="MALE"/>
+                                                </div>
+                                          </div>
+                                          <div class="col-md-3">
+                                            <label class="form-label" for="basic-default-country">Relation</label>
+                                            <select class="form-select" name="relation0" id="member_relation" required>
+                                              <option value="SELF" selected>SELF</option>
+                                              <option value="MOTHER">MOTHER</option>
+                                              <option value="FATHER">FATHER</option>
+                                              <option value="BROTHER">BROTHER</option>
+                                              <option value="SISTER">SISTER</option>
+                                              <option value="UNCLE">UNCLE</option>
+                                              <option value="AUNTY">AUNTY</option>
+                                              <option value="GRAND MOTHER">GRAND MOTHER</option>
+                                              <option value="GRAND FATHER">GRAND FATHER</option>
+                                              <option value="FRIEND">FRIEND</option>
+                                            </select>
+                                          </div>
+                                          <div class="mb-3 col-lg-12 col-xl-1 col-12 d-flex align-items-center mb-0">
+                                            <button class="btn btn-label-danger mt-4" data-repeater-delete>
+                                              <i class="ti ti-x ti-xs me-1"></i>
+                                              <span class="align-middle">Delete</span>
+                                            </button>
+                                          </div>
                                         </div>
-                                        <div class="form-check form-check-inline">
-                                          <input class="form-check-input" type="radio" name="gender" id="genderfemale" value="FEMALE" />
-                                          <label class="form-check-label" for="gender">Female</label>
-                                        </div>
-
-                                        <div class="mb-3 col-lg-6 col-xl-3 col-12 mb-0" hidden>
-                                        <label class="form-label" for="form-repeater-1-2">gender</label>
-                                        <input type="text" id="gender_data" name="gender_data" class="form-control" placeholder="your age" value="MALE"/>
                                       </div>
-                                    </div>
-                                    <div class="col-md-2">
-                                      <label class="form-label" for="basic-default-country">Relation</label>
-                                      <select class="form-select" name="relation" id="member_relation" required>
-                                        <option value="SELF" selected>SELF</option>
-                                        <option value="MOTHER">MOTHER</option>
-                                        <option value="FATHER">FATHER</option>
-                                        <option value="BROTHER">BROTHER</option>
-                                        <option value="SISTER">SISTER</option>
-                                        <option value="UNCLE">UNCLE</option>
-                                        <option value="AUNTY">AUNTY</option>
-                                        <option value="GRAND MOTHER">GRAND MOTHER</option>
-                                        <option value="GRAND FATHER">GRAND FATHER</option>
-                                        <option value="FRIEND">FRIEND</option>
-                                      </select>
-                                    </div>
-                                    <div class="mb-3 col-lg-12 col-xl-2 col-12 d-flex align-items-center mb-0">
-                                      <button class="btn btn-label-danger mt-4" data-repeater-delete>
-                                        <i class="ti ti-x ti-xs me-1"></i>
-                                        <span class="align-middle">Delete</span>
-                                      </button>
-                                    </div>
+                                        <div class="row rep-form">
+                                        </div>
+                                        <hr />
+                                      </div>
                                   </div>
                                 </div>
-                                <div class="row rep-form">
-                                </div>
-                                  <hr />
-                                </div>
-                                </div>
-                                </div>
                               </div>
-                              <div id="dynamicFormsContainer">
-                              </div>
-                              <div class="mb-0">
-                                <button class="btn btn-primary" data-repeater-create>
-                                  <i class="ti ti-plus me-1"></i>
-                                  <span class="align-middle">Add Members</span>
-                                </button>
-                              </div>
+                                  <div id="dynamicFormsContainer">
+                                  </div>
+                                  <div class="mb-0">
+                                    <button class="btn btn-primary" data-repeater-create>
+                                      <i class="ti ti-plus me-1"></i>
+                                      <span class="align-middle">Add Members</span>
+                                    </button>
+                                  </div>
                             </div>
                                               <!-- /Form Repeater -->
                                               <div class="col-12 d-flex justify-content-between">
@@ -922,7 +920,7 @@ function edit(id)
     //   dateFormat: "d-m-Y H:i",
     //   defaultDate: currentDateTime
     // });
-    $(".btn-next").on("click", function() {
+    $(".repeat-next").on("click", function() {
       const selectedList1 = $('#select2Multiple11').val();
       const selectedList2 = $('#select2Multiple22').val();
       const selectedList3 = $('#select2Multiple33').val();
@@ -968,7 +966,7 @@ $(document).ready(function () {
   $(document).ready(function() {
     let currentStep = 1;
  
-    $(".btn-next").on("click", function() {
+    $(".repeat-next").on("click", function() {
       $(".rep-table").empty();
     
       const fullName = $('#full_name_form').val();
@@ -1024,7 +1022,7 @@ $(document).ready(function () {
 </script>
 <script>
   $(document).ready(function() {
-    $("#repeat-next").click(function() {
+    $("#btn-step1").click(function() {
       console.log("click");
       let numForms = parseInt($("#no_of_person_id").val());
 

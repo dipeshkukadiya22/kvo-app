@@ -8,6 +8,8 @@
   <link rel="stylesheet" href="{{ asset ('assets/vendor/libs/flatpickr/flatpickr.css') }}" />
   <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.0/themes/base/jquery-ui.css">
   <link rel="stylesheet" href="{{ asset('assets/vendor/libs/sweetalert2/sweetalert2.css') }}" />
+  <link rel="stylesheet" href="{{ asset ('assets/vendor/libs/bootstrap-select/bootstrap-select.css') }}" />
+  <link rel="stylesheet" href="{{ asset ('assets/vendor/libs/select2/select2.css') }}" />
   <!-- Page CSS --> 
   <style>
 .form-label {
@@ -70,15 +72,15 @@
                       <input type="number" id="sr_no" class="form-control phone-mask" value={{$rec_no+1}} readonly>
                     </div>
                     <div class="col-md-4">
-                    <label for="select2Basic" class="form-label">નામ</label>
-                            <select id="name" name="name" class="select2 form-select form-select-lg" data-allow-clear="true" placeholder="Select Name" required>
+                      <label for="select2Basic" class="form-label">નામ</label>
+                            <select id="name" name="name" class="select2 form-select form-select-md" data-allow-clear="true"  required>
                             <option value=""></option>
                             @foreach($member as $row)
                           <option value="{{$row->p_id}}">{{$row->m_name}} - {{$row->phone_no}}</option>
                         @endforeach
-                            </select>
-                           
+                            </select>  
                     </div>
+                    
                     <div class="col-md-4">
                       <label class="form-label" for="multicol-phone">દર્દીના મોબાઇલ નં </label>
                       <input type="number" id="phone" class="form-control phone-mask" placeholder="658 799 8941" aria-label="658 799 8941" readonly >
@@ -160,11 +162,14 @@
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
 <script src="{{ asset('assets/vendor/libs/sweetalert2/sweetalert2.js') }}"></script>
+<script src="{{ asset ('assets/vendor/libs/select2/select2.js') }}"></script>
+    <script src="{{ asset ('assets/vendor/libs/bootstrap-select/bootstrap-select.js') }}"></script>
 
 <!-- Page JS -->
 <script src="{{ asset('assets/js/extended-ui-sweetalert2.js') }}"></script>
 <script src="{{ asset('assets/js/forms-pickers.js') }}"></script>
 <script src="{{ asset ('assets/js/main.js') }}"></script>
+<script src="{{ asset ('assets/js/forms-selects.js') }}"></script>
 
     <script>
     $("#name").change(function(){

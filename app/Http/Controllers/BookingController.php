@@ -109,16 +109,17 @@ class BookingController extends Controller
                         $data=DB::UPDATE("UPDATE add_room SET STATUS='1',room_detail_id='$req->deposit_no' where room_no='$room'");
                     }}
                    //dd($req->toArray());
-                    $total_member = $req->no_of_person;
+                   $total_member = $req->no_of_person;
                     for ($i = 0; $i < $total_member; $i++) {
-                        //dd( $req->input('m_age'.$i));
+                        dd( $req->toArray());
                         $m_details = new member_details();
                         $m_details->full_name = $req->input('full_name'.$i);
                         $m_details->age= $req->input('m_age'.$i);
                         $m_details->gender = $req->input('gender'.$i);
                         $m_details->relation=$req->input('relation' .$i);
                         $m_details->personal_detail_id=$booking->member_id;
-                        $m_details->room_id=$req->booking_id;
+                     
+                        $m_details->room_id=$req->deposit_no;
                         $m_details->save();
                     }
                     

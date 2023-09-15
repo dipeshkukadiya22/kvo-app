@@ -65,7 +65,12 @@ class Expense extends Controller
         $Mahajan_Expense -> amount = $req -> amount;
         $Mahajan_Expense -> inword = $req -> total_in_word;
         $Mahajan_Expense->save();
-        return redirect()->route("view_mahajan_expense");
+        if($Mahajan_Expense) {
+            return redirect() -> route('view_mahajan_expense') -> with ('message', 'Details Changed Successfully!') ;
+        }
+        else{
+            return redirect() -> route('view_mahajan_expense') -> with ('message', 'your data not submit') ;
+        }
     }
     public function delete_mahajan_expense($id)
     {
@@ -123,7 +128,12 @@ class Expense extends Controller
         $Mahajan_Expense -> amount = $req -> amount;
         $Mahajan_Expense -> inword = $req -> total_in_word;
         $Mahajan_Expense->save();
-        return redirect()->route("View_Sangh_Expense");
+        if($Mahajan_Expense) {
+            return redirect() -> route('View_Sangh_Expense') -> with ('message', 'Details Changed Successfully!') ;
+        }
+        else{
+            return redirect() -> route('View_Sangh_Expense') -> with ('message', 'your data not submit') ;
+        }
     }
     public function delete_sangh_expense($id)
     {

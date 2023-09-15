@@ -125,7 +125,12 @@ class donation extends Controller
         $donation->payment_mode=$req->payment;  
         $donation->remarks=$req->remarks;  
         $donation->save();
-        return back()->with("Update Religious Donation");
+        if($donation) {
+            return redirect() -> route('View_Religious_Donation') -> with ('message', 'Details Changed Successfully!') ;
+        }
+        else{
+            return redirect() -> route('View_Religious_Donation') -> with ('message', 'your data not submit') ;
+        }
     }
     public function delete_religious_donation($id)
     {
@@ -294,7 +299,12 @@ class donation extends Controller
         $donation->details=strtoupper($req->details);
         $donation->member_id=$req->name;
         $status=$donation->save();
-        return redirect()->route('view_general_donation');
+        if($donation) {
+            return redirect() -> route('view_general_donation') -> with ('message', 'Details Changed Successfully!') ;
+        }
+        else{
+            return redirect() -> route('view_general_donation') -> with ('message', 'your data not submit') ;
+        }
     }
     public function delete_general_donation($id)
     {

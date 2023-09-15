@@ -22999,7 +22999,7 @@ a.bg-vimeo:hover, a.bg-vimeo:focus {
   color: #d9f5e5;
 }
 .layout-footer-fixed .layout-wrapper:not(.layout-horizontal) .footer.bg-success .footer-container {
-  background-color: #28c76f !important;
+  /* background-color: #28c76f !important; */
   color: #d9f5e5;
 }
 .footer.bg-success .footer-link {

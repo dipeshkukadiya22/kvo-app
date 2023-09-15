@@ -180,13 +180,6 @@ div.card-datatable [class*=col-md-] {
                                                         <th style="font-size:15px"><b>Payment Mode</b></th>
                                                     </tr>
                                                 </thead>
-                                                <tr>
-                                                        <td></td> <td></td>
-                                                        <td><b>Total Amount:</b></td>
-                                                        <td><b>{{$total[0]->amount}}</b></td>
-                                                       
-                                                </tr>
-                                          
                                                 @foreach($donation as $row)
                                                 <tr>
                                                         <td>{{$row->m_name}}</td>
@@ -195,7 +188,13 @@ div.card-datatable [class*=col-md-] {
                                                         <td>{{$row->payment_mode}}</td>
                                                 </tr>
                                                 @endforeach
-                                                
+                                                <tr>
+                                                      <td></td>
+                                                        <td><b>Total Amount:</b></td>
+                                                        <td><b>{{$total[0]->amount}}</b></td>
+                                                        <td></td>
+                                                       
+                                                </tr>
                                                 </table>
                                             </div>
                                         </div>

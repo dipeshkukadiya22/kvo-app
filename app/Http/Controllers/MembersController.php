@@ -10,7 +10,7 @@ class MembersController extends Controller
 {
     // View Members
     public function ViewMembers(){
-        $data= DB::SELECT("SELECT * from add_members ORDER by p_id DESC");
+        $data = DB::select("SELECT * FROM add_members ORDER BY p_id DESC");
         return view('Booking.view-members',compact('data'));
     }
 
@@ -28,7 +28,12 @@ class MembersController extends Controller
         $member->phone_no = $request->phone_no1;
         $member->city = strtoupper($request->city1);
         $member->save();
-        return back()->with("Update Member Details");
+        if($member) {
+            return redirect() -> route('ViewMembers') -> with ('message', 'Details Changed Successfully!') ;
+        }
+        else{
+            return redirect() -> route('ViewMembers') -> with ('message', 'your data not submit') ;
+        }
     }
     public function delete_members($id){
       

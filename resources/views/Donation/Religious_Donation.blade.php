@@ -677,9 +677,9 @@ function NumToWord(inputNumber, outputControl) {
       if(flag === 0)
       {
         Swal.fire(
-                  'Amount Required!',
-                  '',
-                  'warning'
+                'Required!',
+                'Please Enter One Amount ',
+                'warning'
                 )
         event.preventDefault();
       } else{
@@ -694,14 +694,14 @@ function NumToWord(inputNumber, outputControl) {
 
 <script src="{{ asset('assets/js/ui-toasts.js') }}"></script>
 
-@if (Session::get('message'))
+<!-- @if (Session::get('message'))
     <script>
         toastr['success']("{{ Session::get('message') }}", 'Good Job!', {
             closeButton: true,
             tapToDismiss: false,
         });
     </script>
-@endif
+@endif -->
 
 @endsection
 
