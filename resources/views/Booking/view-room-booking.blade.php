@@ -355,13 +355,8 @@ div.card-datatable [class*=col-md-] {
                                                   <i class="ti ti-arrow-left me-sm-1"></i>
                                                   <span class="align-middle d-sm-inline-block d-none">Previous</span>
                                                 </button> --}}
-                                                {{-- <div>
-                                                <input type="button" class="btn btn-primary btn-next">
-                                                  <span class="align-middle d-sm-inline-block d-none me-sm-1">Next</span>
-                                                  <i class="ti ti-arrow-right"></i>
-                                                </div> --}}
-
-                                                <button type="button" class="btn btn-primary btn-next" >
+                                                
+                                                <button type="button" class="btn btn-primary btn-next" id="repeat-next" >
                                                   <span class="align-middle d-sm-inline-block d-none me-sm-1">Next</span>
                                                   <i class="ti ti-arrow-right"></i>
                                                 </button>
@@ -370,6 +365,108 @@ div.card-datatable [class*=col-md-] {
                                               </div>
                                             </div>
                                           </div>
+                                          <!--start  member details -->
+                                          <div id="address" class="content">
+                                                <button type="button" class="btn btn-primary" id="member_data" >
+                                                  <span class="align-middle d-sm-inline-block d-none me-sm-1">show data</span>
+                                                  <i class="ti ti-arrow-right"></i>
+                                                </button>
+                                              <div class="content-header">
+                                                <small>Enter Member Details.</small>
+                                              </div>
+                                              <div class="row g-3">
+                                              <!-- Form Repeater -->
+                                              <div class="form-repeater">
+                                              <div id="step2FormsContainer "class="col-12">
+                                                <div class="dynamic-form">
+                                                <div class="all-members" data-repeater-list="group-a">
+                                                <div data-repeater-item>
+                                              <div class="rep-form1">
+                                                  <div class="row formrepeater1">
+                                                    <div class="mb-3 col-lg-6 col-xl-3 col-12 mb-0">
+                                                      <label class="form-label" for="form-repeater-1-1">Full Name</label>
+                                                      <input type="text" id="full_name_form"  name="full_name0" class="form-control" placeholder="john doe" readonly />
+                                                    </div>
+                                                    <div class="mb-3 col-lg-4 col-xl-3 col-12 mb-0">
+                                                      <label class="form-label" for="form-repeater-1-2">Age</label>
+                                                      <input type="text" id="member_age" name="m_age0" class="form-control" placeholder="your age" readonly />
+                                                    </div>
+                                                    <div class="mb-3 col-lg-6 col-xl-2 col-12 mb-0 ">
+                                                        <label class="d-block form-label">Gender</label>
+                                                        <div class="form-check form-check-inline">
+                                                      <input class="form-check-input" type="radio" name="gender0" id="inlineRadio1" value="MALE" checked/>
+                                                      <label class="form-check-label" for="gender">Male</label>
+
+                                                        </div>
+                                                        <div class="form-check form-check-inline">
+                                                          <input class="form-check-input" type="radio" name="gender0" id="inlineRadio2" value="FEMALE"/>
+                                                          <label class="form-check-label" for="gender">Female</label>
+                                                        </div>
+
+                                                        <div class="mb-3 col-lg-6 col-xl-3 col-12 mb-0" hidden>
+                                                          <label class="form-label" for="form-repeater-1-2">gender</label>
+                                                          <input type="text" id="gender_data" name="gender_data" class="form-control" placeholder="your age" value="MALE"/>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                      <label class="form-label" for="basic-default-country">Relation</label>
+                                                      <select class="form-select" name="relation0" id="member_relation" required>
+                                                        <option value="SELF" selected>SELF</option>
+                                                        <option value="MOTHER">MOTHER</option>
+                                                        <option value="FATHER">FATHER</option>
+                                                        <option value="BROTHER">BROTHER</option>
+                                                        <option value="SISTER">SISTER</option>
+                                                        <option value="UNCLE">UNCLE</option>
+                                                        <option value="AUNTY">AUNTY</option>
+                                                        <option value="GRAND MOTHER">GRAND MOTHER</option>
+                                                        <option value="GRAND FATHER">GRAND FATHER</option>
+                                                        <option value="FRIEND">FRIEND</option>
+                                                      </select>
+                                                    </div>
+                                                    <div class="mb-3 col-lg-12 col-xl-2 col-12 d-flex align-items-center mb-0">
+                                                  <button class="btn btn-label-danger mt-4" data-repeater-delete>
+                                                    <i class="ti ti-x ti-xs me-1"></i>
+                                                    <span class="align-middle">Delete</span>
+                                                  </button>
+                                                </div>
+                                                  </div>
+                                                </div>
+                                                  <div class="row rep-form">
+                                                  </div>
+                                                  <hr />
+                                              </div>
+                                                </div>
+                                                </div>
+                                              </div>
+                                              <div id="dynamicFormsContainer">
+                                              </div>
+                                              <div class="mb-0" hidden>
+                                                <button class="btn btn-primary" data-repeater-create>
+                                                  <i class="ti ti-plus me-1"></i>
+                                                  <span class="align-middle">Add Members</span>
+                                                </button>
+                                              </div>
+                                          </div>
+                                              <!-- /Form Repeater -->
+                                              <div class="col-12 d-flex justify-content-between">
+                                                <button class="btn btn-label-secondary btn-prev">
+                                                  <i class="ti ti-arrow-left me-sm-1"></i>
+                                                  <span class="align-middle d-sm-inline-block d-none">Previous</span>
+                                                </button>
+                                                {{-- <div>
+                                                  <input type="button"  class="btn btn-primary btn-next">
+                                                  <span class="align-middle d-sm-inline-block d-none me-sm-1">Next</span>
+                                                  <i class="ti ti-arrow-right"></i>
+                                                </div> --}}
+                                                <button type="button" class="btn btn-primary btn-next" id="btn-step3">
+                                                  <span class="align-middle d-sm-inline-block d-none me-sm-1">Next</span>
+                                                  <i class="ti ti-arrow-right"></i>
+                                                </button>
+                                              </div>
+                                            </div>
+                                          </div>
+                                          
+                                          <!-- end member details -->
                                           <!-- Personal Info -->
                                           <div id="personal-info" class="content">
                                             <div class="content-header mb-3">
@@ -528,7 +625,7 @@ div.card-datatable [class*=col-md-] {
                                                   <span class="align-middle d-sm-inline-block d-none">Previous</span>
                                                 </button>
                                             
-                                                <button type="button" class="btn btn-primary btn-next" id="repeat-next">
+                                                <button type="button" class="btn btn-primary btn-next repeat-next"  >
                                                   <span class="align-middle d-sm-inline-block d-none me-sm-1">Next</span>
                                                   <i class="ti ti-arrow-right"></i>
                                                 </button>
@@ -536,106 +633,6 @@ div.card-datatable [class*=col-md-] {
                                             </div>
                                           </div>
                                           <!-- All No of Person -->
-                                          <div id="address" class="content">
-                                                <button type="button" class="btn btn-primary" id="member_data">
-                                                  <span class="align-middle d-sm-inline-block d-none me-sm-1">show data</span>
-                                                  <i class="ti ti-arrow-right"></i>
-                                                </button>
-                                            <div class="content-header">
-                                              <small>Enter Member Details.</small>
-                                            </div>
-                                            
-                                            <div class="row g-3">
-                                              <!-- Form Repeater -->
-                                            
-                                              <div class="form-repeater">
-                              <div id="step2FormsContainer "class="col-12">
-                                <div class="dynamic-form">
-                                  <div class="all-members" >
-                                    <div data-repeater-item>
-                                      <div class="rep-form1">
-                                        <div class="row formrepeater1">
-                                          <div class="mb-3 col-lg-6 col-xl-3 col-12 mb-0">
-                                            <label class="form-label" for="form-repeater-1-1">Full Name</label>
-                                            <input type="text" id="full_name_form"  name="full_name0" class="form-control" placeholder="john doe" readonly/>
-                                          </div>
-                                          <div class="mb-3 col-lg-6 col-xl-2 col-12 mb-0">
-                                            <label class="form-label" for="form-repeater-1-2">Age</label>
-                                            <input type="text" id="member_age" name="m_age0" class="form-control" placeholder="your age" oninput="format(this)" />
-                                          </div>
-                                          <div class="mb-3 col-lg-6 col-xl-2 col-12 mb-0 ">
-                                              <label class="d-block form-label">Gender</label>
-                                              <div class="form-check form-check-inline">
-                                                <input class="form-check-input" type="radio" name="gender0" id="gendermale" value="MALE" checked/>
-                                                <label class="form-check-label" for="gender">Male</label>
-
-                                                  </div>
-                                                  <div class="form-check form-check-inline">
-                                                    <input class="form-check-input" type="radio" name="gender0" id="genderfemale" value="FEMALE" />
-                                                    <label class="form-check-label" for="gender">Female</label>
-                                                  </div>
-                                                  <div class="mb-3 col-lg-6 col-xl-3 col-12 mb-0" hidden>
-                                                  <label class="form-label" for="form-repeater-1-2">gender</label>
-                                                  <input type="text" id="gender_data" name="gender_data0" class="form-control" placeholder="your age" value="MALE"/>
-                                                </div>
-                                          </div>
-                                          <div class="col-md-3">
-                                            <label class="form-label" for="basic-default-country">Relation</label>
-                                            <select class="form-select" name="relation0" id="member_relation" required>
-                                              <option value="SELF" selected>SELF</option>
-                                              <option value="MOTHER">MOTHER</option>
-                                              <option value="FATHER">FATHER</option>
-                                              <option value="BROTHER">BROTHER</option>
-                                              <option value="SISTER">SISTER</option>
-                                              <option value="UNCLE">UNCLE</option>
-                                              <option value="AUNTY">AUNTY</option>
-                                              <option value="GRAND MOTHER">GRAND MOTHER</option>
-                                              <option value="GRAND FATHER">GRAND FATHER</option>
-                                              <option value="FRIEND">FRIEND</option>
-                                            </select>
-                                          </div>
-                                          <div class="mb-3 col-lg-12 col-xl-1 col-12 d-flex align-items-center mb-0">
-                                            <button class="btn btn-label-danger mt-4" data-repeater-delete>
-                                              <i class="ti ti-x ti-xs me-1"></i>
-                                              <span class="align-middle">Delete</span>
-                                            </button>
-                                          </div>
-                                        </div>
-                                      </div>
-                                        <div class="row rep-form">
-                                        </div>
-                                        <hr />
-                                      </div>
-                                  </div>
-                                </div>
-                              </div>
-                                  <div id="dynamicFormsContainer">
-                                  </div>
-                                  <div class="mb-0">
-                                    <button class="btn btn-primary" data-repeater-create>
-                                      <i class="ti ti-plus me-1"></i>
-                                      <span class="align-middle">Add Members</span>
-                                    </button>
-                                  </div>
-                            </div>
-                                              <!-- /Form Repeater -->
-                                              <div class="col-12 d-flex justify-content-between">
-                                                <button class="btn btn-label-secondary btn-prev">
-                                                  <i class="ti ti-arrow-left me-sm-1"></i>
-                                                  <span class="align-middle d-sm-inline-block d-none">Previous</span>
-                                                </button>
-                                                {{-- <div>
-                                                  <input type="button"  class="btn btn-primary btn-next">
-                                                  <span class="align-middle d-sm-inline-block d-none me-sm-1">Next</span>
-                                                  <i class="ti ti-arrow-right"></i>
-                                                </div> --}}
-                                                <button type="button" class="btn btn-primary btn-next">
-                                                  <span class="align-middle d-sm-inline-block d-none me-sm-1">Next</span>
-                                                  <i class="ti ti-arrow-right"></i>
-                                                </button>
-                                              </div>
-                                            </div>
-                                          </div>
                                           
                                           <!-- Review -->
                                           <div id="review-submit" class="content">
@@ -932,8 +929,29 @@ function edit(id)
     const totalAmount = acAmount + nonAcAmount + doorMtAmount;
 
     $('#room_amount').text( totalAmount);
-      const selectedRooms = 'A.C. Room:= ' + selectedList1 + ', Non A.C. Room:= ' + selectedList2 + ', Door Metri A.C. / Non A.C. Room:= ' + selectedList3;
-
+    var selectedRooms ;
+      if(acAmount !=0){
+        selectedRooms = 'A.C. Room:= ' + selectedList1 ;
+        if(nonAcAmount !=0){
+          selectedRooms = 'A.C. Room:= ' + selectedList1  + ', Non A.C. Room:= ' + selectedList2 ;
+            if(doorMtAmount !=0){
+              selectedRooms = 'A.C. Room:= ' + selectedList1  + ', Non A.C. Room:= ' + selectedList2 + ', Door Metri A.C. / Non A.C. Room:= ' + selectedList3;
+          }
+        }
+        if(doorMtAmount !=0){
+          selectedRooms = 'A.C. Room:= ' + selectedList1  + ' Door Metri A.C. / Non A.C. Room:= ' + selectedList3;
+        }
+      }else if(nonAcAmount !=0){
+          selectedRooms =  'Non A.C. Room:= ' + selectedList2 ;
+            if(doorMtAmount !=0){
+              selectedRooms = 'Non A.C. Room:= ' + selectedList2 + ', Door Metri A.C. / Non A.C. Room:= ' + selectedList3;
+            }
+      }else if(doorMtAmount !=0){
+        selectedRooms = 'Door Metri A.C. / Non A.C. Room:= ' + selectedList3;
+      }
+      else{selectedRooms =''}
+     
+     // const selectedRooms = 'A.C. Room:= ' + selectedList1 + ', Non A.C. Room:= ' + selectedList2 + ', Door Metri A.C. / Non A.C. Room:= ' + selectedList3;
       $('#room_lst').text(selectedRooms);
 
       if (selectedDate && selectedDate.length > 0) {
@@ -966,11 +984,10 @@ $(document).ready(function () {
   $(document).ready(function() {
     let currentStep = 1;
  
-    $(".repeat-next").on("click", function() {
+    $(".btn-next").on("click", function() {
       $(".rep-table").empty();
-    
       const fullName = $('#full_name_form').val();
-      const age = $('#member_age').val();
+      const age = $('#members_age').val();
       const selectedGender = $('input[name="gender"]').val();
       const relation = $('#member_relation').val();
       
@@ -1001,7 +1018,7 @@ $(document).ready(function () {
           '<td>'+ j +'</td>' +
           '<td class="member_full_name' + i + '">' + $('#full_name_form' + i).val()+ '</td>' +
           '<td class="members_age' + i + '">' + $('#member_age' + i).val() + '</td>' +
-          '<td class="member_gen' + i + '">' + $('input[name="gender'+i+'[]"]:checked').val() + '</td>' +
+          '<td class="member_gen' + i + '">' + $('input[name="gender'+i+'"]:checked').val() + '</td>' +
           '<td class="member_rel' + i + '">' + $('#member_relation' + i).val() + '</td>' +
           '</tr>'
         );
@@ -1022,7 +1039,7 @@ $(document).ready(function () {
 </script>
 <script>
   $(document).ready(function() {
-    $("#btn-step1").click(function() {
+    $("#repeat-next").click(function() {
       console.log("click");
       let numForms = parseInt($("#no_of_person_id").val());
 
@@ -1043,11 +1060,11 @@ $(document).ready(function () {
 
                                  ' <div class="mb-3 col-lg-6 col-xl-3 col-12 mb-0">'+
                                    ' <label class="form-label" for="form-repeater-1-1">Full Name</label>'+
-                                   ' <input type="text" id="full_name_form'+i+'" style="text-transform:uppercase" name="full_name[]" class="form-control" placeholder="john doe" required />'+
+                                   ' <input type="text" id="full_name_form'+i+'" style="text-transform:uppercase" name="full_name'+i+'" class="form-control" placeholder="john doe" required />'+
                                  ' </div>'+
-                                 ' <div class="mb-3 col-lg-6 col-xl-2 col-12 mb-0">'+
+                                 ' <div class="mb-3 col-lg-4 col-xl-3 col-12 mb-0">'+
                                   '  <label class="form-label" for="form-repeater-1-2">Age</label>'+
-                                  '  <input type="number" id="member_age'+i+'" name="m_age[]" class="form-control" placeholder="your age"  maxlength="2" required oninput="javascript: if (this.value.length > 2) this.value = this.value.slice(0, 2);"  />'+
+                                  '  <input type="number" id="member_age'+i+'" name="m_age'+i+'" class="form-control" placeholder="your age"  maxlength="2" required oninput="javascript: if (this.value.length > 2) this.value = this.value.slice(0, 2);"  />'+
                                 '  </div>'+
                                   
                                   
@@ -1055,17 +1072,17 @@ $(document).ready(function () {
                                   
                                      ' <label class="d-block form-label">Gender</label>'+
                                      ' <div class="form-check form-check-inline">'+
-                                       ' <input class="form-check-input" type="radio" name="gender'+i+'[]" id="inlineRadio1' + i + '" value="MALE" checked />'+
+                                       ' <input class="form-check-input" type="radio" name="gender'+i+'" id="inlineRadio1' + i + '" value="MALE" checked />'+
                                        ' <label class="form-check-label" for="inlineRadio1' + i + '">Male</label>'+
                                      ' </div>'+
                                      ' <div class="form-check form-check-inline">'+
-                                      '  <input class="form-check-input" type="radio" name="gender'+i+'[]" id="inlineRadio2' + i + '" value="FEMALE" />'+
+                                      '  <input class="form-check-input" type="radio" name="gender'+i+'" id="inlineRadio2' + i + '" value="FEMALE" />'+
                                       '  <label class="form-check-label" for="inlineRadio2' + i + '" selected>Female</label>'+
                                     '  </div>'+
                                 '  </div>'+
-                                '    <div class="mb-3 col-lg-6 col-xl-2 col-12 mb-0">'+
+                                '    <div class="col-md-3">'+
                                     '  <label class="form-label" for="basic-default-country">Relation</label>'+
-                                    '  <select class="form-select" name="relation[]" id="member_relation'+i+'" required>'+
+                                    '  <select class="form-select "name="relation'+i+'" id="member_relation'+i+'" required>'+
                                     '   <option value="" disabled selected>Select relation</option>'+
                                     '  <option value="AUNTY">AUNTY</option>'+
                                     '  <option value="BROTHER">BROTHER</option>'+
@@ -1084,12 +1101,12 @@ $(document).ready(function () {
                         
                                   '  </select>'+
                                  ' </div>'+
-                                 ' <div class="mb-3 col-lg-12 col-xl-2 col-12 d-flex align-items-center mb-0">'+
-                                  '  <button class="btn btn-label-danger mt-4" data-repeater-delete>'+
-                                   '   <i class="ti ti-x ti-xs me-1"></i>'+
-                                   '   <span class="align-middle">Delete</span>'+
-                                  '  </button>'+
-                                  '</div>'+
+                                //  ' <div class="mb-3 col-lg-12 col-xl-2 col-12 d-flex align-items-center mb-0">'+
+                                //   '  <button class="btn btn-label-danger mt-4" data-repeater-delete>'+
+                                //    '   <i class="ti ti-x ti-xs me-1"></i>'+
+                                //    '   <span class="align-middle">Delete</span>'+
+                                //   '  </button>'+
+                                //   '</div>'+
                                ' </div>'
                               ); 
                              }
@@ -1127,7 +1144,6 @@ $(document).ready(function () {
     });
   });
 </script>
-
 
     <!-- BEGIN: Page JS-->
    <script>
