@@ -291,7 +291,7 @@ div.card-datatable [class*=col-md-] {
                       
                                                 <div class="col-4">
                                                   <label class="form-label" for="collapsible-address" >Address</label>  
-                                                  <textarea name="member_address"  class="form-control" id="member_address" rows="1" placeholder="1456, Mall Road" required></textarea>
+                                                  <textarea name="member_address"  class="form-control" id="member_address"  style="text-transform:uppercase" rows="1" placeholder="1456, Mall Road" required></textarea>
                                                 </div>
                                                                           
                                                 
@@ -311,7 +311,7 @@ div.card-datatable [class*=col-md-] {
                                                 </div>
                                                 <div class="col-md-4">
                                                   <label for="defaultFormControlInput" class="form-label">Sub Community</label>
-                                                  <input type="text" class="form-control" name="subcommunity" id="subcommunity" placeholder="John Doe" aria-describedby="defaultFormControlHelp" />
+                                                  <input type="text" class="form-control" name="subcommunity"  style="text-transform:uppercase" id="subcommunity" placeholder="John Doe" aria-describedby="defaultFormControlHelp" />
                                                 </div>
 
                                                 <div class="col-md-4">
@@ -325,12 +325,12 @@ div.card-datatable [class*=col-md-] {
                         
                                                 <div class="col-md-4">
                                                 <label class="form-label" for="rupees-in-words">Occupation</label>
-                                                <input type="text" class="form-control" name="occupation" id="occupation" placeholder="Occupation" required>
+                                                <input type="text" class="form-control" name="occupation" id="occupation"  style="text-transform:uppercase" placeholder="Occupation" required>
                                               </div>
 
                                               <div class="col-md-4">
                                                 <label class="form-label" for="rupees-in-words">Reason</label>
-                                                <input type="text" class="form-control" name="reason" id="reason" placeholder="Reason to stay" required>
+                                                <input type="text" class="form-control" name="reason" id="reason"  style="text-transform:uppercase" placeholder="Reason to stay" required>
                                               </div>
                                               <div class="col-md-4">
                                                   <label for="defaultFormControlInput" class="form-label">City</label>
@@ -367,10 +367,11 @@ div.card-datatable [class*=col-md-] {
                                           </div>
                                           <!--start  member details -->
                                           <div id="address" class="content">
-                                                <button type="button" class="btn btn-primary" id="member_data" >
-                                                  <span class="align-middle d-sm-inline-block d-none me-sm-1">show data</span>
-                                                  <i class="ti ti-arrow-right"></i>
-                                                </button>
+                                          <!-- <button type="button" class="btn btn-primary" id="member_data">
+                                            <span class="align-middle d-sm-inline-block d-none me-sm-1">show data</span>
+                                            <i class="ti ti-arrow-right"></i>
+                                          </button> -->
+
                                               <div class="content-header">
                                                 <small>Enter Member Details.</small>
                                               </div>

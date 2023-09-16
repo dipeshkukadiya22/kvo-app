@@ -363,7 +363,7 @@ class BookingController extends Controller
             if ($old_no_of_person < $total_member) {
                 for ($i = $old_no_of_person + 1; $i <= $total_member; $i++) {
                 $m_details = new member_details();
-                $m_details->full_name = $req->input('full_name'.$i);
+                $m_details->full_name =strtoupper($req->input('full_name'.$i));
                 $m_details->age= $req->input('m_age'.$i);
                 $m_details->gender = $req->input('gender'.$i);
                 $m_details->relation=$req->input('relation' .$i);
@@ -373,9 +373,9 @@ class BookingController extends Controller
                 }
            }
            if ($old_no_of_person === $total_member) {
-            for ($i = 1; $i <= $total_member; $i++) {
+            for ($i = 1; $i < $total_member; $i++) {
                 $m_details = member_details::find($req->m_id[$i]);
-                $m_details->full_name = $req->input('full_name'.$i);
+                $m_details->full_name =strtoupper($req->input('full_name'.$i));
                 $m_details->age= $req->input('m_age'.$i);
                 $m_details->gender = $req->input('gender'.$i);
                 $m_details->relation=$req->input('relation' .$i);       
