@@ -275,7 +275,7 @@ class donation extends Controller
             return $pdf->stream();
            
         }else{
-        return redirect() -> route('Donation.View_General_Donation')-> with ('message', 'Form submitted successfully!')->with (['member'=>$member,'donation_data'=>$donation_data]);
+        return redirect() -> route('view_general_donation')-> with ('message', 'Form submitted successfully!')->with (['member'=>$member,'donation_data'=>$donation_data]);
         }
     }
     public function view_general_donation()
