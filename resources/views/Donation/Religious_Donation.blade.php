@@ -189,114 +189,100 @@
                             <label class="form-label" for="multicol-phone">શ્રી સર્વ સાધારણ ખાતે</label>
                             <div class="input-group">
                               <span class="input-group-text">₹</span>
-                              <input type="number" class="form-control amount-input" name="sarv_sadharan" placeholder="Amount" aria-label="Amount (to the nearest dollar)">
-                              
-                            </div>
+                              <input type="text" class="form-control amount-input" name="sarv_sadharan" id="sarv_sadharan" placeholder="Amount" aria-label="Amount (to the nearest dollar)" maxlength="6" onkeypress="return onlyNumbers(this.value);">
+                            </div><div id="sarv_sadharan-1" class="error-message" ></div>
                           </div>
                           <div class="col-md-4">
                             <label class="form-label" for="multicol-phone">શ્રી જીવદયા ખાતે</label>
                             <div class="input-group">
                               <span class="input-group-text">₹</span>
-                              <input type="number" class="form-control amount-input" name="jiv_daya" placeholder="Amount" aria-label="Amount (to the nearest dollar)">
-                              
-                            </div>
+                              <input type="text" class="form-control amount-input" name="jiv_daya" id="jiv_daya" placeholder="Amount" aria-label="Amount (to the nearest dollar)" maxlength="6" onkeypress="return onlyNumbers(this.value);">
+                            </div><div id="jiv_daya-1" class="error-message" ></div>
                           </div>
                           <div class="col-md-4">
                             <label class="form-label" for="multicol-phone">શ્રી સાધુ સાધ્વી વૈયાવચ્છ ખાતે</label>
                             <div class="input-group">
                               <span class="input-group-text">₹</span>
-                              <input type="number" class="form-control amount-input" name="shadhu_shdhvi" placeholder="Amount" aria-label="Amount (to the nearest dollar)">
-                              
-                            </div>
+                              <input type="text" class="form-control amount-input" name="shadhu_shdhvi" id="shadhu_shdhvi" placeholder="Amount" aria-label="Amount (to the nearest dollar)"  maxlength="6" onkeypress="return onlyNumbers(this.value);">
+                            </div><div id="shadhu_shdhvi-1" class="error-message" ></div>
                           </div>
                           <div class="col-md-4">
                             <label class="form-label" for="multicol-phone">શ્રી સાધર્મિક ખરડા ખાતે</label>
                             <div class="input-group">
                               <span class="input-group-text">₹</span>
-                              <input type="number" class="form-control amount-input" name="sadharmik" placeholder="Amount" aria-label="Amount (to the nearest dollar)">
-                              
-                            </div>
+                              <input type="text" class="form-control amount-input" name="sadharmik" id="sadharmik" placeholder="Amount" aria-label="Amount (to the nearest dollar)" maxlength="6" onkeypress="return onlyNumbers(this.value);">
+                            </div><div id="sadharmik-1" class="error-message" ></div>
                           </div>
                           <div class="col-md-4">
                             <label class="form-label" for="multicol-phone">શ્રી ચાતુર્માસ ખરડા ખાતે</label>
                             <div class="input-group">
                               <span class="input-group-text">₹</span>
-                              <input type="number" class="form-control amount-input" name="chaturmas" placeholder="Amount" aria-label="Amount (to the nearest dollar)">
-                              
-                            </div>
+                              <input type="text" class="form-control amount-input" name="chaturmas" id="chaturmas" placeholder="Amount" aria-label="Amount (to the nearest dollar)"  maxlength="6" onkeypress="return onlyNumbers(this.value);">
+                            </div><div id="chaturmas-1" class="error-message" ></div>
                           </div>
                           <div class="col-md-4">
                             <label class="form-label" for="multicol-phone">શ્રી કાયમી તિથી ફંડ ખાતે</label>
                             <div class="input-group">
                               <span class="input-group-text">₹</span>
-                              <input type="number" class="form-control amount-input" name="kayami_tithi" placeholder="Amount" aria-label="Amount (to the nearest dollar)">
-                              
-                            </div>
+                              <input type="text" class="form-control amount-input" name="kayami_tithi" id="kayami_tithi" placeholder="Amount" aria-label="Amount (to the nearest dollar)"  maxlength="6" onkeypress="return onlyNumbers(this.value);">
+                            </div><div id="kayami_tithi-1" class="error-message" ></div>
                           </div>
                           <div class="col-md-4">
                             <label class="form-label" for="multicol-phone">શ્રી દેવદ્રવ્ય ખાતે</label>
                             <div class="input-group">
                               <span class="input-group-text">₹</span>
-                              <input type="number" class="form-control amount-input" name="devdravya" placeholder="Amount" aria-label="Amount (to the nearest dollar)">
-                              
-                            </div>
+                              <input type="text" class="form-control amount-input" name="devdravya" id="devdravya" placeholder="Amount" aria-label="Amount (to the nearest dollar)"  maxlength="6" onkeypress="return onlyNumbers(this.value);">
+                            </div><div id="devdravya-1" class="error-message" ></div>
                           </div>
                           <div class="col-md-4">
                             <label class="form-label" for="multicol-phone">શ્રી કેસર સુખડ ખાતે</label>
                             <div class="input-group">
                               <span class="input-group-text">₹</span>
-                              <input type="number" class="form-control amount-input" name="kesar_sukhad" placeholder="Amount" aria-label="Amount (to the nearest dollar)">
-                              
-                            </div>
+                              <input type="text" class="form-control amount-input" name="kesar_sukhad" id="kesar_sukhad" placeholder="Amount" aria-label="Amount (to the nearest dollar)"  maxlength="6" onkeypress="return onlyNumbers(this.value);">
+                            </div><div id="kesar_sukhad-1" class="error-message" ></div>
                           </div>
                           <div class="col-md-4">
                             <label class="form-label" for="multicol-phone">શ્રી ધુપ-દીપ ખાતે</label>
                             <div class="input-group">
                               <span class="input-group-text">₹</span>
-                              <input type="number" class="form-control amount-input" name="dhoop_deep" placeholder="Amount" aria-label="Amount (to the nearest dollar)">
-                              
-                            </div>
+                              <input type="text" class="form-control amount-input" name="dhoop_deep" id="dhoop_deep" placeholder="Amount" aria-label="Amount (to the nearest dollar)"  maxlength="6" onkeypress="return onlyNumbers(this.value);">
+                            </div><div id="dhoop_deep-1" class="error-message" ></div>
                           </div>
                           <div class="col-md-4">
                             <label class="form-label" for="multicol-phone">શ્રી સ્નાત્ર પૂજા ખાતે</label>
                             <div class="input-group">
                               <span class="input-group-text">₹</span>
-                              <input type="number" class="form-control amount-input" name="snatra_puja" placeholder="Amount" aria-label="Amount (to the nearest dollar)">
-                              
-                            </div>
+                              <input type="text" class="form-control amount-input" name="snatra_puja" id="snatra_puja" placeholder="Amount" aria-label="Amount (to the nearest dollar)"  maxlength="6" onkeypress="return onlyNumbers(this.value);">
+                            </div><div id="snatra_puja-1" class="error-message" ></div>
                           </div>
                           <div class="col-md-4">
                             <label class="form-label" for="multicol-phone">શ્રી આંગી પૂજા ખાતે</label>
                             <div class="input-group">
                               <span class="input-group-text">₹</span>
-                              <input type="number" class="form-control amount-input" name="agani_pooja" placeholder="Amount" aria-label="Amount (to the nearest dollar)">
-                              
-                            </div>
+                              <input type="text" class="form-control amount-input" name="agani_pooja" id="agani_pooja" placeholder="Amount" aria-label="Amount (to the nearest dollar)"  maxlength="6" onkeypress="return onlyNumbers(this.value);">
+                            </div><div id="agani_pooja-1" class="error-message" ></div>
                           </div>
                           <div class="col-md-4">
                             <label class="form-label" for="multicol-phone">શ્રી મોટી પૂજા ખાતે</label>
                             <div class="input-group">
                               <span class="input-group-text">₹</span>
-                              <input type="number" class="form-control amount-input" name="moti_pooja" placeholder="Amount" aria-label="Amount (to the nearest dollar)">
-                              
-                            </div>
+                              <input type="text" class="form-control amount-input" name="moti_pooja" id="moti_pooja" placeholder="Amount" aria-label="Amount (to the nearest dollar)"  maxlength="6" onkeypress="return onlyNumbers(this.value);">
+                            </div><div id="moti_pooja-1" class="error-message" ></div>
                           </div>
                           <div class="col-md-4">
                             <label class="form-label" for="multicol-phone">શ્રી ધૃતની બોલી ખાતે</label>
                             <div class="input-group">
                               <span class="input-group-text">₹</span>
-                              <input type="number" class="form-control amount-input" name="drut_boli" placeholder="Amount" aria-label="Amount (to the nearest dollar)">
-                              
-                            </div>
+                              <input type="text" class="form-control amount-input" name="drut_boli" id="drut_boli" placeholder="Amount" aria-label="Amount (to the nearest dollar)"  maxlength="6" onkeypress="return onlyNumbers(this.value);">
+                            </div><div id="drut_boli-1" class="error-message" ></div>
                           </div>
                        
                           <div class="col-md-4">
                             <label class="form-label" for="multicol-phone">શ્રી અન્ય ખાતે</label>
                             <div class="input-group">
                               <span class="input-group-text">₹</span>
-                              <input type="number" class="form-control amount-input" name="other_account_amount" placeholder="Amount" aria-label="Amount (to the nearest dollar)">
-                              
-                            </div>
+                              <input type="text" class="form-control amount-input" name="other_account_amount" id="other_account_amount" placeholder="Amount" aria-label="Amount (to the nearest dollar)"  maxlength="6" onkeypress="return onlyNumbers(this.value);">
+                            </div><div id="other_account_amount-1" class="error-message" ></div>
                           </div>
                           <div class="col-md-4">
                             <label class="form-label" for="basic-default-name">અન્ય વિગત</label>
@@ -667,6 +653,68 @@ function NumToWord(inputNumber, outputControl) {
             });
 </script>
 <script>
+    $(".browser-default-validation").change(function (event) {
+        
+    });
+        $("#sarv_sadharan").focusout(function(){
+            let sarv_sadharan=document.getElementById("sarv_sadharan").value;
+            if(sarv_sadharan!=""){if(sarv_sadharan == 0){ $("#sarv_sadharan-1").html("Enter Valid Amount");} else { $("#sarv_sadharan-1").html(""); }}
+        });
+        $("#jiv_daya").focusout(function(){
+            let jiv_daya=document.getElementById("jiv_daya").value;
+            if(jiv_daya!=""){if(jiv_daya == 0){ $("#jiv_daya-1").html("Enter Valid Amount");} else { $("#jiv_daya-1").html(""); }}
+        });
+         $("#shadhu_shdhvi").focusout(function(){
+            let shadhu_shdhvi=document.getElementById("shadhu_shdhvi").value;
+            if(shadhu_shdhvi!=""){if(shadhu_shdhvi == 0){ $("#shadhu_shdhvi-1").html("Enter Valid Amount");} else { $("#shadhu_shdhvi-1").html(""); }}
+        });
+        $("#sadharmik").focusout(function(){
+            let sadharmik=document.getElementById("sadharmik").value;
+            if(sadharmik!=""){if(sadharmik == 0){ $("#sadharmik-1").html("Enter Valid Amount");} else { $("#sadharmik-1").html(""); }}
+        });
+        $("#chaturmas").focusout(function(){
+            let chaturmas=document.getElementById("chaturmas").value;  
+            if(chaturmas!=""){if(chaturmas == 0){ $("#chaturmas-1").html("Enter Valid Amount");} else { $("#chaturmas-1").html(""); }}
+        });
+        $("#kayami_tithi").focusout(function(){
+            let kayami_tithi=document.getElementById("kayami_tithi").value;
+            if(kayami_tithi!=""){if(kayami_tithi == 0){ $("#kayami_tithi-1").html("Enter Valid Amount");} else { $("#kayami_tithi-1").html(""); }}
+        });
+        $("#devdravya").focusout(function(){
+            let devdravya=document.getElementById("devdravya").value;
+            if(devdravya!=""){if(devdravya == 0){ $("#devdravya-1").html("Enter Valid Amount");} else { $("#devdravya-1").html(""); }}
+        });
+        $("#kesar_sukhad").focusout(function(){
+            let kesar_sukhad=document.getElementById("kesar_sukhad").value;
+            if(kesar_sukhad!=""){if(kesar_sukhad == 0){ $("#kesar_sukhad-1").html("Enter Valid Amount");} else { $("#kesar_sukhad-1").html(""); }}
+        });
+        $("#dhoop_deep").focusout(function(){
+            let dhoop_deep=document.getElementById("dhoop_deep").value;
+            if(dhoop_deep!=""){if(dhoop_deep == 0){ $("#dhoop_deep-1").html("Enter Valid Amount");} else { $("#dhoop_deep-1").html(""); }}
+        });
+        $("#snatra_puja").focusout(function(){
+            let snatra_puja=document.getElementById("snatra_puja").value;
+            if(snatra_puja!=""){if(snatra_puja == 0){ $("#snatra_puja-1").html("Enter Valid Amount");} else { $("#snatra_puja-1").html(""); }}
+        });
+        $("#agani_pooja").focusout(function(){
+            let agani_pooja=document.getElementById("agani_pooja").value;
+            if(agani_pooja!=""){if(agani_pooja == 0){ $("#agani_pooja-1").html("Enter Valid Amount");} else { $("#agani_pooja-1").html(""); }}
+        });
+        $("#moti_pooja").focusout(function(){
+            let moti_pooja=document.getElementById("moti_pooja").value;
+            if(moti_pooja!=""){if(moti_pooja == 0){ $("#moti_pooja-1").html("Enter Valid Amount");} else { $("#moti_pooja-1").html(""); }}
+        });
+        $("#drut_boli").focusout(function(){
+            let drut_boli=document.getElementById("drut_boli").value;
+            if(drut_boli!=""){if(drut_boli == 0){ $("#drut_boli-1").html("Enter Valid Amount");} else { $("#drut_boli-1").html(""); }}
+        });
+        $("#other_account_amount").focusout(function(){
+            let other_account_amount=document.getElementById("other_account_amount").value;
+            if(other_account_amount!=""){if(other_account_amount == 0){ $("#other_account_amount-1").html("Enter Valid Amount");} else { $("#other_account_amount-1").html(""); }}
+        });
+        
+        
+   
     $("#KVO_religious_donation").submit(function(){
       var flag=0;
       $(".amount-input").each(function(){

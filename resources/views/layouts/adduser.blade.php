@@ -9,7 +9,7 @@
 
   <div class="mb-3">
     <label class="form-label" for="multicol-phone"><span class="required">Phone Number</span></label>
-    <input type="text" name="phone_no" id="multicol-phone" class="form-control phone-mask" placeholder="658 799 8941" pattern="[1-9]{1}[0-9]{9}" maxlength="10" required/>
+    <input type="text" name="phone_no" id="multicol-phone" class="form-control phone-mask" placeholder="658 799 8941" pattern="[1-9]{1}[0-9]{9}" maxlength="10" required onkeypress="return onlyNumbers(this.value);"/>
     <div id="error" class="error-message"></div>
 </div>
   <div class="mb-3">
@@ -46,4 +46,5 @@ contactInput.addEventListener('input', function () {
     }
 });
 </script>
+
 
