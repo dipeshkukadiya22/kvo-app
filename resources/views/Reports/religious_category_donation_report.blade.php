@@ -136,7 +136,7 @@ div.card-datatable [class*=col-md-] {
                                                 <option value="agani_pooja" {{ ($category == "agani_pooja") ? "selected" :""}}>શ્રી આંગી પૂજા ખાતે</option>
                                                 <option value="moti_pooja" {{ ($category == "moti_pooja") ? "selected" :""}}>શ્રી મોટી પૂજા ખાતે</option>
                                                 <option value="drut_boli" {{ ($category == "drut_boli") ? "selected" :""}}>શ્રી ધૃતની બોલી ખાતે</option>
-                                                <option value="other_account_name" {{ ($category == "other_account_name") ? "selected" :""}}>શ્રી અન્ય ખાતે</option>
+                                                <option value="other_account_amount" {{ ($category == "other_account_amount") ? "selected" :""}}>શ્રી અન્ય ખાતે</option>
                                               
                                                 </select>
                                             </div>
@@ -467,7 +467,7 @@ buttons: [
               case "drut_boli":
               $('#display_category').html("શ્રી ધૃતની બોલી ખાતે");
               break;
-              case "other_account_name":
+              case "other_account_amount":
               $('#display_category').html("શ્રી અન્ય ખાતે");
               break;
             default:

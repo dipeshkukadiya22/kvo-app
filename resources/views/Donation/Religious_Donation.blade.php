@@ -653,68 +653,93 @@ function NumToWord(inputNumber, outputControl) {
             });
 </script>
 <script>
-    $(".browser-default-validation").change(function (event) {
-        
-    });
+      let sarv_sadharan=document.getElementById("sarv_sadharan");
+      let jiv_daya=document.getElementById("jiv_daya");
+      let shadhu_shdhvi=document.getElementById("shadhu_shdhvi");
+      let sadharmik=document.getElementById("sadharmik");
+      let chaturmas=document.getElementById("chaturmas");
+      let kayami_tithi=document.getElementById("kayami_tithi");
+      let devdravya=document.getElementById("devdravya");
+      let kesar_sukhad=document.getElementById("kesar_sukhad");
+      let dhoop_deep=document.getElementById("dhoop_deep");
+      let snatra_puja=document.getElementById("snatra_puja");
+      let agani_pooja=document.getElementById("agani_pooja");
+      let moti_pooja=document.getElementById("moti_pooja");
+      let drut_boli=document.getElementById("drut_boli");
+      let other_account_amount=document.getElementById("other_account_amount");
+    $("#KVO_religious_donation").submit(function(){
+      var flag=0;
+      var check=0;
+      if(sarv_sadharan.value!= 0 || jiv_daya.value!=0 || shadhu_shdhvi.value != 0 ||sadharmik.value != 0 &&chaturmas.value !=0 &&kayami_tithi.value !=0 &&devdravya.value !=0 &&kesar_sukhad.value !=0 &&dhoop_deep.value !=0 &&snatra_puja.value !=0 &&agani_pooja.value !=0 &&moti_pooja.value !=0 &&drut_boli.value !=0 &&other_account_amount.value ~=0)
+      {
+        check=1;
+      }
+      if(check==0)
+      {
+        event.preventDefault();
+      }else{
+      $(".amount-input").each(function(){
+        // Test if the div element is empty
+       if($(this).val() != "")
+       {flag=1;}
+      });
+      if(flag === 0)
+      {
+        Swal.fire(
+                'Required!',
+                'Please Enter One Amount ',
+                'warning'
+                )
+        event.preventDefault();
+      } else{
+                window.location.href = 'View_Religious_Donation';
+            }}
+      });
         $("#sarv_sadharan").focusout(function(){
-            let sarv_sadharan=document.getElementById("sarv_sadharan").value;
-            if(sarv_sadharan!=""){if(sarv_sadharan == 0){ $("#sarv_sadharan-1").html("Enter Valid Amount");} else { $("#sarv_sadharan-1").html(""); }}
+            if(sarv_sadharan.value!=""){if(sarv_sadharan.value == 0){ $("#sarv_sadharan-1").html("Enter Valid Amount");} else { $("#sarv_sadharan-1").html(""); }} 
         });
+   
         $("#jiv_daya").focusout(function(){
-            let jiv_daya=document.getElementById("jiv_daya").value;
-            if(jiv_daya!=""){if(jiv_daya == 0){ $("#jiv_daya-1").html("Enter Valid Amount");} else { $("#jiv_daya-1").html(""); }}
+            if(jiv_daya.value!=""){if(jiv_daya.value == 0){ $("#jiv_daya-1").html("Enter Valid Amount");} else { $("#jiv_daya-1").html(""); }}
         });
          $("#shadhu_shdhvi").focusout(function(){
-            let shadhu_shdhvi=document.getElementById("shadhu_shdhvi").value;
-            if(shadhu_shdhvi!=""){if(shadhu_shdhvi == 0){ $("#shadhu_shdhvi-1").html("Enter Valid Amount");} else { $("#shadhu_shdhvi-1").html(""); }}
+            if(shadhu_shdhvi.value!=""){if(shadhu_shdhvi.value == 0){ $("#shadhu_shdhvi-1").html("Enter Valid Amount");} else { $("#shadhu_shdhvi-1").html(""); }}
         });
         $("#sadharmik").focusout(function(){
-            let sadharmik=document.getElementById("sadharmik").value;
-            if(sadharmik!=""){if(sadharmik == 0){ $("#sadharmik-1").html("Enter Valid Amount");} else { $("#sadharmik-1").html(""); }}
+            if(sadharmik.value!=""){if(sadharmik.value == 0){ $("#sadharmik-1").html("Enter Valid Amount");} else { $("#sadharmik-1").html(""); }}
         });
         $("#chaturmas").focusout(function(){
-            let chaturmas=document.getElementById("chaturmas").value;  
-            if(chaturmas!=""){if(chaturmas == 0){ $("#chaturmas-1").html("Enter Valid Amount");} else { $("#chaturmas-1").html(""); }}
+            if(chaturmas.value!=""){if(chaturmas.value == 0){ $("#chaturmas-1").html("Enter Valid Amount");} else { $("#chaturmas-1").html(""); }}
         });
         $("#kayami_tithi").focusout(function(){
-            let kayami_tithi=document.getElementById("kayami_tithi").value;
-            if(kayami_tithi!=""){if(kayami_tithi == 0){ $("#kayami_tithi-1").html("Enter Valid Amount");} else { $("#kayami_tithi-1").html(""); }}
+            if(kayami_tithi.value!=""){if(kayami_tithi.value == 0){ $("#kayami_tithi-1").html("Enter Valid Amount");} else { $("#kayami_tithi-1").html(""); }}
         });
         $("#devdravya").focusout(function(){
-            let devdravya=document.getElementById("devdravya").value;
-            if(devdravya!=""){if(devdravya == 0){ $("#devdravya-1").html("Enter Valid Amount");} else { $("#devdravya-1").html(""); }}
+            if(devdravya.value!=""){if(devdravya.value == 0){ $("#devdravya-1").html("Enter Valid Amount");} else { $("#devdravya-1").html(""); }}
         });
         $("#kesar_sukhad").focusout(function(){
-            let kesar_sukhad=document.getElementById("kesar_sukhad").value;
-            if(kesar_sukhad!=""){if(kesar_sukhad == 0){ $("#kesar_sukhad-1").html("Enter Valid Amount");} else { $("#kesar_sukhad-1").html(""); }}
+            if(kesar_sukhad.value!=""){if(kesar_sukhad.value == 0){ $("#kesar_sukhad-1").html("Enter Valid Amount");} else { $("#kesar_sukhad-1").html(""); }}
         });
         $("#dhoop_deep").focusout(function(){
-            let dhoop_deep=document.getElementById("dhoop_deep").value;
-            if(dhoop_deep!=""){if(dhoop_deep == 0){ $("#dhoop_deep-1").html("Enter Valid Amount");} else { $("#dhoop_deep-1").html(""); }}
+            if(dhoop_deep.value!=""){if(dhoop_deep.value == 0){ $("#dhoop_deep-1").html("Enter Valid Amount");} else { $("#dhoop_deep-1").html(""); }}
         });
         $("#snatra_puja").focusout(function(){
-            let snatra_puja=document.getElementById("snatra_puja").value;
-            if(snatra_puja!=""){if(snatra_puja == 0){ $("#snatra_puja-1").html("Enter Valid Amount");} else { $("#snatra_puja-1").html(""); }}
+            if(snatra_puja.value!=""){if(snatra_puja.value == 0){ $("#snatra_puja-1").html("Enter Valid Amount");} else { $("#snatra_puja-1").html(""); }}
         });
         $("#agani_pooja").focusout(function(){
-            let agani_pooja=document.getElementById("agani_pooja").value;
-            if(agani_pooja!=""){if(agani_pooja == 0){ $("#agani_pooja-1").html("Enter Valid Amount");} else { $("#agani_pooja-1").html(""); }}
+            if(agani_pooja.value!=""){if(agani_pooja.value == 0){ $("#agani_pooja-1").html("Enter Valid Amount");} else { $("#agani_pooja-1").html(""); }}
         });
         $("#moti_pooja").focusout(function(){
-            let moti_pooja=document.getElementById("moti_pooja").value;
-            if(moti_pooja!=""){if(moti_pooja == 0){ $("#moti_pooja-1").html("Enter Valid Amount");} else { $("#moti_pooja-1").html(""); }}
+            if(moti_pooja.value!=""){if(moti_pooja.value == 0){ $("#moti_pooja-1").html("Enter Valid Amount");} else { $("#moti_pooja-1").html(""); }}
         });
         $("#drut_boli").focusout(function(){
-            let drut_boli=document.getElementById("drut_boli").value;
-            if(drut_boli!=""){if(drut_boli == 0){ $("#drut_boli-1").html("Enter Valid Amount");} else { $("#drut_boli-1").html(""); }}
+            if(drut_boli.value!=""){if(drut_boli.value == 0){ $("#drut_boli-1").html("Enter Valid Amount");} else { $("#drut_boli-1").html(""); }}
         });
         $("#other_account_amount").focusout(function(){
-            let other_account_amount=document.getElementById("other_account_amount").value;
-            if(other_account_amount!=""){if(other_account_amount == 0){ $("#other_account_amount-1").html("Enter Valid Amount");} else { $("#other_account_amount-1").html(""); }}
+            if(other_account_amount.value!=""){if(other_account_amount.value == 0){ $("#other_account_amount-1").html("Enter Valid Amount");} else { $("#other_account_amount-1").html(""); }}
         });
-        
-        
-   
+</script>
+<script>
     $("#KVO_religious_donation").submit(function(){
       var flag=0;
       $(".amount-input").each(function(){

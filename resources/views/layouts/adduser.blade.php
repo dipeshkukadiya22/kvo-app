@@ -4,8 +4,8 @@
   @csrf
   <div class="mb-3">
     <label class="form-label" for="basic-default-name">Name</label>
-    <input type="text" name="m_name" class="form-control" id="basic-default-name"  style="text-transform:uppercase"  placeholder="John Doe" required/>
-  </div>
+    <input type="text" name="m_name" class="form-control" id="basic-default-name" style="text-transform: uppercase" placeholder="John Doe" required oninput="this.value = this.value.replace(/[0-9]/g, '');"/>
+</div>
 
   <div class="mb-3">
     <label class="form-label" for="multicol-phone"><span class="required">Phone Number</span></label>
@@ -14,12 +14,12 @@
 </div>
   <div class="mb-3">
     <label class="form-label" for="basic-default-email">Email</label>
-    <input type="email" name="email" id="basic-default-email" class="form-control" placeholder="john@abc.doe" required/>
+    <input type="email" name="email" id="basic-default-email" class="form-control" placeholder="john@abc.doe" maxlength="25" required/>
   </div>
   
   <div class="mb-3">
     <label class="form-label" for="city">City</label>
-    <input type="text" name="city" class="form-control" id="city"  style="text-transform:uppercase" placeholder="Bhuj" required />
+    <input type="text" name="city" class="form-control" id="city"  style="text-transform:uppercase" placeholder="Bhuj" maxlength="20" required />
   </div>
 
  

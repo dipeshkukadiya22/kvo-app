@@ -420,6 +420,7 @@ div.card-datatable [class*=col-md-] {
                 locale: {
                     format: 'DD-MM-YYYY'
                 }
+                
             }, function(start, end, label) {
                 $('input[name="daterange"]').val(start.format("DD-MM-YYYY"));
             });

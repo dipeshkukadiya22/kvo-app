@@ -135,7 +135,7 @@ div.card-datatable [class*=col-md-] {
                                             </div>
                                             <!-- /Range Picker-->
                                             <div class="col-md-3 submit-button">
-                                                <button type="submit" class="btn btn-block btn-primary">Submit</button>
+                                                <button type="submit" id="submitbtn1" class="btn btn-block btn-primary">Submit</button>
                                             </div>
                                         </div>
                                         
@@ -405,18 +405,56 @@ div.card-datatable [class*=col-md-] {
     <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
 
-    <script>
-        $(function() {
-            $('input[name="daterange"]').daterangepicker({
-                opens: 'left',
-                locale: {
-                    format: 'DD-MM-YYYY'
-                }
-            }, function(start, end, label) {
-                $('input[name="daterange"]').val(start.format("DD-MM-YYYY"));
-            });
+   <!-- <script>
+    jQuery(function ($) {
+        var startDate = moment().startOf('month');
+        var endDate = moment().endOf('month'); 
+        $('#daterange').daterangepicker({
+            opens: 'left',
+            locale: {
+                format: 'DD-MM-YYYY'
+            },
+            startDate: startDate,
+            endDate: endDate
+        }, function(start, end, label) {
+       
+            $('#daterange').val(start.format('DD-MM-YYYY') + ' - ' + end.format('DD-MM-YYYY'));
+            event.preventDefault();
         });
-    </script>
+
+       
+    });
+</script>  -->
+
+
+
+
+
+
+
+
+<script>
+    $(function() {
+      var selectedStartDate = moment().startOf('month');
+      var selectedEndDate = moment().endOf('month');
+    
+        $('#daterange').daterangepicker({
+        
+            locale: {
+                format: 'DD-MM-YYYY'
+            }
+        }, function(start, end, label) {
+            selectedStartDate = start;
+            selectedEndDate = end;
+            $('input[name="daterange"]').val(selectedStartDate.format('DD-MM-YYYY') + ' - ' + selectedEndDate.format('DD-MM-YYYY'));
+        });
+        
+    });
+</script>  
+
+
+
+
 
     
    

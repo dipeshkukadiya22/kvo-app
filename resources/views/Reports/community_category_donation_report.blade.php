@@ -614,18 +614,23 @@ $('#daterange').change(function() {
     <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
 
-   <script>
-        $(function() {
-            $('input[name="daterange"]').daterangepicker({
-                opens: 'left',
-                locale: {
-                    format: 'DD-MM-YYYY'
-                }
-            }, function(start, end, label) {
-                $('input[name="daterange"]').val(start.format("DD-MM-YYYY"));
-            });
+    <script>
+    jQuery(function ($) {
+        var startDate = moment().startOf('month');
+        var endDate = moment().endOf('month');
+        
+        $('input[name="daterange"]').daterangepicker({
+            opens: 'left',
+            locale: {
+                format: 'DD-MM-YYYY'
+            },
+            startDate: startDate,
+            endDate: endDate
+        }, function(start, end, label) {
+            $('.daterange span').html(start.format('DD-MM-YYYY') + ' - ' + end.format('DD-MM-YYYY'));
         });
-    </script>
+    });
+</script>
 
 
 
