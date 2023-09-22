@@ -59,13 +59,14 @@ class ReportController extends Controller
         return view('Reports.general_donation_report',['donation'=>$donation,'daterange'=>$daterange,'trust'=>$trust]);
     }
     public function show_general_donation_report(Request $req){
-        $daterange=$req->daterange;
+        $daterange = ($req->input('daterange'));
         $trust=$req->trust;
         $date1=date('Y-m-d',strtotime(substr($daterange,0,10)));
         $date2=date('Y-m-d',strtotime(substr($daterange,13)));
         $donation=DB::SELECT("SELECT * FROM `GeneralDonation` join add_members on add_members.p_id=GeneralDonation.member_id where date BETWEEN '$date1' and '$date2' and community='$trust'");
         return view('Reports.general_donation_report',['donation'=>$donation,'daterange'=>$daterange,'trust'=>$trust]);
     }
+    
    /* public function general_category_donation_report(){
         $daterange=Date("01-m-Y")."-".Date("31-m-Y");
         $trust="VIJAYNAGAR";

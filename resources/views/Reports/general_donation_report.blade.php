@@ -110,7 +110,7 @@ div.card-datatable [class*=col-md-] {
                             <div class="col-md mb-4 mb-md-0">
                                 <div class="card">
                                 <div class="card-body">
-                                    <form id="kvo_general_donation_report" method="GET" class="browser-default-validation" action="{{route('show_general_donation_report')}}">
+                                    <form id="kvo_general_donation_report" method="POST" class="browser-default-validation" action="{{route('show_general_donation_report')}}">
                                         <div class="row g-3">
                                           @csrf
                                           <div class="col-md-3 mb-3">
@@ -122,21 +122,24 @@ div.card-datatable [class*=col-md-] {
                                             </div>
                                           
                                            <!-- Range Picker-->
-                                            <div class="col-md-3 col-12 mb-4">
-                                                <label for="flatpickr-range" class="form-label">Date</label>
-                                                <input
+                                           <div class="col-md-3 col-12 mb-4">
+                                            <label for="flatpickr-range" class="form-label">Date</label>
+                                            <input
                                                 type="text"
                                                 name="daterange"
                                                 id="daterange"
                                                 class="form-control"
-                                                placeholder="YYYY-MM-DD to YYYY-MM-DD"
+                                                placeholder="DD-MM-YYYY to DD-MM-YYYY"
                                                 value="{{$daterange}}"
-                                                 />
-                                            </div>
-                                            <!-- /Range Picker-->
-                                            <div class="col-md-3 submit-button">
-                                                <button type="submit" id="submitbtn1" class="btn btn-block btn-primary">Submit</button>
-                                            </div>
+                                            />
+                                        </div>
+                                             <!-- /Range Picker-->
+                                             <div class="col-md-3 submit-button">
+                                                    <button type="submit" id="submitbtn1" class="btn btn-block btn-primary">Submit</button>
+                                                </div>
+                                                <input type="hidden" name="selectedDateRange" id="selectedDateRange" value="{{$daterange}}">
+
+
                                         </div>
                                         
                                     </form>
@@ -405,7 +408,7 @@ div.card-datatable [class*=col-md-] {
     <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
 
-   <!-- <script>
+<script>
     jQuery(function ($) {
         var startDate = moment().startOf('month');
         var endDate = moment().endOf('month'); 
@@ -416,41 +419,49 @@ div.card-datatable [class*=col-md-] {
             },
             startDate: startDate,
             endDate: endDate
-        }, function(start, end, label) {
+           }, function(start, end, label) {
        
-            $('#daterange').val(start.format('DD-MM-YYYY') + ' - ' + end.format('DD-MM-YYYY'));
+             $('#daterange').val(start.format('DD-MM-YYYY') + ' - ' + end.format('DD-MM-YYYY'));
             event.preventDefault();
+            console.log(startDate);
         });
 
        
     });
-</script>  -->
-
-
-
-
-
-
-
-
-<script>
+</script>   
+<!-- <script>
     $(function() {
-      var selectedStartDate = moment().startOf('month');
-      var selectedEndDate = moment().endOf('month');
-    
+        var selectedStartDate, selectedEndDate;
+
         $('#daterange').daterangepicker({
-        
+            startDate: moment().startOf('month'), 
+            endDate: moment().endOf('month'),    
             locale: {
                 format: 'DD-MM-YYYY'
             }
         }, function(start, end, label) {
             selectedStartDate = start;
             selectedEndDate = end;
-            $('input[name="daterange"]').val(selectedStartDate.format('DD-MM-YYYY') + ' - ' + selectedEndDate.format('DD-MM-YYYY'));
+            console.log(selectedStartDate);
+
         });
-        
+        // aa code working j nathi kem start date j nathi madtii 
+
+        $('#submitbtn1').click(function(e) {
+            e.preventDefault();
+            // Store the selected date range in the hidden input
+            $('#selectedDateRange').val(
+                selectedStartDate.format('DD-MM-YYYY') + ' - ' + selectedEndDate.format('DD-MM-YYYY')
+            );
+
+            // Submit the form
+            $('#kvo_general_donation_report').submit();
+        });
     });
-</script>  
+</script> -->
+
+
+
 
 
 

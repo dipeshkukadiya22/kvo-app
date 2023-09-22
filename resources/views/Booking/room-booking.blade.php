@@ -125,12 +125,12 @@
                             <form class="browser-default-validation" method="POST" tabindex="1" action="{{route('room-booking')}}">
                             @csrf
                                 <label class="form-label required" for="basic-default-name"  >Name</label>
-                                <input type="text" name="m_name" class="form-control" style="text-transform:uppercase" id="basic-default-name"  style="text-transform:uppercase"  placeholder="Name" required />
+                                <input type="text" name="m_name" class="form-control" style="text-transform:uppercase" id="basic-default-name"  style="text-transform:uppercase"  placeholder="Name" required  oninput="this.value = this.value.replace(/[0-9]/g, '');"/>
                               </div>
                               
                               <div class="mb-3">
                                 <label class="form-label" for="multicol-phone"><span class="required">Phone Number</span></label>
-                                <input type="text" name="phone_no" id="multicol-phone" class="form-control phone-mask" placeholder="658 799 8941"pattern="[1-9]{1}[0-9]{9}" maxlength="10" required/>
+                                <input type="text" name="phone_no" id="multicol-phone" class="form-control phone-mask" placeholder="658 799 8941"pattern="[1-9]{1}[0-9]{9}" maxlength="10" required onkeypress="return onlyNumbers(this.value);" required/>
                                                           <div id="error" class="error-message" ></div>
                               </div>
 
@@ -908,166 +908,6 @@ $(document).ready(function () {
     }
  });
 </script>
-
-<!-- <script>
-
-  /**
- * Tagify
- */
-
-'use strict';
-
-(function () {
-  // Basic
-  //------------------------------------------------------
-  const tagifyBasicEl = document.querySelector('#TagifyBasic');
-  const TagifyBasic = new Tagify(tagifyBasicEl);
-
-  // Read only
-  //------------------------------------------------------
-  const tagifyReadonlyEl = document.querySelector('#TagifyReadonly');
-  const TagifyReadonly = new Tagify(tagifyReadonlyEl);
-
-  // Custom list & inline suggestion
-  //------------------------------------------------------
-  const TagifyCustomInlineSuggestionEl = document.querySelector('#TagifyCustomInlineSuggestion');
-  const TagifyCustomListSuggestionEl = document.querySelector('#TagifyCustomListSuggestion');
-
-  const whitelist = [
-    '301 2BAC',
-    '302 2BAC',
-    '303 2BAC',
-    '304 2BAC'
-    
-  ];
-  // Inline
-  let TagifyCustomInlineSuggestion = new Tagify(TagifyCustomInlineSuggestionEl, {
-    whitelist: whitelist,
-    maxTags: 10,
-    dropdown: {
-      maxItems: 20,
-      classname: 'tags-inline',
-      enabled: 0,
-      closeOnSelect: false
-    }
-  });
-  // List
-  let TagifyCustomListSuggestion = new Tagify(TagifyCustomListSuggestionEl, {
-    whitelist: whitelist,
-    maxTags: 10,
-    dropdown: {
-      maxItems: 20,
-      classname: '',
-      enabled: 0,
-      closeOnSelect: false
-    }
-  });
-
-
-})();
-
-
-(function () {
-  // Basic
-  //------------------------------------------------------
-  const tagifyBasicEl = document.querySelector('#TagifyBasic');
-  const TagifyBasic = new Tagify(tagifyBasicEl);
-
-  // Read only
-  //------------------------------------------------------
-  const tagifyReadonlyEl = document.querySelector('#TagifyReadonly');
-  const TagifyReadonly = new Tagify(tagifyReadonlyEl);
-
-  // Custom list & inline suggestion
-  //------------------------------------------------------
-  const TagifyCustomInlineSuggestionEl = document.querySelector('#TagifyCustomInlineSuggestion1');
-  const TagifyCustomListSuggestionEl = document.querySelector('#TagifyCustomListSuggestion1');
-
-  const whitelist = [
-    '201 2BNAC',
-    '202 2BNAC',
-    '203 3BNAC',
-    '204 4BNAC'
-    
-  ];
-  // Inline
-  let TagifyCustomInlineSuggestion = new Tagify(TagifyCustomInlineSuggestionEl, {
-    whitelist: whitelist,
-    maxTags: 10,
-    dropdown: {
-      maxItems: 20,
-      classname: 'tags-inline',
-      enabled: 0,
-      closeOnSelect: false
-    }
-  });
-  // List
-  let TagifyCustomListSuggestion1 = new Tagify(TagifyCustomListSuggestionEl, {
-    whitelist: whitelist,
-    maxTags: 10,
-    dropdown: {
-      maxItems: 20,
-      classname: '',
-      enabled: 0,
-      closeOnSelect: false
-    }
-  });
-
-
-})();
-
-
-(function () {
-  // Basic
-  //------------------------------------------------------
-  const tagifyBasicEl = document.querySelector('#TagifyBasic');
-  const TagifyBasic = new Tagify(tagifyBasicEl);
-
-  // Read only
-  //------------------------------------------------------
-  const tagifyReadonlyEl = document.querySelector('#TagifyReadonly');
-  const TagifyReadonly = new Tagify(tagifyReadonlyEl);
-
-  // Custom list & inline suggestion
-  //------------------------------------------------------
-  const TagifyCustomInlineSuggestionEl = document.querySelector('#TagifyCustomInlineSuggestion2');
-  const TagifyCustomListSuggestionEl = document.querySelector('#TagifyCustomListSuggestion2');
-
-  const whitelist = [
-    '1 DMNAC',
-    '2 DMNAC',
-    '3 DMNAC',
-    '4 DMAC',
-    '5 DMAC',
-    '6 DMAC'
-  ];
-  // Inline
-  let TagifyCustomInlineSuggestion = new Tagify(TagifyCustomInlineSuggestionEl, {
-    whitelist: whitelist,
-    maxTags: 10,
-    dropdown: {
-      maxItems: 20,
-      classname: 'tags-inline',
-      enabled: 0,
-      closeOnSelect: false
-    }
-  });
-  // List
-  let TagifyCustomListSuggestion2 = new Tagify(TagifyCustomListSuggestionEl, {
-    whitelist: whitelist,
-    maxTags: 10,
-    dropdown: {
-      maxItems: 20,
-      classname: '',
-      enabled: 0,
-      closeOnSelect: false
-    }
-  });
-
-
-})();
-</script> -->
-
 <script>
     $("#select2Basic").change(function () {
       var id=$(this).val();
@@ -1121,13 +961,7 @@ $(document).ready(function () {
         });
   </script> -->
   <script>
- 
 </script>
- 
-
-
-
-   
 <script>
  
   $(document).ready(function() {
@@ -1376,7 +1210,6 @@ contactInput.addEventListener('input', function () {
 });
 
 </script>
-
 
 
 
