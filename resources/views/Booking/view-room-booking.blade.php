@@ -454,11 +454,6 @@ div.card-datatable [class*=col-md-] {
                                                   <i class="ti ti-arrow-left me-sm-1"></i>
                                                   <span class="align-middle d-sm-inline-block d-none">Previous</span>
                                                 </button>
-                                                {{-- <div>
-                                                  <input type="button"  class="btn btn-primary btn-next">
-                                                  <span class="align-middle d-sm-inline-block d-none me-sm-1">Next</span>
-                                                  <i class="ti ti-arrow-right"></i>
-                                                </div> --}}
                                                 <button type="button" class="btn btn-primary btn-next" id="btn-step3">
                                                   <span class="align-middle d-sm-inline-block d-none me-sm-1">Next</span>
                                                   <i class="ti ti-arrow-right"></i>
@@ -819,6 +814,8 @@ function edit(id)
                 success:function(response){
                   var gender=response[0]['gender'];
                   var community=response[0]['community'];
+                  var date=new Date(response[0]['check_in_date']);
+                  var checkindate=date.getDate()+"-"+date.getMonth()+"-"+date.getFullYear();
                   document.getElementById("id_proof1").src="assets/img/avatars/"+response[0]['id_proof'];
                   if(response[0]['id_proof1'] != null){
                   document.getElementById("id_proof2").src="assets/img/avatars/"+response[0]['id_proof1'];}
@@ -845,6 +842,8 @@ function edit(id)
                   $("#no_of_days").val(response[0]['no_of_days']);
                   $("#occupation").val(response[0]['occupation']);
                   $("#reason").val(response[0]['reason']);
+                  
+                  $("#flatpickr-datetime").val(checkindate);
                   $("#ac_amount").val(response[0]['ac_amount']);
                   $("#non_ac_amount").val(response[0]['non_ac_amount']);
                   $("#dmt_amount").val(response[0]['door_mt_amount']);
