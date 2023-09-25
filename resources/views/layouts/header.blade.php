@@ -134,7 +134,7 @@
             </li>
 
             <!-- Layouts -->
-            <li class="menu-item" hidden>
+            <li class="menu-item" >
               <a href="{{route('room-booking')}}" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons ti ti-layout-sidebar"></i>
                 <div data-i18n="ROOM-BOOKING">ROOM-BOOKING </div>
@@ -171,6 +171,7 @@
             <li class="menu-item">
               <a href="#" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons ti ti-layout-sidebar"></i>
+                <i class="fa-light fa-user-group"></i>
                 <div data-i18n="Members">MEMBERS</div>
               </a>
               <ul class="menu-sub">
