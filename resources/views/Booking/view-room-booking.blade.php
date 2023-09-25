@@ -404,9 +404,9 @@ div.card-datatable [class*=col-md-] {
                                                           <label class="form-check-label" for="gender">Female</label>
                                                         </div>
 
-                                                        <div class="mb-3 col-lg-6 col-xl-3 col-12 mb-0" hidden>
+                                                        <div class="mb-3 col-lg-6 col-xl-3 col-12 mb-0">
                                                           <label class="form-label" for="form-repeater-1-2">gender</label>
-                                                          <input type="text" id="gender_data" name="gender_data" class="form-control" placeholder="your age" value="MALE"/>
+                                                          <input type="text" id="gender_data" name="gender_data0" class="form-control" placeholder="your age" value="MALE"/>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-2">
@@ -580,7 +580,7 @@ div.card-datatable [class*=col-md-] {
                                               <!-- Datetime Picker-->
                                               <div class="col-md-4">
                                                 <label for="flatpickr-datetime" class="form-label">Check-In Date</label>
-                                                <input type="text" class="form-control" name="check_in_date" placeholder="DD-MM-YYYY HH:MM" id="flatpickr-datetime"/>
+                                                <input type="text" class="form-control" name="check_in_date" placeholder="DD-MM-YYYY HH:MM" id="flatpickr-datetime" value=""/>
                                               </div>
 
                                               
@@ -790,7 +790,7 @@ div.card-datatable [class*=col-md-] {
 
 </script>
 
-    <script>
+    <!-- <script>
       jQuery(document).ready(function($){
       var currentDate = new Date();
       $('#check_out_date').flatpickr({
@@ -798,7 +798,7 @@ div.card-datatable [class*=col-md-] {
       defaultDate: currentDate
     })
     });
-    </script>
+    </script> -->
     <script>
       function pdf(id)
       {
@@ -910,14 +910,7 @@ function edit(id)
 <script>
  
   $(document).ready(function() {
-    // let currentStep = 1;
-    // var currentDateTime = new Date();
-
-    // $('#flatpickr-datetime').flatpickr({
-    //   enableTime: true,
-    //   dateFormat: "d-m-Y H:i",
-    //   defaultDate: currentDateTime
-    // });
+   
     $(".repeat-next").on("click", function() {
       const selectedList1 = $('#select2Multiple11').val();
       const selectedList2 = $('#select2Multiple22').val();
@@ -964,8 +957,8 @@ function edit(id)
   });
 </script>
 <script>
-$(document).ready(function () {   
-
+$(document).ready(function () {  
+  $(".repeat-next").prop('disabled',true);
     $('#FEMALE').change(function(){
       $("#inlineRadio2").attr('checked',true);
       $("#gender_data").val("FEMALE");
@@ -975,10 +968,6 @@ $(document).ready(function () {
       $("#gender_data").val("MALE");
     });
 });
-
-
-
-
 </script>
 
 <script>
@@ -1019,7 +1008,7 @@ $(document).ready(function () {
           '<td>'+ j +'</td>' +
           '<td class="member_full_name' + i + '">' + $('#full_name_form' + i).val()+ '</td>' +
           '<td class="members_age' + i + '">' + $('#member_age' + i).val() + '</td>' +
-          '<td class="member_gen' + i + '">' + $('input[name="gender'+i+'"]:checked').val() + '</td>' +
+          '<td class="member_gen'+ i +'">' + $('input[name="gender'+i+'"]:checked').val() + '</td>' +
           '<td class="member_rel' + i + '">' + $('#member_relation' + i).val() + '</td>' +
           '</tr>'
         );

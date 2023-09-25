@@ -304,10 +304,11 @@ class BookingController extends Controller
     }
     public function update_room_booking(Request $req) 
     {
+        //dd($req->toArray());
         $booking=room_details::find($req->booking_id);
         $old_no_of_person=$booking->no_of_person;
         $booking->no_of_person = $req->no_of_person_id;
-        $booking->check_in_date = date("Y-m-d H:i",strtotime($req->check_in_date));
+        $booking->check_in_date = date('Y-m-d', strtotime(substr($req->check_in_date, 0, 10)));;
         $acRoomList = array_filter($req->input('select2Multiple1', []));
         $nonAcRoomList = array_filter($req->input('select2Multiple2', []));
         $doorMetricRoomList = array_filter($req->input('select2Multiple3', []));
@@ -362,13 +363,16 @@ class BookingController extends Controller
             $total_member = $req->no_of_person_id;
             if ($old_no_of_person < $total_member) {
                 for ($i = $old_no_of_person + 1; $i <= $total_member; $i++) {
+              
                 $m_details = new member_details();
+              
                 $m_details->full_name =strtoupper($req->input('full_name'.$i));
                 $m_details->age= $req->input('m_age'.$i);
                 $m_details->gender = $req->input('gender'.$i);
                 $m_details->relation=$req->input('relation' .$i);
                 $m_details->personal_detail_id=$booking->member_id;
                 $m_details->room_id=$req->booking_id;
+                dd($req->toArray());
                 $m_details->save();  
                 }
            }

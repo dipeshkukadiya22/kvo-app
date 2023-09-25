@@ -1045,7 +1045,6 @@ $(document).ready(function () {
       );
 
       let numForms = parseInt($("#no_of_person_id").val());
-     
       if (isNaN(numForms) || numForms <= 0) {
        
         return false;
