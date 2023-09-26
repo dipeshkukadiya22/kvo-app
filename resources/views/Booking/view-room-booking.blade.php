@@ -109,7 +109,7 @@ div.card-datatable [class*=col-md-] {
                                           <thead>
                                          
                                               <tr >
-                                                <th style="font-size:14px"><b>Booking No.</b></th>
+                                                <th style="font-size:14px"><b>Booking Noo.</b></th>
                                                 <th  style="font-size:14px"><b>Name</b></th>
                                                 {{--<th>Status</th>--}}
                                                 <th style="font-size:15px"><b>Room No </b> </th>
