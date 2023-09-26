@@ -64,7 +64,13 @@ div.card-datatable [class*=col-md-] {
       background-color: #efefef;
       opacity: 1;
   }
-  
+  input[type="radio"].readonly {
+    pointer-events: none;
+}
+
+label.readonly {
+    pointer-events: none;
+}
   
 </style>
 
@@ -109,7 +115,7 @@ div.card-datatable [class*=col-md-] {
                                           <thead>
                                          
                                               <tr >
-                                                <th style="font-size:14px"><b>Booking Noo.</b></th>
+                                                <th style="font-size:14px"><b>Booking No.</b></th>
                                                 <th  style="font-size:14px"><b>Name</b></th>
                                                 {{--<th>Status</th>--}}
                                                 <th style="font-size:15px"><b>Room No </b> </th>
@@ -249,7 +255,7 @@ div.card-datatable [class*=col-md-] {
                                         </div>
                                       </div>
                                       <div class="bs-stepper-content">
-                                      <form id="kvo_update_room_booking" method="POST" action="{{ route('update_room_booking') }}">
+                                      <form id="kvo_update_room_booking" class="browser-default-validation" method="POST" action="{{ route('update_room_booking') }}">
                                         @csrf
                                           <!-- Account Details -->
                                           <div id="account-details" class="content">
@@ -286,12 +292,12 @@ div.card-datatable [class*=col-md-] {
 
                                                 <div class="col-md-4">
                                                   <label class="form-label" for="basic-default-name">Age</label>
-                                                  <input type="text" class="form-control" name="age" id="age" placeholder="Age"  maxlength="2" required oninput="javascript: if (this.value.length > 2) this.value = this.value.slice(0, 2);" />
+                                                  <input type="text" class="form-control check" name="age" id="age" placeholder="Age"  maxlength="2" required oninput="javascript: if (this.value.length > 2) this.value = this.value.slice(0, 2);" />
                                                 </div>
                       
                                                 <div class="col-4">
                                                   <label class="form-label" for="collapsible-address" >Address</label>  
-                                                  <textarea name="member_address"  class="form-control" id="member_address"  style="text-transform:uppercase" rows="1" placeholder="1456, Mall Road" required></textarea>
+                                                  <textarea name="member_address"  class="form-control check" id="member_address"  style="text-transform:uppercase" rows="1" placeholder="1456, Mall Road" required></textarea>
                                                 </div>
                                                                           
                                                 
@@ -351,10 +357,7 @@ div.card-datatable [class*=col-md-] {
                                                 </div>
                       
                                               <div class="col-12 d-flex justify-content-end">
-                                                {{-- <button class="btn btn-label-secondary btn-prev" disabled>
-                                                  <i class="ti ti-arrow-left me-sm-1"></i>
-                                                  <span class="align-middle d-sm-inline-block d-none">Previous</span>
-                                                </button> --}}
+                                                
                                                 
                                                 <button type="button" class="btn btn-primary btn-next" id="repeat-next" >
                                                   <span class="align-middle d-sm-inline-block d-none me-sm-1">Next</span>
@@ -395,18 +398,18 @@ div.card-datatable [class*=col-md-] {
                                                     <div class="mb-3 col-lg-6 col-xl-2 col-12 mb-0 ">
                                                         <label class="d-block form-label">Gender</label>
                                                         <div class="form-check form-check-inline">
-                                                      <input class="form-check-input" type="radio" name="gender0" id="inlineRadio1" value="MALE" checked/>
+                                                      <input class="form-check-input readonly" type="radio" name="gender0" id="inlineRadio1" value="MALE" checked/>
                                                       <label class="form-check-label" for="gender">Male</label>
 
                                                         </div>
                                                         <div class="form-check form-check-inline">
-                                                          <input class="form-check-input" type="radio" name="gender0" id="inlineRadio2" value="FEMALE"/>
+                                                          <input class="form-check-input readonly" type="radio" name="gender0" id="inlineRadio2" value="FEMALE"/>
                                                           <label class="form-check-label" for="gender">Female</label>
                                                         </div>
 
-                                                        <div class="mb-3 col-lg-6 col-xl-3 col-12 mb-0">
+                                                        <div class="mb-3 col-lg-6 col-xl-3 col-12 mb-0" hidden>
                                                           <label class="form-label" for="form-repeater-1-2">gender</label>
-                                                          <input type="text" id="gender_data" name="gender_data0" class="form-control" placeholder="your age" value="MALE"/>
+                                                          <input type="text" id="gender_data" name="gender_data0" class="form-control " placeholder="your age" value="MALE"/>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-2">
@@ -774,6 +777,24 @@ div.card-datatable [class*=col-md-] {
     <script src="{{ asset('assets/vendor/libs/dropzone/dropzone.js') }}"></script>
 
     <script src="{{ asset('assets/js/forms-file-upload.js') }}"></script>
+
+    <script>
+ $(".browser-default-validation").change(function(){
+    let age=document.getElementById("age");
+    let address=document.getElementById("member_address");
+    let occupation=document.getElementById("occupation");
+    let reason=document.getElementById("reason");
+    let sub=document.getElementById("subcommunity");
+    if(!(age.value != "" && sub.value != "" && address.value != "" && occupation.value != "" && reason.value != "" ))
+    {
+      $("#repeat-next").prop('disabled',true);
+    }
+    else{
+      $("#repeat-next").prop('disabled',false);
+    }
+ 
+ });
+</script>
     <script>
   $(document).ready(function() {
     let currentStep = 1;
@@ -957,14 +978,15 @@ function edit(id)
 </script>
 <script>
 $(document).ready(function () {  
-  $(".repeat-next").prop('disabled',true);
     $('#FEMALE').change(function(){
-      $("#inlineRadio2").attr('checked',true);
+      $("#inlineRadio1").attr('checked',true);
       $("#gender_data").val("FEMALE");
+      alert("check");
     });
     $('#MALE').change(function(){
-      $("#inlineRadio1").attr('checked',true);
+      $("#inlineRadio2").attr('checked',true);
       $("#gender_data").val("MALE");
+      alert("male");
     });
 });
 </script>
@@ -1044,7 +1066,7 @@ $(document).ready(function () {
           '<div class="row formrepeater">'+
                                   '<div class="mb-3 col-lg-6 col-xl-3 col-12 mb-0" hidden>'+
                                       '<label class="form-label" for="form-repeater-1-1">member_id</label>'+
-                                      '<input type="text" id="m_id'+i+'" name="m_id[]" class="form-control" placeholder="john doe" value="" readonly/>'+
+                                      '<input type="text" id="m_id'+i+'" name="m_id'+i+'" class="form-control" placeholder="john doe" value="" readonly/>'+
                                     '</div>'+
 
                                  ' <div class="mb-3 col-lg-6 col-xl-3 col-12 mb-0">'+
@@ -1420,12 +1442,6 @@ document.getElementById("deposit-amount").addEventListener("input", convertToWor
                   'Updated!',
                   'Room Booking Details!',
                   'success'
-                )
-          }else{
-              Swal.fire(
-                  'No change!',
-                  'Room Booking Details!',
-                  'error'
                 )
           }
         }

@@ -361,33 +361,28 @@ class BookingController extends Controller
                 $data=DB::UPDATE("UPDATE add_room SET STATUS='1',room_detail_id='$req->booking_id' where room_no='$room'");
             }}
             $total_member = $req->no_of_person_id;
+            if ($old_no_of_person == $total_member) {
+                for ($i = 1; $i < $total_member; $i++) {
+                    $m_details = member_details::find($req->input('m_id'.$i));
+                    $m_details->full_name =strtoupper($req->input('full_name'.$i));
+                    $m_details->age= $req->input('m_age'.$i);
+                    $m_details->gender = $req->input('gender'.$i);
+                    $m_details->relation=$req->input('relation' .$i);       
+                    $m_details->save();
+                    }
+               }
             if ($old_no_of_person < $total_member) {
-                for ($i = $old_no_of_person + 1; $i <= $total_member; $i++) {
-              
-                $m_details = new member_details();
-              
-                $m_details->full_name =strtoupper($req->input('full_name'.$i));
-                $m_details->age= $req->input('m_age'.$i);
-                $m_details->gender = $req->input('gender'.$i);
-                $m_details->relation=$req->input('relation' .$i);
-                $m_details->personal_detail_id=$booking->member_id;
-                $m_details->room_id=$req->booking_id;
-                dd($req->toArray());
-                $m_details->save();  
+                for ($i=$old_no_of_person; $i<$total_member; $i++) {
+                    $m_details = new member_details();
+                    $m_details->full_name =strtoupper($req->input('full_name'.$i));
+                    $m_details->age= $req->input('m_age'.$i);
+                    $m_details->gender = $req->input('gender'.$i);
+                    $m_details->relation=$req->input('relation' .$i);   
+                    $m_details->personal_detail_id=$booking->member_id;
+                    $m_details->room_id=$req->booking_id;    
+                    $m_details->save(); 
                 }
-           }
-           if ($old_no_of_person === $total_member) {
-            for ($i = 1; $i < $total_member; $i++) {
-                $m_details = member_details::find($req->m_id[$i]);
-                $m_details->full_name =strtoupper($req->input('full_name'.$i));
-                $m_details->age= $req->input('m_age'.$i);
-                $m_details->gender = $req->input('gender'.$i);
-                $m_details->relation=$req->input('relation' .$i);       
-                $m_details->save();
-                }
-           }
-          
-           
+           }  
             $ar_list = DB::select("SELECT add_room.*, room_details.check_in_date, room_details.* FROM add_room LEFT JOIN room_details ON add_room.room_no = room_details.r_id WHERE add_room.status = 1");
 
    
