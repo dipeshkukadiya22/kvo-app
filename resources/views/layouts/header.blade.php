@@ -170,8 +170,7 @@
 
             <li class="menu-item">
               <a href="#" class="menu-link menu-toggle">
-                <i class="menu-icon tf-icons ti ti-layout-sidebar"></i>
-                <i class="fa-light fa-user-group"></i>
+              <i class="fa-regular fa-user"></i>
                 <div data-i18n="Members">MEMBERS</div>
               </a>
               <ul class="menu-sub">
@@ -179,7 +178,7 @@
                 
                 <li class="menu-item">
                   <a href="{{route('ViewMembers')}}" class="menu-link">
-                    <i class="menu-icon tf-icons ti ti-help"></i>
+                  <i class="fa-regular fa-user"></i>
                     <div data-i18n="VIEW MEMBERS">VIEW MEMBERS</div>
                   </a>
                 </li>
@@ -222,7 +221,7 @@
             <!-- Pages -->
             <li class="menu-item">
               <a href="javascript:void(0)" class="menu-link menu-toggle">
-                <i class="menu-icon tf-icons ti ti-file"></i>
+              <i class="fa-regular fa-square-plus"></i>
 
                 <div data-i18n="MEDICAL">MEDICAL</div>
               </a>
@@ -231,7 +230,7 @@
                 
                 <li class="menu-item">
                   <a href="{{route('view_treatment')}}" class="menu-link">
-                    <i class="menu-icon tf-icons ti ti-help"></i>
+                  <i class="fa-solid fa-stethoscope"></i>
                     <div data-i18n="TREATMENT">TREATMENT</div>
                   </a>
                 </li>
@@ -271,38 +270,38 @@
             <!-- Forms -->
             <li class="menu-item">
               <a href="javascript:void(0)" class="menu-link menu-toggle">
-                <i class="menu-icon tf-icons ti ti-forms"></i>
+              <i class="fa-solid fa-database"></i>
                 <div data-i18n="REPORTS">REPORTS</div>
               </a>
               <ul class="menu-sub">
                 
                 <li class="menu-item">
                   <a href="{{route('general_donation_report')}}" class="menu-link">
-                    <i class="menu-icon tf-icons ti ti-checkbox"></i>
+                  <i class="fa-solid fa-sack-dollar"></i>
                     <div data-i18n="General Donation">General Donation</div>
                   </a>
                 </li>
                 <li class="menu-item">
                   <a href="{{route('community_donation_report')}}" class="menu-link">
-                    <i class="menu-icon tf-icons ti ti-checkbox"></i>
+                  <i class="fa-solid fa-sack-dollar"></i>
                     <div data-i18n="Community Donation">Community Donation</div>
                   </a>
                 </li>
                 <li class="menu-item">
                   <a href="{{route('community_category_donation_report')}}" class="menu-link">
-                    <i class="menu-icon tf-icons ti ti-checkbox"></i>
+                  <i class="fa-solid fa-sack-dollar"></i>
                     <div data-i18n="Community Category Donation">Community Category Donation</div>
                   </a>
                 </li>
                 <li class="menu-item">
                   <a href="{{route('religious_category_donation_report')}}" class="menu-link">
-                    <i class="menu-icon tf-icons ti ti-checkbox"></i>
+                  <i class="fa-solid fa-sack-dollar"></i>
                     <div data-i18n="Religious Category Donation">Religious Category Donation</div>
                   </a>
                 </li>
                 <li class="menu-item">
                   <a href="{{route('religious_donation_report')}}" class="menu-link">
-                    <i class="menu-icon tf-icons ti ti-checkbox"></i>
+                  <i class="fa-solid fa-sack-dollar"></i>
                     <div data-i18n="Religious Donation">Religious Donation</div>
                   </a>
                 </li>
@@ -314,7 +313,7 @@
                 </li>
                 <li class="menu-item">
                   <a href="{{route('medical_report')}}" class="menu-link">
-                    <i class="menu-icon tf-icons ti ti-checkbox"></i>
+                  <i class="fa-solid fa-hand-holding-medical"></i>
                     <div data-i18n="Medical">Medical</div>
                   </a>
                 </li>
