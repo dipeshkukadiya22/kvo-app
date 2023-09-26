@@ -41,6 +41,8 @@ Route::get('login',[AuthController::class,'destroy'])->name('destroy');
 
 Route::group(['middleware'=>['user']],function(){
 
+    Route::get('temp', [BookingController::class, 'temp']);
+    Route::post('store', [BookingController::class, 'store'])->name('store');
 
     Route::POST('RoomBooking', [BookingController::class, 'RoomBooking'])->name('RoomBooking');
     Route::get('room-booking', [BookingController::class, 'index']);

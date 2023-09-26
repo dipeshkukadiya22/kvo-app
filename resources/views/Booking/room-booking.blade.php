@@ -122,7 +122,7 @@
                             <!-- Browser Default -->
                              
                               <div class="mb-3">
-                            <form class="browser-default-validation" method="POST" tabindex="1" action="{{route('room-booking')}}">
+                            <form class="browser-default-validation" method="POST" tabindex="1" action="{{route('room-booking')}}" >
                             @csrf
                                 <label class="form-label required" for="basic-default-name"  >Name</label>
                                 <input type="text" name="m_name" class="form-control" style="text-transform:uppercase" id="basic-default-name"  style="text-transform:uppercase"  placeholder="Name" required  oninput="this.value = this.value.replace(/[0-9]/g, '');"/>
@@ -220,7 +220,7 @@
                       </div>
                     </div>
                     <div class="bs-stepper-content">
-                    <form class="browser-default-validation"  action="{{ route('RoomBooking') }}" method="POST" id="room_booking">
+                    <form class="browser-default-validation"  action="{{ route('RoomBooking') }}" method="POST" id="room_booking" enctype="multipart/form-data">
 
                         @csrf
                         <!-- Account Details -->
@@ -295,7 +295,7 @@
 
                               <div class="col-md-4">
                                 <label for="formFileMultiple" class="form-label"><span class="required">Identity Proof</span></label>
-                                <input class="form-control" type="file" name="id_proof[]" id="formFileMultiple" multiple required />
+                                <input class="form-control" type="file" name="id_proof" id="formFileMultiple" required />
                             </div>
 
                             <div class="col-md-4">

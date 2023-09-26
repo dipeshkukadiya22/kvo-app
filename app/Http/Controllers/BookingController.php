@@ -7,10 +7,11 @@ use App\Models\member_details;
 use App\Models\add_room;
 use App\Models\checkout;
 use Carbon\Carbon;
-use Image;
+use Auth;
+use File;
 use DB;
 use Illuminate\Http\Request;
-use Spatie\LaravelIgnition\Solutions\SolutionProviders\InvalidRouteActionSolutionProvider;
+
 
 class BookingController extends Controller
 {
@@ -26,6 +27,9 @@ class BookingController extends Controller
 
     public function RoomBooking(Request $req)
     {
+        $req->validate([
+            'id_proof.*' => 'mimes:doc,pdf,docx,zip,jpeg,png,jpg,gif,svg',]);
+
         $m_name =(personal_details::get()->last()->m_name);
         $p_details=personal_details::with('member')->get();
         $data = personal_details::find($req->p_id);
@@ -45,12 +49,17 @@ class BookingController extends Controller
         $details->subcommunity = strtoupper($req->subcommunity);
         $details->gender = $req->inlineRadioOptions;
         $details->member_id=$req->name;
-       // $fileName = basename($_FILES[$req->id_proof[0]]["name"]);
-        //dd($req->id_proof[0]);
-        /*if(count($req->id_proof)==1){ $details->id_proof=$req->id_proof[0]; }
-
-        else{$details->id_proof=$req->id_proof[0];$details->id_proof1=$req->id_proof[1];}*/
-        
+       
+   
+            //dd("in");
+            $file = $req->id_proof ;
+            //dd($file);
+            $fileName =$file->getClientOriginalName();
+            $destinationPath = public_path().'/images' ;
+            $file->move($destinationPath,$fileName);
+            $details->id_proof=$fileName;
+               
+       
         $details->occupation=$req->occupation;
         $details->reason=$req->reason;
      
@@ -453,5 +462,20 @@ class BookingController extends Controller
             }
         return view('Booking.AdvanceRoomBooking',['m_data'=>$m_data,'ac_list'=>$ac_list,'non_ac_list'=>$non_ac_list,'dmt_list'=>$dmt_list,'p_id'=>$p_id]);
     }
-    
+
+    public function temp() {
+        return view('Booking.temp');
+     }
+     public function store(Request $request)
+    {
+        $request->validate([
+            'image.*' => 'mimes:doc,pdf,docx,zip,jpeg,png,jpg,gif,svg',]);
+        if($file = $request->hasFile('image')) {
+            $file = $request->file('image') ;
+            $fileName = $file->getClientOriginalName() ;
+            $destinationPath = public_path().'/images' ;
+            $file->move($destinationPath,$fileName);
+            return back();
+    }
+}  
 }
