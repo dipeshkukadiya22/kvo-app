@@ -28,7 +28,7 @@
 <link rel="stylesheet" href="{{ asset('assets/vendor/libs/sweetalert2/sweetalert2.css') }}" />
 <link rel="stylesheet" href="{{ asset ('assets/vendor/libs/dropzone/dropzone.css') }}" />
 <link rel="stylesheet" href="{{ asset ('assets/vendor/libs/bs-stepper/bs-stepper.css') }}" />
-    
+<link rel="stylesheet" href="{{ asset('assets/vendor/libs/toastr/toastr.css') }}" />
 
 <!-- Page CSS -->
 <style>
@@ -255,7 +255,7 @@ label.readonly {
                                         </div>
                                       </div>
                                       <div class="bs-stepper-content">
-                                      <form id="kvo_update_room_booking" class="browser-default-validation" method="POST" action="{{ route('update_room_booking') }}">
+                                      <form id="kvo_update_room_booking" class="browser-default-validation" method="POST" action="{{ route('update_room_booking') }}" >
                                         @csrf
                                           <!-- Account Details -->
                                           <div id="account-details" class="content">
@@ -268,11 +268,6 @@ label.readonly {
                                               <div class="col-md-4">
                                                   <label for="select2Basic" class="form-label" >Name</label>
                                                   <input type="text" id="select2Basic" name="name" class="form-control" placeholder="" readonly/>
-                                                 <!-- <select id="select2Basic" class="select2 form-select" data-allow-clear="true" name="name" placeholder="select name" readonly>
-                                                      @foreach ($member as $row)
-                                                          <option value="{{$row->p_id}}">{{$row->m_name}}</option>
-                                                      @endforeach
-                                                  </select>-->
                                                 </div>
                                                 <div class="col-md-4">
                                                   
@@ -606,12 +601,12 @@ label.readonly {
                                                     <span class="note needsclick"
                                                       >(This is just a demo dropzone. Selected files are <strong>not</strong> actually
                                                       uploaded.)</span
-                                                    ><img id="id_proof1" width="250px" style="padding: 10px">
+                                                    ><img id="id_proof1" name="idproof1" width="250px" style="padding: 10px">
                                                       <img id="id_proof2" width="250px" style="padding: 10px">
                                                       
                                                   </div>
                                                   <div class="fallback">
-                                                  <input class="form-control" type="file" name="id_proof" id="id_proof" multiple required />
+                                                  <input class="form-control" type="file" name="id_proof[]" id="id_proof" multiple required />
                                                   </div>
                                                 </div>
                                               </div>
@@ -772,12 +767,14 @@ label.readonly {
     <script src="{{ asset('assets/vendor/libs/bs-stepper/bs-stepper.js') }}"></script>
 
     
-  <script src="{{ asset('assets/js/form-wizard-icons.js') }}"></script>
+    <script src="{{ asset('assets/js/form-wizard-icons.js') }}"></script>
 
     <script src="{{ asset('assets/vendor/libs/dropzone/dropzone.js') }}"></script>
 
     <script src="{{ asset('assets/js/forms-file-upload.js') }}"></script>
+    <script src="{{ asset('assets/vendor/libs/toastr/toastr.js') }}"></script>
 
+    <script src="{{ asset('assets/js/ui-toasts.js') }}"></script>
     <script>
  $(".browser-default-validation").change(function(){
     let age=document.getElementById("age");
@@ -839,22 +836,14 @@ function edit(id)
                   var checkindate=date.getDate()+"-"+date.getMonth()+"-"+date.getFullYear();
                   var img=response[0]['id_proof'];
                   var index=img.indexOf(',');
-                  
-                  var path="images/";
-                  
+
                   if(index>0)
                   {
                     var img1=img.substr(0,index);
-                    document.getElementById("id_proof1").src=path+img1;
+                    document.getElementById("id_proof1").src="images/"+img1;
                     var img2=img.substr(index+1);
-                    document.getElementById("id_proof2").src=path+img2;
-                  }else{document.getElementById("id_proof1").src=path+img;}
-
-                 
-                  
-                 
-                 /* if(response[0]['id_proof1'] != null){
-                  document.getElementById("id_proof2").src="assets/img/avatars/"+img2}*/
+                    document.getElementById("id_proof2").src="images/"+img2;
+                  }else{document.getElementById("id_proof1").src="images/"+img;}
                   $("#select2Basic").val(response[0]['m_name']);
                   $("#full_name_form").val(response[0]['m_name']);
                   $("#age").val(response[0]['age']);
@@ -1451,20 +1440,19 @@ document.getElementById("deposit-amount").addEventListener("input", convertToWor
                 icon: "error",
             });
             return false; // Prevent form submission
-        } else {
-          if(flag ===1){
-                Swal.fire(
-                  'Updated!',
-                  'Room Booking Details!',
-                  'success'
-                )
-          }
-        }
+        } 
     });
 </script>
 
 <script src="{{ asset ('assets/vendor/libs/jquery-repeater/jquery-repeater.js') }}"></script>
-
+@if (Session::get('message'))
+    <script>
+        toastr['success']("{{ Session::get('message') }}", 'Updated!', {
+            closeButton: true,
+            tapToDismiss: false,
+        });
+    </script>
+@endif
 @endsection
 
 @endsection

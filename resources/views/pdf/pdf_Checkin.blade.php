@@ -161,9 +161,11 @@
 			<table class="table2 tg" style="width: 740px">
 				<tbody>
 					<tr>
-						<td class="tg-0pky tc"><img src="{{url('assets/img/avatars/'.$room_booking[0]->id_proof)}}" width="150px" style="padding: 10px"></td>
-						@if($room_booking[0]->id_proof1 <> NULL)
-						<td class="tg-0pky tc"><img src="{{url('assets/img/avatars/'.$room_booking[0]->id_proof1)}}" width="150spx" style="padding: 10px"></td>
+						@if($img2)
+						<td class="tg-0pky tc"><img src="{{url($img1)}}" width="150px" style="padding: 10px"></td>
+						<td class="tg-0pky tc"><img src="{{url($img2)}}" width="150spx" style="padding: 10px"></td>
+						@else
+						<td class="tg-0pky tc"><img src="{{url($img1)}}" width="150px" style="padding: 10px"></td>
 						@endif
 					</tr>		  
 				</tbody>

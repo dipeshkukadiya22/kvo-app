@@ -63,7 +63,6 @@ class BookingController extends Controller
             $file->move($destinationPath,$fileName);
             $img=$img.",".$fileName;
         }
-        //dd(substr($img,1));
         $details->id_proof=substr($img,1);
         $details->occupation=$req->occupation;
         $details->reason=$req->reason;
@@ -315,7 +314,9 @@ class BookingController extends Controller
     }
     public function update_room_booking(Request $req) 
     {
-        //dd($req->toArray());
+        $req->validate([
+            'id_proof.*' => 'mimes:doc,pdf,docx,zip,jpeg,png,jpg,gif,svg',]);
+
         $booking=room_details::find($req->booking_id);
         $old_no_of_person=$booking->no_of_person;
         $booking->no_of_person = $req->no_of_person_id;
@@ -325,11 +326,8 @@ class BookingController extends Controller
         $doorMetricRoomList = array_filter($req->input('select2Multiple3', []));
         $oldRoomList=$booking->room_list;
         $oldRoomList=explode(',',$oldRoomList);
-        //dd($oldRoomList);
         $combinedList = array_merge($acRoomList, $nonAcRoomList, $doorMetricRoomList);
-        //dd($combinedList);
         $filteredCombinedList = array_filter($combinedList);
-         //dd($filteredCombinedList);
         $remove_room=array_diff($oldRoomList,$combinedList);
         foreach($remove_room as $room)
         {
@@ -343,15 +341,13 @@ class BookingController extends Controller
         $booking->rs_word = $req->rs_word;
         $booking->no_of_days = $req->no_of_days;
         $booking->save();
-    
         $details=personal_details::find($booking->member_id);
         $details->age = $req->age;
         $details->address = $req->member_address;
         $details->community = $req->community;
         $details->subcommunity = strtoupper($req->subcommunity);
         $details->gender = $req->inlineRadioOptions;
-       
-        //$details->id_proof=$req->id_proof;
+       /*update id_proof*/
         $details->occupation=$req->occupation;
         $details->reason=$req->reason;
         $details->save();
@@ -395,9 +391,12 @@ class BookingController extends Controller
                 }
            }  
             $ar_list = DB::select("SELECT add_room.*, room_details.check_in_date, room_details.* FROM add_room LEFT JOIN room_details ON add_room.room_no = room_details.r_id WHERE add_room.status = 1");
-
-   
-    return back();
+            if($booking) {
+                return back() -> with ('message', 'Details Changed Successfully!') ;
+            }
+            else{
+                return back() -> with ('message', 'Your Data Not Submit') ;
+            }
     }
 
     /*public function cancel_room($id) {
