@@ -49,22 +49,24 @@ class BookingController extends Controller
         $details->subcommunity = strtoupper($req->subcommunity);
         $details->gender = $req->inlineRadioOptions;
         $details->member_id=$req->name;
-       
-   
-            //dd("in");
-            $file = $req->id_proof ;
-            //dd($file);
+        $count=sizeof($req->id_proof);
+        $img="";
+        for($i=0;$i<$count;$i++)
+        {
+
+            $file = $req->id_proof[$i] ;
             $fileName =$file->getClientOriginalName();
+            $path=pathinfo($fileName);
+            $extension=$path['extension'];
+            $fileName = ($req->deposit_no)."(".($i+1).")".".".$extension;
             $destinationPath = public_path().'/images' ;
             $file->move($destinationPath,$fileName);
-            $details->id_proof=$fileName;
-               
-       
+            $img=$img.",".$fileName;
+        }
+        //dd(substr($img,1));
+        $details->id_proof=substr($img,1);
         $details->occupation=$req->occupation;
         $details->reason=$req->reason;
-     
-    
-
         /*Insert Room Booking deatil*/
         $booking = new room_details();
         $booking->no_of_person = $req->no_of_person;

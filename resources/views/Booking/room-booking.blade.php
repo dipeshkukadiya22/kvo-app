@@ -295,7 +295,8 @@
 
                               <div class="col-md-4">
                                 <label for="formFileMultiple" class="form-label"><span class="required">Identity Proof</span></label>
-                                <input class="form-control" type="file" name="id_proof" id="formFileMultiple" required />
+                                <input class="form-control" type="file" name="id_proof[]" id="formFileMultiple" multiple required />
+                                <div id="img" class="error-message" ></div>
                             </div>
 
                             <div class="col-md-4">
@@ -896,13 +897,20 @@ $(document).ready(function () {
 </script>
 <script>
  $(".browser-default-validation").change(function(){
+  var flag=0;
     let age=document.getElementById("basic-default-age");
     let address=document.getElementById("member-address");
     let occupation=document.getElementById("occupation");
     let reason=document.getElementById("reason");
     let idproof=document.getElementById("formFileMultiple");
     let sub=document.getElementById("defaultFormControlInput");
-   if(age.value != "" && sub.value != "" && address.value != "" && occupation.value != "" && reason.value != "" && idproof.value !="")
+    var $fileUpload = $("input[type='file']");
+    if (parseInt($fileUpload.get(0).files.length) > 2){
+                  $("#img").html("Allowed To Upload Maximum of 2 Documents ");
+                  $("#btn-step1").prop('disabled',true);
+                  flag=1;
+               }else{  $("#img").html("");}
+   if(age.value != "" && sub.value != "" && address.value != "" && occupation.value != "" && reason.value != "" && idproof.value !="" && flag ==0)
     {
       $("#btn-step1").prop('disabled',false);
     }
