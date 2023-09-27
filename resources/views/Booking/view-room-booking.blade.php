@@ -837,9 +837,24 @@ function edit(id)
                   var community=response[0]['community'];
                   var date=new Date(response[0]['check_in_date']);
                   var checkindate=date.getDate()+"-"+date.getMonth()+"-"+date.getFullYear();
-                  document.getElementById("id_proof1").src="assets/img/avatars/"+response[0]['id_proof'];
-                  if(response[0]['id_proof1'] != null){
-                  document.getElementById("id_proof2").src="assets/img/avatars/"+response[0]['id_proof1'];}
+                  var img=response[0]['id_proof'];
+                  var index=img.indexOf(',');
+                  
+                  var path="images/";
+                  
+                  if(index>0)
+                  {
+                    var img1=img.substr(0,index);
+                    document.getElementById("id_proof1").src=path+img1;
+                    var img2=img.substr(index+1);
+                    document.getElementById("id_proof2").src=path+img2;
+                  }else{document.getElementById("id_proof1").src=path+img;}
+
+                 
+                  
+                 
+                 /* if(response[0]['id_proof1'] != null){
+                  document.getElementById("id_proof2").src="assets/img/avatars/"+img2}*/
                   $("#select2Basic").val(response[0]['m_name']);
                   $("#full_name_form").val(response[0]['m_name']);
                   $("#age").val(response[0]['age']);
