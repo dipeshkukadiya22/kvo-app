@@ -462,15 +462,10 @@
                                   <label class="form-label" for="basic-default-name">Amount</label>
                                   <div class="input-group">
                                     <span class="input-group-text">₹</span>
-                                    <input type="number" class="form-control"  name="ac_amount" placeholder="Amount" aria-label="Amount (to the nearest indian)" id="ac-amount" />
+                                    <input type="text" class="form-control"  name="ac_amount" placeholder="Amount" aria-label="Amount (to the nearest indian)" id="ac-amount" maxlength="4" onkeypress="return onlyNumbers(this.value);"/>
                                   </div>
                                 </div>
 
-
-                                <!-- <div class="col-md-2">
-                                  <label for="TagifyCustomListSuggestion1" class="form-label">Non. A.C. Room</label>
-                                  <input id="TagifyCustomListSuggestion1" name="TagifyCustomListSuggestion1" class="form-control" placeholder="Select Roomlist" />
-                                </div> -->
                                 <div class="col-md-2">
                                 <label for="select2Multiple2" class="form-label">Non Ac Room</label>
                                 <select id="select2Multiple22" name="select2Multiple2[]" class="select2 form-select" multiple>
@@ -490,14 +485,10 @@
                                   <label class="form-label" for="basic-default-name">Amount</label>
                                   <div class="input-group">
                                     <span class="input-group-text">₹</span>
-                                    <input type="number" class="form-control"  name="non_ac_amount" placeholder="Amount" aria-label="Amount (to the nearest indian)" id="non-ac-amount" />
+                                    <input type="text" class="form-control"  name="non_ac_amount" placeholder="Amount" aria-label="Amount (to the nearest indian)" id="non-ac-amount" maxlength="4" onkeypress="return onlyNumbers(this.value);"/>
                                   </div>
                                 </div>
 
-                                <!-- <div class="col-md-2">
-                                  <label for="TagifyCustomListSuggestion2" class="form-label">Door Metri. A.C. / Non. A.C. Room </label>
-                                  <input id="TagifyCustomListSuggestion2" name="TagifyCustomListSuggestion2" class="form-control" placeholder="Select Roomlist" />
-                                </div> -->
                                 <div class="col-md-2">
                                 <label for="select2Multiple3" class="form-label">Door Mt Room</label>
                                 <select id="select2Multiple33" name="select2Multiple3[]" class="select2 form-select" multiple>
@@ -517,7 +508,7 @@
                                   <label class="form-label" for="basic-default-name">Amount</label>
                                   <div class="input-group">
                                     <span class="input-group-text">₹</span>
-                                    <input type="number" class="form-control"  name="door_mt_amount" id="door_mt_amount" placeholder="Amount" aria-label="Amount (to the nearest indian)"   />
+                                    <input type="text" class="form-control"  name="door_mt_amount" id="door_mt_amount" placeholder="Amount" aria-label="Amount (to the nearest indian)"  maxlength="4" onkeypress="return onlyNumbers(this.value);" />
                                   </div>
                                 </div>
   
@@ -539,16 +530,13 @@
   
                             <div class="col-md-4">
                               <label class="form-label" for="deposit-amount"><span class="required">Deposit Rs</span></label>
-                              <input type="number" class="form-control check-field" name="deposite_rs" id="deposit-amount" placeholder="Deposit Rs" required/>
-                            </div>
+                              <input type="text" class="form-control check-field" name="deposite_rs" id="deposit-amount" placeholder="Deposit Rs" required maxlength="4" onkeypress="return onlyNumbers(this.value);"/>
+                              <div id="deposite" class="error-message" ></div></div>
                             
                             <div class="col-md-4">
                               <label class="form-label" for="rupees-in-words">Deposit Rs (rupees in words)</label>
                               <input type="text" class="form-control" name="rs_word" id="rupees-in-words" placeholder="Rupees in words" readonly>
                             </div>
-
-                            
-  
                             
                             <div class="col-12 d-flex justify-content-between">
                               <button class="btn btn-label-secondary btn-prev">
@@ -686,7 +674,7 @@
     <script src="{{ asset('assets/vendor/libs/flatpickr/flatpickr.js') }}"></script>
     <script src="{{ asset('assets/vendor/libs/typeahead-js/typeahead.js') }}"></script>
     <script src="{{ asset('assets/vendor/libs/tagify/tagify.js') }}"></script>
-
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 
     
@@ -726,6 +714,13 @@
         </script>
     @endif
     <script>
+     
+      $("#deposit-amount").keydown(function(e){
+        if(e.key === "-" || e.key === "+"){e.preventDefault();}
+      });
+      $("#deposit-amount").focusout(function(){
+          
+      });
       $("#multicol-phone").focusout(function(){
         var contact=document.getElementById("multicol-phone").value;
         $.ajax({
@@ -834,46 +829,9 @@
     document.getElementById("deposit-amount").addEventListener("input", convertToWords);
     
     </script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    
 <script>
-//      $("#btn-step1").hover(function(){
-//       var age=document.getElementById("basic-default-age").value;
-//         var address=document.getElementById("member-address").value;
-//         var subcommunity=document.getElementById("defaultFormControlInput").value;
-//         var city=document.getElementById("member_city").value;
-//         if(age === ""){ $("#age").html("Enter Age");} else{ $("#age").html("");}
-//         if(address === ""){ $("#addres").html("Enter Address");} else{ $("#addres").html("");}
-//         if(subcommunity === ""){ $("#scommunity").html("Enter Subcommunity");} else{ $("#scommunity").html("");}
-//         if(city === ""){ $("#city1").html("Enter City");} else{ $("#city1").html("");}
-//       });
-//       $("#repeat-next").hover(function(e){
-//         var noofperson=document.getElementById("no_of_person_id").value;
-//         var idproof=document.getElementById("formFileMultiple").value;
-//         var deposite=document.getElementById("deposit-amount").value;
-//         var noofdays=document.getElementById("no_of_days").value;
-//         var occupation1=document.getElementById("occupation").value;
-//         var reason1=document.getElementById("reason").value;
-//         if(noofperson === ""){ $("#noofperson").html("Enter No of Person");} else{ $("#noofperson").html("");}
-//         if(idproof === ""){ $("#idproof").html("Upload Idproof");} else{ $("#idproof").html("");}
-//         if(deposite === ""){ $("#deposite").html("Enter Deposite Amount");} else{ $("#deposite").html("");}
-//         if(noofdays === ""){ $("#noofdays").html("Enter No of Days");} else{ $("#noofdays").html("");}
-//         if(occupation1 === ""){ $("#occupation1").html("Enter Occupation");} else{ $("#occupation1").html("");}
-//         if(reason1 === ""){ $("#reason1").html("Enter Reason");} else{ $("#reason1").html("");}
-//       });
-//     $(document).ready(function() {
-//       $(".btn-dropdown").click(function() {
-//       $(this).parent().toggleClass("active");
-//     });
-
-//   // Hide the dropdown when clicking outside of it
-//   $(document).click(function(event) {
-//     if (!$(event.target).closest(".dropdown-checkboxes").length) {
-//       $(".dropdown-checkboxes").removeClass("active");
-//     }
-//   });
-// });
-
-$(document).ready(function () {  
+  $(document).ready(function () {  
   $("#btn-step1").prop('disabled',true); 
   $("#repeat-next").prop('disabled',true);
   $("#ac-amount").attr('readonly',true);
@@ -929,6 +887,7 @@ $(document).ready(function () {
     {$("#door_mt_amount").attr('readonly',false);}
     if(((list1.value !="" && ac_amt.value !="") || (list2.value !="" && non_ac_amt.value !="") ||(list3.value !="" && dmt_amt.value !=""))&& deposite.value !="")
     {$("#repeat-next").prop('disabled',false);}
+    if($("#deposit-amount").val()>9000){  $("#deposite").html("Deposite Amount Should Be Below 9000"); $("#repeat-next").prop('disabled',true);}
  });
 </script>
 <script>
