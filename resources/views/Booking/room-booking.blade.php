@@ -283,15 +283,10 @@
 
                                 </select>
                               </div>
-
-                              
-
-                              
                               <div class="col-md-4">
                                 <label for="defaultFormControlInput" class="form-label"><span class="required">Sub Community</span></label>
                                 <input type="text" class="form-control" name="subcommunity" id="defaultFormControlInput" style="text-transform:uppercase" aria-describedby="defaultFormControlHelp" required/>
                               </div>
-
 
                               <div class="col-md-4">
                                 <label for="formFileMultiple" class="form-label"><span class="required">Identity Proof</span></label>
@@ -880,6 +875,11 @@
 
 $(document).ready(function () {  
   $("#btn-step1").prop('disabled',true); 
+  $("#repeat-next").prop('disabled',true);
+  $("#ac-amount").attr('readonly',true);
+  $("#non-ac-amount").attr('readonly',true);
+  $("#door_mt_amount").attr('readonly',true);
+
     $('#personalRadio2').change(function(){
       $("#genderfemale").attr('checked',true);
       $("#gender_data").val("FEMALE");
@@ -904,6 +904,13 @@ $(document).ready(function () {
     let reason=document.getElementById("reason");
     let idproof=document.getElementById("formFileMultiple");
     let sub=document.getElementById("defaultFormControlInput");
+    let list1=document.getElementById("select2Multiple11");
+    let list2=document.getElementById("select2Multiple22");
+    let list3=document.getElementById("select2Multiple33");
+    let ac_amt=document.getElementById("ac-amount");
+    let non_ac_amt=document.getElementById("non-ac-amount");
+    let dmt_amt=document.getElementById("door_mt_amount");
+    let deposite=document.getElementById("deposit-amount");
     var $fileUpload = $("input[type='file']");
     if (parseInt($fileUpload.get(0).files.length) > 2){
                   $("#img").html("Allowed To Upload Maximum of 2 Documents ");
@@ -914,6 +921,14 @@ $(document).ready(function () {
     {
       $("#btn-step1").prop('disabled',false);
     }
+    if(list1.value !="")
+    {$("#ac-amount").attr('readonly',false);} 
+    if(list2.value !="")
+    {$("#non-ac-amount").attr('readonly',false);} 
+    if(list3.value !="")
+    {$("#door_mt_amount").attr('readonly',false);}
+    if(((list1.value !="" && ac_amt.value !="") || (list2.value !="" && non_ac_amt.value !="") ||(list3.value !="" && dmt_amt.value !=""))&& deposite.value !="")
+    {$("#repeat-next").prop('disabled',false);}
  });
 </script>
 <script>
@@ -931,56 +946,12 @@ $(document).ready(function () {
                 }
               });
     });
-      /*  $(document).ready(function () {
-            $("#select2Basic").click(function () {
-                var data = $.parseJSON($("#email_user").val());
-                 
-                $.each(data,function(key,value){
-                  console.log('id::'+$('#select2Basic').val());
-                  if($('#select2Basic').val()==value['p_id']){
-                   console.log(value['email']);
-                   $('#member_email').val(value['email']);
-                   $('#member-phone').val(value['phone_no']);
-                   $('#member_city').val(value['city']);
-                   $('#full_name_form').val(value['m_name']);
-                   }
-                });
-            
-            });
-        });*/
     </script>
 
-
-
-  <!-- <script>
-     $(document).ready(function () {
-            $("#TagifyCustomListSuggestion").click(function () {
-                var data = $.parseJSON($("#roomlist").val());
-                 
-                $.each(data,function(key,value){
-                  console.log('id::'+$('#TagifyCustomListSuggestion').val());
-                  if($('#TagifyCustomListSuggestion').val()==value['room_no']){
-                   $('#TagifyCustomListSuggestion').val(value['TagifyCustomListSuggestion']);
-                   
-                   }
-                });
-            
-            });
-        });
-  </script> -->
   <script>
 </script>
 <script>
- 
-  $(document).ready(function() {
-    // let currentStep = 1;
-    // var currentDateTime = new Date();
 
-    // $('#flatpickr-datetime').flatpickr({
-    //   enableTime: true,
-    //   dateFormat: "d-m-Y H:i",
-    //   defaultDate: currentDateTime
-    // });
     $("#repeat-next").on("click", function() {
 
       const selectedList1 = $('#select2Multiple11').val();
@@ -1023,7 +994,6 @@ $(document).ready(function () {
       }
      
     });
-  });
 </script>
 
 <script>
@@ -1072,13 +1042,6 @@ $(document).ready(function () {
 
        
         j++;
-
-        // Setting text for elements in the loop using jQuery
-        // $('.member_full_name' + i).text($('#full_name_form' + i).val());
-        // $('.members_age' + i).text($('#member_age' + i).val());
-        // $('.member_gen' + i).text($('#gender'+i).val());
-        // $('.member_rel' + i).text($('#member_relation' + i).val());
-        // j++;
       }
 
       $(".rep-table").show();
@@ -1157,43 +1120,6 @@ $(document).ready(function () {
     });
   });
 </script>
-<!-- 
-<script>
- $("#room_booking").submit(function(){
-
-      var address = document.getElementById('member-address').value;
-      var city = document.getElementById('member_city').value;
-    
-  
-      if (address  === '' && city === '' ) {
-  
-          Swal.fire({
-              text: "Sorry, looks like there are some errors detected, please try again.",
-              icon: "error",
-              buttonsStyling: false,
-              confirmButtonText: "Ok, got it!",
-              customClass: {
-                  confirmButton: "btn btn-primary"
-              }
-          });
-          return false; // Prevent form submission
-      } else {
-          Swal.fire({
-              text: "Form has been successfully submitted!",
-              icon: "success",
-              buttonsStyling: false,
-              confirmButtonText: "Ok, got it!",
-              customClass: {
-                  confirmButton: "btn btn-primary"
-              }
-          }).then(function(t) {
-              if (t.isConfirmed) {
-                  location.reload();
-              }
-          });
-      }
-  });
-  </script> -->
 </script>
 <script>
   function format(input){
