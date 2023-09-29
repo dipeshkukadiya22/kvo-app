@@ -86,6 +86,7 @@ class BookingController extends Controller
         $booking->rs_word = $req->rs_word;
         $booking->no_of_days = $req->no_of_days;
         $booking->member_id=$personal_details_id;
+        $booking->date=date("Y-m-d");
         if(date("Y-m-d",strtotime($req->check_in_date)) == date("Y-m-d")) {
             $booking->status="BOOKED";
             $booking->booking_type="REGULAR";}

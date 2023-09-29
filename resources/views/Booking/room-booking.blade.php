@@ -16,7 +16,7 @@
 <link rel="stylesheet" href="{{ asset ('assets/vendor/libs/dropzone/dropzone.css') }}" />
 
 <link rel="stylesheet" href="{{ asset ('assets/vendor/libs/select2/select2.css') }}" />
-
+<link rel="stylesheet" href="{{ asset('assets/vendor/libs/sweetalert2/sweetalert2.css') }}" />
 <style>
   @media (min-width: 768px){
     .content-header > .text-md-right {
@@ -220,7 +220,7 @@
                       </div>
                     </div>
                     <div class="bs-stepper-content">
-                    <form class="browser-default-validation"  action="{{ route('RoomBooking') }}" method="POST" id="room_booking" enctype="multipart/form-data">
+                    <form class="browser-default-validation"   method="POST" id="room_booking" enctype="multipart/form-data">
 
                         @csrf
                         <!-- Account Details -->
@@ -530,14 +530,49 @@
   
                             <div class="col-md-4">
                               <label class="form-label" for="deposit-amount"><span class="required">Deposit Rs</span></label>
-                              <input type="text" class="form-control check-field" name="deposite_rs" id="deposit-amount" placeholder="Deposit Rs" required maxlength="4" onkeypress="return onlyNumbers(this.value);"/>
+                              <input type="text" class="form-control check-field" name="deposite_rs" id="deposit-amount" placeholder="Deposit Rs" required maxlength="5" onkeypress="return onlyNumbers(this.value);"/>
                               <div id="deposite" class="error-message" ></div></div>
                             
                             <div class="col-md-4">
                               <label class="form-label" for="rupees-in-words">Deposit Rs (rupees in words)</label>
                               <input type="text" class="form-control" name="rs_word" id="rupees-in-words" placeholder="Rupees in words" readonly>
                             </div>
+                            <div class="col-md-4">
+                            <label class="d-block form-label">Payment Mode</label>
+                            <div class="form-check form-check-inline">
+                              <input
+                                type="radio"
+                                id="CASH"
+                                name="basic_default_radio"
+                                class="form-check-input"
+                                value="CASH"
+                                required checked/>
+                              <label class="form-check-label" for="basic_default_radio">Cash</label>
+                            </div>
+                            <div class="form-check form-check-inline mb-2">
+                              <input
+                                type="radio"
+                                id="CHEQUE"
+                                name="basic_default_radio"
+                                class="form-check-input"
+                                value="CHEQUE"
+                                required />
+                              <label class="form-check-label" for="basic_default_radio">Cheque</label>
+                            </div>
                             
+                            <div class="form-check form-check-inline">
+                              <input
+                                type="radio"
+                                id="UPI"
+                                name="basic_default_radio"
+                                class="form-check-input"
+                                value="UPI"
+                                required />
+                              <label class="form-check-label" for="basic_default_radio">UPI</label>
+                            </div>
+                          </div>
+                          <div class="col-md-4" id="member-container"></div>
+
                             <div class="col-12 d-flex justify-content-between">
                               <button class="btn btn-label-secondary btn-prev">
                                 <i class="ti ti-arrow-left me-sm-1"></i>
@@ -598,6 +633,7 @@
                                       <th>Age </th>
                                       <th>Gender</th>
                                       <th>Relations</th>
+                                      <th></th>
                                       </tr>
                                   </thead>
                                   <tbody class="rep-table">
@@ -609,7 +645,7 @@
                                         <td id="members_age"></td>
                                         <td id="member_gen"></td>
                                         <td id="member_rel"></td>
-                                      
+                                        <td id="member"></td>
                                       </tr>
                                       
                                                                        
@@ -622,18 +658,20 @@
                             </div>
                           </div>
                           <!-- /Invoice -->
-
+                          <div class="col-md-4">
+                          <select id="selectMember" class="select2 form-select form-select-md" data-allow-clear="true" name="name" placeholder="select name" required>
+                                  <option value=""></option>
+                                  
+                                </select>
+                          </div>
                           <div class="col-12 d-flex justify-content-between">
                             <button class="btn btn-label-secondary btn-prev">
                               <i class="ti ti-arrow-left me-sm-1"></i>
                               <span class="align-middle d-sm-inline-block d-none">Previous</span>
                             </button>
-                          
+                            
                             <button type="submit" id="submit-button" class="btn btn-success btn-submit">Submit</button>
 
-
-                            
-                            
                           </div>
                         </div>
                      </form>
@@ -675,9 +713,9 @@
     <script src="{{ asset('assets/vendor/libs/typeahead-js/typeahead.js') }}"></script>
     <script src="{{ asset('assets/vendor/libs/tagify/tagify.js') }}"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="{{ asset('assets/js/extended-ui-sweetalert2.js') }}"></script>
 
-
-    
+    <script src="{{ asset('assets/vendor/libs/sweetalert2/sweetalert2.js') }}"></script>
     <!-- Page JS -->
     
     <script src="{{ asset ('assets/js/forms-selects.js') }}"></script>
@@ -717,9 +755,6 @@
      
       $("#deposit-amount").keydown(function(e){
         if(e.key === "-" || e.key === "+"){e.preventDefault();}
-      });
-      $("#deposit-amount").focusout(function(){
-          
       });
       $("#multicol-phone").focusout(function(){
         var contact=document.getElementById("multicol-phone").value;
@@ -854,41 +889,25 @@
   });
 </script>
 <script>
- $(".browser-default-validation").change(function(){
-  var flag=0;
-    let age=document.getElementById("basic-default-age");
-    let address=document.getElementById("member-address");
-    let occupation=document.getElementById("occupation");
-    let reason=document.getElementById("reason");
-    let idproof=document.getElementById("formFileMultiple");
-    let sub=document.getElementById("defaultFormControlInput");
-    let list1=document.getElementById("select2Multiple11");
-    let list2=document.getElementById("select2Multiple22");
-    let list3=document.getElementById("select2Multiple33");
-    let ac_amt=document.getElementById("ac-amount");
-    let non_ac_amt=document.getElementById("non-ac-amount");
-    let dmt_amt=document.getElementById("door_mt_amount");
-    let deposite=document.getElementById("deposit-amount");
-    var $fileUpload = $("input[type='file']");
-    if (parseInt($fileUpload.get(0).files.length) > 2){
-                  $("#img").html("Allowed To Upload Maximum of 2 Documents ");
-                  $("#btn-step1").prop('disabled',true);
-                  flag=1;
-               }else{  $("#img").html("");}
-   if(age.value != "" && sub.value != "" && address.value != "" && occupation.value != "" && reason.value != "" && idproof.value !="" && flag ==0)
-    {
-      $("#btn-step1").prop('disabled',false);
-    }
-    if(list1.value !="")
-    {$("#ac-amount").attr('readonly',false);} 
-    if(list2.value !="")
-    {$("#non-ac-amount").attr('readonly',false);} 
-    if(list3.value !="")
-    {$("#door_mt_amount").attr('readonly',false);}
-    if(((list1.value !="" && ac_amt.value !="") || (list2.value !="" && non_ac_amt.value !="") ||(list3.value !="" && dmt_amt.value !=""))&& deposite.value !="")
-    {$("#repeat-next").prop('disabled',false);}
-    if($("#deposit-amount").val()>9000){  $("#deposite").html("Deposite Amount Should Be Below 9000"); $("#repeat-next").prop('disabled',true);}
- });
+ function createCheckbox()
+ {
+  var checkbox = document.createElement('input');
+            checkbox.type = 'checkbox';
+            checkbox.id = 'car';
+            checkbox.name = 'interest';
+            checkbox.value = 'car';
+ 
+            var label = document.createElement('label')
+            label.htmlFor = 'car';
+            label.appendChild(document.createTextNode('Car'));
+ 
+            var br = document.createElement('br');
+ 
+            var container = document.getElementById('member-container');
+            container.appendChild(checkbox);
+            container.appendChild(label);
+            container.appendChild(br);
+ }
 </script>
 <script>
     $("#select2Basic").change(function () {
@@ -956,6 +975,7 @@
 </script>
 
 <script>
+    let check=0;
   $(document).ready(function() {
     let currentStep = 1;
  
@@ -965,21 +985,34 @@
       const age = $('#members_age').val();
       const selectedGender = $('input[name="gender"]').val();
       const relation = $('#member_relation').val();
-
+      const member = "AA";
+      let i=1;
       $('#member_full_name').text(fullName);
       $('#members_age').text(age);
       $('#member_gen').text(selectedGender);
       $('#member_rel').text(relation);
-
-      $(".rep-table").append(
+      $('#member').text(member);
+      if(check==1)
+      { $(".rep-table").append(
         '<tr>' +
-        '<td>'+ '1' +'</td>' +
+        '<td>'+ i +'</td>' +
         '<td id="member_full_name">' + $('#full_name_form').val() + '</td>' +
         '<td id="members_age">' + $('#member_age').val() + '</td>' +
         '<td id="member_gen">' + $('#gender_data').val() + '</td>' +
         '<td id="member_rel">' + $('#member_relation').val() + '</td>' +
+        '<td id="member">' + '<input type=checkbox class=member value='+$('#full_name_form').val()+'>' + '</td>' +
         '</tr>'
-      );
+      );}else{
+      $(".rep-table").append(
+        '<tr>' +
+        '<td>'+ i +'</td>' +
+        '<td id="member_full_name">' + $('#full_name_form').val() + '</td>' +
+        '<td id="members_age">' + $('#member_age').val() + '</td>' +
+        '<td id="member_gen">' + $('#gender_data').val() + '</td>' +
+        '<td id="member_rel">' + $('#member_relation').val() + '</td>' +
+        '<td id="member">' + '' + '</td>' +
+        '</tr>'
+      );}
 
       let numForms = parseInt($("#no_of_person_id").val());
       if (isNaN(numForms) || numForms <= 0) {
@@ -988,7 +1021,20 @@
       } let j=2;
       for (let i = 1; i < numForms; i++) {
        
-     
+        if(check==1)
+        {
+          $(".rep-table").append(
+        '<tr>' +
+        '<td>'+ j +'</td>' +
+        '<td class="member_full_name' + i + '">' + $('#full_name_form' + i).val().toUpperCase() + '</td>' +
+        '<td class="members_age' + i + '">' + $('#member_age' + i).val() + '</td>' +
+        '<td class="member_gen'+ i +'">' + $('input[name="gender'+i+'"]:checked').val() + '</td>' +
+        '<td class="member_rel' + i + '">' + $('#member_relation' + i).val() + '</td>' +
+        '<td class="member' + i + '">' + '<input class=member type=checkbox value='+$('#full_name_form' + i).val()+'>' + '</td>' +
+        '</tr>'
+         );
+        j++;
+        }else{
         $(".rep-table").append(
         '<tr>' +
         '<td>'+ j +'</td>' +
@@ -996,16 +1042,81 @@
         '<td class="members_age' + i + '">' + $('#member_age' + i).val() + '</td>' +
         '<td class="member_gen'+ i +'">' + $('input[name="gender'+i+'"]:checked').val() + '</td>' +
         '<td class="member_rel' + i + '">' + $('#member_relation' + i).val() + '</td>' +
+        '<td class="member' + i + '">' + '' + '</td>' +
         '</tr>'
          );
-
-       
         j++;
-      }
+      }}
 
       $(".rep-table").show();
     });
   });
+  $("#deposit-amount").focusout(function(){
+    if($("#deposit-amount").val()>9000){  
+      Swal.fire({
+          title: "Are you sure?",
+          text: "You want to deposite in Cash!",
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonColor: "#3085d6",
+          cancelButtonColor: "#d33",
+          confirmButtonText: "Yes,do It!",
+      }).then((result) => {
+          // If the user confirms the deletion, proceed with the deletion logic
+          if (result.isConfirmed) {
+            check=1;
+          }else{
+            $("#deposite").html("Deposite Amount Should Be Below 9000");
+            $("#repeat-next").prop('disabled',true);
+          }
+          });
+        }else{check=0;$("#deposite").html("");}
+        });
+      
+        $("#submit-button").click(function(){
+          $('.member').each(function () {
+            if($(this).is(':checked'))
+            {
+           
+            $('#selectMember').append(new Option($(this).val(), $(this).val()));
+            alert($(this).val());}
+        });
+        });
+  $(".browser-default-validation").change(function(){
+  var flag=0;
+    let age=document.getElementById("basic-default-age");
+  
+    let address=document.getElementById("member-address");
+    let occupation=document.getElementById("occupation");
+    let reason=document.getElementById("reason");
+    let idproof=document.getElementById("formFileMultiple");
+    let sub=document.getElementById("defaultFormControlInput");
+    let list1=document.getElementById("select2Multiple11");
+    let list2=document.getElementById("select2Multiple22");
+    let list3=document.getElementById("select2Multiple33");
+    let ac_amt=document.getElementById("ac-amount");
+    let non_ac_amt=document.getElementById("non-ac-amount");
+    let dmt_amt=document.getElementById("door_mt_amount");
+    let deposite=document.getElementById("deposit-amount");
+    var $fileUpload = $("input[type='file']");
+    if (parseInt($fileUpload.get(0).files.length) > 2){
+        $("#img").html("Allowed To Upload Maximum of 2 Documents ");
+        $("#btn-step1").prop('disabled',true);
+        flag=1;
+    }else{  $("#img").html("");}
+   if(age.value != "" && sub.value != "" && address.value != "" && occupation.value != "" && reason.value != "" && idproof.value !="" && flag ==0)
+    {
+      $("#btn-step1").prop('disabled',false);
+    }
+    if(list1.value !="")
+    {$("#ac-amount").attr('readonly',false);} 
+    if(list2.value !="")
+    {$("#non-ac-amount").attr('readonly',false);} 
+    if(list3.value !="")
+    {$("#door_mt_amount").attr('readonly',false);}
+    if(((list1.value !="" && ac_amt.value !="") || (list2.value !="" && non_ac_amt.value !="") ||(list3.value !="" && dmt_amt.value !=""))&& deposite.value !="")
+    {$("#repeat-next").prop('disabled',false);}
+ });
 </script>
  
 <script>
