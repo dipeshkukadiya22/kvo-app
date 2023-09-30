@@ -1385,42 +1385,6 @@ document.getElementById("deposit-amount").addEventListener("input", convertToWor
 
 </script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
-      
-  {{-- <script>
-    // Get all elements with class "delete-record"
-    const deleteLinks = document.querySelectorAll(".delete-record");
-
-    // Loop through each delete link and attach a click event listener
-    deleteLinks.forEach(link => {
-        link.addEventListener("click", function() {
-            // Show a confirmation dialog using SweetAlert2
-            Swal.fire({
-                title: "Are you sure?",
-                text: "You won't be able to revert this!",
-                icon: "warning",
-                showCancelButton: true,
-                confirmButtonColor: "#3085d6",
-                cancelButtonColor: "#d33",
-                confirmButtonText: "Yes, delete it!",
-            }).then((result) => {
-                // If the user confirms the deletion, proceed with the deletion logic
-                if (result.isConfirmed) {
-                    // Write your deletion logic here
-                    // For example, you can remove the entire row from the table:
-                    const row = this.closest("tr");
-                    if (row) {
-                        row.remove();
-                    }
-
-                    // Show a success message using SweetAlert2
-                    Swal.fire("Deleted!", "The record has been deleted.", "success");
-                }
-            });
-        });
-    });
-</script> --}}
-
 <script>
   let flag=0;
   $("#kvo_update_room_booking :input").change(function() {

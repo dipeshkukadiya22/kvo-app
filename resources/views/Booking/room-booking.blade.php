@@ -220,7 +220,7 @@
                       </div>
                     </div>
                     <div class="bs-stepper-content">
-                    <form class="browser-default-validation" action="{{ route('RoomBooking') }}"  method="POST" id="room_booking" enctype="multipart/form-data">
+                    <form class="browser-default-validation"   method="POST" id="room_booking" enctype="multipart/form-data">
 
                         @csrf
                         <!-- Account Details -->
@@ -664,7 +664,7 @@
                               <i class="ti ti-arrow-left me-sm-1"></i>
                               <span class="align-middle d-sm-inline-block d-none">Previous</span>
                             </button>
-                            
+                            <div id="error-member" class="error-message" ></div>
                             <button type="submit" id="submit-button" class="btn btn-success btn-submit">Submit</button>
 
                           </div>
@@ -876,6 +876,24 @@
       $("#gendermale").attr('checked',true);
       $("#gender_data").val("MALE");
     });
+});
+$("#room_booking").submit(function(){
+  let deposite=$("#deposit-amount").val();
+  let count=0;
+  if(deposite>9000)
+  {div=Math.ceil(deposite/9000);}
+  $('.member').each(function () {
+    if($(this).is(':checked'))
+    {count++;}
+  });
+  if(div>count){
+    $("#error-member").html("Please Checked "+ (div-count) +" Member Name");
+    event.preventDefault();
+  }
+  if(div<count){
+    $("#error-member").html("Checked Only " + div + " Members for Deposite");
+    event.preventDefault();
+  }
 });
 </script>
 <script>
