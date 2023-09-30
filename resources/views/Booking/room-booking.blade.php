@@ -220,7 +220,7 @@
                       </div>
                     </div>
                     <div class="bs-stepper-content">
-                    <form class="browser-default-validation"   method="POST" id="room_booking" enctype="multipart/form-data">
+                    <form class="browser-default-validation" action="{{ route('RoomBooking') }}"  method="POST" id="room_booking" enctype="multipart/form-data">
 
                         @csrf
                         <!-- Account Details -->
@@ -658,12 +658,7 @@
                             </div>
                           </div>
                           <!-- /Invoice -->
-                          <div class="col-md-4">
-                          <select id="selectMember" class="select2 form-select form-select-md" data-allow-clear="true" name="name" placeholder="select name" required>
-                                  <option value=""></option>
-                                  
-                                </select>
-                          </div>
+                        
                           <div class="col-12 d-flex justify-content-between">
                             <button class="btn btn-label-secondary btn-prev">
                               <i class="ti ti-arrow-left me-sm-1"></i>
@@ -889,27 +884,6 @@
   });
 </script>
 <script>
- function createCheckbox()
- {
-  var checkbox = document.createElement('input');
-            checkbox.type = 'checkbox';
-            checkbox.id = 'car';
-            checkbox.name = 'interest';
-            checkbox.value = 'car';
- 
-            var label = document.createElement('label')
-            label.htmlFor = 'car';
-            label.appendChild(document.createTextNode('Car'));
- 
-            var br = document.createElement('br');
- 
-            var container = document.getElementById('member-container');
-            container.appendChild(checkbox);
-            container.appendChild(label);
-            container.appendChild(br);
- }
-</script>
-<script>
     $("#select2Basic").change(function () {
       var id=$(this).val();
       $.ajax({
@@ -1000,7 +974,7 @@
         '<td id="members_age">' + $('#member_age').val() + '</td>' +
         '<td id="member_gen">' + $('#gender_data').val() + '</td>' +
         '<td id="member_rel">' + $('#member_relation').val() + '</td>' +
-        '<td id="member">' + '<input type=checkbox class=member value='+$('#full_name_form').val()+'>' + '</td>' +
+        '<td id="member">' + '<input type=checkbox class=member value='+$('#full_name_form').val()+' name=member[0]>' + '</td>' +
         '</tr>'
       );}else{
       $(".rep-table").append(
@@ -1010,7 +984,7 @@
         '<td id="members_age">' + $('#member_age').val() + '</td>' +
         '<td id="member_gen">' + $('#gender_data').val() + '</td>' +
         '<td id="member_rel">' + $('#member_relation').val() + '</td>' +
-        '<td id="member">' + '' + '</td>' +
+        '<td id="member">' + '<input type=checkbox class=member value='+$('#full_name_form').val()+' name=member[0] checked >' + '</td>' +
         '</tr>'
       );}
 
@@ -1030,7 +1004,7 @@
         '<td class="members_age' + i + '">' + $('#member_age' + i).val() + '</td>' +
         '<td class="member_gen'+ i +'">' + $('input[name="gender'+i+'"]:checked').val() + '</td>' +
         '<td class="member_rel' + i + '">' + $('#member_relation' + i).val() + '</td>' +
-        '<td class="member' + i + '">' + '<input class=member type=checkbox value='+$('#full_name_form' + i).val()+'>' + '</td>' +
+        '<td class="member' + i + '">' + '<input class=member type=checkbox value='+$('#full_name_form' + i).val()+' name=member['+i+']>' + '</td>' +
         '</tr>'
          );
         j++;
@@ -1073,15 +1047,14 @@
         }else{check=0;$("#deposite").html("");}
         });
       
-        $("#submit-button").click(function(){
+      /*  $("#submit-button").click(function(){
           $('.member').each(function () {
             if($(this).is(':checked'))
             {
-           
-            $('#selectMember').append(new Option($(this).val(), $(this).val()));
+        
             alert($(this).val());}
         });
-        });
+        });*/
   $(".browser-default-validation").change(function(){
   var flag=0;
     let age=document.getElementById("basic-default-age");

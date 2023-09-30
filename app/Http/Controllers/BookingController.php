@@ -5,6 +5,7 @@ use App\Models\room_details;
 use App\Models\add_members;
 use App\Models\member_details;
 use App\Models\add_room;
+use App\Models\Deposite;
 use App\Models\checkout;
 use Carbon\Carbon;
 use Auth;
@@ -29,7 +30,7 @@ class BookingController extends Controller
     {
         $req->validate([
             'id_proof.*' => 'mimes:doc,pdf,docx,zip,jpeg,png,jpg,gif,svg',]);
-
+        //dd($req->member);
         $m_name =(personal_details::get()->last()->m_name);
         $p_details=personal_details::with('member')->get();
         $data = personal_details::find($req->p_id);
@@ -133,16 +134,44 @@ class BookingController extends Controller
                         $m_details->room_id=$req->deposit_no;
                         $m_details->save();
                     }
-                    
-                  
-
-                    // $m_details = new member_details();
-                    // $m_details->full_name = $req->full_name;
-                    // $m_details->age= $req->m_age;
-                    // $m_details->gender=$req->gender;
-                    // $m_details->relation=$req->relation;
-                    // $m_details->save();  
-
+                    /*deposite */
+                    if($req->deposite_rs>9000)
+                    { 
+                        if($req->deposite_rs>9000){
+                            $div=floor($req->deposite_rs / 9000);
+                            $rem=$req->deposite_rs % 9000;
+                            $i=0;
+                        }
+                        if($req->deposite_rs>9000)
+                        {  
+	                        while($div!=0)
+                        	{
+                                $deposite=new Deposite();
+                                $deposite->booking_id=$req->deposit_no;
+                                $deposite->member_name=$req->member[$i];
+                                $deposite->payment_mode="CASH";
+                                $deposite->amount=9000;
+                                $deposite->save();
+		                        $div--;$i++;
+	                        }
+                            if($rem>0)
+                            {
+                                $deposite=new Deposite();
+                                $deposite->booking_id=$req->deposit_no;
+                                $deposite->member_name=$req->member[$i];
+                                $deposite->payment_mode="CASH";
+                                $deposite->amount=$rem;
+                                $deposite->save();
+                            }
+                        }}
+                        else{
+                            $deposite=new Deposite();
+                            $deposite->booking_id=$req->deposit_no;
+                            $deposite->member_name=$req->member[0];
+                            $deposite->payment_mode="CASH";
+	                        $deposite->amount=$req->deposite_rs;
+                            $deposite->save();
+                        }
             }
         }
       
