@@ -28,8 +28,7 @@ class BookingController extends Controller
 
     public function RoomBooking(Request $req)
     {
-        $req->validate([
-            'id_proof.*' => 'mimes:doc,pdf,docx,zip,jpeg,png,jpg,gif,svg',]);
+
         //dd($req->member);
         $m_name =(personal_details::get()->last()->m_name);
         $p_details=personal_details::with('member')->get();
@@ -54,15 +53,15 @@ class BookingController extends Controller
         $img="";
         for($i=0;$i<$count;$i++)
         {
-
             $file = $req->id_proof[$i] ;
             $fileName =$file->getClientOriginalName();
             $path=pathinfo($fileName);
             $extension=$path['extension'];
+            if($extension==="png" || $extension==="jpg" || $extension==="pdf" ||$extension==="jpeg"){
             $fileName = ($req->deposit_no)."(".($i+1).")".".".$extension;
             $destinationPath = public_path().'/images' ;
             $file->move($destinationPath,$fileName);
-            $img=$img.",".$fileName;
+            $img=$img.",".$fileName;}
         }
         $details->id_proof=substr($img,1);
         $details->occupation=$req->occupation;

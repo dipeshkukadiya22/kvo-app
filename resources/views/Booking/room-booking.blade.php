@@ -220,7 +220,7 @@
                       </div>
                     </div>
                     <div class="bs-stepper-content">
-                    <form class="browser-default-validation"   method="POST" id="room_booking" enctype="multipart/form-data">
+                    <form class="browser-default-validation" action="{{ route('RoomBooking') }}"  method="POST" id="room_booking" enctype="multipart/form-data">
 
                         @csrf
                         <!-- Account Details -->
@@ -361,7 +361,7 @@
                                                 <label class="form-label" for="form-repeater-1-1">Full Name</label>
                                                 <input type="text" id="full_name_form"  name="full_name0" class="form-control" placeholder="john doe" value="{{ (!empty($member) )? $member->m_name : '' }}"/>
                                               </div>
-                                              <div class="mb-3 col-lg-4 col-xl-2 col-12 mb-0">
+                                              <div class="mb-3 col-lg-4 col-xl-3 col-12 mb-0">
                                                 <label class="form-label" for="form-repeater-1-2">Age</label>
                                                 <input type="text" id="member_age" name="m_age0" class="form-control" placeholder="your age" />
                                               </div>
@@ -894,6 +894,8 @@ $("#room_booking").submit(function(){
     $("#error-member").html("Checked Only " + div + " Members for Deposite");
     event.preventDefault();
   }
+  if(div==count)
+  {$("#error-member").html("");}
 });
 </script>
 <script>
