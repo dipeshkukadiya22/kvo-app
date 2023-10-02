@@ -148,7 +148,7 @@ class BookingController extends Controller
                                 $deposite=new Deposite();
                                 $deposite->booking_id=$req->deposit_no;
                                 $deposite->member_name=strtoupper($req->member[$i]);
-                                $deposite->payment_mode="CASH";
+                                $deposite->payment_mode=$req->payment;
                                 $deposite->amount=9000;
                                 $deposite->save();
 		                        $div--;$i++;
@@ -158,7 +158,7 @@ class BookingController extends Controller
                                 $deposite=new Deposite();
                                 $deposite->booking_id=$req->deposit_no;
                                 $deposite->member_name=strtoupper($req->member[$i]);
-                                $deposite->payment_mode="CASH";
+                                $deposite->payment_mode=$req->payment;
                                 $deposite->amount=$rem;
                                 $deposite->save();
                             }
@@ -167,14 +167,12 @@ class BookingController extends Controller
                             $deposite=new Deposite();
                             $deposite->booking_id=$req->deposit_no;
                             $deposite->member_name=strtoupper($req->member[0]);
-                            $deposite->payment_mode="CASH";
+                            $deposite->payment_mode=$req->payment;
 	                        $deposite->amount=$req->deposite_rs;
                             $deposite->save();
                         }
             }
         }
-      
-      
         $ar_list = DB::select("SELECT add_room.*, room_details.check_in_date, room_details.* FROM add_room LEFT JOIN room_details ON add_room.room_no = room_details.r_id WHERE add_room.status = 1");
         if($status){
         return redirect()-> route('view_room_booking')-> with ('message', 'Details Changed Successfully!') ;
@@ -349,8 +347,6 @@ class BookingController extends Controller
     }
     public function update_room_booking(Request $req) 
     {
-        $req->validate([
-            'id_proof.*' => 'mimes:doc,pdf,docx,zip,jpeg,png,jpg,gif,svg',]);
 
         $booking=room_details::find($req->booking_id);
         $old_no_of_person=$booking->no_of_person;

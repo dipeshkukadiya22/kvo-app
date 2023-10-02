@@ -549,8 +549,7 @@
                                 id="CASH"
                                 name="basic_default_radio"
                                 class="form-check-input"
-                                value="CASH"
-                                required checked/>
+                                checked/>
                               <label class="form-check-label" for="basic_default_radio">Cash</label>
                             </div>
                             <div class="form-check form-check-inline mb-2">
@@ -559,8 +558,7 @@
                                 id="CHEQUE"
                                 name="basic_default_radio"
                                 class="form-check-input"
-                                value="CHEQUE"
-                                required />
+                               />
                               <label class="form-check-label" for="basic_default_radio">Cheque</label>
                             </div>
                             
@@ -570,9 +568,9 @@
                                 id="UPI"
                                 name="basic_default_radio"
                                 class="form-check-input"
-                                value="UPI"
-                                required />
+                                 />
                               <label class="form-check-label" for="basic_default_radio">UPI</label>
+                              <input type=text name="payment" id="payment" value="CASH">
                             </div>
                           </div>
                           <div class="col-md-4" id="member-container"></div>
@@ -751,7 +749,7 @@
         </script>
     @endif
     <script>
-     
+  
       $("#deposit-amount").keydown(function(e){
         if(e.key === "-" || e.key === "+"){e.preventDefault();}
       });
@@ -1049,32 +1047,12 @@ $("#room_booking").submit(function(){
       $(".rep-table").show();
     });
   });
-  $("#deposit-amount").focusout(function(){
-    if($("#deposit-amount").val()>9000){  
-      Swal.fire({
-          title: "Are you sure?",
-          text: "You want to deposite in Cash!",
-          icon: "warning",
-          showCancelButton: true,
-          confirmButtonColor: "#3085d6",
-          cancelButtonColor: "#d33",
-          confirmButtonText: "Yes,do It!",
-      }).then((result) => {
-          // If the user confirms the deletion, proceed with the deletion logic
-          if (result.isConfirmed) {
-            check=1;
-          }else{
-            $("#deposite").html("Deposite Amount Should Be Below 9000");
-            $("#repeat-next").prop('disabled',true);
-          }
-          });
-        }else{check=0;$("#deposite").html("");}
-        });
+ 
+ 
 
   $(".browser-default-validation").change(function(){
   var flag=0;
     let age=document.getElementById("basic-default-age");
-  
     let address=document.getElementById("member-address");
     let occupation=document.getElementById("occupation");
     let reason=document.getElementById("reason");
@@ -1097,18 +1075,49 @@ $("#room_booking").submit(function(){
     {
       $("#btn-step1").prop('disabled',false);
     }
-    if(list1.value !="")
-    {$("#ac-amount").attr('readonly',false);} 
+    if(list1.value != "")
+    {alert("HI");$("#ac-amount").attr('readonly',false);} 
     if(list2.value !="")
     {$("#non-ac-amount").attr('readonly',false);} 
     if(list3.value !="")
     {$("#door_mt_amount").attr('readonly',false);}
     if(((list1.value !="" && ac_amt.value !="") || (list2.value !="" && non_ac_amt.value !="") ||(list3.value !="" && dmt_amt.value !=""))&& deposite.value !="")
-    {$("#repeat-next").prop('disabled',false);}
+    {$("#repeat-next").prop('disabled',false);} 
+    if($("#payment").val()=="CASH"){
+      if(deposite.value>9000) 
+      {
+        Swal.fire({
+          title: "Are you sure?",
+          text: "You want to deposite in Cash!",
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonColor: "#3085d6",
+          cancelButtonColor: "#d33",
+          confirmButtonText: "Yes,do It!",
+      }).then((result) => {
+          // If the user confirms the deletion, proceed with the deletion logic
+          if (result.isConfirmed) {
+            check=1;
+          }else{
+            $("#deposite").html("Deposite Amount Should Be Below 9000");
+            $("#repeat-next").prop('disabled',true);
+          }
+          });
+        }}else{check=0;$("#deposite").html("");}
  });
+
 </script>
  
 <script>
+     $("#CASH").change(function(){
+        document.getElementById("payment").value="CASH";
+    });
+      $("#CHEQUE").change(function(){
+        document.getElementById("payment").value="CHEQUE";
+    });
+      $("#UPI").change(function(){
+        document.getElementById("payment").value="UPI";
+    });
   $(document).ready(function() {
     $("#btn-step1").click(function() {
       console.log("click");

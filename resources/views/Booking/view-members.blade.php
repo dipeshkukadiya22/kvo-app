@@ -478,14 +478,7 @@ function delete_member(id)
           }
 
 </script>
-@if (Session::get('message'))
-    <script>
-        toastr['success']("{{ Session::get('message') }}", 'Updated!', {
-            closeButton: true,
-            tapToDismiss: false,
-        });
-    </script>
-@endif
+
 
 <!-- <script>
   let flag=0;

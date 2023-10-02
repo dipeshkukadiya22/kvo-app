@@ -638,16 +638,46 @@ label.readonly {
                                               <div class="col-md-4">
                                                 <label class="form-label" for="deposit-amount">Deposit Rs</label>
                                                 <input type="number" class="form-control" name="deposite_rs" id="deposit-amount" placeholder="Deposit Rs">
-                                              </div>
+                                                <div id="deposite" class="error-message" ></div></div>
                                               
                                               <div class="col-md-4">
                                                 <label class="form-label" for="rupees-in-words">Deposit Rs (rupees in words)</label>
                                                 <input type="text" class="form-control" name="rs_word" id="rupees-in-words" placeholder="Rupees in words" readonly>
                                               </div>
-                                              
-
-    
-
+                                              <div class="col-md-4">
+                                                <label class="d-block form-label">Payment Mode</label>
+                                                <div class="form-check form-check-inline">
+                                                  <input
+                                                    type="radio"
+                                                    id="CASH"
+                                                    name="basic_default_radio"
+                                                    class="form-check-input"
+                                                    value="CASH"
+                                                    required checked/>
+                                                  <label class="form-check-label" for="basic_default_radio">Cash</label>
+                                                </div>
+                                                <div class="form-check form-check-inline mb-2">
+                                                  <input
+                                                    type="radio"
+                                                    id="CHEQUE"
+                                                    name="basic_default_radio"
+                                                    class="form-check-input"
+                                                    value="CHEQUE"
+                                                    required />
+                                                  <label class="form-check-label" for="basic_default_radio">Cheque</label>
+                                                </div>
+                                                
+                                                <div class="form-check form-check-inline">
+                                                  <input
+                                                    type="radio"
+                                                    id="UPI"
+                                                    name="basic_default_radio"
+                                                    class="form-check-input"
+                                                    value="UPI"
+                                                    required />
+                                                  <label class="form-check-label" for="basic_default_radio">UPI</label>
+                                                </div>
+                                              </div>
                                               <div class="col-12">
                                                 <div action="/upload" class="dropzone needsclick" id="dropzone-multi" >
                                                   <div class="dz-message needsclick" id="dz-img">
@@ -1183,7 +1213,7 @@ function edit(id)
                   
                   var room=response[0]['room_list'];
                   var ArrNames =room .split(",");
-                
+                 
                       ArrNames.forEach(myFunction1);
                       function myFunction1(room, index) {
                         if(room==301 || room==302 || room==401 || room==402 )
@@ -1377,7 +1407,12 @@ $(document).ready(function () {
     }
       $(".rep-table").show();
     });
-  })
+  });
+
+  $("#deposit-amount").keydown(function(e){
+        if(e.key === "-" || e.key === "+"){e.preventDefault();}
+  });
+
   $("#deposit-amount").focusout(function(){
     if($("#deposit-amount").val()>9000){  
       Swal.fire({
