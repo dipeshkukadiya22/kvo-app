@@ -728,6 +728,7 @@ label.readonly {
                                                         <th>Age </th>
                                                         <th>Gender</th>
                                                         <th>Relations</th>
+                                                        <th>test</th>
                                                         </tr>
                                                     </thead>
                                                  
@@ -1303,6 +1304,7 @@ $(document).ready(function () {
 </script>
 
 <script>
+  let check=0;
   $(document).ready(function() {
     let currentStep = 1;
  
@@ -1312,12 +1314,14 @@ $(document).ready(function () {
       const age = $('#members_age').val();
       const selectedGender = $('input[name="gender"]').val();
       const relation = $('#member_relation').val();
-      
+      const member = "Member";
       $('#member_full_name').text(fullName);
       $('#members_age').text(age);
       $('#member_gen').text(selectedGender);
       $('#member_rel').text(relation);
-      
+      $('#member').text(member);
+      if(check==1)
+      {
       $(".rep-table").append(
         '<tr>' +
         '<td>'+ '1' +'</td>' +
@@ -1325,9 +1329,20 @@ $(document).ready(function () {
         '<td id="members_age">' + $('#member_age').val() + '</td>' +
         '<td id="member_gen">' +  $('#gender_data').val() + '</td>' +
         '<td id="member_rel">' + $('#member_relation').val() + '</td>' +
+        '<td id="member">' + '<input type=checkbox class=member value='+$('#full_name_form').val()+' name=member[0]>' + '</td>' +
         '</tr>'
-      );
-
+      );}else{
+        $(".rep-table").append(
+        '<tr>' +
+        '<td>'+ i +'</td>' +
+        '<td id="member_full_name">' + $('#full_name_form').val() + '</td>' +
+        '<td id="members_age">' + $('#member_age').val() + '</td>' +
+        '<td id="member_gen">' + $('#gender_data').val() + '</td>' +
+        '<td id="member_rel">' + $('#member_relation').val() + '</td>' +
+        '<td id="member">' + '<input type=checkbox class=member value='+$('#full_name_form').val()+' name=member[0] checked >' + '</td>' +
+        '</tr>'
+      );}
+      
       let numForms = parseInt($("#no_of_person_id").val());
       if (isNaN(numForms) || numForms <= 0) {
        
@@ -1335,7 +1350,8 @@ $(document).ready(function () {
       }  let j=2;
       for (let i = 1; i < numForms; i++) {
       
-        $(".rep-table").append(
+        if(check==1)
+        {$(".rep-table").append(
           '<tr>' +
           '<td>'+ j +'</td>' +
           '<td class="member_full_name' + i + '">' + $('#full_name_form' + i).val()+ '</td>' +
@@ -1344,20 +1360,45 @@ $(document).ready(function () {
           '<td class="member_rel' + i + '">' + $('#member_relation' + i).val() + '</td>' +
           '</tr>'
         );
-
-
         j++;
-        // Setting text for elements in the loop using jQuery
-        // $('.member_full_name' + i).text($('#full_name_form' + i).val());
-        // $('.members_age' + i).text($('#member_age' + i).val());
-        // $('.member_gen' + i).text($('#gender'+i).val());
-        // $('.member_rel' + i).text($('#member_relation' + i).val());
-        // j++;
+        }else{
+        $(".rep-table").append(
+        '<tr>' +
+        '<td>'+ j +'</td>' +
+        '<td class="member_full_name' + i + '">' + $('#full_name_form' + i).val().toUpperCase() + '</td>' +
+        '<td class="members_age' + i + '">' + $('#member_age' + i).val() + '</td>' +
+        '<td class="member_gen'+ i +'">' + $('input[name="gender'+i+'"]:checked').val() + '</td>' +
+        '<td class="member_rel' + i + '">' + $('#member_relation' + i).val() + '</td>' +
+        '<td class="member' + i + '">' + '' + '</td>' +
+        '</tr>'
+         );
+        j++;
       }
-
+    }
       $(".rep-table").show();
     });
-  });
+  })
+  $("#deposit-amount").focusout(function(){
+    if($("#deposit-amount").val()>9000){  
+      Swal.fire({
+          title: "Are you sure?",
+          text: "You want to deposite in Cash!",
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonColor: "#3085d6",
+          cancelButtonColor: "#d33",
+          confirmButtonText: "Yes,do It!",
+      }).then((result) => {
+          // If the user confirms the deletion, proceed with the deletion logic
+          if (result.isConfirmed) {
+            check=1;
+          }else{
+            $("#deposite").html("Deposite Amount Should Be Below 9000");
+            $("#repeat-next").prop('disabled',true);
+          }
+          });
+        }else{check=0;$("#deposite").html("");}
+        });
 </script>
 <script>
   $(document).ready(function() {

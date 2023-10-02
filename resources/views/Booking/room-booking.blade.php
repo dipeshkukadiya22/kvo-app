@@ -983,7 +983,7 @@ $("#room_booking").submit(function(){
       const age = $('#members_age').val();
       const selectedGender = $('input[name="gender"]').val();
       const relation = $('#member_relation').val();
-      const member = "AA";
+      const member = "Member";
       let i=1;
       $('#member_full_name').text(fullName);
       $('#members_age').text(age);
@@ -1045,7 +1045,7 @@ $("#room_booking").submit(function(){
          );
         j++;
       }}
-
+      
       $(".rep-table").show();
     });
   });
@@ -1070,15 +1070,7 @@ $("#room_booking").submit(function(){
           });
         }else{check=0;$("#deposite").html("");}
         });
-      
-      /*  $("#submit-button").click(function(){
-          $('.member').each(function () {
-            if($(this).is(':checked'))
-            {
-        
-            alert($(this).val());}
-        });
-        });*/
+
   $(".browser-default-validation").change(function(){
   var flag=0;
     let age=document.getElementById("basic-default-age");
