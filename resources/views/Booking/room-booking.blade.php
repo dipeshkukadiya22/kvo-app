@@ -384,16 +384,20 @@
                                                 <div class="col-md-3">
                                                   <label class="form-label" for="basic-default-country">Relation</label>
                                                     <select class="form-select" name="relation0" id="member_relation" required>
-                                                      <option value="SELF" selected>SELF</option>
-                                                      <option value="MOTHER">MOTHER</option>
-                                                      <option value="FATHER">FATHER</option>
-                                                      <option value="BROTHER">BROTHER</option>
-                                                      <option value="SISTER">SISTER</option>
-                                                      <option value="UNCLE">UNCLE</option>
+                                                    <option value="SELF" selected>SELF</option>
                                                       <option value="AUNTY">AUNTY</option>
-                                                      <option value="GRAND MOTHER">GRAND MOTHER</option>
-                                                      <option value="GRAND FATHER">GRAND FATHER</option>
+                                                      <option value="BROTHER">BROTHER</option>
+                                                      <option value="BROTHER">COUSIN</option>
+                                                      <option value="FATHER">FATHER</option>
                                                       <option value="FRIEND">FRIEND</option>
+                                                      <option value="GRAND FATHER">GRAND FATHER</option>
+                                                      <option value="GRAND MOTHER">GRAND MOTHER</option>
+                                                      <option value="MOTHER">MOTHER</option>
+                                                      <option value="NEPHEW">NEPHEW</option>
+                                                      <option value="SISTER">SISTER</option>
+                                                      <option value="SON">SON</option>
+                                                      <option value="UNCLE">UNCLE</option>
+                                                      <option value="WIFE">WIFE</option>
                                                     </select>
                                                 </div>
                                                 <div class="mb-3 col-lg-12 col-xl-2 col-12 d-flex align-items-center mb-0">
@@ -1168,6 +1172,7 @@ $("#room_booking").submit(function(){
                                     '  <option value="MOTHER">MOTHER</option>'+
                                     '  <option value="NEPHEW">NEPHEW</option>'+
                                     '  <option value="SISTER">SISTER</option>'+
+                                    '  <option value="SON">SON</option>'+
                                     '  <option value="UNCLE">UNCLE</option>'+
                                     '  <option value="WIFE">WIFE</option>'+
                         

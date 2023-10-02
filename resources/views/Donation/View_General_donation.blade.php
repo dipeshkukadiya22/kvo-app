@@ -589,24 +589,6 @@ button.swal2-cancel.btn.btn-label-danger {
                 aboveTens();
                 break;
   
-            //            This is optional. 
-  
-            //            case 9:
-            //                if ((rev[i] == 0) || (rev[i + 1] == 1)) {
-            //                    word[j] = '';
-            //                }
-            //                else {
-            //                    word[j] = once[rev[i]];
-            //                }
-            //                if (rev[i + 1] !== '0' || rev[i] > '0') {
-            //                    word[j] = word[j] + " Arab";
-            //                }
-            //                break;
-  
-            //            case 10:
-            //                aboveTens();
-            //                break;
-  
             default: break;
         }
         j++;
@@ -634,7 +616,6 @@ button.swal2-cancel.btn.btn-label-danger {
         const myOffcanvas = document.getElementById('offcanvasBackdrop');
         let a=new bootstrap.Offcanvas(myOffcanvas);
         a.show();
-       // $('#submitbtn').prop('disabled','true');
         var member_id=[];
         var temp=document.getElementById('name');
           for(i=0;i<temp.options.length;i++)

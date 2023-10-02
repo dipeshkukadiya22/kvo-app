@@ -1,35 +1,19 @@
+<style>
+span.app-brand-logo.demo {
+    width: 250px !important;
+    height: auto !important;
+}
+
+</style>
+
 <!-- Navbar -->
 <nav class="layout-navbar navbar navbar-expand-xl align-items-center bg-navbar-theme" id="layout-navbar">
     <div class="container-xxl">
       <div class="navbar-brand app-brand demo d-none d-xl-flex py-0 me-4">
         <a href="{{route('ViewMembers')}}" class="app-brand-link gap-2">
           <span class="app-brand-logo demo">
-          <svg width="32" height="22" viewBox="0 0 32 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path
-                fill-rule="evenodd"
-                clip-rule="evenodd"
-                d="M0.00172773 0V6.85398C0.00172773 6.85398 -0.133178 9.01207 1.98092 10.8388L13.6912 21.9964L19.7809 21.9181L18.8042 9.88248L16.4951 7.17289L9.23799 0H0.00172773Z"
-                fill="#ca5300" />
-              <path
-                opacity="0.06"
-                fill-rule="evenodd"
-                clip-rule="evenodd"
-                d="M7.69824 16.4364L12.5199 3.23696L16.5541 7.25596L7.69824 16.4364Z"
-                fill="#161616" />
-              <path
-                opacity="0.06"
-                fill-rule="evenodd"
-                clip-rule="evenodd"
-                d="M8.07751 15.9175L13.9419 4.63989L16.5849 7.28475L8.07751 15.9175Z"
-                fill="#161616" />
-              <path
-                fill-rule="evenodd"
-                clip-rule="evenodd"
-                d="M7.77295 16.3566L23.6563 0H32V6.88383C32 6.88383 31.8262 9.17836 30.6591 10.4057L19.7824 22H13.6938L7.77295 16.3566Z"
-                fill="#ca5300" />
-            </svg>
-          </span>
-          <span class="app-brand-text demo menu-text fw-bold">KVO</span>
+            <img src="{{ asset('public/assets/img/new-logo.png') }}" width="100%"> 
+          <span>
         </a>
           
         <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto d-xl-none">
@@ -142,6 +126,12 @@
 
               <ul class="menu-sub">
               <li class="menu-item">
+                  <a href="{{route('Advance_Room_Booking')}}" class="menu-link">
+                    <i class="menu-icon tf-icons ti ti-menu-2"></i>
+                    <div data-i18n="Advance Room Booking">Advance Room Booking</div>
+                  </a>
+                </li>
+              <li class="menu-item">
                   <a href="{{route('room-booking')}}" class="menu-link">
                     <i class="menu-icon tf-icons ti ti-menu-2"></i>
                     <div data-i18n="Add New Room Booking">Add New Room Booking</div>
@@ -197,7 +187,7 @@
                
                 <li class="menu-item">
                   <a href="{{route('view_general_donation')}}" class="menu-link">
-                    <i class="menu-icon tf-icons ti ti-layout-kanban"></i>
+                  <i class="ti ti-coin-rupee"></i>
                     <div data-i18n="General Donation">General Donation</div>
                   </a>
                 </li>
@@ -221,7 +211,7 @@
             <!-- Pages -->
             <li class="menu-item">
               <a href="javascript:void(0)" class="menu-link menu-toggle">
-              <i class="fa-regular fa-square-plus"></i>
+              <i class=" menu-icon fa-regular fa-square-plus"></i>
 
                 <div data-i18n="MEDICAL">MEDICAL</div>
               </a>
@@ -230,7 +220,7 @@
                 
                 <li class="menu-item">
                   <a href="{{route('view_treatment')}}" class="menu-link">
-                  <i class="fa-solid fa-stethoscope"></i>
+                  <i class="menu-icon fa-solid fa-stethoscope"></i>
                     <div data-i18n="TREATMENT">TREATMENT</div>
                   </a>
                 </li>
@@ -247,20 +237,20 @@
             <!-- Components -->
             <li class="menu-item">
               <a href="javascript:void(0)" class="menu-link menu-toggle">
-                <i class="menu-icon tf-icons ti ti-toggle-left"></i>
+              <i class="menu-icon ti ti-wallet"></i>
                 <div data-i18n="EXPENSE">EXPENSE</div>
               </a>
               
               <ul class="menu-sub">
                  <li class="menu-item">
                   <a href="{{route('View_Sangh_Expense')}}" class="menu-link ">
-                    <i class="menu-icon tf-icons ti ti-id"></i>
+                  <i class="menu-icon ti ti-wallet"></i>
                     <div data-i18n="Sangh Expense">Sangh Expense</div>
                   </a>
                  </li> 
                  <li class="menu-item">
                   <a href="{{route('view_mahajan_expense')}}" class="menu-link">
-                    <i class="menu-icon tf-icons ti ti-id"></i>
+                  <i class="menu-icon ti ti-wallet"></i>
                     <div data-i18n="Mahajan Expense">Mahajan Expense</div>
                   </a>
                  </li> 
@@ -270,50 +260,50 @@
             <!-- Forms -->
             <li class="menu-item">
               <a href="javascript:void(0)" class="menu-link menu-toggle">
-              <i class="fa-solid fa-database"></i>
+              <i class="menu-icon fa-solid fa-database"></i>
                 <div data-i18n="REPORTS">REPORTS</div>
               </a>
               <ul class="menu-sub">
                 
                 <li class="menu-item">
                   <a href="{{route('general_donation_report')}}" class="menu-link">
-                  <i class="fa-solid fa-sack-dollar"></i>
+                  <i class="menu-icon ti ti-coin-rupee"></i>
                     <div data-i18n="General Donation">General Donation</div>
                   </a>
                 </li>
                 <li class="menu-item">
                   <a href="{{route('community_donation_report')}}" class="menu-link">
-                  <i class="fa-solid fa-sack-dollar"></i>
+                  <i class="menu-icon ti ti-coin-rupee"></i>
                     <div data-i18n="Community Donation">Community Donation</div>
                   </a>
                 </li>
                 <li class="menu-item">
                   <a href="{{route('community_category_donation_report')}}" class="menu-link">
-                  <i class="fa-solid fa-sack-dollar"></i>
+                  <i class="menu-icon ti ti-coin-rupee"></i>
                     <div data-i18n="Community Category Donation">Community Category Donation</div>
                   </a>
                 </li>
                 <li class="menu-item">
                   <a href="{{route('religious_category_donation_report')}}" class="menu-link">
-                  <i class="fa-solid fa-sack-dollar"></i>
+                  <i class="menu-icon ti ti-coin-rupee"></i>
                     <div data-i18n="Religious Category Donation">Religious Category Donation</div>
                   </a>
                 </li>
                 <li class="menu-item">
                   <a href="{{route('religious_donation_report')}}" class="menu-link">
-                  <i class="fa-solid fa-sack-dollar"></i>
+                  <i class="menu-icon ti ti-coin-rupee"></i>
                     <div data-i18n="Religious Donation">Religious Donation</div>
                   </a>
                 </li>
                 <li class="menu-item">
                   <a href="{{route('expense_report')}}" class="menu-link">
-                    <i class="menu-icon tf-icons ti ti-checkbox"></i>
+                  <i class="menu-icon ti ti-wallet"></i>
                     <div data-i18n="Expense">Expense</div>
                   </a>
                 </li>
                 <li class="menu-item">
                   <a href="{{route('medical_report')}}" class="menu-link">
-                  <i class="fa-solid fa-hand-holding-medical"></i>
+                  <i class=" menu-icon fa-solid fa-hand-holding-medical"></i>
                     <div data-i18n="Medical">Medical</div>
                   </a>
                 </li>

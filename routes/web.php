@@ -63,7 +63,7 @@ Route::group(['middleware'=>['user']],function(){
     Route::get('/get_roomdata/{id}', [BookingController::class, 'get_roomdata'])->name('get_roomdata');
     Route::post('update_roomdata', [BookingController::class, 'update_roomdata'])->name('update_roomdata');
 
-    Route::get('AdvanceRoomBooking', [BookingController::class, 'AdvanceRoomBooking'])->name('AdvanceRoomBooking');
+    //Route::get('AdvanceRoomBooking', [BookingController::class, 'AdvanceRoomBooking'])->name('AdvanceRoomBooking');
 
     Route::get('room-list', [BookingController::class, 'get_room_list'])->name('get_room_list');
     Route::POST('RoomList', [BookingController::class, 'RoomList'])->name('RoomList');
@@ -145,8 +145,12 @@ Route::group(['middleware'=>['user']],function(){
 
 /* Auth Login Route */
 
-/* Room Booking Route */
-
+/* Advance */
+    Route::POST('AdvanceRoomBooking', [BookingController::class, 'advanceroom'])->name('AdvanceRoomBooking');
+    Route::get('Advance_Room_Booking', [BookingController::class, 'AdvanceRoomBooking'])->name('Advance_Room_Booking');
+    Route::get('checkRoom/{date1,date2}', [BookingController::class, 'checkRoom'])->name('checkRoom');
+    Route::post('update_advance_room_booking', [BookingController::class, 'update_advance_room_booking'])->name('update_advance_room_booking');
+    Route::get('get_advance_data/{id}', [BookingController::class, 'get_advance_data'])->name('get_advance_data');
 
 
 

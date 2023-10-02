@@ -16,6 +16,8 @@
 <link rel="stylesheet" href="{{ asset ('assets/vendor/libs/dropzone/dropzone.css') }}" />
 
 <link rel="stylesheet" href="{{ asset ('assets/vendor/libs/select2/select2.css') }}" />
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+<link rel="stylesheet" href="{{ asset('assets/vendor/libs/sweetalert2/sweetalert2.css') }}" />
 
 <style>
   @media (min-width: 768px){
@@ -96,7 +98,7 @@
                 <div class="content-header-left col-md-9 col-12 mb-2">
                     <div class="row breadcrumbs-top">
                         <div class="col-12">
-                          <h4 class="fw-bold py-3"><span class="text-muted fw-light">Forms /</span> Validation</h4>
+                          <h4 class="fw-bold py-3"><span class="text-muted fw-light"></span>Advance Room Booking</h4>
                         </div>
                     </div>
                 </div>
@@ -136,12 +138,8 @@
                 <div class="col-12 mb-4">
                   <div class="bs-stepper wizard-icons wizard-icons-example mt-2">
                     <div class="bs-stepper-header">
-                      
-                     
-                      
-                     
                     <div class="bs-stepper-content">
-                     <form class="browser-default-validation" action="{{route('RoomBooking')}}" method="POST" id="room_booking">
+                    <form class="browser-default-validation" action="{{ route('AdvanceRoomBooking') }}" method="POST" id="room_booking">
                         @csrf
                         <!-- Account Details -->
                     
@@ -186,9 +184,13 @@
                                 <label for="defaultFormControlInput" class="form-label">City</label>
                                 <input type="text" class="form-control" name="city" id="member_city" style="text-transform:uppercase" placeholder="John Doe" aria-describedby="defaultFormControlHelp" value="{{ (!empty($member)) ? $member->city : '' }}"/>
                               </div>
-                       <br/>
+                 
+                            <div class="col-md-4">
+                              <label for="flatpickr-range" class="form-label"><span class="required">Advance Date</span></label>
+                              <input type="text" class="form-control" name="advance_date" placeholder="DD-MM-YYYY HH:MM" id="daterange" required/>
+                            </div>
                           </div>
-                   
+                          
                         <!-- Personal Info -->
                      
                         
@@ -209,7 +211,7 @@
                             <div class="col-md-2 mt-3">
                                 <label for="select2Multiple1" class="form-label">Ac Room</label> 
                               
-                                <select id="select2Multiple11" name="select2Multiple1[]" class="select2 form-select" multiple>
+                                <select id="select2Multiple11" name="select2Multiple1[]" class="select2 form-select room-input" multiple>
                                      @foreach($ac_list as $list)
                                         <option value="{{$list}}" >{{$list}}</option>
                                     @endforeach
@@ -220,13 +222,13 @@
                                   <label class="form-label" for="basic-default-name">Amount</label>
                                   <div class="input-group">
                                     <span class="input-group-text">₹</span>
-                                    <input type="number" class="form-control"  name="ac_amount" placeholder="Amount" aria-label="Amount (to the nearest indian)" id="ac-amount" />
+                                    <input type="number" class="form-control "  name="ac_amount" placeholder="Amount" aria-label="Amount (to the nearest indian)" id="ac-amount" />
                                   </div>
                                 </div>
 
                                 <div class="col-md-2 mt-3">
                                 <label for="select2Multiple2" class="form-label">Non Ac Room</label>
-                                <select id="select2Multiple22" name="select2Multiple2[]" class="select2 form-select" multiple>
+                                <select id="select2Multiple22" name="select2Multiple2[]" class="select2 form-select room-input" multiple>
                                     @foreach($non_ac_list as $list)
                                         <option value="{{$list}}" >{{$list}}</option>
                                     @endforeach
@@ -242,13 +244,9 @@
                                   </div>
                                 </div>
 
-                                <!-- <div class="col-md-2">
-                                  <label for="TagifyCustomListSuggestion2" class="form-label">Door Metri. A.C. / Non. A.C. Room </label>
-                                  <input id="TagifyCustomListSuggestion2" name="TagifyCustomListSuggestion2" class="form-control" placeholder="Select Roomlist" />
-                                </div> -->
                                 <div class="col-md-2 mt-3">
                                 <label for="select2Multiple3" class="form-label">Door Mt Room</label>
-                                <select id="select2Multiple33" name="select2Multiple3[]" class="select2 form-select" multiple>
+                                <select id="select2Multiple33" name="select2Multiple3[]" class="select2 form-select room-input" multiple>
                                     @foreach($dmt_list as $list)
                                         <option value="{{$list}}" >{{$list}}</option>
                                     @endforeach
@@ -272,18 +270,12 @@
                               <input type="number" class="form-control"  name="no_of_person" id="no_of_person_id" placeholder="No of Person" value="1" required/>
                             </div>
                             <!-- Datetime Picker-->
-                            <div class="col-md-4">
-                              <label for="flatpickr-datetime" class="form-label"><span class="required">Check-In Date</span></label>
-                              <input type="text" class="form-control" name="check_in_date" placeholder="DD-MM-YYYY HH:MM" id="flatpickr-datetime" required/>
-                            </div>
-  
-                         
+                            
 
-                           
-  
                             <div class="col-md-4">
                               <label class="form-label" for="deposit-amount"><span class="required">Deposit Rs</span></label>
                               <input type="number" class="form-control" name="deposite_rs" id="deposit-amount" placeholder="Deposit Rs" required>
+                              <div id="deposite" class="error-message" ></div>
                             </div>
                             
                             <div class="col-md-4">
@@ -293,21 +285,23 @@
 
                             <div class="col-md-4">
                               <label class="form-label" for="deposit-amount"><span class="required">No of Days</span></label>
-                              <input type="number" class="form-control" name="no_of_days" id="no_of_days" placeholder="no_of_days" required>
+                              <input type="number" class="form-control" name="no_of_days" id="no_of_days" placeholder="no_of_days" value="1" required readonly>
+                              <input type="hidden" name="start_date" id="start_date" value="">
+                              <input type="hidden" name="end_date" id="end_date" value="">
                             </div>
                             
                             <div class="col-md-4">
                               <label class="form-label" for="rupees-in-words">Occupation</label>
-                              <input type="text" class="form-control" name="occupation" id="occupation" placeholder="Occupation" >
+                              <input type="text" class="form-control" style="text-transform:uppercase" name="occupation" id="occupation" placeholder="Occupation" required>
                             </div>
 
                             <div class="col-md-4">
                               <label class="form-label" for="rupees-in-words">Reason</label>
-                              <input type="text" class="form-control" name="reason" id="reason" placeholder="Reason to stay">
+                              <input type="text" class="form-control" style="text-transform:uppercase" name="reason" id="reason" placeholder="Reason to stay" required>
                             </div>
   
                             <div class="col-12 flex justify-content">
-                            <button type="submit" class="btn btn-success btn-submit">Submit</button>
+                            <button type="submit" id="submitbtn1" class="btn btn-success btn-submit">Submit</button>
                           </div>
                           </div>
                        
@@ -352,6 +346,7 @@
     <script src="{{ asset('assets/vendor/libs/flatpickr/flatpickr.js') }}"></script>
     <script src="{{ asset('assets/vendor/libs/typeahead-js/typeahead.js') }}"></script>
     <script src="{{ asset('assets/vendor/libs/tagify/tagify.js') }}"></script>
+    <script src="{{ asset('assets/vendor/libs/sweetalert2/sweetalert2.js') }}"></script>
 
 
 
@@ -365,43 +360,127 @@
     <script src="{{ asset('assets/js/form-basic-inputs.js') }}"></script>
 
     <script src="{{ asset('assets/js/form-wizard-icons.js') }}"></script>
+    <script src="{{ asset('assets/js/extended-ui-sweetalert2.js') }}"></script>
 
     <script src="{{ asset ('assets/js/forms-extras.js') }}"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
     <script>
-      $("#multicol-phone").focusout(function(){
-        var contact=document.getElementById("multicol-phone").value;
-        $.ajax({
-                url:"{{url('check_num')}}"+"/"+ contact,
+    jQuery(function ($) {
+     
+        $('#daterange').daterangepicker({
+            opens: 'left',
+            locale: {
+                format: 'DD/MM/YYYY'
+            },
+          
+           }, function(start, end, label) {
+            var startDate = start.format('YYYY-MM-DD'); 
+            var endDate = end.format('YYYY-MM-DD');
+            var numberOfDays = moment(endDate).diff(startDate, 'days');
+            $('#no_of_days').val(numberOfDays + 1);
+            $('#start_date').val(startDate);
+            $('#end_date').val(endDate);
+             $('#daterange').val(start.format('DD/MM/YYYY') + ' - ' + end.format('DD/MM/YYYY'));
+          
+            
+        });
+    
+    });
+</script> 
+<script>
+    let list1=document.getElementById("select2Multiple11");
+    let list2=document.getElementById("select2Multiple22");
+    let list3=document.getElementById("select2Multiple33");
+    $("#room_booking").submit(function(){
+      
+
+      var check=0;
+      if(list1.value !="" || list2.value !="" || list3.value !="")
+      {
+        check=1;
+      }
+      if(check==0)
+      {
+        Swal.fire(
+                'Required!',
+                'Please Select One Room',
+                'warning'
+                )
+        event.preventDefault();
+       
+      }
+      if($("#deposit-amount").val()>9000){ 
+         $("#deposite").html("Deposite Amount Should Be Below 9000"); 
+         event.preventDefault();}
+    });
+</script>
+
+
+    @if(session('new_member') === 1)
+        <script>
+          var member_id=[];
+          var temp=document.getElementById('select2Basic');
+          var value;
+          for(i=0;i<temp.options.length;i++)
+            {
+              member_id[i]=temp.options[i].value;
+              value=member_id[i];
+            }
+            $("#select2Basic option[value=" + value + "]").attr('selected', 'selected');
+            $.ajax({
+                url:"{{url('get_member')}}",
                 type:'GET',
                 success:function(response){
-                    if(response==1)
-                      { $("#submitbtn").prop('disabled',true);}
-                    else{ $("#submitbtn").prop('disabled',false);}
-                    }
-                });
-      });
-      $("#submitbtn").click(function(){
+                  $('#member_email').val(response['email']);
+                  $('#member-phone').val(response['phone_no']);
+                  $('#member_city').val(response['city']);
+                  $('#full_name_form').val(response['m_name']);
+                }
+              });
+        </script>
+    @endif
+    <script>
+       $("#submitbtn").click(function(){
     var name = document.getElementById("basic-default-name").value;
     var phone = document.getElementById("multicol-phone").value;
     var email = document.getElementById("basic-default-email").value;
     var city = document.getElementById("city").value;
-        $.ajax({
-            method: "POST",
-            url: "{{ url('add_member') }}",
-            data: {
-                _token: $("#csrf").val(),
-                name: name,
-                email: email,
-                phone: phone,
-                city: city
-            },
-            success: function(response){
-            $("#member_email").val(response[0]['email']); // Assuming the server returns a JSON object with a “name” property
-            }
-        });
+    $.ajax({
+        method: "POST",
+        url: "{{ url('add_member') }}",
+        data: {
+            _token: $("#csrf").val(),
+            name: name,
+            email: email,
+            phone: phone,
+            city: city
+        },
+        success: function(response){
+          
+          $("#member_email").val(response[0]['email']); // Assuming the server returns a JSON object with a “name” property
+        }
     });
-</script>
-<script>
+  });
+  </script>
+  <script>
+    $("#daterange").on("change",function(){
+      var date=$("#daterange").val()
+      var index=date.indexOf('-');
+      var startdate=date.substr(0,index-1);
+      var enddate=date.substr(index+1);
+    
+      // $.ajax({
+      //   url:"{{url('checkRoom')}}" +"/"+ startdate + "," + enddate,
+      //   type:'GET',
+      //     success:function(response){   
+      //       alert("success");
+      //     }
+      //   });
+    }); 
+
+
+  </script>
+  <script>
       function convertToWords() {
       var depositAmount = parseFloat(document.getElementById("deposit-amount").value);
       var inWords = numberToWords(depositAmount);
@@ -489,7 +568,7 @@ $(document).ready(function() {
 
 </script>
 
-<script>
+<!-- <script>
         $(document).ready(function () {
             $("#select2Basic").change(function () {
                 var data = $.parseJSON($("#email_user").val());
@@ -507,19 +586,25 @@ $(document).ready(function() {
             
             });
         });
-</script>
+</script> -->
 
 <script>
  
   $(document).ready(function() {
-    // let currentStep = 1;
-    // var currentDateTime = new Date();
+    $("#select2Basic").change(function(){
+      const id=document.getElementById("select2Basic").value;
+      $.ajax({
+        
+                url:"{{url('get')}}" +"/"+ id,
+                type:'GET',
+                  success:function(response){   
+                        $("#member_city").val(response['city']); 
+                        $("#member-phone").val(response['phone_no']); 
+                        $("#member_email").val(response['email']);
 
-    // $('#flatpickr-datetime').flatpickr({
-    //   enableTime: true,
-    //   dateFormat: "d-m-Y H:i",
-    //   defaultDate: currentDateTime
-    // });
+                  }
+                });
+            }); 
     $("#repeat-next").on("click", function() {
 
       $('#member_age').val($('#basic-default-age').val());
@@ -540,7 +625,6 @@ $(document).ready(function() {
 
       if (selectedDate && selectedDate.length > 0) {
         $('#check_date').text( selectedDate);
-        // currentStep++;
       }
      
     });
@@ -593,13 +677,6 @@ $(document).ready(function() {
          );
 
         j++;
-
-        // Setting text for elements in the loop using jQuery
-      /*  $('.member_full_name' + i).text($('#full_name_form' + i).val());
-        $('.members_age' + i).text($('#member_age' + i).val());
-        $('.member_gen' + i).text($('#gender'+i).val());
-        $('.member_rel' + i).text($('#member_relation' + i).val());
-        j++;*/
       }
 
       $(".rep-table").show();
