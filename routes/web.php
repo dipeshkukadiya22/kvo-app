@@ -126,6 +126,7 @@ Route::group(['middleware'=>['user']],function(){
     Route::get('/pdf_Sangh_Expense/{id}',[pdfcontroller::class,'pdf_Sangh_Expense'])->name('pdf_Sangh_Expense');
     Route::get('pdf_CheckIn/{id}',[pdfcontroller::class,'pdf_CheckIn'])->name('pdf_CheckIn');
     Route::get('pdf_CheckOut/{id}',[pdfcontroller::class,'pdf_CheckOut'])->name('pdf_CheckOut');
+    Route::get('pdf_Advance_Deposit/{id}',[pdfcontroller::class,'pdf_Advance_Deposit'])->name('pdf_Advance_Deposit');
     
     Route::get('religious_donation_report', [ReportController::class, 'religious_donation_report'])->name('religious_donation_report');
     Route::get('show_religious_donation_report', [ReportController::class, 'show_religious_donation_report'])->name('show_religious_donation_report');

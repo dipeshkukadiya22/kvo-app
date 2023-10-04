@@ -207,7 +207,7 @@ label.readonly {
                                               <td>{{$row->deposite_rs}}</td>
                                               <td>
                                                   <div class="d-inline-block">
-                                                    <a href="{{route('pdf_CheckIn',$row->r_id)}}" target="_blank"><img src="./assets/icon/orange-eye.png" width="20px"></a>
+                                                    <a href="{{route('pdf_Advance_Deposit',$row->r_id)}}" target="_blank"><img src="./assets/icon/orange-eye.png" width="20px"></a>
 
                                                     <a onclick="editadvanceroom({{$row->r_id}})"  class="btn btn-sm btn-icon item-edit"><img src="./assets/icon/orange-edit.png" width="20px"></a>
 
