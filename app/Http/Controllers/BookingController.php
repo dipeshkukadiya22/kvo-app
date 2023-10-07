@@ -634,38 +634,34 @@ class BookingController extends Controller
     }
 
     public function update_advance_room_booking(Request $req){
-      
         $advanceroombooking=room_details::find($req->deposit_no);
         $ac_list = array();
         $non_ac_list = array();
         $dmt_list = array();
-        $single = array(); 
+        $single = array();
         $ac_list = array_filter($req->input('select2Multiple1', []));
         $non_ac_list = array_filter($req->input('select2Multiple2', []));
         $dmt_list = array_filter($req->input('select2Multiple3', []));
         $combinedList = array_merge($ac_list, $non_ac_list, $dmt_list);
         $filteredCombinedList = array_filter($combinedList);
-       
         $advance=personal_details::find($advanceroombooking->member_id);
         $advance->occupation=$req->occupation;
         $advance->reason=$req->reason;
         $status=$advance->save();
-        
         $personal_id=personal_details::get()->last()->p_id;
-       
         $advanceroombooking->no_of_person = $req->no_of_person;
         $advanceroombooking->room_list = implode(',', $filteredCombinedList);
         $advanceroombooking->deposite_rs = $req->deposite_rs;
-        $advanceroombooking->rs_word = $req->rs_word ; 
+        $advanceroombooking->rs_word = $req->rs_word ;
         $advanceroombooking->ac_amount = $req->ac_amount;
         $advanceroombooking->non_ac_amount = $req->non_ac_amount;
         $advanceroombooking->door_mt_amount = $req->door_mt_amount;
         $advanceroombooking->no_of_days = $req->no_of_days;
-        $advanceroombooking->advance_date =date('Y-m-d', strtotime(substr($req->advance_date, 0, 10)));
+        $advanceroombooking->advance_date = $req->advance_date;
         $advanceroombooking->status = "ADVANCE";
         $advanceroombooking->booking_type = "ADVANCE";
         $advanceroombooking->date=date("Y-m-d");
-        $room_no=add_room::pluck('room_no')->toArray(); 
+        $room_no=add_room::pluck('room_no')->toArray();
         $available_roomlist = array_diff($room_no, $single);
             foreach($available_roomlist as $list)
             {
@@ -684,13 +680,11 @@ class BookingController extends Controller
                 {
                     $dmt_list[]=$list;
                 }
-
             }
         $status=$advanceroombooking->save();
         if($status){
             return back()->with ('message', 'Advance booking update successfully!'); }
         else{
             return back()->with ('message', 'Advance booking Not update!'); }
-        
     }
 }
