@@ -5,7 +5,7 @@
 
 				@font-face {
 					font-family: KAP119;
-					src: url('C:/xampplatest/htdocs/kvo-app/vendor/dompdf/dompdf/lib/fonts/KAP119.ttf');
+					src: url('C:/xampp latest/htdocs/kvo-app/vendor/dompdf/dompdf/lib/fonts/KAP119.ttf');
 				}
 
 				@page  
@@ -182,9 +182,9 @@
 						<td class="tg-0pky gujfont">GMG V[P;LP ~D</td>
 						<td class="tg-0pky tc">{{$ac}}</td>
 						<td class="tg-0pky tc">{{$checkout[0]->non_ac_amount}}</td>
+						<td class="tg-0pky tc">{{$checkout[0]->non_ac_room_extra}}</td>
 						<td class="tg-0pky tc">{{$checkout[0]->non_ac_amount+$checkout[0]->non_ac_room_extra}}</td>
 						<td class="tg-0pky tc">{{$checkout[0]->no_of_days}}</td>
-						<td class="tg-0pky tc">{{$checkout[0]->non_ac_room_extra}}</td>
 						<td class="tg-0pky tc">{{$checkout[0]->non_ac_room_total}}</td>
 						</tr>
 					@endif

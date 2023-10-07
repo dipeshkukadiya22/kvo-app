@@ -106,10 +106,18 @@ class pdfcontroller extends Controller
         return $pdf->stream();
     }
     
-    public function pdf_Advance_Deposit()
+    public function pdf_Advance_Deposit($id)
     {
-    $pdf = Pdf::loadView('pdf.pdf_Advance_Deposit')->setPaper('a5', 'potrait')->setOptions(['defaultFont' => 'KAP119']);
-    return $pdf->stream();
+        $count=DB::SELECT("SELECT count(*) from booking_deposite WHERE booking_id='$id'");
+    
+        
+            $advance_room_booking=DB::SELECT("SELECT *,add_members.p_id as m_id from room_details join personal_details on personal_details.p_id=room_details.member_id join add_members on personal_details.member_id=add_members.p_id join booking_deposite on room_details.r_id=booking_deposite.booking_id WHERE booking_id='$id'");
+            $member_detail=DB::SELECT("SELECT * from member_details WHERE room_id='$id'");
+            $pdf = Pdf::loadView('pdf.pdf_Advance_Deposit',['advance_room_booking'=>$advance_room_booking,'member_detail'=>$member_detail])->setPaper('a5', 'potrait')->setOptions(['defaultFont' => 'KAP119']);
+            return $pdf->stream();
+        
+    //$advance_room_booking=DB::SELECT("SELECT *,add_members.p_id as m_id from room_details join personal_details on personal_details.p_id=room_details.member_id join add_members on personal_details.member_id=add_members.p_id WHERE r_id='$id'");
+       
     }
     public function pdf_Medical_Treatment($id)
     {  

@@ -58,6 +58,15 @@
             background-color: #dda919 !important;
             color: #FFF !important;
         }
+.box{
+  margin:12px;
+}
+.status-0 {
+        background-color: green !important;
+}
+.inner-box{
+  padding:12px;
+}
 
 
 
@@ -97,15 +106,6 @@
                                 All Rooms <span id="allRoomsCount">0</span>
                               </button>
                             </li>
-                            <li class="nav-item">
-                              <button type="button" class="nav-link" role="tab" data-bs-toggle="tab" data-bs-target="#navs-pills-top-available"  aria-controls="navs-pills-top-available" aria-selected="false"> Available (<span id="availableRoomsCount">0</span>) </button>
-                            </li>
-                            <li class="nav-item">
-                              <button type="button" class="nav-link"  role="tab"  data-bs-toggle="tab"  data-bs-target="#navs-pills-top-booked"  aria-controls="navs-pills-top-booked"  aria-selected="false">  Booked (<span id="bookedRoomsCount">0</span>) </button>
-                            </li>
-                            <li class="nav-item"> <button  type="button" class="nav-link" role="tab" data-bs-toggle="tab"  data-bs-target="#navs-pills-top-canceled"  aria-controls="navs-pills-top-canceled" aria-selected="false"> Canceled (<span id="canceledRoomsCount">0</span>)
-                              </button>
-                            </li>
                           </ul>
                           
                           <!-- Enable backdrop (default) Offcanvas -->
@@ -135,7 +135,7 @@
     
                                 <!-- Browser Default -->
                                 <form class="browser-default-validation" method="POST" action="{{route('RoomList')}}">
-                                @csrf
+                                  @csrf
                                   <div class="mb-3">
                                     <label class="form-label" for="basic-default-name">Room Name</label>
                                     <input type="text" class="form-control"  style="text-transform:uppercase" name="room_name" id="basic-default-name" placeholder="Deluxe"/>
@@ -196,7 +196,7 @@
                                 <div class="tab-pane fade show active" id="navs-pills-top-allroom" role="tabpanel">
                                   <div class="card-datatable table-responsive pt-0">
                                     <table id="DataTables_Table_0" class="datatables-basic table">
-                                      <thead>
+                                      <!-- <thead>
                                         @csrf
                                         <tr>
                                           <th></th>
@@ -206,169 +206,29 @@
                                           <th>Room Facility</th>
                                           <th>Status</th>
                                           <th>Action</th>
-                                        </tr>
-                                      </thead>
-                                      <tbody>
-                                      @foreach($list as $row)
-                                        <tr>
-                                            <td></td>
-                                            <td>{{$row->room_no}}</td>
-                                            <td>{{$row->room_name}}</td>
-                                            <td>{{$row->room_type}}</td>
-                                            <td>{{$row->room_facility}}</td>
-                                            <td>
-                                            @if ($row->status == 1)
-                                            <div>
-                                            <label for="flatpickr-multi" id="cal" class="form-label text-danger">Booked</label>
+                                        </tr> -->
+                                      <div class="box">
+                                        <div class="row">
+                                          @foreach ($list as $room)
+                                            <div class="col-md-2 mt-3">
+                                                <a href="#">
+                                                    <div class="card inner-box text-white bg-danger {{$room->status == 0 ? 'status-0' : '' }}">
+                                                        <div class="card-header text-center">{{$room->room_no}}&nbsp;{{ $room->room_name }}</div>
+                                                    </div>
+                                                </a>
+                                            </div>
+                                          @endforeach
+                                        </div>
                                       </div>
-                                        @else
-                                            <span class="text-success">{{$row->status == 0 ? 'Available' : ''}}</span>
-                                        @endif
-                                          </td>
-                                            <td>
-                                                <div class="d-inline-block">
-                                                    <a onclick="edit({{$row->room_no}})" class="btn btn-sm btn-icon item-edit"><img src="./assets/icon/orange-edit.png" width="20px"></a>
-                                                   
-                                                    <!--<a href="{{route('cancel_room', $row->room_no)}}" class="text-danger delete-record" >
-                                                        <i class="ti ti-trash"></i>-->
-                                                    </a>
-
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    @endforeach
-                                      </tbody>
+                                      </thead>
                                     </table>
                                   </div>
                                 </div>
+                                  
+                                
                         
-                                <div class="tab-pane fade" id="navs-pills-top-available" role="tabpanel">
-                                  <div class="card-datatable table-responsive pt-0">
-                                    <table id="DataTables_Table_1" class="datatables-basic table">
-                                      <thead>
-                                        <tr>
-                                        <th></th>
-                                          <th></th>
-                                          <th>Room No</th>
-                                          <th>Room Name</th>
-                                          <th>Room Type</th>
-                                          <th>Room Facility</th>
-                                          <th>Status</th>
-                                          <!-- <th></th> -->
-                                        </tr>
-                                      </thead>
-                                      <tbody>
-                                      @foreach($availablelist as $available)
-                                      @if( $available->status == 0)
-                                        <tr>
-                                          <td></td>
-                                          <td></td>
-                                            <td>{{ $available->id }}</td>
-                                            <td>{{ $available->room_name }}</td>
-                                            <td>{{ $available->room_type }}</td>
-                                            <td>{{ $available->room_facility }}</td>
-                                          <td><span class="badge bg-label-primary">Available</span></td>
-                                          <!-- <td>
-                                            <div class="d-inline-block">
-                                              <a href="javascript:;" class="btn btn-sm btn-icon item-edit" data-bs-toggle="offcanvas" data-bs-target="#offcanvasBackdropEditRoom" aria-controls="offcanvasBackdrop"><i class="text-primary ti ti-edit"></i></a>
-                                              <a href="javascript:;" id="confirm-text" class="text-danger delete-record"><i class="ti ti-trash "></i></a>
-                                            </div>
-                                          </td> -->
-                                        </tr>
-                                        @endif
-                                    @endforeach
-                                      </tbody>
-                                    </table>
-                                  </div>
-                                </div>
-                        
-                                <div class="tab-pane fade" id="navs-pills-top-booked" role="tabpanel">
-                                  <div class="card-datatable table-responsive pt-0">
-                                    <table id="DataTables_Table_2" class="datatables-basic table">
-                                      <thead>
-                                        <tr>
-                                          <th></th>
-                                          <th></th>
-                                          <th>Room No</th>
-                                          <th>Room Name</th>
-                                          <th>Room Type</th>
-                                          <th>Room Facility</th>
-                                          <th>Status</th>
-                                          <!-- <th>Action</th> -->
-                                        </tr>
-                                      </thead>
-                                      <tbody>
-                                      @foreach($get_list as $book)
-                                      @if( $book->status == 1)
-                                        <tr>
-                                            <td></td>
-                                            <td></td>
-                                            <td>{{ $book->room_no }}</td>
-                                            <td>{{ $book->room_name }}</td>
-                                            <td>{{ $book->room_type }}</td>
-                                            <td>{{ $book->room_facility }}</td>
-                                            <td>
-                                            <!-- Multiple Dates Picker-->
-                                            <div>
-                                              <label for="flatpickr-multi" class="form-label">Booked </label>
-                                              <input type="date" class="form-control" placeholder="YYYY-MM-DD" id="flatpickr-multi" value="{{$book->check_in_date}}" />
-                                            </div>
-                                           <!-- /Multiple Dates Picker-->
-                                          </td>
-                                            
-                                            <!-- <td>
-                                                <div class="d-inline-block">
-                                                    <a href="javascript:;" class="btn btn-sm btn-icon item-edit" data-bs-toggle="offcanvas" data-bs-target="#offcanvasBackdropEditRoom" aria-controls="offcanvasBackdrop"><i class="text-primary ti ti-edit"></i></a>
-                                                    <a href="javascript:;" id="confirm-text" class="text-danger delete-record"><i class="ti ti-trash"></i></a>
-                                                </div>
-                                            </td> -->
-                                        </tr>
-                                        @endif
-                                    @endforeach
-
-
-                                      </tbody>
-                                    </table>
-                                  </div>
-                                </div>
-
-                                <div class="tab-pane fade" id="navs-pills-top-canceled" role="tabpanel">
-                                  <div class="card-datatable table-responsive pt-0">
-                                    <table id="DataTables_Table_3" class="datatables-basic table">
-                                      <thead>
-                                        <tr>
-                                          <th></th>
-                                          <th></th>
-                                          <th>Room Name</th>
-                                          <th>Room Type</th>
-                                          <th>Room Facility</th>
-                                          <th>Status</th>
-                                          <th>Action</th>
-                                        </tr>
-                                      </thead>
-                                      <tbody>
-                                        <tr>
-                                          <td></td>
-                                          <td></td>
-                                          <td>Deluxe #B-0005</td>
-                                          <td>Single Bed</td>
-                                          <td>Non A.C. Room</td>
-                                          <td>
-                                            <div class="badge bg-label-danger mb-2">Canceled</div>
-                                            <div class="badge bg-label-primary booked-date "><i class="text-primary me-2 ti ti-calendar"></i> June 15, 2023</div>
-                                          </td>
-                                          <td>
-                                            <div class="d-inline-block">
-                                              <a href="javascript:;" class="btn btn-sm btn-icon item-edit" data-bs-toggle="offcanvas" data-bs-target="#offcanvasBackdropEditRoom" aria-controls="offcanvasBackdrop"><i class="text-primary ti ti-edit"></i></a>
-                                              <a href="javascript:;" id="confirm-text" class="text-danger delete-record"><i class="ti ti-trash"></i></a>
-                                            </div>
-                                          </td>
-                                        </tr>
-                                        
-                                      </tbody>
-                                    </table>
-                                  </div>
-                                </div>
+                                
+                              
                               </div>
                             </div>
                           </div>

@@ -359,11 +359,11 @@
                                             <div class="row formrepeater1" data-repeater-list="group-a" >
                                               <div class="mb-3 col-lg-6 col-xl-3 col-12 mb-0">
                                                 <label class="form-label" for="form-repeater-1-1">Full Name</label>
-                                                <input type="text" id="full_name_form"  name="full_name0" class="form-control" placeholder="john doe" value="{{ (!empty($member) )? $member->m_name : '' }}"/>
+                                                <input type="text" id="full_name_form"  name="full_name0" class="form-control" placeholder="john doe" value="{{ (!empty($member) )? $member->m_name : '' }}" required/>
                                               </div>
                                               <div class="mb-3 col-lg-4 col-xl-3 col-12 mb-0">
                                                 <label class="form-label" for="form-repeater-1-2">Age</label>
-                                                <input type="text" id="member_age" name="m_age0" class="form-control" placeholder="your age" />
+                                                <input type="text" id="member_age" name="m_age0" class="form-control" placeholder="your age" required />
                                               </div>
                                               <div class="mb-3 col-lg-6 col-xl-2 col-12 mb-0 ">
                                                         <label class="d-block form-label">Gender</label>
@@ -449,6 +449,26 @@
                            
                             <div class="row">
                             <div class="col-md-2">
+                                <label for="select2Multiple4" class="form-label">AC Deluxe Room</label> 
+                              
+                                <select id="select2Multiple44" name="select2Multiple4[]" class="select2 form-select" multiple>
+                                  @foreach($a_list as $list)
+                                      @if ($list->room_facility == 'Deluxe Room')
+                                          <option value="{{$list->room_no}}"{{(!empty($member) && $member->room_name == $list->room_name) ? "selected" : ""}}>
+                                              {{$list->room_no}}-{{$list->room_name}}
+                                          </option>
+                                      @endif
+                                  @endforeach
+                              </select>
+                            </div>
+                            <div class="col-md-2">
+                                  <label class="form-label" for="basic-default-name">Amount</label>
+                                  <div class="input-group">
+                                    <span class="input-group-text">₹</span>
+                                    <input type="text" class="form-control"  name="dlx_amount" placeholder="Amount" aria-label="Amount (to the nearest indian)" id="dlx_amount" maxlength="4" onkeypress="return onlyNumbers(this.value);"/>
+                                  </div>
+                              </div>
+                            <div class="col-md-2">
                                 <label for="select2Multiple1" class="form-label">Ac Room</label> 
                               
                                 <select id="select2Multiple11" name="select2Multiple1[]" class="select2 form-select" multiple>
@@ -461,8 +481,7 @@
                                   @endforeach
                               </select>
                             </div>
-
-                                <div class="col-md-2">
+                           <div class="col-md-2">
                                   <label class="form-label" for="basic-default-name">Amount</label>
                                   <div class="input-group">
                                     <span class="input-group-text">₹</span>
@@ -494,11 +513,34 @@
                                 </div>
 
                                 <div class="col-md-2">
-                                <label for="select2Multiple3" class="form-label">Door Mt Room</label>
+                                <label for="select2Multiple5" class="form-label">Door Mt AC Room</label>
+                                <select id="select2Multiple55" name="select2Multiple5[]" class="select2 form-select" multiple>
+                                
+                                @foreach ($a_list as $list)
+                                @if ($list->room_facility == 'DOOR MATRY  A.C ROOM')
+                                    <option value="{{$list->room_no}}"{{(!empty($member) && $member->room_name == $list->room_name) ? "selected" : ""}}>
+                                        {{$list->room_no}}-{{$list->room_name}}
+                                    </option>
+                                @endif
+                                  @endforeach
+                                 
+                                </select>
+                              </div>
+
+                                <div class="col-md-2">
+                                  <label class="form-label" for="basic-default-name">Amount</label>
+                                  <div class="input-group">
+                                    <span class="input-group-text">₹</span>
+                                    <input type="text" class="form-control"  name="door_mt_ac_amount" id="door_mt_ac_amount" placeholder="Amount" aria-label="Amount (to the nearest indian)"  maxlength="4" onkeypress="return onlyNumbers(this.value);" />
+                                  </div>
+                                </div>
+
+                                <div class="col-md-2">
+                                <label for="select2Multiple3" class="form-label">Door Mt Non AC Room</label>
                                 <select id="select2Multiple33" name="select2Multiple3[]" class="select2 form-select" multiple>
                                 
                                 @foreach ($a_list as $list)
-                                @if ($list->room_facility == 'DOOR MATRY NON A.C ROOM' || $list->room_facility == 'DOOR MATRY  A.C ROOM')
+                                @if ($list->room_facility == 'DOOR MATRY NON A.C ROOM')
                                     <option value="{{$list->room_no}}"{{(!empty($member) && $member->room_name == $list->room_name) ? "selected" : ""}}>
                                         {{$list->room_no}}-{{$list->room_name}}
                                     </option>
@@ -570,7 +612,7 @@
                                 class="form-check-input"
                                  />
                               <label class="form-check-label" for="basic_default_radio">UPI</label>
-                              <input type=text name="payment" id="payment" value="CASH">
+                              <input type=text name="payment" id="payment" value="CASH" hidden>
                             </div>
                           </div>
                           <div class="col-md-4" id="member-container"></div>
@@ -866,9 +908,11 @@
   $(document).ready(function () {  
   $("#btn-step1").prop('disabled',true); 
   $("#repeat-next").prop('disabled',true);
+  $("#dlx_amount").attr('readonly',true);
   $("#ac-amount").attr('readonly',true);
   $("#non-ac-amount").attr('readonly',true);
   $("#door_mt_amount").attr('readonly',true);
+  $("#door_mt_ac_amount").attr('readonly',true);
 
     $('#personalRadio2').change(function(){
       $("#genderfemale").attr('checked',true);
@@ -928,15 +972,20 @@ $("#room_booking").submit(function(){
 
     $("#repeat-next").on("click", function() {
 
+      const selectedList4 = $('#select2Multiple44').val();
       const selectedList1 = $('#select2Multiple11').val();
       const selectedList2 = $('#select2Multiple22').val();
       const selectedList3 = $('#select2Multiple33').val();
+      const selectedList5 = $('#select2Multiple55').val();
       const selectedDate = $('#flatpickr-datetime').val();
+
+      const dlxacAmount = parseFloat($('#dlx_amount').val()) || 0; 
       const acAmount = parseFloat($('#ac-amount').val()) || 0; 
       const nonAcAmount = parseFloat($('#non-ac-amount').val()) || 0;
       const doorMtAmount = parseFloat($('#door_mt_amount').val()) || 0;
+      const doorMtAcAmount = parseFloat($('#door_mt_ac_amount').val()) || 0;
 
-      const totalAmount = acAmount + nonAcAmount + doorMtAmount;
+      const totalAmount =dlxacAmount + acAmount + nonAcAmount + doorMtAmount + doorMtAcAmount;
       $('#room_amount').text( totalAmount);
       var selectedRooms ;
       if(acAmount !=0){
@@ -1058,12 +1107,16 @@ $("#room_booking").submit(function(){
     let reason=document.getElementById("reason");
     let idproof=document.getElementById("formFileMultiple");
     let sub=document.getElementById("defaultFormControlInput");
+    let list4=document.getElementById("select2Multiple44");
     let list1=document.getElementById("select2Multiple11");
     let list2=document.getElementById("select2Multiple22");
     let list3=document.getElementById("select2Multiple33");
+    let list5=document.getElementById("select2Multiple55");
+    let dlx_amt=document.getElementById("dlx_amount");
     let ac_amt=document.getElementById("ac-amount");
     let non_ac_amt=document.getElementById("non-ac-amount");
     let dmt_amt=document.getElementById("door_mt_amount");
+    let dmt_ac_amt=document.getElementById("door_mt_ac_amount");
     let deposite=document.getElementById("deposit-amount");
     var $fileUpload = $("input[type='file']");
     if (parseInt($fileUpload.get(0).files.length) > 2){
@@ -1075,13 +1128,17 @@ $("#room_booking").submit(function(){
     {
       $("#btn-step1").prop('disabled',false);
     }
+    if(list4.value != "")
+    {$("#dlx_amount").attr('readonly',false);}
     if(list1.value != "")
-    {alert("HI");$("#ac-amount").attr('readonly',false);} 
+    {$("#ac-amount").attr('readonly',false);} 
     if(list2.value !="")
     {$("#non-ac-amount").attr('readonly',false);} 
     if(list3.value !="")
     {$("#door_mt_amount").attr('readonly',false);}
-    if(((list1.value !="" && ac_amt.value !="") || (list2.value !="" && non_ac_amt.value !="") ||(list3.value !="" && dmt_amt.value !=""))&& deposite.value !="")
+    if(list5.value !="")
+    {$("#door_mt_ac_amount").attr('readonly',false);}
+    if(((list4.value != "" && dlx_amt.value !="" )||( list1.value !="" && ac_amt.value !="") || (list2.value !="" && non_ac_amt.value !="") ||(list3.value !="" && dmt_amt.value !="") || (list5.value != "" && dmt_ac_amt.value !="")) && deposite.value !="")
     {$("#repeat-next").prop('disabled',false);} 
     if($("#payment").val()=="CASH"){
       if(deposite.value>9000) 

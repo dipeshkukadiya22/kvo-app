@@ -149,7 +149,7 @@ div.card-datatable [class*=col-md-] {
                                                             <td>{{$row->deposite_rs}}</td>
                                                             <td>
                                                                 <div class="d-inline-block">
-                                                                  <a href="{{route('pdf_CheckIn',$row->r_id)}}" class="text-primary"><img src="./assets/icon/orange-eye.png" width="20px"></a>
+                                                                  <a href="{{route('pdf_CheckIn',$row->r_id)}}"  target ="_blank" class="text-primary"><img src="./assets/icon/orange-eye.png" width="20px"></a>
                                                                   <a @if($row->status=='BOOKED') onclick="edit_checkout({{$row->r_id}})"; @endif class="btn btn-sm btn-icon item-edit"><img src="./assets/icon/orange-edit.png" width="20px"></a>
                                                                 </div>
                                                             </td>
@@ -306,7 +306,7 @@ div.card-datatable [class*=col-md-] {
                                           <input type="text" id="ac_room" name="ac_room" class="form-control clear-value" value=""  readonly/>
                                         </td>
                                         <td>
-                                          <input type="text" id="ac_room_charge" name="ac_room_charge" class="form-control clear-value"  readonly/>
+                                          <input type="text" id="ac_room_charge" name="ac_room_charge" class="form-control clear-value" value="" readonly/>
                                         </td>
                                         <td>
                                           <input type="text" id="ac_room_Excharge" name="ac_room_Excharge" class="form-control clear-value" disabled/>
@@ -550,38 +550,44 @@ div.card-datatable [class*=col-md-] {
                       $("#name").val(response[0]['m_name']);
                       $("#city").val(response[0]['city']);
                       var date=new Date(response[0]['check_in_date']);
-                      var checkindate=date.getDate()+"-"+date.getMonth()+"-"+date.getFullYear()+" "+date.getHours()+":"+date.getMinutes();
+                      var checkindate=date.getDate()+"-"+(date.getMonth()+1)+"-"+date.getFullYear()+" "+date.getHours()+":"+date.getMinutes();
                       var date1=new Date();
                       var days=Math.round((date1.getTime()-date.getTime())/(1000*3600*24));
+                      if(days==0){days=1;}
                       $("#check_in_date").val(checkindate);
                       $("#deposite").val(response[0]['deposite_rs']);
                       var room=response[0]['room_list'];
+                      var dlx=[],ac=[],non_ac=[],dmt_ac=[],dmt_non_ac=[];
                       var ArrNames =room .split(",");
                       ArrNames.forEach(myFunction);
                       function myFunction(room, index) { 
                       if(room==301 || room==302 || room==401 || room==402)
-                      {
-                        $("#dlx_room").val(room);
+                      {           
+                        dlx.push(room);
+                        $("#dlx_room").val(dlx);
                         $("#dlx_room_Excharge").prop('disabled', false);
-                        $("#dlx_room_charge").val(response[0]['ac_amount']);
+                        $("#dlx_room_charge").val(response[0]['dlx_amount']);
                         $("#dlx_no_of_days").val(days);
-                        $("#dlx_amount").val(days * response[0]['ac_amount']);
-                        $("#dlx_room_total").val(days * response[0]['ac_amount']);
+                        $("#dlx_amount").val(days * response[0]['dlx_amount']);
+                        $("#dlx_room_total").val(days * response[0]['dlx_amount']);
                         amt+=parseInt(document.getElementById('dlx_room_total').value);
-                      }
+                      } 
+                          
                       if(room==303 || room==304 ||room==305 || room==306 || room==403)
                       {
-                        $("#ac_room").val(room);
+                        ac.push(room);
+                        $("#ac_room").val(ac);
                         $("#ac_room_Excharge").prop('disabled', false);
                         $("#ac_room_charge").val(response[0]['ac_amount']);
                         $("#ac_no_of_days").val(days);
                         $("#ac_amount").val(days * response[0]['ac_amount']);
                         $("#ac_room_total").val(days * response[0]['ac_amount']);
-                        amt+=prseInt(document.getElementById('ac_room_total').value);
+                        amt+=parseInt(document.getElementById('ac_room_total').value);
                       }
                       if(room==201 || room==202 ||room==203 || room==204 ||room==205 || room==206 || room==404 || room==405 || room==406)
                       {
-                        $("#non_ac_room").val(room);
+                        non_ac.push(room);
+                        $("#non_ac_room").val(non_ac);
                         $("#non_ac_room_Excharge").prop('disabled', false);
                         $("#non_ac_room_charge").val(response[0]['non_ac_amount']);
                         $("#non_ac_no_of_days").val(days);
@@ -592,18 +598,20 @@ div.card-datatable [class*=col-md-] {
                       
                       if(room==1 || room==2 ||room==3 || room==4 ||room==5 || room==6 ||room==7 || room==8 ||room==9 || room==10)
                       {
-                        $("#non_dmt_ac_room").val(room);
+                        dmt_non_ac.push(room);
+                        $("#non_dmt_ac_room").val(dmt_non_ac);
                         $("#non_dmt_ac_room_Excharge").prop('disabled', false);
-                        $("#non_dmt_ac_room_charge").val(response[0]['door_mt_amount']);
+                        $("#non_dmt_ac_room_charge").val(response[0]['door_mt_ac_amount']);
                         $("#non_dmt_ac_no_of_days").val(days);
-                        $("#non_dmt_ac_amount").val(days * response[0]['door_mt_amount']);
-                        $("#non_dmt_ac_room_total").val(days * response[0]['door_mt_amount']);
+                        $("#non_dmt_ac_amount").val(days * response[0]['door_mt_ac_amount']);
+                        $("#non_dmt_ac_room_total").val(days * response[0]['door_mt_ac_amount']);
                         amt+=parseInt(document.getElementById('non_dmt_ac_room_total').value);
                       }
 
                       if(room==11 || room==12 ||room==13 || room==14 ||room==15 || room==16 ||room==17 || room==18 ||room==19 || room==20)
                       {
-                        $("#dmt_ac_room").val(room);
+                        dmt_ac.push(room);
+                        $("#dmt_ac_room").val(dmt_ac);
                         $("#dmt_ac_room_Excharge").prop('disabled', false);
                         $("#dmt_ac_room_charge").val(response[0]['door_mt_amount']);
                         $("#dmt_ac_no_of_days").val(days);

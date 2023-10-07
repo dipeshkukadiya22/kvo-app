@@ -5,7 +5,7 @@
 
 				@font-face {
 					font-family: KAP119;
-					src: url('C:/xampp/htdocs/kvo-app/vendor/dompdf/dompdf/lib/fonts/KAP119.ttf');
+					src: url('C:/xampp latest/htdocs/kvo-app/vendor/dompdf/dompdf/lib/fonts/KAP119.ttf');
 				}
 
 				@page  
@@ -100,15 +100,15 @@
 				</tr>
 				<tr>
 					<td class="tg-0pky"><span class="gujfont">l0P G\o </span><span></span></td>
-					<td class="tg-0pky"><span class="gujfont">A}™SU G\ o </span><span></span></td>
-					<td class="tg-0pky"><span class="gujfont">TFZLBo </span><span></span></td>
+					<td class="tg-0pky"><span class="gujfont">A}™SU G\ o </span><span>{{$advance_room_booking[0]->booking_id}}</span></td>
+					<td class="tg-0pky"><span class="gujfont">TFZLBo </span><span>{{Date("d-m-Y",strtotime($advance_room_booking[0]->date))}}</span></td>
 				</tr>
 				<tr>
-					<td class="tg-0pky" colspan="2"><span class="gujfont">GFDo </span><span></span></td>
-					<td class="tg-0pky"><span class="gujfont">UFDo </span><span></span></td>
+					<td class="tg-0pky" colspan="2"><span class="gujfont">GFDo </span><span>{{$advance_room_booking[0]->m_name}}</span></td>
+					<td class="tg-0pky"><span class="gujfont">UFDo </span><span>{{$advance_room_booking[0]->city}}</span></td>
 				</tr>
 				<tr>
-					<td class="tg-0pky" colspan="3"><span class="gujfont">J5ZFXGL TFZLBo </span><span></span></td>
+					<td class="tg-0pky" colspan="3"><span class="gujfont">J5ZFXGL TFZLBo </span>{{$advance_room_booking[0]->advance_date}}<span></span></td>
 				</tr>
 				</tbody>
 			</table>
@@ -122,8 +122,8 @@
 					</tr>
 					<tr>
 					<td class="tg-0pky gujfont">l0,S®; ~D</td>
-					<td class="tg-1pky">5</td>
-					<td class="tg-0pky">65000</td>
+					<td class="tg-1pky">{{$advance_room_booking[0]->room_list}}</td>
+					<td class="tg-0pky">{{$advance_room_booking[0]->ac_amount}}</td>
 					</tr>
                     <tr>
 					<td class="tg-0pky gujfont">V[P;LP ~D</td>
@@ -149,11 +149,7 @@
 					<td class="tg-1pky"></td>
 					<td class="tg-0pky"></td>
 					</tr>
-                    <tr>
-					<td class="tg-0pky gujfont">V[daI],g;</td>
-					<td class="tg-1pky"></td>
-					<td class="tg-0pky">6500</td>
-					</tr>
+                    
 					<tr>
 					<td class="tg-0pky"></td>
 					<td class="tg-0pky gujfont" style="text-align: right;">8M8,</td>
@@ -184,7 +180,7 @@
                     <td class="tg-0pky sign gujfont" rowspan="3" style="height: 80px">;CL</td>
                   </tr>
                   <tr>
-                    <td class="tg-0pky </span><span></span>" colspan="2"><span class="gujfont">TFZLBo </span><span></span></td>
+                    <td class="tg-0pky </span><span></span>" colspan="2"><span class="gujfont">TFZLBo </span><span>{{substr($advance_room_booking[0]->advance_date, 12) }}</span></td>
                   </tr>
                   <tr>
                       <td class="tg-0pky gujfont bigtitle" colspan="2">R[S VFp8 8F.D ;JFZ[ (P)) S,FS[</td>

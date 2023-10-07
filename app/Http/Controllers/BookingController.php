@@ -67,21 +67,26 @@ class BookingController extends Controller
         $details->occupation=$req->occupation;
         $details->reason=$req->reason;
         /*Insert Room Booking deatil*/
+
         $booking = new room_details();
         $booking->no_of_person = $req->no_of_person;
         $booking->check_in_date = date("Y-m-d H:i",strtotime($req->check_in_date));
-    
+        
+        $deluxeRoomList = array_filter($req->input('select2Multiple4', []));
         $acRoomList = array_filter($req->input('select2Multiple1', []));
         $nonAcRoomList = array_filter($req->input('select2Multiple2', []));
         $doorMetricRoomList = array_filter($req->input('select2Multiple3', []));
+        $doorMetriAcRoomList = array_filter($req->input('select2Multiple5', []));
         
-        $combinedList = array_merge($acRoomList, $nonAcRoomList, $doorMetricRoomList);
+        $combinedList = array_merge($deluxeRoomList,$acRoomList, $nonAcRoomList, $doorMetricRoomList, $doorMetriAcRoomList);
         $filteredCombinedList = array_filter($combinedList);
         
         $booking->room_list = implode(',', $filteredCombinedList);
+        $booking->dlx_amount = $req->dlx_amount;
         $booking->ac_amount = $req->ac_amount;
         $booking->non_ac_amount = $req->non_ac_amount;
         $booking->door_mt_amount = $req->door_mt_amount;
+        $booking->door_mt_ac_amount = $req->door_mt_ac_amount;
         $booking->deposite_rs = $req->deposite_rs;
         $booking->rs_word = $req->rs_word;
         $booking->no_of_days = $req->no_of_days;
@@ -104,7 +109,12 @@ class BookingController extends Controller
             $booking_status=$booking->save();
             if($booking_status)
             {
-                if(!empty($req->select2Multiple1)){
+                if(!empty($req->select2Multiple4)){
+                    foreach($req->select2Multiple4 as $room)
+                    {
+                        $data=DB::UPDATE("UPDATE add_room SET STATUS='1',room_detail_id='$req->deposit_no' where room_no='$room'");
+                    }}
+                    if(!empty($req->select2Multiple1)){
                     foreach($req->select2Multiple1 as $room)
                     {
                         $data=DB::UPDATE("UPDATE add_room SET STATUS='1',room_detail_id='$req->deposit_no' where room_no='$room'");
@@ -119,6 +129,11 @@ class BookingController extends Controller
                     {
                         $data=DB::UPDATE("UPDATE add_room SET STATUS='1',room_detail_id='$req->deposit_no' where room_no='$room'");
                     }}
+                    if(!empty($req->select2Multiple5)){
+                        foreach($req->select2Multiple5 as $room)
+                        {
+                            $data=DB::UPDATE("UPDATE add_room SET STATUS='1',room_detail_id='$req->deposit_no' where room_no='$room'");
+                        }}
                    //dd($req->toArray());
                    $total_member = $req->no_of_person;
                     for ($i = 0; $i < $total_member; $i++) {
@@ -340,7 +355,8 @@ class BookingController extends Controller
     }
     public function view_room_booking(){
         $checkout= DB::select("SELECT * FROM room_details join personal_details on personal_details.p_id=room_details.member_id join add_members on add_members.p_id=personal_details.member_id where room_details.status='BOOKED' order by r_id desc");
-        $advancebooking= DB::select("SELECT * FROM room_details join personal_details on personal_details.p_id=room_details.member_id join add_members on add_members.p_id=personal_details.member_id where room_details.status='ADVANCE' order by r_id desc");
+        //$advancebooking= DB::select("SELECT * FROM room_details join personal_details on personal_details.p_id=room_details.member_id join add_members on add_members.p_id=personal_details.member_id where room_details.status='ADVANCE' order by r_id desc");
+        $advancebooking= DB::select("SELECT *,add_members.p_id as m_id from room_details join personal_details on personal_details.p_id=room_details.member_id join add_members on personal_details.member_id=add_members.p_id join booking_deposite on room_details.r_id=booking_deposite.booking_id where room_details.status='ADVANCE'");
         $member = add_members::all();
         $ar_list= DB::select("SELECT *, add_room.room_no as id FROM add_room WHERE add_room.status = 0");
         return view('Booking.view-room-booking',['checkout'=>$checkout,'member'=>$member,'a_list'=>$ar_list,'advancebooking'=>$advancebooking]);

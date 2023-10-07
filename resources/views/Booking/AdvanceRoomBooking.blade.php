@@ -169,20 +169,19 @@
                             
                               <div class="col-md-4">
                                   <label class="form-label" for="basic-default-email"><span class="required">Email</span></label>
-                                  <input type="email" id="member_email" name="email" class="form-control" placeholder="john.doe" value="{{ (!empty($member) )? $member->email : '' }}" required/>
+                                  <input type="email" id="member_email" name="email" class="form-control" placeholder="john.doe" value="{{ (!empty($member) )? $member->email : '' }}" readonly/>
                               
                               </div>
 
                               <div class="col-md-4">
                                 <label class="form-label" for="multicol-phone"><span class="required">Phone Number</span></label>
                                 <input type="number" id="member-phone" name="phone_no" class="form-control phone-mask" placeholder="658 799 8941" aria-label="658 799 8941" value="{{ (!empty($member)) ? $row->phone_no : '' }}"    maxlength="10"
-                              required
-                              oninput="javascript: if (this.value.length > 10) this.value = this.value.slice(0, 10);"/>
+                                  readonly oninput="javascript: if (this.value.length > 10) this.value = this.value.slice(0, 10);"/>
                               </div> 
                               
                               <div class="col-md-4">
                                 <label for="defaultFormControlInput" class="form-label">City</label>
-                                <input type="text" class="form-control" name="city" id="member_city" style="text-transform:uppercase" placeholder="John Doe" aria-describedby="defaultFormControlHelp" value="{{ (!empty($member)) ? $member->city : '' }}"/>
+                                <input type="text" class="form-control" name="city" id="member_city" style="text-transform:uppercase" placeholder="John Doe" aria-describedby="defaultFormControlHelp" value="{{ (!empty($member)) ? $member->city : '' }}" readonly/>
                               </div>
                  
                             <div class="col-md-4">
@@ -299,6 +298,38 @@
                               <label class="form-label" for="rupees-in-words">Reason</label>
                               <input type="text" class="form-control" style="text-transform:uppercase" name="reason" id="reason" placeholder="Reason to stay" required>
                             </div>
+                            <div class="col-md-4">
+                            <label class="d-block form-label">Payment Mode</label>
+                            <div class="form-check form-check-inline">
+                              <input
+                                type="radio"
+                                id="CASH"
+                                name="basic_default_radio"
+                                class="form-check-input"
+                                checked/>
+                              <label class="form-check-label" for="basic_default_radio">Cash</label>
+                            </div>
+                            <div class="form-check form-check-inline mb-2">
+                              <input
+                                type="radio"
+                                id="CHEQUE"
+                                name="basic_default_radio"
+                                class="form-check-input"
+                               />
+                              <label class="form-check-label" for="basic_default_radio">Cheque</label>
+                            </div>
+                            
+                            <div class="form-check form-check-inline">
+                              <input
+                                type="radio"
+                                id="UPI"
+                                name="basic_default_radio"
+                                class="form-check-input"
+                                 />
+                              <label class="form-check-label" for="basic_default_radio">UPI</label>
+                              <input type=text name="payment" id="payment" value="CASH" hidden>
+                            </div>
+                          </div>
   
                             <div class="col-12 flex justify-content">
                             <button type="submit" id="submitbtn1" class="btn btn-success btn-submit">Submit</button>
@@ -391,11 +422,36 @@
     let list1=document.getElementById("select2Multiple11");
     let list2=document.getElementById("select2Multiple22");
     let list3=document.getElementById("select2Multiple33");
-    $("#room_booking").submit(function(){
+    var check=0;
+    $(".browser-default-validation").change(function(){
       
 
-      var check=0;
-      if(list1.value !="" || list2.value !="" || list3.value !="")
+     
+      if($("#payment").val()=="CASH"){
+      if($("#deposit-amount").val()>9000){ 
+         /*$("#deposite").html("Deposite Amount Should Be Below 9000"); 
+         event.preventDefault();}*/
+        Swal.fire({
+          title: "Are you sure?",
+          text: "You want to deposite in Cash!",
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonColor: "#3085d6",
+          cancelButtonColor: "#d33",
+          confirmButtonText: "Yes,do It!",
+      }).then((result) => {
+          // If the user confirms the deletion, proceed with the deletion logic
+          if (result.isConfirmed) {
+            check=1;
+          }else{
+            $("#deposite").html("Deposite Amount Should Be Below 9000");
+            event.preventDefault();
+          }
+          });
+        }}else{check=0;$("#deposite").html("");}
+    });
+    $("#room_booking").submit(function(){
+    if(list1.value !="" || list2.value !="" || list3.value !="")
       {
         check=1;
       }
@@ -407,11 +463,7 @@
                 'warning'
                 )
         event.preventDefault();
-       
       }
-      if($("#deposit-amount").val()>9000){ 
-         $("#deposite").html("Deposite Amount Should Be Below 9000"); 
-         event.preventDefault();}
     });
 </script>
 

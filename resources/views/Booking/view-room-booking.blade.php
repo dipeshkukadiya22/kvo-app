@@ -14,7 +14,7 @@
 <link rel="stylesheet" href="{{ asset ('assets/vendor/libs/typeahead-js/typeahead.css') }}" />
 <link rel="stylesheet" href="{{ asset ('assets/vendor/libs/tagify/tagify.css') }}" />
 <link rel="stylesheet" href="{{ asset ('assets/vendor/libs/formvalidation/dist/css/formValidation.min.css') }}" />
-<link rel="stylesheet" href="{{ asset('assets/vendor/libs/toastr/toastr.css') }}" />
+
 <link rel="stylesheet" href="{{ asset ('assets/vendor/libs/datatables-buttons-bs5/buttons.bootstrap5.css') }}" />
 
 <link rel="stylesheet" href="{{ asset ('assets/vendor/libs/datatables-bs5/datatables.bootstrap5.css') }}" />
@@ -23,12 +23,12 @@
 
 <!-- Row Group CSS -->
 <link rel="stylesheet" href="{{ asset ('assets/vendor/libs/datatables-rowgroup-bs5/rowgroup.bootstrap5.css') }}" />
-<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+
 <link rel="stylesheet" href="{{ asset('assets/vendor/libs/animate-css/animate.css') }}" />
 <link rel="stylesheet" href="{{ asset('assets/vendor/libs/sweetalert2/sweetalert2.css') }}" />
 <link rel="stylesheet" href="{{ asset ('assets/vendor/libs/dropzone/dropzone.css') }}" />
 <link rel="stylesheet" href="{{ asset ('assets/vendor/libs/bs-stepper/bs-stepper.css') }}" />
-    
+<link rel="stylesheet" href="{{ asset('assets/vendor/libs/toastr/toastr.css') }}" />
 
 <!-- Page CSS -->
 <style>
@@ -46,9 +46,9 @@
       opacity: 1;
 }
 
-/* button.swal2-cancel.btn.btn-label-danger {
+button.swal2-cancel.btn.btn-label-danger {
     display: none !important;
-} */
+}
 
 
 /* Increase the width of th and td elements in the DataTable */
@@ -90,33 +90,18 @@ label.readonly {
 
             <div class="container-xxl flex-grow-1 container-p-y">
                 <div class="content-header row">
-                  
-                </div>
-                <div class="content-header-right d-flex justify-content-end col-md-12 col-12">
-                      
-                      <div class="form-group breadcrumb-right py-3  d-flex justify-content-end ">
-
-                        <ul class="nav nav-pills mb-3 me-2" role="tablist">
-                        <li class="nav-item">
-                        <button class="btn btn-transparent darkbtn" type="button" >
-                        <a href="{{route('room-booking')}}"><span class="ti-xs ti ti-plus me-1"></span>Add New Room booking</a>
-                        </button>
-                        </li>
-                          <li class="nav-item">
-                            <button
-                              type="button" class="nav-link active" role="tab" data-bs-toggle="tab" data-bs-target="#navs-pills-top-bookedroom" aria-controls="navs-pills-top-allroom" aria-selected="true">
-                              View Room Booking(<span id="bookedRoomsCount">0</span>)
-                            </button>
-                          </li>
-                          <li class="nav-item">
-                            <button type="button" class="nav-link" role="tab" data-bs-toggle="tab" data-bs-target="#navs-pills-top-checkoutroom"  aria-controls="navs-pills-top-available" aria-selected="false"> 
-                              View Advance Room Booking(<span id="availableRoomsCount">0</span>) </button>
-                          </li>
-                          
-                        </ul>
-                      </div>
+                <div class="col-12" style= "display: flex; justify-content: flex-end;">
+                  <button class="btn btn-transparent darkbtn"    type="button" >
+                    <a href="{{route('room-booking')}}"><span class="ti-xs ti ti-plus me-1"></span>Add New Room booking</a></button>
                   </div>
-                
+                  <div class="content-header-left col-md-9 col-12 mb-2">
+                    {{-- <div class="row breadcrumbs-top">
+                      <div class="col-12">
+                        <h4 class="fw-bold py-3">View all Room Booking</h4>
+                      </div>
+                    </div> --}}
+                  </div>
+                </div>
                 <div class="row mb-4">
                   <div class="col-md mb-4 mb-md-0">
                     <div class="card">
@@ -125,23 +110,21 @@ label.readonly {
                         <div class="row">
                             <div class="col-12">
                                 <div class="card">
-                                  <div class="tab-content p-0">
-                                      <div class="tab-pane fade show active" id="navs-pills-top-bookedroom" role="tabpanel">
-                                          <div class="card-datatable table-responsive pt-0">
+                                    <div class="card-datatable pt-0">
                                         <table id="DataTables_Table_0" class="datatables-basic table">
                                           <thead>
                                          
                                               <tr >
-                                                <td style="font-size:14px width:80px;"><b>Booking No.</b></td>
-                                                <td  style="font-size:14px width:80px;;"><b>Name</b></td>
+                                                <th style="font-size:14px"><b>Booking No.</b></th>
+                                                <th  style="font-size:14px"><b>Name</b></th>
                                                 {{--<th>Status</th>--}}
-                                                <td style="font-size:15px "><b>Room No </b> </td>
-                                                <td style="font-size:15px width:80px;"><b><b>Check In Date</b></td>
-                                                <td style="font-size:15px width:80px;"><b>Check Out Date</b></td>
-                                                <td style="font-size:15px width:80px;"><b>Rent</b></td>
-                                                <td style="font-size:15px width:80px;"><b>Days Of Stay</b></td>                       
-                                                <td style="font-size:14px width:80px;"><b>Deposite(₹) </b></td>
-                                                <td style="font-size:14px width:80px;"><b>Action</b></td>
+                                                <th style="font-size:15px"><b>Room No </b> </th>
+                                                <th style="font-size:15px"><b><b>Check In Date</b></th>
+                                                <th style="font-size:15px"><b>Check Out Date</b></th>
+                                                <th style="font-size:15px"><b>Rent</b></th>
+                                                <th style="font-size:15px"><b>Days Of Stay</b></th>                       
+                                                <th style="font-size:14px"><b>Deposite(₹) </b></th>
+                                                <th style="font-size:14px"><b>Action</b></th>
                                               </tr>
                                           </thead>
                                           @foreach($checkout as $row)
@@ -173,84 +156,51 @@ label.readonly {
                                           
                                         </table>
                                     </div>
-                                  </div>
-                                </div>
                                 </div>
                             </div>
                         </div>
-                         <!--START checkedout room TAB-->
-                                          <div class="tab-pane fade" id="navs-pills-top-checkoutroom" role="tabpanel">
-                                          <div class="card-datatable pt-0">
-                                          <table id="DataTables_Table_0" class="datatables-basic table" >
-                                          <thead>
-                                              <tr >
-                                                  <th style="font-size:15px"><b>Booking No</b></th>
-                                                  <th style="font-size:15px"><b>Name</b></th>
-                                                  <th style="font-size:15px"><b>Room No</b></th>
-                                                  <th style="font-size:15px"><b>From Date</b></th>
-                                                  <th style="font-size:15px"><b>To Date</b></th>
-                                                  <th style="font-size:15px"><b>Day of Stay</b></th>
-                                                  <th style="font-size:15px"><b>Deposite Rs</b></th>
-                                                
-                                                  <th style="font-size:15px"><b>Actions</b></th>
-                                              </tr>
-                                          </thead>
-                                          @foreach($advancebooking as $row)
-                                          <tr>
-                                             <input type="hidden" class="id" value="{{$row->r_id}}">
-                                             <td>{{$row->r_id}}</td>
-                                              <td>{{$row->m_name}}</td>
-                                              <td>{{$row->room_list}}</td>
-                                              <td>{{substr($row->advance_date, 0, 10) }}</td>
-                                              <td>{{substr($row->advance_date, 12) }}</td>
-                                              <td>{{$row->no_of_days}}</td>
-                                              <td>{{$row->deposite_rs}}</td>
-                                              <td>
-                                                  <div class="d-inline-block">
-                                                    <a href="{{route('pdf_CheckIn',$row->r_id)}}" target="_blank"><img src="./assets/icon/orange-eye.png" width="20px"></a>
-
-                                                    <a onclick="editadvanceroom({{$row->r_id}})"  class="btn btn-sm btn-icon item-edit"><img src="./assets/icon/orange-edit.png" width="20px"></a>
-
-                                                    <a href="{{route('cancel_booking',$row->r_id)}}" class="text-danger delete-record"><img src="./assets/icon/orange-trash.png" width="20px"></a> 
-                                                    
-                                                  </div>
-                                              </td>
-                                          </tr>
-                                          @endforeach
-                                        </table>
-                                          </div>
-                                        </div>
-                                      
-                                        <!--END TAB-->
                         <!--modal pdf-->
                         <div id="myModal" class="modal fade" role="dialog">
                           <div class="modal-dialog modal-lg">
+
                             <!-- Modal content-->
                             <div class="modal-content">
                                 <div class="modal-header">
                                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                                     <h4 class="modal-title">Modal Header</h4>
                                 </div>
-                                  <div class="modal-body">
-                                          <embed src="~/Content/Article List.pdf" frameborder="0" width="100%" height="400px">
+                                <div class="modal-body">
+
+                                    <embed src="~/Content/Article List.pdf"
+                                          frameborder="0" width="100%" height="400px">
+
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                                             </div>
-                                  </div>
+                                        </div>
+
+                                    </div>
                                 </div>
-                            </div>
                           </div>
                         <!--End pdf modal-->
                         <div class="modal fade" id="exLargeModal" tabindex="-1" aria-hidden="true">
                           <div class="modal-dialog modal-xl" role="document">
                             <div class="modal-content">
-                                <div class="modal-header">
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                </div>
+                              <div class="modal-header">
+                                <button
+                                  type="button"
+                                  class="btn-close"
+                                  data-bs-dismiss="modal"
+                                  aria-label="Close"></button>
+                              </div>
                               <div class="modal-body">
                                 <div class="row">
+                                 
                                   <!-- Default Icons Wizard -->
                                   <div class="col-12 mb-4">
+
+                                      
+
                                     <div class="bs-stepper wizard-icons wizard-icons-example mt-2">
                                       <div class="bs-stepper-header">
                                         <div class="step" data-target="#account-details">
@@ -304,8 +254,8 @@ label.readonly {
                                           </button>
                                         </div>
                                       </div>
-                                    <div class="bs-stepper-content">
-                                      <form id="kvo_update_room_booking" class="browser-default-validation" method="POST" action="{{ route('update_room_booking') }}">
+                                      <div class="bs-stepper-content">
+                                      <form id="kvo_update_room_booking" class="browser-default-validation" method="POST" action="{{ route('update_room_booking') }}" >
                                         @csrf
                                           <!-- Account Details -->
                                           <div id="account-details" class="content">
@@ -318,11 +268,6 @@ label.readonly {
                                               <div class="col-md-4">
                                                   <label for="select2Basic" class="form-label" >Name</label>
                                                   <input type="text" id="select2Basic" name="name" class="form-control" placeholder="" readonly/>
-                                                 <!-- <select id="select2Basic" class="select2 form-select" data-allow-clear="true" name="name" placeholder="select name" readonly>
-                                                      @foreach ($member as $row)
-                                                          <option value="{{$row->p_id}}">{{$row->m_name}}</option>
-                                                      @endforeach
-                                                  </select>-->
                                                 </div>
                                                 <div class="col-md-4">
                                                   
@@ -420,6 +365,11 @@ label.readonly {
                                           </div>
                                           <!--start  member details -->
                                           <div id="address" class="content">
+                                          <!-- <button type="button" class="btn btn-primary" id="member_data">
+                                            <span class="align-middle d-sm-inline-block d-none me-sm-1">show data</span>
+                                            <i class="ti ti-arrow-right"></i>
+                                          </button> -->
+
                                               <div class="content-header">
                                                 <small>Enter Member Details.</small>
                                               </div>
@@ -428,10 +378,10 @@ label.readonly {
                                               <div class="form-repeater">
                                               <div id="step2FormsContainer "class="col-12">
                                                 <div class="dynamic-form">
-                                                <div class="all-members" >
+                                                <div class="all-members" data-repeater-list="group-a">
                                                 <div data-repeater-item>
                                               <div class="rep-form1">
-                                                  <div class="row formrepeater1" data-repeater-list="group-a">
+                                                  <div class="row formrepeater1">
                                                     <div class="mb-3 col-lg-6 col-xl-3 col-12 mb-0">
                                                       <label class="form-label" for="form-repeater-1-1">Full Name</label>
                                                       <input type="text" id="full_name_form"  name="full_name0" class="form-control" placeholder="john doe" readonly />
@@ -457,31 +407,27 @@ label.readonly {
                                                           <input type="text" id="gender_data" name="gender_data0" class="form-control " placeholder="your age" value="MALE"/>
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-3">
+                                                    <div class="col-md-2">
                                                       <label class="form-label" for="basic-default-country">Relation</label>
                                                       <select class="form-select" name="relation0" id="member_relation" required>
-                                                      <option value="SELF" selected>SELF</option>
-                                                      <option value="AUNTY">AUNTY</option>
-                                                      <option value="BROTHER">BROTHER</option>
-                                                      <option value="BROTHER">COUSIN</option>
-                                                      <option value="FATHER">FATHER</option>
-                                                      <option value="FRIEND">FRIEND</option>
-                                                      <option value="GRAND FATHER">GRAND FATHER</option>
-                                                      <option value="GRAND MOTHER">GRAND MOTHER</option>
-                                                      <option value="MOTHER">MOTHER</option>
-                                                      <option value="NEPHEW">NEPHEW</option>
-                                                      <option value="SISTER">SISTER</option>
-                                                      <option value="SON">SON</option>
-                                                      <option value="UNCLE">UNCLE</option>
-                                                      <option value="WIFE">WIFE</option>
+                                                        <option value="SELF" selected>SELF</option>
+                                                        <option value="MOTHER">MOTHER</option>
+                                                        <option value="FATHER">FATHER</option>
+                                                        <option value="BROTHER">BROTHER</option>
+                                                        <option value="SISTER">SISTER</option>
+                                                        <option value="UNCLE">UNCLE</option>
+                                                        <option value="AUNTY">AUNTY</option>
+                                                        <option value="GRAND MOTHER">GRAND MOTHER</option>
+                                                        <option value="GRAND FATHER">GRAND FATHER</option>
+                                                        <option value="FRIEND">FRIEND</option>
                                                       </select>
                                                     </div>
-                                                    <!-- <div class="mb-3 col-lg-12 col-xl-2 col-12 d-flex align-items-center mb-0">
-                                                  <button class="btn btn-label-danger mt-4" data-repeater-delete >
+                                                    <div class="mb-3 col-lg-12 col-xl-2 col-12 d-flex align-items-center mb-0">
+                                                  <button class="btn btn-label-danger mt-4" data-repeater-delete>
                                                     <i class="ti ti-x ti-xs me-1"></i>
                                                     <span class="align-middle">Delete</span>
                                                   </button>
-                                                </div> -->
+                                                </div>
                                                   </div>
                                                 </div>
                                                   <div class="row rep-form">
@@ -638,46 +584,16 @@ label.readonly {
                                               <div class="col-md-4">
                                                 <label class="form-label" for="deposit-amount">Deposit Rs</label>
                                                 <input type="number" class="form-control" name="deposite_rs" id="deposit-amount" placeholder="Deposit Rs">
-                                                <div id="deposite" class="error-message" ></div></div>
+                                              </div>
                                               
                                               <div class="col-md-4">
                                                 <label class="form-label" for="rupees-in-words">Deposit Rs (rupees in words)</label>
                                                 <input type="text" class="form-control" name="rs_word" id="rupees-in-words" placeholder="Rupees in words" readonly>
                                               </div>
-                                              <div class="col-md-4">
-                                                <label class="d-block form-label">Payment Mode</label>
-                                                <div class="form-check form-check-inline">
-                                                  <input
-                                                    type="radio"
-                                                    id="CASH"
-                                                    name="basic_default_radio"
-                                                    class="form-check-input"
-                                                    value="CASH"
-                                                    required checked/>
-                                                  <label class="form-check-label" for="basic_default_radio">Cash</label>
-                                                </div>
-                                                <div class="form-check form-check-inline mb-2">
-                                                  <input
-                                                    type="radio"
-                                                    id="CHEQUE"
-                                                    name="basic_default_radio"
-                                                    class="form-check-input"
-                                                    value="CHEQUE"
-                                                    required />
-                                                  <label class="form-check-label" for="basic_default_radio">Cheque</label>
-                                                </div>
-                                                
-                                                <div class="form-check form-check-inline">
-                                                  <input
-                                                    type="radio"
-                                                    id="UPI"
-                                                    name="basic_default_radio"
-                                                    class="form-check-input"
-                                                    value="UPI"
-                                                    required />
-                                                  <label class="form-check-label" for="basic_default_radio">UPI</label>
-                                                </div>
-                                              </div>
+                                              
+
+    
+
                                               <div class="col-12">
                                                 <div action="/upload" class="dropzone needsclick" id="dropzone-multi" >
                                                   <div class="dz-message needsclick" id="dz-img">
@@ -685,12 +601,12 @@ label.readonly {
                                                     <span class="note needsclick"
                                                       >(This is just a demo dropzone. Selected files are <strong>not</strong> actually
                                                       uploaded.)</span
-                                                    ><img id="id_proof1" width="250px" style="padding: 10px">
+                                                    ><img id="id_proof1" name="idproof1" width="250px" style="padding: 10px">
                                                       <img id="id_proof2" width="250px" style="padding: 10px">
                                                       
                                                   </div>
                                                   <div class="fallback">
-                                                  <input class="form-control" type="file" name="id_proof" id="id_proof" multiple required />
+                                                  <input class="form-control" type="file" name="id_proof[]" id="id_proof" multiple required />
                                                   </div>
                                                 </div>
                                               </div>
@@ -758,7 +674,6 @@ label.readonly {
                                                         <th>Age </th>
                                                         <th>Gender</th>
                                                         <th>Relations</th>
-                                                        <th>test</th>
                                                         </tr>
                                                     </thead>
                                                  
@@ -797,179 +712,27 @@ label.readonly {
                                     </div>
                                   </div>
                                   <!-- /Default Icons Wizard -->
+
+                                  
                                 </div>
+
+                                
+
                               </div>
-                            </div>
-                          </div> 
-                          <!-- end roon booking view -->
-                          
-                          
-                      </section>
-                      </div>
-                      <div id="myModal" class="modal fade" role="dialog">
-                          <div class="modal-dialog modal-lg">
-                            <!-- Modal content-->
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                    <h4 class="modal-title">Modal Header</h4>
-                                </div>
-                                  <div class="modal-body">
-                                          <embed src="~/Content/Article List.pdf" frameborder="0" width="100%" height="400px">
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                            </div>
-                                  </div>
-                                </div>
+                           
                             </div>
                           </div>
-                        <!--End pdf modal-->
-                        <div class="modal fade" id="advance" tabindex="-1" aria-hidden="true">
-                          <div class="modal-dialog modal-xl" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                </div>
-                              <div class="modal-body">
-                                <div class="row">
-                                  <!-- Default Icons Wizard -->
-                                  <div class="col-12 mb-4">
-                                    <div class="bs-stepper-content">
-                                    <form class="browser-default-validation" action="{{ route('update_advance_room_booking') }}" method="POST" id="room_booking">
-                                          @csrf
-                                          <!-- Account Details -->
-                                          <div class="row g-3">
-                                            <div class="col-12">
-                                              <h6 class="fw-semibold">1. Personal Details</h6>
-                                              <hr class="mt-0 mb-0" />
-                                            </div>
-                                            <!-- Basic -->
-                                              <div class="col-md-4">
-                                                <label class="form-label" for="basic-default-name">Booking No</label>
-                                                <input type="text" class="form-control" name="deposit_no" id="deposit_no" placeholder="Deposit No" value="" readonly/>
-                                               </div>
-                                                <div class="col-md-4">
-                                                    <label for="select2Basic" class="form-label"><span class="required">Name</span></label>
-                                                    <input type="text" id="m_name" name="name" class="form-control" placeholder="" readonly/> 
-                                                  
-                                                </div>
-                                                
-                                                <div class="col-md-4">
-                                                    <label class="form-label" for="basic-default-email"><span class="required">Email</span></label>
-                                                    <input type="email" id="m_email" name="email" class="form-control" placeholder="john.doe" readonly required/>
-                                                </div>
-                                                <div class="col-md-4">
-                                                  <label class="form-label" for="multicol-phone"><span class="required">Phone Number</span></label>
-                                                  <input type="number" id="m_phone" name="phone_no" class="form-control phone-mask" placeholder="658 799 8941" aria-label="658 799 8941" maxlength="10"
-                                                required
-                                                oninput="javascript: if (this.value.length > 10) this.value = this.value.slice(0, 10);" readonly/>
-                                                </div> 
-                                                <div class="col-md-4">
-                                                  <label for="defaultFormControlInput" class="form-label">City</label>
-                                                  <input type="text" class="form-control" name="city" id="m_city" style="text-transform:uppercase" placeholder="John Doe" aria-describedby="defaultFormControlHelp" readonly/>
-                                                </div>
-                                                <div class="col-md-4">
-                                                  <label for="flatpickr-range" class="form-label"><span class="required">Advance Date</span></label>
-                                                  <input type="text" class="form-control" name="advance_date" placeholder="DD-MM-YYYY HH:MM" id="advance_daterange" required/>
-                                                </div>
-                                              </div>
-                                              <!-- Personal Info -->
-                                              <div class="row g-3">
-                                              <!-- Primary -->
-                                              <div class="row mt-5">
-                                              <div class="col-12">
-                                                  <h6 class="fw-semibold">2. Booking Details</h6>
-                                                  <hr class="mt-0 mb-0" />
-                                              </div>
-                                              <div class="col-md-2 mt-3">
-                                                  <label for="select2Multiple1" class="form-label">Ac Room</label> 
-                                                  <select id="advance_select2Multiple11" name="select2Multiple1[]" class="select2 form-select room-input" multiple>
-                                                 
-                                                 
-                                                </select> 
-                                              </div>
-                                              <div class="col-md-2 mt-3">
-                                                <label class="form-label" for="basic-default-name">Amount</label>
-                                                <div class="input-group">
-                                                  <span class="input-group-text">₹</span>
-                                                  <input type="number" class="form-control "  name="ac_amount" placeholder="Amount" aria-label="Amount (to the nearest indian)" id="advance_ac-amount" />
-                                                </div>
-                                              </div>
+                        </div>
 
-                                              <div class="col-md-2 mt-3">
-                                                <label for="select2Multiple2" class="form-label">Non Ac Room</label> 
-                                                <select id="advance_select2Multiple22" name="select2Multiple2[]"    class="select2 form-select room-input" multiple>
-                                               </select>
-                                              </div>
-                                              <div class="col-md-2 mt-3">
-                                                <label class="form-label" for="basic-default-name">Amount</label>
-                                                <div class="input-group">
-                                                  <span class="input-group-text">₹</span>
-                                                  <input type="number" class="form-control"  name="non_ac_amount" placeholder="Amount" aria-label="Amount (to the nearest indian)" id="advance_non-ac-amount" />
-                                                </div>
-                                              </div>
-
-                                              <div class="col-md-2 mt-3">
-                                                <label for="select2Multiple3" class="form-label">Door Mt Room</label>   
-                                                <select id="advance_select2Multiple33" name="select2Multiple3[]" class="select2 form-select room-input" multiple>
-                                              </select>                            
-                                              </div>
-                                              <div class="col-md-2 mt-3">
-                                                <label class="form-label" for="basic-default-name">Amount</label>
-                                                <div class="input-group">
-                                                  <span class="input-group-text">₹</span>
-                                                  <input type="number" class="form-control"  name="door_mt_amount" id="advance_door_mt_amount" placeholder="Amount" aria-label="Amount (to the nearest indian)"   />
-                                                </div>
-                                              </div>
-                                            </div>
-                                            <div class="col-md-4">
-                                              <label class="form-label" for="basic-default-name"><span class="required">No. of Person</span></label>
-                                              <input type="number" class="form-control"  name="no_of_person" id="advance_no_of_person_id" placeholder="No of Person"  required/>
-                                            </div>
-                                            <div class="col-md-4">
-                                              <label class="form-label" for="deposit-amount"><span class="required">Deposit Rs</span></label>
-                                              <input type="number" class="form-control" name="deposite_rs" id="advance_deposit-amount" placeholder="Deposit Rs" required>
-                                              <div id="deposite" class="error-message" ></div>
-                                            </div>                           
-                                            <div class="col-md-4">
-                                              <label class="form-label" for="rupees-in-words">Deposit Rs (rupees in words)</label>
-                                              <input type="text" class="form-control" name="rs_word" id="advance_rupees-in-words" placeholder="Rupees in words" readonly>
-                                            </div>
-                                            <div class="col-md-4">
-                                              <label class="form-label" for="deposit-amount"><span class="required">No of Days</span></label>
-                                              <input type="number" class="form-control" name="no_of_days" id="advance_no_of_days" placeholder="no_of_days" value="1" required readonly>
-                                              <input type="hidden" name="start_date" id="start_date" value="">
-                                              <input type="hidden" name="end_date" id="end_date" value="">
-                                            </div>
-                                            <div class="col-md-4">
-                                              <label class="form-label" for="rupees-in-words">Occupation</label>
-                                              <input type="text" class="form-control" style="text-transform:uppercase" name="occupation" id="advance_occupation" placeholder="Occupation" required>
-                                            </div>
-                                            <div class="col-md-4">
-                                              <label class="form-label" for="rupees-in-words">Reason</label>
-                                              <input type="text" class="form-control" style="text-transform:uppercase" name="reason" id="advance_reason" placeholder="Reason to stay" required>
-                                            </div>
-                                            <div class="col-12 flex justify-content">
-                                                <button type="submit" id="submitbtn1" class="btn btn-success btn-submit">Submit</button>
-                                            </div>
-                                          </div>
-                                        </div>
-                                     </form>
-                                      </div>
-                                    </div>
-                                  </div>
-                                  <!-- /Default Icons Wizard -->
-                                </div>
-                              </div>
-                            </div>
-                          </div> 
-                      <!--/ Basic table -->
-                    </div>
+                        
+                        
+                    </section>
+                     <!--/ Basic table -->
                   </div>
                 </div>
-                
-              </div>
-              
+            </div>
+        </div>
+
 @section('pagejs')
 
    
@@ -978,10 +741,7 @@ label.readonly {
     <script src="{{ asset ('assets/vendor/libs/moment/moment.js') }}"></script>
     <script src="{{ asset ('assets/vendor/libs/datatables-bs5/datatables-bootstrap5.js') }}"></script>
     <script src="{{ asset ('assets/vendor/libs/select2/select2.js') }}"></script>
-    <script src="{{ asset('assets/vendor/libs/bootstrap-datepicker/bootstrap-datepicker.js') }}"></script>
-    <script src="{{ asset('assets/vendor/libs/bootstrap-daterangepicker/bootstrap-daterangepicker.js') }}"></script>
-    <script src="{{ asset('assets/vendor/libs/jquery-timepicker/jquery-timepicker.js') }}"></script>
-    <script src="{{ asset('assets/vendor/libs/pickr/pickr.js') }}"></script>
+
     <script src="{{ asset('assets/vendor/libs/pickr/pickr.js') }}"></script>
     <script src="{{ asset ('assets/vendor/libs/formvalidation/dist/js/FormValidation.min.js') }}"></script>
     <script src="{{ asset ('assets/vendor/libs/formvalidation/dist/js/plugins/Bootstrap5.min.js') }}"></script>
@@ -991,164 +751,50 @@ label.readonly {
     <script src="{{ asset('assets/vendor/libs/sweetalert2/sweetalert2.js') }}"></script>
 
     <script src="{{ asset ('assets/js/forms-selects.js') }}"></script>
+
     <script src="{{ asset('assets/vendor/libs/pickr/pickr.js') }}"></script>
 
     <!-- Page JS -->
     <script src="{{ asset('assets/js/extended-ui-sweetalert2.js') }}"></script>
     <script src="{{ asset('assets/vendor/libs/flatpickr/flatpickr.js') }}"></script>
+
     <script src="{{ asset('assets/js/forms-pickers.js') }}"></script>
     
    
     <!-- Page JS -->
     <script src="{{ asset ('assets/js/form-validation.js') }}"></script>
+
     <script src="{{ asset('assets/vendor/libs/bs-stepper/bs-stepper.js') }}"></script>
+
+    
     <script src="{{ asset('assets/js/form-wizard-icons.js') }}"></script>
+
     <script src="{{ asset('assets/vendor/libs/dropzone/dropzone.js') }}"></script>
+
     <script src="{{ asset('assets/js/forms-file-upload.js') }}"></script>
     <script src="{{ asset('assets/vendor/libs/toastr/toastr.js') }}"></script>
+
     <script src="{{ asset('assets/js/ui-toasts.js') }}"></script>
     <script>
-    jQuery(function ($) {
-     
-        $('#advance_daterange').daterangepicker({
-            opens: 'left',
-            locale: {
-                format: 'DD/MM/YYYY'
-            },
-          
-           }, function(start, end, label) {
-            var startDate = start.format('YYYY-MM-DD'); 
-            var endDate = end.format('YYYY-MM-DD');
-            var numberOfDays = moment(endDate).diff(startDate, 'days');
-            $('#advance_no_of_days').val(numberOfDays + 1);
-            $('#start_date').val(startDate);
-            $('#end_date').val(endDate);
-             $('#advance_daterange').val(start.format('DD/MM/YYYY') + ' - ' + end.format('DD/MM/YYYY'));
-          
-            
-        });
-    
-    });
-</script> 
-
-<script>
-     
-   function pdf(id)
-      {
-        alert("start");
-          const myOffcanvas = document.getElementById(' myModal');
-          let a=new bootstrap.Modal(myOffcanvas);
-          a.show();
-     
-      }
-function editadvanceroom(id)
-{
-     
-      const myOffcanvas = document.getElementById('advance');
-      let b=new bootstrap.Modal(myOffcanvas);
-     
-      b.show();
-
-      $.ajax({
-          url:"{{url('get_advance_data')}}" +"/"+ id,
-          type:'GET',
-            success:function(response){
-              
-              var dateRange = response[0]['advance_date'];
-              var dateParts = dateRange.split(" - ");
-              var startDate = new Date(dateParts[0]);
-              var endDate = new Date(dateParts[1]);
-              var advancedate =  (startDate.getMonth() + 1)  + "-" +startDate.getDate() + "-" + startDate.getFullYear();
-              var advancedate1 =  (endDate.getMonth() + 1) + "-" +endDate.getDate() + "-" + endDate.getFullYear();
-
-              $("#m_name").val(response[0]['m_name']);
-              $("#m_city").val(response[0]['city']);
-              $('#m_email').val(response[0]['email']);
-              $('#m_phone').val(response[0]['phone_no']);
-              $("#advance_no_of_person_id").val(response[0]['no_of_person']);
-              $("#deposit_no").val(response[0]['r_id']);
-              $("#person_id").val(response[0]['person_id']);
-              $("#advance_deposit-amount").val(response[0]['deposite_rs']);
-              $("#advance_rupees-in-words").val(response[0]['rs_word']);
-              $("#advance_no_of_days").val(response[0]['no_of_days']);
-              $("#advance_occupation").val(response[0]['occupation']);
-              $("#advance_reason").val(response[0]['reason']);
-              $("#advance_daterange").val(advancedate + '-' + advancedate1);
-              $("#advance_ac_amount").val(response[0]['ac_amount']);
-              $("#advance_non_ac_amount").val(response[0]['non_ac_amount']);
-              $("#advance_dmt_amount").val(response[0]['door_mt_amount']);
-              
-              var room=response[0]['room_list'];
-              var ArrNames =room .split(",");
-            
-                  ArrNames.forEach(myFunction1);
-                  function myFunction1(room, index) {
-                    if(room==301 || room==302 || room==401 || room==402 )
-                    {
-                      $("#advance_select2Multiple11").append('<option value=' + room +'>'+ room+'-AC DELUXE ROOM' +'</option');
-                      $("#advance_select2Multiple11 option[value=" + room + "]").attr('selected', 'selected');
-                    }
-                    if(room==303 || room==304 ||room==305 || room==306 || room==403)
-                    {
-                      $("#advance_select2Multiple11").append('<option value=' + room +'>'+ room +'-AC RE. ROOM' +'</option');
-                      $("#advance_select2Multiple11 option[value=" + room + "]").attr('selected', 'selected');
-                    }
-                    if(room==203 || room==204 ||room==205 || room==206 || room==404 || room==405 || room==406)
-                    {
-                      $("#advance_advance_select2Multiple22").append('<option value=' + room +'>'+ room +'-2BNAC'+'</option');
-                      $("#advance_select2Multiple22 option[value=" + room + "]").attr('selected', 'selected');
-                    }
-                    if(room==201)
-                    {
-                      $("#advance_select2Multiple22").append('<option value=' + room +'>'+ room +'-4BNAC' +'</option');
-                      $("#advance_select2Multiple22 option[value=" + room + "]").attr('selected', 'selected');
-                    }
-                    if(room==202)
-                    {
-                      $("#advance_select2Multiple22").append('<option value=' + room +'>'+ room +'-3BNAC' +'</option');
-                      $("#advance_select2Multiple22 option[value=" + room + "]").attr('selected', 'selected');
-                    }
-                    if(room==1 || room==2 ||room==3 || room==4 ||room==5 || room==6 ||room==7 || room==8 ||room==9 || room==10 )
-                    {
-                      $("#advance_select2Multiple33").append('<option value=' + room +'>'+ room +'-DMNAC'+'</option');
-                      $("#advance_select2Multiple33 option[value=" + room + "]").attr('selected', 'selected');
-                    }
-                    if( room==11 || room==12 ||room==13 || room==14 ||room==15 || room==16 ||room==17 || room==18 ||room==19 || room==20)
-                    {
-                      $("#advance_select2Multiple33").append('<option value=' + room +'>'+ room +'-DMAC'+'</option');
-                      $("#advance_select2Multiple33 option[value=" + room + "]").attr('selected', 'selected');
-                    }
-                  }   
-                  member_id.forEach(myFunction)
-            }
-        });
-
-        }
-
-  </script>
-  <script>
  $(".browser-default-validation").change(function(){
     let age=document.getElementById("age");
     let address=document.getElementById("member_address");
     let occupation=document.getElementById("occupation");
     let reason=document.getElementById("reason");
     let sub=document.getElementById("subcommunity");
-    let no_of_person=document.getElementById("no_of_person_id");
-    let no_of_days=document.getElementById("no_of_days");
-    if(age.value != "" && sub.value != "" && address.value != "" && occupation.value != "" && reason.value != "" && no_of_person.value != "" && no_of_days.value != "")
+    if(!(age.value != "" && sub.value != "" && address.value != "" && occupation.value != "" && reason.value != "" ))
     {
-      $("#repeat-next").prop('disabled',false);
+      $("#repeat-next").prop('disabled',true);
     }
     else{
-      $("#repeat-next").prop('disabled',true);
+      $("#repeat-next").prop('disabled',false);
     }
  
  });
 </script>
     <script>
   $(document).ready(function() {
-    $("#repeat-next").prop('disabled',false);
-       let currentStep = 1;
+    let currentStep = 1;
 
     $(".btn-next").on("click", function() {
       $('#member_age').val($('#age').val());
@@ -1157,7 +803,16 @@ function editadvanceroom(id)
 
 </script>
 
-<script>
+    <!-- <script>
+      jQuery(document).ready(function($){
+      var currentDate = new Date();
+      $('#check_out_date').flatpickr({
+      dateFormat: "d-m-Y",
+      defaultDate: currentDate
+    })
+    });
+    </script> -->
+    <script>
       function pdf(id)
       {
         alert("start");
@@ -1179,9 +834,16 @@ function edit(id)
                   var community=response[0]['community'];
                   var date=new Date(response[0]['check_in_date']);
                   var checkindate=date.getDate()+"-"+date.getMonth()+"-"+date.getFullYear();
-                  document.getElementById("id_proof1").src="assets/img/avatars/"+response[0]['id_proof'];
-                  if(response[0]['id_proof1'] != null){
-                  document.getElementById("id_proof2").src="assets/img/avatars/"+response[0]['id_proof1'];}
+                  var img=response[0]['id_proof'];
+                  var index=img.indexOf(',');
+
+                  if(index>0)
+                  {
+                    var img1=img.substr(0,index);
+                    document.getElementById("id_proof1").src="images/"+img1;
+                    var img2=img.substr(index+1);
+                    document.getElementById("id_proof2").src="images/"+img2;
+                  }else{document.getElementById("id_proof1").src="images/"+img;}
                   $("#select2Basic").val(response[0]['m_name']);
                   $("#full_name_form").val(response[0]['m_name']);
                   $("#age").val(response[0]['age']);
@@ -1213,7 +875,7 @@ function edit(id)
                   
                   var room=response[0]['room_list'];
                   var ArrNames =room .split(",");
-                 
+                
                       ArrNames.forEach(myFunction1);
                       function myFunction1(room, index) {
                         if(room==301 || room==302 || room==401 || room==402 )
@@ -1267,7 +929,7 @@ function edit(id)
             }
   
       </script>
-</script>
+
 
 <script>
  
@@ -1334,7 +996,6 @@ $(document).ready(function () {
 </script>
 
 <script>
-  let check=0;
   $(document).ready(function() {
     let currentStep = 1;
  
@@ -1344,14 +1005,12 @@ $(document).ready(function () {
       const age = $('#members_age').val();
       const selectedGender = $('input[name="gender"]').val();
       const relation = $('#member_relation').val();
-      const member = "Member";
+      
       $('#member_full_name').text(fullName);
       $('#members_age').text(age);
       $('#member_gen').text(selectedGender);
       $('#member_rel').text(relation);
-      $('#member').text(member);
-      if(check==1)
-      {
+      
       $(".rep-table").append(
         '<tr>' +
         '<td>'+ '1' +'</td>' +
@@ -1359,20 +1018,9 @@ $(document).ready(function () {
         '<td id="members_age">' + $('#member_age').val() + '</td>' +
         '<td id="member_gen">' +  $('#gender_data').val() + '</td>' +
         '<td id="member_rel">' + $('#member_relation').val() + '</td>' +
-        '<td id="member">' + '<input type=checkbox class=member value='+$('#full_name_form').val()+' name=member[0]>' + '</td>' +
         '</tr>'
-      );}else{
-        $(".rep-table").append(
-        '<tr>' +
-        '<td>'+ i +'</td>' +
-        '<td id="member_full_name">' + $('#full_name_form').val() + '</td>' +
-        '<td id="members_age">' + $('#member_age').val() + '</td>' +
-        '<td id="member_gen">' + $('#gender_data').val() + '</td>' +
-        '<td id="member_rel">' + $('#member_relation').val() + '</td>' +
-        '<td id="member">' + '<input type=checkbox class=member value='+$('#full_name_form').val()+' name=member[0] checked >' + '</td>' +
-        '</tr>'
-      );}
-      
+      );
+
       let numForms = parseInt($("#no_of_person_id").val());
       if (isNaN(numForms) || numForms <= 0) {
        
@@ -1380,8 +1028,7 @@ $(document).ready(function () {
       }  let j=2;
       for (let i = 1; i < numForms; i++) {
       
-        if(check==1)
-        {$(".rep-table").append(
+        $(".rep-table").append(
           '<tr>' +
           '<td>'+ j +'</td>' +
           '<td class="member_full_name' + i + '">' + $('#full_name_form' + i).val()+ '</td>' +
@@ -1390,50 +1037,20 @@ $(document).ready(function () {
           '<td class="member_rel' + i + '">' + $('#member_relation' + i).val() + '</td>' +
           '</tr>'
         );
+
+
         j++;
-        }else{
-        $(".rep-table").append(
-        '<tr>' +
-        '<td>'+ j +'</td>' +
-        '<td class="member_full_name' + i + '">' + $('#full_name_form' + i).val().toUpperCase() + '</td>' +
-        '<td class="members_age' + i + '">' + $('#member_age' + i).val() + '</td>' +
-        '<td class="member_gen'+ i +'">' + $('input[name="gender'+i+'"]:checked').val() + '</td>' +
-        '<td class="member_rel' + i + '">' + $('#member_relation' + i).val() + '</td>' +
-        '<td class="member' + i + '">' + '' + '</td>' +
-        '</tr>'
-         );
-        j++;
+        // Setting text for elements in the loop using jQuery
+        // $('.member_full_name' + i).text($('#full_name_form' + i).val());
+        // $('.members_age' + i).text($('#member_age' + i).val());
+        // $('.member_gen' + i).text($('#gender'+i).val());
+        // $('.member_rel' + i).text($('#member_relation' + i).val());
+        // j++;
       }
-    }
+
       $(".rep-table").show();
     });
   });
-
-  $("#deposit-amount").keydown(function(e){
-        if(e.key === "-" || e.key === "+"){e.preventDefault();}
-  });
-
-  $("#deposit-amount").focusout(function(){
-    if($("#deposit-amount").val()>9000){  
-      Swal.fire({
-          title: "Are you sure?",
-          text: "You want to deposite in Cash!",
-          icon: "warning",
-          showCancelButton: true,
-          confirmButtonColor: "#3085d6",
-          cancelButtonColor: "#d33",
-          confirmButtonText: "Yes,do It!",
-      }).then((result) => {
-          // If the user confirms the deletion, proceed with the deletion logic
-          if (result.isConfirmed) {
-            check=1;
-          }else{
-            $("#deposite").html("Deposite Amount Should Be Below 9000");
-            $("#repeat-next").prop('disabled',true);
-          }
-          });
-        }else{check=0;$("#deposite").html("");}
-        });
 </script>
 <script>
   $(document).ready(function() {
@@ -1494,7 +1111,6 @@ $(document).ready(function () {
                                     '  <option value="MOTHER">MOTHER</option>'+
                                     '  <option value="NEPHEW">NEPHEW</option>'+
                                     '  <option value="SISTER">SISTER</option>'+
-                                    '  <option value="SON">SON</option>'+
                                     '  <option value="UNCLE">UNCLE</option>'+
                                     '  <option value="WIFE">WIFE</option>'+
                         
@@ -1768,79 +1384,7 @@ function numberToWords(number) {
 document.getElementById("deposit-amount").addEventListener("input", convertToWords);
 
 </script>
-<script>
-  function convertToWords() {
-  var depositAmount = parseFloat(document.getElementById("advance_deposit-amount").value);
-  var inWords = numberToWords(depositAmount);
-  document.getElementById("advance_rupees-in-words").value = inWords;
-}
-
-function numberToWords(number) {
-  var units = [
-    "Zero", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine",
-    "Ten", "Eleven", "Twelve", "Thirteen", "Fourteen", "Fifteen", "Sixteen", "Seventeen",
-    "Eighteen", "Nineteen"
-  ];
-
-  var tens = [
-    "", "", "Twenty", "Thirty", "Forty", "Fifty", "Sixty", "Seventy", "Eighty", "Ninety"
-  ];
-
-  var words = "";
-
-  if (number === 0) {
-    return "Zero";
-  }
-
-  if (number < 0) {
-    words += "Minus ";
-    number = Math.abs(number);
-  }
-
-  if (Math.floor(number / 10000000) > 0) {
-    words += numberToWords(Math.floor(number / 10000000)) + " Crore ";
-    number %= 10000000;
-  }
-
-  if (Math.floor(number / 100000) > 0) {
-    words += numberToWords(Math.floor(number / 100000)) + " Lakh ";
-    number %= 100000;
-  }
-
-  if (Math.floor(number / 1000) > 0) {
-    words += numberToWords(Math.floor(number / 1000)) + " Thousand ";
-    number %= 1000;
-  }
-
-  if (Math.floor(number / 100) > 0) {
-    words += numberToWords(Math.floor(number / 100)) + " Hundred ";
-    number %= 100;
-  }
-
-  if (number > 0) {
-    if (words !== "") {
-      words += "and ";
-    }
-
-    if (number < 20) {
-      words += units[number];
-    } else {
-      words += tens[Math.floor(number / 10)];
-      if (number % 10 > 0) {
-        words += "-" + units[number % 10];
-      }
-    }
-  }
-
-  return words.trim();
-}
-
-// Add event listener to deposit amount input field
-document.getElementById("advance_deposit-amount").addEventListener("input", convertToWords);
-
-</script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
 <script>
   let flag=0;
   $("#kvo_update_room_booking :input").change(function() {
@@ -1860,17 +1404,19 @@ document.getElementById("advance_deposit-amount").addEventListener("input", conv
                 icon: "error",
             });
             return false; // Prevent form submission
-        } else {
-          toastr['success']("{{ Session::get('message') }}", 'Updated!', {
-            closeButton: true,
-            tapToDismiss: false,
-        });
-      }
+        } 
     });
 </script>
 
 <script src="{{ asset ('assets/vendor/libs/jquery-repeater/jquery-repeater.js') }}"></script>
-
+@if (Session::get('message'))
+    <script>
+        toastr['success']("{{ Session::get('message') }}", 'Updated!', {
+            closeButton: true,
+            tapToDismiss: false,
+        });
+    </script>
+@endif
 @endsection
 
 @endsection
