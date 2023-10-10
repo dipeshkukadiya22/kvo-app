@@ -33,9 +33,13 @@ use App\Http\Controllers\pdfcontroller;
 */
 
 /* Auth Login Route */
+Route::get('/', function () {
+    return view('Auth.login');
+});
 Route::get('/dashboard', [DashboardController::class, 'Dashboard'])->name('Dashboard');
 
 Route::get('login',[AuthController::class,'LoginUser'])->name('login');
+//Route::get('/',[AuthController::class,'LoginUser'])->name('login');
 Route::post('login',[AuthController::class,'check_user'])->name('check_user');
 Route::get('login',[AuthController::class,'destroy'])->name('destroy');
 

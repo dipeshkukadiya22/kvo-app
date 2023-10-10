@@ -29,10 +29,10 @@ class MembersController extends Controller
         $member->city = strtoupper($request->city1);
         $member->save();
         if($member) {
-            return redirect() -> route('ViewMembers') -> with ('message', 'Details Changed Successfully!') ;
+            return redirect() -> route('ViewMembers') -> with ('updatemessage', 'Details Changed Successfully!') ;
         }
         else{
-            return redirect() -> route('ViewMembers') -> with ('message', 'your data not submit') ;
+            return redirect() -> route('ViewMembers') -> with ('updatemessage', 'Details Not Changed Successfully!') ;
         }
     }
     public function delete_members($id){
