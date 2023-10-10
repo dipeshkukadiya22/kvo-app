@@ -520,14 +520,14 @@
       var index=date.indexOf('-');
       var startdate=date.substr(0,index-1);
       var enddate=date.substr(index+1);
-    
-      // $.ajax({
-      //   url:"{{url('checkRoom')}}" +"/"+ startdate + "," + enddate,
-      //   type:'GET',
-      //     success:function(response){   
-      //       alert("success");
-      //     }
-      //   });
+      alert("check");
+      $.ajax({
+        url:"{{url('checkRoom')}}" +"/"+ startdate,
+        type:'GET',
+          success:function(response){   
+            alert("success");
+          }
+        });
     }); 
 
 

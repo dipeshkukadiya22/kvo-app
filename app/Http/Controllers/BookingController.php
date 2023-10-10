@@ -493,7 +493,8 @@ class BookingController extends Controller
         $startdate="2023-10-11";$enddate="2023-10-11";
         $adv_booked_room=room_details::select("room_list")
                             ->where('booking_type','=','ADVANCE')
-                            ->where('advance_date','=','2023-10-11')
+                            ->where('advance_date(from)','=',$startdate)
+                            ->where('advance_date(to)','=',$enddate)
                             ->get();
                     //dd($adv_booked_room);
         foreach($adv_booked_room as $item)
@@ -524,7 +525,8 @@ class BookingController extends Controller
     }
     public function checkRoom($date)
     {
-        $single=array();
+        dd("hi");
+        /*$single=array();
         $startdate="2023-10-11";$enddate="2023-10-11";
         $adv_booked_room=room_details::select("room_list")
                             ->where('booking_type','=','ADVANCE')
@@ -554,7 +556,7 @@ class BookingController extends Controller
                     $dmt_list[]=$list;
                 }
             }
-            return response()->json(1); 
+            return response()->json(1); */
     }
 
     public function temp() {
@@ -612,7 +614,9 @@ class BookingController extends Controller
         $dmt_list = array_filter($req->input('select2Multiple3', []));
         $combinedList = array_merge($ac_list, $non_ac_list, $dmt_list);
         $filteredCombinedList = array_filter($combinedList);
-        $personal_id=(personal_details::get()->last()->p_id)+1;
+        $count=DB::SELECT("SELECT p_id from personal_details");
+        if($count){
+            $personal_id=(personal_details::get()->last()->p_id)+1;}else{$personal_id=1;}
         $advance = new personal_details();
         $advance->member_id=$req->name;
         $advance->occupation=$req->occupation;
