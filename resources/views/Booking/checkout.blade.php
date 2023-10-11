@@ -473,17 +473,12 @@ div.card-datatable [class*=col-md-] {
                                         <td><strong>બાકી લેવાની /<br> પરત કરવાની રકમ</strong></td>
                                         <td>
                                           <input type="text" class="form-control amount-input" name="net_amount" id="net_amount" aria-label="Amount (to the nearest dollar)"  onkeypress="return onlyNumbers(event);">
-                                          
-
                                         </td>
                                       </tr>
 
                                     </tbody>
                                   </table>
-
                                 <!--/ Basic Bootstrap Table -->
-                          
-
                               </div>
                               <div class="modal-footer">
                                 <button type="button" class="btn btn-label-secondary" data-bs-dismiss="modal">
@@ -502,7 +497,6 @@ div.card-datatable [class*=col-md-] {
             </div>
         </div>
   </body>
-
 @section('pagejs')
 
 
@@ -549,10 +543,12 @@ div.card-datatable [class*=col-md-] {
                       $("#bookingId").val(response[0]['r_id']);
                       $("#name").val(response[0]['m_name']);
                       $("#city").val(response[0]['city']);
-                      var date=new Date(response[0]['check_in_date']);
-                      var checkindate=date.getDate()+"-"+(date.getMonth()+1)+"-"+date.getFullYear()+" "+date.getHours()+":"+date.getMinutes();
+                      var date = new Date(response[0]['check_in_date']);
+                      var checkindate = date.getDate() +'-' +(date.getMonth() + 1) +'-' + date.getFullYear() +' ' +date.getHours() +':' +date.getMinutes();
                       var date1=new Date();
                       var days=Math.round((date1.getTime()-date.getTime())/(1000*3600*24));
+                      alert(days);
+                      
                       if(days==0){days=1;}
                       $("#check_in_date").val(checkindate);
                       $("#deposite").val(response[0]['deposite_rs']);
@@ -571,8 +567,7 @@ div.card-datatable [class*=col-md-] {
                         $("#dlx_amount").val(days * response[0]['dlx_amount']);
                         $("#dlx_room_total").val(days * response[0]['dlx_amount']);
                         amt+=parseInt(document.getElementById('dlx_room_total').value);
-                      } 
-                          
+                      }                           
                       if(room==303 || room==304 ||room==305 || room==306 || room==403)
                       {
                         ac.push(room);

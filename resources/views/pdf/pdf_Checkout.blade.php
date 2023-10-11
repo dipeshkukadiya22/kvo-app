@@ -158,8 +158,8 @@
 					<tr>
 						<td class="tg-0pky gujfont">l0,S®; ~D</td>
 						<td class="tg-0pky tc">{{$drc}}</td>
-						<td class="tg-0pky tc">{{$checkout[0]->ac_amount}}</td>
-						<td class="tg-0pky tc">{{$checkout[0]->ac_amount+$checkout[0]->deluxe_room_extra}}</td>
+						<td class="tg-0pky tc">{{$checkout[0]->dlx_amount}}</td>
+						<td class="tg-0pky tc">{{$checkout[0]->dlx_amount+$checkout[0]->deluxe_room_extra}}</td>
 						<td class="tg-0pky tc">{{$checkout[0]->no_of_days}}</td>
 						<td class="tg-0pky tc">{{$checkout[0]->deluxe_room_extra}}</td>
 						<td class="tg-0pky tc">{{$checkout[0]->deluxe_room_total}}</td>

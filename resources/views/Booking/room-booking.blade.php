@@ -136,7 +136,7 @@
 
                               <div class="mb-3">
                                         <label class="form-label" for="basic-default-email">Email</label>
-                                        <input type="email" name="email" id="basic-default-email" class="form-control" placeholder="Email" required/>
+                                        <input type="email" name="email" id="basic-default-email" class="form-control" placeholder="Email" />
                                     </div>
                               <div class="mb-3">
                                 <label class="form-label" for="city">City</label>
@@ -254,7 +254,7 @@
     
                               <div class="col-md-4">
                                   <label class="form-label" for="basic-default-email"><span class="required">Email</span></label>
-                                  <input type="email" id="member_email" name="email" class="form-control" placeholder="john@gmail.com" value="{{ (!empty($member) )? $member->email : '' }}" required readonly/>
+                                  <input type="email" id="member_email" name="email" class="form-control" placeholder="john@gmail.com" value="{{ (!empty($member) )? $member->email : '' }}" readonly/>
                               
                               </div>
                               <div class="col-md-4">
