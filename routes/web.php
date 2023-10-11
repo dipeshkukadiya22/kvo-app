@@ -153,7 +153,7 @@ Route::group(['middleware'=>['user']],function(){
 /* Advance */
     Route::POST('AdvanceRoomBooking', [BookingController::class, 'advanceroom'])->name('AdvanceRoomBooking');
     Route::get('Advance_Room_Booking', [BookingController::class, 'AdvanceRoomBooking'])->name('Advance_Room_Booking');
-    Route::get('checkRoom/{date1}', [BookingController::class, 'checkRoom'])->name('checkRoom');
+    Route::get('checkRoom/{date}', [BookingController::class, 'checkRoom'])->name('checkRoom');
     Route::post('update_advance_room_booking', [BookingController::class, 'update_advance_room_booking'])->name('update_advance_room_booking');
     Route::get('get_advance_data/{id}', [BookingController::class, 'get_advance_data'])->name('get_advance_data');
 

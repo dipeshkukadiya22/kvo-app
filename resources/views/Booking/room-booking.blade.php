@@ -249,12 +249,12 @@
                                 <label class="form-label" for="multicol-phone"><span class="required">Phone Number</span></label>
                                 <input type="number" id="member-phone" name="phone_no" class="form-control phone-mask" placeholder="658 799 8941" aria-label="658 799 8941" value="{{ (!empty($member)) ? $row->phone_no : '' }}"    maxlength="10"
                                   required
-                                  oninput="javascript: if (this.value.length > 10) this.value = this.value.slice(0, 10);"/>
+                                  oninput="javascript: if (this.value.length > 10) this.value = this.value.slice(0, 10);" readonly/>
                                   </div>
     
                               <div class="col-md-4">
                                   <label class="form-label" for="basic-default-email"><span class="required">Email</span></label>
-                                  <input type="email" id="member_email" name="email" class="form-control" placeholder="john@gmail.com" value="{{ (!empty($member) )? $member->email : '' }}" required/>
+                                  <input type="email" id="member_email" name="email" class="form-control" placeholder="john@gmail.com" value="{{ (!empty($member) )? $member->email : '' }}" required readonly/>
                               
                               </div>
                               <div class="col-md-4">
@@ -984,31 +984,48 @@ $("#room_booking").submit(function(){
       const nonAcAmount = parseFloat($('#non-ac-amount').val()) || 0;
       const doorMtAmount = parseFloat($('#door_mt_amount').val()) || 0;
       const doorMtAcAmount = parseFloat($('#door_mt_ac_amount').val()) || 0;
-
       const totalAmount =dlxacAmount + acAmount + nonAcAmount + doorMtAmount + doorMtAcAmount;
       $('#room_amount').text( totalAmount);
-      var selectedRooms ;
-      if(acAmount !=0){
-        selectedRooms = 'A.C. Room:= ' + selectedList1 ;
-        if(nonAcAmount !=0){
-          selectedRooms = 'A.C. Room:= ' + selectedList1  + ', Non A.C. Room:= ' + selectedList2 ;
-            if(doorMtAmount !=0){
-              selectedRooms = 'A.C. Room:= ' + selectedList1  + ', Non A.C. Room:= ' + selectedList2 + ', Door Metri A.C. / Non A.C. Room:= ' + selectedList3;
-          }
-        }
-        if(doorMtAmount !=0){
-          selectedRooms = 'A.C. Room:= ' + selectedList1  + ' Door Metri A.C. / Non A.C. Room:= ' + selectedList3;
-        }
-      }else if(nonAcAmount !=0){
-          selectedRooms =  'Non A.C. Room:= ' + selectedList2 ;
-            if(doorMtAmount !=0){
-              selectedRooms = 'Non A.C. Room:= ' + selectedList2 + ', Door Metri A.C. / Non A.C. Room:= ' + selectedList3;
+
+      var selectedRooms = '';
+
+            if (dlxacAmount !== 0) {
+              selectedRooms = 'Deluxe Room:= ' + selectedList4;
+
+              if (acAmount !== 0) {
+                selectedRooms += ', A.C. Room:= ' + selectedList1;
+
+                if (nonAcAmount !== 0) {
+                  selectedRooms += ', Non A.C. Room:= ' + selectedList2;
+
+                  if (doorMtAcAmount !== 0) {
+                    selectedRooms += ', Door Mt AC Room:= ' + selectedList5;
+
+                    if (doorMtAmount !== 0) {
+                      selectedRooms += ', Door Mt Non AC Room:= ' + selectedList3;
+                    }
+                  }
+                }
+              }
+            } else if (nonAcAmount !== 0) {
+              selectedRooms = 'Non A.C. Room:= ' + selectedList2;
+
+              if (doorMtAcAmount !== 0) {
+                selectedRooms += ', Door Mt AC Room:= ' + selectedList5;
+
+                if (doorMtAmount !== 0) {
+                  selectedRooms += ', Door Mt Non AC Room:= ' + selectedList3;
+                }
+              }
+            } else if (doorMtAcAmount !== 0) {
+              selectedRooms = 'Door Mt AC Room:= ' + selectedList5;
+            } else if (doorMtAmount !== 0) {
+              selectedRooms = 'Door Mt Non AC Room:= ' + selectedList3;
+            } else {
+              selectedRooms = '';
             }
-      }else if(doorMtAmount !=0){
-        selectedRooms = 'Door Metri A.C. / Non A.C. Room:= ' + selectedList3;
-      }
-      else{selectedRooms =''}
-     
+
+                
      // const selectedRooms = 'A.C. Room:= ' + selectedList1 + ', Non A.C. Room:= ' + selectedList2 + ', Door Metri A.C. / Non A.C. Room:= ' + selectedList3;
       $('#room_lst').text(selectedRooms);
 
@@ -1177,6 +1194,7 @@ $("#room_booking").submit(function(){
     });
   $(document).ready(function() {
     $("#btn-step1").click(function() {
+      alert("hii");
       console.log("click");
       $('#member_age').val($('#basic-default-age').val());
       let numForms = parseInt($("#no_of_person_id").val());

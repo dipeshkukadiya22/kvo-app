@@ -387,7 +387,7 @@ class BookingController extends Controller
         $booking->ac_amount = $req->ac_amount;
         $booking->non_ac_amount = $req->non_ac_amount;
         $booking->door_mt_amount = $req->dmt_amount;
-        $booking->door_mt_ac_amount = $req->door_mt_ac_amount;
+        $booking->door_mt_ac_amount = $req->dmt_ac_amount;
         $booking->deposite_rs = $req->deposite_rs;
         $booking->rs_word = $req->rs_word;
         $booking->no_of_days = $req->no_of_days;
@@ -405,7 +405,7 @@ class BookingController extends Controller
         if(!empty($req->select2Multiple4)){
             foreach($req->select2Multiple4 as $room)
             {
-                $data=DB::UPDATE("UPDATE add_room SET STATUS='1',room_detail_id='$req->deposit_no' where room_no='$room'");
+                $data=DB::UPDATE("UPDATE add_room SET STATUS='1',room_detail_id='$req->booking_id' where room_no='$room'");
             }}
             if(!empty($req->select2Multiple1)){
             foreach($req->select2Multiple1 as $room)
@@ -425,7 +425,7 @@ class BookingController extends Controller
             if(!empty($req->select2Multiple5)){
                 foreach($req->select2Multiple5 as $room)
                 {
-                    $data=DB::UPDATE("UPDATE add_room SET STATUS='1',room_detail_id='$req->deposit_no' where room_no='$room'");
+                    $data=DB::UPDATE("UPDATE add_room SET STATUS='1',room_detail_id='$req->booking_id' where room_no='$room'");
                 }}
             $total_member = $req->no_of_person_id;
             if ($old_no_of_person == $total_member) {
@@ -486,15 +486,17 @@ class BookingController extends Controller
         if($count)
         {$p_id=room_details::get()->last()->r_id;}else{$p_id=0;}
      
+        $dlx_list=array();
         $ac_list=array();
         $non_ac_list=array();
-        $dmt_list=array(); 
+        $dmt_list=array();
+        $dmt_ac_list=array();
         $single=array();
-        $startdate="2023-10-11";$enddate="2023-10-11";
+        $startdate="2023-10-12";$enddate="2023-10-12";
         $adv_booked_room=room_details::select("room_list")
                             ->where('booking_type','=','ADVANCE')
-                            ->where('advance_date(from)','=',$startdate)
-                            ->where('advance_date(to)','=',$enddate)
+                            ->where('advance_date_from','=',$startdate)
+                            ->where('advance_date_to','=',$enddate)
                             ->get();
                     //dd($adv_booked_room);
         foreach($adv_booked_room as $item)
@@ -503,60 +505,89 @@ class BookingController extends Controller
         }
         $room_no=add_room::pluck('room_no')->toArray(); 
         $available_roomlist = array_diff($room_no, $single);
-            foreach($available_roomlist as $list)
+        foreach($available_roomlist as $list)
+        {
+            if($list ==301 || $list ==302 ||$list ==401 || $list ==402)
             {
-                if($list ==301 || $list ==302 ||$list ==303 || $list ==304 ||
-                    $list ==305 || $list ==306 ||$list ==401 || $list==402 || $list ==403 )
-                {
-                    $ac_list[]=$list;
-                }
-                if($list ==201 || $list ==202 ||$list ==203 || $list ==204 ||
-                    $list ==205 || $list ==206 ||$list ==404 || $list==405 || $list ==406 )
-                {
-                    $non_ac_list[]=$list;
-                }
-                if($list ==1 || $list ==2 ||$list ==3 || $list ==4 || $list ==5 || $list ==6 ||$list ==7 || $list==8 || $list ==9 ||$list==10||
-                    $list ==11 || $list ==12 ||$list ==13 || $list ==14 || $list ==15 || $list ==16 ||$list ==17 || $list==18 || $list ==19|| $list==20)
-                {
-                    $dmt_list[]=$list;
-                }
+                $dlx_list[]=$list;
             }
-        return view('Booking.AdvanceRoomBooking',['m_data'=>$m_data,'ac_list'=>$ac_list,'non_ac_list'=>$non_ac_list,'dmt_list'=>$dmt_list,'p_id'=>$p_id]);
+            if($list ==303 || $list ==304 ||
+                $list ==305 || $list ==306 || $list ==403 )
+            {
+                $ac_list[]=$list;
+            }
+            if($list ==201 || $list ==202 ||$list ==203 || $list ==204 ||
+            $list ==205 || $list ==206 ||$list ==404 || $list==405 || $list ==406 )
+            {
+                $non_ac_list[]=$list;
+            }
+            if($list ==1 || $list ==2 ||$list ==3 || $list ==4 || $list ==5 || $list ==6 ||$list ==7 || $list==8 || $list ==9 ||$list==10 )
+            {
+                $dmt_list[]=$list;
+            }
+            if( $list ==11 || $list ==12 ||$list ==13 || $list ==14 || $list ==15 || $list ==16 ||$list ==17 || $list==18 || $list ==19|| $list==20)
+            {
+                $dmt_ac_list[]=$list;
+            }
+
+        }
+        return view('Booking.AdvanceRoomBooking',['dlx_list'=>$dlx_list,'dmt_ac_list'=>$dmt_ac_list,'m_data'=>$m_data,'ac_list'=>$ac_list,'non_ac_list'=>$non_ac_list,'dmt_list'=>$dmt_list,'p_id'=>$p_id]);
     }
     public function checkRoom($date)
     {
-        dd("hi");
-        /*$single=array();
+        $startdate=date("Y-m-d",strtotime(substr($date,0,10)));
+        $enddate=date("Y-m-d",strtotime(substr($date,13)));
+        $m_data = add_members::all();
+        $count=DB::SELECT("SELECT r_id from room_details");
+        if($count)
+        {$p_id=room_details::get()->last()->r_id;}else{$p_id=0;}
+     
+        $dlx_list=array();
+        $ac_list=array();
+        $non_ac_list=array();
+        $dmt_list=array();
+        $dmt_ac_list=array();
+        $single=array();
         $startdate="2023-10-11";$enddate="2023-10-11";
         $adv_booked_room=room_details::select("room_list")
                             ->where('booking_type','=','ADVANCE')
-                            ->whereBetween('date',[$startdate,$enddate])
+                            ->where('advance_date_from','=',$startdate)
+                            ->where('advance_date_to','=',$enddate)
                             ->get();
+                    //dd($adv_booked_room);
         foreach($adv_booked_room as $item)
         {
             $single = array_merge($single, explode(',', $item->room_list));
         }
         $room_no=add_room::pluck('room_no')->toArray(); 
         $available_roomlist = array_diff($room_no, $single);
-            foreach($available_roomlist as $list)
+        foreach($available_roomlist as $list)
+        {
+            if($list ==301 || $list ==302 ||$list ==401 || $list ==402)
             {
-                if($list ==301 || $list ==302 ||$list ==303 || $list ==304 ||
-                    $list ==305 || $list ==306 ||$list ==401 || $list==402 || $list ==403 )
-                {
-                    $ac_list[]=$list;
-                }
-                if($list ==201 || $list ==202 ||$list ==203 || $list ==204 ||
-                $list ==205 || $list ==206 ||$list ==404 || $list==405 || $list ==406 )
-                {
-                    $non_ac_list[]=$list;
-                }
-                if($list ==1 || $list ==2 ||$list ==3 || $list ==4 || $list ==5 || $list ==6 ||$list ==7 || $list==8 || $list ==9 ||$list==10||
-                    $list ==11 || $list ==12 ||$list ==13 || $list ==14 || $list ==15 || $list ==16 ||$list ==17 || $list==18 || $list ==19|| $list==20)
-                {
-                    $dmt_list[]=$list;
-                }
+                $dlx_list[]=$list;
             }
-            return response()->json(1); */
+            if($list ==303 || $list ==304 ||
+                $list ==305 || $list ==306 || $list ==403 )
+            {
+                $ac_list[]=$list;
+            }
+            if($list ==201 || $list ==202 ||$list ==203 || $list ==204 ||
+            $list ==205 || $list ==206 ||$list ==404 || $list==405 || $list ==406 )
+            {
+                $non_ac_list[]=$list;
+            }
+            if($list ==1 || $list ==2 ||$list ==3 || $list ==4 || $list ==5 || $list ==6 ||$list ==7 || $list==8 || $list ==9 ||$list==10 )
+            {
+                $dmt_list[]=$list;
+            }
+            if( $list ==11 || $list ==12 ||$list ==13 || $list ==14 || $list ==15 || $list ==16 ||$list ==17 || $list==18 || $list ==19|| $list==20)
+            {
+                $dmt_ac_list[]=$list;
+            }
+            $list=[$dlx_list, $ac_list, $non_ac_list, $dmt_list,$dmt_ac_list];
+
+        }   return response()->json($list); 
     }
 
     public function temp() {
@@ -578,17 +609,23 @@ class BookingController extends Controller
     public function AdvanceBooking(){
         $m_data = add_members::all();
         $p_id=room_details::get()->last()->r_id;
+        $dlx_list=array();
         $ac_list=array();
         $non_ac_list=array();
         $dmt_list=array();
+        $dmt_ac_list=array();
         $single=array();  
         
         $room_no=add_room::pluck('room_no')->toArray(); 
         $available_roomlist = array_diff($room_no, $single);
             foreach($available_roomlist as $list)
             {
-                if($list ==301 || $list ==302 ||$list ==303 || $list ==304 ||
-                    $list ==305 || $list ==306 ||$list ==401 || $list==402 || $list ==403 )
+                if($list ==301 || $list ==302 ||$list ==401 || $list ==402)
+                {
+                    $dlx_list[]=$list;
+                }
+                if($list ==303 || $list ==304 ||
+                    $list ==305 || $list ==306 || $list ==403 )
                 {
                     $ac_list[]=$list;
                 }
@@ -604,15 +641,17 @@ class BookingController extends Controller
                 }
 
             }
-        return view("Booking.AdvanceRoomBooking",['m_data'=>$m_data,'ac_list'=>$ac_list,'non_ac_list'=>$non_ac_list,'dmt_list'=>$dmt_list,'p_id'=>$p_id]);
+        return view("Booking.AdvanceRoomBooking",['dlx_list'=>$dlx_list,'dmt_ac_list'=>$dmt_ac_list,'m_data'=>$m_data,'ac_list'=>$ac_list,'non_ac_list'=>$non_ac_list,'dmt_list'=>$dmt_list,'p_id'=>$p_id]);
     }
 
     public function advanceroom(Request $req){
         $m_data = add_members::all();
+        $dlx_list = array_filter($req->input('select2Multiple4', []));
         $ac_list = array_filter($req->input('select2Multiple1', []));
         $non_ac_list = array_filter($req->input('select2Multiple2', []));
         $dmt_list = array_filter($req->input('select2Multiple3', []));
-        $combinedList = array_merge($ac_list, $non_ac_list, $dmt_list);
+        $dmt_ac_list = array_filter($req->input('select2Multiple5', []));
+        $combinedList = array_merge( $dlx_list, $ac_list, $non_ac_list, $dmt_list, $dmt_ac_list);
         $filteredCombinedList = array_filter($combinedList);
         $count=DB::SELECT("SELECT p_id from personal_details");
         if($count){
@@ -622,7 +661,6 @@ class BookingController extends Controller
         $advance->occupation=$req->occupation;
         $advance->reason=$req->reason;
         $status=$advance->save();
-        
         $advanceroombooking = new room_details();
         $advanceroombooking->no_of_person = $req->no_of_person;
         $advanceroombooking->room_list = implode(',', $filteredCombinedList);
@@ -634,12 +672,16 @@ class BookingController extends Controller
         $advanceroombooking->non_ac_amount = $req->non_ac_amount;
         $advanceroombooking->door_mt_amount = $req->door_mt_amount;
         $advanceroombooking->no_of_days = $req->no_of_days;
-        $advanceroombooking->advance_date = $req->advance_date;
+        $date1=date("Y-m-d",strtotime(substr($req->advance_date,0,10)));
+        $date2=date("Y-m-d",strtotime(substr($req->advance_date,13)));
+        $advanceroombooking->advance_date_from = $date1;
+        $advanceroombooking->advance_date_to = $date2;
         $advanceroombooking->status = "ADVANCE";
         $advanceroombooking->booking_type = "ADVANCE";
         $advanceroombooking->date=date("Y-m-d");
         $room_no=add_room::pluck('room_no')->toArray(); 
         $status=$advanceroombooking->save();
+        
         if($status){
             return back()->with ('message', 'Advance booking Insert successfully!'); }
         else{
@@ -686,8 +728,12 @@ class BookingController extends Controller
         $available_roomlist = array_diff($room_no, $single);
             foreach($available_roomlist as $list)
             {
+                if($list ==301 || $list ==302 ||$list ==401 || $list ==402)
+                {
+                    $dlx_list[]=$list;
+                }
                 if($list ==301 || $list ==302 ||$list ==303 || $list ==304 ||
-                    $list ==305 || $list ==306 ||$list ==401 || $list==402 || $list ==403 )
+                    $list ==305 || $list ==306 || $list ==403 )
                 {
                     $ac_list[]=$list;
                 }

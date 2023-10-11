@@ -169,14 +169,15 @@
                             
                               <div class="col-md-4">
                                   <label class="form-label" for="basic-default-email"><span class="required">Email</span></label>
-                                  <input type="email" id="member_email" name="email" class="form-control" placeholder="john.doe" value="{{ (!empty($member) )? $member->email : '' }}" readonly/>
+                                  <input type="email" id="member_email" name="email" class="form-control" placeholder="john.doe" value="{{ (!empty($member) )? $member->email : '' }}" required readonly/>
                               
                               </div>
 
                               <div class="col-md-4">
                                 <label class="form-label" for="multicol-phone"><span class="required">Phone Number</span></label>
                                 <input type="number" id="member-phone" name="phone_no" class="form-control phone-mask" placeholder="658 799 8941" aria-label="658 799 8941" value="{{ (!empty($member)) ? $row->phone_no : '' }}"    maxlength="10"
-                                  readonly oninput="javascript: if (this.value.length > 10) this.value = this.value.slice(0, 10);"/>
+                              required
+                              oninput="javascript: if (this.value.length > 10) this.value = this.value.slice(0, 10);" readonly/>
                               </div> 
                               
                               <div class="col-md-4">
@@ -188,6 +189,7 @@
                               <label for="flatpickr-range" class="form-label"><span class="required">Advance Date</span></label>
                               <input type="text" class="form-control" name="advance_date" placeholder="DD-MM-YYYY HH:MM" id="daterange" required/>
                             </div>
+
                           </div>
                           
                         <!-- Personal Info -->
@@ -206,6 +208,22 @@
                                     <h6 class="fw-semibold">2. Booking Details</h6>
                                      <hr class="mt-0 mb-0" />
                                 </div>
+                                <div class="col-md-2 mt-3">
+                                <label for="select2Multiple4" class="form-label"> Deluxe Room</label> 
+                              
+                                <select id="select2Multiple44" name="select2Multiple4[]" class="select2 form-select" multiple>
+                                    @foreach($dlx_list as $list)
+                                        <option value="{{$list}}">{{$list}}</option>
+                                    @endforeach
+                              </select>
+                            </div>
+                            <div class="col-md-2 mt-3">
+                                  <label class="form-label" for="basic-default-name">Amount</label>
+                                  <div class="input-group">
+                                    <span class="input-group-text">₹</span>
+                                    <input type="text" class="form-control"  name="dlx_amount" placeholder="Amount" aria-label="Amount (to the nearest indian)" id="dlx_amount" maxlength="4" onkeypress="return onlyNumbers(this.value);"/>
+                                  </div>
+                              </div>
                             
                             <div class="col-md-2 mt-3">
                                 <label for="select2Multiple1" class="form-label">Ac Room</label> 
@@ -242,9 +260,24 @@
                                     <input type="number" class="form-control"  name="non_ac_amount" placeholder="Amount" aria-label="Amount (to the nearest indian)" id="non-ac-amount" />
                                   </div>
                                 </div>
+                                <div class="col-md-2 mt-3">
+                                <label for="select2Multiple5" class="form-label">Door Mt AC Room</label>
+                                <select id="select2Multiple55" name="select2Multiple5[]" class="select2 form-select" multiple>
+                                    @foreach($dmt_ac_list as $list)
+                                        <option value="{{$list}}" >{{$list}}</option>
+                                    @endforeach
+                                </select>
+                              </div>
+                                <div class="col-md-2 mt-3">
+                                  <label class="form-label" for="basic-default-name">Amount</label>
+                                  <div class="input-group">
+                                    <span class="input-group-text">₹</span>
+                                    <input type="text" class="form-control"  name="door_mt_ac_amount" id="door_mt_ac_amount" placeholder="Amount" aria-label="Amount (to the nearest indian)"  maxlength="4" onkeypress="return onlyNumbers(this.value);" />
+                                  </div>
+                                </div>
 
                                 <div class="col-md-2 mt-3">
-                                <label for="select2Multiple3" class="form-label">Door Mt Room</label>
+                                <label for="select2Multiple3" class="form-label">Door Mt Non AC Room</label>
                                 <select id="select2Multiple33" name="select2Multiple3[]" class="select2 form-select room-input" multiple>
                                     @foreach($dmt_list as $list)
                                         <option value="{{$list}}" >{{$list}}</option>
@@ -298,38 +331,6 @@
                               <label class="form-label" for="rupees-in-words">Reason</label>
                               <input type="text" class="form-control" style="text-transform:uppercase" name="reason" id="reason" placeholder="Reason to stay" required>
                             </div>
-                            <div class="col-md-4">
-                            <label class="d-block form-label">Payment Mode</label>
-                            <div class="form-check form-check-inline">
-                              <input
-                                type="radio"
-                                id="CASH"
-                                name="basic_default_radio"
-                                class="form-check-input"
-                                checked/>
-                              <label class="form-check-label" for="basic_default_radio">Cash</label>
-                            </div>
-                            <div class="form-check form-check-inline mb-2">
-                              <input
-                                type="radio"
-                                id="CHEQUE"
-                                name="basic_default_radio"
-                                class="form-check-input"
-                               />
-                              <label class="form-check-label" for="basic_default_radio">Cheque</label>
-                            </div>
-                            
-                            <div class="form-check form-check-inline">
-                              <input
-                                type="radio"
-                                id="UPI"
-                                name="basic_default_radio"
-                                class="form-check-input"
-                                 />
-                              <label class="form-check-label" for="basic_default_radio">UPI</label>
-                              <input type=text name="payment" id="payment" value="CASH" hidden>
-                            </div>
-                          </div>
   
                             <div class="col-12 flex justify-content">
                             <button type="submit" id="submitbtn1" class="btn btn-success btn-submit">Submit</button>
@@ -397,61 +398,33 @@
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
     <script>
     jQuery(function ($) {
-     
-        $('#daterange').daterangepicker({
+        var startDate = moment();
+        var endDate = moment();
+        
+        $('input[name="advance_date"]').daterangepicker({
             opens: 'left',
             locale: {
-                format: 'DD/MM/YYYY'
+                format: 'DD-MM-YYYY'
             },
-          
-           }, function(start, end, label) {
-            var startDate = start.format('YYYY-MM-DD'); 
-            var endDate = end.format('YYYY-MM-DD');
-            var numberOfDays = moment(endDate).diff(startDate, 'days');
-            $('#no_of_days').val(numberOfDays + 1);
-            $('#start_date').val(startDate);
-            $('#end_date').val(endDate);
-             $('#daterange').val(start.format('DD/MM/YYYY') + ' - ' + end.format('DD/MM/YYYY'));
-          
-            
+            startDate: startDate,
+            endDate: endDate
+        }, function(start, end, label) {
+           
+            $('#daterange').val(start.format('DD-MM-YYYY') + ' To ' + end.format('DD-MM-YYYY'));
         });
-    
     });
+
+
 </script> 
 <script>
     let list1=document.getElementById("select2Multiple11");
     let list2=document.getElementById("select2Multiple22");
     let list3=document.getElementById("select2Multiple33");
-    var check=0;
-    $(".browser-default-validation").change(function(){
+    $("#room_booking").submit(function(){
       
 
-     
-      if($("#payment").val()=="CASH"){
-      if($("#deposit-amount").val()>9000){ 
-         /*$("#deposite").html("Deposite Amount Should Be Below 9000"); 
-         event.preventDefault();}*/
-        Swal.fire({
-          title: "Are you sure?",
-          text: "You want to deposite in Cash!",
-          icon: "warning",
-          showCancelButton: true,
-          confirmButtonColor: "#3085d6",
-          cancelButtonColor: "#d33",
-          confirmButtonText: "Yes,do It!",
-      }).then((result) => {
-          // If the user confirms the deletion, proceed with the deletion logic
-          if (result.isConfirmed) {
-            check=1;
-          }else{
-            $("#deposite").html("Deposite Amount Should Be Below 9000");
-            event.preventDefault();
-          }
-          });
-        }}else{check=0;$("#deposite").html("");}
-    });
-    $("#room_booking").submit(function(){
-    if(list1.value !="" || list2.value !="" || list3.value !="")
+      var check=0;
+      if(list1.value !="" || list2.value !="" || list3.value !="")
       {
         check=1;
       }
@@ -463,7 +436,11 @@
                 'warning'
                 )
         event.preventDefault();
+       
       }
+      if($("#deposit-amount").val()>9000){ 
+         $("#deposite").html("Deposite Amount Should Be Below 9000"); 
+         event.preventDefault();}
     });
 </script>
 
@@ -492,6 +469,25 @@
         </script>
     @endif
     <script>
+      $("#deposit-amount").keydown(function(e){
+        if(e.key === "-" || e.key === "+"){e.preventDefault();}
+      });
+      $("#multicol-phone").focusout(function(){
+        var contact=document.getElementById("multicol-phone").value;
+        $.ajax({
+                
+                url:"{{url('check_num')}}"+"/"+ contact,
+                type:'GET',
+                success:function(response){
+                    if(response==1)
+                      { $("#submitbtn1").prop('disabled',true);
+                        $("#error").html("Phone no alraedy exit");
+                      }
+                    else{ $("#submitbtn1").prop('disabled',false);
+                    $("#error").html("");}
+                    }
+                });
+      });
        $("#submitbtn").click(function(){
     var name = document.getElementById("basic-default-name").value;
     var phone = document.getElementById("multicol-phone").value;
@@ -515,19 +511,22 @@
   });
   </script>
   <script>
-    $("#daterange").on("change",function(){
-      var date=$("#daterange").val()
-      var index=date.indexOf('-');
+   $('#daterange').change(function() {
+   
+      var date=$("#daterange").val();
+      alert(date);
+     var index=date.indexOf('-');
+ 
       var startdate=date.substr(0,index-1);
       var enddate=date.substr(index+1);
-      alert("check");
       $.ajax({
-        url:"{{url('checkRoom')}}" +"/"+ startdate,
-        type:'GET',
-          success:function(response){   
-            alert("success");
-          }
-        });
+                
+                url:"{{url('checkRoom')}}"+"/"+ date,
+                type:'GET',
+                success:function(response){
+                  alert(response[0][0]);
+                 }
+              });
     }); 
 
 
@@ -932,33 +931,6 @@ $(document).ready(function() {
   });
 });
 </script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 @endsection
