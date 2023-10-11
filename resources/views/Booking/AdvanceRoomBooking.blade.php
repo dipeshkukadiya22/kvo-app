@@ -401,6 +401,7 @@
         var startDate = moment();
         var endDate = moment();
         
+        
         $('input[name="advance_date"]').daterangepicker({
             opens: 'left',
             locale: {
@@ -409,7 +410,7 @@
             startDate: startDate,
             endDate: endDate
         }, function(start, end, label) {
-           
+          
             $('#daterange').val(start.format('DD-MM-YYYY') + ' To ' + end.format('DD-MM-YYYY'));
         });
     });
@@ -515,16 +516,52 @@
    
       var date=$("#daterange").val();
       alert(date);
-     var index=date.indexOf('-');
- 
+      var index=date.indexOf('-');
       var startdate=date.substr(0,index-1);
       var enddate=date.substr(index+1);
+      let n;
       $.ajax({
                 
                 url:"{{url('checkRoom')}}"+"/"+ date,
                 type:'GET',
                 success:function(response){
-                  alert(response[0][0]);
+                  alert("success");
+                  $("#select2Multiple11 option").remove();
+                  $("#select2Multiple22 option").remove();
+                  $("#select2Multiple33 option").remove();
+                  $("#select2Multiple44 option").remove();
+                  $("#select2Multiple55 option").remove();
+                  n=response[0].length;
+                  for(i=0;i<n;i++)
+                  {
+                    var dlx_list=response[0][i];
+                    $('#select2Multiple44').append(`<option value="${dlx_list}"> ${dlx_list} </option>`); 
+                  }
+                  n=response[1].length;
+                  for(i=0;i<n;i++)
+                  {
+                    var ac_list=response[1][i];
+                    $('#select2Multiple11').append(`<option value="${ac_list}"> ${ac_list} </option>`); 
+                  }
+                  n=response[2].length;
+                  for(i=0;i<n;i++)
+                  {
+                    var non_ac_list=response[2][i];
+                    $('#select2Multiple22').append(`<option value="${non_ac_list}"> ${non_ac_list} </option>`); 
+                  }
+                  n=response[3].length;
+                  for(i=0;i<n;i++)
+                  {
+                    var dmt_list=response[3][i];
+                    $('#select2Multiple33').append(`<option value="${dmt_list}"> ${dmt_list} </option>`); 
+                  }
+                  n=response[4].length;
+                  for(i=0;i<n;i++)
+                  {
+                    var dmt_ac_list=response[4][i];
+                    $('#select2Multiple55').append(`<option value="${dmt_ac_list}"> ${dmt_ac_list} </option>`); 
+                  }
+                 
                  }
               });
     }); 

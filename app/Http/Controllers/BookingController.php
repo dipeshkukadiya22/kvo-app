@@ -148,45 +148,7 @@ class BookingController extends Controller
                      
                         $m_details->room_id=$req->deposit_no;
                         $m_details->save();
-                    }
-                    /*deposite */
-                    if($req->deposite_rs>9000)
-                    { 
-                        if($req->deposite_rs>9000){
-                            $div=floor($req->deposite_rs / 9000);
-                            $rem=$req->deposite_rs % 9000;
-                            $i=0;
-                        }
-                        if($req->deposite_rs>9000)
-                        {  
-	                        while($div!=0)
-                        	{
-                                $deposite=new Deposite();
-                                $deposite->booking_id=$req->deposit_no;
-                                $deposite->member_name=strtoupper($req->member[$i]);
-                                $deposite->payment_mode=$req->payment;
-                                $deposite->amount=9000;
-                                $deposite->save();
-		                        $div--;$i++;
-	                        }
-                            if($rem>0)
-                            {
-                                $deposite=new Deposite();
-                                $deposite->booking_id=$req->deposit_no;
-                                $deposite->member_name=strtoupper($req->member[$i]);
-                                $deposite->payment_mode=$req->payment;
-                                $deposite->amount=$rem;
-                                $deposite->save();
-                            }
-                        }}
-                        else{
-                            $deposite=new Deposite();
-                            $deposite->booking_id=$req->deposit_no;
-                            $deposite->member_name=strtoupper($req->member[0]);
-                            $deposite->payment_mode=$req->payment;
-	                        $deposite->amount=$req->deposite_rs;
-                            $deposite->save();
-                        }
+                    } 
             }
         }
         $ar_list = DB::select("SELECT add_room.*, room_details.check_in_date, room_details.* FROM add_room LEFT JOIN room_details ON add_room.room_no = room_details.r_id WHERE add_room.status = 1");
@@ -262,7 +224,9 @@ class BookingController extends Controller
     public function checkout(){
         $bookedRoom= DB::select("SELECT * FROM room_details JOIN ( SELECT add_room.room_detail_id, MAX(add_room.room_no) AS room_no, MAX(add_room.status) AS room_status FROM add_room WHERE add_room.status = 1 GROUP BY add_room.room_detail_id ) AS filtered_rooms ON room_details.r_id = filtered_rooms.room_detail_id JOIN personal_details ON personal_details.p_id = room_details.member_id JOIN add_members ON personal_details.member_id = add_members.p_id where room_details.status='BOOKED'");
         $checkout=DB::select("SELECT * FROM checkout join `room_details`on checkout.room_booking_id=room_details.r_id join personal_details on room_details.member_id=personal_details.p_id join add_members on add_members.p_id=personal_details.member_id WHERE room_details.status='CHECKOUT' order by r_id DESC");
-        $rec_no=checkout::get()->last()->rec_no;
+        $count=DB::SELECT("SELECT rec_no from checkout");
+        if($count){
+            $rec_no=checkout::get()->last()->rec_no;}else{$rec_no=0;}
         if(!$rec_no)
         {$rec_no=1;}
         $member=add_members::all();
@@ -492,7 +456,7 @@ class BookingController extends Controller
         $dmt_list=array();
         $dmt_ac_list=array();
         $single=array();
-        $startdate="2023-10-12";$enddate="2023-10-12";
+        $startdate="2023-10-13";$enddate="2023-10-13";
         $adv_booked_room=room_details::select("room_list")
                             ->where('booking_type','=','ADVANCE')
                             ->where('advance_date_from','=',$startdate)
@@ -548,11 +512,11 @@ class BookingController extends Controller
         $dmt_list=array();
         $dmt_ac_list=array();
         $single=array();
-        $startdate="2023-10-11";$enddate="2023-10-11";
+  
         $adv_booked_room=room_details::select("room_list")
                             ->where('booking_type','=','ADVANCE')
-                            ->where('advance_date_from','=',$startdate)
-                            ->where('advance_date_to','=',$enddate)
+                            ->whereDate('advance_date_from','>=',$startdate)
+                            ->whereDate('advance_date_to','<=',$enddate)
                             ->get();
                     //dd($adv_booked_room);
         foreach($adv_booked_room as $item)
@@ -668,9 +632,11 @@ class BookingController extends Controller
         $advanceroombooking->deposite_rs = $req->deposite_rs;
         $advanceroombooking->rs_word = $req->rs_word ; 
         $advanceroombooking->member_id=$personal_id;
+        $advanceroombooking->dlx_amount = $req->dlx_amount;
         $advanceroombooking->ac_amount = $req->ac_amount;
         $advanceroombooking->non_ac_amount = $req->non_ac_amount;
         $advanceroombooking->door_mt_amount = $req->door_mt_amount;
+        $advanceroombooking->door_mt_ac_amount = $req->door_mt_amount;
         $advanceroombooking->no_of_days = $req->no_of_days;
         $date1=date("Y-m-d",strtotime(substr($req->advance_date,0,10)));
         $date2=date("Y-m-d",strtotime(substr($req->advance_date,13)));

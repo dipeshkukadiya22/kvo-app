@@ -677,7 +677,6 @@
                                       <th>Age </th>
                                       <th>Gender</th>
                                       <th>Relations</th>
-                                      <th></th>
                                       </tr>
                                   </thead>
                                   <tbody class="rep-table">
@@ -689,7 +688,6 @@
                                         <td id="members_age"></td>
                                         <td id="member_gen"></td>
                                         <td id="member_rel"></td>
-                                        <td id="member"></td>
                                       </tr>
                                       
                                                                        
@@ -923,26 +921,7 @@
       $("#gender_data").val("MALE");
     });
 });
-$("#room_booking").submit(function(){
-  let deposite=$("#deposit-amount").val();
-  let count=0;
-  if(deposite>9000)
-  {div=Math.ceil(deposite/9000);}
-  $('.member').each(function () {
-    if($(this).is(':checked'))
-    {count++;}
-  });
-  if(div>count){
-    $("#error-member").html("Please Checked "+ (div-count) +" Member Name");
-    event.preventDefault();
-  }
-  if(div<count){
-    $("#error-member").html("Checked Only " + div + " Members for Deposite");
-    event.preventDefault();
-  }
-  if(div==count)
-  {$("#error-member").html("");}
-});
+
 </script>
 <script>
   $(document).ready(function() {
@@ -1037,7 +1016,7 @@ $("#room_booking").submit(function(){
 </script>
 
 <script>
-    let check=0;
+ 
   $(document).ready(function() {
     let currentStep = 1;
  
@@ -1047,34 +1026,23 @@ $("#room_booking").submit(function(){
       const age = $('#members_age').val();
       const selectedGender = $('input[name="gender"]').val();
       const relation = $('#member_relation').val();
-      const member = "Member";
+     
       let i=1;
       $('#member_full_name').text(fullName);
       $('#members_age').text(age);
       $('#member_gen').text(selectedGender);
       $('#member_rel').text(relation);
-      $('#member').text(member);
-      if(check==1)
-      { $(".rep-table").append(
+    
+     
+       $(".rep-table").append(
         '<tr>' +
         '<td>'+ i +'</td>' +
         '<td id="member_full_name">' + $('#full_name_form').val() + '</td>' +
         '<td id="members_age">' + $('#member_age').val() + '</td>' +
         '<td id="member_gen">' + $('#gender_data').val() + '</td>' +
         '<td id="member_rel">' + $('#member_relation').val() + '</td>' +
-        '<td id="member">' + '<input type=checkbox class=member value='+$('#full_name_form').val()+' name=member[0]>' + '</td>' +
         '</tr>'
-      );}else{
-      $(".rep-table").append(
-        '<tr>' +
-        '<td>'+ i +'</td>' +
-        '<td id="member_full_name">' + $('#full_name_form').val() + '</td>' +
-        '<td id="members_age">' + $('#member_age').val() + '</td>' +
-        '<td id="member_gen">' + $('#gender_data').val() + '</td>' +
-        '<td id="member_rel">' + $('#member_relation').val() + '</td>' +
-        '<td id="member">' + '<input type=checkbox class=member value='+$('#full_name_form').val()+' name=member[0] checked >' + '</td>' +
-        '</tr>'
-      );}
+      );
 
       let numForms = parseInt($("#no_of_person_id").val());
       if (isNaN(numForms) || numForms <= 0) {
@@ -1083,8 +1051,7 @@ $("#room_booking").submit(function(){
       } let j=2;
       for (let i = 1; i < numForms; i++) {
        
-        if(check==1)
-        {
+
           $(".rep-table").append(
         '<tr>' +
         '<td>'+ j +'</td>' +
@@ -1092,23 +1059,10 @@ $("#room_booking").submit(function(){
         '<td class="members_age' + i + '">' + $('#member_age' + i).val() + '</td>' +
         '<td class="member_gen'+ i +'">' + $('input[name="gender'+i+'"]:checked').val() + '</td>' +
         '<td class="member_rel' + i + '">' + $('#member_relation' + i).val() + '</td>' +
-        '<td class="member' + i + '">' + '<input class=member type=checkbox value='+$('#full_name_form' + i).val()+' name=member['+i+']>' + '</td>' +
         '</tr>'
          );
         j++;
-        }else{
-        $(".rep-table").append(
-        '<tr>' +
-        '<td>'+ j +'</td>' +
-        '<td class="member_full_name' + i + '">' + $('#full_name_form' + i).val().toUpperCase() + '</td>' +
-        '<td class="members_age' + i + '">' + $('#member_age' + i).val() + '</td>' +
-        '<td class="member_gen'+ i +'">' + $('input[name="gender'+i+'"]:checked').val() + '</td>' +
-        '<td class="member_rel' + i + '">' + $('#member_relation' + i).val() + '</td>' +
-        '<td class="member' + i + '">' + '' + '</td>' +
-        '</tr>'
-         );
-        j++;
-      }}
+      }
       
       $(".rep-table").show();
     });
@@ -1160,26 +1114,12 @@ $("#room_booking").submit(function(){
     if($("#payment").val()=="CASH"){
       if(deposite.value>9000) 
       {
-        Swal.fire({
-          title: "Are you sure?",
-          text: "You want to deposite in Cash!",
-          icon: "warning",
-          showCancelButton: true,
-          confirmButtonColor: "#3085d6",
-          cancelButtonColor: "#d33",
-          confirmButtonText: "Yes,do It!",
-      }).then((result) => {
-          // If the user confirms the deletion, proceed with the deletion logic
-          if (result.isConfirmed) {
-            check=1;
-          }else{
             $("#deposite").html("Deposite Amount Should Be Below 9000");
             $("#repeat-next").prop('disabled',true);
           }
-          });
-        }}else{check=0;$("#deposite").html("");}
- });
-
+          else{ $("#deposite").html("");}
+    }else{ $("#deposite").html("");}
+  });
 </script>
  
 <script>
@@ -1194,9 +1134,7 @@ $("#room_booking").submit(function(){
     });
   $(document).ready(function() {
     $("#btn-step1").click(function() {
-      alert("hii");
-      console.log("click");
-      $('#member_age').val($('#basic-default-age').val());
+    $('#member_age').val($('#basic-default-age').val());
       let numForms = parseInt($("#no_of_person_id").val());
 
 

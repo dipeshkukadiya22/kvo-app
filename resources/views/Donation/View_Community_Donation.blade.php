@@ -209,28 +209,10 @@ button.swal2-cancel.btn.btn-label-danger {
                                     </div>
 
                                     <div class="col-md-12">
-                                        <label class="form-label" for="multicol-phone">શૈક્ષણિક</label>
-                                        <div class="input-group">
-                                        <span class="input-group-text">₹</span>
-                                        <input type="number" class="form-control amount-input" name="shaikshanik" id="shaikshanik" placeholder="Amount" aria-label="Amount (to the nearest dollar)"/>
-                                        
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-12">
                                         <label class="form-label" for="multicol-phone">લવાજમ</label>
                                         <div class="input-group">
                                         <span class="input-group-text">₹</span>
                                         <input type="number" class="form-control amount-input" name="lavajam" id="lavajam" placeholder="Amount" aria-label="Amount (to the nearest dollar)"/>
-                                        
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-12">
-                                        <label class="form-label" for="multicol-phone">ઑક્સીજન ડોનેશન</label>
-                                        <div class="input-group">
-                                        <span class="input-group-text">₹</span>
-                                        <input type="number" class="form-control amount-input" name="oxygen" id="oxygen" placeholder="Amount" aria-label="Amount (to the nearest dollar)"/>
                                         
                                         </div>
                                     </div>
@@ -783,8 +765,6 @@ button.swal2-cancel.btn.btn-label-danger {
                 $("#medical_checkup").val(response[0]['medical_checkup']);
                 $("#bhojanshala").val(response[0]['bhojanshala']);
                 $("#mahajan").val(response[0]['mahajan']);
-                $("#shaikshanik").val(response[0]['shaikshanik']);
-                $("#oxygen").val(response[0]['oxygen']);
                 $("#lavajam").val(response[0]['lavajam']);
                 $("#ambulance").val(response[0]['ambulance']);
                 $("#other").val(response[0]['other']);

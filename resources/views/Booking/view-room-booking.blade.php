@@ -150,7 +150,7 @@ label.readonly {
                                               <td>{{$row->room_list}}</td>
                                               <td>{{date("d-m-Y",strtotime($row->check_in_date))}}</td>
                                               <td>{{date("d-m-Y",strtotime($row->check_in_date . '+' .$row->no_of_days . 'days'))}}</td>
-                                              <td>{{$row->ac_amount + $row->non_ac_amount + $row->door_mt_amount}}</td>
+                                              <td>{{$row->dlx_amount + $row->ac_amount + $row->non_ac_amount + $row->door_mt_amount + $row->door_mt_ac_amount}}</td>
                                               <td>{{$row->no_of_days}}</td>
                                               <td>{{$row->deposite_rs}}</td>
                                               <td>
@@ -198,8 +198,8 @@ label.readonly {
                                              <td>{{$row->r_id}}</td>
                                               <td>{{$row->m_name}}</td>
                                               <td>{{$row->room_list}}</td>
-                                              <td>{{substr($row->advance_date, 0, 10) }}</td>
-                                              <td>{{substr($row->advance_date, 12) }}</td>
+                                              <td>{{$row->advance_date_from }}</td>
+                                              <td>{{$row->advance_date_to}}</td>
                                               <td>{{$row->no_of_days}}</td>
                                               <td>{{$row->deposite_rs}}</td>
                                               <td>
@@ -406,7 +406,7 @@ label.readonly {
                                               <div class="col-12 d-flex justify-content-end">
                                                 
                                                 
-                                                <button type="button" class="btn btn-primary btn-next" id="repeat-next" >
+                                                <button type="button" class="btn btn-primary btn-next" id="repeat-next">
                                                   <span class="align-middle d-sm-inline-block d-none me-sm-1">Next</span>
                                                   <i class="ti ti-arrow-right"></i>
                                                 </button>
@@ -917,6 +917,19 @@ label.readonly {
                                                   <hr class="mt-0 mb-0" />
                                               </div>
                                               <div class="col-md-2 mt-3">
+                                                  <label for="select2Multiple4" class="form-label">Deluxe Room</label> 
+                                                  <select id="advance_select2Multiple44" name="select2Multiple4[]" class="select2 form-select room-input" multiple>
+                                              
+                                                  </select> 
+                                              </div>
+                                              <div class="col-md-2 mt-3">
+                                                <label class="form-label" for="basic-default-name">Amount</label>
+                                                <div class="input-group">
+                                                  <span class="input-group-text">₹</span>
+                                                  <input type="number" class="form-control "  name="dlx_amount" placeholder="Amount" aria-label="Amount (to the nearest indian)" id="dlx_amount" />
+                                                </div>
+                                              </div>
+                                              <div class="col-md-2 mt-3">
                                                   <label for="select2Multiple1" class="form-label">Ac Room</label> 
                                                   <select id="advance_select2Multiple11" name="select2Multiple1[]" class="select2 form-select room-input" multiple>
                                                  
@@ -943,9 +956,21 @@ label.readonly {
                                                   <input type="number" class="form-control"  name="non_ac_amount" placeholder="Amount" aria-label="Amount (to the nearest indian)" id="advance_non-ac-amount" />
                                                 </div>
                                               </div>
-
                                               <div class="col-md-2 mt-3">
-                                                <label for="select2Multiple3" class="form-label">Door Mt Room</label>   
+                                                  <label for="select2Multiple5" class="form-label">Door Mt Ac Room</label> 
+                                                  <select id="advance_select2Multiple55" name="select2Multiple5[]" class="select2 form-select room-input" multiple>
+                                              
+                                                  </select> 
+                                              </div>
+                                              <div class="col-md-2 mt-3">
+                                                <label class="form-label" for="basic-default-name">Amount</label>
+                                                <div class="input-group">
+                                                  <span class="input-group-text">₹</span>
+                                                  <input type="number" class="form-control "  name="dmt_ac_amount" placeholder="Amount" aria-label="Amount (to the nearest indian)" id="dmt_ac_amount" />
+                                                </div>
+                                              </div>
+                                              <div class="col-md-2 mt-3">
+                                                <label for="select2Multiple3" class="form-label">Door Mt Non Room</label>   
                                                 <select id="advance_select2Multiple33" name="select2Multiple3[]" class="select2 form-select room-input" multiple>
                                               </select>                            
                                               </div>
@@ -1078,7 +1103,7 @@ label.readonly {
       }
 function editadvanceroom(id)
 {
-     
+    
       const myOffcanvas = document.getElementById('advance');
       let b=new bootstrap.Modal(myOffcanvas);
      
@@ -1089,14 +1114,15 @@ function editadvanceroom(id)
           type:'GET',
             success:function(response){
               
-              var dateRange = response[0]['advance_date'];
-              var dateParts = dateRange.split(" - ");
-              var startDate = new Date(dateParts[0]);
-              var endDate = new Date(dateParts[1]);
-              var advancedate =  (startDate.getMonth() + 1)  + "-" +startDate.getDate() + "-" + startDate.getFullYear();
-              var advancedate1 =  (endDate.getMonth() + 1) + "-" +endDate.getDate() + "-" + endDate.getFullYear();
+              // var dateRange = response[0]['advance_date'];
+              // var dateParts = dateRange.split(" - ");
+              // var startDate = new Date(dateParts[0]);
+              // var endDate = new Date(dateParts[1]);
+              // var advancedate =  (startDate.getMonth() + 1)  + "-" +startDate.getDate() + "-" + startDate.getFullYear();
+              // var advancedate1 =  (endDate.getMonth() + 1) + "-" +endDate.getDate() + "-" + endDate.getFullYear();
 
               $("#m_name").val(response[0]['m_name']);
+             
               $("#m_city").val(response[0]['city']);
               $('#m_email').val(response[0]['email']);
               $('#m_phone').val(response[0]['phone_no']);
@@ -1109,9 +1135,12 @@ function editadvanceroom(id)
               $("#advance_occupation").val(response[0]['occupation']);
               $("#advance_reason").val(response[0]['reason']);
               $("#advance_daterange").val(dateRange);
+              $("#dlx_amount").val(response[0]['dlx_amount']);
               $("#advance_ac-amount").val(response[0]['ac_amount']);
               $("#advance_non-ac-amount").val(response[0]['non_ac_amount']);
+              $("#dmt_ac_amount").val(response[0]['door_mt_ac_amount']);
               $("#advance_dmt-amount").val(response[0]['door_mt_amount']);
+              
               
               var room=response[0]['room_list'];
               var ArrNames =room .split(",");
@@ -1120,8 +1149,8 @@ function editadvanceroom(id)
                   function myFunction1(room, index) {
                     if(room==301 || room==302 || room==401 || room==402 )
                     {
-                      $("#advance_select2Multiple11").append('<option value=' + room +'>'+ room+'-AC DELUXE ROOM' +'</option');
-                      $("#advance_select2Multiple11 option[value=" + room + "]").attr('selected', 'selected');
+                      $("#advance_select2Multiple44").append('<option value=' + room +'>'+ room+'-AC DELUXE ROOM' +'</option');
+                      $("#advance_select2Multiple44 option[value=" + room + "]").attr('selected', 'selected');
                     }
                     if(room==303 || room==304 ||room==305 || room==306 || room==403)
                     {
@@ -1150,8 +1179,8 @@ function editadvanceroom(id)
                     }
                     if( room==11 || room==12 ||room==13 || room==14 ||room==15 || room==16 ||room==17 || room==18 ||room==19 || room==20)
                     {
-                      $("#advance_select2Multiple33").append('<option value=' + room +'>'+ room +'-DMAC'+'</option');
-                      $("#advance_select2Multiple33 option[value=" + room + "]").attr('selected', 'selected');
+                      $("#advance_select2Multiple55").append('<option value=' + room +'>'+ room +'-DMAC'+'</option');
+                      $("#advance_select2Multiple55 option[value=" + room + "]").attr('selected', 'selected');
                     }
                   }   
                   member_id.forEach(myFunction)
@@ -1213,7 +1242,7 @@ function edit(id)
                   var gender=response[0]['gender'];
                   var community=response[0]['community'];
                   var date=new Date(response[0]['check_in_date']);
-                  var checkindate=date.getDate()+"-"+date.getMonth()+"-"+date.getFullYear();
+                  var checkindate=date.getDate()+"-"+(date.getMonth()+1)+"-"+date.getFullYear();
                   document.getElementById("id_proof1").src="assets/img/avatars/"+response[0]['id_proof'];
                   if(response[0]['id_proof1'] != null){
                   document.getElementById("id_proof2").src="assets/img/avatars/"+response[0]['id_proof1'];}
@@ -1245,7 +1274,7 @@ function edit(id)
                   $("#dlx_amount").val(response[0]['dlx_amount']);
                   $("#ac_amount").val(response[0]['ac_amount']);
                   $("#non_ac_amount").val(response[0]['non_ac_amount']);
-                  $("#dmt_ac_amount").val(response[0]['dmt_ac_amount']);
+                  $("#dmt_ac_amount").val(response[0]['door_mt_ac_amount']);
                   $("#dmt_amount").val(response[0]['door_mt_amount']);
                   
                   var room=response[0]['room_list'];
@@ -1321,9 +1350,9 @@ function edit(id)
       const acAmount = parseFloat($('#ac_amount').val()) || 0; 
       const nonAcAmount = parseFloat($('#non_ac_amount').val()) || 0;
       const doorMtAmount = parseFloat($('#dmt_amount').val()) || 0;
-      const doorMtAcAmount = parseFloat($('#door_mt_ac_amount').val()) || 0;
+      const doorMtAcAmount = parseFloat($('#dmt_ac_amount').val()) || 0;
 
-    const totalAmount = acAmount + nonAcAmount + doorMtAmount;
+    const totalAmount =dlxacAmount + acAmount + nonAcAmount + doorMtAmount + doorMtAcAmount;
 
     $('#room_amount').text( totalAmount);
     var selectedRooms = '';
@@ -1402,6 +1431,7 @@ $(document).ready(function () {
       const selectedGender = $('input[name="gender"]').val();
       const relation = $('#member_relation').val();
       const member = "Member";
+      let i=1;
       $('#member_full_name').text(fullName);
       $('#members_age').text(age);
       $('#member_gen').text(selectedGender);
@@ -1452,7 +1482,7 @@ $(document).ready(function () {
         $(".rep-table").append(
         '<tr>' +
         '<td>'+ j +'</td>' +
-        '<td class="member_full_name' + i + '">' + $('#full_name_form' + i).val().toUpperCase() + '</td>' +
+        '<td class="member_full_name' + i + '">' + $('#full_name_form' + i).val() + '</td>' +
         '<td class="members_age' + i + '">' + $('#member_age' + i).val() + '</td>' +
         '<td class="member_gen'+ i +'">' + $('input[name="gender'+i+'"]:checked').val() + '</td>' +
         '<td class="member_rel' + i + '">' + $('#member_relation' + i).val() + '</td>' +
@@ -1493,16 +1523,12 @@ $(document).ready(function () {
         });
 </script>
 <script>
-  $(document).ready(function() {
+   $(document).ready(function() {
     $("#repeat-next").click(function() {
+      alert("hii");
       console.log("click");
       let numForms = parseInt($("#no_of_person_id").val());
-
-      // Clear previous forms if any
       $(".rep-form").empty();
-
-      // Clone and show the form templates
-      //console.log('form:'.$('.reo-form').children());
       for (let i = 1; i < numForms; i++) {
         let formTemplate = $(".rep-form .formrepeater").clone();
         $(".rep-form").append(

@@ -192,26 +192,10 @@
                             </div>
                           </div>
                           <div class="col-md-4">
-                            <label class="form-label" for="multicol-phone">શૈક્ષણિક</label>
-                            <div class="input-group">
-                              <span class="input-group-text">₹</span>
-                              <input type="number" class="form-control amount-input" name="shaikshanik" id="shaikshanik" placeholder="Amount" aria-label="Amount (to the nearest dollar)">
-                              
-                            </div>
-                          </div>
-                          <div class="col-md-4">
                             <label class="form-label" for="multicol-phone">લવાજમ</label>
                             <div class="input-group">
                               <span class="input-group-text">₹</span>
                               <input type="number" class="form-control amount-input" name="lavajam" id="lavajam" placeholder="Amount" aria-label="Amount (to the nearest dollar)" >
-                              
-                            </div>
-                          </div>
-                          <div class="col-md-4">
-                            <label class="form-label" for="multicol-phone">ઑક્સીજન ડોનેશન</label>
-                            <div class="input-group">
-                              <span class="input-group-text">₹</span>
-                              <input type="number" class="form-control amount-input" name="oxygen" id="oxygen" placeholder="Amount" aria-label="Amount (to the nearest dollar)" >
                               
                             </div>
                           </div>
@@ -231,14 +215,6 @@
                               
                             </div>
                           </div>
-                          <!--<div class="col-md-4">
-                            <label class="form-label" for="multicol-phone">શ્રી અન્ય ખાતે</label>
-                            <div class="input-group">
-                              <span class="input-group-text">₹</span>
-                              <input type="number" class="form-control" placeholder="Amount" aria-label="Amount (to the nearest dollar)">
-                              
-                            </div>
-                          </div>-->
                           <div class="col-md-4">
                             <label class="form-label" for="basic-default-name">અન્ય વિગત</label>
                             <input
@@ -635,15 +611,6 @@ $(document).ready(function () {
  
 });
 </script>
-
-// @if (Session::get('message'))
-//     <script>
-//         toastr['success']("{{ Session::get('message') }}", 'Good Job!', {
-//             closeButton: true,
-//             tapToDismiss: false,
-//         });
-//     </script>
-// @endif 
 
 
 @endsection
