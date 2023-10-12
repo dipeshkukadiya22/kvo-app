@@ -350,13 +350,13 @@ label.readonly {
                                                 
                                                 <!-- Basic -->
                                                 <div class="col-md-4">
-                                                  <label for="select2Basic" class="form-label">Community</label>
+                                                  <label  class="form-label">Community</label>
                                                   <select id="select2Basic1" class="select2 form-select form-select-lg" name="community" data-allow-clear="true">
-                                                  <option value="Hindu" selected>Hindu</option>
+                                                  <option value="Hindu">Hindu</option>
                                                   <option value="Jain">Jain</option>
-                                                  <option value="Isalam">Isalam</option>
+                                                  <option value="Isalam">Muslim</option>
                                                   <option value="Sikh">Sikh</option>
-                                                  <option value="Budda">Budda</option>
+                                                  <option value="Budda">Buddhist</option>
                                                   <option value="Other Religions">Other Religions</option>
 
                                                       
@@ -519,28 +519,7 @@ label.readonly {
                                             </div>
                                             <div class="row g-3">
                                               
-                                            
-                                              <!-- /Datetime Picker-->
-                                              
-                                              
-
-                                                <!-- Primary -->
-                                              {{-- <div class="col-md-4">
-                                                <label for="select3Primary" class="form-label">Room Facility</label>
-                                                <div class="select2-primary">
-                                                  <select id="select3Primary1" name="room_list" class="select2 form-select" multiple>
-                                                    <option value="">Select Room</option>
-                                                      <option value="A.C. Room No" name="room_facility"> A.C. Room.</option>
-                                                      <option value="Non. A.C. Room No" name="room_facility">Non. A.C. Room</option>
-                                                      <option value="Door Metri. Room No" name="room_facility">Door Metri. Room.</option>
-                                                  </select>
-                                                </div>
-                                              </div> --}}
-
-
-                                              <!-- Primary -->
-
-                                              
+                                      
                                               <div class="row g-3 mt-0 mb-3">
 
                                                 <!-- Custom Suggestions: List -->
@@ -712,6 +691,7 @@ label.readonly {
                                                     required />
                                                   <label class="form-check-label" for="basic_default_radio">UPI</label>
                                                 </div>
+                                                <input type=text name="payment" id="payment" value="CASH" hidden>
                                               </div>
                                               <div class="col-12">
                                                 <div action="/upload" class="dropzone needsclick" id="dropzone-multi" >
@@ -738,7 +718,7 @@ label.readonly {
                                                   <span class="align-middle d-sm-inline-block d-none">Previous</span>
                                                 </button>
                                             
-                                                <button type="button" class="btn btn-primary btn-next repeat-next"  >
+                                                <button type="button" class="btn btn-primary btn-next repeat-next" id="nextToSubmit" >
                                                   <span class="align-middle d-sm-inline-block d-none me-sm-1">Next</span>
                                                   <i class="ti ti-arrow-right"></i>
                                                 </button>
@@ -793,7 +773,7 @@ label.readonly {
                                                         <th>Age </th>
                                                         <th>Gender</th>
                                                         <th>Relations</th>
-                                                        <th>test</th>
+                                                     
                                                         </tr>
                                                     </thead>
                                                  
@@ -1095,7 +1075,6 @@ label.readonly {
      
    function pdf(id)
       {
-        alert("start");
           const myOffcanvas = document.getElementById(' myModal');
           let a=new bootstrap.Modal(myOffcanvas);
           a.show();
@@ -1199,6 +1178,7 @@ function editadvanceroom(id)
     let sub=document.getElementById("subcommunity");
     let no_of_person=document.getElementById("no_of_person_id");
     let no_of_days=document.getElementById("no_of_days");
+    let deposite=document.getElementById("deposit-amount");
     if(age.value != "" && sub.value != "" && address.value != "" && occupation.value != "" && reason.value != "" && no_of_person.value != "" && no_of_days.value != "")
     {
       $("#repeat-next").prop('disabled',false);
@@ -1206,6 +1186,14 @@ function editadvanceroom(id)
     else{
       $("#repeat-next").prop('disabled',true);
     }
+    if($("#payment").val()=="CASH"){
+    if(deposite.value>9000) 
+      {
+            $("#deposite").html("Deposite Amount Should Be Below 9000");
+            $("#nextToSubmit").prop('disabled',true);
+          }
+          else{ $("#deposite").html("");}
+        }else{ $("#deposite").html("");}
  
  });
 </script>
@@ -1218,29 +1206,43 @@ function editadvanceroom(id)
       $('#member_age').val($('#age').val());
     });
   });
-
+  $("#CASH").change(function(){
+        document.getElementById("payment").value="CASH";
+    });
+      $("#CHEQUE").change(function(){
+        document.getElementById("payment").value="CHEQUE";
+    });
+      $("#UPI").change(function(){
+        document.getElementById("payment").value="UPI";
+    });
 </script>
 
 <script>
       function pdf(id)
       {
-        alert("start");
           const myOffcanvas = document.getElementById(' myModal');
           let a=new bootstrap.Modal(myOffcanvas);
           a.show();
-       alert(id);
+  
       }
 function edit(id)
 {
           const myOffcanvas = document.getElementById('exLargeModal');
           let a=new bootstrap.Modal(myOffcanvas);
           a.show();
+          var member_id=[];
+          var temp=document.getElementById('select2Basic1');
+          for(i=0;i<temp.options.length;i++)
+            {
+              member_id[i]=temp.options[i].value;
+            }
           $.ajax({
               url:"{{url('get_data')}}" +"/"+ id,
               type:'GET',
                 success:function(response){
                   var gender=response[0]['gender'];
                   var community=response[0]['community'];
+                 
                   var date=new Date(response[0]['check_in_date']);
                   var checkindate=date.getDate()+"-"+(date.getMonth()+1)+"-"+date.getFullYear();
                   document.getElementById("id_proof1").src="assets/img/avatars/"+response[0]['id_proof'];
@@ -1318,16 +1320,14 @@ function edit(id)
                           $("#select2Multiple55 option[value=" + room + "]").attr('selected', 'selected');
                         }
                       }   
-                    member_id.forEach(myFunction)
-                    function myFunction(item, index, arr) {
+                    
+                      member_id.forEach(myFunction)
+                      function myFunction(item, index, arr) {
                         if((member_id[index])==community)
                         {
-                          $("#select2Basic1 option[value=" + community + "]").attr('selected', 'selected');
+                          $("#select2Basic1 option[value=" + community + "]").attr('selected', 'selected'); 
                         }
-
-                    }
-
-                }
+                }}
             });
 
             }
@@ -1409,18 +1409,16 @@ $(document).ready(function () {
     $('#FEMALE').change(function(){
       $("#inlineRadio1").attr('checked',true);
       $("#gender_data").val("FEMALE");
-      alert("check");
     });
     $('#MALE').change(function(){
       $("#inlineRadio2").attr('checked',true);
       $("#gender_data").val("MALE");
-      alert("male");
     });
 });
 </script>
 
 <script>
-  let check=0;
+
   $(document).ready(function() {
     let currentStep = 1;
  
@@ -1430,15 +1428,13 @@ $(document).ready(function () {
       const age = $('#members_age').val();
       const selectedGender = $('input[name="gender"]').val();
       const relation = $('#member_relation').val();
-      const member = "Member";
+   
       let i=1;
       $('#member_full_name').text(fullName);
       $('#members_age').text(age);
       $('#member_gen').text(selectedGender);
       $('#member_rel').text(relation);
-      $('#member').text(member);
-      if(check==1)
-      {
+    
       $(".rep-table").append(
         '<tr>' +
         '<td>'+ '1' +'</td>' +
@@ -1446,19 +1442,8 @@ $(document).ready(function () {
         '<td id="members_age">' + $('#member_age').val() + '</td>' +
         '<td id="member_gen">' +  $('#gender_data').val() + '</td>' +
         '<td id="member_rel">' + $('#member_relation').val() + '</td>' +
-        '<td id="member">' + '<input type=checkbox class=member value='+$('#full_name_form').val()+' name=member[0]>' + '</td>' +
         '</tr>'
-      );}else{
-        $(".rep-table").append(
-        '<tr>' +
-        '<td>'+ i +'</td>' +
-        '<td id="member_full_name">' + $('#full_name_form').val() + '</td>' +
-        '<td id="members_age">' + $('#member_age').val() + '</td>' +
-        '<td id="member_gen">' + $('#gender_data').val() + '</td>' +
-        '<td id="member_rel">' + $('#member_relation').val() + '</td>' +
-        '<td id="member">' + '<input type=checkbox class=member value='+$('#full_name_form').val()+' name=member[0] checked >' + '</td>' +
-        '</tr>'
-      );}
+      );
       
       let numForms = parseInt($("#no_of_person_id").val());
       if (isNaN(numForms) || numForms <= 0) {
@@ -1466,9 +1451,7 @@ $(document).ready(function () {
         return false;
       }  let j=2;
       for (let i = 1; i < numForms; i++) {
-      
-        if(check==1)
-        {$(".rep-table").append(
+        $(".rep-table").append(
           '<tr>' +
           '<td>'+ j +'</td>' +
           '<td class="member_full_name' + i + '">' + $('#full_name_form' + i).val()+ '</td>' +
@@ -1478,19 +1461,6 @@ $(document).ready(function () {
           '</tr>'
         );
         j++;
-        }else{
-        $(".rep-table").append(
-        '<tr>' +
-        '<td>'+ j +'</td>' +
-        '<td class="member_full_name' + i + '">' + $('#full_name_form' + i).val() + '</td>' +
-        '<td class="members_age' + i + '">' + $('#member_age' + i).val() + '</td>' +
-        '<td class="member_gen'+ i +'">' + $('input[name="gender'+i+'"]:checked').val() + '</td>' +
-        '<td class="member_rel' + i + '">' + $('#member_relation' + i).val() + '</td>' +
-        '<td class="member' + i + '">' + '' + '</td>' +
-        '</tr>'
-         );
-        j++;
-      }
     }
       $(".rep-table").show();
     });
@@ -1500,33 +1470,11 @@ $(document).ready(function () {
         if(e.key === "-" || e.key === "+"){e.preventDefault();}
   });
 
-  $("#deposit-amount").focusout(function(){
-    if($("#deposit-amount").val()>9000){  
-      Swal.fire({
-          title: "Are you sure?",
-          text: "You want to deposite in Cash!",
-          icon: "warning",
-          showCancelButton: true,
-          confirmButtonColor: "#3085d6",
-          cancelButtonColor: "#d33",
-          confirmButtonText: "Yes,do It!",
-      }).then((result) => {
-          // If the user confirms the deletion, proceed with the deletion logic
-          if (result.isConfirmed) {
-            check=1;
-          }else{
-            $("#deposite").html("Deposite Amount Should Be Below 9000");
-            $("#repeat-next").prop('disabled',true);
-          }
-          });
-        }else{check=0;$("#deposite").html("");}
-        });
+
 </script>
 <script>
    $(document).ready(function() {
     $("#repeat-next").click(function() {
-      alert("hii");
-      console.log("click");
       let numForms = parseInt($("#no_of_person_id").val());
       $(".rep-form").empty();
       for (let i = 1; i < numForms; i++) {

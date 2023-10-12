@@ -243,12 +243,13 @@ class BookingController extends Controller
     }
     public function add_checkout(Request $req)
     {
-        //$checkout= DB::select("SELECT * from room_details join add_room on add_room.room_detail_id=room_details.r_id join personal_details on personal_details.p_id=room_details.member_id join add_members on personal_details.member_id=add_members.p_id WHERE add_room.status =1");
         $checkout= DB::select("SELECT * FROM `room_details` join personal_details on room_details.member_id=personal_details.p_id join add_members on add_members.p_id=personal_details.member_id WHERE r_id='$req->bookingId'");
-        dd($checkout[0]->check_in_date);//2023-10-12 12:49
-        dd($req->check_out_date);
+        $date1=date_create($checkout[0]->check_in_date);
+        $date2=date_create($req->check_out_date);
+        $x=(date_diff($date1,$date2))->format('%a');
+        if($x==0){$x=1;}
         $member=add_members::all();
-           
+    
             $data=new checkout();
             $data->room_booking_id=$req->bookingId;
             $data->check_out_date=Date("Y-m-d H:i",strtotime($req->check_out_date));
@@ -277,6 +278,8 @@ class BookingController extends Controller
             $roomNumbers = explode(',', $r_list);
             add_room::whereIn('room_no', $roomNumbers)->update(['status' => 0 , 'room_detail_id' => 0]);
 
+            $status=DB::UPDATE("UPDATE room_details set no_of_days='$x' where r_id='$req->bookingId'");
+       
             }
            
             return redirect() -> route('checkout') -> with ('message', 'checkout submitted successfully!') -> with 

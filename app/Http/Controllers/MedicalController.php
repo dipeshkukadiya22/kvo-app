@@ -12,7 +12,12 @@ use Illuminate\Http\Request;
 class MedicalController extends Controller
 {
     public function show(){
-        $rec_no=medical::get()->last()->sr_no;
+        $count=DB::SELECT("SELECT sr_no from medical");
+        if($count)
+        {
+            $rec_no=medical::get()->last()->sr_no;
+        }else{$rec_no=0;}
+        
         $member=DB::select("SELECT * FROM add_members");
         $treatment=DB::select("select DISTINCT doctor_name from medical");
         return view ('Medical.treatment',['member' => $member,'rec_no' => $rec_no,'treatment'=>$treatment]);
@@ -28,7 +33,11 @@ class MedicalController extends Controller
     {
         $member_data=DB::select("SELECT * FROM add_members");
         $member=DB::select("SELECT m.sr_no,m.date,m.doctor_name,m.amount,m.payment_mode,M.m_name,M.city,M.phone_no,M.p_id FROM medical As m join add_members As M where m.p_id=M.p_id order by m.sr_no desc");
-        $rec_no=medical::get()->last()->sr_no;
+        $count=DB::SELECT("SELECT sr_no from medical");
+        if($count)
+        {
+            $rec_no=medical::get()->last()->sr_no;
+        }else{$rec_no=0;}
      
         $data=new medical();
         $data->p_id=strtoupper($req->name);

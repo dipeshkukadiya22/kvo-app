@@ -547,8 +547,6 @@ div.card-datatable [class*=col-md-] {
                       var checkindate = date.getDate() +'-' +(date.getMonth() + 1) +'-' + date.getFullYear() +' ' +date.getHours() +':' +date.getMinutes();
                       var date1=new Date();
                       var days=Math.round((date1.getTime()-date.getTime())/(1000*3600*24));
-                      alert(days);
-                      
                       if(days==0){days=1;}
                       $("#check_in_date").val(checkindate);
                       $("#deposite").val(response[0]['deposite_rs']);

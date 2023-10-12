@@ -472,9 +472,28 @@
         event.preventDefault();
        
       }
-      if($("#deposit-amount").val()>9000){ 
-         $("#deposite").html("Deposite Amount Should Be Below 9000"); 
-         event.preventDefault();}
+     
+    });
+
+    $(".browser-default-validation").change(function(){
+    let deposite=document.getElementById("deposit-amount").value;
+        if($("#payment").val()=="CASH"){
+          if(deposite>9000) 
+            {
+            $("#deposite").html("Deposite Amount Should Be Below 9000");
+            $("#submitbtn1").prop('disabled',true);
+            }
+          else{ $("#deposite").html("");}
+        }else{ $("#deposite").html("");}
+    });
+    $("#CASH").change(function(){
+        document.getElementById("payment").value="CASH";
+    });
+      $("#CHEQUE").change(function(){
+        document.getElementById("payment").value="CHEQUE";
+    });
+      $("#UPI").change(function(){
+        document.getElementById("payment").value="UPI";
     });
 </script>
 
@@ -548,7 +567,6 @@
    $('#daterange').change(function() {
    
       var date=$("#daterange").val();
-      alert(date);
       var index=date.indexOf('-');
       var startdate=date.substr(0,index-1);
       var enddate=date.substr(index+1);
@@ -558,7 +576,6 @@
                 url:"{{url('checkRoom')}}"+"/"+ date,
                 type:'GET',
                 success:function(response){
-                  alert("success");
                   $("#select2Multiple11 option").remove();
                   $("#select2Multiple22 option").remove();
                   $("#select2Multiple33 option").remove();
