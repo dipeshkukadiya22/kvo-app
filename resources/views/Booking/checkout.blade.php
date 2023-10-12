@@ -596,10 +596,10 @@ div.card-datatable [class*=col-md-] {
                         dmt_non_ac.push(room);
                         $("#non_dmt_ac_room").val(dmt_non_ac);
                         $("#non_dmt_ac_room_Excharge").prop('disabled', false);
-                        $("#non_dmt_ac_room_charge").val(response[0]['door_mt_ac_amount']);
+                        $("#non_dmt_ac_room_charge").val(response[0]['door_mt_amount']);
                         $("#non_dmt_ac_no_of_days").val(days);
-                        $("#non_dmt_ac_amount").val(days * response[0]['door_mt_ac_amount']);
-                        $("#non_dmt_ac_room_total").val(days * response[0]['door_mt_ac_amount']);
+                        $("#non_dmt_ac_amount").val(days * response[0]['door_mt_amount']);
+                        $("#non_dmt_ac_room_total").val(days * response[0]['door_mt_amount']);
                         amt+=parseInt(document.getElementById('non_dmt_ac_room_total').value);
                       }
 
@@ -608,10 +608,10 @@ div.card-datatable [class*=col-md-] {
                         dmt_ac.push(room);
                         $("#dmt_ac_room").val(dmt_ac);
                         $("#dmt_ac_room_Excharge").prop('disabled', false);
-                        $("#dmt_ac_room_charge").val(response[0]['door_mt_amount']);
+                        $("#dmt_ac_room_charge").val(response[0]['door_mt_ac_amount']);
                         $("#dmt_ac_no_of_days").val(days);
-                        $("#dmt_ac_amount").val(days * response[0]['door_mt_amount']);
-                        $("#dmt_ac_room_total").val(days * response[0]['door_mt_amount']);
+                        $("#dmt_ac_amount").val(days * response[0]['door_mt_ac_amount']);
+                        $("#dmt_ac_room_total").val(days * response[0]['door_mt_ac_amount']);
                         amt+=parseInt(document.getElementById('dmt_ac_room_total').value);
                       }
                     }

@@ -331,6 +331,39 @@
                               <label class="form-label" for="rupees-in-words">Reason</label>
                               <input type="text" class="form-control" style="text-transform:uppercase" name="reason" id="reason" placeholder="Reason to stay" required>
                             </div>
+
+                            <div class="col-md-4">
+                            <label class="d-block form-label">Payment Mode</label>
+                            <div class="form-check form-check-inline">
+                              <input
+                                type="radio"
+                                id="CASH"
+                                name="basic_default_radio"
+                                class="form-check-input"
+                                checked/>
+                              <label class="form-check-label" for="basic_default_radio">Cash</label>
+                            </div>
+                            <div class="form-check form-check-inline mb-2">
+                              <input
+                                type="radio"
+                                id="CHEQUE"
+                                name="basic_default_radio"
+                                class="form-check-input"
+                               />
+                              <label class="form-check-label" for="basic_default_radio">Cheque</label>
+                            </div>
+                            
+                            <div class="form-check form-check-inline">
+                              <input
+                                type="radio"
+                                id="UPI"
+                                name="basic_default_radio"
+                                class="form-check-input"
+                                 />
+                              <label class="form-check-label" for="basic_default_radio">UPI</label>
+                              <input type=text name="payment" id="payment" value="CASH" hidden>
+                            </div>
+                          </div>
   
                             <div class="col-12 flex justify-content">
                             <button type="submit" id="submitbtn1" class="btn btn-success btn-submit">Submit</button>

@@ -245,6 +245,8 @@ class BookingController extends Controller
     {
         //$checkout= DB::select("SELECT * from room_details join add_room on add_room.room_detail_id=room_details.r_id join personal_details on personal_details.p_id=room_details.member_id join add_members on personal_details.member_id=add_members.p_id WHERE add_room.status =1");
         $checkout= DB::select("SELECT * FROM `room_details` join personal_details on room_details.member_id=personal_details.p_id join add_members on add_members.p_id=personal_details.member_id WHERE r_id='$req->bookingId'");
+        dd($checkout[0]->check_in_date);//2023-10-12 12:49
+        dd($req->check_out_date);
         $member=add_members::all();
            
             $data=new checkout();
@@ -274,6 +276,7 @@ class BookingController extends Controller
             $r_list = $r->room_list; 
             $roomNumbers = explode(',', $r_list);
             add_room::whereIn('room_no', $roomNumbers)->update(['status' => 0 , 'room_detail_id' => 0]);
+
             }
            
             return redirect() -> route('checkout') -> with ('message', 'checkout submitted successfully!') -> with 
@@ -513,12 +516,13 @@ class BookingController extends Controller
         $dmt_ac_list=array();
         $single=array();
   
-        $adv_booked_room=room_details::select("room_list")
-                            ->where('booking_type','=','ADVANCE')
-                            ->whereDate('advance_date_from','>=',$startdate)
-                            ->whereDate('advance_date_to','<=',$enddate)
-                            ->get();
-                    //dd($adv_booked_room);
+        $adv_booked_room = room_details::select("room_list")
+        ->where('booking_type', '=', 'ADVANCE')
+        ->whereBetween('advance_date_from', [$startdate, $enddate])
+        ->whereBetween('advance_date_to', [$startdate, $enddate])
+        ->get();
+        ///->toArray();
+                   // dd($adv_booked_room);
         foreach($adv_booked_room as $item)
         {
             $single = array_merge($single, explode(',', $item->room_list));

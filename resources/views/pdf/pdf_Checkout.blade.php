@@ -134,13 +134,13 @@
 					@if($room_count>0)
 					<td class="tg-0pky" @php if($dmt_count==0){@endphp colspan="5" @php } else { @endphp colspan="3" @php }@endphp ><span class="gujfont">~D G\ o </span><span>
 						@foreach($room_no as $room)
-							{{$room}}
+							{{$room.","}}
 						@endforeach</span></td>
 					@endif
 					@if($dmt_count>0)
                     <td class="tg-0pky" @php if($room_count==0){@endphp colspan="5" @php } else { @endphp colspan="2" @php }@endphp ><span class="gujfont">0MZD[8ZL G\ o </span><span>
 						@foreach($dmt_no as $room)
-							{{$room}}
+							{{$room.","}}
 						@endforeach
 						</span></td>
 			
