@@ -127,8 +127,24 @@
 				</tr>
                 <tr>
 					<td class="tg-0pky"><span class="gujfont">5]bT õDZGF o </span><span>{{$checkout[0]->age}}</span></td>
-					<td class="tg-0pky" colspan="4" width="50%"><span class="gujfont">~D G\ o </span><span>{{$checkout[0]->room_list}}</span></td>
-                    <td class="tg-0pky"><span class="gujfont">0MZD[8ZL G\ o </span><span></span></td>
+					@php 
+						$room_count=count($room_no);
+						$dmt_count=count($dmt_no);
+					@endphp
+					@if($room_count>0)
+					<td class="tg-0pky" @php if($dmt_count==0){@endphp colspan="5" @php } else { @endphp colspan="3" @php }@endphp ><span class="gujfont">~D G\ o </span><span>
+						@foreach($room_no as $room)
+							{{$room}}
+						@endforeach</span></td>
+					@endif
+					@if($dmt_count>0)
+                    <td class="tg-0pky" @php if($room_count==0){@endphp colspan="5" @php } else { @endphp colspan="2" @php }@endphp ><span class="gujfont">0MZD[8ZL G\ o </span><span>
+						@foreach($dmt_no as $room)
+							{{$room}}
+						@endforeach
+						</span></td>
+			
+					@endif
 				</tr>
                 <tr>
 					<td class="tg-0pky" colspan="3"><span class="gujfont">VFUDG TFZLB ;DI o </span><span>{{(new DateTime($checkout[0]->check_in_date))->format('d-m-Y')}}</span></td>
@@ -159,10 +175,10 @@
 						<td class="tg-0pky gujfont">l0,S®; ~D</td>
 						<td class="tg-0pky tc">{{$drc}}</td>
 						<td class="tg-0pky tc">{{$checkout[0]->dlx_amount}}</td>
-						<td class="tg-0pky tc">{{$checkout[0]->dlx_amount+$checkout[0]->deluxe_room_extra}}</td>
-						<td class="tg-0pky tc">{{$checkout[0]->no_of_days}}</td>
 						<td class="tg-0pky tc">{{$checkout[0]->deluxe_room_extra}}</td>
-						<td class="tg-0pky tc">{{$checkout[0]->deluxe_room_total}}</td>
+						<td class="tg-0pky tc">{{$checkout[0]->dlx_amount*$checkout[0]->no_of_days}}</td>
+						<td class="tg-0pky tc">{{$checkout[0]->no_of_days}}</td>
+						<td class="tg-0pky tc">{{$checkout[0]->deluxe_room_total+$checkout[0]->deluxe_room_extra}}</td>
 					</tr>
 					@endif
 						
@@ -171,10 +187,10 @@
 						<td class="tg-0pky gujfont">V[P;LP ~D</td>
 						<td class="tg-0pky tc">{{$nonac}}</td>
 						<td class="tg-0pky tc">{{$checkout[0]->ac_amount}}</td>
+						<td class="tg-0pky tc">{{$checkout[0]->ac_room_extra}}</td>
 						<td class="tg-0pky tc">{{$checkout[0]->ac_amount+$checkout[0]->ac_room_extra}}</td>
 						<td class="tg-0pky tc">{{$checkout[0]->no_of_days}}</td>
-						<td class="tg-0pky tc">{{$checkout[0]->ac_room_extra}}</td>
-						<td class="tg-0pky tc">{{$checkout[0]->ac_room_total}}</td>
+						<td class="tg-0pky tc">{{$checkout[0]->ac_room_total*$checkout[0]->no_of_days}}</td>
 					</tr>
 					@endif
 					@if($ac != 0)
@@ -185,7 +201,7 @@
 						<td class="tg-0pky tc">{{$checkout[0]->non_ac_room_extra}}</td>
 						<td class="tg-0pky tc">{{$checkout[0]->non_ac_amount+$checkout[0]->non_ac_room_extra}}</td>
 						<td class="tg-0pky tc">{{$checkout[0]->no_of_days}}</td>
-						<td class="tg-0pky tc">{{$checkout[0]->non_ac_room_total}}</td>
+						<td class="tg-0pky tc">{{$checkout[0]->non_ac_room_total*$checkout[0]->no_of_days}}</td>
 						</tr>
 					@endif
 					@if($dmac !=0)
@@ -193,10 +209,10 @@
 						<td class="tg-0pky gujfont">V[P;LP 0MZD[8ZL</td>
 						<td class="tg-0pky tc">{{$dmac}}</td>
 						<td class="tg-0pky tc">{{$checkout[0]->door_mt_amount}}</td>
+						<td class="tg-0pky tc">{{$checkout[0]->ac_dmt_extra}}</td>
 						<td class="tg-0pky tc">{{$checkout[0]->door_mt_amount+$checkout[0]->ac_dmt_extra}}</td>
 						<td class="tg-0pky tc">{{$checkout[0]->no_of_days}}</td>
-						<td class="tg-0pky tc">{{$checkout[0]->ac_dmt_extra}}</td>
-						<td class="tg-0pky tc">{{$checkout[0]->ac_dmt_total}}</td>
+						<td class="tg-0pky tc">{{$checkout[0]->ac_dmt_total*$checkout[0]->no_of_days}}</td>
 					</tr>
 					@endif
 					@if($dmnonac != 0)
@@ -204,10 +220,10 @@
 					<td class="tg-0pky gujfont">GMG V[P;LP 0MZD[8ZL</td>
 						<td class="tg-0pky tc">{{$dmnonac}}</td>
 						<td class="tg-0pky tc">{{$checkout[0]->door_mt_amount}}</td>
+						<td class="tg-0pky tc">{{$checkout[0]->non_ac_dmt_extra}}</td>
 						<td class="tg-0pky tc">{{$checkout[0]->door_mt_amount+$checkout[0]->non_ac_dmt_extra}}</td>
 						<td class="tg-0pky tc">{{$checkout[0]->no_of_days}}</td>
-						<td class="tg-0pky tc">{{$checkout[0]->non_ac_dmt_extra}}</td>
-						<td class="tg-0pky tc">{{$checkout[0]->non_ac_dmt_total}}</td>
+						<td class="tg-0pky tc">{{$checkout[0]->non_ac_dmt_total*$checkout[0]->no_of_days}}</td>
 					</tr>
 					@endif
     			@endforeach

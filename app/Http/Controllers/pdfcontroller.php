@@ -55,27 +55,28 @@ class pdfcontroller extends Controller
         $ac = 0;
         $dmac = 0;
         $dmnonac = 0;
-      
+        $room_no=array();
+        $dmt_no=array();
         foreach ($room_checkout as $room) {
             if ($room === '301' || $room === '302' || $room === '401' || $room === '402') {
-         
+                array_push($room_no,$room);
                 $drc++;
             } elseif ($room === '303' || $room === '304' || $room === '305' || $room === '306' || $room === '403') {
-              
+                array_push($room_no,$room);
                 $nonac++;
             } elseif ($room === '201' || $room === '202' || $room === '203' || $room === '204' || $room === '205' || $room === '206' || $room === '404' || $room === '405' || $room === '406') {
-              
+                array_push($room_no,$room);
                 $ac++;
             } elseif ($room === '11' || $room === '12' || $room === '13' || $room === '14' || $room === '15' || $room === '16' || $room === '17' || $room === '18' || $room === '19' || $room === '20') {
-                
+                array_push($dmt_no,$room);
                 $dmac++;
             } elseif ($room === '1' || $room === '2' || $room === '3' || $room === '4' || $room === '5' || $room === '6' || $room === '7' || $room === '8' || $room === '9' || $room === '10') {
-             
+                array_push($dmt_no,$room);
                 $dmnonac++;
             }
         }   
  
-        $pdf = Pdf::loadView('pdf.pdf_Checkout',['checkout'=>$checkout,'drc'=> $drc ,'nonac'=> $nonac ,'ac'=>$ac,'dmac'=>$dmac,'dmnonac'=>$dmnonac])->setPaper('a4', 'potrait')->setOptions(['defaultFont' => 'NotoSansGujarati-Regular','enable_remote', TRUE]);
+        $pdf = Pdf::loadView('pdf.pdf_Checkout',['checkout'=>$checkout,'drc'=> $drc ,'nonac'=> $nonac ,'ac'=>$ac,'dmac'=>$dmac,'dmnonac'=>$dmnonac,'room_no'=>$room_no,'dmt_no'=>$dmt_no])->setPaper('a4', 'potrait')->setOptions(['defaultFont' => 'NotoSansGujarati-Regular','enable_remote', TRUE]);
         return $pdf->stream();
       
     }
