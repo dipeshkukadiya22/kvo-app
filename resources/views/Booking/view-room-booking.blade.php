@@ -1017,7 +1017,7 @@ label.readonly {
                                 class="form-check-input"
                                  />
                               <label class="form-check-label" for="basic_default_radio">UPI</label>
-                              <input type=text name="payment" id="adv_payment" value="CASH" hidden>
+                              <input type=hidden name="adv_payment" id="adv_payment" value="CASH">
                             </div>
                           </div>
                                             <div class="col-12 flex justify-content">
@@ -1190,6 +1190,10 @@ function editadvanceroom(id)
               $("#advance_non-ac-amount").val(response.data[0].non_ac_amount);
               $("#advance_dmt_ac_amount").val(response.data[0].door_mt_ac_amount);
               $("#advance_door_mt_amount").val(response.data[0].door_mt_amount);  
+              $("#adv_payment").val(response.data[0].payment_mode); 
+                  if($("#adv_payment").val()=="CASH"){$("#adv_CASH").attr('checked',true);}
+                  if($("#adv_payment").val()=="UPI"){$("#adv_UPI").attr('checked',true);}
+                  if($("#adv_payment").val()=="CHEQUE"){$("#adv_CHEQUE").attr('checked',true);}
               var room=response.data[0].room_list;
               var ArrNames =room .split(",");
             

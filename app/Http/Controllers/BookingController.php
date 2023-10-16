@@ -92,6 +92,7 @@ class BookingController extends Controller
         $booking->rs_word = $req->rs_word;
         $booking->no_of_days = $req->no_of_days;
         $booking->member_id=$personal_details_id;
+        $booking->payment_mode=$req->payment;
         $booking->date=date("Y-m-d");
         if(date("Y-m-d",strtotime($req->check_in_date)) == date("Y-m-d")) {
             $booking->status="BOOKED";
@@ -361,6 +362,7 @@ class BookingController extends Controller
         $booking->deposite_rs = $req->deposite_rs;
         $booking->rs_word = $req->rs_word;
         $booking->no_of_days = $req->no_of_days;
+        $booking->payment_mode=$req->payment;
         $booking->save();
         $details=personal_details::find($booking->member_id);
         $details->age = $req->age;
@@ -645,6 +647,7 @@ class BookingController extends Controller
         $advanceroombooking->door_mt_amount = $req->door_mt_amount;
         $advanceroombooking->door_mt_ac_amount = $req->door_mt_amount;
         $advanceroombooking->no_of_days = $req->no_of_days;
+        $advanceroombooking->payment_mode=$req->adv_payment;
         $date1=date("Y-m-d",strtotime(substr($req->advance_date,0,10)));
         $date2=date("Y-m-d",strtotime(substr($req->advance_date,13)));
         $advanceroombooking->advance_date_from = $date1;
@@ -731,6 +734,7 @@ class BookingController extends Controller
         $advanceroombooking->door_mt_ac_amount = $req->adv_dmt_ac_amount;
         $advanceroombooking->door_mt_amount = $req->adv_door_mt_amount;
         $advanceroombooking->no_of_days = $req->no_of_days;
+        $advanceroombooking->payment_mode=$req->adv_payment;
         $advanceroombooking->advance_date_from = $startdate;
         $advanceroombooking->advance_date_to = $enddate;
         $advanceroombooking->status = "ADVANCE";
