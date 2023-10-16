@@ -850,7 +850,7 @@ label.readonly {
                                   <!-- Default Icons Wizard -->
                                   <div class="col-12 mb-4">
                                     <div class="bs-stepper-content">
-                                    <form class="browser-default-validation" action="{{ route('update_advance_room_booking') }}" method="POST" id="room_booking">
+                                    <form id="kvo_update_adv_room_booking" class="browser-default-validation" action="{{ route('update_advance_room_booking') }}" method="POST">
                                           @csrf
                                           <!-- Account Details -->
                                           <div class="row g-3">
@@ -906,7 +906,7 @@ label.readonly {
                                                 <label class="form-label" for="basic-default-name">Amount</label>
                                                 <div class="input-group">
                                                   <span class="input-group-text">₹</span>
-                                                  <input type="number" class="form-control "  name="dlx_amount" placeholder="Amount" aria-label="Amount (to the nearest indian)" id="dlx_amount" />
+                                                  <input type="number" class="form-control "  name="adv_dlx_amount" placeholder="Amount" aria-label="Amount (to the nearest indian)" id="advance_dlx_amount" />
                                                 </div>
                                               </div>
                                               <div class="col-md-2 mt-3">
@@ -920,7 +920,7 @@ label.readonly {
                                                 <label class="form-label" for="basic-default-name">Amount</label>
                                                 <div class="input-group">
                                                   <span class="input-group-text">₹</span>
-                                                  <input type="number" class="form-control "  name="ac_amount" placeholder="Amount" aria-label="Amount (to the nearest indian)" id="advance_ac-amount" />
+                                                  <input type="number" class="form-control "  name="adv_ac_amount" placeholder="Amount" aria-label="Amount (to the nearest indian)" id="advance_ac-amount" />
                                                 </div>
                                               </div>
 
@@ -933,11 +933,11 @@ label.readonly {
                                                 <label class="form-label" for="basic-default-name">Amount</label>
                                                 <div class="input-group">
                                                   <span class="input-group-text">₹</span>
-                                                  <input type="number" class="form-control"  name="non_ac_amount" placeholder="Amount" aria-label="Amount (to the nearest indian)" id="advance_non-ac-amount" />
+                                                  <input type="number" class="form-control"  name="adv_non_ac_amount" placeholder="Amount" aria-label="Amount (to the nearest indian)" id="advance_non-ac-amount" />
                                                 </div>
                                               </div>
                                               <div class="col-md-2 mt-3">
-                                                  <label for="select2Multiple5" class="form-label">Door Mt Ac Room</label> 
+                                                  <label for="select2Multiple5" class="form-label">Door Mt Non Ac Room</label> 
                                                   <select id="advance_select2Multiple55" name="select2Multiple5[]" class="select2 form-select room-input" multiple>
                                               
                                                   </select> 
@@ -946,7 +946,7 @@ label.readonly {
                                                 <label class="form-label" for="basic-default-name">Amount</label>
                                                 <div class="input-group">
                                                   <span class="input-group-text">₹</span>
-                                                  <input type="number" class="form-control "  name="dmt_ac_amount" placeholder="Amount" aria-label="Amount (to the nearest indian)" id="dmt_ac_amount" />
+                                                  <input type="number" class="form-control "  name="adv_dmt_ac_amount" placeholder="Amount" aria-label="Amount (to the nearest indian)" id="advance_dmt_ac_amount" />
                                                 </div>
                                               </div>
                                               <div class="col-md-2 mt-3">
@@ -958,7 +958,7 @@ label.readonly {
                                                 <label class="form-label" for="basic-default-name">Amount</label>
                                                 <div class="input-group">
                                                   <span class="input-group-text">₹</span>
-                                                  <input type="number" class="form-control"  name="door_mt_amount" id="advance_door_mt_amount" placeholder="Amount" aria-label="Amount (to the nearest indian)"   />
+                                                  <input type="number" class="form-control"  name="adv_door_mt_amount" id="advance_door_mt_amount" placeholder="Amount" aria-label="Amount (to the nearest indian)"   />
                                                 </div>
                                               </div>
                                             </div>
@@ -969,7 +969,7 @@ label.readonly {
                                             <div class="col-md-4">
                                               <label class="form-label" for="deposit-amount"><span class="required">Deposit Rs</span></label>
                                               <input type="number" class="form-control" name="deposite_rs" id="advance_deposit-amount" placeholder="Deposit Rs" required>
-                                              <div id="deposite" class="error-message" ></div>
+                                              <div id="adv_deposite" class="error-message" ></div>
                                             </div>                           
                                             <div class="col-md-4">
                                               <label class="form-label" for="rupees-in-words">Deposit Rs (rupees in words)</label>
@@ -978,8 +978,7 @@ label.readonly {
                                             <div class="col-md-4">
                                               <label class="form-label" for="deposit-amount"><span class="required">No of Days</span></label>
                                               <input type="number" class="form-control" name="no_of_days" id="advance_no_of_days" placeholder="no_of_days" value="1" required readonly>
-                                              <input type="hidden" name="start_date" id="start_date" value="">
-                                              <input type="hidden" name="end_date" id="end_date" value="">
+        
                                             </div>
                                             <div class="col-md-4">
                                               <label class="form-label" for="rupees-in-words">Occupation</label>
@@ -989,6 +988,38 @@ label.readonly {
                                               <label class="form-label" for="rupees-in-words">Reason</label>
                                               <input type="text" class="form-control" style="text-transform:uppercase" name="reason" id="advance_reason" placeholder="Reason to stay" required>
                                             </div>
+                                            <div class="col-md-4">
+                            <label class="d-block form-label">Payment Mode</label>
+                            <div class="form-check form-check-inline">
+                              <input
+                                type="radio"
+                                id="adv_CASH"
+                                name="basic_default_radio"
+                                class="form-check-input"
+                                checked/>
+                              <label class="form-check-label" for="basic_default_radio">Cash</label>
+                            </div>
+                            <div class="form-check form-check-inline mb-2">
+                              <input
+                                type="radio"
+                                id="adv_CHEQUE"
+                                name="basic_default_radio"
+                                class="form-check-input"
+                               />
+                              <label class="form-check-label" for="basic_default_radio">Cheque</label>
+                            </div>
+                            
+                            <div class="form-check form-check-inline">
+                              <input
+                                type="radio"
+                                id="adv_UPI"
+                                name="basic_default_radio"
+                                class="form-check-input"
+                                 />
+                              <label class="form-check-label" for="basic_default_radio">UPI</label>
+                              <input type=text name="payment" id="adv_payment" value="CASH" hidden>
+                            </div>
+                          </div>
                                             <div class="col-12 flex justify-content">
                                                 <button type="submit" id="submitbtn1" class="btn btn-success btn-submit">Submit</button>
                                             </div>
@@ -1053,17 +1084,15 @@ label.readonly {
         $('#advance_daterange').daterangepicker({
             opens: 'left',
             locale: {
-                format: 'DD/MM/YYYY'
+                format: 'DD-MM-YYYY'
             },
           
            }, function(start, end, label) {
             var startDate = start.format('YYYY-MM-DD'); 
             var endDate = end.format('YYYY-MM-DD');
             var numberOfDays = moment(endDate).diff(startDate, 'days');
-            $('#advance_no_of_days').val(numberOfDays + 1);
-            $('#start_date').val(startDate);
-            $('#end_date').val(endDate);
-             $('#advance_daterange').val(start.format('DD/MM/YYYY') + ' - ' + end.format('DD/MM/YYYY'));
+              $('#advance_no_of_days').val(numberOfDays + 1);
+              $('#advance_daterange').val(start.format('DD-MM-YYYY') + ' - ' + end.format('DD-MM-YYYY'));
           
             
         });
@@ -1092,36 +1121,76 @@ function editadvanceroom(id)
           url:"{{url('get_advance_data')}}" +"/"+ id,
           type:'GET',
             success:function(response){
-              
-              // var dateRange = response[0]['advance_date'];
-              // var dateParts = dateRange.split(" - ");
-              // var startDate = new Date(dateParts[0]);
-              // var endDate = new Date(dateParts[1]);
-              // var advancedate =  (startDate.getMonth() + 1)  + "-" +startDate.getDate() + "-" + startDate.getFullYear();
-              // var advancedate1 =  (endDate.getMonth() + 1) + "-" +endDate.getDate() + "-" + endDate.getFullYear();
-
-              $("#m_name").val(response[0]['m_name']);
-             
-              $("#m_city").val(response[0]['city']);
-              $('#m_email').val(response[0]['email']);
-              $('#m_phone').val(response[0]['phone_no']);
-              $("#advance_no_of_person_id").val(response[0]['no_of_person']);
-              $("#deposit_no").val(response[0]['r_id']);
-              $("#person_id").val(response[0]['person_id']);
-              $("#advance_deposit-amount").val(response[0]['deposite_rs']);
-              $("#advance_rupees-in-words").val(response[0]['rs_word']);
-              $("#advance_no_of_days").val(response[0]['no_of_days']);
-              $("#advance_occupation").val(response[0]['occupation']);
-              $("#advance_reason").val(response[0]['reason']);
-              $("#advance_daterange").val(dateRange);
-              $("#dlx_amount").val(response[0]['dlx_amount']);
-              $("#advance_ac-amount").val(response[0]['ac_amount']);
-              $("#advance_non-ac-amount").val(response[0]['non_ac_amount']);
-              $("#dmt_ac_amount").val(response[0]['door_mt_ac_amount']);
-              $("#advance_dmt-amount").val(response[0]['door_mt_amount']);
-              
-              
-              var room=response[0]['room_list'];
+              var data = response.data;
+              var List = response.list;
+              const arrayFromObject = [];
+              for (let key in List) {
+                 arrayFromObject.push({value: List[key] });
+                }
+                  $("#advance_select2Multiple11 option").remove();
+                  $("#advance_select2Multiple22 option").remove();
+                  $("#advance_select2Multiple33 option").remove();
+                  $("#advance_select2Multiple44 option").remove();
+                  $("#advance_select2Multiple55 option").remove();
+                  $("#advance_dlx_amount").attr('readonly',true);
+                  $("#advance_ac-amount").attr('readonly',true);
+                  $("#advance_non-ac-amount").attr('readonly',true);
+                  $("#advance_dmt_ac_amount").attr('readonly',true);
+                  $("#advance_door_mt_amount").attr('readonly',true);
+                arrayFromObject.forEach(room => {
+                        if(room.value==301 || room.value==302 || room.value==401 || room.value==402 )
+                        {
+                          $("#advance_select2Multiple44").append('<option value=' + room.value +'>'+ room.value+'-AC DELUXE ROOM' +'</option');
+                        }
+                        if(room.value==303 || room.value==304 ||room.value==305 || room.value==306 || room.value==403)
+                        {
+                          $("#advance_select2Multiple11").append('<option value=' + room.value +'>'+ room.value +'-AC RE. ROOM' +'</option');
+                        }
+                        if(room.value==203 || room.value==204 ||room.value==205 || room.value==206 || room.value==404 || room.value==405 || room.value==406)
+                        {
+                          $("#advance_select2Multiple22").append('<option value=' + room.value +'>'+ room.value +'-2BNAC'+'</option');
+                        }
+                        if(room.value==201)
+                        {
+                          $("#advance_select2Multiple22").append('<option value=' + room.value +'>'+ room.value +'-4BNAC' +'</option');
+                        }
+                        if(room.value==202)
+                        {
+                          $("#advance_select2Multiple22").append('<option value=' + room.value +'>'+ room.value +'-3BNAC' +'</option');
+                        }
+                        if(room.value==1 || room.value==2 ||room.value==3 || room.value==4 ||room.value==5 || room.value==6 ||room.value==7 || room.value==8 ||room.value==9 || room.value==10 )
+                        {
+                          $("#advance_select2Multiple33").append('<option value=' + room.value +'>'+ room.value +'-DMNAC'+'</option');
+                        }
+                        if( room.value==11 || room.value==12 ||room.value==13 || room.value==14 ||room.value==15 || room.value==16 ||room.value==17 || room.value==18 ||room.value==19 || room.value==20)
+                        {
+                          $("#advance_select2Multiple55").append('<option value=' + room.value +'>'+ room.value +'-DMAC'+'</option');
+                        }
+              });
+    
+              var startDate = moment(response.data[0].advance_date_from, 'YYYY-MM-DD');
+              var endDate = moment(response.data[0].advance_date_to, 'YYYY-MM-DD');
+              var numberOfDays = moment(endDate).diff(startDate, 'days');
+              if (numberOfDays==0){numberOfDays=1;}
+              $('#advance_daterange').val(startDate.format('DD-MM-YYYY') + ' - ' + endDate.format('DD-MM-YYYY'));
+              $("#m_name").val(response.data[0].m_name);
+              $("#m_city").val(response.data[0].city);
+              $('#m_email').val(response.data[0].email);
+              $('#m_phone').val(response.data[0].phone_no);
+              $("#advance_no_of_person_id").val(response.data[0].no_of_person);
+              $("#deposit_no").val(response.data[0].r_id);
+              $("#person_id").val(response.data[0].person_id);
+              $("#advance_deposit-amount").val(response.data[0].deposite_rs);
+              $("#advance_rupees-in-words").val(response.data[0].rs_word);
+              $("#advance_no_of_days").val(numberOfDays);
+              $("#advance_occupation").val(response.data[0].occupation);
+              $("#advance_reason").val(response.data[0].reason);
+              $("#advance_dlx_amount").val(response.data[0].dlx_amount);
+              $("#advance_ac-amount").val(response.data[0].ac_amount);
+              $("#advance_non-ac-amount").val(response.data[0].non_ac_amount);
+              $("#advance_dmt_ac_amount").val(response.data[0].door_mt_ac_amount);
+              $("#advance_door_mt_amount").val(response.data[0].door_mt_amount);  
+              var room=response.data[0].room_list;
               var ArrNames =room .split(",");
             
                   ArrNames.forEach(myFunction1);
@@ -1130,40 +1199,47 @@ function editadvanceroom(id)
                     {
                       $("#advance_select2Multiple44").append('<option value=' + room +'>'+ room+'-AC DELUXE ROOM' +'</option');
                       $("#advance_select2Multiple44 option[value=" + room + "]").attr('selected', 'selected');
+                      $("#advance_dlx_amount").attr('readonly',false);
                     }
                     if(room==303 || room==304 ||room==305 || room==306 || room==403)
                     {
                       $("#advance_select2Multiple11").append('<option value=' + room +'>'+ room +'-AC RE. ROOM' +'</option');
                       $("#advance_select2Multiple11 option[value=" + room + "]").attr('selected', 'selected');
+                      $("#advance_ac-amount").attr('readonly',false);
                     }
                     if(room==203 || room==204 ||room==205 || room==206 || room==404 || room==405 || room==406)
                     {
                       $("#advance_select2Multiple22").append('<option value=' + room +'>'+ room +'-2BNAC'+'</option');
                       $("#advance_select2Multiple22 option[value=" + room + "]").attr('selected', 'selected');
+                      $("#advance_non-ac-amount").attr('readonly',false);
                     }
                     if(room==201)
                     {
                       $("#advance_select2Multiple22").append('<option value=' + room +'>'+ room +'-4BNAC' +'</option');
                       $("#advance_select2Multiple22 option[value=" + room + "]").attr('selected', 'selected');
+                      $("#advance_non-ac-amount").attr('readonly',false);
                     }
                     if(room==202)
                     {
                       $("#advance_select2Multiple22").append('<option value=' + room +'>'+ room +'-3BNAC' +'</option');
                       $("#advance_select2Multiple22 option[value=" + room + "]").attr('selected', 'selected');
+                      $("#advance_non-ac-amount").attr('readonly',false);
                     }
                     if(room==1 || room==2 ||room==3 || room==4 ||room==5 || room==6 ||room==7 || room==8 ||room==9 || room==10 )
                     {
                       $("#advance_select2Multiple33").append('<option value=' + room +'>'+ room +'-DMNAC'+'</option');
                       $("#advance_select2Multiple33 option[value=" + room + "]").attr('selected', 'selected');
+                      $("#advance_door_mt_amount").attr('readonly',false);
                     }
                     if( room==11 || room==12 ||room==13 || room==14 ||room==15 || room==16 ||room==17 || room==18 ||room==19 || room==20)
                     {
                       $("#advance_select2Multiple55").append('<option value=' + room +'>'+ room +'-DMAC'+'</option');
                       $("#advance_select2Multiple55 option[value=" + room + "]").attr('selected', 'selected');
+                      $("#advance_dmt_ac_amount").attr('readonly',false);
                     }
-                  }   
-                  member_id.forEach(myFunction)
-            }
+                  }  
+                }   
+          
         });
 
         }
@@ -1196,6 +1272,28 @@ function editadvanceroom(id)
         }else{ $("#deposite").html("");}
  
  });
+ $("#kvo_update_adv_room_booking").change(function(){
+
+  let deposite=document.getElementById("advance_deposit-amount").value;
+        if($("#adv_payment").val()=="CASH"){
+          if(deposite>9000) 
+            {
+            $("#adv_deposite").html("Deposite Amount Should Be Below 9000");
+            $("#submitbtn1").prop('disabled',true);
+            }
+          else{ $("#adv_deposite").html("");$("#submitbtn1").prop('disabled',false);}
+        }else{ $("#adv_deposite").html("");$("#submitbtn1").prop('disabled',false);}
+ });
+
+    $("#adv_CASH").change(function(){
+        document.getElementById("adv_payment").value="CASH";
+    });
+      $("#adv_CHEQUE").change(function(){
+        document.getElementById("adv_payment").value="CHEQUE";
+    });
+      $("#adv_UPI").change(function(){
+        document.getElementById("adv_payment").value="UPI";
+    });
 </script>
     <script>
   $(document).ready(function() {
@@ -1206,12 +1304,12 @@ function editadvanceroom(id)
       $('#member_age').val($('#age').val());
     });
   });
-  $("#CASH").change(function(){
+      $("#CASH").change(function(){
         document.getElementById("payment").value="CASH";
-    });
+      });
       $("#CHEQUE").change(function(){
         document.getElementById("payment").value="CHEQUE";
-    });
+      });
       $("#UPI").change(function(){
         document.getElementById("payment").value="UPI";
     });
