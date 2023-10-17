@@ -358,6 +358,7 @@ class BookingController extends Controller
         {
             $data=DB::UPDATE("UPDATE add_room SET STATUS='0',room_detail_id='0' where room_no='$room'");
         }
+        
         $booking->room_list = implode(',', $filteredCombinedList);
         $booking->dlx_amount = $req->dlx_amount;
         $booking->ac_amount = $req->ac_amount;
@@ -370,6 +371,9 @@ class BookingController extends Controller
         $booking->payment_mode=$req->payment;
         $booking->save();
         $details=personal_details::find($booking->member_id);
+        if($booking->status=="ADVANCE"){
+            /*store image*/
+            $booking->status="BOOKED";}
         $details->age = $req->age;
         $details->address = $req->member_address;
         $details->community = $req->community;

@@ -131,12 +131,11 @@ label.readonly {
                                         <table id="DataTables_Table_0" class="datatables-basic table">
                                           <thead>
                                               <tr>
-                                              <th style="font-size:15px"><b>Booking No</b></th>
+                                                <th style="font-size:15px"><b>Booking No</b></th>
                                                 <th style="font-size:15px"><b>Name</b></th>
                                                 <th style=" font-size:15px"><b>Room No</b></th>
                                                 <th style="font-size:15px"><b>Check In Date</b></th>
                                                 <th style="font-size:15px"><b>Check Out Date</b></th>
-                                                <th style="font-size:15px"><b>Rent</b></th>
                                                 <th style="font-size:15px"><b>Days Of Stay</b></th>                       
                                                 <th style="font-size:15px"><b>Deposite(₹) </b></th>
                                                 <th style="font-size:15px"><b>Action</b></th>
@@ -150,7 +149,6 @@ label.readonly {
                                               <td>{{$row->room_list}}</td>
                                               <td>{{date("d-m-Y",strtotime($row->check_in_date))}}</td>
                                               <td>{{date("d-m-Y",strtotime($row->check_in_date . '+' .$row->no_of_days . 'days'))}}</td>
-                                              <td>{{$row->dlx_amount + $row->ac_amount + $row->non_ac_amount + $row->door_mt_amount + $row->door_mt_ac_amount}}</td>
                                               <td>{{$row->no_of_days}}</td>
                                               <td>{{$row->deposite_rs}}</td>
                                               <td>
@@ -701,13 +699,11 @@ label.readonly {
                                                     Drop files here or click to upload
                                                     <span class="note needsclick"
                                                       >(This is just a demo dropzone. Selected files are <strong>not</strong> actually
-                                                      uploaded.)</span
-                                                    ><img id="id_proof1" width="250px" style="padding: 10px">
-                                                      <img id="id_proof2" width="250px" style="padding: 10px">
+                                                      uploaded.)</span>
                                                       
                                                   </div>
                                                   <div class="fallback">
-                                                  <input class="form-control" type="file" name="id_proof" id="id_proof" multiple required />
+                                                  <input class="form-control" type="file" name="id_proof[]" id="id_proof" multiple required />
                                                   </div>
                                                 </div>
                                               </div>
@@ -1119,7 +1115,6 @@ function editadvanceroom(id)
       let b=new bootstrap.Modal(myOffcanvas);
      
       b.show();
-
       $.ajax({
           url:"{{url('get_advance_data')}}" +"/"+ id,
           type:'GET',
@@ -1450,12 +1445,13 @@ function edit(id)
                 success:function(response){
                   var gender=response.data[0].gender;
                   var community=response.data[0].community;
-                  if(response.data[0].status=="ADVANCE"){$("#repeat-next").prop('disabled', true);}
+                  if(response.data[0].status=="ADVANCE"){
+                      $("#repeat-next").prop('disabled', true);
+                    }else{
+                      $("#repeat-next").prop('disabled', false);}
                   var date=new Date(response.data[0].check_in_date);
                   var checkindate=date.getDate()+"-"+(date.getMonth()+1)+"-"+date.getFullYear();
-                  document.getElementById("id_proof1").src="assets/img/avatars/"+response.data[0].id_proof;
-                  if(response.data[0].id_proof1!= null){
-                  document.getElementById("id_proof2").src="assets/img/avatars/"+response.data[0].id_proof1;}
+                
                   $("#select2Basic").val(response.data[0].m_name);
                   $("#full_name_form").val(response.data[0].m_name);
                   $("#age").val(response.data[0].age);
@@ -1858,7 +1854,7 @@ $(document).ready(function () {
               text: '<i class="ti ti-printer me-1" ></i>Print',
               className: 'dropdown-item',
               exportOptions: {
-                columns: [0,1 ,2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15],
+                columns: [0,1 ,2, 3, 4, 5, 6, 7],
                 // prevent avatar to be display
                 format: {
                   body: function (inner, coldex, rowdex) {
@@ -1895,7 +1891,7 @@ $(document).ready(function () {
               text: '<i class="ti ti-file-text me-1" ></i>Csv',
               className: 'dropdown-item',
               exportOptions: {
-                columns: [0,1 ,2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15],
+                columns: [0,1 ,2, 3, 4, 5, 6, 7],
                 // prevent avatar to be display
                 format: {
                   body: function (inner, coldex, rowdex) {
@@ -1919,7 +1915,7 @@ $(document).ready(function () {
               text: '<i class="ti ti-file-spreadsheet me-1"></i>Excel',
               className: 'dropdown-item',
               exportOptions: {
-                columns: [0,1 ,2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15],
+                columns: [0,1 ,2, 3, 4, 5, 6, 7],
                 // prevent avatar to be display
                 format: {
                   body: function (inner, coldex, rowdex) {
@@ -1943,7 +1939,7 @@ $(document).ready(function () {
               text: '<i class="ti ti-file-description me-1"></i>Pdf',
               className: 'dropdown-item',
               exportOptions: {
-                columns: [0,1 ,2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15],
+                columns: [0,1 ,2, 3, 4, 5, 6, 7],
                 // prevent avatar to be display
                 format: {
                   body: function (inner, coldex, rowdex) {
