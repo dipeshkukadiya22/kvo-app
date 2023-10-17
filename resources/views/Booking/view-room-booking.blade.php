@@ -198,8 +198,8 @@ label.readonly {
                                              <td>{{$row->r_id}}</td>
                                               <td>{{$row->m_name}}</td>
                                               <td>{{$row->room_list}}</td>
-                                              <td>{{$row->advance_date_from }}</td>
-                                              <td>{{$row->advance_date_to}}</td>
+                                              <td>{{date('d-m-Y',strtotime($row->advance_date_from))}}</td>
+                                              <td>{{date('d-m-Y',strtotime($row->advance_date_to))}}</td>
                                               <td>{{$row->no_of_days}}</td>
                                               <td>{{$row->deposite_rs}}</td>
                                               <td>

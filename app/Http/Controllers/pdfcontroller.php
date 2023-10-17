@@ -36,15 +36,15 @@ class pdfcontroller extends Controller
     }
     public function pdf_CheckOut($id)
     {
-        $checkout=DB::SELECT("SELECT *,add_members.p_id as m_id from room_details left join personal_details on personal_details.p_id=room_details.member_id left join add_members on personal_details.member_id=add_members.p_id left Join checkout on checkout.room_booking_id = room_details.r_id WHERE rec_no= '$id'");
-        $room_checkout = $checkout[0]->room_list;
+        // $checkout=DB::SELECT("SELECT *,add_members.p_id as m_id from room_details left join personal_details on personal_details.p_id=room_details.member_id left join add_members on personal_details.member_id=add_members.p_id left Join checkout on checkout.room_booking_id = room_details.r_id WHERE rec_no= '$id'");
+        // $room_checkout = $checkout[0]->room_list;
 
 
-        $drc = 0;
-        $nonac = 0;
-        $ac = 0;
-        $dmac = 0;
-        $dmnonac = 0;
+        // $drc = 0;
+        // $nonac = 0;
+        // $ac = 0;
+        // $dmac = 0;
+        // $dmnonac = 0;
 
         $checkout = DB::SELECT("SELECT *,add_members.p_id as m_id from room_details left join personal_details on personal_details.p_id=room_details.member_id left join add_members on personal_details.member_id=add_members.p_id left Join checkout on checkout.room_booking_id = room_details.r_id WHERE rec_no= '$id'");
 
@@ -109,12 +109,42 @@ class pdfcontroller extends Controller
     
     public function pdf_Advance_Deposit($id)
     {
-        $count=DB::SELECT("SELECT count(*) from booking_deposite WHERE booking_id='$id'");
+        //$count=DB::SELECT("SELECT count(*) from booking_deposite WHERE booking_id='$id'");
     
         
-            $advance_room_booking=DB::SELECT("SELECT *,add_members.p_id as m_id from room_details join personal_details on personal_details.p_id=room_details.member_id join add_members on personal_details.member_id=add_members.p_id join booking_deposite on room_details.r_id=booking_deposite.booking_id WHERE booking_id='$id'");
+            $advance_room_booking=DB::SELECT("SELECT *,add_members.p_id as m_id from room_details join personal_details on personal_details.p_id=room_details.member_id join add_members on personal_details.member_id=add_members.p_id  WHERE r_id='$id'");
             $member_detail=DB::SELECT("SELECT * from member_details WHERE room_id='$id'");
-            $pdf = Pdf::loadView('pdf.pdf_Advance_Deposit',['advance_room_booking'=>$advance_room_booking,'member_detail'=>$member_detail])->setPaper('a5', 'potrait')->setOptions(['defaultFont' => 'KAP119']);
+            $booked_room = explode(",", $advance_room_booking[0]->room_list); 
+        
+            $drc = 0;
+            $nonac = 0;
+            $ac = 0;
+            $dmac = 0;
+            $dmnonac = 0;
+            $dlx_room=array();
+            $ac_room=array();
+            $nonac_room=array();
+            $dmtac_room=array();
+            $dmtnonac_room=array();
+            foreach ($booked_room as $room) {
+                if ($room === '301' || $room === '302' || $room === '401' || $room === '402') {
+                    array_push($dlx_room,$room);
+                    $drc++;
+                } elseif ($room === '303' || $room === '304' || $room === '305' || $room === '306' || $room === '403') {
+                    array_push($ac_room,$room);
+                    $ac++;
+                } elseif ($room === '201' || $room === '202' || $room === '203' || $room === '204' || $room === '205' || $room === '206' || $room === '404' || $room === '405' || $room === '406') {
+                    array_push($nonac_room,$room);
+                    $nonac++;
+                } elseif ($room === '11' || $room === '12' || $room === '13' || $room === '14' || $room === '15' || $room === '16' || $room === '17' || $room === '18' || $room === '19' || $room === '20') {
+                    array_push($dmtac_room,$room);
+                    $dmac++;
+                } elseif ($room === '1' || $room === '2' || $room === '3' || $room === '4' || $room === '5' || $room === '6' || $room === '7' || $room === '8' || $room === '9' || $room === '10') {
+                    array_push($dmtnonac_room,$room);
+                    $dmnonac++;
+                }
+            }   
+            $pdf = Pdf::loadView('pdf.pdf_Advance_Deposit',['advance_room_booking'=>$advance_room_booking,'member_detail'=>$member_detail,'drc'=> $drc ,'nonac'=> $nonac ,'ac'=>$ac,'dmac'=>$dmac,'dmnonac'=>$dmnonac,'dlx_room'=>$dlx_room,'ac_room'=>$ac_room,'nonac_room'=>$nonac_room,'dmtac_room'=>$dmtac_room,'dmtnonac_room'=>$dmtnonac_room])->setPaper('a5', 'potrait')->setOptions(['defaultFont' => 'KAP119']);
             return $pdf->stream();
         
     //$advance_room_booking=DB::SELECT("SELECT *,add_members.p_id as m_id from room_details join personal_details on personal_details.p_id=room_details.member_id join add_members on personal_details.member_id=add_members.p_id WHERE r_id='$id'");
