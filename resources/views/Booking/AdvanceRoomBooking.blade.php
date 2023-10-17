@@ -431,20 +431,21 @@
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
     <script>
     jQuery(function ($) {
-        var startDate = moment();
-        var endDate = moment();
-        
         
         $('input[name="advance_date"]').daterangepicker({
             opens: 'left',
             locale: {
                 format: 'DD-MM-YYYY'
             },
-            startDate: startDate,
-            endDate: endDate
-        }, function(start, end, label) {
           
+        }, function(start, end, label) {
+          var startDate = start.format('YYYY-MM-DD'); 
+            var endDate = end.format('YYYY-MM-DD');
+            var numberOfDays = moment(endDate).diff(startDate, 'days');
+            if(numberOfDays==0){numberOfDays=1;}
+              $('#no_of_days').val(numberOfDays);
             $('#daterange').val(start.format('DD-MM-YYYY') + ' To ' + end.format('DD-MM-YYYY'));
+
         });
     });
 
@@ -483,8 +484,8 @@
             $("#deposite").html("Deposite Amount Should Be Below 9000");
             $("#submitbtn1").prop('disabled',true);
             }
-          else{ $("#deposite").html("");}
-        }else{ $("#deposite").html("");}
+          else{ $("#deposite").html("");$("#submitbtn1").prop('disabled',false);}
+        }else{ $("#deposite").html("");$("#submitbtn1").prop('disabled',false);}
     });
     $("#CASH").change(function(){
         document.getElementById("payment").value="CASH";

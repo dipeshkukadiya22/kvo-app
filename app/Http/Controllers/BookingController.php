@@ -645,9 +645,9 @@ class BookingController extends Controller
         $advanceroombooking->ac_amount = $req->ac_amount;
         $advanceroombooking->non_ac_amount = $req->non_ac_amount;
         $advanceroombooking->door_mt_amount = $req->door_mt_amount;
-        $advanceroombooking->door_mt_ac_amount = $req->door_mt_amount;
+        $advanceroombooking->door_mt_ac_amount = $req->door_mt_ac_amount;
         $advanceroombooking->no_of_days = $req->no_of_days;
-        $advanceroombooking->payment_mode=$req->adv_payment;
+        $advanceroombooking->payment_mode=$req->payment;
         $date1=date("Y-m-d",strtotime(substr($req->advance_date,0,10)));
         $date2=date("Y-m-d",strtotime(substr($req->advance_date,13)));
         $advanceroombooking->advance_date_from = $date1;

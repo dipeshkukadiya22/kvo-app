@@ -937,7 +937,7 @@ label.readonly {
                                                 </div>
                                               </div>
                                               <div class="col-md-2 mt-3">
-                                                  <label for="select2Multiple5" class="form-label">Door Mt Non Ac Room</label> 
+                                                  <label for="select2Multiple5" class="form-label">Door Mt Ac Room</label> 
                                                   <select id="advance_select2Multiple55" name="select2Multiple5[]" class="select2 form-select room-input" multiple>
                                               
                                                   </select> 
@@ -950,7 +950,7 @@ label.readonly {
                                                 </div>
                                               </div>
                                               <div class="col-md-2 mt-3">
-                                                <label for="select2Multiple3" class="form-label">Door Mt Non Room</label>   
+                                                <label for="select2Multiple3" class="form-label">Door Mt Non Ac Room</label>   
                                                 <select id="advance_select2Multiple33" name="select2Multiple3[]" class="select2 form-select room-input" multiple>
                                               </select>                            
                                               </div>
