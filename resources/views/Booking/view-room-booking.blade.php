@@ -1017,7 +1017,7 @@ label.readonly {
                                 class="form-check-input"
                                  />
                               <label class="form-check-label" for="basic_default_radio">UPI</label>
-                              <input type=hidden name="adv_payment" id="adv_payment" value="CASH">
+                              <input type=text name="adv_payment" id="adv_payment" value="CASH" hidden>
                             </div>
                           </div>
                                             <div class="col-12 flex justify-content">
@@ -1091,7 +1091,8 @@ label.readonly {
             var startDate = start.format('YYYY-MM-DD'); 
             var endDate = end.format('YYYY-MM-DD');
             var numberOfDays = moment(endDate).diff(startDate, 'days');
-              $('#advance_no_of_days').val(numberOfDays + 1);
+            if(numberOfDays==0){numberOfDays=1;}
+              $('#advance_no_of_days').val(numberOfDays);
               $('#advance_daterange').val(start.format('DD-MM-YYYY') + ' - ' + end.format('DD-MM-YYYY'));
           
             
@@ -1250,7 +1251,55 @@ function editadvanceroom(id)
 
   </script>
   <script>
+  $(document).ready(function () {
+    $("#dlx_amount").prop('readonly', true);
+    $("#ac_amount").prop('readonly', true);
+    $("#non_ac_amount").prop('readonly', true);
+    $("#dmt_amount").prop('readonly', true);
+    $("#dmt_ac_amount").prop('readonly', true);
+
+    $("#kvo_update_room_booking").change(function () {
+      let list4 = document.getElementById("select2Multiple44");
+      let list1 = document.getElementById("select2Multiple11");
+      let list2 = document.getElementById("select2Multiple22");
+      let list3 = document.getElementById("select2Multiple33");
+      let list5 = document.getElementById("select2Multiple55");
+      if (list4.value !== "") {
+        $("#dlx_amount").prop('readonly', false);
+      } else {
+        $("#dlx_amount").prop('readonly', true);
+      }
+
+      if (list1.value !== "") {
+        $("#ac_amount").prop('readonly', false);
+      } else {
+        $("#ac_amount").prop('readonly', true);
+      }
+
+      if (list2.value !== "") {
+        $("#non_ac_amount").prop('readonly', false);
+      } else {
+        $("#non_ac_amount").prop('readonly', true);
+      }
+
+      if (list3.value !== "") {
+        $("#dmt_amount").prop('readonly', false);
+      } else {
+        $("#dmt_amount").prop('readonly', true);
+      }
+
+      if (list5.value !== "") {
+        $("#dmt_ac_amount").prop('readonly', false);
+      } else {
+        $("#dmt_ac_amount").prop('readonly', true);
+      }
+      
+    });
+  });
+</script>
+  <script>
  $(".browser-default-validation").change(function(){
+  
     let age=document.getElementById("age");
     let address=document.getElementById("member_address");
     let occupation=document.getElementById("occupation");
@@ -1259,31 +1308,32 @@ function editadvanceroom(id)
     let no_of_person=document.getElementById("no_of_person_id");
     let no_of_days=document.getElementById("no_of_days");
     let deposite=document.getElementById("deposit-amount");
-    if(age.value != "" && sub.value != "" && address.value != "" && occupation.value != "" && reason.value != "" && no_of_person.value != "" && no_of_days.value != "")
-    {
-      $("#repeat-next").prop('disabled',false);
-    }
-    else{
-      $("#repeat-next").prop('disabled',true);
-    }
+   
+        if (age.value !== "" && sub.value !== "" && address.value !== "" && occupation.value !== "" && reason.value !== "" && no_of_person.value !== "" && no_of_days.value !== "" && flag === 0
+        ) {
+          $("#repeat-next").prop('disabled', false);
+        } else {
+          $("#repeat-next").prop('disabled', true);
+        }
+
     if($("#payment").val()=="CASH"){
     if(deposite.value>9000) 
       {
             $("#deposite").html("Deposite Amount Should Be Below 9000");
             $("#nextToSubmit").prop('disabled',true);
           }
-          else{ $("#deposite").html("");}
-        }else{ $("#deposite").html("");}
+          else{ $("#deposite").html(""); $("#nextToSubmit").prop('disabled',false);}
+        }else{ $("#deposite").html(""); $("#nextToSubmit").prop('disabled',false);}
  
  });
  $("#kvo_update_adv_room_booking").change(function(){
-
-  let deposite=document.getElementById("advance_deposit-amount").value;
+      let deposite=document.getElementById("advance_deposit-amount").value;
         if($("#adv_payment").val()=="CASH"){
           if(deposite>9000) 
             {
             $("#adv_deposite").html("Deposite Amount Should Be Below 9000");
             $("#submitbtn1").prop('disabled',true);
+         
             }
           else{ $("#adv_deposite").html("");$("#submitbtn1").prop('disabled',false);}
         }else{ $("#adv_deposite").html("");$("#submitbtn1").prop('disabled',false);}
@@ -1317,6 +1367,53 @@ function editadvanceroom(id)
       $("#UPI").change(function(){
         document.getElementById("payment").value="UPI";
     });
+</script>
+<script>
+  $(document).ready(function () {
+    $("#advance_dlx_amount").prop('readonly', true);
+    $("#advance_ac-amount").prop('readonly', true);
+    $("#advance_non-ac-amount").prop('readonly', true);
+    $("#advance_dmt_ac_amount").prop('readonly', true);
+    $("#advance_door_mt_amount").prop('readonly', true);
+
+    $("#kvo_update_adv_room_booking").change(function () {
+      let list4 = document.getElementById("advance_select2Multiple44");
+      let list1 = document.getElementById("advance_select2Multiple11");
+      let list2 = document.getElementById("advance_select2Multiple22");
+      let list3 = document.getElementById("advance_select2Multiple33");
+      let list5 = document.getElementById("advance_select2Multiple55");
+      if (list4.value !== "") {
+        $("#advance_dlx_amount").prop('readonly', false);
+      } else {
+        $("#advance_dlx_amount").prop('readonly', true);
+      }
+
+      if (list1.value !== "") {
+        $("#advance_ac-amount").prop('readonly', false);
+      } else {
+        $("#advance_ac-amount").prop('readonly', true);
+      }
+
+      if (list2.value !== "") {
+        $("#advance_non-ac-amount").prop('readonly', false);
+      } else {
+        $("#advance_non-ac-amount").prop('readonly', true);
+      }
+
+      if (list3.value !== "") {
+        $("#advance_door_mt_amount").prop('readonly', false);
+      } else {
+        $("#advance_door_mt_amount").prop('readonly', true);
+      }
+
+      if (list5.value !== "") {
+        $("#advance_dmt_ac_amount").prop('readonly', false);
+      } else {
+        $("#advance_dmt_ac_amount").prop('readonly', true);
+      }
+      
+    });
+  });
 </script>
 
 <script>
@@ -1375,6 +1472,7 @@ function edit(id)
                   $("#reason").val(response[0]['reason']);
                   
                   $("#flatpickr-datetime").val(checkindate);
+                  
                   $("#dlx_amount").val(response[0]['dlx_amount']);
                   $("#ac_amount").val(response[0]['ac_amount']);
                   $("#non_ac_amount").val(response[0]['non_ac_amount']);
@@ -1390,36 +1488,43 @@ function edit(id)
                         {
                           $("#select2Multiple44").append('<option value=' + room +'>'+ room+'-AC DELUXE ROOM' +'</option');
                           $("#select2Multiple44 option[value=" + room + "]").attr('selected', 'selected');
+                          $("#dlx_amount").attr('readonly',false);
                         }
                         if(room==303 || room==304 ||room==305 || room==306 || room==403)
                         {
                           $("#select2Multiple11").append('<option value=' + room +'>'+ room +'-AC RE. ROOM' +'</option');
                           $("#select2Multiple11 option[value=" + room + "]").attr('selected', 'selected');
+                          $("#ac_amount").attr('readonly',false);
                         }
                         if(room==203 || room==204 ||room==205 || room==206 || room==404 || room==405 || room==406)
                         {
                           $("#select2Multiple22").append('<option value=' + room +'>'+ room +'-2BNAC'+'</option');
                           $("#select2Multiple22 option[value=" + room + "]").attr('selected', 'selected');
+                          $("#non_ac_amount").attr('readonly',false);
                         }
                         if(room==201)
                         {
                           $("#select2Multiple22").append('<option value=' + room +'>'+ room +'-4BNAC' +'</option');
                           $("#select2Multiple22 option[value=" + room + "]").attr('selected', 'selected');
+                          $("#non_ac_amount").attr('readonly',false);
                         }
                         if(room==202)
                         {
                           $("#select2Multiple22").append('<option value=' + room +'>'+ room +'-3BNAC' +'</option');
                           $("#select2Multiple22 option[value=" + room + "]").attr('selected', 'selected');
+                          $("#non_ac_amount").attr('readonly',false);
                         }
                         if(room==1 || room==2 ||room==3 || room==4 ||room==5 || room==6 ||room==7 || room==8 ||room==9 || room==10 )
                         {
                           $("#select2Multiple33").append('<option value=' + room +'>'+ room +'-DMNAC'+'</option');
                           $("#select2Multiple33 option[value=" + room + "]").attr('selected', 'selected');
+                          $("#dmt_amount").attr('readonly',false);
                         }
                         if( room==11 || room==12 ||room==13 || room==14 ||room==15 || room==16 ||room==17 || room==18 ||room==19 || room==20)
                         {
                           $("#select2Multiple55").append('<option value=' + room +'>'+ room +'-DMAC'+'</option');
                           $("#select2Multiple55 option[value=" + room + "]").attr('selected', 'selected');
+                          $("#dmt_ac_amount").attr('readonly',false);
                         }
                       }   
                     
@@ -1975,10 +2080,7 @@ document.getElementById("advance_deposit-amount").addEventListener("input", conv
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <script>
-  let flag=0;
-  $("#kvo_update_room_booking :input").change(function() {
-    flag=1;
-    });
+ 
     $("#kvo_update_room_booking").submit(function(){
         var age=document.getElementById("age").value;
         var address=document.getElementById("member_address").value;

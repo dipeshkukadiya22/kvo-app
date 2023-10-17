@@ -452,14 +452,64 @@
 
 </script> 
 <script>
+  $(document).ready(function () {
+    $("#submitbtn1").prop('disabled', true);
+    $("#dlx_amount").prop('readonly', true);
+    $("#ac-amount").prop('readonly', true);
+    $("#non-ac-amount").prop('readonly', true);
+    $("#door_mt_amount").prop('readonly', true);
+    $("#door_mt_ac_amount").prop('readonly', true);
+
+    $("#room_booking").change(function () {
+      let list4 = document.getElementById("select2Multiple44");
+      let list1 = document.getElementById("select2Multiple11");
+      let list2 = document.getElementById("select2Multiple22");
+      let list3 = document.getElementById("select2Multiple33");
+      let list5 = document.getElementById("select2Multiple55");
+      if (list4.value !== "") {
+        $("#dlx_amount").prop('readonly', false);
+      } else {
+        $("#dlx_amount").prop('readonly', true);
+      }
+
+      if (list1.value !== "") {
+        $("#ac-amount").prop('readonly', false);
+      } else {
+        $("#ac-amount").prop('readonly', true);
+      }
+
+      if (list2.value !== "") {
+        $("#non-ac-amount").prop('readonly', false);
+      } else {
+        $("#non-ac-amount").prop('readonly', true);
+      }
+
+      if (list3.value !== "") {
+        $("#door_mt_amount").prop('readonly', false);
+      } else {
+        $("#door_mt_amount").prop('readonly', true);
+      }
+
+      if (list5.value !== "") {
+        $("#door_mt_ac_amount").prop('readonly', false);
+      } else {
+        $("#door_mt_ac_amount").prop('readonly', true);
+      }
+    });
+  });
+</script>
+
+<script>
     let list1=document.getElementById("select2Multiple11");
     let list2=document.getElementById("select2Multiple22");
     let list3=document.getElementById("select2Multiple33");
+    let list4=document.getElementById("select2Multiple44");
+    let list5=document.getElementById("select2Multiple55");
     $("#room_booking").submit(function(){
       
 
       var check=0;
-      if(list1.value !="" || list2.value !="" || list3.value !="")
+      if(list1.value !="" || list2.value !="" || list3.value !="" ||list4.value !=""||list5.value !="")
       {
         check=1;
       }
@@ -477,7 +527,7 @@
     });
 
     $(".browser-default-validation").change(function(){
-    let deposite=document.getElementById("deposit-amount").value;
+        let deposite=document.getElementById("deposit-amount").value;
         if($("#payment").val()=="CASH"){
           if(deposite>9000) 
             {

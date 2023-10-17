@@ -318,7 +318,7 @@
                               
                               <div class="col-md-4">
                                 <label for="defaultFormControlInput" class="form-label"><span class="required">City</span></label>
-                                <input type="text" class="form-control" name="city" id="member_city" style="text-transform:uppercase" placeholder="city" aria-describedby="defaultFormControlHelp" value="{{ (!empty($member)) ? $member->city : '' }}" required/>
+                                <input type="text" class="form-control" name="city" id="member_city" style="text-transform:uppercase" placeholder="city" aria-describedby="defaultFormControlHelp" value="{{ (!empty($member)) ? $member->city : '' }}" readonly/>
                               </div>
 
 
