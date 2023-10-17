@@ -967,43 +967,36 @@
       $('#room_amount').text( totalAmount);
 
       var selectedRooms = '';
-
             if (dlxacAmount !== 0) {
               selectedRooms = 'Deluxe Room:= ' + selectedList4;
-
-              if (acAmount !== 0) {
-                selectedRooms += ', A.C. Room:= ' + selectedList1;
-
-                if (nonAcAmount !== 0) {
-                  selectedRooms += ', Non A.C. Room:= ' + selectedList2;
-
-                  if (doorMtAcAmount !== 0) {
-                    selectedRooms += ', Door Mt AC Room:= ' + selectedList5;
-
-                    if (doorMtAmount !== 0) {
-                      selectedRooms += ', Door Mt Non AC Room:= ' + selectedList3;
-                    }
-                  }
-                }
-              }
-            } else if (nonAcAmount !== 0) {
-              selectedRooms = 'Non A.C. Room:= ' + selectedList2;
-
-              if (doorMtAcAmount !== 0) {
-                selectedRooms += ', Door Mt AC Room:= ' + selectedList5;
-
-                if (doorMtAmount !== 0) {
-                  selectedRooms += ', Door Mt Non AC Room:= ' + selectedList3;
-                }
-              }
-            } else if (doorMtAcAmount !== 0) {
-              selectedRooms = 'Door Mt AC Room:= ' + selectedList5;
-            } else if (doorMtAmount !== 0) {
-              selectedRooms = 'Door Mt Non AC Room:= ' + selectedList3;
-            } else {
-              selectedRooms = '';
             }
-
+            if (acAmount !== 0) {
+              if (selectedRooms !== '') {
+                selectedRooms += ', ';
+              }
+              selectedRooms += 'A.C. Room:= ' + selectedList1;
+            }
+            if (nonAcAmount !== 0) {
+              if (selectedRooms !== '') {
+                selectedRooms += ', ';
+              }
+              selectedRooms += 'Non A.C. Room:= ' + selectedList2;
+            }
+            if (doorMtAcAmount !== 0) {
+              if (selectedRooms !== '') {
+                selectedRooms += ', ';
+              }
+              selectedRooms += 'Door Mt AC Room:= ' + selectedList5;
+            }
+            if (doorMtAmount !== 0) {
+              if (selectedRooms !== '') {
+                selectedRooms += ', ';
+              }
+              selectedRooms += 'Door Mt Non AC Room:= ' + selectedList3;
+            }
+            if (selectedRooms === '') {
+              selectedRooms = 'No rooms selected';
+            }
                 
      // const selectedRooms = 'A.C. Room:= ' + selectedList1 + ', Non A.C. Room:= ' + selectedList2 + ', Door Metri A.C. / Non A.C. Room:= ' + selectedList3;
       $('#room_lst').text(selectedRooms);

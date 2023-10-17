@@ -189,7 +189,7 @@ label.readonly {
                                                   <th style="font-size:15px"><b>Day of Stay</b></th>
                                                   <th style="font-size:15px"><b>Deposite Rs</b></th>
                                                 
-                                                  <th style="font-size:15px"><b>Actions</b></th>
+                                                  <th style="font-size:15px"><b>Action</b></th>
                                               </tr>
                                           </thead>
                                           @foreach($advancebooking as $row)
@@ -204,6 +204,8 @@ label.readonly {
                                               <td>{{$row->deposite_rs}}</td>
                                               <td>
                                                   <div class="d-inline-block">
+                                                    <a onclick="edit({{$row->r_id}})" class="btn btn-sm btn-icon item-edit"><img src="./assets/icon/orange-edit.png" width="20px"></a>
+
                                                     <a href="{{route('pdf_Advance_Deposit',$row->r_id)}}" target="_blank"><img src="./assets/icon/orange-eye.png" width="20px"></a>
 
                                                     <a onclick="editadvanceroom({{$row->r_id}})"  class="btn btn-sm btn-icon item-edit"><img src="./assets/icon/orange-edit.png" width="20px"></a>
@@ -1174,6 +1176,7 @@ function editadvanceroom(id)
               var numberOfDays = moment(endDate).diff(startDate, 'days');
               if (numberOfDays==0){numberOfDays=1;}
               $('#advance_daterange').val(startDate.format('DD-MM-YYYY') + ' - ' + endDate.format('DD-MM-YYYY'));
+
               $("#m_name").val(response.data[0].m_name);
               $("#m_city").val(response.data[0].city);
               $('#m_email').val(response.data[0].email);
@@ -1309,8 +1312,8 @@ function editadvanceroom(id)
     let no_of_days=document.getElementById("no_of_days");
     let deposite=document.getElementById("deposit-amount");
    
-        if (age.value !== "" && sub.value !== "" && address.value !== "" && occupation.value !== "" && reason.value !== "" && no_of_person.value !== "" && no_of_days.value !== "" && flag === 0
-        ) {
+        if (age.value !== "" && sub.value !== "" && address.value !== "" && occupation.value !== "" && reason.value !== "" && no_of_person.value !== "" && no_of_days.value !== "")
+        {
           $("#repeat-next").prop('disabled', false);
         } else {
           $("#repeat-next").prop('disabled', true);
@@ -1429,7 +1432,13 @@ function edit(id)
           const myOffcanvas = document.getElementById('exLargeModal');
           let a=new bootstrap.Modal(myOffcanvas);
           a.show();
+            $("#select2Multiple11 option").remove();
+            $("#select2Multiple22 option").remove();
+            $("#select2Multiple33 option").remove();
+            $("#select2Multiple44 option").remove();
+            $("#select2Multiple55 option").remove();
           var member_id=[];
+          var room_no=[];
           var temp=document.getElementById('select2Basic1');
           for(i=0;i<temp.options.length;i++)
             {
@@ -1439,22 +1448,22 @@ function edit(id)
               url:"{{url('get_data')}}" +"/"+ id,
               type:'GET',
                 success:function(response){
-                  var gender=response[0]['gender'];
-                  var community=response[0]['community'];
-                 
-                  var date=new Date(response[0]['check_in_date']);
+                  var gender=response.data[0].gender;
+                  var community=response.data[0].community;
+                  if(response.data[0].status=="ADVANCE"){$("#repeat-next").prop('disabled', true);}
+                  var date=new Date(response.data[0].check_in_date);
                   var checkindate=date.getDate()+"-"+(date.getMonth()+1)+"-"+date.getFullYear();
-                  document.getElementById("id_proof1").src="assets/img/avatars/"+response[0]['id_proof'];
-                  if(response[0]['id_proof1'] != null){
-                  document.getElementById("id_proof2").src="assets/img/avatars/"+response[0]['id_proof1'];}
-                  $("#select2Basic").val(response[0]['m_name']);
-                  $("#full_name_form").val(response[0]['m_name']);
-                  $("#age").val(response[0]['age']);
-                  $("#member_address").val(response[0]['address']);
-                  $("#subcommunity").val(response[0]['subcommunity']);
-                  $("#member_city").val(response[0]['city']);
-                  $('#member_email').val(response[0]['email']);
-                  $('#member_phone').val(response[0]['phone_no']);
+                  document.getElementById("id_proof1").src="assets/img/avatars/"+response.data[0].id_proof;
+                  if(response.data[0].id_proof1!= null){
+                  document.getElementById("id_proof2").src="assets/img/avatars/"+response.data[0].id_proof1;}
+                  $("#select2Basic").val(response.data[0].m_name);
+                  $("#full_name_form").val(response.data[0].m_name);
+                  $("#age").val(response.data[0].age);
+                  $("#member_address").val(response.data[0].address);
+                  $("#subcommunity").val(response.data[0].subcommunity);
+                  $("#member_city").val(response.data[0].city);
+                  $('#member_email').val(response.data[0].email);
+                  $('#member_phone').val(response.data[0].phone_no);
                   if(gender=="MALE"){
                     $("#MALE").attr('checked',true);
                     $("#inlineRadio1").attr('checked',true);
@@ -1462,24 +1471,60 @@ function edit(id)
                   if(gender=="FEMALE"){
                     $("#FEMALE").attr('checked',true);
                     $("#inlineRadio2").attr('checked',true);}
-                  $("#no_of_person_id").val(response[0]['no_of_person']);
-                  $("#booking_id").val(response[0]['r_id']);
-                  $("#person_id").val(response[0]['person_id']);
-                  $("#deposit-amount").val(response[0]['deposite_rs']);
-                  $("#rupees-in-words").val(response[0]['rs_word']);
-                  $("#no_of_days").val(response[0]['no_of_days']);
-                  $("#occupation").val(response[0]['occupation']);
-                  $("#reason").val(response[0]['reason']);
+                  $("#no_of_person_id").val(response.data[0].no_of_person);
+                  $("#booking_id").val(response.data[0].r_id);
+                  $("#person_id").val(response.data[0].person_id);
+                  $("#deposit-amount").val(response.data[0].deposite_rs);
+                  $("#rupees-in-words").val(response.data[0].rs_word);
+                  $("#no_of_days").val(response.data[0].no_of_days);
+                  $("#occupation").val(response.data[0].occupation);
+                  $("#reason").val(response.data[0].reason);
                   
                   $("#flatpickr-datetime").val(checkindate);
                   
-                  $("#dlx_amount").val(response[0]['dlx_amount']);
-                  $("#ac_amount").val(response[0]['ac_amount']);
-                  $("#non_ac_amount").val(response[0]['non_ac_amount']);
-                  $("#dmt_ac_amount").val(response[0]['door_mt_ac_amount']);
-                  $("#dmt_amount").val(response[0]['door_mt_amount']);
+                  $("#dlx_amount").val(response.data[0].dlx_amount);
+                  $("#ac_amount").val(response.data[0].ac_amount);
+                  $("#non_ac_amount").val(response.data[0].non_ac_amount);
+                  $("#dmt_ac_amount").val(response.data[0].door_mt_ac_amount);
+                  $("#dmt_amount").val(response.data[0].door_mt_amount);
                   
-                  var room=response[0]['room_list'];
+                    var temp=response.ar_list.length;
+                    for(i=0;i<response.ar_list.length;i++)
+                    {
+                      room_no[i]=response.ar_list[i].room_no;
+                    }
+                    room_no.forEach(listFunction);
+                    function listFunction(room, index) {
+                    if(room==301 || room==302 || room==401 || room==402 )
+                        {
+                          $("#select2Multiple44").append('<option value=' + room +'>'+ room+'-AC DELUXE ROOM' +'</option');
+                        }
+                        if(room==303 || room==304 ||room==305 || room==306 || room==403)
+                        {
+                          $("#select2Multiple11").append('<option value=' + room +'>'+ room +'-AC RE. ROOM' +'</option');
+                        }
+                        if(room==203 || room==204 ||room==205 || room==206 || room==404 || room==405 || room==406)
+                        {
+                          $("#select2Multiple22").append('<option value=' + room +'>'+ room +'-2BNAC'+'</option');
+                        }
+                        if(room==201)
+                        {
+                          $("#select2Multiple22").append('<option value=' + room +'>'+ room +'-4BNAC' +'</option');
+                        }
+                        if(room==202)
+                        {
+                          $("#select2Multiple22").append('<option value=' + room +'>'+ room +'-3BNAC' +'</option');
+                        }
+                        if(room==1 || room==2 ||room==3 || room==4 ||room==5 || room==6 ||room==7 || room==8 ||room==9 || room==10 )
+                        {
+                          $("#select2Multiple33").append('<option value=' + room +'>'+ room +'-DMNAC'+'</option');
+                        }
+                        if( room==11 || room==12 ||room==13 || room==14 ||room==15 || room==16 ||room==17 || room==18 ||room==19 || room==20)
+                        {
+                          $("#select2Multiple55").append('<option value=' + room +'>'+ room +'-DMAC'+'</option');
+                        }
+                    }
+                  var room=response.data[0].room_list;
                   var ArrNames =room .split(",");
                  
                       ArrNames.forEach(myFunction1);
@@ -1527,14 +1572,13 @@ function edit(id)
                           $("#dmt_ac_amount").attr('readonly',false);
                         }
                       }   
-                    
                       member_id.forEach(myFunction)
                       function myFunction(item, index, arr) {
                         if((member_id[index])==community)
                         {
                           $("#select2Basic1 option[value=" + community + "]").attr('selected', 'selected'); 
-                        }
-                }}
+                        }}
+                }
             });
 
             }

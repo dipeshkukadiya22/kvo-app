@@ -304,7 +304,12 @@ class BookingController extends Controller
     public function get_data($id)
     {
         $data=DB::SELECT("SELECT *,add_members.p_id as m_id,room_details.member_id as person_id from room_details join personal_details on personal_details.p_id=room_details.member_id join add_members on personal_details.member_id=add_members.p_id WHERE r_id='$id'");
-        return $data;   
+        $ar_list= DB::select("SELECT *, add_room.room_no as id FROM add_room WHERE add_room.status = 0");
+        $data=[
+            'data'=>$data,
+            'ar_list'=>$ar_list,
+        ];
+        return response()->json($data); 
     }
     public function get_roomdata($id)
     {
@@ -464,13 +469,25 @@ class BookingController extends Controller
         $dmt_list=array();
         $dmt_ac_list=array();
         $single=array();
-        $startdate="2023-10-13";$enddate="2023-10-13";
-        $adv_booked_room=room_details::select("room_list")
-                            ->where('booking_type','=','ADVANCE')
-                            ->where('advance_date_from','=',$startdate)
-                            ->where('advance_date_to','=',$enddate)
-                            ->get();
-                    //dd($adv_booked_room);
+        $startDate=date('Y-m-d');$endDate=date('Y-m-d');
+        $adv_booked_room = room_details::select("room_list")
+                                        ->where('booking_type', '=', 'ADVANCE')
+                                        ->where('status', '=', 'ADVANCE')
+                                        ->where(function ($query) use ($startDate, $endDate) {
+                                            $query->where(function ($query) use ($startDate, $endDate) {
+                                                    $query->where('advance_date_from', '<=', $startDate)
+                                                    ->where('advance_date_to', '>', $startDate);
+                                            })
+                                                    ->orWhere(function ($query) use ($startDate, $endDate) {
+                                                    $query->where('advance_date_from', '<=', $endDate)
+                                                    ->where('advance_date_to', '>', $endDate);
+                                            })
+                                                    ->orWhere(function ($query) use ($startDate, $endDate) {
+                                                    $query->where('advance_date_from', '>=', $startDate)
+                                                    ->where('advance_date_to', '<', $endDate);
+                                            });
+                                        })->get();     
+                    //dd($adv_booked_room->toArray());
         foreach($adv_booked_room as $item)
         {
             $single = array_merge($single, explode(',', $item->room_list));
@@ -507,8 +524,8 @@ class BookingController extends Controller
     }
     public function checkRoom($date)
     {
-        $startdate=date("Y-m-d",strtotime(substr($date,0,10)));
-        $enddate=date("Y-m-d",strtotime(substr($date,13)));
+        $startDate=date("Y-m-d",strtotime(substr($date,0,10)));
+        $endDate=date("Y-m-d",strtotime(substr($date,13)));
         $m_data = add_members::all();
         $count=DB::SELECT("SELECT r_id from room_details");
         if($count)
@@ -523,11 +540,22 @@ class BookingController extends Controller
   
         $adv_booked_room = room_details::select("room_list")
         ->where('booking_type', '=', 'ADVANCE')
-        ->whereBetween('advance_date_from', [$startdate, $enddate])
-        ->whereBetween('advance_date_to', [$startdate, $enddate])
-        ->get();
-        ///->toArray();
-                   // dd($adv_booked_room);
+        ->where('status', '=', 'ADVANCE')
+        ->where(function ($query) use ($startDate, $endDate) {
+            $query->where(function ($query) use ($startDate, $endDate) {
+                    $query->where('advance_date_from', '<=', $startDate)
+                    ->where('advance_date_to', '>', $startDate);
+            })
+                    ->orWhere(function ($query) use ($startDate, $endDate) {
+                    $query->where('advance_date_from', '<=', $endDate)
+                    ->where('advance_date_to', '>', $endDate);
+            })
+                    ->orWhere(function ($query) use ($startDate, $endDate) {
+                    $query->where('advance_date_from', '>=', $startDate)
+                    ->where('advance_date_to', '<', $endDate);
+            });
+        })->get();   
+       
         foreach($adv_booked_room as $item)
         {
             $single = array_merge($single, explode(',', $item->room_list));
@@ -670,10 +698,8 @@ class BookingController extends Controller
     {
         $data=DB::SELECT("SELECT *,add_members.p_id as m_id,room_details.member_id as person_id from room_details join personal_details on personal_details.p_id=room_details.member_id join add_members on personal_details.member_id=add_members.p_id WHERE r_id='$id'");
 
-       /* $startdate=$data[0]->advance_date_from;
-        $enddate=$data[0]->advance_date_to;*/
-        $startdate=$data[0]->advance_date_from;
-        $enddate=$data[0]->advance_date_to;
+        $startDate=$data[0]->advance_date_from;
+        $endDate=$data[0]->advance_date_to;
         $dlx_list=array();
         $ac_list=array();
         $non_ac_list=array();
@@ -683,9 +709,21 @@ class BookingController extends Controller
   
         $adv_booked_room = room_details::select("room_list")
         ->where('booking_type', '=', 'ADVANCE')
-        ->whereBetween('advance_date_from', [$startdate, $enddate])
-        ->whereBetween('advance_date_to', [$startdate, $enddate])
-        ->get();
+        ->where('status', '=', 'ADVANCE')
+        ->where(function ($query) use ($startDate, $endDate) {
+            $query->where(function ($query) use ($startDate, $endDate) {
+                    $query->where('advance_date_from', '<=', $startDate)
+                    ->where('advance_date_to', '>', $startDate);
+            })
+                    ->orWhere(function ($query) use ($startDate, $endDate) {
+                    $query->where('advance_date_from', '<=', $endDate)
+                    ->where('advance_date_to', '>', $endDate);
+            })
+                    ->orWhere(function ($query) use ($startDate, $endDate) {
+                    $query->where('advance_date_from', '>=', $startDate)
+                    ->where('advance_date_to', '<', $endDate);
+            });
+        })->get();   
         foreach($adv_booked_room as $item)
         {
             $single = array_merge($single, explode(',', $item->room_list));
