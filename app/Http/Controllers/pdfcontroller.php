@@ -10,22 +10,49 @@ use DB;
 class pdfcontroller extends Controller
 {
    
-    public function pdf_CheckIn($id)
-    {
-        $room_booking=DB::SELECT("SELECT *,add_members.p_id as m_id from room_details join personal_details on personal_details.p_id=room_details.member_id join add_members on personal_details.member_id=add_members.p_id WHERE r_id='$id'");
-        $member_detail=DB::SELECT("SELECT * from member_details WHERE room_id='$id'");
-        $img="images/".$room_booking[0]->id_proof;
-        $index=strrpos($img,",");
-        if($index==false)
-        {
-            $pdf = Pdf::loadView('pdf.pdf_Checkin',['room_booking'=>$room_booking,'member_detail'=>$member_detail,'img1'=>$img,'img2'=>NULL])->setPaper('a4', 'potrait')->setOptions(['defaultFont' => 'NotoSansGujarati-Regular','enable_remote'=>TRUE]);    
-        }else{
-            $img1=substr($img,0,$index);
-            $img2="images/".substr($img,$index+1);
-            $pdf = Pdf::loadView('pdf.pdf_Checkin',['room_booking'=>$room_booking,'member_detail'=>$member_detail,'img1'=>$img1,'img2'=>$img2])->setPaper('a4', 'potrait')->setOptions(['defaultFont' => 'NotoSansGujarati-Regular','enable_remote'=>TRUE]);
-        }
-        return $pdf->stream();
-    }
+public function pdf_CheckIn($id)
+  {
+      $room_booking=DB::SELECT("SELECT *,add_members.p_id as m_id from room_details join personal_details on personal_details.p_id=room_details.member_id join add_members on personal_details.member_id=add_members.p_id WHERE r_id='$id'");
+      $room_no = array();
+      $dmt_no = array();
+      $dmt_non_ac = array();
+      $room_checkin = explode(",", $room_booking[0]->room_list);
+      $drc = 0;
+      $nonac = 0;
+      $ac = 0;
+      $dmac = 0;
+      $dmnonac = 0;
+      foreach ($room_checkin as $room) {
+          if ($room === '301' || $room === '302' || $room === '401' || $room === '402') {
+              array_push($room_no, $room);
+              $drc++;
+          } elseif ($room === '303' || $room === '304' || $room === '305' || $room === '306' || $room === '403') {
+              array_push($room_no, $room);
+              $nonac++;
+          } elseif ($room === '201' || $room === '202' || $room === '203' || $room === '204' || $room === '205' || $room === '206' || $room === '404' || $room === '405' || $room === '406') {
+              array_push($room_no, $room);
+              $ac++;
+          } elseif ($room === '11' || $room === '12' || $room === '13' || $room === '14' || $room === '15' || $room === '16' || $room === '17' || $room === '18' || $room === '19' || $room === '20') {
+              array_push($dmt_no, $room);
+              $dmac++;
+          } elseif ($room === '1' || $room === '2' || $room === '3' || $room === '4' || $room === '5' || $room === '6' || $room === '7' || $room === '8' || $room === '9' || $room === '10') {
+              array_push($dmt_non_ac, $room);
+              $dmnonac++;
+          }
+      }
+      $member_detail=DB::SELECT("SELECT * from member_details WHERE room_id='$id'");
+      $img="images/".$room_booking[0]->id_proof;
+      $index=strrpos($img,",");
+      if($index==false)
+      {
+          $pdf = Pdf::loadView('pdf.pdf_Checkin',['room_booking'=>$room_booking,'member_detail'=>$member_detail,'img1'=>$img,'img2'=>NULL,'drc'=> $drc ,'nonac'=> $nonac ,'ac'=>$ac,'dmac'=>$dmac,'dmnonac'=>$dmnonac,'room_no'=>$room_no,'dmt_no'=>$dmt_no,'dmt_non_ac' => $dmt_non_ac])->setPaper('a4', 'potrait')->setOptions(['defaultFont' => 'NotoSansGujarati-Regular','enable_remote'=>TRUE]);
+      }else{
+          $img1=substr($img,0,$index);
+          $img2="images/".substr($img,$index+1);
+          $pdf = Pdf::loadView('pdf.pdf_Checkin',['room_booking'=>$room_booking,'member_detail'=>$member_detail,'img1'=>$img1,'img2'=>$img2,'drc'=> $drc ,'nonac'=> $nonac ,'ac'=>$ac,'dmac'=>$dmac,'dmnonac'=>$dmnonac,'room_no'=>$room_no,'dmt_no'=>$dmt_no,'dmt_non_ac' => $dmt_non_ac])->setPaper('a4', 'potrait')->setOptions(['defaultFont' => 'NotoSansGujarati-Regular','enable_remote'=>TRUE]);
+      }
+      return $pdf->stream();
+  }
    
     public function pdf_Religious_Donation($id)
     {   

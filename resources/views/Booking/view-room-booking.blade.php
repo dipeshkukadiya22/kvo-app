@@ -351,7 +351,7 @@ label.readonly {
                                                 <!-- Basic -->
                                                 <div class="col-md-4">
                                                   <label  class="form-label">Community</label>
-                                                  <select id="select2Basic1" class="select2 form-select form-select-lg" name="community" data-allow-clear="true">
+                                                  <select id="select2Basic1" class=" form-select form-select-md" name="community" data-allow-clear="true">
                                                   <option value="Hindu">Hindu</option>
                                                   <option value="Jain">Jain</option>
                                                   <option value="Isalam">Muslim</option>
@@ -1266,32 +1266,32 @@ function editadvanceroom(id)
         $("#dlx_amount").prop('readonly', false);
       } else {
         $("#dlx_amount").prop('readonly', true);
+        $("#dlx_amount").val('');
       }
-
       if (list1.value !== "") {
         $("#ac_amount").prop('readonly', false);
       } else {
         $("#ac_amount").prop('readonly', true);
+        $("#ac_amount").val('');
       }
-
       if (list2.value !== "") {
         $("#non_ac_amount").prop('readonly', false);
       } else {
         $("#non_ac_amount").prop('readonly', true);
+        $("#non_ac_amount").val('');
       }
-
       if (list3.value !== "") {
         $("#dmt_amount").prop('readonly', false);
       } else {
         $("#dmt_amount").prop('readonly', true);
+        $("#dmt_amount").val('');
       }
-
       if (list5.value !== "") {
         $("#dmt_ac_amount").prop('readonly', false);
       } else {
         $("#dmt_ac_amount").prop('readonly', true);
-      }
-      
+        $("#dmt_ac_amount").val('');
+      }  
     });
   });
 </script>
@@ -1384,34 +1384,34 @@ function editadvanceroom(id)
         $("#advance_dlx_amount").prop('readonly', false);
       } else {
         $("#advance_dlx_amount").prop('readonly', true);
+        $("#advance_dlx_amount").val('');
       }
-
       if (list1.value !== "") {
         $("#advance_ac-amount").prop('readonly', false);
       } else {
         $("#advance_ac-amount").prop('readonly', true);
+        $("#advance_ac-amount").val('');
       }
-
       if (list2.value !== "") {
         $("#advance_non-ac-amount").prop('readonly', false);
       } else {
         $("#advance_non-ac-amount").prop('readonly', true);
+        $("#advance_non-ac-amount").val('');
       }
-
       if (list3.value !== "") {
         $("#advance_door_mt_amount").prop('readonly', false);
       } else {
         $("#advance_door_mt_amount").prop('readonly', true);
+        $("#advance_door_mt_amount").val('');
       }
-
       if (list5.value !== "") {
         $("#advance_dmt_ac_amount").prop('readonly', false);
       } else {
         $("#advance_dmt_ac_amount").prop('readonly', true);
+        $("#advance_dmt_ac_amount").val('');
       }
-      
-    });
   });
+});
 </script>
 
 <script>
@@ -1460,6 +1460,7 @@ function edit(id)
                   $("#member_city").val(response.data[0].city);
                   $('#member_email').val(response.data[0].email);
                   $('#member_phone').val(response.data[0].phone_no);
+                  $("#gender_data").val(gender);
                   if(gender=="MALE"){
                     $("#MALE").attr('checked',true);
                     $("#inlineRadio1").attr('checked',true);

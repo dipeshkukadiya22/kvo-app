@@ -461,42 +461,43 @@
     $("#door_mt_ac_amount").prop('readonly', true);
 
     $("#room_booking").change(function () {
-      let list4 = document.getElementById("select2Multiple44");
-      let list1 = document.getElementById("select2Multiple11");
-      let list2 = document.getElementById("select2Multiple22");
-      let list3 = document.getElementById("select2Multiple33");
-      let list5 = document.getElementById("select2Multiple55");
-      if (list4.value !== "") {
-        $("#dlx_amount").prop('readonly', false);
-      } else {
-        $("#dlx_amount").prop('readonly', true);
-      }
-
-      if (list1.value !== "") {
-        $("#ac-amount").prop('readonly', false);
-      } else {
-        $("#ac-amount").prop('readonly', true);
-      }
-
-      if (list2.value !== "") {
-        $("#non-ac-amount").prop('readonly', false);
-      } else {
-        $("#non-ac-amount").prop('readonly', true);
-      }
-
-      if (list3.value !== "") {
-        $("#door_mt_amount").prop('readonly', false);
-      } else {
-        $("#door_mt_amount").prop('readonly', true);
-      }
-
-      if (list5.value !== "") {
-        $("#door_mt_ac_amount").prop('readonly', false);
-      } else {
-        $("#door_mt_ac_amount").prop('readonly', true);
-      }
-    });
+    let list4 = document.getElementById("select2Multiple44");
+    let list1 = document.getElementById("select2Multiple11");
+    let list2 = document.getElementById("select2Multiple22");
+    let list3 = document.getElementById("select2Multiple33");
+    let list5 = document.getElementById("select2Multiple55");
+    if (list4.value !== "") {
+      $("#dlx_amount").prop('readonly', false);
+    } else {
+      $("#dlx_amount").prop('readonly', true);
+      $("#dlx_amount").val('');
+    }
+    if (list1.value !== "") {
+      $("#ac-amount").prop('readonly', false);
+    } else {
+      $("#ac-amount").prop('readonly', true);
+      $("#ac-amount").val('');
+    }
+    if (list2.value !== "") {
+      $("#non-ac-amount").prop('readonly', false);
+    } else {
+      $("#non-ac-amount").prop('readonly', true);
+      $("#non-ac-amount").val('');
+    }
+    if (list3.value !== "") {
+      $("#door_mt_amount").prop('readonly', false);
+    } else {
+      $("#door_mt_amount").prop('readonly', true);
+      $("#door_mt_amount").val('');
+    }
+    if (list5.value !== "") {
+      $("#door_mt_ac_amount").prop('readonly', false);
+    } else {
+      $("#door_mt_ac_amount").prop('readonly', true);
+      $("#door_mt_ac_amount").val('');
+    }
   });
+});
 </script>
 
 <script>

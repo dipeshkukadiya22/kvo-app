@@ -1092,16 +1092,35 @@
     {
       $("#btn-step1").prop('disabled',false);
     }
-    if(list4.value != "")
-    {$("#dlx_amount").attr('readonly',false);}
-    if(list1.value != "")
-    {$("#ac-amount").attr('readonly',false);} 
-    if(list2.value !="")
-    {$("#non-ac-amount").attr('readonly',false);} 
-    if(list3.value !="")
-    {$("#door_mt_amount").attr('readonly',false);}
-    if(list5.value !="")
-    {$("#door_mt_ac_amount").attr('readonly',false);}
+    if (list4.value !== "") {
+        $("#dlx_amount").prop('readonly', false);
+      } else {
+        $("#dlx_amount").prop('readonly', true);
+        $("#dlx_amount").val('');}
+    if (list1.value !== "") {
+        $("#ac-amount").prop('readonly', false);
+      } else {
+        $("#ac-amount").prop('readonly', true);
+        $("#ac-amount").val('');
+      }
+    if (list2.value !== "") {
+        $("#non-ac-amount").prop('readonly', false);
+      } else {
+        $("#non-ac-amount").prop('readonly', true);
+        $("#non-ac-amount").val('');
+      }
+    if (list3.value !== "") {
+        $("#door_mt_amount").prop('readonly', false);
+      } else {
+        $("#door_mt_amount").prop('readonly', true);
+        $("#door_mt_amount").val('');
+      }
+    if (list5.value !== "") {
+        $("#door_mt_ac_amount").prop('readonly', false);
+      } else {
+        $("#door_mt_ac_amount").prop('readonly', true);
+        $("#door_mt_ac_amount").val('');
+      }
     if(((list4.value != "" && dlx_amt.value !="" )||( list1.value !="" && ac_amt.value !="") || (list2.value !="" && non_ac_amt.value !="") ||(list3.value !="" && dmt_amt.value !="") || (list5.value != "" && dmt_ac_amt.value !="")) && deposite.value !="")
     {$("#repeat-next").prop('disabled',false);} 
     if($("#payment").val()=="CASH"){
