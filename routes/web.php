@@ -146,6 +146,8 @@ Route::group(['middleware'=>['user']],function(){
     Route::get('show_expense_report', [ReportController::class, 'show_expense_report'])->name('show_expense_report');
     Route::get('medical_report', [ReportController::class, 'medical_report'])->name('medical_report');
     Route::get('show_medical_report', [ReportController::class, 'show_medical_report'])->name('show_medical_report');
+    Route::get('room_booking_report', [ReportController::class, 'room_booking_report'])->name('room_booking_report');
+    Route::get('show_room_booking_report', [ReportController::class, 'show_room_booking_report'])->name('show_room_booking_report');
 });
 
 /* Auth Login Route */

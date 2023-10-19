@@ -156,5 +156,20 @@ class ReportController extends Controller
         $data=DB::SELECT("SELECT * FROM medical join add_members on add_members.p_id=medical.p_id where date BETWEEN '$date1' and '$date2'");
         return view('Reports.medical_report',['data'=>$data,'daterange'=>$daterange,'total'=>$total]);
     }
-
+    public function room_booking_report(){
+        $daterange=Date("01-m-Y")."-".Date("31-m-Y");
+        $date1=date('Y-m-d',strtotime(substr($daterange,0,10)));
+        $date2=date('Y-m-d',strtotime(substr($daterange,13)));
+        $data=DB::SELECT("SELECT * FROM checkout join `room_details`on checkout.room_booking_id=room_details.r_id join personal_details on room_details.member_id=personal_details.p_id join add_members on add_members.p_id=personal_details.member_id WHERE room_details.status='CHECKOUT'and check_out_date BETWEEN  '$date1' and '$date2'");
+        $total=DB::SELECT("SELECT sum(total) as amount FROM checkout join `room_details`on checkout.room_booking_id=room_details.r_id join personal_details on room_details.member_id=personal_details.p_id join add_members on add_members.p_id=personal_details.member_id WHERE room_details.status='CHECKOUT' and check_out_date BETWEEN  '$date1' and '$date2'");
+        return view('Reports.room_booking_report',['data'=>$data,'daterange'=>$daterange,'total'=>$total]);
+    }
+    public function show_room_booking_report(Request $req){
+        $daterange=$req->daterange;
+        $date1=date('Y-m-d',strtotime(substr($daterange,0,10)));
+        $date2=date('Y-m-d',strtotime(substr($daterange,13)));
+        $data=DB::SELECT("SELECT * FROM checkout join `room_details`on checkout.room_booking_id=room_details.r_id join personal_details on room_details.member_id=personal_details.p_id join add_members on add_members.p_id=personal_details.member_id WHERE room_details.status='CHECKOUT'and check_out_date BETWEEN  '$date1' and '$date2'");
+        $total=DB::SELECT("SELECT sum(total) as amount FROM checkout join `room_details`on checkout.room_booking_id=room_details.r_id join personal_details on room_details.member_id=personal_details.p_id join add_members on add_members.p_id=personal_details.member_id WHERE room_details.status='CHECKOUT' and check_out_date BETWEEN  '$date1' and '$date2'");
+        return view('Reports.room_booking_report',['data'=>$data,'daterange'=>$daterange,'total'=>$total]);
+    }
 }

@@ -307,6 +307,12 @@ span.app-brand-logo.demo {
                     <div data-i18n="Medical">Medical</div>
                   </a>
                 </li>
+                <li class="menu-item">
+                  <a href="{{route('room_booking_report')}}" class="menu-link">
+                  <i class=" menu-icon fa-solid fa-hand-holding-medical"></i>
+                    <div data-i18n="Medical">Room Booking</div>
+                  </a>
+                </li>
               </ul> 
             </li>
 

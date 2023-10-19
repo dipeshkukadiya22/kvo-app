@@ -17,6 +17,8 @@
 
 <link rel="stylesheet" href="{{ asset ('assets/vendor/libs/select2/select2.css') }}" />
 <link rel="stylesheet" href="{{ asset('assets/vendor/libs/sweetalert2/sweetalert2.css') }}" />
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
 <style>
   @media (min-width: 768px){
     .content-header > .text-md-right {
@@ -1237,11 +1239,19 @@ contactInput.addEventListener('input', function () {
 });
 
 </script>
+<script>
+flatpickr("#flatpickr-datetime", {
+  enableTime: true, // If you want to allow time selection
+  dateFormat: "d-m-Y H:i", // Date and time format
+  maxDate: "today", // Set the maximum date to today to disable future dates
+});
 
+</script>
 
 
 
 <script src="{{ asset ('assets/vendor/libs/jquery-repeater/jquery-repeater.js') }}"></script>
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 
 @endsection
 

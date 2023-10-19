@@ -94,17 +94,10 @@ class BookingController extends Controller
         $booking->member_id=$personal_details_id;
         $booking->payment_mode=$req->payment;
         $booking->date=date("Y-m-d");
-        if(date("Y-m-d",strtotime($req->check_in_date)) == date("Y-m-d")) {
+       
             $booking->status="BOOKED";
-            $booking->booking_type="REGULAR";}
-        else{
-            
-            $booking->advance_date= date("Y-m-d H:i",strtotime($req->check_in_date));
-            $booking->status="ADVANCE";
-            $booking->booking_type="ADVANCE";}
-       
-       
-       
+            $booking->booking_type="REGULAR";
+     
         $status=$details->save();
         if($status)
         {
