@@ -62,8 +62,13 @@
   margin:12px;
 }
 .status-0 {
-        background-color: green !important;
+        background-color:#1d3456  !important;
 }
+.status-not-0 {
+    background-color: #ca5300 !important;
+}
+
+
 .inner-box{
   padding:12px;
 }
@@ -95,7 +100,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="content-header-right d-flex justify-content-end col-md-6 col-12">
+                    <!-- <div class="content-header-right d-flex justify-content-end col-md-6 col-12">
                       
                         <div class="form-group breadcrumb-right py-3 d-inline-flex">
 
@@ -108,7 +113,7 @@
                             </li>
                           </ul>
                           
-                          <!-- Enable backdrop (default) Offcanvas -->
+                        
                           <div class="mt-0">
                             <button
                               class="btn btn-primary"
@@ -133,7 +138,7 @@
                               </div>
                               <div class="offcanvas-body mx-0 flex-grow-0">
     
-                                <!-- Browser Default -->
+                              
                                 <form class="browser-default-validation" method="POST" action="{{route('RoomList')}}">
                                   @csrf
                                   <div class="mb-3">
@@ -174,7 +179,7 @@
                                     </div>
                                   </div>
                                 </form>
-                                <!-- /Browser Default -->
+                              
     
                                 
                               </div>
@@ -182,7 +187,7 @@
                           </div>
                         
                         </div>
-                    </div>
+                    </div> -->
                 </div>
                 <div class="row mb-4">
                   <div class="col-md mb-4 mb-md-0">
@@ -210,13 +215,14 @@
                                       <div class="box">
                                         <div class="row">
                                           @foreach ($list as $room)
-                                            <div class="col-md-2 mt-3">
-                                                <a href="#">
-                                                    <div class="card inner-box text-white bg-danger {{$room->status == 0 ? 'status-0' : '' }}">
-                                                        <div class="card-header text-center">{{$room->room_no}}&nbsp;{{ $room->room_name }}</div>
-                                                    </div>
-                                                </a>
-                                            </div>
+                                          <div class="col-md-2 mt-3">
+                                              <a href="#">
+                                                  <div class="card inner-box text-white  {{$room->status == 0 ? 'status-0' : 'status-not-0' }}">
+                                                      <div class="card-header text-center">{{$room->room_no}}&nbsp;{{ $room->room_name }}</div>
+                                                  </div>
+                                              </a>
+                                          </div>
+
                                           @endforeach
                                         </div>
                                       </div>
@@ -227,6 +233,8 @@
                                   
                                 
                         
+
+                                
                                 
                               
                               </div>

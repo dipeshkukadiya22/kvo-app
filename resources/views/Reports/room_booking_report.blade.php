@@ -393,7 +393,7 @@ div.card-datatable [class*=col-md-] {
     });
 
     
-    $('div.head-label').html('<h5 class="card-title mb-0">તબીબી સારવાર રિપોર્ટ</h5>');
+    $('div.head-label').html('<h5 class="card-title mb-0">રૂમ બુકિગ રિપોર્ટ</h5>');
 
     </script>
 

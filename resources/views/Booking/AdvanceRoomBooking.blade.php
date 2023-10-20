@@ -289,7 +289,7 @@
                                   <label class="form-label" for="basic-default-name">Amount</label>
                                   <div class="input-group">
                                     <span class="input-group-text">₹</span>
-                                    <input type="number" class="form-control"  name="door_mt_amount" id="door_mt_amount" placeholder="Amount" aria-label="Amount (to the nearest indian)"   />
+                                    <input type="number" class="form-control check-amount"  name="door_mt_amount" id="door_mt_amount" placeholder="Amount" aria-label="Amount (to the nearest indian)"   />
                                   </div>
                                 </div>
                             
@@ -316,19 +316,19 @@
                             </div>
 
                             <div class="col-md-4">
-                              <label class="form-label" for="deposit-amount"><span class="required">No of Days</span></label>
+                              <label class="form-label" for="deposit-amount "><span class="required">No of Days</span></label>
                               <input type="number" class="form-control" name="no_of_days" id="no_of_days" placeholder="no_of_days" value="1" required readonly>
                               <input type="hidden" name="start_date" id="start_date" value="">
                               <input type="hidden" name="end_date" id="end_date" value="">
                             </div>
                             
                             <div class="col-md-4">
-                              <label class="form-label" for="rupees-in-words">Occupation</label>
+                              <label class="form-label" for="rupees-in-words"><span class="required">Occupation</span></label>
                               <input type="text" class="form-control" style="text-transform:uppercase" name="occupation" id="occupation" placeholder="Occupation" required>
                             </div>
 
                             <div class="col-md-4">
-                              <label class="form-label" for="rupees-in-words">Reason</label>
+                              <label class="form-label" for="rupees-in-words"><span class="required">Reason</span></label>
                               <input type="text" class="form-control" style="text-transform:uppercase" name="reason" id="reason" placeholder="Reason to stay" required>
                             </div>
 
@@ -430,6 +430,12 @@
     <script src="{{ asset ('assets/js/forms-extras.js') }}"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
     <script>
+
+    $(".check-amount").keydown(function(e){
+      if(e.keyCode==109){
+        event.preventDefault();
+      }
+    });
     jQuery(function ($) {
         
         $('input[name="advance_date"]').daterangepicker({
