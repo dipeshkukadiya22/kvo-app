@@ -221,7 +221,7 @@
                                   <label class="form-label" for="basic-default-name">Amount</label>
                                   <div class="input-group">
                                     <span class="input-group-text">₹</span>
-                                    <input type="text" class="form-control"  name="dlx_amount" placeholder="Amount" aria-label="Amount (to the nearest indian)" id="dlx_amount" maxlength="4" onkeypress="return onlyNumbers(this.value);"/>
+                                    <input type="number" class="form-control"  name="dlx_amount" placeholder="Amount" aria-label="Amount (to the nearest indian)" id="dlx_amount" maxlength="4"  oninput="this.value = this.value.slice(0, 4);"/>
                                   </div>
                               </div>
                             
@@ -239,7 +239,7 @@
                                   <label class="form-label" for="basic-default-name">Amount</label>
                                   <div class="input-group">
                                     <span class="input-group-text">₹</span>
-                                    <input type="number" class="form-control "  name="ac_amount" placeholder="Amount" aria-label="Amount (to the nearest indian)" id="ac-amount" />
+                                    <input type="number" class="form-control "  name="ac_amount" placeholder="Amount" aria-label="Amount (to the nearest indian)" id="ac-amount" maxlength="4"  oninput="this.value = this.value.slice(0, 4);"/>
                                   </div>
                                 </div>
 
@@ -257,7 +257,7 @@
                                   <label class="form-label" for="basic-default-name">Amount</label>
                                   <div class="input-group">
                                     <span class="input-group-text">₹</span>
-                                    <input type="number" class="form-control"  name="non_ac_amount" placeholder="Amount" aria-label="Amount (to the nearest indian)" id="non-ac-amount" />
+                                    <input type="number" class="form-control"  name="non_ac_amount" placeholder="Amount" aria-label="Amount (to the nearest indian)" id="non-ac-amount" maxlength="4"  oninput="this.value = this.value.slice(0, 4);"/>
                                   </div>
                                 </div>
                                 <div class="col-md-2 mt-3">
@@ -272,7 +272,7 @@
                                   <label class="form-label" for="basic-default-name">Amount</label>
                                   <div class="input-group">
                                     <span class="input-group-text">₹</span>
-                                    <input type="text" class="form-control"  name="door_mt_ac_amount" id="door_mt_ac_amount" placeholder="Amount" aria-label="Amount (to the nearest indian)"  maxlength="4" onkeypress="return onlyNumbers(this.value);" />
+                                    <input type="number" class="form-control"  name="door_mt_ac_amount" id="door_mt_ac_amount" placeholder="Amount" aria-label="Amount (to the nearest indian)"  maxlength="4"  oninput="this.value = this.value.slice(0, 4);" />
                                   </div>
                                 </div>
 
@@ -289,7 +289,7 @@
                                   <label class="form-label" for="basic-default-name">Amount</label>
                                   <div class="input-group">
                                     <span class="input-group-text">₹</span>
-                                    <input type="number" class="form-control check-amount"  name="door_mt_amount" id="door_mt_amount" placeholder="Amount" aria-label="Amount (to the nearest indian)"   />
+                                    <input type="number" class="form-control check-amount"  name="door_mt_amount" id="door_mt_amount" placeholder="Amount" aria-label="Amount (to the nearest indian)" maxlength="4" oninput="this.value = this.value.slice(0, 4);"  />
                                   </div>
                                 </div>
                             
@@ -299,14 +299,14 @@
                             
                             <div class="col-md-4">
                               <label class="form-label" for="basic-default-name"><span class="required">No. of Person</span></label>
-                              <input type="number" class="form-control"  name="no_of_person" id="no_of_person_id" placeholder="No of Person" value="1" required/>
+                              <input type="number" class="form-control"  name="no_of_person" id="no_of_person_id" placeholder="No of Person" value="1" maxlength="1" required oninput="this.value = this.value.slice(0, 1);"/>
                             </div>
                             <!-- Datetime Picker-->
                             
 
                             <div class="col-md-4">
                               <label class="form-label" for="deposit-amount"><span class="required">Deposit Rs</span></label>
-                              <input type="number" class="form-control" name="deposite_rs" id="deposit-amount" placeholder="Deposit Rs" required>
+                              <input type="number" class="form-control" name="deposite_rs" id="deposit-amount" placeholder="Deposit Rs" maxlength="5" required oninput="this.value = this.value.slice(0, 5);">
                               <div id="deposite" class="error-message" ></div>
                             </div>
                             
@@ -317,7 +317,7 @@
 
                             <div class="col-md-4">
                               <label class="form-label" for="deposit-amount "><span class="required">No of Days</span></label>
-                              <input type="number" class="form-control" name="no_of_days" id="no_of_days" placeholder="no_of_days" value="1" required readonly>
+                              <input type="number" class="form-control" name="no_of_days" id="no_of_days" placeholder="no_of_days" value="1" maxlength="2" required oninput="this.value = this.value.slice(0, 2);" readonly>
                               <input type="hidden" name="start_date" id="start_date" value="">
                               <input type="hidden" name="end_date" id="end_date" value="">
                             </div>

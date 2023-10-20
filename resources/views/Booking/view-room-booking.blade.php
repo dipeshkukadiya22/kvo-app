@@ -105,12 +105,12 @@ label.readonly {
                           <li class="nav-item">
                             <button
                               type="button" class="nav-link active" role="tab" data-bs-toggle="tab" data-bs-target="#navs-pills-top-bookedroom" aria-controls="navs-pills-top-allroom" aria-selected="true">
-                              View Room Booking(<span id="bookedRoomsCount">0</span>)
+                              View Room Booking(<span id="bookedRoomsCount">{{$room_booking[0]->total}}</span>)
                             </button>
                           </li>
                           <li class="nav-item">
                             <button type="button" class="nav-link" role="tab" data-bs-toggle="tab" data-bs-target="#navs-pills-top-checkoutroom"  aria-controls="navs-pills-top-available" aria-selected="false"> 
-                              View Advance Room Booking(<span id="availableRoomsCount">0</span>) </button>
+                              View Advance Room Booking(<span id="availableRoomsCount">{{$advance_room_booking[0]->total}}</span>) </button>
                           </li>
                           
                         </ul>
@@ -339,7 +339,7 @@ label.readonly {
 
                                                 <div class="col-md-4">
                                                   <label class="form-label" for="basic-default-name">Age</label>
-                                                  <input type="text" class="form-control check" name="age" id="age" placeholder="Age"  maxlength="2" required oninput="javascript: if (this.value.length > 2) this.value = this.value.slice(0, 2);" />
+                                                  <input type="number" class="form-control check" name="age" id="age" placeholder="Age"  maxlength="2" required oninput="this.value = this.value.slice(0, 2);" />
                                                 </div>
                       
                                                 <div class="col-4">
@@ -369,11 +369,11 @@ label.readonly {
 
                                                 <div class="col-md-4">
                                                 <label class="form-label" for="basic-default-name">No. of Person</label>
-                                                <input type="text" class="form-control"  name="no_of_person_id" id="no_of_person_id" placeholder="No of Person" min="1" max="10"/>
+                                                <input type="number" class="form-control"  name="no_of_person_id" id="no_of_person_id" placeholder="No of Person" maxlength="1" required oninput="this.value = this.value.slice(0, 1);" />
                                               </div>
                                               <div class="col-md-4">
                                                 <label class="form-label" for="basic-default-name">No. of days</label>
-                                                <input type="text" class="form-control"  name="no_of_days" id="no_of_days" placeholder="No of Person" min="1" max="10"/>
+                                                <input type="number" class="form-control"  name="no_of_days" id="no_of_days" placeholder="No of Person" maxlength="2" required oninput="this.value = this.value.slice(0, 2);"/>
                                               </div>
                         
                                                 <div class="col-md-4">
@@ -539,7 +539,7 @@ label.readonly {
                                                         <label class="form-label" for="basic-default-name">Amount</label>
                                                         <div class="input-group">
                                                           <span class="input-group-text">₹</span>
-                                                          <input type="text" class="form-control"  name="dlx_amount" placeholder="Amount" aria-label="Amount (to the nearest indian)" id="dlx_amount" maxlength="4" onkeypress="return onlyNumbers(this.value);"/>
+                                                          <input type="number" class="form-control"  name="dlx_amount" placeholder="Amount" aria-label="Amount (to the nearest indian)" id="dlx_amount" maxlength="4"  oninput="this.value = this.value.slice(0, 4);"/>
                                                         </div>
                                                   </div>
                                                 <div class="col-md-2">
@@ -560,7 +560,7 @@ label.readonly {
                                                     <label class="form-label" for="basic-default-name">Amount</label>
                                                     <div class="input-group">
                                                       <span class="input-group-text">₹</span>
-                                                      <input type="number" class="form-control"  name="ac_amount" placeholder="Amount" aria-label="Amount (to the nearest indian)" id="ac_amount" value="" />
+                                                      <input type="number" class="form-control"  name="ac_amount" placeholder="Amount" aria-label="Amount (to the nearest indian)" id="ac_amount" maxlength="4" oninput="this.value = this.value.slice(0, 4);" />
                                                     </div>
                                                   </div>
 
@@ -582,7 +582,7 @@ label.readonly {
                                                     <label class="form-label" for="basic-default-name">Amount</label>
                                                     <div class="input-group">
                                                       <span class="input-group-text">₹</span>
-                                                      <input type="number" class="form-control"  name="non_ac_amount" placeholder="Amount" aria-label="Amount (to the nearest indian)" id="non_ac_amount" value="" />
+                                                      <input type="number" class="form-control"  name="non_ac_amount" placeholder="Amount" aria-label="Amount (to the nearest indian)" id="non_ac_amount" value="" maxlength="4"  oninput="this.value = this.value.slice(0, 4);"/>
                                                     </div>
                                                   </div>
                                                   <div class="col-md-2">
@@ -602,7 +602,7 @@ label.readonly {
                                                         <label class="form-label" for="basic-default-name">Amount</label>
                                                         <div class="input-group">
                                                           <span class="input-group-text">₹</span>
-                                                          <input type="text" class="form-control"  name="dmt_ac_amount" placeholder="Amount" aria-label="Amount (to the nearest indian)" id="dmt_ac_amount" maxlength="4" onkeypress="return onlyNumbers(this.value);"/>
+                                                          <input type="number" class="form-control"  name="dmt_ac_amount" placeholder="Amount" aria-label="Amount (to the nearest indian)" id="dmt_ac_amount" maxlength="4"  oninput="this.value = this.value.slice(0, 4);"/>
                                                         </div>
                                                     </div>
                                                   <div class="col-md-2">
@@ -624,7 +624,7 @@ label.readonly {
                                                     <label class="form-label" for="basic-default-name">Amount</label>
                                                     <div class="input-group">
                                                       <span class="input-group-text">₹</span>
-                                                      <input type="number" class="form-control"  name="dmt_amount" placeholder="Amount" aria-label="Amount (to the nearest indian)" id="dmt_amount" value="" />
+                                                      <input type="number" class="form-control"  name="dmt_amount" placeholder="Amount" aria-label="Amount (to the nearest indian)" id="dmt_amount" maxlength="4"  oninput="this.value = this.value.slice(0, 4);"/>
                                                     </div>
                                                   </div>
                     
@@ -651,7 +651,7 @@ label.readonly {
                                               </div>
                                               <div class="col-md-4">
                                                 <label class="form-label" for="deposit-amount">Deposit Rs</label>
-                                                <input type="number" class="form-control" name="deposite_rs" id="deposit-amount" placeholder="Deposit Rs">
+                                                <input type="number" class="form-control" name="deposite_rs" id="deposit-amount" placeholder="Deposit Rs" maxlength="5" oninput="this.value = this.value.slice(0, 5);">
                                                 <div id="deposite" class="error-message" ></div></div>
                                               
                                               <div class="col-md-4">
@@ -904,7 +904,7 @@ label.readonly {
                                                 <label class="form-label" for="basic-default-name">Amount</label>
                                                 <div class="input-group">
                                                   <span class="input-group-text">₹</span>
-                                                  <input type="number" class="form-control "  name="adv_dlx_amount" placeholder="Amount" aria-label="Amount (to the nearest indian)" id="advance_dlx_amount" />
+                                                  <input type="number" class="form-control "  name="adv_dlx_amount" placeholder="Amount" aria-label="Amount (to the nearest indian)" id="advance_dlx_amount" maxlength="4"  oninput="this.value = this.value.slice(0, 4);"/>
                                                 </div>
                                               </div>
                                               <div class="col-md-2 mt-3">
@@ -918,7 +918,7 @@ label.readonly {
                                                 <label class="form-label" for="basic-default-name">Amount</label>
                                                 <div class="input-group">
                                                   <span class="input-group-text">₹</span>
-                                                  <input type="number" class="form-control "  name="adv_ac_amount" placeholder="Amount" aria-label="Amount (to the nearest indian)" id="advance_ac-amount" />
+                                                  <input type="number" class="form-control "  name="adv_ac_amount" placeholder="Amount" aria-label="Amount (to the nearest indian)" id="advance_ac-amount" maxlength="4" required oninput="this.value = this.value.slice(0, 4);" />
                                                 </div>
                                               </div>
 
@@ -931,7 +931,7 @@ label.readonly {
                                                 <label class="form-label" for="basic-default-name">Amount</label>
                                                 <div class="input-group">
                                                   <span class="input-group-text">₹</span>
-                                                  <input type="number" class="form-control"  name="adv_non_ac_amount" placeholder="Amount" aria-label="Amount (to the nearest indian)" id="advance_non-ac-amount" />
+                                                  <input type="number" class="form-control"  name="adv_non_ac_amount" placeholder="Amount" aria-label="Amount (to the nearest indian)" id="advance_non-ac-amount" maxlength="4" required oninput="this.value = this.value.slice(0, 4);" />
                                                 </div>
                                               </div>
                                               <div class="col-md-2 mt-3">
@@ -944,7 +944,7 @@ label.readonly {
                                                 <label class="form-label" for="basic-default-name">Amount</label>
                                                 <div class="input-group">
                                                   <span class="input-group-text">₹</span>
-                                                  <input type="number" class="form-control "  name="adv_dmt_ac_amount" placeholder="Amount" aria-label="Amount (to the nearest indian)" id="advance_dmt_ac_amount" />
+                                                  <input type="number" class="form-control "  name="adv_dmt_ac_amount" placeholder="Amount" aria-label="Amount (to the nearest indian)" id="advance_dmt_ac_amount" maxlength="4" required oninput="this.value = this.value.slice(0, 4);" />
                                                 </div>
                                               </div>
                                               <div class="col-md-2 mt-3">
@@ -956,17 +956,17 @@ label.readonly {
                                                 <label class="form-label" for="basic-default-name">Amount</label>
                                                 <div class="input-group">
                                                   <span class="input-group-text">₹</span>
-                                                  <input type="number" class="form-control"  name="adv_door_mt_amount" id="advance_door_mt_amount" placeholder="Amount" aria-label="Amount (to the nearest indian)"   />
+                                                  <input type="number" class="form-control"  name="adv_door_mt_amount" id="advance_door_mt_amount" placeholder="Amount" aria-label="Amount (to the nearest indian)" maxlength="4" required oninput="this.value = this.value.slice(0, 4);"  />
                                                 </div>
                                               </div>
                                             </div>
                                             <div class="col-md-4">
                                               <label class="form-label" for="basic-default-name"><span class="required">No. of Person</span></label>
-                                              <input type="number" class="form-control"  name="no_of_person" id="advance_no_of_person_id" placeholder="No of Person"  required/>
+                                              <input type="number" class="form-control"  name="no_of_person" id="advance_no_of_person_id" placeholder="No of Person"  maxlength="1" required oninput="this.value = this.value.slice(0, 1);"/>
                                             </div>
                                             <div class="col-md-4">
                                               <label class="form-label" for="deposit-amount"><span class="required">Deposit Rs</span></label>
-                                              <input type="number" class="form-control" name="deposite_rs" id="advance_deposit-amount" placeholder="Deposit Rs" required>
+                                              <input type="number" class="form-control" name="deposite_rs" id="advance_deposit-amount" placeholder="Deposit Rs" maxlength="5" required oninput="this.value = this.value.slice(0, 5);">
                                               <div id="adv_deposite" class="error-message" ></div>
                                             </div>                           
                                             <div class="col-md-4">
@@ -2143,6 +2143,8 @@ document.getElementById("advance_deposit-amount").addEventListener("input", conv
         });
       }
     });
+
+
 </script>
 
 <script src="{{ asset ('assets/vendor/libs/jquery-repeater/jquery-repeater.js') }}"></script>

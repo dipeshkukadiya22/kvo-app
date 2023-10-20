@@ -325,11 +325,12 @@ class BookingController extends Controller
     }
     public function view_room_booking(){
         $checkout= DB::select("SELECT * FROM room_details join personal_details on personal_details.p_id=room_details.member_id join add_members on add_members.p_id=personal_details.member_id where room_details.status='BOOKED' order by r_id desc");
-        //$advancebooking= DB::select("SELECT * FROM room_details join personal_details on personal_details.p_id=room_details.member_id join add_members on add_members.p_id=personal_details.member_id where room_details.status='ADVANCE' order by r_id desc");
+        $room_booking=DB::SELECT("SELECT count(*) as total FROM room_details where room_details.status='BOOKED'");
         $advancebooking= DB::select("SELECT * from room_details join personal_details on p_id=room_details.member_id join add_members on add_members.p_id=personal_details.member_id where room_details.status='ADVANCE'");
+        $advance_room_booking=DB::SELECT("SELECT count(*) as total FROM room_details where room_details.status='ADVANCE'");
         $member = add_members::all();
         $ar_list= DB::select("SELECT *, add_room.room_no as id FROM add_room WHERE add_room.status = 0");
-        return view('Booking.view-room-booking',['checkout'=>$checkout,'member'=>$member,'a_list'=>$ar_list,'advancebooking'=>$advancebooking]);
+        return view('Booking.view-room-booking',['checkout'=>$checkout,'member'=>$member,'a_list'=>$ar_list,'advancebooking'=>$advancebooking,'room_booking'=>$room_booking,'advance_room_booking'=>$advance_room_booking]);
     }
     public function update_room_booking(Request $req)
     {

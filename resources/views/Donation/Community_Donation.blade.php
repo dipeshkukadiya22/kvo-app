@@ -606,11 +606,7 @@ function NumToWord(inputNumber, outputControl) {
             }
           });
     </script>
-<script>
-$(document).ready(function () {
- 
-});
-</script>
+
 
 
 @endsection

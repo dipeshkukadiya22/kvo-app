@@ -261,7 +261,7 @@
                               </div>
                               <div class="col-md-4">
                                 <label class="form-label" for="basic-default-name"><span class="required">Age</span></label>
-                                <input type="number" class="form-control" name="age" id="basic-default-age" placeholder="Age" oninput="format(this)" required/>
+                                <input type="number" class="form-control" name="age" id="basic-default-age" placeholder="Age" maxlength="2" required oninput="this.value = this.value.slice(0, 2);"/>
                               </div>
 
     
@@ -303,7 +303,7 @@
 
                             <div class="col-md-4">
                               <label class="form-label" for="deposit-amount"><span class="required">No of Days</span></label>
-                              <input type="number" class="form-control" name="no_of_days" id="no_of_days" placeholder="No Of Days" required>
+                              <input type="text" class="form-control" name="no_of_days" id="no_of_days" placeholder="No Of Days" maxlength="2"  oninput="this.value=this.value.replace(/[^1-9]/g,'');" required>
                             </div>
                             
                             <div class="col-md-4">
@@ -365,7 +365,7 @@
                                               </div>
                                               <div class="mb-3 col-lg-4 col-xl-3 col-12 mb-0">
                                                 <label class="form-label" for="form-repeater-1-2">Age</label>
-                                                <input type="text" id="member_age" name="m_age0" class="form-control" placeholder="your age" required />
+                                                <input type="text" id="member_age" name="m_age0" class="form-control" placeholder="your age" maxlength="2"  oninput="this.value=this.value.replace(/[^1-9]/g,'');" required />
                                               </div>
                                               <div class="mb-3 col-lg-6 col-xl-2 col-12 mb-0 ">
                                                         <label class="d-block form-label">Gender</label>
@@ -467,7 +467,7 @@
                                   <label class="form-label" for="basic-default-name">Amount</label>
                                   <div class="input-group">
                                     <span class="input-group-text">₹</span>
-                                    <input type="text" class="form-control"  name="dlx_amount" placeholder="Amount" aria-label="Amount (to the nearest indian)" id="dlx_amount" maxlength="4" onkeypress="return onlyNumbers(this.value);"/>
+                                    <input type="number" class="form-control"  name="dlx_amount" placeholder="Amount" aria-label="Amount (to the nearest indian)" id="dlx_amount" oninput="this.value = this.value.slice(0, 4);"/>
                                   </div>
                               </div>
                             <div class="col-md-2">
@@ -487,7 +487,7 @@
                                   <label class="form-label" for="basic-default-name">Amount</label>
                                   <div class="input-group">
                                     <span class="input-group-text">₹</span>
-                                    <input type="text" class="form-control"  name="ac_amount" placeholder="Amount" aria-label="Amount (to the nearest indian)" id="ac-amount" maxlength="4" onkeypress="return onlyNumbers(this.value);"/>
+                                    <input type="number" class="form-control"  name="ac_amount" placeholder="Amount" aria-label="Amount (to the nearest indian)" id="ac-amount" oninput="this.value = this.value.slice(0, 4);"/>
                                   </div>
                                 </div>
 
@@ -510,7 +510,7 @@
                                   <label class="form-label" for="basic-default-name">Amount</label>
                                   <div class="input-group">
                                     <span class="input-group-text">₹</span>
-                                    <input type="text" class="form-control"  name="non_ac_amount" placeholder="Amount" aria-label="Amount (to the nearest indian)" id="non-ac-amount" maxlength="4" onkeypress="return onlyNumbers(this.value);"/>
+                                    <input type="number" class="form-control"  name="non_ac_amount" placeholder="Amount" aria-label="Amount (to the nearest indian)" id="non-ac-amount" oninput="this.value = this.value.slice(0, 4);"/>
                                   </div>
                                 </div>
 
@@ -533,7 +533,7 @@
                                   <label class="form-label" for="basic-default-name">Amount</label>
                                   <div class="input-group">
                                     <span class="input-group-text">₹</span>
-                                    <input type="text" class="form-control"  name="door_mt_ac_amount" id="door_mt_ac_amount" placeholder="Amount" aria-label="Amount (to the nearest indian)"  maxlength="4" onkeypress="return onlyNumbers(this.value);" />
+                                    <input type="number" class="form-control"  name="door_mt_ac_amount" id="door_mt_ac_amount" placeholder="Amount" aria-label="Amount (to the nearest indian)" oninput="this.value = this.value.slice(0, 4);" />
                                   </div>
                                 </div>
 
@@ -556,7 +556,7 @@
                                   <label class="form-label" for="basic-default-name">Amount</label>
                                   <div class="input-group">
                                     <span class="input-group-text">₹</span>
-                                    <input type="text" class="form-control"  name="door_mt_amount" id="door_mt_amount" placeholder="Amount" aria-label="Amount (to the nearest indian)"  maxlength="4" onkeypress="return onlyNumbers(this.value);" />
+                                    <input type="number" class="form-control"  name="door_mt_amount" id="door_mt_amount" placeholder="Amount" aria-label="Amount (to the nearest indian)"  oninput="this.value = this.value.slice(0, 4);"/>
                                   </div>
                                 </div>
   
@@ -578,7 +578,8 @@
   
                             <div class="col-md-4">
                               <label class="form-label" for="deposit-amount"><span class="required">Deposit Rs</span></label>
-                              <input type="text" class="form-control check-field" name="deposite_rs" id="deposit-amount" placeholder="Deposit Rs" required maxlength="5" onkeypress="return onlyNumbers(this.value);"/>
+                              <input type="number" class="form-control check-field" name="deposite_rs" id="deposit-amount" placeholder="Deposit Rs" required oninput="this.value = this.value.slice(0, 5
+                              );"/>
                               <div id="deposite" class="error-message" ></div></div>
                             
                             <div class="col-md-4">
@@ -1168,7 +1169,7 @@
                                  ' </div>'+
                                  ' <div class="mb-3 col-lg-4 col-xl-3 col-12 mb-0">'+
                                   '  <label class="form-label" for="form-repeater-1-2">Age</label>'+
-                                  '  <input type="number" id="member_age'+i+'" name="m_age'+i+'" class="form-control" placeholder="your age" />'+
+                                  '  <input type="number" id="member_age'+i+'" name="m_age'+i+'" class="form-control" placeholder="your age" oninput="this.value = this.value.slice(0, 2);" />'+
                                 '  </div>'+
                                   
                                   
