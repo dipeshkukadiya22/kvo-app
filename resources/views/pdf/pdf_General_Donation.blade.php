@@ -131,7 +131,7 @@
 			<table class="table3 tg" style="width: 740px">
 			  <tbody>
 				<tr>
-				  <td class="tg-0pky sign" height="100px"><span class="gujfont">VF5GFZGL ;CL </span></td>
+				  <td class="tg-0pky sign" height="60px"><span class="gujfont">VF5GFZGL ;CL </span></td>
 				  <td class="tg-0pky sign"><span class="gujfont">,[GFZGL ;CL </span></td>
 				</tr>
 			  </tbody>
